@@ -93,6 +93,9 @@
 ### 1. 구입 금액 입력 기능
 
 - 사용자로부터 구입 금액을 입력받는다.
+- 구입 금액이 유효한 정수가 아닌 경우: IllegalArgumentException 발생
+- 구입 금액이 1000원 이하인 경우: IllegalArgumentException 발생
+- 구입 금액이 1000원으로 나누어 떨어지지 않는 경우: IllegalArgumentException 발생
 
 ### 2. 구매 개수 계산 기능
 
