@@ -19,5 +19,29 @@ class LottoTest {
         }
     }
 
-    // TODO: 추가 기능 구현에 따른 테스트 코드 작성
+    @Test
+    fun `로또 생성에 성공한다`() {
+        Lotto(listOf(1, 2, 3, 4, 5, 6))
+    }
+
+    @Test
+    fun `로또 번호에 너무 큰 값이 들어가면 예외가 발생한다`() {
+        assertThrows<IllegalArgumentException> {
+            Lotto(listOf(1, 2, 3, 4, 5, 66))
+        }
+    }
+
+    @Test
+    fun `로또 번호에 너무 작은 값이 들어가면 예외가 발생한다`() {
+        assertThrows<IllegalArgumentException> {
+            Lotto(listOf(1, -2, 3, 4, 5, 6))
+        }
+    }
+
+    @Test
+    fun `로또 번호가 6개 미만이면 예외가 발생한다`() {
+        assertThrows<IllegalArgumentException> {
+            Lotto(listOf(1, 2, 3, 4, 5))
+        }
+    }
 }
