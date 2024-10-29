@@ -1,5 +1,7 @@
 package lotto.domain
 
+import camp.nextstep.edu.missionutils.Randoms
+
 class Lotto(private val numbers: List<Int>) {
     init {
         require(numbers.size == ITEM_LENGTH) { ERROR_NOT_ITEM_LENGTH }
@@ -18,8 +20,12 @@ class Lotto(private val numbers: List<Int>) {
         const val ITEM_LENGTH = 6
         const val START_NUMBER = 1
         const val END_NUMBER = 45
+        const val PRICE = 1_000
         const val ERROR_NOT_ITEM_LENGTH = "[ERROR] 로또 번호는 6개여야 합니다."
         const val ERROR_NOT_LOTTO_NUMBER = "[ERROR] 로또 번호는 1부터 45까지 가능합니다."
         const val ERROR_NOT_DUPLICATE_NUMBER = "[ERROR] 로또 번호는 중복될 수 없습니다."
+        fun create(): Lotto {
+            return Lotto(Randoms.pickUniqueNumbersInRange(START_NUMBER, END_NUMBER, ITEM_LENGTH))
+        }
     }
 }

@@ -44,4 +44,9 @@ class LottoTest {
             Lotto(listOf(1, 2, 3, 4, 5))
         }
     }
+
+    @Test
+    fun `로또가 예외 없이 생성된다`() {
+        Lotto.create()
+    }
 }
