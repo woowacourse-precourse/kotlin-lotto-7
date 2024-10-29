@@ -11,6 +11,18 @@ class Lotto(private val numbers: List<Int>) {
         validateDuplicates(numbers)
     }
 
+    fun getLottoRank(winLottoInfo: LottoWinningInfo): LottoRank {
+        var matchCount = 0
+        for (number in winLottoInfo.numbers) {
+            if (numbers.contains(number)) {
+                matchCount++
+            }
+        }
+        val isBonusMatch = numbers.contains(winLottoInfo.bonusNumber)
+
+        return LottoRank.getRank(matchCount, isBonusMatch)
+    }
+
     private fun validateDuplicates(numbers: List<Int>) {
         val filterNumbers = numbers.toSet()
         require(filterNumbers.size == ITEM_LENGTH) { ERROR_NOT_DUPLICATE_NUMBER }
