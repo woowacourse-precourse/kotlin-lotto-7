@@ -1,8 +1,8 @@
 package util
 
 enum class Exception(private val msg: String) {
-    EMPTY_INPUT("빈 값이 입력 되었어요.");
-
+    EMPTY_INPUT("빈 값이 입력 되었어요."),
+    INVALID_INPUT("숫자만 입력해주세요.");
 
     override fun toString(): String = "$ERROR $msg"
 
