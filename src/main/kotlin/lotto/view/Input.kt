@@ -19,7 +19,7 @@ class Input {
         println(BONUS_NUMBER_MSG)
     }
 
-    fun purchasedQuantityMsg(count: Int, lottos: List<String>) {
+    fun purchasedQuantityMsg(count: Int, lottos: List<Lotto>) {
         println("$count$PURCHASED_QUANTITY_MSG")
         for (i in lottos.indices) {
             println(lottos[i])
