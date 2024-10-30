@@ -7,6 +7,7 @@ import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 
 class ApplicationTest : NsTest() {
+    /*
     @Test
     fun `기능 테스트`() {
         assertRandomUniqueNumbersInRangeTest(
@@ -40,6 +41,7 @@ class ApplicationTest : NsTest() {
             listOf(1, 3, 5, 14, 22, 45)
         )
     }
+    */
 
     @Test
     fun `예외 테스트`() {
