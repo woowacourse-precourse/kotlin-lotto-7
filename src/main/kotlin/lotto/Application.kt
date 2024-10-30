@@ -1,6 +1,6 @@
 package lotto
 
-import template.controller.GameController
+import lotto.controller.GameController
 
 fun main() {
     val lottoGame = GameController.create()

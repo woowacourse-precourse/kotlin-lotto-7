@@ -1,10 +1,10 @@
-package template.controller
+package lotto.controller
 
 import lotto.model.Lotto
-import template.view.GameView
-import template.domain.InputValidator
-import template.domain.GameService
-import template.resources.Messages
+import lotto.view.GameView
+import lotto.domain.InputValidator
+import lotto.domain.GameService
+import lotto.resources.Messages.*
 
 class GameController(
     private val gameView: GameView,
@@ -20,15 +20,15 @@ class GameController(
     }
 
     private fun readMoney(): Long {
-        gameView.showMessage(Messages.INFO_INPUT_MONEY)
+        gameView.showMessage(INFO_INPUT_MONEY.message())
         val money = gameView.readLine()
         gameView.showBlankLine()
 
         return money.toLong()
     }
 
-    private fun showBoughtLotto(boughtLotto: List<Lotto>){
-        gameView.showMessage(Messages.INFO_BUY_AMOUNT.format(boughtLotto.size))
+    private fun showBoughtLotto(boughtLotto: List<Lotto>) {
+        gameView.showMessage(INFO_BUY_AMOUNT.formattedMessage(boughtLotto.size))
         boughtLotto.forEach {
             gameView.showMessage(it.getLottoNumbersText())
         }
@@ -36,7 +36,7 @@ class GameController(
     }
 
     private fun readWinningNumbers(): Lotto {
-        gameView.showMessage(Messages.INFO_INPUT_WINNING_NUMBER)
+        gameView.showMessage(INFO_INPUT_WINNING_NUMBER.message())
         val winningNumbersText = gameView.readLine().split(",")
         val winningNumbers = winningNumbersText.map { it.toInt() }.sorted()
         gameView.showBlankLine()
@@ -45,7 +45,7 @@ class GameController(
     }
 
     private fun readBonusNumber(): Int {
-        gameView.showMessage(Messages.INFO_INPUT_BONUS_NUMBER)
+        gameView.showMessage(INFO_INPUT_BONUS_NUMBER.message())
         val bonusNumber = gameView.readLine().toInt()
         gameView.showBlankLine()
 

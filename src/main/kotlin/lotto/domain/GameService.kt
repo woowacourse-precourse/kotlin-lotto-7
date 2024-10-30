@@ -1,4 +1,4 @@
-package template.domain
+package lotto.domain
 
 import lotto.model.Lotto
 import camp.nextstep.edu.missionutils.Randoms

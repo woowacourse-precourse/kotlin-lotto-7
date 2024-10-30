@@ -1,7 +1,6 @@
-package template.view
+package lotto.view
 
 import camp.nextstep.edu.missionutils.Console
-import template.resources.Messages
 
 class GameView {
     // Input Views
@@ -16,11 +15,5 @@ class GameView {
 
     fun showMessage(message: String) {
         println(message)
-    }
-
-    companion object {
-        fun showFormattedError(errorMessage: String) {
-            println(Messages.ERROR.format(errorMessage))
-        }
     }
 }

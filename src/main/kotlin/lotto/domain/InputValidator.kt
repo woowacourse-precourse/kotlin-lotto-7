@@ -1,23 +1,21 @@
-package template.domain
+package lotto.domain
 
-import template.resources.Messages
-import template.view.GameView
+import lotto.resources.Messages.*
 
 class InputValidator {
     fun commaStringValidate(input: String) {
         require(input.isNotBlank()) {
-            GameView.showFormattedError(Messages.ERROR_EMPTY_INPUT)
-            Messages.ERROR_EMPTY_INPUT
+            ERROR_EMPTY_INPUT.errorMessage()
         }
         val elements = input.split(",")
-        require(elements.size == elements.distinct().size) { Messages.ERROR_DUPLICATE_NAME }
+        require(elements.size == elements.distinct().size) { ERROR_DUPLICATE_NAME.errorMessage() }
     }
 
     fun numberValidate(input: String) {
-        require(input.isNotBlank()) { Messages.ERROR_EMPTY_INPUT }
-        require(input.length < 9) { Messages.ERROR_OVERSIZE_TRY_COUNT }
+        require(input.isNotBlank()) { ERROR_EMPTY_INPUT.errorMessage() }
+        require(input.length < 9) { ERROR_OVERSIZE_TRY_COUNT.errorMessage() }
         val number = runCatching { input.toInt() }
-            .getOrElse { throw IllegalArgumentException(Messages.ERROR_NOT_POSITIVE) }
-        require(number > 0) { Messages.ERROR_NOT_POSITIVE }
+            .getOrElse { throw IllegalArgumentException(ERROR_NOT_POSITIVE.errorMessage()) }
+        require(number > 0) { ERROR_NOT_POSITIVE.errorMessage() }
     }
 }
