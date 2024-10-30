@@ -46,11 +46,15 @@ class GameController(
 
     private fun readWinNumbers(): Lotto {
         gameView.showMessage(INFO_INPUT_WINNING_NUMBER.message())
-        val winningNumbersText = gameView.readLine().split(",")
-        val winningNumbers = winningNumbersText.map { it.toInt() }.sorted()
-        gameView.showBlankLine()
-
-        return Lotto(winningNumbers)
+        while (true) {
+            try {
+                val winNumbers = validator.validateWinNumbers(gameView.readLine())
+                gameView.showBlankLine()
+                return winNumbers
+            } catch (e: IllegalArgumentException) {
+                gameView.showMessage(e.message ?: INVALID_ERROR.errorMessage())
+            }
+        }
     }
 
     private fun readBonusNumber(): Int {
