@@ -13,4 +13,5 @@ fun main() {
     println(sortedLottoNumbers)
 
     val winningNumber = Console.readLine()
+    val splitedWinningNumber = winningNumber.split(",")
 }
