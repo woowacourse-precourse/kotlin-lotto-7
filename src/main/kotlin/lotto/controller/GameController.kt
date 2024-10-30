@@ -25,10 +25,15 @@ class GameController(
 
     private fun readMoney(): Long {
         gameView.showMessage(INFO_INPUT_MONEY.message())
-        val money = gameView.readLine()
-        gameView.showBlankLine()
-
-        return money.toLong()
+        while (true) {
+            try {
+                val money = validator.validateMoney(gameView.readLine())
+                gameView.showBlankLine()
+                return money
+            } catch (e: IllegalArgumentException) {
+                gameView.showMessage(e.message ?: INVALID_ERROR.errorMessage())
+            }
+        }
     }
 
     private fun showBoughtLotto(boughtLotto: List<Lotto>) {

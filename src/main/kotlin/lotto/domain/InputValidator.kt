@@ -3,19 +3,15 @@ package lotto.domain
 import lotto.resources.Messages.*
 
 class InputValidator {
-    fun commaStringValidate(input: String) {
-        require(input.isNotBlank()) {
-            EMPTY_INPUT.errorMessage()
-        }
-        val elements = input.split(",")
-        require(elements.size == elements.distinct().size) { DUPLICATE_NAME.errorMessage() }
+    fun validateMoney(input: String): Long {
+        require(input.isNotBlank() && input.isNotEmpty()) { EMPTY_INPUT.errorMessage() }
+        val money = input.toLongOrNull()
+            ?: throw IllegalArgumentException(NOT_NUMBER.errorMessage())
+        require(money > 0L && money % MONEY_UNIT == 0L) { NOT_DIVIDED_BY_UNIT.errorMessage() }
+        return money
     }
 
-    fun numberValidate(input: String) {
-        require(input.isNotBlank()) { EMPTY_INPUT.errorMessage() }
-        require(input.length < 9) { OVERSIZE_TRY_COUNT.errorMessage() }
-        val number = runCatching { input.toInt() }
-            .getOrElse { throw IllegalArgumentException(NOT_POSITIVE.errorMessage()) }
-        require(number > 0) { NOT_POSITIVE.errorMessage() }
+    companion object {
+        const val MONEY_UNIT = 1000
     }
 }
