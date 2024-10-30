@@ -16,6 +16,7 @@ enum class Messages(private val message: String) {
         6개 일치 (2,000,000,000원) - %d개
         """.trimIndent()
     ),
+    INFO_RETURN_RATE("총 수익률은 %s입니다."),
 
     ERROR("[ERROR] %s"),
     DUPLICATE_LOTTO_NUMBER("로또 번호에 중복값이 존재합니다"),

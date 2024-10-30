@@ -11,11 +11,15 @@ class WinningCounter {
         return WinningCategory.entries.map { winningCounts.getOrDefault(it, 0) }
     }
 
-    enum class WinningCategory {
-        MATCH_THREE,
-        MATCH_FOUR,
-        MATCH_FIVE,
-        MATCH_FIVE_BONUS,
-        MATCH_SIX
+    fun totalPrizeSum(): Long {
+        return winningCounts.entries.sumOf { (category, count) -> category.prize * count }
+    }
+
+    enum class WinningCategory(val prize: Long) {
+        MATCH_THREE(5000L),
+        MATCH_FOUR(50000L),
+        MATCH_FIVE(1500000L),
+        MATCH_FIVE_BONUS(30000000L),
+        MATCH_SIX(2000000000L)
     }
 }

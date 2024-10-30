@@ -17,10 +17,10 @@ class GameController(
         val boughtLottos = gameService.buyLottos(money)
         showBoughtLotto(boughtLottos)
 
-        val winNumberLotto = readWinNumbers()
+        val winNumbers = readWinNumbers()
         val bonusNumber = readBonusNumber()
-        val winningCounts = gameService.countWinnings(boughtLottos, winNumberLotto, bonusNumber)
-        showLottoResult(winningCounts)
+        val winningCounts = gameService.countWinnings(boughtLottos, winNumbers, bonusNumber)
+        showLottoResult(winningCounts, money)
     }
 
     private fun readMoney(): Long {
@@ -56,10 +56,16 @@ class GameController(
         return bonusNumber
     }
 
-    private fun showLottoResult(winningCounts: WinningCounter) {
+    private fun showLottoResult(winningCounts: WinningCounter, money: Long) {
         gameView.showMessage(
             INFO_WINNING_STATISTICS.formattedMessage(*winningCounts.inOrderNumbers().toTypedArray())
         )
+        showReturnRate(winningCounts, money)
+    }
+
+    private fun showReturnRate(winningCounts: WinningCounter, money: Long) {
+        val returnRate = gameService.calculateReturnRate(winningCounts, money)
+        gameView.showMessage(INFO_RETURN_RATE.formattedMessage(returnRate))
     }
 
     companion object {

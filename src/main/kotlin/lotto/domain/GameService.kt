@@ -19,10 +19,10 @@ class GameService {
         return Lotto(lottoNumbers)
     }
 
-    fun countWinnings(boughtLottos: List<Lotto>, winningLotto: Lotto, bonusNumber: Int): WinningCounter {
+    fun countWinnings(boughtLottos: List<Lotto>, winNumbers: Lotto, bonusNumber: Int): WinningCounter {
         val winningCount = WinningCounter()
         boughtLottos.forEach { myLotto ->
-            val matchingCount = myLotto.numbers().count { it in winningLotto.numbers() }
+            val matchingCount = myLotto.numbers().count { it in winNumbers.numbers() }
             val isBonusMatch = bonusNumber in myLotto.numbers()
             when {
                 matchingCount == 6 -> winningCount.increaseCount(MATCH_SIX)
@@ -34,6 +34,11 @@ class GameService {
         }
 
         return winningCount
+    }
+
+    fun calculateReturnRate(countWinnings: WinningCounter, money: Long): String {
+        val returnRate = (countWinnings.totalPrizeSum().toDouble() / money) * 100
+        return String.format("%.1f%%", returnRate)
     }
 
     companion object {
