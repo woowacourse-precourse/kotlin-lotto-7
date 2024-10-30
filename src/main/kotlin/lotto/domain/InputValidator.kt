@@ -24,6 +24,15 @@ class InputValidator {
         return Lotto(winningNumbers)
     }
 
+    fun validateBonusNumber(input: String, winNumbers: Lotto): Int {
+        require(input.isNotBlank() && input.isNotEmpty()) { EMPTY_INPUT.errorMessage() }
+        val bonusNumber = input.toIntOrNull()
+            ?: throw IllegalArgumentException(NOT_NUMBER.errorMessage())
+        require(bonusNumber in LOTTO_RANGE) { INVALID_LOTTO_RANGE.errorMessage() }
+        require(bonusNumber !in winNumbers.numbers()) { DUPLICATE_LOTTO_NUMBER.errorMessage() }
+        return bonusNumber
+    }
+
     companion object {
         const val MONEY_UNIT = 1000
         const val LOTTO_LENGTH = 6

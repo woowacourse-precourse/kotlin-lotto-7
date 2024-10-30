@@ -18,7 +18,7 @@ class GameController(
         showBoughtLotto(boughtLottos)
 
         val winNumbers = readWinNumbers()
-        val bonusNumber = readBonusNumber()
+        val bonusNumber = readBonusNumber(winNumbers)
         val winningCounts = gameService.countWinnings(boughtLottos, winNumbers, bonusNumber)
         showLottoResult(winningCounts, money)
     }
@@ -57,12 +57,17 @@ class GameController(
         }
     }
 
-    private fun readBonusNumber(): Int {
+    private fun readBonusNumber(winNumbers: Lotto): Int {
         gameView.showMessage(INFO_INPUT_BONUS_NUMBER.message())
-        val bonusNumber = gameView.readLine().toInt()
-        gameView.showBlankLine()
-
-        return bonusNumber
+        while (true) {
+            try {
+                val bonusNumber = validator.validateBonusNumber(gameView.readLine(), winNumbers)
+                gameView.showBlankLine()
+                return bonusNumber
+            } catch (e: IllegalArgumentException) {
+                gameView.showMessage(e.message ?: INVALID_ERROR.errorMessage())
+            }
+        }
     }
 
     private fun showLottoResult(winningCounts: WinningCounter, money: Long) {
