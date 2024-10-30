@@ -9,9 +9,12 @@ class Controller {
     val inputValidator = InputValidator()
 
     fun start(){
-        var money = input.getMoney()
-        while(!inputValidator.isValidMoney(money)){
+
+        var money : String
+        while(true){
             money = input.getMoney()
+            if(inputValidator.isValidMoney(money)) break
+            ValidatorMessage.INPUT_MONEY.display()
         }
     }
 
