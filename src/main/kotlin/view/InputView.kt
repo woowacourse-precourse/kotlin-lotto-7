@@ -3,6 +3,7 @@ package view
 import camp.nextstep.edu.missionutils.Console.readLine
 import delegate.common.CommonErrorDelegate
 import util.Input
+import util.Process
 import util.retryWhenNoException
 
 class InputView(
@@ -15,7 +16,12 @@ class InputView(
         retryWhenNoException {
             println(Input.INPUT_PAY.toString())
             val pay = readLine()
-            commonErrorDelegator.isEmpty(pay)
+            isValid(pay)
         }
+    }
+
+    private fun isValid(value: String){
+        commonErrorDelegator.isEmpty(value)
+        commonErrorDelegator.isNumeric(value, Process.PAY)
     }
 }
