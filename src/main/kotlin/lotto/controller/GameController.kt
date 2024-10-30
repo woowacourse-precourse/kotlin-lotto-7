@@ -15,6 +15,7 @@ class GameController(
         val money = readMoney()
         val boughtLotto = gameService.buyLotto(money)
         showBoughtLotto(boughtLotto)
+        val winningNumbers = readWinningNumbers()
     }
 
     private fun readMoney(): Long {
@@ -25,13 +26,23 @@ class GameController(
         return money.toLong()
     }
 
-    private fun showBoughtLotto(ownLotto : List<Lotto>){
-        gameView.showMessage(Messages.INFO_BUY_AMOUNT.format(ownLotto.size))
-        ownLotto.forEach {
+    private fun showBoughtLotto(boughtLotto: List<Lotto>){
+        gameView.showMessage(Messages.INFO_BUY_AMOUNT.format(boughtLotto.size))
+        boughtLotto.forEach {
             gameView.showMessage(it.getLottoNumbersText())
         }
         gameView.showBlankLine()
     }
+
+    private fun readWinningNumbers(): Lotto {
+        gameView.showMessage(Messages.INFO_INPUT_WINNING_NUMBER)
+        val winningNumbersText = gameView.readLine().split(",")
+        val winningNumbers = winningNumbersText.map { it.toInt() }.sorted()
+        gameView.showBlankLine()
+
+        return Lotto(winningNumbers)
+    }
+
 
     companion object {
         fun create(): GameController {
