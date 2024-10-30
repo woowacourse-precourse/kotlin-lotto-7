@@ -22,6 +22,11 @@ class InputView {
         return validator.validatePrizeNumber(numbers)
     }
 
+    fun inputBonusNumber(): Int {
+        val number = Console.readLine()
+        return validator.validateBonusNumber(number)
+    }
+
     companion object {
         private const val ERROR_PAYMENT_UNIT = "[ERROR] 구매 금액은 1,000원 단위여야 합니다."
         private const val LOTTO_PRICE = 1000

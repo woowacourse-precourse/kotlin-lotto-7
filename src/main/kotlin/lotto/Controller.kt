@@ -17,5 +17,7 @@ class Controller {
         outputView.printInformationLotto(lotto)
         outputView.printRequirePrizeNumber()
         inputView.inputPrizeNumber()
+        outputView.printRequireBonusNumber()
+        inputView.inputBonusNumber()
     }
 }
