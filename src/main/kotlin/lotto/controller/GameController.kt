@@ -1,9 +1,9 @@
 package template.controller
 
+import lotto.model.Lotto
 import template.view.GameView
 import template.domain.InputValidator
 import template.domain.GameService
-import template.model.DummyModel
 import template.resources.Messages
 
 class GameController(
@@ -13,7 +13,8 @@ class GameController(
 ) {
     fun gameStart() {
         val money = readMoney()
-        val ownLotto = gameService.buyLotto(money)
+        val boughtLotto = gameService.buyLotto(money)
+        showBoughtLotto(boughtLotto)
     }
 
     private fun readMoney(): Long {
@@ -22,6 +23,14 @@ class GameController(
         gameView.showBlankLine()
 
         return money.toLong()
+    }
+
+    private fun showBoughtLotto(ownLotto : List<Lotto>){
+        gameView.showMessage(Messages.INFO_BUY_AMOUNT.format(ownLotto.size))
+        ownLotto.forEach {
+            gameView.showMessage(it.getLottoNumbersText())
+        }
+        gameView.showBlankLine()
     }
 
     companion object {

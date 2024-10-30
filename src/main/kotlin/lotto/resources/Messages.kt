@@ -1,11 +1,9 @@
 package template.resources
 
 object Messages {
-    // 입력 안내 메시지
+    // 안내 메시지
     const val INFO_INPUT_MONEY = "구입금액을 입력해 주세요."
-
-    // 게임 결과 메시지
-    const val GAME_RESULT_HEADER = "<게임 결과>"
+    const val INFO_BUY_AMOUNT = "%s개를 구매했습니다."
 
     // 에러 메시지
     const val ERROR = "[ERROR] %s"
