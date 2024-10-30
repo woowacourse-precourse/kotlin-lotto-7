@@ -10,10 +10,11 @@ class Lotto(private val numbers: List<Int>) {
         }
     }
 
-    fun getLottoNumbers(): List<Int> {
+    fun numbers(): List<Int> {
         return numbers
     }
-    fun getLottoNumbersText(): String {
+
+    fun numbersText(): String {
         return "[${numbers.joinToString()}]"
     }
 }
