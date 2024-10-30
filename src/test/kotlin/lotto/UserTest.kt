@@ -16,7 +16,7 @@ class UserTest {
     @Test
     fun `1000원에 나누어 떨어지도록 로또를 구매하는 기능 테스트`() {
         user.buy()
-        val result = user.lottos.size
+        val result = user.lottoTickets.size
         val expect = 3
         assertEquals(expect, result)
     }
