@@ -1,6 +1,6 @@
 package lotto.view
 
-import lotto.Lotto
+import lotto.domain.Lotto
 
 object OutputView {
     fun printPurchasedLottos(lottos: List<Lotto>) {
