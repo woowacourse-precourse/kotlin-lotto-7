@@ -11,8 +11,8 @@ class CalculateLottoRankUseCaseTest {
         val lotto = Lotto(listOf(1, 2, 3, 4, 5, 6))
         val winningNumbers = WinningNumbers(listOf(1, 2, 3, 4, 5, 6), 7)
         val rank = calculateLottoRankUseCase.execute(lotto, winningNumbers)
-        val expect = 1
-        assertEquals(expect,rank)
+        val expect = LottoRank.First
+        assertEquals(expect, rank)
     }
 
     @Test
@@ -20,16 +20,16 @@ class CalculateLottoRankUseCaseTest {
         val lotto = Lotto(listOf(1, 2, 3, 4, 5, 7))
         val winningNumbers = WinningNumbers(listOf(1, 2, 3, 4, 5, 6), 7)
         val rank = calculateLottoRankUseCase.execute(lotto, winningNumbers)
-        val expect = 2
-        assertEquals(expect,rank)
+        val expect = LottoRank.SECOND
+        assertEquals(expect, rank)
     }
 
     @Test
     fun `2개를 맞춰서 등수가 6등일 경우 테스트`() {
-        val lotto = Lotto(listOf(1, 2, 3, 4, 5, 7))
+        val lotto = Lotto(listOf(1, 2, 8, 9, 10, 11))
         val winningNumbers = WinningNumbers(listOf(1, 2, 3, 4, 5, 6), 7)
         val rank = calculateLottoRankUseCase.execute(lotto, winningNumbers)
-        val expect = 2
-        assertEquals(expect,rank)
+        val expect = LottoRank.SIXTH
+        assertEquals(expect, rank)
     }
 }
