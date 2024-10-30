@@ -20,4 +20,11 @@ class UserTest {
         val expect = 3
         assertEquals(expect, result)
     }
+
+    @Test
+    fun `1000원에 나누어 떨어지지 않으면 예외 발생 테스트`() {
+        assertThrows<IllegalArgumentException> {
+            User(4001)
+        }
+    }
 }
