@@ -1,11 +1,22 @@
 package lotto.domain
 
+import lotto.constants.RankingConstants.FIFTH_MSG
+import lotto.constants.RankingConstants.FIFTH_PRIZE
+import lotto.constants.RankingConstants.FIRST_MSG
+import lotto.constants.RankingConstants.FIRST_PRIZE
+import lotto.constants.RankingConstants.FOURTH_MSG
+import lotto.constants.RankingConstants.FOURTH_PRIZE
+import lotto.constants.RankingConstants.SECOND_MSG
+import lotto.constants.RankingConstants.SECOND_PRIZE
+import lotto.constants.RankingConstants.THIRD_MSG
+import lotto.constants.RankingConstants.THIRD_PRIZE
+
 enum class Ranking(val prize: Int, private val matchingMsg: String) {
-    FIFTH(5_000, "3개 일치 (5,000원) - "), // 5등
-    FOURTH(50_000, "4개 일치 (50,000원) - "), // 4등
-    THIRD( 1_500_000, "5개 일치 (1,500,000원) - "), // 3등
-    SECOND( 30_000_000, "5개 일치, 보너스 볼 일치 (30,000,000원) - "), // 2등
-    FIRST(2_000_000_000, "6개 일치 (2,000,000,000원) - "); // 1등
+    FIFTH(FIFTH_PRIZE, FIFTH_MSG), // 5등
+    FOURTH(FOURTH_PRIZE, FOURTH_MSG), // 4등
+    THIRD(THIRD_PRIZE, THIRD_MSG), // 3등
+    SECOND(SECOND_PRIZE, SECOND_MSG), // 2등
+    FIRST(FIRST_PRIZE, FIRST_MSG); // 1등
 
 
     fun formattedMsg(): String {
