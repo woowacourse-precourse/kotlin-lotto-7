@@ -1,5 +1,9 @@
 package lotto
+import camp.nextstep.edu.missionutils.*
+import lotto.Controller
 
 fun main() {
-    // TODO: 프로그램 구현
+    val controller = Controller()
+    controller.start()
 }
+
