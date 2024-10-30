@@ -4,6 +4,7 @@ import delegate.common.CommonErrorDelegate
 import delegate.common.CommonErrorDelegator
 import org.assertj.core.api.Assertions
 import org.junit.jupiter.api.BeforeEach
+import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.EmptySource
 import org.junit.jupiter.params.provider.ValueSource
@@ -28,10 +29,20 @@ class InputTest {
 
     @ParameterizedTest
     @ValueSource(strings = ["abc", "ㄱㄴㄷ", "!@#$", "100,23,22"])
-    fun `구입 입력 입력값이 숫자가 아닐 때`(value: String) {
+    fun `구입 금액 입력값이 숫자가 아닐 때`(value: String) {
         val type = Process.PAY
         Assertions.assertThatThrownBy { commonErrorDelegate.isNumeric(value, type) }
             .isInstanceOf(IllegalArgumentException::class.java)
             .hasMessage("${type}은(는) ${Exception.INVALID_INPUT}")
+    }
+
+    @Test
+    fun `구입 금액 입력값이 Int형으로 표현할 수 있는 범위를 초과할 때`(){
+        val type = Process.PAY
+        val value = Int.MIN_VALUE.toString()
+
+        Assertions.assertThatThrownBy { commonErrorDelegate.isOverFlow(value, type) }
+            .isInstanceOf(IllegalArgumentException::class.java)
+            .hasMessage("${type}의 ${Exception.EXCEED_INPUT}")
     }
 }
