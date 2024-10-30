@@ -62,3 +62,21 @@
 - [ ] 잘못된 값을 입력할 경우 `IllegalArgumentException` 발생
   - [ ] `[ERROR]` 로 시작하는 에러 메시지 출력 후 그 부분부터 입력을 다시 받음
   - `Exception이` 아닌 `IllegalArgumentException`, `IllegalStateException` 등과 같은 명확한 유형을 처리
+
+### Model
+- [ ] Lotto
+
+### View
+- [ ] InputView
+  - [ ] 구매 금액 입력
+  - [ ] 당첨 번호 입력
+  - [ ] 보너스 번호 입력
+- [ ] OutputView
+  - [ ] 로또 구매 리스트
+  - [ ] 당첨 통계
+
+### Controller
+- [ ] LottoController
+
+### util
+- [ ] Exception(Validator)
