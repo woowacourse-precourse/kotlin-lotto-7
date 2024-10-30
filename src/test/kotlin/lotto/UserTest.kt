@@ -27,4 +27,11 @@ class UserTest {
             User(4001)
         }
     }
+
+    @Test
+    fun `돈이 마이너스일 경우 예외 발생 테스트`() {
+        assertThrows<IllegalArgumentException> {
+            User(-1000)
+        }
+    }
 }
