@@ -8,17 +8,17 @@ class InputView {
     fun amountTickets(): Int {
         val payment = inputPayment()
         require(payment % LOTTO_PRICE == REMAINDER_AFTER_DIVIDE) { ERROR_PAYMENT_UNIT }
-        return (payment / LOTTO_PRICE).toInt()
+        return payment / LOTTO_PRICE
     }
 
-    private fun inputPayment(): Long {
+    private fun inputPayment(): Int {
         val payment = Console.readLine()
         return validator.validatePayment(payment)
     }
 
     companion object {
-        private const val ERROR_PAYMENT_UNIT = "[ERROR] 구매 금액은 1000원 단위여야 합니다."
-        private const val LOTTO_PRICE = 1000L
-        private const val REMAINDER_AFTER_DIVIDE = 0L
+        private const val ERROR_PAYMENT_UNIT = "[ERROR] 구매 금액은 1,000원 단위여야 합니다."
+        private const val LOTTO_PRICE = 1000
+        private const val REMAINDER_AFTER_DIVIDE = 0
     }
 }
