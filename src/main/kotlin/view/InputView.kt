@@ -21,7 +21,8 @@ class InputView(
     }
 
     private fun isValid(value: String){
+        val process = Process.PAY
         commonErrorDelegator.isEmpty(value)
-        commonErrorDelegator.isNumeric(value, Process.PAY)
+        commonErrorDelegator.isNumeric(value, process)
     }
 }

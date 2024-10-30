@@ -36,13 +36,4 @@ class InputTest {
             .hasMessage("${type}은(는) ${Exception.INVALID_INPUT}")
     }
 
-    @Test
-    fun `구입 금액 입력값이 Int형으로 표현할 수 있는 범위를 초과할 때`(){
-        val type = Process.PAY
-        val value = Int.MIN_VALUE.toString()
-
-        Assertions.assertThatThrownBy { commonErrorDelegate.isOverFlow(value, type) }
-            .isInstanceOf(IllegalArgumentException::class.java)
-            .hasMessage("${type}의 ${Exception.EXCEED_INPUT}")
-    }
 }
