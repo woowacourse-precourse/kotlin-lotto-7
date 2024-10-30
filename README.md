@@ -111,6 +111,12 @@
 ### 4. 당첨 번호 입력 기능
 
 - 사용자로부터 당첨 번호를 입력받는다. 입력 형식은 쉼표(,)로 구분된 숫자들이다.
+- 당첨 번호에 공백이 포함되어 있는 경우: 공백 제거 처리
+- 당첨 번호가 쉼표로 나눠질 수 없는 경우: IllegalArgumentException 발생
+- 당첨 번호가 정수가 아닌 경우: IllegalArgumentException 발생
+- 당첨 번호가 6개가 아닌 경우: IllegalArgumentException 발생
+- 당첨 번호의 범위가 1 ~ 45가 아닌 경우: IllegalArgumentException 발생
+- 당첨 번호가 중복되는 경우: IllegalArgumentException 발생
 
 ### 5. 보너스 번호 입력 기능
 
