@@ -64,4 +64,5 @@ fun main() {
 
     val returnPrice = 5000 * winningCount["5등"]!! + 50000 * winningCount["4등"]!! + 1500000 * winningCount["3등"]!! + 30000000 * winningCount["2등"]!! + 2000000000 * winningCount["1등"]!!
     val rateOfReturn = (returnPrice/price.toInt()) * 100
+    println("\n총 수익률은 ${rateOfReturn}%입니다.")
 }
