@@ -14,6 +14,7 @@
 
 - 입력받은 금액이 숫자가 아니거나 음수인 경우 `IllegalArgumentException` 발생
 - 입력받은 금액이 1000원으로 나누어떨어지지 않는 경우 `IllegalArgumentException` 발생
+- 입력받은 금액이 중복되는 경우 `IllegalArgumentException` 발생
 
 ## 2. 로또 당첨 값 입력받기
 
