@@ -46,43 +46,37 @@
 - 당첨 번호
 - 보너스 번호
 
-
 ## 출력값
 
 - 구매 갯수
 - 구매된 로또 번호
 - 당첨 통계
-  - 당첨내역
-  - 수익률
-
+    - 당첨내역
+    - 수익률
 
 # 프로그래밍 요구 사항
 
 - `indent depth` 2까지 허용
 - 한 가지 일 함수
-  - 각 함수의 코드길이는 15 이하
+    - 각 함수의 코드길이는 15 이하
 - 테스트 코드 작성
-  - 단위 테스트
+    - 단위 테스트
 - `else` 지양
 - `Enum` 사용
 - 제공된 `Lotto` 클래스 사용
-  - `numbers` 이외 필드 추가 금지
-  - `numbers`의 접근 제어자 변경 금지
-  - `Lotto`의 패키지 변경은 무관
-
+    - `numbers` 이외 필드 추가 금지
+    - `numbers`의 접근 제어자 변경 금지
+    - `Lotto`의 패키지 변경은 무관
 
 ## 라이브러리
 
 - `camp.nextstep.edu.missionutils`
-  - `Console.readLine()`
-  - `Randoms.pickUniqueNumbersInRange()`
-
+    - `Console.readLine()`
+    - `Randoms.pickUniqueNumbersInRange()`
 
 ---
 
-
 # 예외 케이스
-
 
 # 슈도 코드 작성
 
