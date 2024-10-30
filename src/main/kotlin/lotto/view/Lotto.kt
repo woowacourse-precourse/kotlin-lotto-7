@@ -1,11 +1,11 @@
-package lotto
+package lotto.view
 
 class Lotto(private val numbers: List<Int>) {
     init {
-        validateNumbers(numbers)
+        validateNumbers()
     }
 
-    private fun validateNumbers(numbers: List<Int>) {
+    fun validateNumbers() {
         require(numbers.size == 6) { ERROR_SIZE_NUMBERS }
         require(numbers.size == numbers.distinct().size){ ERROR_SAME_NUMBER }
         for (number in numbers) {

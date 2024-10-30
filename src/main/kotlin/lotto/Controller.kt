@@ -16,5 +16,6 @@ class Controller {
         val lotto = lottoGenerator.purchaseLotto(tickets)
         outputView.printInformationLotto(lotto)
         outputView.printRequirePrizeNumber()
+        inputView.inputPrizeNumber()
     }
 }

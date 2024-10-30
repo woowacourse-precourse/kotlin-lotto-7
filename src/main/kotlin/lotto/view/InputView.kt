@@ -16,9 +16,16 @@ class InputView {
         return validator.validatePayment(payment)
     }
 
+    fun inputPrizeNumber(): List<Int> {
+        val prizeNumber = Console.readLine()
+        val numbers = prizeNumber.split(NUMBER_DELIMITER)
+        return validator.validatePrizeNumber(numbers)
+    }
+
     companion object {
         private const val ERROR_PAYMENT_UNIT = "[ERROR] 구매 금액은 1,000원 단위여야 합니다."
         private const val LOTTO_PRICE = 1000
         private const val REMAINDER_AFTER_DIVIDE = 0
+        private const val NUMBER_DELIMITER = ","
     }
 }
