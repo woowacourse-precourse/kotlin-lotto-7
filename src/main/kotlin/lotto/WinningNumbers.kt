@@ -3,6 +3,7 @@ package lotto
 class WinningNumbers(val numbers: List<Int>, val bonusNumber: Int) {
     init {
         validateNumbers()
+        validateBonusNumbers()
     }
 
     private fun validateNumbers() {
@@ -12,5 +13,11 @@ class WinningNumbers(val numbers: List<Int>, val bonusNumber: Int) {
             require(number <= 45) { "[ERROR] 당첨 번호는 45보다 작거나 같아야 합니다." }
             require(number >= 1) { "[ERROR] 당첨 번호는 1보다 크거나 같아야 합니다." }
         }
+    }
+
+    private fun validateBonusNumbers() {
+        require(bonusNumber <= 45) { "[ERROR] 보너스 번호는 45보다 작거나 같아야 합니다." }
+        require(bonusNumber >= 1) { "[ERROR] 보너스 번호는 1보다 크거나 같아야 합니다." }
+        require(numbers.contains(bonusNumber).not()) { "[ERROR] 보너스 번호는 로또 번호들과 중복되면 안됩니다." }
     }
 }
