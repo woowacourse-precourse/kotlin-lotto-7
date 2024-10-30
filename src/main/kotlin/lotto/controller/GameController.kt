@@ -16,6 +16,7 @@ class GameController(
         val boughtLotto = gameService.buyLotto(money)
         showBoughtLotto(boughtLotto)
         val winningNumbers = readWinningNumbers()
+        val bonusNumber = readBonusNumber()
     }
 
     private fun readMoney(): Long {
@@ -43,6 +44,13 @@ class GameController(
         return Lotto(winningNumbers)
     }
 
+    private fun readBonusNumber(): Int {
+        gameView.showMessage(Messages.INFO_INPUT_BONUS_NUMBER)
+        val bonusNumber = gameView.readLine().toInt()
+        gameView.showBlankLine()
+
+        return bonusNumber
+    }
 
     companion object {
         fun create(): GameController {
