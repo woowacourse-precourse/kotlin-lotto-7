@@ -61,4 +61,7 @@ fun main() {
             "5개 일치 (1,500,000원) - ${winningCount["3등"]}개\n" +
             "5개 일치, 보너스 볼 일치 (30,000,000원) - ${winningCount["2등"]}개\n" +
             "6개 일치 (2,000,000,000원) - ${winningCount["1등"]}개")
+
+    val returnPrice = 5000 * winningCount["5등"]!! + 50000 * winningCount["4등"]!! + 1500000 * winningCount["3등"]!! + 30000000 * winningCount["2등"]!! + 2000000000 * winningCount["1등"]!!
+    val rateOfReturn = (returnPrice/price.toInt()) * 100
 }
