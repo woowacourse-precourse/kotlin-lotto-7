@@ -1,12 +1,10 @@
 package lotto
 
-import delegate.common.CommonErrorDelegator
-import delegate.input.InputErrorDelegator
+import di.DependencyInjector
 import view.InputView
 
 fun main() {
-    val commonErrorDelegator = CommonErrorDelegator()
-    val inputErrorDelegate = InputErrorDelegator()
-    InputView(commonErrorDelegator, inputErrorDelegate)
-
+    val injector = DependencyInjector()
+    val inputValidator = injector.injectInputValidator()
+    InputView(inputValidator)
 }
