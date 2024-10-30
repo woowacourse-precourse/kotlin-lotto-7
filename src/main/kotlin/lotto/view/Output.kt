@@ -11,7 +11,7 @@ class Output {
         prizeMessages.forEach { println(it + COUNT) }
     }
 
-    fun profitRateMsg(profitRate: Float) {
+    fun rateOfReturnMsg(profitRate: Float) {
         println(String.format(PROFIT_RATE_MSG, "$profitRate$PERCENT"))
     }
 }
