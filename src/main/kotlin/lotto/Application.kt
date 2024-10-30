@@ -9,4 +9,5 @@ fun main() {
     val count = price.toInt() / 1000
     println("\n${count}개를 구매했습니다.")
     val lottoNumbers = pickUniqueNumbersInRange(1, 45, 6)
+    val sortedLottoNumbers = lottoNumbers.sorted()
 }
