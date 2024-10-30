@@ -1,6 +1,6 @@
 package lotto.domain
 
-import lotto.constants.Constants.COMMA
+import lotto.constants.LottoConstants.COMMA
 
 class InputNumbers(rawWinningNumbers: String, rawBonusNumber: String) {
 

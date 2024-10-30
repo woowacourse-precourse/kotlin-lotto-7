@@ -1,7 +1,7 @@
 package lotto.view
 
-import lotto.constants.Constants.PROFIT_RATE_MSG
-import lotto.constants.Constants.WINNING_RESULT_MSG
+import lotto.constants.OutputConstants.PROFIT_RATE_MSG
+import lotto.constants.OutputConstants.WINNING_RESULT_MSG
 
 class Output {
     fun winningResultMsg(prizeMessages: List<String>) {

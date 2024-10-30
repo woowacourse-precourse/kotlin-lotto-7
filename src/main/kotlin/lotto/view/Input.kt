@@ -1,9 +1,9 @@
 package lotto.view
 
-import lotto.constants.Constants.BONUS_NUMBER_MSG
-import lotto.constants.Constants.PURCHASED_QUANTITY_MSG
-import lotto.constants.Constants.PURCHASE_PRICE_MSG
-import lotto.constants.Constants.WINNING_NUMBERS_MSG
+import lotto.constants.InputConstants.BONUS_NUMBER_MSG
+import lotto.constants.InputConstants.PURCHASED_QUANTITY_MSG
+import lotto.constants.InputConstants.PURCHASE_PRICE_MSG
+import lotto.constants.InputConstants.WINNING_NUMBERS_MSG
 import lotto.domain.Lotto
 
 class Input {
