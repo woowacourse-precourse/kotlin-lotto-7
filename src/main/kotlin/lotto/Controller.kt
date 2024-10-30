@@ -10,14 +10,32 @@ class Controller {
     private val lottoGenerator = LottoGenerator()
 
     fun start() {
+        val tickets = payment()
+        purchaseLotto(tickets)
+        getPrizeNumber()
+        getBonusNumber()
+    }
+
+    private fun payment(): Int {
         outputView.printRequirePaymentMessage()
         val tickets = inputView.amountTickets()
         outputView.printAmountTickets(tickets)
+        return tickets
+    }
+
+    private fun purchaseLotto(tickets: Int): List<List<Int>> {
         val lotto = lottoGenerator.purchaseLotto(tickets)
         outputView.printInformationLotto(lotto)
+        return lotto
+    }
+
+    private fun getPrizeNumber(): List<Int> {
         outputView.printRequirePrizeNumber()
-        inputView.inputPrizeNumber()
+        return inputView.inputPrizeNumber()
+    }
+
+    private fun getBonusNumber(): Int {
         outputView.printRequireBonusNumber()
-        inputView.inputBonusNumber()
+        return inputView.inputBonusNumber()
     }
 }

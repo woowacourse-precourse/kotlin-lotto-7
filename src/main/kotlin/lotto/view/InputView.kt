@@ -5,28 +5,24 @@ import camp.nextstep.edu.missionutils.Console
 class InputView {
     private val validator = Validator()
 
-    fun amountTickets(): Int {
-        val payment = inputPayment()
+    fun amountTickets() = inputPayment().let { payment ->
         require(payment % LOTTO_PRICE == REMAINDER_AFTER_DIVIDE) {
             ErrorMessages.ERROR_PAYMENT_UNIT.message
         }
-        return payment / LOTTO_PRICE
+        payment / LOTTO_PRICE
     }
 
-    private fun inputPayment(): Int {
-        val payment = Console.readLine()
-        return validator.validatePayment(payment)
+    private fun inputPayment() = Console.readLine().let { payment ->
+        validator.validatePayment(payment)
     }
 
-    fun inputPrizeNumber(): List<Int> {
-        val prizeNumber = Console.readLine()
+    fun inputPrizeNumber() = Console.readLine().let { prizeNumber ->
         val numbers = prizeNumber.split(NUMBER_DELIMITER)
-        return validator.validatePrizeNumber(numbers)
+        validator.validatePrizeNumber(numbers)
     }
 
-    fun inputBonusNumber(): Int {
-        val number = Console.readLine()
-        return validator.validateBonusNumber(number)
+    fun inputBonusNumber() = Console.readLine().let  { number ->
+        validator.validateBonusNumber(number)
     }
 
     companion object {

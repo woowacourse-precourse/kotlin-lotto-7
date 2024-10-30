@@ -4,8 +4,12 @@ class Validator {
     fun validatePayment(payment: String): Int {
         try {
             val convertPayment = payment.toInt()
-            require(convertPayment >= LOWER_RANGE_PAYMENT) { ErrorMessages.ERROR_POSITIVE_DIGIT.message }
-            require(convertPayment <= UPPER_RANGE_PAYMENT) { ErrorMessages.ERROR_MAX_PAYMENT.message }
+            require(convertPayment >= LOWER_RANGE_PAYMENT) {
+                ErrorMessages.ERROR_POSITIVE_DIGIT.message
+            }
+            require(convertPayment <= UPPER_RANGE_PAYMENT) {
+                ErrorMessages.ERROR_MAX_PAYMENT.message
+            }
             return convertPayment
         } catch (e: NumberFormatException) {
             throw IllegalArgumentException(ErrorMessages.ERROR_ONLY_LONG_DIGIT.message)

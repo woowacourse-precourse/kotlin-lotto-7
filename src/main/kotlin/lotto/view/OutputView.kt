@@ -14,7 +14,7 @@ class OutputView {
         println(lotto.joinToString(LINE_FEED))
     }
 
-    fun printRequirePrizeNumber(){
+    fun printRequirePrizeNumber() {
         println()
         println(MESSAGE_PRIZE_NUMBER)
     }
