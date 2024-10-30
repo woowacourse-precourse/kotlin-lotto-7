@@ -1,4 +1,4 @@
-package util
+package domain.enums
 
 enum class Process(private val msg: String) {
     PAY("구입 금액"),

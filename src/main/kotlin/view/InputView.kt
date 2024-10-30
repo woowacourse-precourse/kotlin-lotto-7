@@ -3,8 +3,8 @@ package view
 import camp.nextstep.edu.missionutils.Console.readLine
 import delegate.common.CommonErrorDelegate
 import delegate.input.InputErrorDelegate
-import util.Input
-import util.Process
+import domain.enums.Input
+import domain.enums.Process
 import util.retryWhenNoException
 
 class InputView(

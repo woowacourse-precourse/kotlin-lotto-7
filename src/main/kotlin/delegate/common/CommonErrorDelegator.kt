@@ -1,7 +1,7 @@
 package delegate.common
 
-import util.Exception
-import util.Process
+import domain.enums.Exception
+import domain.enums.Process
 import util.isNumeric
 
 class CommonErrorDelegator : CommonErrorDelegate {

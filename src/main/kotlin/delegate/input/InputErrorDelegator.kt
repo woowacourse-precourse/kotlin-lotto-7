@@ -1,6 +1,6 @@
 package delegate.input
 
-import util.Exception
+import domain.enums.Exception
 import util.isThousandUnit
 
 class InputErrorDelegator : InputErrorDelegate {

@@ -1,4 +1,4 @@
-package util
+package domain.enums
 
 enum class Input(private val msg: String) {
     INPUT_PAY("구입금액을 입력해 주세요.");

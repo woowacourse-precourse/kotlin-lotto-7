@@ -6,12 +6,11 @@ import delegate.input.InputErrorDelegate
 import delegate.input.InputErrorDelegator
 import org.assertj.core.api.Assertions
 import org.junit.jupiter.api.BeforeEach
-import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.EmptySource
 import org.junit.jupiter.params.provider.ValueSource
-import util.Exception
-import util.Process
+import domain.enums.Exception
+import domain.enums.Process
 
 class InputTest {
     private lateinit var commonErrorDelegate: CommonErrorDelegate

@@ -1,6 +1,6 @@
 package delegate.common
 
-import util.Process
+import domain.enums.Process
 
 interface CommonErrorDelegate {
     fun isEmpty(input: String)
