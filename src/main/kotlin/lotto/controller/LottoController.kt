@@ -39,6 +39,6 @@ class LottoController {
 
     private fun totalResult(winningResult: WinningResult, inputNumbers: InputNumbers, purchasedPrice: String) {
         output.winningResultMsg(getPrizeRankMsg(winningResult.getMatchCount(inputNumbers)))
-        output.profitRateMsg(winningResult.rate(inputNumbers,purchasedPrice))
+        output.profitRateMsg(winningResult.rate(purchasedPrice))
     }
 }

@@ -19,7 +19,7 @@ class WinningResult(private val lottos: List<Lotto>) {
         return countByMatchCount[2]++
     }
 
-    fun rate(inputNumbers: InputNumbers, purchasedPrice: String): Float {
+    fun rate(purchasedPrice: String): Float {
         val totalPrize = Ranking.entries
             .mapIndexed { index, ranking -> countByMatchCount[index] * ranking.prize }
             .sum()
