@@ -20,7 +20,7 @@ class GameView {
 
     companion object {
         fun showFormattedError(errorMessage: String) {
-            println(Messages.ERROR_FORMAT.format(errorMessage))
+            println(Messages.ERROR.format(errorMessage))
         }
     }
 }

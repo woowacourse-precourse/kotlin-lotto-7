@@ -8,8 +8,9 @@ object Messages {
     const val GAME_RESULT_HEADER = "<게임 결과>"
 
     // 에러 메시지
-    const val ERROR_FORMAT = "[ERROR] %s"
+    const val ERROR = "[ERROR] %s"
 
+    const val DUPLICATE_LOTTO_NUMBER = "로또 번호에 중복값이 존재합니다"
     const val ERROR_EMPTY_INPUT = "입력값이 비어있습니다."
     const val ERROR_DUPLICATE_NAME = "컬렉션에 중복값이 존재합니다"
 

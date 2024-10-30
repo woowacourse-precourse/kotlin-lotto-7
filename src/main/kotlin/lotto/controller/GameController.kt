@@ -13,7 +13,7 @@ class GameController(
 ) {
     fun gameStart() {
         val money = readMoney()
-
+        val ownLotto = gameService.buyLotto(money)
     }
 
     private fun readMoney(): Long {
@@ -22,13 +22,6 @@ class GameController(
         gameView.showBlankLine()
 
         return money.toLong()
-    }
-
-    private fun announceFinalWinner() {
-        val winnersName = gameService.findWinnerNames(
-            listOf(DummyModel("1호", 10), DummyModel("2호"))
-        )
-        gameView.showMessage("우승자 : ${winnersName.joinToString()}")
     }
 
     companion object {

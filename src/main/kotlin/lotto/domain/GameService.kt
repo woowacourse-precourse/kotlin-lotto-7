@@ -1,16 +1,23 @@
 package template.domain
 
-import template.model.DummyModel
+import lotto.model.Lotto
+import camp.nextstep.edu.missionutils.Randoms
 
 class GameService {
-    fun findWinnerNames(dummyModels: List<DummyModel>): List<String> {
-        val maxDistance = dummyModels.maxOf { it.distance }
-        val winners = dummyModels.filter { it.distance == maxDistance }
+    fun buyLotto(money: Long): List<Lotto> {
+        val lottoAmount = (money / ONE_LOTTO_PRICE).toInt()
 
-        return winners.map { it.name }
+        return List(lottoAmount) { generateLotto() }
+    }
+
+    private fun generateLotto(): Lotto {
+        val lottoNumbers = Randoms.pickUniqueNumbersInRange(1, 45, 6)
+        lottoNumbers.sort()
+
+        return Lotto(lottoNumbers)
     }
 
     companion object {
-        private const val MAX_RANDOM = 9
+        private const val ONE_LOTTO_PRICE = 1000
     }
 }
