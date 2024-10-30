@@ -11,8 +11,11 @@ class LottoTicket {
             _numberOfPurchase = value
         }
 
-    private val _userLottoNumbers = mutableListOf<Lotto>()
+    private var _userLottoNumbers = mutableListOf<Lotto>()
 
-    val userLottoNumbers: List<Lotto>
+    var userLottoNumbers: List<Lotto>
         get() = _userLottoNumbers
+        set(numbers) {
+            _userLottoNumbers.addAll(numbers)
+        }
 }
