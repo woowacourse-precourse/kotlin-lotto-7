@@ -1,6 +1,7 @@
 package lotto.controller
 
 import camp.nextstep.edu.missionutils.Console
+import lotto.constants.OutputConstants.COUNT
 import lotto.domain.InputNumbers
 import lotto.domain.LottoAmount
 import lotto.domain.Ranking
@@ -24,21 +25,19 @@ class LottoController {
 
         input.bonusNumberMsg()
         val bonusNumber = Console.readLine()
-
         val inputNumbers = InputNumbers(winningNumbers, bonusNumber)
-        val winningResult = WinningResult(lottoAmount.lottos)
 
-        totalResult(winningResult, inputNumbers, purchasePrice)
+        totalResult(purchasePrice, lottoAmount, inputNumbers)
     }
 
-    private fun getPrizeRankMsg(countByMatchCount: List<Int>): List<String> {
-        return Ranking.entries.mapIndexed { index, ranking ->
-            "${ranking.formattedMsg()}${countByMatchCount[index]}개"
-        }
-    }
+    private fun totalResult(
+        purchasedPrice: String,
+        lottoAmount: LottoAmount,
+        inputNumbers: InputNumbers
+    ) {
+        val winningResult = WinningResult(lottoAmount.lottos, inputNumbers)
 
-    private fun totalResult(winningResult: WinningResult, inputNumbers: InputNumbers, purchasedPrice: String) {
-        output.winningResultMsg(getPrizeRankMsg(winningResult.getMatchCount(inputNumbers)))
+        output.winningResultMsg(winningResult.getPrizeRankMsg())
         output.profitRateMsg(winningResult.rate(purchasedPrice))
     }
 }
