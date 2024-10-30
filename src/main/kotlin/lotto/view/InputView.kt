@@ -7,7 +7,9 @@ class InputView {
 
     fun amountTickets(): Int {
         val payment = inputPayment()
-        require(payment % LOTTO_PRICE == REMAINDER_AFTER_DIVIDE) { ERROR_PAYMENT_UNIT }
+        require(payment % LOTTO_PRICE == REMAINDER_AFTER_DIVIDE) {
+            ErrorMessages.ERROR_PAYMENT_UNIT.message
+        }
         return payment / LOTTO_PRICE
     }
 
@@ -28,7 +30,6 @@ class InputView {
     }
 
     companion object {
-        private const val ERROR_PAYMENT_UNIT = "[ERROR] 구매 금액은 1,000원 단위여야 합니다."
         private const val LOTTO_PRICE = 1000
         private const val REMAINDER_AFTER_DIVIDE = 0
         private const val NUMBER_DELIMITER = ","
