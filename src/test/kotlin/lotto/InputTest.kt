@@ -2,6 +2,8 @@ package lotto
 
 import delegate.common.CommonErrorDelegate
 import delegate.common.CommonErrorDelegator
+import delegate.input.InputErrorDelegate
+import delegate.input.InputErrorDelegator
 import org.assertj.core.api.Assertions
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
@@ -13,10 +15,12 @@ import util.Process
 
 class InputTest {
     private lateinit var commonErrorDelegate: CommonErrorDelegate
+    private lateinit var inputErrorDelegate: InputErrorDelegate
 
     @BeforeEach
     fun init() {
         commonErrorDelegate = CommonErrorDelegator()
+        inputErrorDelegate = InputErrorDelegator()
     }
 
     @ParameterizedTest
@@ -36,4 +40,11 @@ class InputTest {
             .hasMessage("${type}은(는) ${Exception.INVALID_INPUT}")
     }
 
+    @ParameterizedTest
+    @ValueSource(strings = ["0", "9999", "10001", "1111"])
+    fun `구입 금액 입력값이 천원 단위가 아닐 때 `(value: String) {
+        Assertions.assertThatThrownBy { inputErrorDelegate.isThousandWonUnit(value) }
+            .isInstanceOf(IllegalArgumentException::class.java)
+            .hasMessage(Exception.INVALID_UNIT.toString())
+    }
 }
