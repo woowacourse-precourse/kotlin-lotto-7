@@ -1,14 +1,17 @@
 package lotto.view
 
+import lotto.util.InfoMessages
+import lotto.util.InputMessages
+
 class OutputView {
 
     fun printPurchaseAmountPrompt() {
-        println("구입금액을 입력해 주세요.")
+        println(InputMessages.PURCHASE_AMOUNT_PROMPT)
     }
 
     fun printNumberOfPurchase(numberOfPurchase: Int) {
         println()
-        println("${numberOfPurchase}개를 구매했습니다.")
+        println("${numberOfPurchase}${InfoMessages.PURCHASE_AMOUNT_INFO}")
     }
 
 }

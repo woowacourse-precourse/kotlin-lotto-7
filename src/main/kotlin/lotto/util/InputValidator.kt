@@ -6,10 +6,10 @@ class InputValidator {
         val parsedPurchaseAmount = purchaseAmount.toIntOrNull()
 
         require(parsedPurchaseAmount != null) {
-            Messages.INVALID_PURCHASE_AMOUNT_FORMAT
+            ErrorMessages.INVALID_PURCHASE_AMOUNT_FORMAT
         }
         require(parsedPurchaseAmount >= 1000 && parsedPurchaseAmount % 1000 == 0) {
-            Messages.INVALID_PURCHASE_AMOUNT_UNIT
+            ErrorMessages.INVALID_PURCHASE_AMOUNT_UNIT
         }
     }
 
