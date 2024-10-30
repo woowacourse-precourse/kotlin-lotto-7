@@ -1,5 +1,12 @@
 package lotto
 
+import delegate.common.CommonErrorDelegator
+import delegate.input.InputErrorDelegator
+import view.InputView
+
 fun main() {
-    // TODO: 프로그램 구현
+    val commonErrorDelegator = CommonErrorDelegator()
+    val inputErrorDelegate = InputErrorDelegator()
+    InputView(commonErrorDelegator, inputErrorDelegate)
+
 }
