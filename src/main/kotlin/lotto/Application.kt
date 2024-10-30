@@ -11,4 +11,6 @@ fun main() {
     val lottoNumbers = pickUniqueNumbersInRange(1, 45, 6)
     val sortedLottoNumbers = lottoNumbers.sorted()
     println(sortedLottoNumbers)
+
+    val winningNumber = Console.readLine()
 }
