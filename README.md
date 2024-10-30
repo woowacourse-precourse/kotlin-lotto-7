@@ -73,20 +73,24 @@
 
 ## 파일 구조
 ### Model
-- [ ] Lotto
+- [ ] Lotto.kt: 당첨 번호 관리(?) 클래스
+- [ ] LottoRank.kt: 로또 등수 관리 클래스 
+- [ ] LottoGenerator.kt: 로또 번호 생성 클래스
 
 ### View
-- [ ] InputView
-- [ ] OutputView
+- [ ] InputView.kt
+- [ ] OutputView.kt
 
 ### Controller
-- [ ] LottoController
+- [ ] LottoController.kt
 
 ### utils
-- [ ] Exception(Validator)
+- [ ] Exception.kt(Validator)
 
 ### Test
-- [ ] ApplicationTest
-- [ ] InputViewTest
-- [ ] OutputViewTest
-- [ ] 모델 관련
+- [ ] ApplicationTest.kt
+- [ ] InputViewTest.kt
+- [ ] OutputViewTest.kt
+- [ ] Lotto.kt
+- [ ] LottoRank.kt
+- [ ] LottoGenerator.kt
