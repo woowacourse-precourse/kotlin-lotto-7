@@ -25,6 +25,9 @@
 
 - 사용자가 가진 로또의 등수를 계산한다
 
+### LottoRank
+- 로또의 랭킹을 열거형으로 가진다
+
 ### CalculateLottoReturnUseCase
 
 - 로또의 수익률을 계산한다
