@@ -1,9 +1,7 @@
 package lotto
 
-import lotto.view.InputView
-import lotto.view.OutputView
+import lotto.controller.MainController
 
 fun main() {
-    OutputView().printPurchaseAmountPrompt()
-    InputView().inputPurchaseAmount()
+    MainController().run()
 }
