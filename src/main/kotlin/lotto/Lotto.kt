@@ -13,4 +13,6 @@ class Lotto(private val numbers: List<Int>) {
             require(number >= 1) { "[ERROR] 로또 번호는 1보다 크거나 같아야 합니다." }
         }
     }
+
+    fun getNumbers() = numbers.toList()
 }
