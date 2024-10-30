@@ -12,6 +12,7 @@ fun main() {
     val sortedLottoNumbers = lottoNumbers.sorted()
     println(sortedLottoNumbers)
 
+    println("당첨 번호를 입력해 주세요.")
     val winningNumber = Console.readLine()
     val splitedWinningNumber = winningNumber.split(",")
 }
