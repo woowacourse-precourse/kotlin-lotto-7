@@ -5,17 +5,17 @@ import lotto.resources.Messages.*
 class InputValidator {
     fun commaStringValidate(input: String) {
         require(input.isNotBlank()) {
-            ERROR_EMPTY_INPUT.errorMessage()
+            EMPTY_INPUT.errorMessage()
         }
         val elements = input.split(",")
-        require(elements.size == elements.distinct().size) { ERROR_DUPLICATE_NAME.errorMessage() }
+        require(elements.size == elements.distinct().size) { DUPLICATE_NAME.errorMessage() }
     }
 
     fun numberValidate(input: String) {
-        require(input.isNotBlank()) { ERROR_EMPTY_INPUT.errorMessage() }
-        require(input.length < 9) { ERROR_OVERSIZE_TRY_COUNT.errorMessage() }
+        require(input.isNotBlank()) { EMPTY_INPUT.errorMessage() }
+        require(input.length < 9) { OVERSIZE_TRY_COUNT.errorMessage() }
         val number = runCatching { input.toInt() }
-            .getOrElse { throw IllegalArgumentException(ERROR_NOT_POSITIVE.errorMessage()) }
-        require(number > 0) { ERROR_NOT_POSITIVE.errorMessage() }
+            .getOrElse { throw IllegalArgumentException(NOT_POSITIVE.errorMessage()) }
+        require(number > 0) { NOT_POSITIVE.errorMessage() }
     }
 }

@@ -17,13 +17,12 @@ enum class Messages(private val message: String) {
         """.trimIndent()
     ),
 
-    // 에러 메시지
     ERROR("[ERROR] %s"),
     DUPLICATE_LOTTO_NUMBER("로또 번호에 중복값이 존재합니다"),
-    ERROR_EMPTY_INPUT("입력값이 비어있습니다."),
-    ERROR_DUPLICATE_NAME("컬렉션에 중복값이 존재합니다"),
-    ERROR_OVERSIZE_TRY_COUNT("너무 크거나 잘못된 입력입니다."),
-    ERROR_NOT_POSITIVE("양의 정수만 입력 가능합니다.");
+    EMPTY_INPUT("입력값이 비어있습니다."),
+    DUPLICATE_NAME("컬렉션에 중복값이 존재합니다"),
+    OVERSIZE_TRY_COUNT("너무 크거나 잘못된 입력입니다."),
+    NOT_POSITIVE("양의 정수만 입력 가능합니다.");
 
     fun message(): String = message
     fun errorMessage(): String = ERROR.formattedMessage(message)

@@ -4,6 +4,7 @@ import lotto.model.Lotto
 import lotto.view.GameView
 import lotto.domain.InputValidator
 import lotto.domain.GameService
+import lotto.model.WinningCounter
 import lotto.resources.Messages.*
 
 class GameController(
@@ -15,8 +16,11 @@ class GameController(
         val money = readMoney()
         val boughtLottos = gameService.buyLottos(money)
         showBoughtLotto(boughtLottos)
+
         val winNumberLotto = readWinNumbers()
         val bonusNumber = readBonusNumber()
+        val winningCounts = gameService.countWinnings(boughtLottos, winNumberLotto, bonusNumber)
+        showLottoResult(winningCounts)
     }
 
     private fun readMoney(): Long {
@@ -52,7 +56,11 @@ class GameController(
         return bonusNumber
     }
 
-
+    private fun showLottoResult(winningCounts: WinningCounter) {
+        gameView.showMessage(
+            INFO_WINNING_STATISTICS.formattedMessage(*winningCounts.inOrderNumbers().toTypedArray())
+        )
+    }
 
     companion object {
         fun create(): GameController {
