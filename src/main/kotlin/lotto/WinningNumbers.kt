@@ -1,6 +1,6 @@
 package lotto
 
-class WinningNumbers(val numbers: List<Int>, val bonusNumber: Int) {
+class WinningNumbers(private val numbers: List<Int>, val bonusNumber: Int) {
     init {
         validateNumbers()
         validateBonusNumbers()
@@ -20,4 +20,6 @@ class WinningNumbers(val numbers: List<Int>, val bonusNumber: Int) {
         require(bonusNumber >= 1) { "[ERROR] 보너스 번호는 1보다 크거나 같아야 합니다." }
         require(numbers.contains(bonusNumber).not()) { "[ERROR] 보너스 번호는 로또 번호들과 중복되면 안됩니다." }
     }
+
+    private fun getNumbers() = numbers.toList()
 }
