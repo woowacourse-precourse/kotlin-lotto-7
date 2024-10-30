@@ -1,11 +1,15 @@
 package lotto.controller
 
+import lotto.Lotto
 import lotto.view.InputView
+import lotto.view.OutputView
 
 object LottoController {
     fun run() {
         val purchaseAmount = getValidPurchaseAmount()
-
+        val lottoCount = purchaseAmount / 1_000
+        val lottos = generateLottos(lottoCount)
+        OutputView.printPurchasedLottos(lottos)
     }
 
     private fun getValidPurchaseAmount(): Int {
@@ -18,5 +22,8 @@ object LottoController {
                 println(e.message)
             }
         }
+    }
+    private fun generateLottos(count: Int): List<Lotto> {
+        return List(count) { Lotto() }
     }
 }
