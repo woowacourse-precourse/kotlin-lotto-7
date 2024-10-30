@@ -13,4 +13,19 @@ class InputValidator {
         }
     }
 
+    fun validateWinningNumbers(winningNumbers: List<Int?>) {
+        require(winningNumbers.all { it != null }) {
+            ErrorMessages.INVALID_WINNING_NUMBERS_FORMAT
+        }
+        require(winningNumbers.size == 6) {
+            ErrorMessages.INVALID_WINNING_NUMBERS_SIZE
+        }
+        require(winningNumbers.all { it!! > 0 && it <= 45 }) {
+            ErrorMessages.INVALID_WINNING_NUMBERS_RANGE
+        }
+        require(winningNumbers.size == winningNumbers.distinct().size) {
+            ErrorMessages.DUPLICATE_WINNING_NUMBERS
+        }
+    }
+
 }

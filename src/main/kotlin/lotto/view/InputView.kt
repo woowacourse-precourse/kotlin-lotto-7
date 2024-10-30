@@ -12,4 +12,11 @@ class InputView {
         return purchaseAmount.toInt()
     }
 
+    fun inputWinningNumbers(): List<Int?> {
+        val winningNumbersInput = Console.readLine()
+        val parsedWinningNumbers = winningNumbersInput.split(",").map { it.trim().toIntOrNull() }
+        inputValidator.validateWinningNumbers(parsedWinningNumbers)
+        return parsedWinningNumbers
+    }
+
 }

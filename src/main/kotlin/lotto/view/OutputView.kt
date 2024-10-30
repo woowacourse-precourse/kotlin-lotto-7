@@ -21,4 +21,9 @@ class OutputView {
         }
     }
 
+    fun printWinningNumbersPrompt() {
+        println()
+        println(InputMessages.WINNING_NUMBERS_PROMPT)
+    }
+
 }
