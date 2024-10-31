@@ -62,10 +62,22 @@ class InputTest {
         }
     }
 
-    @Test
-    fun `구입 금액 유효성 검사 후 반환값 테스트`(){
-        val value = "5000"
-        val expected = Pair("5개를 구매했습니다.", 5)
-        Assertions.assertThat(inputValidator.payValidation(value)).isEqualTo(expected)
+    @Nested
+    inner class WinningNumberTest {
+        @BeforeEach
+        fun init() {
+            commonErrorDelegate = CommonErrorDelegator()
+            inputErrorDelegate = InputErrorDelegator()
+            inputValidator = InputValidator(commonErrorDelegate, inputErrorDelegate)
+        }
+
+        @ParameterizedTest
+        @ValueSource(strings = ["1", "1,2", "1,2,3", "1,2,3,4", "1,2,3,4,5", "1,2,3,4,5,6,7,8,9,10"])
+        fun `당첨 번호가 6개가 아닐 때 예외 테스트`(value: String){
+            val winningNumber = value.split(",")
+            Assertions.assertThatThrownBy { inputErrorDelegate.isInvalidLottoSize(winningNumber) }
+                .isInstanceOf(IllegalArgumentException::class.java)
+                .hasMessage(Exception.INVALID_SIZE.toString())
+        }
     }
 }
