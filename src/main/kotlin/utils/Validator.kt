@@ -15,7 +15,7 @@ import utils.ExtensionUtil.getInt
 
 object Validator {
 
-    fun validateMoney(inputMoney: String) {
+    fun validateMoney(inputMoney: String): Int {
 
         MoneyValidator.SHOULD_BE_NUMBER.validate(inputMoney)
 
@@ -25,6 +25,7 @@ object Validator {
 
         MoneyValidator.SHOULD_BE_UNDER_MAX.validate(inputMoney)
 
+        return inputMoney.toInt()
     }
 
     fun validateWinningNumbers(inputWinningNumbers: String) {
