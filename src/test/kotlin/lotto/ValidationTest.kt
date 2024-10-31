@@ -28,6 +28,13 @@ class ValidationTest {
     }
 
     @Test
+    fun `구입 금액은 Int MAX_VALUE 이하이어야 한다`() {
+        assertThrows<IllegalArgumentException> {
+            Validator.validateMoney("${Int.MAX_VALUE}")
+        }
+    }
+
+    @Test
     fun `0원도 허용한다`() {
         assertDoesNotThrow {
             Validator.validateMoney("0")

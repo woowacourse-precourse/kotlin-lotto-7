@@ -11,6 +11,8 @@ object Validator {
         require(money >= 0) { "금액은 양수로 입력해야 합니다." }
 
         require(money % 1000 == 0) { "금액은 1,000원 단위로 입력해야 합니다." }
+
+        require(money <= Int.MAX_VALUE) { "금액은 2,147,483,647원 이하로 입력해야 합니다." }
     }
 
     fun validateWinningNumbers(inputWinningNumbers: String) {
