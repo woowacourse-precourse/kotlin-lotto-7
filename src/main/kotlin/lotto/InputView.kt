@@ -42,6 +42,14 @@ class InputView {
         println(INPUT_LUCKY_NUMBERS_EXAMPLE_MESSAGE)
     }
 
+    private fun informBonusNumber() {
+        println(INPUT_BONUS_NUMBER_MESSAGE)
+        println(INPUT_BONUS_NUMBER_RANGE_MESSAGE)
+        println(INPUT_POSITIVE_BONUS_NUMBER_MESSAGE)
+        println(INPUT_NO_DUPLICATE_LUCKY_NUMBERS_MESSAGE)
+        println(INPUT_NO_BLANK_MESSAGE)
+    }
+
     companion object InputMessage {
         private const val INPUT_INFORMATION_MESSAGE = "안녕하세요!\n채채의 로또 판매점에 오신것을 환영합니다\n로또 번호 한줄당 1000원입니다\n오늘도 LUCKY한 하루되세요!"
         private const val INPUT_PURCHASE_AMOUNT_MESSAGE = "아래의 사항을 준수해 로또 구입 금액을 입력하고 enter를 눌러주세요."
@@ -58,5 +66,9 @@ class InputView {
         private const val INPUT_NO_BLANK_MESSAGE = "• 입력 시 공백은 자동으로 제거됩니다."
         private const val INPUT_LUCKY_NUMBERS_EXAMPLE_MESSAGE = "예시)1,2,3,4,5,6"
 
+        private const val INPUT_BONUS_NUMBER_MESSAGE = "아래의 사항을 준수해 보너스 번호 1개를 입력하고 enter를 눌러주세요."
+        private const val INPUT_BONUS_NUMBER_RANGE_MESSAGE = "• 보너스 번호는 1부터 45까지 가능합니다."
+        private const val INPUT_POSITIVE_BONUS_NUMBER_MESSAGE = "• 보너스 번호는 양의 정수만 입력해주세요."
+        private const val INPUT_NO_DUPLICATE_LUCKY_NUMBERS_MESSAGE = "• 당첨 번호와 중복된 숫자 입력은 안됩니다."
     }
 }
