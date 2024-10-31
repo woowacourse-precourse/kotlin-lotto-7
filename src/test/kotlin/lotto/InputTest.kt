@@ -29,7 +29,15 @@ class InputTest {
             inputErrorDelegate = InputErrorDelegator()
             inputValidator = InputValidator(commonErrorDelegate, inputErrorDelegate)
         }
+    @BeforeEach
+    fun init() {
+        commonErrorDelegate = CommonErrorDelegator()
+        inputErrorDelegate = InputErrorDelegator()
+        inputValidator = InputValidator(commonErrorDelegate, inputErrorDelegate)
+    }
 
+    @Nested
+    inner class CommonErrorTest {
         @ParameterizedTest
         @EmptySource
         fun `사용자의 입력값이 비어있을 때`(입력: String) {
@@ -37,6 +45,7 @@ class InputTest {
                 .isInstanceOf(IllegalArgumentException::class.java)
                 .hasMessage(Exception.EMPTY_INPUT.toString())
         }
+    }
 
         @ParameterizedTest
         @ValueSource(strings = ["abc", "ㄱㄴㄷ", "!@#$", "100,23,22"])
