@@ -1,11 +1,12 @@
 package lotto.view
 
 import camp.nextstep.edu.missionutils.Console
+import lotto.model.message.InputMessage
 
 object InputView {
 
     fun askForPrice(): String {
-        println("구입금액을 입력해 주세요.")
+        println(InputMessage.INPUT_PURCHASE_PRICE.message)
         return Console.readLine()
     }
 }

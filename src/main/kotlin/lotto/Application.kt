@@ -2,10 +2,10 @@ package lotto
 
 import lotto.view.OutputView
 import lotto.controller.LottoController
+import lotto.model.message.ErrorMessage
 import lotto.view.ErrorView
 
 fun main() {
-
     try {
         val lottoController = LottoController()
 
@@ -14,7 +14,7 @@ fun main() {
 
         OutputView.printLottoTickets(tickets)
     } catch (e: IllegalArgumentException) {
-        ErrorView.errorMessage(e.message ?: "오류가 발생했습니다.")
+        ErrorView.errorMessage(e.message ?: ErrorMessage.DEFAULT_ERROR.message)
         throw e
     }
 }
