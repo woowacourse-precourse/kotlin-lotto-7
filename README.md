@@ -168,3 +168,9 @@ when (input) {
 }
 ```
 
+## 로또 번호 뽑기 및 오름차순 정렬 로직
+
+```kotlin
+pickNumberInRange(1, 45, 6).sorted()
+```
+
