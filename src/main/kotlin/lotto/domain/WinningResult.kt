@@ -6,13 +6,15 @@ class WinningResult(private val lottos: List<Lotto>, private val inputNumbers: I
     private var countByMatchCount = mutableListOf(0, 0, 0, 0, 0)
 
     private fun getMatchCount(): MutableList<Int> {
-        for (i in lottos.indices)
-            when (lottos[i].winningCount(inputNumbers)) {
+        lottos.forEachIndexed { index, lotto ->
+            when (lotto.winningCount(inputNumbers)) {
                 3 -> countByMatchCount[0]++
                 4 -> countByMatchCount[1]++
-                5 -> getBonusCount(i)
+                5 -> getBonusCount(index)
                 6 -> countByMatchCount[4]++
             }
+        }
+
         return countByMatchCount
     }
 

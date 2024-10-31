@@ -13,9 +13,11 @@ class Lotto(private val numbers: List<Int>) {
 
     fun winningCount(inputNumbers: InputNumbers): Int {
         var winningCount = 0
-        for (i in numbers.indices) {
-            winningCount += numbers.count { it == inputNumbers.winningNumbers[i] }
-        }
+        inputNumbers
+            .winningNumbers
+            .forEach { winningNumber ->
+                winningCount += numbers.count { it == winningNumber }
+            }
 
         return winningCount
     }
