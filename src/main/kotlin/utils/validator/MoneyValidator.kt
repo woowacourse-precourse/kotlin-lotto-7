@@ -4,12 +4,11 @@ import utils.ErrorMessages.MONEY_1000_UNIT_ERROR
 import utils.ErrorMessages.MONEY_MAX_VALUE_ERROR
 import utils.ErrorMessages.MONEY_NUMBER_ERROR
 import utils.ErrorMessages.MONEY_POSITIVE_ERROR
-import utils.ExtensionUtil.getInt
 
 enum class MoneyValidator {
     SHOULD_BE_NUMBER {
         override fun validate(money: String) {
-            money.getInt() ?: throw IllegalArgumentException(MONEY_NUMBER_ERROR)
+            money.toIntOrNull() ?: throw IllegalArgumentException(MONEY_NUMBER_ERROR)
         }
 
     },

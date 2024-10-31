@@ -4,7 +4,6 @@ import utils.ErrorMessages.WINNING_NUMBERS_COUNT_ERROR
 import utils.ErrorMessages.WINNING_NUMBERS_DUPLICATE_ERROR
 import utils.ErrorMessages.WINNING_NUMBERS_NUMBER_ERROR
 import utils.ErrorMessages.WINNING_NUMBERS_RANGE_ERROR
-import utils.ExtensionUtil.getInt
 
 enum class WinningNumbersValidator {
     SHOULD_BE_SIX_COUNT {
@@ -15,7 +14,7 @@ enum class WinningNumbersValidator {
     SHOULD_BE_NUMBER {
         override fun validate(winningNumbers: List<String>) {
             winningNumbers.map {
-                it.getInt() ?: throw IllegalArgumentException(WINNING_NUMBERS_NUMBER_ERROR)
+                it.toIntOrNull() ?: throw IllegalArgumentException(WINNING_NUMBERS_NUMBER_ERROR)
             }
         }
     },
