@@ -27,5 +27,12 @@ class InputValidator(
         inputErrorDelegate.isDuplicated(winningNumber.toMapByEachCount())
         return winningNumber.map { it.toInt() }
     }
+
+    fun bonusNumberValidation(value: String): Int {
+        val process = Process.BONUS_NUMBER
+        commonErrorDelegator.isEmpty(value)
+        commonErrorDelegator.isNumeric(value, process)
+        inputErrorDelegate.isExceededRange(listOf(value), process)
+        return value.toInt()
     }
 }
