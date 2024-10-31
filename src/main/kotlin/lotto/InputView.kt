@@ -10,6 +10,12 @@ class InputView {
         return purchaseAmount
     }
 
+    fun getLuckNumbers(): String {
+        informLuckNumbers()
+        val luckNumbers = getInput().trim()
+        return luckNumbers
+    }
+
     private fun getInput(): String {
         val userInput = Console.readLine()
         return userInput
