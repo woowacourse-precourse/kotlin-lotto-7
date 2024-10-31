@@ -2,17 +2,18 @@ package view
 
 import camp.nextstep.edu.missionutils.Console.readLine
 import domain.enums.Input
-import domain.enums.Output
 import domain.validator.InputValidator
 import util.retryWhenNoException
 import vm.LottoViewModel
 
-class InputView(
+class View(
     private val validator: InputValidator,
     private val viewModel: LottoViewModel
 ) {
     init {
         getPayment()
+        getWinningNumber()
+        getBonusNumber()
     }
 
     private fun getPayment() {
@@ -20,22 +21,38 @@ class InputView(
             println(Input.INPUT_PAY.toString())
             val pay = readLine()
             val output = validator.payValidation(pay)
-            onCompleteInputPayment(output.first, output.second)
+            printAndSetPurchase(output.first, output.second)
         }
     }
 
     private fun getWinningNumber() {
-        val winningNumber = retryWhenNoException {
+        retryWhenNoException {
             println(Input.INPUT_WINNING_NUMBER.toString())
             val winningNumber = readLine()
-            validator.winningNumberValidation(winningNumber)
+            val validWinningNumber = validator.winningNumberValidation(winningNumber)
+            printAndSetWinningNumber(validWinningNumber)
         }
     }
 
-    private fun onCompleteInputPayment(msg: String, purchase: Int){
+    private fun getBonusNumber() {
+        retryWhenNoException {
+            println(Input.INPUT_BONUS_NUMBER.toString())
+            val bonusNumber = readLine()
+            val validBonusNumber = validator.bonusNumberValidation(bonusNumber)
+            viewModel.onCompleteInputBonusNumber(validBonusNumber)
+        }
+    }
+
+    private fun printAndSetPurchase(msg: String, purchase: Int){
         lineBreak()
         println(msg)
         viewModel.onCompleteInputPayment(purchase)
+        lineBreak()
+    }
+
+    private fun printAndSetWinningNumber(winningNumber: List<Int>){
+        lineBreak()
+        viewModel.onCompleteInputWinningNumber(winningNumber)
     }
 
     private fun lineBreak() = println()
