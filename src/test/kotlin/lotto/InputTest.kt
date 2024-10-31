@@ -11,20 +11,24 @@ import org.junit.jupiter.params.provider.EmptySource
 import org.junit.jupiter.params.provider.ValueSource
 import domain.enums.Exception
 import domain.enums.Process
+import domain.validator.InputValidator
+import org.junit.jupiter.api.Test
 
 class InputTest {
     private lateinit var commonErrorDelegate: CommonErrorDelegate
     private lateinit var inputErrorDelegate: InputErrorDelegate
+    private lateinit var inputValidator: InputValidator
 
     @BeforeEach
     fun init() {
         commonErrorDelegate = CommonErrorDelegator()
         inputErrorDelegate = InputErrorDelegator()
+        inputValidator = InputValidator(commonErrorDelegate, inputErrorDelegate)
     }
 
     @ParameterizedTest
     @EmptySource
-    fun `입력값이 비어잇을 때`(입력: String) {
+    fun `구입금액 입력값이 비어있을 때`(입력: String) {
         Assertions.assertThatThrownBy { commonErrorDelegate.isEmpty(입력) }
             .isInstanceOf(IllegalArgumentException::class.java)
             .hasMessage(Exception.EMPTY_INPUT.toString())
@@ -45,5 +49,12 @@ class InputTest {
         Assertions.assertThatThrownBy { inputErrorDelegate.isThousandWonUnit(value) }
             .isInstanceOf(IllegalArgumentException::class.java)
             .hasMessage(Exception.INVALID_UNIT.toString())
+    }
+
+    @Test
+    fun `구입 금액 유효성 검사 후 반환값 테스트`(){
+        val value = "5000"
+        val expected = Pair("5개를 구매했습니다.", 5)
+        Assertions.assertThat(inputValidator.payValidation(value)).isEqualTo(expected)
     }
 }
