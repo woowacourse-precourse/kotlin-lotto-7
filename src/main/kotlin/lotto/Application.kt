@@ -8,4 +8,7 @@ fun main() {
     println(LottoOutputText.INPUT_PURCHASE_PRICE_TEXT)
     val purchasePrice = Console.readLine().toInt()  // TODO: 입력 예외 처리 필요
     println()
+
+    val lottoMachine = LottoMachine(purchasePrice)
+    lottoMachine.generate()
 }

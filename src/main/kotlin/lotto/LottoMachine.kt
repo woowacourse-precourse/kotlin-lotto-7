@@ -10,6 +10,14 @@ class LottoMachine(private val purchasePrice: Int) {
         require(purchasePrice % 1000 == 0) { ErrorMessage.INVALID_PURCHASE_PRICE.getMessage() }
     }
 
+    fun generate(): List<Lotto> {
+        val lottoCount = getLottoCount()
+        val lottoList = List(lottoCount) {
+            generateOneLotto()
+        }
+        return lottoList
+    }
+
     private fun getLottoCount(): Int = purchasePrice / LottoConstants.PRICE
 
     private fun generateOneLotto(): Lotto {
