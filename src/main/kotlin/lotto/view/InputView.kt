@@ -17,9 +17,10 @@ class InputView {
         }
     }
     private fun validateLottoAmount(lottoAmount: String) {
-        require(lottoAmount.toIntOrNull() != null) { Constants.ERROR_NOT_NUMBER }
+        require(lottoAmount.toIntOrNull() != null) { Constants.ERROR_AMOUNT_NOT_NUMBER }
         val amount = lottoAmount.toInt()
-        require(amount > 0) { Constants.ERROR_NOT_POSITIVE }
-        require(amount % 1000 == 0) { Constants.ERROR_NOT_DIVIDE_BY_1000 }
+        require(amount > 0) { Constants.ERROR_AMOUNT_NOT_POSITIVE }
+        require(amount % 1000 == 0) { Constants.ERROR_AMOUNT_NOT_DIVIDE_BY_1000 }
+    }
     }
 }
