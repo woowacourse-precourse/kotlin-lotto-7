@@ -12,9 +12,12 @@ class LottoGenerator {
         return randomLotto
     }
     fun getNumberOfLotto(money : String) : Int {
-        return money.toInt() / 1000
+        val deleteCommaMoney = money.replace(",","")
+        return deleteCommaMoney.toInt() / 1000
     }
     private fun getRandomNumbers():List<Int>{
         return Randoms.pickUniqueNumbersInRange(1,45,6)
     }
+
+
 }
