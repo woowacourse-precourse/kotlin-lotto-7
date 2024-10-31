@@ -1,5 +1,6 @@
 package lotto.view
 
+import lotto.model.Lotto
 import lotto.model.Random
 
 class OutputView {
@@ -8,7 +9,7 @@ class OutputView {
         println("${count}$PRINT_PURCHASE_LOTTO_COUNT_MESSAGE")
     }
 
-    fun printPurchaseLotto(lottos: List<List<Int>>) {
+    fun printPurchaseLotto(lottos: List<Lotto>) {
         for (lotto in lottos) {
             println(lotto)
         }

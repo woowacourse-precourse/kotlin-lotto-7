@@ -1,5 +1,6 @@
 package lotto.controller
 
+import lotto.model.Lotto
 import lotto.model.Random
 import lotto.view.InputView
 import lotto.view.OutputView
@@ -10,8 +11,8 @@ class LottoController {
     private val randomGenerator = Random()
 
     private var money = NOT_INPUT_MONEY
-    private var lotto = mutableListOf<List<Int>>()
-    private var winLotteryNumber = emptyList<Int>()
+    private var lotto = mutableListOf<Lotto>()
+    private var winLotteryNumber: Lotto?  = null
     private var bonusLotteryNumber = NOT_INPUT_BONUS_LOTTERY_NUMBER
 
 
@@ -24,14 +25,14 @@ class LottoController {
     }
 
     fun setLotteryNumber() {
-        winLotteryNumber = inputView.printInputWinLotteryNumber()
+        winLotteryNumber = Lotto(inputView.printInputWinLotteryNumber())
         bonusLotteryNumber = inputView.printInputBonusLotteryNumber()
 
     }
 
     private fun generateLotto(count: Int) {
         repeat(count) {
-            lotto.add(randomGenerator.generateUniqueRandomList())
+            lotto.add(Lotto(randomGenerator.generateUniqueRandomList()))
         }
     }
 
