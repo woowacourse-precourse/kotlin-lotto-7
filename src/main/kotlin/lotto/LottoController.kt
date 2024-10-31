@@ -9,11 +9,17 @@ class LottoController(
 ) {
     fun run() {
         val lottoCost = getLottoCost()
-
+        val user = User(lottoCost.toInt())
+        showLottoTicketsResult(user)
     }
 
     private fun getLottoCost(): String {
         lottoBuyView.guidePurchaseAmount()
         return lottoBuyView.inputPurchaseAmount()
+    }
+
+    private fun showLottoTicketsResult(user: User) {
+        lottoBuyView.guidePurchaseLottoCount(user.getLottoTickets().count())
+        lottoBuyView.guideLottoNumbers(user.getLottoTickets())
     }
 }
