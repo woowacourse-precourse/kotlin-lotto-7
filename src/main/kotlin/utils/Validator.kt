@@ -17,13 +17,14 @@ object Validator {
 
     fun validateMoney(inputMoney: String) {
 
-        val money = inputMoney.getInt() ?: throw IllegalArgumentException(MONEY_NUMBER_ERROR)
+        MoneyValidator.SHOULD_BE_NUMBER.validate(inputMoney)
 
-        require(money >= 0) { MONEY_POSITIVE_ERROR }
+        MoneyValidator.SHOULD_BE_POSITIVE.validate(inputMoney)
 
-        require(money % 1000 == 0) { MONEY_1000_UNIT_ERROR }
+        MoneyValidator.SHOULD_BE_1000_UNIT.validate(inputMoney)
 
-        require(money <= Int.MAX_VALUE) { MONEY_MAX_VALUE_ERROR }
+        MoneyValidator.SHOULD_BE_UNDER_MAX.validate(inputMoney)
+
     }
 
     fun validateWinningNumbers(inputWinningNumbers: String) {
