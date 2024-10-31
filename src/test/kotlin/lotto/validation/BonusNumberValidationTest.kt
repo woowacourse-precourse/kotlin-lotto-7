@@ -1,8 +1,8 @@
-package lotto
+package lotto.validation
 
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
-import utils.BonusNumberValidator
+import utils.validator.BonusNumberValidator
 
 class BonusNumberValidationTest {
     @Test

@@ -1,8 +1,8 @@
-package lotto
+package lotto.validation
 
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
-import utils.WinningNumbersValidator
+import utils.validator.WinningNumbersValidator
 
 class WinningNumbersValidationTest {
     @Test

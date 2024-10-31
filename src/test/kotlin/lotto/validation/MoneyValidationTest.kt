@@ -1,12 +1,12 @@
-package lotto
+package lotto.validation
 
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertDoesNotThrow
 import org.junit.jupiter.api.assertThrows
-import utils.MoneyValidator
-import utils.Validator
+import utils.validator.MoneyValidator
+import utils.validator.Validator
 
-class ValidationTest {
+class MoneyValidationTest {
     @Test
     fun `구입 금액은 숫자 형태이어야 한다`() {
         assertThrows<IllegalArgumentException> {
