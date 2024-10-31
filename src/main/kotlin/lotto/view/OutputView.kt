@@ -1,7 +1,7 @@
 package lotto.view
 
-import lotto.util.PrizeRank
 import lotto.util.OutputMessages
+import lotto.util.PrizeRank
 
 class OutputView {
     fun printRequirePaymentMessage() {

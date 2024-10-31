@@ -1,9 +1,9 @@
 package lotto
 
-import lotto.view.InputView
-import lotto.view.OutputView
 import lotto.model.LottoGenerator
 import lotto.model.VerifyPrize
+import lotto.view.InputView
+import lotto.view.OutputView
 
 class Controller {
     private val inputView = InputView()

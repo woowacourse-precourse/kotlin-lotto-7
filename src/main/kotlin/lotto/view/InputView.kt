@@ -12,7 +12,7 @@ class InputView {
                     ErrorMessages.ERROR_PAYMENT_UNIT.message
                 }
                 return payment / LOTTO_PRICE
-            } catch(error: IllegalArgumentException) {
+            } catch (error: IllegalArgumentException) {
                 println(error.message)
             }
         }

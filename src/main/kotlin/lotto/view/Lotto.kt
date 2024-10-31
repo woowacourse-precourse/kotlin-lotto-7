@@ -11,7 +11,7 @@ class Lotto(private val numbers: List<Int>) {
         require(numbers.size == NUMBERS_SIZE) {
             ErrorMessages.ERROR_SIZE_NUMBERS.message
         }
-        require(numbers.size == numbers.distinct().size){
+        require(numbers.size == numbers.distinct().size) {
             ErrorMessages.ERROR_SAME_NUMBER.message
         }
         for (number in numbers) {
