@@ -25,6 +25,22 @@ class InputValidateTest: NsTest() {
         }
     }
 
+    @Test
+    fun testWinningLottoNotSize6() {
+        assertSimpleTest {
+            runException("5000", "1,2,3,4,5,6,7")
+            assertThat(output()).contains(ERROR_MESSAGE)
+        }
+    }
+
+    @Test
+    fun testWinningLottoNotDigit() {
+        assertSimpleTest {
+            runException("5000", "a,b,c,d,e,f,g")
+            assertThat(output()).contains(ERROR_MESSAGE)
+        }
+    }
+
     override fun runMain() {
         main()
     }
