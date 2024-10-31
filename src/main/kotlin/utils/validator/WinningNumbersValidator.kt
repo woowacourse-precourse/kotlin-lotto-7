@@ -1,4 +1,4 @@
-package utils
+package utils.validator
 
 import utils.ErrorMessages.WINNING_NUMBERS_COUNT_ERROR
 import utils.ErrorMessages.WINNING_NUMBERS_DUPLICATE_ERROR

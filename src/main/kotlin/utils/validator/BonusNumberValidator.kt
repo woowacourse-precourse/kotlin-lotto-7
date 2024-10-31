@@ -1,4 +1,4 @@
-package utils
+package utils.validator
 
 import utils.ErrorMessages.BONUS_NUMBER_DUPLICATE_ERROR
 import utils.ErrorMessages.BONUS_NUMBER_NUMBER_ERROR

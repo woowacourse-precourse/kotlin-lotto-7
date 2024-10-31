@@ -1,17 +1,4 @@
-package utils
-
-import utils.ErrorMessages.BONUS_NUMBER_DUPLICATE_ERROR
-import utils.ErrorMessages.BONUS_NUMBER_NUMBER_ERROR
-import utils.ErrorMessages.BONUS_NUMBER_RANGE_ERROR
-import utils.ErrorMessages.MONEY_1000_UNIT_ERROR
-import utils.ErrorMessages.MONEY_MAX_VALUE_ERROR
-import utils.ErrorMessages.MONEY_NUMBER_ERROR
-import utils.ErrorMessages.MONEY_POSITIVE_ERROR
-import utils.ErrorMessages.WINNING_NUMBERS_COUNT_ERROR
-import utils.ErrorMessages.WINNING_NUMBERS_DUPLICATE_ERROR
-import utils.ErrorMessages.WINNING_NUMBERS_NUMBER_ERROR
-import utils.ErrorMessages.WINNING_NUMBERS_RANGE_ERROR
-import utils.ExtensionUtil.getInt
+package utils.validator
 
 object Validator {
 

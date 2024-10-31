@@ -1,4 +1,4 @@
-package utils
+package utils.validator
 
 import utils.ErrorMessages.MONEY_1000_UNIT_ERROR
 import utils.ErrorMessages.MONEY_MAX_VALUE_ERROR
