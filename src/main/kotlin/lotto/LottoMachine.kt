@@ -6,6 +6,9 @@ class LottoMachine {
     }
 
     fun purchase(won: Int): List<Lotto> {
+        if (won % 1000 != 0) {
+            throw IllegalArgumentException(ErrorMessage.INPUT_AMOUNT_ERROR.getMessage())
+        }
         return listOf()
     }
 }
