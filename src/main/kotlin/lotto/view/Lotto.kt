@@ -1,5 +1,7 @@
 package lotto.view
 
+import lotto.util.ErrorMessages
+
 class Lotto(private val numbers: List<Int>) {
     init {
         validateNumbers()

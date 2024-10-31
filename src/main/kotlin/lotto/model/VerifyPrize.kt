@@ -1,11 +1,13 @@
 package lotto.model
 
+import lotto.util.PrizeRank
+
 class VerifyPrize {
-    val countPrize: MutableMap<PrizeNumber, Int> = mutableMapOf()
+    val countPrize: MutableMap<PrizeRank, Int> = mutableMapOf()
     private var earn: Double = INIT_EARN
 
     init {
-        PrizeNumber.entries.forEach { rank -> countPrize[rank] = INIT_RANK_COUNT }
+        PrizeRank.entries.forEach { rank -> countPrize[rank] = INIT_RANK_COUNT }
     }
 
     fun prizeResult(tickets: List<List<Int>>, prizeNumber: List<Int>, bonusNumber: Int): Double {
@@ -18,21 +20,18 @@ class VerifyPrize {
     private fun checkPrize(ticket: List<Int>, prizeNumber: List<Int>, bonusNumber: Int) {
         val theNumber = ticket.count { prizeNumber.contains(it) }
         val rank = when (theNumber) {
-            CORRECT_THREE -> PrizeNumber.FIFTH
-            CORRECT_FOUR -> PrizeNumber.FOURTH
-            CORRECT_FIVE -> {
-                if (prizeNumber.contains(bonusNumber)) {
-                    PrizeNumber.SECOND
-                }
-                else {
-                    PrizeNumber.THIRD
-                }
-            }
-            CORRECT_SIX -> PrizeNumber.FIRST
-            else -> PrizeNumber.THE_LAST
+            CORRECT_THREE -> PrizeRank.FIFTH
+            CORRECT_FOUR -> PrizeRank.FOURTH
+            CORRECT_FIVE -> checkContainBonus(prizeNumber, bonusNumber)
+            CORRECT_SIX -> PrizeRank.FIRST
+            else -> PrizeRank.THE_LAST
         }
         countPrize[rank] = countPrize[rank]!! + ADD_ONE
         earn += rank.prizeValue
+    }
+
+    private fun checkContainBonus(prizeNumber: List<Int>, bonusNumber: Int): PrizeRank {
+        return if (prizeNumber.contains(bonusNumber)) PrizeRank.SECOND else PrizeRank.THIRD
     }
 
     companion object {

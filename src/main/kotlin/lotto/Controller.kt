@@ -14,8 +14,8 @@ class Controller {
         val verifyPrize = VerifyPrize()
         val earningValue = verifyPrize.prizeResult(
             purchaseLotto(tickets),
-            getPrizeNumber(),
-            getBonusNumber()
+            prizeNumber(),
+            bonusNumber()
         )
         outputView.printResult(verifyPrize.countPrize, earningValue)
     }
@@ -27,19 +27,20 @@ class Controller {
         return tickets
     }
 
-    private fun purchaseLotto(tickets: Int) = LottoGenerator(tickets).let { lottoGenerator ->
+    private fun purchaseLotto(tickets: Int): List<List<Int>> {
+        val lottoGenerator = LottoGenerator(tickets)
         val lotto = lottoGenerator.purchaseLotto()
         outputView.printInformationLotto(lotto)
-        lotto
+        return lotto
     }
 
-    private fun getPrizeNumber(): List<Int> {
+    private fun prizeNumber(): List<Int> {
         outputView.printRequirePrizeNumber()
-        return inputView.inputPrizeNumber()
+        return inputView.getPrizeNumber()
     }
 
-    private fun getBonusNumber(): Int {
+    private fun bonusNumber(): Int {
         outputView.printRequireBonusNumber()
-        return inputView.inputBonusNumber()
+        return inputView.getBonusNumber()
     }
 }

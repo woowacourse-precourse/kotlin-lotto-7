@@ -1,10 +1,9 @@
 package lotto.view
 
 import camp.nextstep.edu.missionutils.Console
+import lotto.util.ErrorMessages
 
 class InputView {
-    private val validator = Validator()
-
     fun amountTickets(): Int {
         while (true) {
             try {
@@ -21,29 +20,59 @@ class InputView {
 
     private fun inputPayment(): Int {
         val payment = Console.readLine()
-        return validator.validatePayment(payment)
+        try {
+            val convertPayment = payment.toInt()
+            Payment(convertPayment)
+            return convertPayment
+        } catch (error: NumberFormatException) {
+            throw IllegalArgumentException(ErrorMessages.ERROR_ONLY_LONG_DIGIT.message)
+        }
     }
 
-    fun inputPrizeNumber(): List<Int> {
+    fun getPrizeNumber(): List<Int> {
         while (true) {
             try {
-                val prizeNumber = Console.readLine()
-                val numbers = prizeNumber.split(NUMBER_DELIMITER)
-                val getPrizeNumber = validator.validatePrizeNumber(numbers)
-                return getPrizeNumber
+                val prizeNumber = inputPrizeNumber()
+                Lotto(prizeNumber)
+                return prizeNumber
             } catch (error: IllegalArgumentException) {
                 println(error.message)
             }
         }
     }
 
-    fun inputBonusNumber(): Int {
+    private fun inputPrizeNumber(): List<Int> {
+        try {
+            val prizeNumber = Console.readLine()
+            val numbers = prizeNumber.split(NUMBER_DELIMITER)
+            val convertNumbers = numbers.mapNotNull { it.toIntOrNull() }
+            return convertNumbers
+        } catch (error: IllegalArgumentException) {
+            throw IllegalArgumentException(ErrorMessages.ERROR_ONLY_DIGIT.message)
+        }
+    }
+
+    fun getBonusNumber(): Int {
+        while (true) {
+            try {
+                val bonusNumber = inputBonusNumber()
+                Bonus(bonusNumber)
+                return bonusNumber
+            } catch (error: IllegalArgumentException) {
+                println(error.message)
+            }
+        }
+    }
+
+    private fun inputBonusNumber(): Int {
         while (true) {
             try {
                 val number = Console.readLine()
-                return validator.validateBonusNumber(number)
+                val convertNumber = number.toInt()
+                Bonus(convertNumber)
+                return convertNumber
             } catch (error: IllegalArgumentException) {
-                println(error.message)
+                throw IllegalArgumentException(ErrorMessages.ERROR_ONLY_DIGIT.message)
             }
         }
     }

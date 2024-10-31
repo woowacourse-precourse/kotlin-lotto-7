@@ -1,4 +1,4 @@
-package lotto.view
+package lotto.util
 
 enum class ErrorMessages(val message: String) {
     ERROR_SIZE_NUMBERS("[ERROR] 로또 번호는 6개여야 합니다."),

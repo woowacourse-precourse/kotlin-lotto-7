@@ -1,56 +1,45 @@
 package lotto.view
 
-import lotto.model.PrizeNumber
+import lotto.util.PrizeRank
+import lotto.util.OutputMessages
 
 class OutputView {
     fun printRequirePaymentMessage() {
-        println(MESSAGE_INPUT_PAYMENT)
+        println(OutputMessages.MESSAGE_INPUT_PAYMENT.message)
     }
 
     fun printAmountTickets(tickets: Int) {
         println()
-        println("$tickets$PRINT_AMOUNT_TICKETS")
+        println("$tickets${OutputMessages.PRINT_AMOUNT_TICKETS.message}")
     }
 
     fun printInformationLotto(lotto: List<List<Int>>) {
-        println(lotto.joinToString(LINE_FEED))
+        println(lotto.joinToString(OutputMessages.LINE_FEED.message))
     }
 
     fun printRequirePrizeNumber() {
         println()
-        println(MESSAGE_PRIZE_NUMBER)
+        println(OutputMessages.MESSAGE_PRIZE_NUMBER.message)
     }
 
     fun printRequireBonusNumber() {
         println()
-        println(MESSAGE_BONUS_NUMBER)
+        println(OutputMessages.MESSAGE_BONUS_NUMBER.message)
     }
 
-    fun printResult(prizeResult: MutableMap<PrizeNumber, Int>, earningRate: Double) {
-        val sb = StringBuilder(MESSAGE_RESULT)
-        sb.append("$PRINT_RESULT_THREE${prizeResult[PrizeNumber.FIFTH]}$UNIT_CORRECT")
-        sb.append("$PRINT_RESULT_FOUR${prizeResult[PrizeNumber.FOURTH]}$UNIT_CORRECT")
-        sb.append("$PRINT_RESULT_FIVE${prizeResult[PrizeNumber.THIRD]}$UNIT_CORRECT")
-        sb.append("$PRINT_RESULT_FIVE_WITH_BONUS${prizeResult[PrizeNumber.SECOND]}$UNIT_CORRECT")
-        sb.append("$PRINT_RESULT_ALL${prizeResult[PrizeNumber.FIRST]}$UNIT_CORRECT")
-        sb.append("$RESULT$earningRate$RESULT_SECOND")
+    fun printResult(prizeResult: MutableMap<PrizeRank, Int>, earningRate: Double) {
+        val sb = StringBuilder(OutputMessages.MESSAGE_RESULT.message)
+        sb.append("${OutputMessages.PRINT_RESULT_THREE.message}${prizeResult[PrizeRank.FIFTH]}")
+        sb.append(OutputMessages.UNIT_CORRECT.message)
+        sb.append("${OutputMessages.PRINT_RESULT_FOUR.message}${prizeResult[PrizeRank.FOURTH]}")
+        sb.append(OutputMessages.UNIT_CORRECT.message)
+        sb.append("${OutputMessages.PRINT_RESULT_FIVE.message}${prizeResult[PrizeRank.THIRD]}")
+        sb.append(OutputMessages.UNIT_CORRECT.message)
+        sb.append("${OutputMessages.PRINT_RESULT_FIVE_WITH_BONUS.message}${prizeResult[PrizeRank.SECOND]}")
+        sb.append(OutputMessages.UNIT_CORRECT.message)
+        sb.append("${OutputMessages.PRINT_RESULT_ALL.message}${prizeResult[PrizeRank.FIRST]}")
+        sb.append(OutputMessages.UNIT_CORRECT.message)
+        sb.append("${OutputMessages.RESULT.message}$earningRate${OutputMessages.RESULT_SECOND.message}")
         println(sb)
-    }
-
-    companion object {
-        private const val MESSAGE_INPUT_PAYMENT = "구입금액을 입력해 주세요."
-        private const val PRINT_AMOUNT_TICKETS = "개를 구매했습니다."
-        private const val MESSAGE_PRIZE_NUMBER = "당첨 번호를 입력해 주세요."
-        private const val MESSAGE_BONUS_NUMBER = "보너스 번호를 입력해 주세요."
-        private const val LINE_FEED = "\n"
-        private const val MESSAGE_RESULT = "당첨 통계\n---\n"
-        private const val PRINT_RESULT_THREE = "3개 일치 (5,000원) - "
-        private const val PRINT_RESULT_FOUR = "4개 일치 (50,000원) - "
-        private const val PRINT_RESULT_FIVE = "5개 일치 (1,500,000원) - "
-        private const val PRINT_RESULT_FIVE_WITH_BONUS = "5개 일치, 보너스 볼 일치 (30,000,000원) - "
-        private const val PRINT_RESULT_ALL = "6개 일치 (2,000,000,000원) - "
-        private const val UNIT_CORRECT = "개\n"
-        private const val RESULT = "총 수익률은 "
-        private const val RESULT_SECOND = "%입니다."
     }
 }
