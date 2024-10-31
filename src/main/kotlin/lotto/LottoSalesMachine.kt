@@ -7,8 +7,8 @@ class LottoSalesMachine {
 
     fun purchase(won: Int): List<Lotto> {
         if (won % 1000 != 0) {
+        return List(won / 1000) { LottoMaker.make() }
             throw IllegalArgumentException(ErrorMessage.INPUT_AMOUNT_ERROR.getMessage())
         }
-        return listOf()
     }
 }
