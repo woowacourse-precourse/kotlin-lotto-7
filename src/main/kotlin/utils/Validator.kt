@@ -31,16 +31,14 @@ object Validator {
     fun validateWinningNumbers(inputWinningNumbers: String) {
         val winningNumbers = inputWinningNumbers.split(",")
 
-        require(winningNumbers.size == 6) { WINNING_NUMBERS_COUNT_ERROR }
+        WinningNumbersValidator.SHOULD_BE_SIX_COUNT.validate(winningNumbers)
 
-        val numbers = winningNumbers.map {
-            it.getInt()
-                ?: throw IllegalArgumentException(WINNING_NUMBERS_NUMBER_ERROR)
-        }
+        WinningNumbersValidator.SHOULD_BE_NUMBER.validate(winningNumbers)
 
-        require(numbers.all { it in 1..45 }) { WINNING_NUMBERS_RANGE_ERROR }
+        WinningNumbersValidator.SHOULD_BE_1_TO_45_NUMBER.validate(winningNumbers)
 
-        require(numbers.toSet().size == 6) { WINNING_NUMBERS_DUPLICATE_ERROR }
+        WinningNumbersValidator.SHOULD_NOT_BE_DUPLICATE.validate(winningNumbers)
+
     }
 
     fun validateBonusNumber(inputBonusNumber: String, winningNumbers: List<Int>) {
