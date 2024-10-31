@@ -28,7 +28,11 @@ class Controller {
             winningNum = input.getWinningNum()
             if (inputValidator.isValidWinningNum(winningNum)) break
         }
-
+        var bonusNum: String
+        while (true) {
+            bonusNum = input.getBonusNum()
+            if (inputValidator.isValidBonusNum(bonusNum, winningNum)) break
+        }
     }
 
 
