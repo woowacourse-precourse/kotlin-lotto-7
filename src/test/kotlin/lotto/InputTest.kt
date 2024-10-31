@@ -14,6 +14,7 @@ import domain.enums.Process
 import domain.validator.InputValidator
 import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.params.provider.CsvSource
 
 class InputTest {
     private lateinit var commonErrorDelegate: CommonErrorDelegate
@@ -72,8 +73,6 @@ class InputTest {
         }
 
         @ParameterizedTest
-        @ValueSource(strings = ["1", "1,2", "1,2,3", "1,2,3,4", "1,2,3,4,5", "1,2,3,4,5,6,7,8,9,10"])
-        fun `당첨 번호가 6개가 아닐 때 예외 테스트`(value: String){
         @CsvSource(
             "1;2;3;4;5;6",
             "1.2.3.4.5.6",
@@ -94,6 +93,14 @@ class InputTest {
             Assertions.assertThatThrownBy { inputErrorDelegate.isInvalidLottoSize(winningNumber) }
                 .isInstanceOf(IllegalArgumentException::class.java)
                 .hasMessage(Exception.INVALID_SIZE.toString())
+        }
+
+        @ParameterizedTest
+        @ValueSource(strings = ["1,2,3,4,5,@", "1,;ㄱ,a,4,5,@"])
+        fun `당첨 번호에 숫자와 구분자(쉼표)가 아닌 문자가 입력되었을 때`(value: String) {
+            Assertions.assertThatThrownBy { inputErrorDelegate.isInvalidInputFormat(value) }
+                .isInstanceOf(IllegalArgumentException::class.java)
+                .hasMessage(Exception.INVALID_FORMAT.toString())
         }
     }
 }
