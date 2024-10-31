@@ -11,3 +11,7 @@ fun String.isThousandUnit(): Boolean{
 fun String.toThousandUnit(): Int{
     return this.toInt() / 1000
 }
+
+fun String.splitByComma(): List<String>{
+    return this.split(",")
+}
