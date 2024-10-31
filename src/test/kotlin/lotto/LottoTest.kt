@@ -26,7 +26,7 @@ class LottoTest {
 
         assertRandomUniqueNumbersInRangeTest({
             assertThrows<IllegalArgumentException> {
-                lottoMachine.createLotto()
+                lottoMachine.releaseLotto(2)
             }
         }, listOf(1, 2, 333, 4, 6,7))
 
