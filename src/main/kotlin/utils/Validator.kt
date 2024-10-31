@@ -1,41 +1,52 @@
 package utils
 
+import utils.ErrorMessages.BONUS_NUMBER_DUPLICATE_ERROR
+import utils.ErrorMessages.BONUS_NUMBER_NUMBER_ERROR
+import utils.ErrorMessages.BONUS_NUMBER_RANGE_ERROR
+import utils.ErrorMessages.MONEY_1000_UNIT_ERROR
+import utils.ErrorMessages.MONEY_MAX_VALUE_ERROR
+import utils.ErrorMessages.MONEY_NUMBER_ERROR
+import utils.ErrorMessages.MONEY_POSITIVE_ERROR
+import utils.ErrorMessages.WINNING_NUMBERS_COUNT_ERROR
+import utils.ErrorMessages.WINNING_NUMBERS_DUPLICATE_ERROR
+import utils.ErrorMessages.WINNING_NUMBERS_NUMBER_ERROR
+import utils.ErrorMessages.WINNING_NUMBERS_RANGE_ERROR
 import utils.ExtensionUtil.getInt
 
 object Validator {
 
     fun validateMoney(inputMoney: String) {
 
-        val money = inputMoney.getInt() ?: throw IllegalArgumentException("금액은 숫자로 입력해야 합니다.")
+        val money = inputMoney.getInt() ?: throw IllegalArgumentException(MONEY_NUMBER_ERROR)
 
-        require(money >= 0) { "금액은 양수로 입력해야 합니다." }
+        require(money >= 0) { MONEY_POSITIVE_ERROR }
 
-        require(money % 1000 == 0) { "금액은 1,000원 단위로 입력해야 합니다." }
+        require(money % 1000 == 0) { MONEY_1000_UNIT_ERROR }
 
-        require(money <= Int.MAX_VALUE) { "금액은 2,147,483,647원 이하로 입력해야 합니다." }
+        require(money <= Int.MAX_VALUE) { MONEY_MAX_VALUE_ERROR }
     }
 
     fun validateWinningNumbers(inputWinningNumbers: String) {
         val winningNumbers = inputWinningNumbers.split(",")
 
-        require(winningNumbers.size == 6) { "당첨 번호는 6개여야 합니다." }
+        require(winningNumbers.size == 6) { WINNING_NUMBERS_COUNT_ERROR }
 
         val numbers = winningNumbers.map {
             it.getInt()
-                ?: throw IllegalArgumentException("당첨 번호는 숫자로 입력해야 합니다.")
+                ?: throw IllegalArgumentException(WINNING_NUMBERS_NUMBER_ERROR)
         }
 
-        require(numbers.all { it in 1..45 }) { "당첨 번호는 1~45 사이의 숫자여야 합니다." }
+        require(numbers.all { it in 1..45 }) { WINNING_NUMBERS_RANGE_ERROR }
 
-        require(numbers.toSet().size == 6) { "당첨 번호는 중복되어서는 안됩니다." }
+        require(numbers.toSet().size == 6) { WINNING_NUMBERS_DUPLICATE_ERROR }
     }
 
     fun validateBonusNumber(inputBonusNumber: String, winningNumbers: List<Int>) {
         val bonusNumber =
-            inputBonusNumber.getInt() ?: throw IllegalArgumentException("보너스 번호는 숫자로 입력해야 합니다.")
+            inputBonusNumber.getInt() ?: throw IllegalArgumentException(BONUS_NUMBER_NUMBER_ERROR)
 
-        require(bonusNumber in 1..45) { "보너스 번호는 1~45 사이의 숫자여야 합니다." }
-        require(bonusNumber in winningNumbers) { "보너스 번호는 당첨 번호와 중복될 수 없습니다." }
+        require(bonusNumber in 1..45) { BONUS_NUMBER_RANGE_ERROR }
+        require(bonusNumber in winningNumbers) { BONUS_NUMBER_DUPLICATE_ERROR }
 
     }
 
