@@ -10,4 +10,11 @@ object InputView {
 
         return Validator.validateMoney(inputMoney)
     }
+
+    fun getWinningNumbers(): List<Int> {
+        println("당첨 번호를 입력해 주세요.")
+        val inputWinningNumbers = Console.readLine()
+
+        return Validator.validateWinningNumbers(inputWinningNumbers)
+    }
 }
