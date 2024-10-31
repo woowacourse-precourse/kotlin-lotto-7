@@ -1,5 +1,6 @@
 package lotto.controller
 
+import lotto.model.lotto.Lotto
 import lotto.model.lotto.LottoTicket
 import lotto.view.InputView
 import java.lang.IllegalArgumentException
@@ -32,7 +33,7 @@ class LottoController {
         return purchasePrice
     }
 
-    private fun getWinningNumbers(): List<Int> {
+    private fun getWinningNumbers(): Lotto {
         val purchasePrice = InputView.askWinningNumbers()
             .split(",")
             .map {
@@ -40,8 +41,6 @@ class LottoController {
                 require(trimmed.isNotEmpty()) { ErrorMessage.INPUT_WINNING_EMPTY.message }
                 trimmed.toIntOrNull() ?: throw IllegalArgumentException(ErrorMessage.INPUT_WINNING_ONLY_NUMBERS.message)
             }
-        require(purchasePrice.size == 6) { ErrorMessage.INPUT_WINNING_6_NUMBERS.message }
-        return purchasePrice
+        return Lotto(purchasePrice)
     }
-
 }

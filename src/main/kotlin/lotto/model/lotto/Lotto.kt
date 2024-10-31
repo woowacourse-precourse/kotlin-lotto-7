@@ -1,9 +1,12 @@
 package lotto.model.lotto
 
+import lotto.model.message.ErrorMessage
+
 class Lotto(private val numbers: List<Int>) {
 
     init {
-        require(numbers.size == 6) { "[ERROR] 로또 번호는 6개여야 합니다." }
-        require(numbers.all { it in 1..45 }) { "[ERROR] 로또 번호는 1부터 45 사이의 숫자여야 합니다." }
+        require(numbers.size == 6) { ErrorMessage.INPUT_WINNING_6_NUMBERS.message }
+        require(numbers.all { it in 1..45 }) { ErrorMessage.INPUT_1_TO_45.message }
+        require(numbers.toSet().size == numbers.size) {ErrorMessage.INPUT_DUPLICATION.message}
     }
 }
