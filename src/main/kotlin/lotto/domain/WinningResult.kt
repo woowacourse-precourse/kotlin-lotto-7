@@ -10,13 +10,13 @@ class WinningResult(private val lottos: List<Lotto>, private val inputNumbers: I
             when (lottos[i].winningCount(inputNumbers)) {
                 3 -> countByMatchCount[0]++
                 4 -> countByMatchCount[1]++
-                5 -> bonusCount(i)
+                5 -> getBonusCount(i)
                 6 -> countByMatchCount[4]++
             }
         return countByMatchCount
     }
 
-    private fun bonusCount(i: Int): Int {
+    private fun getBonusCount(i: Int): Int {
         if (lottos[i].isBonus(inputNumbers)) return countByMatchCount[3]++
         return countByMatchCount[2]++
     }
