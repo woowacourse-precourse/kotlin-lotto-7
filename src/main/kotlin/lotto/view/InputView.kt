@@ -3,6 +3,7 @@ package lotto.view
 import camp.nextstep.edu.missionutils.Console
 import lotto.util.InputValidator.validateInputIsNumeric
 import lotto.util.InputValidator.validateMoneyIsNotNegative
+import lotto.util.InputValidator.validateMoneyIsEnough
 import lotto.util.InputValidator.validateMoneyIsDivisible
 
 class InputView {
@@ -12,6 +13,7 @@ class InputView {
         validateInputIsNumeric(input)
         val money = input.toInt()
         validateMoneyIsNotNegative(money)
+        validateMoneyIsEnough(money)
         validateMoneyIsDivisible(money)
         return money
     }
