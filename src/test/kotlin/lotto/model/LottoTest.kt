@@ -30,7 +30,7 @@ class LottoTest {
 
     // TODO: 문자, 공백, 소수, 구분자가 다를 경우
 
-    // TODO: Test코드에서 중복해서 사용하므로 Constans 파일 만들어 보기
+    // TODO: Test코드에서 중복해서 사용하므로 Constants 파일 만들어 보기
     companion object {
         private const val ERROR_MESSAGE: String = "[ERROR]"
     }
