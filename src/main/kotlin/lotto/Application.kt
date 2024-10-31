@@ -6,13 +6,10 @@ import lotto.model.message.ErrorMessage
 import lotto.view.ErrorView
 
 fun main() {
+    val lottoController = LottoController()
+
     try {
-        val lottoController = LottoController()
-
-        val purchaseAmount = lottoController.getNumbers()
-        val tickets = lottoController.generateLottoTickets(purchaseAmount)
-
-        OutputView.printLottoTickets(tickets)
+        lottoController.run()
     } catch (e: IllegalArgumentException) {
         ErrorView.errorMessage(e.message ?: ErrorMessage.DEFAULT_ERROR.message)
         throw e
