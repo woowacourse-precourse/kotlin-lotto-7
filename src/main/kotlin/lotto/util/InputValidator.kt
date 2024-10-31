@@ -6,6 +6,6 @@ object InputValidator {
     }
 
     fun validateMoneyIsDivisible(lottoMoney: Int) {
-        if (lottoMoney % 1000 != 0) throw IllegalArgumentException(ErrorMessage.ERROR_MONEY_NOT_DIVISIBLE)
+        if (lottoMoney % Constant.LOTTO_PRICE != 0) throw IllegalArgumentException(ErrorMessage.ERROR_MONEY_NOT_DIVISIBLE)
     }
 }
