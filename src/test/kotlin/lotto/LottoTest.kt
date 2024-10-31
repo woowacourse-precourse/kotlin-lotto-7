@@ -1,5 +1,6 @@
 package lotto
 
+import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 
@@ -19,5 +20,13 @@ class LottoTest {
         }
     }
 
-    // TODO: 추가 기능 구현에 따른 테스트 코드 작성
+    @Test
+    fun `로또 번호 오름차순으로 정렬`() {
+        val testList = listOf(6,5,4,3,2,1)
+        val lotto = Lotto(testList)
+        val expectedList = testList.sorted()
+        val actualList = lotto.getSortedNumbers()
+
+        assertEquals(expectedList, actualList)
+    }
 }
