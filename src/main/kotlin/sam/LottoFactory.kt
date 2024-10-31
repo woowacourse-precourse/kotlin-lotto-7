@@ -1,3 +1,5 @@
 package sam
 
-fun interface LottoFactory : () -> List<Int>
+import java.util.TreeSet
+
+fun interface LottoFactory : () -> TreeSet<Int>

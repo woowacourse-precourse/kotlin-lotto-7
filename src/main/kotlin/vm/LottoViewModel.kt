@@ -1,11 +1,14 @@
 package vm
 
+import domain.lotto.Lotto
 import domain.model.PurchaseState
 import sam.LottoFactory
+import java.util.TreeSet
 
 class LottoViewModel(
     private val lottoFactory: LottoFactory
 ) {
+
     var state = PurchaseState()
         private set
 
@@ -24,10 +27,19 @@ class LottoViewModel(
 
     private fun pickLotto(){
         val purchaseLottoAmount = state.purchaseLottoCount
-        val pickedLotto = mutableListOf<List<Int>>()
+        val pickedLotto = mutableListOf<TreeSet<Int>>()
         repeat(purchaseLottoAmount) {
             pickedLotto.add(lottoFactory())
         }
         state = state.copy(pickedLotto = pickedLotto)
+    }
+
+    private fun getLottoResult(){
+        val lotto = Lotto(state.winningNumber)
+
+        state.pickedLotto.map {
+            //lotto.calculateReword(it)
+        }
+
     }
 }

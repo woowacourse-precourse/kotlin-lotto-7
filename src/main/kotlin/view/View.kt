@@ -49,8 +49,8 @@ class View(
         lineBreak()
         println(msg)
         viewModel.onCompleteInputPayment(purchase)
-        viewModel.state.pickedLotto.map { lotto ->
-            println(lotto.printWithSquareBracket())
+        viewModel.state.pickedLotto.forEach { lotto ->
+            lotto.printWithSquareBracket()
         }
     }
 
