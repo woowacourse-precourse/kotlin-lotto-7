@@ -2,13 +2,13 @@ package view
 
 import camp.nextstep.edu.missionutils.Console.readLine
 import domain.enums.Input
-import domain.validator.InputValidator
+import domain.validator.InputValidate
 import util.printWithSquareBracket
 import util.retryWhenNoException
 import vm.LottoViewModel
 
 class View(
-    private val validator: InputValidator,
+    private val validator: InputValidate,
     private val viewModel: LottoViewModel
 ) {
     init {
