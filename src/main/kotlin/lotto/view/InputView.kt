@@ -9,4 +9,9 @@ object InputView {
         println(InputMessage.INPUT_PURCHASE_PRICE.message)
         return Console.readLine()
     }
+
+    fun askWinningNumbers(): String {
+        println("당첨 번호를 입력해 주세요.")
+        return Console.readLine()
+    }
 }

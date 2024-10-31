@@ -1,6 +1,5 @@
 package lotto
 
-import lotto.view.OutputView
 import lotto.controller.LottoController
 import lotto.model.message.ErrorMessage
 import lotto.view.ErrorView
