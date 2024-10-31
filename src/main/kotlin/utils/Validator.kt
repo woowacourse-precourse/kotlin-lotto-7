@@ -44,12 +44,12 @@ object Validator {
     }
 
     fun validateBonusNumber(inputBonusNumber: String, winningNumbers: List<Int>) {
-        val bonusNumber =
-            inputBonusNumber.getInt() ?: throw IllegalArgumentException(BONUS_NUMBER_NUMBER_ERROR)
 
-        require(bonusNumber in 1..45) { BONUS_NUMBER_RANGE_ERROR }
-        require(bonusNumber in winningNumbers) { BONUS_NUMBER_DUPLICATE_ERROR }
+        BonusNumberValidator.SHOULD_BE_NUMBER.validate(inputBonusNumber)
 
+        BonusNumberValidator.SHOULD_BE_1_TO_45_NUMBER.validate(inputBonusNumber)
+
+        BonusNumberValidator.SHOULD_NOT_BE_DUPLICATE.validate(inputBonusNumber, winningNumbers)
     }
 
 
