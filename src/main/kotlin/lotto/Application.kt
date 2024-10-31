@@ -8,6 +8,16 @@ const val MIN_BALL_NUMBER = 1
 const val WINNING_BALL_COUNT = 6
 const val LOTTO_TICKET_PRICE = 1000
 
+enum class Ranking(
+    val winningBall: Int, val bonusBall: Boolean
+) {
+    FIRST(6, false),
+    SECOND(5, true),
+    THIRD(5, false),
+    FOURTH(4, false),
+    FIFTH(3, false),
+}
+
 fun main() {
     val lottoTickets: MutableList<List<Int>> = mutableListOf()
     val winningCount: MutableMap<String, Int> = mutableMapOf("1등" to 0, "2등" to 0,
