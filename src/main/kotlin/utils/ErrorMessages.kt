@@ -2,6 +2,7 @@ package utils
 
 object ErrorMessages {
     private const val ERROR = "[ERROR] "
+
     const val MONEY_NUMBER_ERROR = ERROR + "금액은 숫자로 입력해야 합니다."
     const val MONEY_POSITIVE_ERROR = ERROR + "금액은 양수로 입력해야 합니다."
     const val MONEY_1000_UNIT_ERROR = ERROR + "금액은 1,000원 단위로 입력해야 합니다."
