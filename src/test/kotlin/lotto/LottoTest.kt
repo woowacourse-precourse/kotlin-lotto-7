@@ -22,10 +22,11 @@ class LottoTest {
 
     @Test
     fun `로또 번호의 범위가 1이상 45이하가 아니면 예외가 발생한다`() {
+        val lottoMachine = LottoMachine()
 
         assertRandomUniqueNumbersInRangeTest({
             assertThrows<IllegalArgumentException> {
-                createLotto()
+                lottoMachine.createLotto()
             }
         }, listOf(1, 2, 333, 4, 6,7))
 
