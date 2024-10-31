@@ -47,6 +47,26 @@ class ApplicationTest : NsTest() {
             runException("1000j")
             assertThat(output()).contains(ERROR_MESSAGE)
         }
+
+        assertSimpleTest {
+            runException("-1000")
+            assertThat(output()).contains(ERROR_MESSAGE)
+        }
+
+        assertSimpleTest {
+            runException(null)
+            assertThat(output()).contains(ERROR_MESSAGE)
+        }
+
+        assertSimpleTest {
+            runException("")
+            assertThat(output()).contains(ERROR_MESSAGE)
+        }
+
+        assertSimpleTest {
+            runException("\n")
+            assertThat(output()).contains(ERROR_MESSAGE)
+        }
     }
 
     override fun runMain() {
