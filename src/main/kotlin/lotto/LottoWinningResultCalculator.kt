@@ -1,6 +1,6 @@
 package lotto
 
-class LottoResultCalculator {
+class LottoWinningResultCalculator {
 
     fun calculateResults(
         purchasedLottos: List<Lotto>,
@@ -24,12 +24,6 @@ class LottoResultCalculator {
         return LottoMatchType.getMatchType(matchingNumberCount, containsBonusNumber)
     }
 
-    fun calculateProfitRate(results: Map<LottoMatchType, Int>, purchaseAmount: Int): Double {
-        val totalReward = results.entries.sumOf { (matchType, count) ->
-            matchType.reward.replace(",", "").toInt() * count
-        }
-        return (totalReward / purchaseAmount.toDouble()) * 100
-    }
 }
 
 // Lotto 클래스에 확장 함수 추가
