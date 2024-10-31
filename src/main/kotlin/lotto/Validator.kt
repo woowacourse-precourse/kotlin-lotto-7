@@ -14,7 +14,14 @@ enum class WinLotteryValidator(val msg: String) {
     ERROR_NOT_NUMBER("[ERROR] 복권 번호는 숫자만 입력하실 수 있습니다."),
     ERROR_INVALID_DELIMITER("[ERROR] 유효하지 않은 구분자 입니다. 복권 번호 구분자는 , 만 사용 가능합니다. "),
     ERROR_CONSECUTIVE_DELIMITER("[ERROR] 구분자가 연이어 사용했습니다. 복권 번호 구분자(,)를 하나씩 사용하세요. "),
-    ERROR_TOO_MANY_LOTTO_NUMBER("[ERROR] 복권 번호는 6개까지만 입력 가능합니다.")
+    ERROR_TOO_MANY_LOTTO_NUMBER("[ERROR] 복권 번호는 6개까지만 입력 가능합니다."),
+    ERROR_DUPLICATE_LOTTO_NUMBER("[ERROR] 중복된 복권 숫자가 있습니다.")
+}
+
+enum class BonusLotteryValidator(val msg: String) {
+    ERROR_EMPTY_LOTTO_NUMBER("[ERROR] 보너스 번호는 공백이거나 빈 값일 수 없습니다."),
+    ERROR_OUT_OF_RANGE("[ERROR] 1~45 사이의 숫자만 입력 가능합니다."),
+    ERROR_NOT_NUMBER("[ERROR] 보너스300 번호는 숫자만 입력하실 수 있습니다."),
 }
 
 object Validator {
@@ -49,6 +56,22 @@ object Validator {
         require(isOutOfRange(s)) {
             WinLotteryValidator.ERROR_OUT_OF_RANGE.msg
         }
+        require(isNotExistDuplicateNumber(s)) {
+            WinLotteryValidator.ERROR_DUPLICATE_LOTTO_NUMBER.msg
+        }
+
+    }
+
+    fun validateBonusLottery(s: String) {
+        require(s.isNotBlank()) {
+            BonusLotteryValidator.ERROR_EMPTY_LOTTO_NUMBER.msg
+        }
+        require(s.toIntOrNull() != null) {
+            BonusLotteryValidator.ERROR_NOT_NUMBER.msg
+        }
+        require(s.toInt() in 1..45) {
+            BonusLotteryValidator.ERROR_OUT_OF_RANGE.msg
+        }
 
     }
 
@@ -71,11 +94,15 @@ object Validator {
 
     private fun isChangeToInt(input: String): Boolean {
         val lotto = input.split(",").map { it.trim().toIntOrNull()}
-        println("lotto: $lotto")
         for (i in lotto) {
             if (i == null) return false
         }
         return true
+    }
+
+    private fun isNotExistDuplicateNumber(input: String): Boolean {
+        val lotto = input.split(",").map { it.trim().toIntOrNull()}
+        return lotto.size == lotto.distinct().size
     }
 
 }

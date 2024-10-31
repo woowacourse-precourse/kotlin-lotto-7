@@ -19,7 +19,6 @@ class LottoController {
     fun purchaseLotto() {
         money = inputView.printInputMoney()
         generateLotto(money / LOTTO_PRICE)
-
         outputView.printPurchaseLottoCount(money / LOTTO_PRICE)
         outputView.printPurchaseLotto(lotto)
     }

@@ -16,6 +16,7 @@ class InputView {
         println(PRINT_PLEASE_INPUT_WIN_LOTTERY_NUMBER)
         val winLottery = Console.readLine()
         Validator.validateWinLottery(winLottery)
+
         println()
         return winLottery.split(",").map { it.trim().toInt() }
     }
@@ -23,6 +24,7 @@ class InputView {
     fun printInputBonusLotteryNumber(): Int {
         println(PRINT_PLEASE_INPUT_BONUS_LOTTERY_NUMBER)
         val bonusLottery = Console.readLine()
+        Validator.validateBonusLottery(bonusLottery)
         println()
         return bonusLottery.toInt()
     }
