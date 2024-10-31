@@ -1,5 +1,7 @@
 package lotto.domain
 
+import lotto.constants.OutputConstants.TWO_DECIMAL_FORMAT
+
 class WinningResult(private val lottos: List<Lotto>, private val inputNumbers: InputNumbers) {
     private var countByMatchCount = mutableListOf(0, 0, 0, 0, 0)
 
@@ -24,7 +26,7 @@ class WinningResult(private val lottos: List<Lotto>, private val inputNumbers: I
             .mapIndexed { index, ranking -> countByMatchCount[index] * ranking.prize }
             .sum()
         val rate = totalPrize / purchasedPrice.toFloat() * 100
-        val formatedRate = String.format("%.2f", rate).toFloat()
+        val formatedRate = String.format(TWO_DECIMAL_FORMAT, rate).toFloat()
         return formatedRate
     }
 

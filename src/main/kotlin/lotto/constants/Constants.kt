@@ -12,10 +12,21 @@ object OutputConstants {
     const val PROFIT_RATE_MSG = "총 수익률은 %s입니다."
     const val PERCENT = "%"
     const val COUNT = "개"
+    const val TWO_DECIMAL_FORMAT = "%.2f"
 }
 
 
 object ErrorConstants {
+    const val ERROR_PRICE_ONLY_NUMERIC = "[ERROR] 구입금액은 숫자만 가능합니다."
+    const val ERROR_PRICE_NOT_MULTIPLE_OF_1000 = "[ERROR] 구입 금액은 1000원 단위만 가능합니다."
+    const val ERROR_PURCHASE_PRICE_MINIMUM = "[ERROR] 구입 금액은 1000원 이상이여야 합니다."
+
+    const val ERROR_WINNING_NUMBERS_ONLY_NUMERIC = "[ERROR] 당첨번호는 숫자만 가능합니다."
+    const val ERROR_WINNING_NUMBERS_COUNT = "[ERROR] 당첨 번호는 6개여야 합니다"
+    const val ERROR_WINNING_NUMBERS_DUPLICATE = "[ERROR] 당첨 번호는 중복된 숫자가 없어야 합니다."
+
+    const val ERROR_BONUS_NUMBER_ONLY_NUMERIC = "[ERROR] 보너스번호는 숫자만 가능합니다."
+    const val ERROR_BONUS_NUMBER_RANGE = "[ERROR] 보너스 번호는 1-45 사이 입니다."
 
 }
 

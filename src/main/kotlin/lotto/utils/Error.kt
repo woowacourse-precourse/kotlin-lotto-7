@@ -1,37 +1,42 @@
 package lotto.utils
 
+import lotto.constants.ErrorConstants.ERROR_BONUS_NUMBER_ONLY_NUMERIC
+import lotto.constants.ErrorConstants.ERROR_BONUS_NUMBER_RANGE
+import lotto.constants.ErrorConstants.ERROR_PRICE_NOT_MULTIPLE_OF_1000
+import lotto.constants.ErrorConstants.ERROR_PRICE_ONLY_NUMERIC
+import lotto.constants.ErrorConstants.ERROR_PURCHASE_PRICE_MINIMUM
+import lotto.constants.ErrorConstants.ERROR_WINNING_NUMBERS_COUNT
+import lotto.constants.ErrorConstants.ERROR_WINNING_NUMBERS_DUPLICATE
+import lotto.constants.ErrorConstants.ERROR_WINNING_NUMBERS_ONLY_NUMERIC
 import lotto.constants.LottoConstants.COMMA
 
 object Error {
 
-    fun priceError(purchasePrice: String): Boolean {
+    fun priceError(purchasePrice: String) {
         val price = purchasePrice.toIntOrNull()
-            ?: throw IllegalArgumentException("[ERROR] 구입금액은 숫자만 가능합니다.")
+            ?: throw IllegalArgumentException(ERROR_PRICE_ONLY_NUMERIC)
         if (price % 1000 != 0)
-            throw IllegalArgumentException("[ERROR] 구입 금액은 1000원 단위만 가능합니다.")
+            throw IllegalArgumentException(ERROR_PRICE_NOT_MULTIPLE_OF_1000)
         if (price < 1000)
-            throw IllegalArgumentException("[ERROR] 구입 금액은 1000원 이상이여야 합니다.")
-
-        return false
+            throw IllegalArgumentException(ERROR_PURCHASE_PRICE_MINIMUM)
     }
 
-    fun winningNumberError(winningNumbers: String): Boolean {
+    fun winningNumberError(winningNumbers: String) {
         val numbers = winningNumbers.split(COMMA)
-            .map { it.toIntOrNull() ?: throw IllegalArgumentException("[ERROR] 당첨 번호는 숫자만 가능합니다.") }
+            .map {
+                it.toIntOrNull()
+                    ?: throw IllegalArgumentException(ERROR_WINNING_NUMBERS_ONLY_NUMERIC)
+            }
         if (numbers.size != 6)
-            throw IllegalArgumentException("[ERROR] 당첨 번호는 6개여야 합니다")
+            throw IllegalArgumentException(ERROR_WINNING_NUMBERS_COUNT)
         if (numbers.toSet().size != 6)
-            throw IllegalArgumentException("[ERROR] 당첨 번호는 중복된 숫자가 없어야 합니다.")
-
-        return false
+            throw IllegalArgumentException(ERROR_WINNING_NUMBERS_DUPLICATE)
     }
 
-    fun bonusNumberError(bonusNumber: String): Boolean {
+    fun bonusNumberError(bonusNumber: String) {
         val number = bonusNumber.toIntOrNull()
-            ?: throw IllegalArgumentException("[ERROR] 보너스 번호는 숫자여야 합니다.")
+            ?: throw IllegalArgumentException(ERROR_BONUS_NUMBER_ONLY_NUMERIC)
         if (number !in 1..45)
-            throw IllegalArgumentException("\"[ERROR] 보너스 번호는 1-45 사이 입니다.\"")
-
-        return false
+            throw IllegalArgumentException(ERROR_BONUS_NUMBER_RANGE)
     }
 }
