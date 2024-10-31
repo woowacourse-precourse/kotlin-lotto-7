@@ -11,6 +11,7 @@ class LottoController(
         val lottoCost = getLottoCost()
         val user = User(lottoCost.toInt())
         showLottoTicketsResult(user)
+        val winningNumbers = getWinningNumbers()
     }
 
     private fun getLottoCost(): String {
@@ -21,5 +22,11 @@ class LottoController(
     private fun showLottoTicketsResult(user: User) {
         lottoBuyView.guidePurchaseLottoCount(user.getLottoTickets().count())
         lottoBuyView.guideLottoNumbers(user.getLottoTickets())
+    }
+
+    private fun getWinningNumbers(): WinningNumbers {
+        val winningNumbers = winningNumberInputView.inputWinningNumbers().split(",").map { it.toInt() }
+        val bonusNumber = winningNumberInputView.inputBonusNumber().toInt()
+        return WinningNumbers(winningNumbers, bonusNumber)
     }
 }
