@@ -74,6 +74,18 @@ class InputTest {
         @ParameterizedTest
         @ValueSource(strings = ["1", "1,2", "1,2,3", "1,2,3,4", "1,2,3,4,5", "1,2,3,4,5,6,7,8,9,10"])
         fun `당첨 번호가 6개가 아닐 때 예외 테스트`(value: String){
+        @CsvSource(
+            "1;2;3;4;5;6",
+            "1.2.3.4.5.6",
+            "1^2$3%4#5@6",
+            "1-2-3-4-5-6",
+            "1_2_3_4_5_6",
+        )
+        fun `당첨 번호의 구분자가 잘못 입력되었을 때`(value: String) {
+            Assertions.assertThatThrownBy { inputErrorDelegate.isInvalidInputFormat(value) }
+                .isInstanceOf(IllegalArgumentException::class.java)
+                .hasMessage(Exception.INVALID_FORMAT.toString())
+        }
             val winningNumber = value.split(",")
             Assertions.assertThatThrownBy { inputErrorDelegate.isInvalidLottoSize(winningNumber) }
                 .isInstanceOf(IllegalArgumentException::class.java)
