@@ -2,12 +2,10 @@ package lotto
 
 import camp.nextstep.edu.missionutils.test.Assertions.assertSimpleTest
 import camp.nextstep.edu.missionutils.test.NsTest
-import lotto.View.InputView
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 
 class InputValidateTest: NsTest() {
-    private val inputView = InputView()
 
     @Test
     fun testPurchaseAmountNotDivide1000() {
