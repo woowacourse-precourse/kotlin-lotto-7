@@ -1,6 +1,6 @@
 package lotto.view
 
-import lotto.model.LottoTicket
+import lotto.model.lotto.LottoTicket
 
 object OutputView {
 
