@@ -1,4 +1,4 @@
 package lotto.utils
 
-class Constants {
+object Constants {
 }
