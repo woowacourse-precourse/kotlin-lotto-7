@@ -1,6 +1,4 @@
-package lotto.model
-
-import java.util.*
+package lotto.model.lotto
 
 class Lotto(private val numbers: List<Int>) {
 
