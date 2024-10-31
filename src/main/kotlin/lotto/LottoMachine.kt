@@ -4,13 +4,14 @@ import camp.nextstep.edu.missionutils.Randoms
 
 class LottoMachine {
     fun releaseLotto(releaseCount: Int): List<Lotto> {
-        println("${releaseCount}개를 구매했습니다.")
 
         val lottos = arrayListOf<Lotto>()
 
         repeat(releaseCount) {
             lottos.add(createLotto())
         }
+
+        println("${lottos.size}개를 구매했습니다.")
 
         return lottos
     }
