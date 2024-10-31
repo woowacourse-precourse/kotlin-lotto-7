@@ -7,9 +7,7 @@ class LottoMachine {
 
         val lottos = arrayListOf<Lotto>()
 
-        repeat(releaseCount) {
-            lottos.add(createLotto())
-        }
+        repeat(releaseCount) { lottos.add(createLotto()) }
 
         println("${lottos.size}개를 구매했습니다.")
 
@@ -30,9 +28,7 @@ class LottoMachine {
         var bonusMatch = false
 
         for (number in numbers) {
-            if (number == bonus) {
-                bonusMatch = true; break
-            }
+            if (number == bonus) { bonusMatch = true; break }
         }
 
         return calculateRank(winningNumberMatchCount, bonusMatch)
@@ -40,28 +36,19 @@ class LottoMachine {
 
     private fun calculateRank(winningNumberMatchCount: Int, bonusMatch: Boolean): Rank {
         return when (winningNumberMatchCount) {
-            6 -> {
-                Rank.FIRST
-            }
+            6 -> Rank.FIRST
 
             5 -> {
-                if (bonusMatch) {
-                    return Rank.SECOND
-                }
+                if (bonusMatch) { return Rank.SECOND }
+
                 return Rank.THIRD
             }
 
-            4 -> {
-                Rank.FORTH
-            }
+            4 -> Rank.FORTH
 
-            3 -> {
-                Rank.FIFTH
-            }
+            3 -> Rank.FIFTH
 
-            else -> {
-                Rank.LOSE
-            }
+            else -> Rank.LOSE
         }
     }
 
@@ -69,19 +56,14 @@ class LottoMachine {
         winningNumbers: List<Int>,
         bonusNumber: Int
     ) {
-        if (winningNumbers.size != 6) {
-            throw IllegalArgumentException("[ERROR] 로또 당첨 번호는 6개여야 합니다.")
-        }
+        if (winningNumbers.size != 6) { throw IllegalArgumentException("[ERROR] 로또 당첨 번호는 6개여야 합니다.") }
+
         val usedNumber = mutableSetOf<Int>()
         val allNumbers = listOf(*winningNumbers.toTypedArray(), bonusNumber)
 
         for (number in allNumbers) {
-            if (!numberRangeValidate(number)) {
-                throw IllegalArgumentException("[ERROR] 로또 번호는 1 이상 45 이하여야 합니다.")
-            }
-            if (!numberDuplicateValidate(number, usedNumber)) {
-                throw IllegalArgumentException("[ERROR] 중복된 로또 당첨 번호입니다.")
-            }
+            if (!numberRangeValidate(number)) { throw IllegalArgumentException("[ERROR] 로또 번호는 1 이상 45 이하여야 합니다.") }
+            if (!numberDuplicateValidate(number, usedNumber)) { throw IllegalArgumentException("[ERROR] 중복된 로또 당첨 번호입니다.") }
 
             usedNumber.add(number)
         }
@@ -94,9 +76,7 @@ class LottoMachine {
         var count = 0
 
         for (number in numbers) {
-            if (winningNumbers.contains(number)) {
-                count++
-            }
+            if (winningNumbers.contains(number)) { count++ }
         }
 
         return count
