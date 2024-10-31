@@ -15,7 +15,6 @@ class InputValidator {
         else if (money % AMOUNT_UNIT != 0 || money <= 0) return false
 
         return true
-
     }
 }
 
