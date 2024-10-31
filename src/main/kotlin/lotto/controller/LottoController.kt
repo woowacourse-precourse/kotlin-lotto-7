@@ -1,5 +1,6 @@
 package lotto.controller
 
+import lotto.model.lotto.BonusLotto
 import lotto.model.lotto.Lotto
 import lotto.model.lotto.LottoTicket
 import lotto.view.InputView
@@ -15,7 +16,7 @@ class LottoController {
 
         OutputView.printLottoTickets(tickets)
 
-        val winningNumbers = getWinningNumbers()
+        getWholeNumber()
     }
 
     private fun generateLottoTickets(purchaseAmount: Int): List<LottoTicket> {
@@ -29,7 +30,7 @@ class LottoController {
 
     private fun getPrice(): Int {
         val purchasePrice = InputView.askForPrice().toIntOrNull()
-            ?: throw IllegalArgumentException(ErrorMessage.EMPTY_PURCHASE_PRICE.message)
+            ?: throw IllegalArgumentException(ErrorMessage.INVALID_NUMBER_FORMAT.message)
         return purchasePrice
     }
 
@@ -42,5 +43,12 @@ class LottoController {
                 trimmed.toIntOrNull() ?: throw IllegalArgumentException(ErrorMessage.INPUT_WINNING_ONLY_NUMBERS.message)
             }
         return Lotto(purchasePrice)
+    }
+
+    private fun getWholeNumber(): BonusLotto {
+        val lotto = getWinningNumbers()
+        val bonusNumber = InputView.askForBonusNumber().toIntOrNull()
+            ?: throw IllegalArgumentException(ErrorMessage.INVALID_NUMBER_FORMAT.message)
+        return BonusLotto(lotto.getNumbers(), bonusNumber)
     }
 }
