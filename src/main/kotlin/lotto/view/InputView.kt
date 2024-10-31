@@ -2,13 +2,16 @@ package lotto.view
 
 import camp.nextstep.edu.missionutils.Console
 import lotto.util.InputValidator.validateInputIsNumeric
+import lotto.util.InputValidator.validateMoneyIsDivisible
 
 class InputView {
     fun readLottoMoney(): Int {
         println(PROMPT_LOTTO_MONEY)
-        val lottoMoney = Console.readLine()
-        validateInputIsNumeric(lottoMoney)
-        return lottoMoney.toInt()
+        val input = Console.readLine()
+        validateInputIsNumeric(input)
+        val lottoMoney = input.toInt()
+        validateMoneyIsDivisible(lottoMoney)
+        return lottoMoney
     }
 
     companion object {
