@@ -7,3 +7,5 @@ class Lotto(private val numbers: List<Int>) {
 
     fun getSortedNumbers(): List<Int> = numbers.sorted()
 }
+
+fun List<Lotto>.toNumberList(): List<List<Int>> = this.map { it.getSortedNumbers() }

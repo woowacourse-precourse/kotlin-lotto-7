@@ -17,9 +17,20 @@ fun main() {
     lottoList.forEach { lotto ->
         println(lotto.getSortedNumbers())
     }
+    println()
 
     println(LottoOutputText.INPUT_WINNING_NUMBERS)
-    val winningNumbers = Console.readLine().split(LottoConstants.WINNING_NUMBERS_DELIMITER)
+    val winningNumbers = Console.readLine()
+        .split(LottoConstants.WINNING_NUMBERS_DELIMITER)
+        .map { it.toInt() }
+    println()
+
+    println(LottoOutputText.INPUT_BONUS_NUMBER)
     val trimBonusNumber = Console.readLine().trim() // TODO: 입력 예외 처리 필요
     val bonusNumber = trimBonusNumber.toInt()
+    println()
+
+    val lottoResult = LottoResult(lottoList, winningNumbers, bonusNumber)
+    val matchingCount = lottoResult.getMatchingCount()
+    println(matchingCount)
 }
