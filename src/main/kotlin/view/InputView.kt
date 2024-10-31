@@ -17,4 +17,12 @@ object InputView {
 
         return Validator.validateWinningNumbers(inputWinningNumbers)
     }
+
+    fun getBonusNumber(winningNumbers: List<Int>): Int {
+        println("보너스 번호를 입력해 주세요.")
+        val inputBonusNumber = Console.readLine()
+
+        return Validator.validateBonusNumber(inputBonusNumber, winningNumbers)
+    }
+
 }
