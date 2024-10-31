@@ -3,6 +3,11 @@ package lotto
 import camp.nextstep.edu.missionutils.Console
 import camp.nextstep.edu.missionutils.Randoms.pickUniqueNumbersInRange
 
+const val MAX_BALL_NUMBER = 45
+const val MIN_BALL_NUMBER = 1
+const val WINNING_BALL_COUNT = 6
+const val LOTTO_TICKET_PRICE = 1000
+
 fun main() {
     val lottoTickets: MutableList<List<Int>> = mutableListOf()
     val winningCount: MutableMap<String, Int> = mutableMapOf("1등" to 0, "2등" to 0,
@@ -10,11 +15,11 @@ fun main() {
 
     println("구입금액을 입력해 주세요.")
     val price = Console.readLine()
-    val count = price.toInt() / 1000
+    val count = price.toInt() / LOTTO_TICKET_PRICE
     println("\n${count}개를 구매했습니다.")
 
     repeat(count) {
-        val numbers = pickUniqueNumbersInRange(1, 45, 6)
+        val numbers = pickUniqueNumbersInRange(MIN_BALL_NUMBER, MAX_BALL_NUMBER, WINNING_BALL_COUNT)
         val lottoTicket = Lotto(numbers).sort()
         println(lottoTicket)
         lottoTickets.add(lottoTicket)
