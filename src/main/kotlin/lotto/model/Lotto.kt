@@ -8,6 +8,7 @@ package lotto.model
 class Lotto(private val numbers: List<Int>) {
     init {
         require(numbers.size == 6) { "[ERROR] 로또 번호는 6개여야 합니다." }
+        require(numbers.all { it in 1..45 }) { "[ERROR] 로또 번호는 1에서 45 이내여야 합니다." }
     }
 
     // TODO: 추가 기능 구현
@@ -17,6 +18,7 @@ class Lotto(private val numbers: List<Int>) {
     // 로또 번호 생성기도 중복될 수 있나? -> 그건 상관 없나 -> 상관 없지 중복 n등이니까
 
     // 그럼 여기서 로또 번호를 생성할까?
+    // 아니면 예외 처리하는 함수인가
 
     /**
      * 모델이 수행할 기능 목록
