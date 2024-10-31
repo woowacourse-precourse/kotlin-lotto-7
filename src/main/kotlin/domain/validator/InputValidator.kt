@@ -17,5 +17,15 @@ class InputValidator(
         inputErrorDelegate.isThousandWonUnit(value)
         return Output.getPurchase(value)
     }
+    fun winningNumberValidation(value: String): List<Int> {
+        val process = Process.WINNING_NUMBER
+        val winningNumber = value.splitByComma()
+        commonErrorDelegator.isEmpty(value)
+        inputErrorDelegate.isInvalidInputFormat(value)
+        inputErrorDelegate.isInvalidLottoSize(winningNumber)
+        inputErrorDelegate.isExceededRange(winningNumber, process)
+        inputErrorDelegate.isDuplicated(winningNumber.toMapByEachCount())
+        return winningNumber.map { it.toInt() }
+    }
     }
 }
