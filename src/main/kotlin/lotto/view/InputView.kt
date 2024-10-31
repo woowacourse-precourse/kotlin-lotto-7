@@ -31,6 +31,21 @@ class InputView {
             }
         }
     }
+
+    fun getBonusNumber(winningNumbers: List<Int>): Int {
+        while (true) {
+            println(Constants.INPUT_BONUS_NUMBER_MESSAGE)
+            val bonusNumber = Console.readLine()
+            try {
+                validateBonusNumber(bonusNumber, winningNumbers)
+                println()
+                return bonusNumber.toInt()
+            } catch (e: IllegalArgumentException) {
+                println(e.message)
+            }
+        }
+    }
+
     private fun validateLottoAmount(lottoAmount: String) {
         require(lottoAmount.toIntOrNull() != null) { Constants.ERROR_AMOUNT_NOT_NUMBER }
         val amount = lottoAmount.toInt()
