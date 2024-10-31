@@ -21,14 +21,6 @@ class InputTest {
     private lateinit var inputErrorDelegate: InputErrorDelegate
     private lateinit var inputValidator: InputValidator
 
-    @Nested
-    inner class PurchaseAmountTest {
-        @BeforeEach
-        fun init() {
-            commonErrorDelegate = CommonErrorDelegator()
-            inputErrorDelegate = InputErrorDelegator()
-            inputValidator = InputValidator(commonErrorDelegate, inputErrorDelegate)
-        }
     @BeforeEach
     fun init() {
         commonErrorDelegate = CommonErrorDelegator()
@@ -46,6 +38,9 @@ class InputTest {
                 .hasMessage(Exception.EMPTY_INPUT.toString())
         }
     }
+
+    @Nested
+    inner class PurchaseAmountTest {
 
         @ParameterizedTest
         @ValueSource(strings = ["abc", "ㄱㄴㄷ", "!@#$", "100,23,22"])
@@ -74,12 +69,6 @@ class InputTest {
 
     @Nested
     inner class WinningNumberTest {
-        @BeforeEach
-        fun init() {
-            commonErrorDelegate = CommonErrorDelegator()
-            inputErrorDelegate = InputErrorDelegator()
-            inputValidator = InputValidator(commonErrorDelegate, inputErrorDelegate)
-        }
 
         @ParameterizedTest
         @CsvSource(
@@ -110,6 +99,15 @@ class InputTest {
             Assertions.assertThatThrownBy { inputErrorDelegate.isInvalidInputFormat(value) }
                 .isInstanceOf(IllegalArgumentException::class.java)
                 .hasMessage(Exception.INVALID_FORMAT.toString())
+        }
+
+        @ParameterizedTest
+        @ValueSource(strings = ["0", "46"])
+        fun `당첨번호가 로또번호의 범위를 벗어날 때`(value: String){
+            val type = Process.WINNING_NUMBER
+            Assertions.assertThatThrownBy { inputErrorDelegate.isExceededRange(value, type) }
+                .isInstanceOf(IllegalArgumentException::class.java)
+                .hasMessage(Exception.EXCEED_INPUT.toString())
         }
     }
 }
