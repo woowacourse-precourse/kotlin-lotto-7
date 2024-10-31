@@ -10,6 +10,7 @@ class InputView {
             val input = Console.readLine()
             try {
                 validateLottoAmount(input)
+                println()
                 return input.toInt()
             } catch (e: IllegalArgumentException) {
                 println(e.message)
