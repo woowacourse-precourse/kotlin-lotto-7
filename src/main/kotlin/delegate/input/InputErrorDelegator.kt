@@ -1,9 +1,9 @@
 package delegate.input
 
 import domain.enums.Exception
-import domain.enums.Lotto.LOTTO_MIN
-import domain.enums.Lotto.LOTTO_MAX
-import domain.enums.Lotto.LOTTO_SIZE
+import domain.enums.LottoSetting.LOTTO_MIN
+import domain.enums.LottoSetting.LOTTO_MAX
+import domain.enums.LottoSetting.LOTTO_SIZE
 import domain.enums.Process
 import util.isThousandUnit
 
