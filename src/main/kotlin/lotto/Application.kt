@@ -1,5 +1,19 @@
 package lotto
 
+import lotto.ui.Ui
+
 fun main() {
-    // TODO: 프로그램 구현
+    val ui = Ui()
+
+    val budget = keepRequestingForValidBudget(ui)
+}
+
+private fun keepRequestingForValidBudget(ui: Ui): Int {
+    while (true) {
+        ui.requestBudget().onSuccess { budget ->
+            return budget
+        }.onFailure { exception ->
+            ui.displayExceptionMessage(exception.message)
+        }
+    }
 }
