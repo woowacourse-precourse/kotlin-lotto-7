@@ -105,7 +105,7 @@
       <td><input type="checkbox"></td>
       <td>소수가 들어오는 경우 </td>
    </tr>
-      <td rowspan="5">당첨 번호</td>
+      <td rowspan="5">보너스 번호</td>
       <td><input type="checkbox"></td>
       <td>빈 경우</td>
     </tr>
