@@ -35,4 +35,20 @@ class LottoTest {
         assertThat(sortedLottoTicket).isEqualTo(result)
 
     }
+
+    @Test
+    @DisplayName("Lotto class의 check 메서드 검증")
+    fun `로또의 당첨을 확인한다`() {
+        // given
+        val lottoTicket: List<Int> = listOf(1,7,12,27,32,45)
+        val winningLotto: List<Int> = listOf(1,7,12,27,32,45)
+        val result = 6
+
+        // when
+        val winningCount: Int = Lotto(lottoTicket).check(winningLotto)
+
+        // then
+        assertThat(winningCount).isEqualTo(result)
+
+    }
 }
