@@ -3,6 +3,7 @@ package view
 import camp.nextstep.edu.missionutils.Console.readLine
 import domain.enums.Input
 import domain.validator.InputValidator
+import util.printWithSquareBracket
 import util.retryWhenNoException
 import vm.LottoViewModel
 
@@ -27,6 +28,7 @@ class View(
 
     private fun getWinningNumber() {
         retryWhenNoException {
+            lineBreak()
             println(Input.INPUT_WINNING_NUMBER.toString())
             val winningNumber = readLine()
             val validWinningNumber = validator.winningNumberValidation(winningNumber)
@@ -47,7 +49,9 @@ class View(
         lineBreak()
         println(msg)
         viewModel.onCompleteInputPayment(purchase)
-        lineBreak()
+        viewModel.state.pickedLotto.map { lotto ->
+            println(lotto.printWithSquareBracket())
+        }
     }
 
     private fun printAndSetWinningNumber(winningNumber: List<Int>){
