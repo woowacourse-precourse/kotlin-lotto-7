@@ -1,6 +1,7 @@
 package lotto
 
 import camp.nextstep.edu.missionutils.Console
+import lotto.util.LottoConstants
 import lotto.util.LottoOutputText
 
 fun main() {
@@ -16,4 +17,9 @@ fun main() {
     lottoList.forEach { lotto ->
         println(lotto.getSortedNumbers())
     }
+
+    println(LottoOutputText.INPUT_WINNING_NUMBERS)
+    val winningNumbers = Console.readLine().split(LottoConstants.WINNING_NUMBERS_DELIMITER)
+    val trimBonusNumber = Console.readLine().trim() // TODO: 입력 예외 처리 필요
+    val bonusNumber = trimBonusNumber.toInt()
 }
