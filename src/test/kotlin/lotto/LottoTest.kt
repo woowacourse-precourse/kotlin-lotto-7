@@ -1,7 +1,9 @@
 package lotto
 
 import lotto.domain.Lotto
+import lotto.domain.Rank
 import lotto.domain.WinningLotto
+import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 
@@ -40,6 +42,30 @@ class LottoTest {
         assertThrows<IllegalArgumentException> {
             WinningLotto(listOf(1,2,3,4,5,6),6)
         }
+    }
+
+    @Test
+    fun `입력받은 로또 번호가 6개 일치하면 1등`() {
+        val rank = Rank.valueOfMatchCount(6, false)
+        assertEquals(Rank.FIRST, rank)
+    }
+
+    @Test
+    fun `입력받은 로또 번호가 5개 일치하고 보너스 번호 일치하면 2등`() {
+        val rank = Rank.valueOfMatchCount(5, true)
+        assertEquals(Rank.SECOND, rank)
+    }
+
+    @Test
+    fun `입력받은 로또 번호가 5개 일치하면 3등`() {
+        val rank = Rank.valueOfMatchCount(5, false)
+        assertEquals(Rank.THIRD, rank)
+    }
+
+    @Test
+    fun `입력받은 로또 번호가 3개 미만 일치하면 NONE`() {
+        val rank = Rank.valueOfMatchCount(2, false)
+        assertEquals(Rank.NONE, rank)
     }
 
 
