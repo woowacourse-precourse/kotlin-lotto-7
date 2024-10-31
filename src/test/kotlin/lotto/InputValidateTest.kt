@@ -39,6 +39,30 @@ class InputValidateTest: NsTest() {
         }
     }
 
+    @Test
+    fun testBonusNumberNotDigit() {
+        assertSimpleTest {
+            runException("5000", "1,2,3,4,5,6", "a")
+            assertThat(output()).contains(ERROR_MESSAGE)
+        }
+    }
+
+    @Test
+    fun testBonusNumberNotRightRange() {
+        assertSimpleTest {
+            runException("5000", "1,2,3,4,5,6", "50")
+            assertThat(output()).contains(ERROR_MESSAGE)
+        }
+    }
+
+    @Test
+    fun testBonusNumberDuplicateWithWinningLotto() {
+        assertSimpleTest {
+            runException("5000", "1,2,3,4,5,6", "6")
+            assertThat(output()).contains(ERROR_MESSAGE)
+        }
+    }
+
     override fun runMain() {
         main()
     }

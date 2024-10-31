@@ -2,19 +2,29 @@ package lotto.Controller
 
 import lotto.Lotto
 import lotto.Model.InputValidater
+import lotto.Model.RandomLottoMaker
 import lotto.View.InputView
+import lotto.View.OutputView
 
 class LottoController {
     private val inputView = InputView()
+    private val outputView = OutputView()
+    private var releasedLottos = listOf<Lotto>()
 
     companion object {
         private const val LOTTO_SPLIT_DELIMITER = ","
     }
 
-    fun getInputs() {
-        val lottoAmount = getPurchaseInput()
+    fun execute() {
+        getInputsAndReleaseLottos()
+    }
+
+    private fun getInputsAndReleaseLottos() {
+        val purchaseAmount = getPurchaseInput()
+        val lottoAmount = purchaseAmount / 1000
+        releaseLottos(lottoAmount)
         val winningLotto = getWinningLotto()
-        val bonusNumber = inputView.getBonusNumber()
+        val bonusNumber = getBonusNumber(winningLotto)
     }
 
     private fun getPurchaseInput(): Int {
@@ -22,7 +32,7 @@ class LottoController {
             try {
                 val purchaseAmount = inputView.getPurchaseAmount()
                 InputValidater.validatePurchaseAmount(purchaseAmount)
-                return purchaseAmount.toInt() / 1000
+                return purchaseAmount.toInt()
             } catch (e: IllegalArgumentException) {
                 println(e.message)
             }
@@ -41,5 +51,22 @@ class LottoController {
                 println(e.message)
             }
         }
+    }
+
+    private fun getBonusNumber(winningLotto: Lotto): Int {
+        while (true) {
+            try {
+                val inputBonusNumber = inputView.getBonusNumber()
+                InputValidater.validateBonusNumber(winningLotto, inputBonusNumber)
+                return inputBonusNumber.toInt()
+            } catch (e: IllegalArgumentException) {
+                println(e.message)
+            }
+        }
+    }
+
+    private fun releaseLottos(lottoAmount: Int) {
+        releasedLottos = RandomLottoMaker.makeLottos(lottoAmount)
+        outputView.printLottos(releasedLottos)
     }
 }

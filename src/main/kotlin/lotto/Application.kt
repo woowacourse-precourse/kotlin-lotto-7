@@ -4,5 +4,5 @@ import lotto.Controller.LottoController
 
 fun main() {
     val lottoController = LottoController()
-    lottoController.getInputs()
+    lottoController.execute()
 }
