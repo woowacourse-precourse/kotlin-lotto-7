@@ -49,6 +49,20 @@ class LottoTest {
 
         // then
         assertThat(winningCount).isEqualTo(result)
+    }
 
+    @Test
+    @DisplayName("Lotto class의 isBonus 메서드 검증")
+    fun `보너스 번호 당첨을 확인한다`() {
+        // given
+        val lottoTicket: List<Int> = listOf(1,7,12,27,32,45)
+        val bonusBall = 45
+        val expectedResult = true
+
+        // when
+        val result = Lotto(lottoTicket).isBonus(bonusBall)
+
+        // then
+        assertThat(result).isEqualTo(expectedResult)
     }
 }
