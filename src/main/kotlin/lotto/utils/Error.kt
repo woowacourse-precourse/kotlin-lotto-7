@@ -8,6 +8,7 @@ import lotto.constants.ErrorConstants.ERROR_PURCHASE_PRICE_MINIMUM
 import lotto.constants.ErrorConstants.ERROR_WINNING_NUMBERS_COUNT
 import lotto.constants.ErrorConstants.ERROR_WINNING_NUMBERS_DUPLICATE
 import lotto.constants.ErrorConstants.ERROR_WINNING_NUMBERS_ONLY_NUMERIC
+import lotto.constants.ErrorConstants.ERROR_WINNING_NUMBERS_RANGE
 import lotto.constants.LottoConstants.COMMA
 
 object Error {
@@ -31,6 +32,9 @@ object Error {
             throw IllegalArgumentException(ERROR_WINNING_NUMBERS_COUNT)
         if (numbers.toSet().size != 6)
             throw IllegalArgumentException(ERROR_WINNING_NUMBERS_DUPLICATE)
+        numbers.forEach { number->
+            if (number !in 1..45) throw IllegalArgumentException(ERROR_WINNING_NUMBERS_RANGE)
+        }
     }
 
     fun bonusNumberError(bonusNumber: String) {
