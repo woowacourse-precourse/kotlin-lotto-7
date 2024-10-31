@@ -33,7 +33,8 @@ object LottoController {
         while (true) {
             try {
                 val winningNumbers = InputView.getWinningNumbers()
-                return WinningLotto(winningNumbers)
+                val bousNumber = InputView.getBonusNumbers()
+                return WinningLotto(winningNumbers, bousNumber)
             } catch (e: IllegalArgumentException) {
                 println(e.message)
             }

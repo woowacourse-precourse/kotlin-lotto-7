@@ -14,4 +14,10 @@ object InputView {
         val input = Console.readLine()
         return input.split(",").map { it.trim().toIntOrNull() ?: throw IllegalArgumentException("[ERROR] 당첨 번호는 숫자여야 합니다") }
     }
+
+    fun getBonusNumbers() : Int {
+        println("보너스 번호를 입력해 주세요.")
+        val input = Console.readLine()
+        return input.toIntOrNull() ?: throw IllegalArgumentException("[ERROR] 보너스 번호는 숫자여야 합니다.")
+    }
 }
