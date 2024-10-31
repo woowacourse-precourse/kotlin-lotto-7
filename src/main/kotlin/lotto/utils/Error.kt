@@ -5,7 +5,6 @@ import lotto.constants.ErrorConstants.ERROR_NUMBERS_DUPLICATE
 import lotto.constants.ErrorConstants.ERROR_NUMBER_ONLY_NUMERIC
 import lotto.constants.ErrorConstants.ERROR_NUMBER_RANGE
 import lotto.constants.ErrorConstants.ERROR_PRICE_NOT_MULTIPLE_OF_1000
-import lotto.constants.ErrorConstants.ERROR_PURCHASE_PRICE_MINIMUM
 import lotto.constants.LottoConstants.COMMA
 
 object Error {
@@ -15,8 +14,6 @@ object Error {
             ?: throw IllegalArgumentException(ERROR_NUMBER_ONLY_NUMERIC)
         if (price % 1000 != 0)
             throw IllegalArgumentException(ERROR_PRICE_NOT_MULTIPLE_OF_1000)
-        if (price < 1000)
-            throw IllegalArgumentException(ERROR_PURCHASE_PRICE_MINIMUM)
     }
 
     fun winningNumberError(winningNumbers: String) {

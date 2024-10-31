@@ -18,7 +18,6 @@ object OutputConstants {
 
 object ErrorConstants {
     const val ERROR_PRICE_NOT_MULTIPLE_OF_1000 = "[ERROR] 구입 금액은 1000원 단위만 가능합니다."
-    const val ERROR_PURCHASE_PRICE_MINIMUM = "[ERROR] 구입 금액은 1000원 이상이여야 합니다."
 
     const val ERROR_NUMBER_ONLY_NUMERIC = "[ERROR] 숫자만 입력 가능합니다."
     const val ERROR_NUMBERS_COUNT = "[ERROR] 번호는 6개여야 합니다"
