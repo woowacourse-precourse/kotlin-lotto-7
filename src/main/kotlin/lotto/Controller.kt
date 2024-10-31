@@ -1,6 +1,5 @@
 package lotto
 
-import lotto.model.Lotto
 import lotto.model.LottoGenerator
 import lotto.view.InputView
 import lotto.validator.*
@@ -13,18 +12,22 @@ class Controller {
     val inputValidator = InputValidator()
     val lottoGenerator = LottoGenerator()
 
-    fun start(){
+    fun start() {
 
-        var money : String
-        while(true){
+        var money: String
+        while (true) {
             money = input.getMoney()
-            if(inputValidator.isValidMoney(money)) break
-            ValidatorMessage.INPUT_MONEY.display()
+            if (inputValidator.isValidMoney(money)) break
         }
         val numberOfLotto = lottoGenerator.getNumberOfLotto(money)
         val randomLotto = lottoGenerator.generateLotto(numberOfLotto)
 
-        output.displayLotto(numberOfLotto,randomLotto)
+        output.displayLotto(numberOfLotto, randomLotto)
+        var winningNum: String
+        while (true) {
+            winningNum = input.getWinningNum()
+            if (inputValidator.isValidWinningNum(winningNum)) break
+        }
 
     }
 
