@@ -55,8 +55,8 @@
 ### util
 ### `Validator`
 - [ ] 구입 금액 검증 `MoneyValidator`
-- [ ] 당첨 번호 검증 
-- [ ] 보너스 번호 검증
+- [ ] 당첨 번호 검증 `WinnerNumberValidator`
+- [ ] 보너스 번호 검증 `BonusNumberValidator`
 ### `ExtenstionUtil`
 - [ ] String 을 Int 로 반환한다.
 
