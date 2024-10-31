@@ -156,3 +156,15 @@
 
 # 슈도 코드 작성
 
+## 입력값 예외 처리 로직
+
+```kotlin
+when (input) {
+    !is Int -> throw~
+    in Int.MIN_VALUE until 1 -> throw~
+    in 1..45 -> throw~
+        == winningNumber-> throw~
+    else -> // 통과
+}
+```
+
