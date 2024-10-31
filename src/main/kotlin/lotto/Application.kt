@@ -10,5 +10,10 @@ fun main() {
     println()
 
     val lottoGenerator = LottoGenerator(purchasePrice)
-    lottoGenerator.generate()
+    val lottoList = lottoGenerator.generate()
+    val lottoListSize = lottoList.size
+    println("${lottoListSize}${LottoOutputText.LOTTO_GENERATE_FINISH_TEXT}")
+    lottoList.forEach { lotto ->
+        println(lotto.getSortedNumbers())
+    }
 }
