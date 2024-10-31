@@ -7,6 +7,7 @@ import org.junit.jupiter.params.provider.ValueSource
 
 import lotto.util.InputValidator.validateInputIsNumeric
 import lotto.util.InputValidator.validateMoneyIsNotNegative
+import lotto.util.InputValidator.validateMoneyIsEnough
 import lotto.util.InputValidator.validateMoneyIsDivisible
 
 class InputValidatorTest {
@@ -19,6 +20,12 @@ class InputValidatorTest {
     @Test
     fun `구매 금액이 음수일 경우 예외가 발생한다`() {
         assertThrows<IllegalArgumentException> { validateMoneyIsNotNegative(-1000) }
+    }
+
+    @ParameterizedTest
+    @ValueSource(ints = [0, 100])
+    fun `구매 금액으로 로또를 하나도 구매할 수 없을 경우 발생한다`(input: Int) {
+        assertThrows<IllegalArgumentException> { validateMoneyIsEnough(input) }
     }
 
     @Test
