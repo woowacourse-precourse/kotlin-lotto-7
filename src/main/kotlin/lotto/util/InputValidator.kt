@@ -2,6 +2,6 @@ package lotto.util
 
 object InputValidator {
     fun validateInputIsNumeric(input: String) {
-        if (input.toIntOrNull() == null) throw IllegalArgumentException("[ERROR] 올바른 숫자가 아닙니다.")
+        if (input.toIntOrNull() == null) throw IllegalArgumentException(ErrorMessage.ERROR_INPUT_NOT_NUMERIC)
     }
 }
