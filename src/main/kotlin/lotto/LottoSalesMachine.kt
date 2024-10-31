@@ -6,8 +6,12 @@ class LottoSalesMachine {
     }
 
     fun purchase(won: Int): List<Lotto> {
-        if (won % 1000 != 0) {
+        exceptNotDevideThousand(won)
         return List(won / 1000) { LottoMaker.make() }
+    }
+
+    private fun exceptNotDevideThousand(number: Int) {
+        if (number % 1000 != 0) {
             throw IllegalArgumentException(ErrorMessage.INPUT_AMOUNT_ERROR.getMessage())
         }
     }
