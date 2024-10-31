@@ -17,6 +17,20 @@ class InputView {
             }
         }
     }
+
+    fun getWinningNumbers(): List<Int> {
+        while (true) {
+            println(Constants.INPUT_WINNING_NUMBERS_MESSAGE)
+            val winningNumbers = Console.readLine().split(",")
+            try {
+                validateWinningNumbers(winningNumbers)
+                println()
+                return winningNumbers.map { it.toInt() }
+            } catch (e: IllegalArgumentException) {
+                println(e.message)
+            }
+        }
+    }
     private fun validateLottoAmount(lottoAmount: String) {
         require(lottoAmount.toIntOrNull() != null) { Constants.ERROR_AMOUNT_NOT_NUMBER }
         val amount = lottoAmount.toInt()

@@ -16,6 +16,8 @@ class LottoController {
         outputView.printLottoAmountMessage(lottoCount)
 
         printLottoNumber(lottoCount)
+
+        val winningNumbers = inputView.getWinningNumbers()
     }
 
     private fun printLottoNumber(lottoCount: Int) {
