@@ -1,5 +1,16 @@
 package lotto
 
 fun main() {
-    // TODO: 프로그램 구현
+    val calculateLottoRankUseCase = CalculateLottoRankUseCase()
+    val calculateLottoReturnUseCase = CalculateLottoReturnUseCase()
+    val lottoBuyView = LottoBuyView()
+    val winningNumberInputView = WinningNumberInputView()
+    val lottoResultView = LottoResultView()
+    LottoController(
+        calculateLottoRankUseCase,
+        calculateLottoReturnUseCase,
+        lottoBuyView,
+        winningNumberInputView,
+        lottoResultView
+    ).run()
 }
