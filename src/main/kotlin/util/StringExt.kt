@@ -7,3 +7,7 @@ fun String.isNumeric(): Boolean{
 fun String.isThousandUnit(): Boolean{
     return this != "0" && this.toInt() % 1000 == 0
 }
+
+fun String.toThousandUnit(): Int{
+    return this.toInt() / 1000
+}
