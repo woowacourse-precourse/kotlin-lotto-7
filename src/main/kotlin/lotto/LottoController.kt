@@ -12,6 +12,7 @@ class LottoController(
         val user = User(lottoCost.toInt())
         showLottoTicketsResult(user)
         val winningNumbers = getWinningNumbers()
+        showLottoResult(user.getLottoTickets(), winningNumbers)
     }
 
     private fun getLottoCost(): String {
@@ -28,5 +29,15 @@ class LottoController(
         val winningNumbers = winningNumberInputView.inputWinningNumbers().split(",").map { it.toInt() }
         val bonusNumber = winningNumberInputView.inputBonusNumber().toInt()
         return WinningNumbers(winningNumbers, bonusNumber)
+    }
+
+    private fun showLottoResult(lottoTickets: List<Lotto>, winningNumbers: WinningNumbers) {
+        val lottoTicketsRank = lottoTickets.map { lotto ->
+            calculateLottoRankUseCase.execute(lotto, winningNumbers)
+        }
+        lottoResultView.outputWinningStatistics(lottoTicketsRank)
+        val winningPrizes = lottoTicketsRank.map { it.price }
+        val lottoTotalProfitRate = calculateLottoReturnUseCase.execute(winningPrizes, lottoTickets.size.times(1000))
+        lottoResultView.outputTotalProfitRate(lottoTotalProfitRate)
     }
 }
