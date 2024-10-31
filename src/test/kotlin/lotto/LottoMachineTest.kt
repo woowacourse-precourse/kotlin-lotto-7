@@ -14,8 +14,8 @@ class LottoMachineTest {
     }
 
     @Test
-    fun `로또 판매 안내를 할 수 있어야 한다`() {
-        assertThat(lottoMachine.guideSaleLotto()).isEqualTo("구입금액을 입력해 주세요.")
+    fun `로또 구입 금액 입력을 안내할 수 있어야 한다`() {
+        assertThat(lottoMachine.guideInputLottoPurchaseAmount()).isEqualTo("구입금액을 입력해 주세요.")
     }
 
 }
