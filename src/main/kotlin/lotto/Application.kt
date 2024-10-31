@@ -7,4 +7,5 @@ fun main() {
     // TODO: 프로그램 구현
     val lottoController = LottoController()
     lottoController.purchaseLotto()
+    lottoController.setLotteryNumber()
 }

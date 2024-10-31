@@ -23,8 +23,10 @@ class LottoController {
         outputView.printPurchaseLotto(lotto)
     }
 
-    fun setWinLotteryNumber() {
-        winLotteryNumber = inputView.printInputWinLotteryNumber().map { it.toInt() }
+    fun setLotteryNumber() {
+        winLotteryNumber = inputView.printInputWinLotteryNumber()
+        bonusLotteryNumber = inputView.printInputBonusLotteryNumber()
+
     }
 
     private fun generateLotto(count: Int) {

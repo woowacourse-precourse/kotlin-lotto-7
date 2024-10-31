@@ -12,15 +12,24 @@ class InputView {
         return money.toInt()
     }
 
-    fun printInputWinLotteryNumber(): List<String> {
+    fun printInputWinLotteryNumber(): List<Int> {
         println(PRINT_PLEASE_INPUT_WIN_LOTTERY_NUMBER)
         val winLottery = Console.readLine()
-        return winLottery.split(",")
+        println()
+        return winLottery.split(",").map { it.trim().toInt() }
+    }
+
+    fun printInputBonusLotteryNumber(): Int {
+        println(PRINT_PLEASE_INPUT_BONUS_LOTTERY_NUMBER)
+        val bonusLottery = Console.readLine()
+        println()
+        return bonusLottery.toInt()
     }
 
 
     companion object {
         const val PRINT_PLEASE_INPUT_MONEY = "구입금액을 입력해 주세요."
         const val PRINT_PLEASE_INPUT_WIN_LOTTERY_NUMBER = "당첨 번호를 입력해 주세요."
+        const val PRINT_PLEASE_INPUT_BONUS_LOTTERY_NUMBER = "보너스 번호를 입력해 주세요."
     }
 }
