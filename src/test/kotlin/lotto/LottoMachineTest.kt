@@ -7,27 +7,31 @@ import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.Assertions.*
 
 class LottoMachineTest {
+    private val lottoMachine = LottoMachine()
 
     @Test
-    fun calculateRank() {
-        val lottoMachine = LottoMachine()
+    fun releaseLottoTest() {
+        val releaseCount = 5000
+        val releaseLottos = lottoMachine.releaseLotto(releaseCount)
+
+        assert(releaseLottos.size == releaseCount)
+    }
+
+    @Test
+    fun calculateRankTest() {
 
         assertRandomUniqueNumbersInRangeTest({
-            val firstLotto = lottoMachine.createLotto()
-            val secondLotto = lottoMachine.createLotto()
-            val thirdLotto = lottoMachine.createLotto()
-            val forthLotto = lottoMachine.createLotto()
-            val fifthLotto = lottoMachine.createLotto()
-            val sixthLotto = lottoMachine.createLotto()
+            val purchaseCost = 6000
+            val lottos = lottoMachine.releaseLotto(purchaseCost)
             val winningNumbers = listOf(1, 2, 3, 4, 5, 6)
             val bonus = 7
 
-            assert(lottoMachine.lottoRank(firstLotto.getNumbers(), winningNumbers, bonus) == LottoMachine.Rank.FIRST)
-            assert(lottoMachine.lottoRank(secondLotto.getNumbers(), winningNumbers, bonus) == LottoMachine.Rank.SECOND)
-            assert(lottoMachine.lottoRank(thirdLotto.getNumbers(), winningNumbers, bonus) == LottoMachine.Rank.THIRD)
-            assert(lottoMachine.lottoRank(forthLotto.getNumbers(), winningNumbers, bonus) == LottoMachine.Rank.FORTH)
-            assert(lottoMachine.lottoRank(fifthLotto.getNumbers(), winningNumbers, bonus) == LottoMachine.Rank.FIFTH)
-            assert(lottoMachine.lottoRank(sixthLotto.getNumbers(), winningNumbers, bonus) == LottoMachine.Rank.LOSE)
+            assert(lottoMachine.lottoRank(lottos[0].getNumbers(), winningNumbers, bonus) == LottoMachine.Rank.FIRST)
+            assert(lottoMachine.lottoRank(lottos[1].getNumbers(), winningNumbers, bonus) == LottoMachine.Rank.SECOND)
+            assert(lottoMachine.lottoRank(lottos[2].getNumbers(), winningNumbers, bonus) == LottoMachine.Rank.THIRD)
+            assert(lottoMachine.lottoRank(lottos[3].getNumbers(), winningNumbers, bonus) == LottoMachine.Rank.FORTH)
+            assert(lottoMachine.lottoRank(lottos[4].getNumbers(), winningNumbers, bonus) == LottoMachine.Rank.FIFTH)
+            assert(lottoMachine.lottoRank(lottos[5].getNumbers(), winningNumbers, bonus) == LottoMachine.Rank.LOSE)
         },
             listOf(1, 2, 3, 4, 5, 6),
             listOf(2, 3, 4, 5, 6, 7),
