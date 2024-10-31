@@ -43,13 +43,15 @@ object Validator {
 
     }
 
-    fun validateBonusNumber(inputBonusNumber: String, winningNumbers: List<Int>) {
+    fun validateBonusNumber(inputBonusNumber: String, winningNumbers: List<Int>): Int {
 
         BonusNumberValidator.SHOULD_BE_NUMBER.validate(inputBonusNumber)
 
         BonusNumberValidator.SHOULD_BE_1_TO_45_NUMBER.validate(inputBonusNumber)
 
         BonusNumberValidator.SHOULD_NOT_BE_DUPLICATE.validate(inputBonusNumber, winningNumbers)
+
+        return inputBonusNumber.toInt()
     }
 
 
