@@ -1,8 +1,14 @@
 package lotto.domain
 
+import lotto.constants.ErrorConstants.ERROR_NUMBERS_COUNT
+import lotto.constants.ErrorConstants.ERROR_NUMBERS_DUPLICATE
+import lotto.constants.ErrorConstants.ERROR_NUMBER_RANGE
+
 class Lotto(private val numbers: List<Int>) {
     init {
-        require(numbers.size == 6) { "[ERROR] 로또 번호는 6개여야 합니다." }
+        require(numbers.size == 6) { ERROR_NUMBERS_COUNT }
+        require(numbers.toSet().size == 6) { ERROR_NUMBERS_DUPLICATE }
+        require(numbers.all { it in 1..45 }) { ERROR_NUMBER_RANGE }
     }
 
     fun winningCount(inputNumbers: InputNumbers): Int {
