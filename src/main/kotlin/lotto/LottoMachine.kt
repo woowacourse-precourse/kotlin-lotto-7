@@ -3,9 +3,7 @@ package lotto
 import camp.nextstep.edu.missionutils.Randoms
 
 class LottoMachine {
-    fun releaseLotto(money: Int): List<Lotto> {
-        val releaseCount = money.calculateLottoCount()
-
+    fun releaseLotto(releaseCount: Int): List<Lotto> {
         println("${releaseCount}개를 구매했습니다.")
 
         val lottos = arrayListOf<Lotto>()
@@ -15,10 +13,6 @@ class LottoMachine {
         }
 
         return lottos
-    }
-
-    private fun Int.calculateLottoCount(): Int {
-        return this / lottoPrice
     }
 
     private fun createLotto(): Lotto = Lotto(drawNumbers())
