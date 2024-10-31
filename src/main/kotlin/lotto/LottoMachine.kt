@@ -16,7 +16,7 @@ class LottoMachine {
         return lottos
     }
 
-    private fun createLotto(): Lotto = Lotto(drawNumbers())
+    private fun createLotto(): Lotto = Lotto(drawNumbers().sorted())
 
     fun lottoRank(
         numbers: List<Int>,
