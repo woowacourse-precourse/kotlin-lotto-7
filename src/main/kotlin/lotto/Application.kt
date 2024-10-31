@@ -13,6 +13,10 @@ fun main() {
     val purchaseCost: Int = getPurchaseCost()
     val releaseLottoCount = purchaseCost.calculateLottoCount()
     val lottos = lottoMachine.releaseLotto(releaseLottoCount)
+
+    println(lottos.joinToString("\n") { lotto ->
+        "[${lotto.getNumbers().joinToString(", ")}]"
+    })
 }
 
 private fun Int.validatePrice(): Int {
