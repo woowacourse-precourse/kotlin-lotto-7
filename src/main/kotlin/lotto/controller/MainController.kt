@@ -31,6 +31,10 @@ class MainController {
         outputView.printWinningNumbersPrompt()
         winningNumbers = inputView.inputWinningNumbers()
 
+        // 보너스 번호 입력
+        outputView.printBonusNumberPrompt()
+        bonusNumber = inputView.inputBonusNumber()
+
     }
 
 }

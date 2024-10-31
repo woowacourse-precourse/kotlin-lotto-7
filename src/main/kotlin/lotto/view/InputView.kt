@@ -13,10 +13,16 @@ class InputView {
     }
 
     fun inputWinningNumbers(): List<Int?> {
-        val winningNumbersInput = Console.readLine()
-        val parsedWinningNumbers = winningNumbersInput.split(",").map { it.trim().toIntOrNull() }
+        val winningNumbers = Console.readLine()
+        val parsedWinningNumbers = winningNumbers.split(",").map { it.trim().toIntOrNull() }
         inputValidator.validateWinningNumbers(parsedWinningNumbers)
         return parsedWinningNumbers
+    }
+
+    fun inputBonusNumber(): Int {
+        val bonusNumber = Console.readLine()
+        inputValidator.validateBonusNumber(bonusNumber)
+        return bonusNumber.toInt()
     }
 
 }

@@ -28,4 +28,15 @@ class InputValidator {
         }
     }
 
+    fun validateBonusNumber(bonusNumber: String) {
+        val parsedBonusNumber = bonusNumber.toIntOrNull()
+
+        require(parsedBonusNumber != null) {
+            ErrorMessages.INVALID_BONUS_NUMBER_FORMAT
+        }
+        require(parsedBonusNumber in 1..45) {
+            ErrorMessages.INVALID_BONUS_NUMBER_RANGE
+        }
+    }
+
 }

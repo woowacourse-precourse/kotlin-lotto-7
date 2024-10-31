@@ -4,6 +4,8 @@ object ErrorMessages {
     // 로또 구입 금액 입력 에러 메시지
     const val INVALID_PURCHASE_AMOUNT_FORMAT = "[ERROR] 구입 금액은 정수 형태여야 합니다."
     const val INVALID_PURCHASE_AMOUNT_UNIT = "[ERROR] 구입 금액은 1,000원 단위로 입력해야 합니다."
+
+    // 로또 번호 에러 메시지
     const val INVALID_LOTTO_NUMBER_COUNT = "[ERROR] 로또 번호는 6개여야 합니다."
     const val DUPLICATE_LOTTO_NUMBER = "[ERROR] 로또 번호는 중복되지 않아야 합니다."
 
@@ -13,6 +15,9 @@ object ErrorMessages {
     const val INVALID_WINNING_NUMBERS_RANGE = "[ERROR] 당첨 번호는 0보다 크고 46보다 작아야 합니다."
     const val DUPLICATE_WINNING_NUMBERS = "[ERROR] 당첨 번호는 중복될 수 없습니다."
 
+    // 보너스 번호 입력 에러 메시지
+    const val INVALID_BONUS_NUMBER_FORMAT = "[ERROR] 보너스 번호는 정수 형태여야 합니다."
+    const val INVALID_BONUS_NUMBER_RANGE = "[ERROR] 보너스 번호는 0보다 크고 46보다 작아야 합니다."
 }
 
 object InputMessages {
