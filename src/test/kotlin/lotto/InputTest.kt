@@ -14,7 +14,8 @@ import domain.enums.Process
 import domain.validator.InputValidator
 import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.Test
-import org.junit.jupiter.params.provider.CsvSource
+import util.splitByComma
+import util.toMapByEachCount
 
 class InputTest {
     private lateinit var commonErrorDelegate: CommonErrorDelegate
@@ -71,20 +72,6 @@ class InputTest {
     inner class WinningNumberTest {
 
         @ParameterizedTest
-        @CsvSource(
-            "1;2;3;4;5;6",
-            "1.2.3.4.5.6",
-            "1^2$3%4#5@6",
-            "1-2-3-4-5-6",
-            "1_2_3_4_5_6",
-        )
-        fun `당첨 번호의 구분자가 잘못 입력되었을 때`(value: String) {
-            Assertions.assertThatThrownBy { inputErrorDelegate.isInvalidInputFormat(value) }
-                .isInstanceOf(IllegalArgumentException::class.java)
-                .hasMessage(Exception.INVALID_FORMAT.toString())
-        }
-
-        @ParameterizedTest
         @ValueSource(strings = [",,,", ",", "1", "1,2", "1,2,3", "1,2,3,4", "1,2,3,4,5", "1,2,3,4,5,6,7,8,9,10"])
         fun `당첨 번호가 6개가 아닐 때 예외 테스트`(value: String) {
             val winningNumber = value.split(",")
@@ -105,7 +92,7 @@ class InputTest {
         @ValueSource(strings = ["0, 46"])
         fun `당첨번호가 로또번호의 범위를 벗어날 때`(value: String){
             val type = Process.WINNING_NUMBER
-            val winningNumber = value.split(",")
+            val winningNumber = value.splitByComma()
             Assertions.assertThatThrownBy { inputErrorDelegate.isExceededRange(winningNumber, type) }
                 .isInstanceOf(IllegalArgumentException::class.java)
                 .hasMessage(Exception.EXCEED_INPUT.toString())
@@ -113,11 +100,34 @@ class InputTest {
 
         @ParameterizedTest
         @ValueSource(strings = ["1, 1, 1, 1, 1, 1", "1, 2, 3, 3, 3, 3", "1, 2, 3, 4, 5, 5"])
-        fun `당첨 번호가 중독됐을 때`(value: String){
+        fun `당첨 번호가 중복 됐을 때`(value: String){
             val winningNumber = value.splitByComma().toMapByEachCount()
             Assertions.assertThatThrownBy { inputErrorDelegate.isDuplicated(winningNumber) }
                 .isInstanceOf(IllegalArgumentException::class.java)
                 .hasMessage(Exception.INVALID_DUPLICATED.toString())
+        }
+    }
+
+    @Nested
+    inner class BonusNumberTest{
+
+        @ParameterizedTest
+        @ValueSource(strings = ["abc", "ㄱㄴㄷ", "!@#$", "100,23,22"])
+        fun `보너스 번호가 숫자가 아닐 때`(value: String) {
+            val type = Process.BONUS_NUMBER
+            Assertions.assertThatThrownBy { commonErrorDelegate.isNumeric(value, type) }
+                .isInstanceOf(IllegalArgumentException::class.java)
+                .hasMessage("${type}은(는) ${Exception.INVALID_INPUT}")
+        }
+
+        @ParameterizedTest
+        @ValueSource(strings = ["0, 46"])
+        fun `보너스 번호가 로또번호의 범위를 벗어날 때`(value: String){
+            val type = Process.BONUS_NUMBER
+            val winningNumber = value.splitByComma()
+            Assertions.assertThatThrownBy { inputErrorDelegate.isExceededRange(winningNumber, type) }
+                .isInstanceOf(IllegalArgumentException::class.java)
+                .hasMessage(Exception.EXCEED_INPUT.toString())
         }
     }
 }
