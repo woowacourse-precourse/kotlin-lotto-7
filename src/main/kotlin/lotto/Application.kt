@@ -4,7 +4,7 @@ import camp.nextstep.edu.missionutils.Console
 import camp.nextstep.edu.missionutils.Randoms.pickUniqueNumbersInRange
 
 fun main() {
-    var lotteys: MutableList<List<Int>> = mutableListOf()
+    val lottoTickets: MutableList<List<Int>> = mutableListOf()
     val winningCount: MutableMap<String, Int> = mutableMapOf("1등" to 0, "2등" to 0,
         "3등" to 0, "4등" to 0, "5등" to 0)
 
@@ -14,13 +14,13 @@ fun main() {
     println("\n${count}개를 구매했습니다.")
 
     repeat(count) {
-        val lottoNumbers = pickUniqueNumbersInRange(1, 45, 6)
-        val sortedLottoNumbers = lottoNumbers.sorted()
-        println(sortedLottoNumbers)
-        lotteys.add(sortedLottoNumbers)
+        val numbers = pickUniqueNumbersInRange(1, 45, 6)
+        val lottoTicket = Lotto(numbers).sort()
+        println(lottoTicket)
+        lottoTickets.add(lottoTicket)
     }
 
-    println(lotteys)
+    println(lottoTickets)
 
     println("당첨 번호를 입력해 주세요.")
     val winningNumber = Console.readLine()
@@ -29,16 +29,16 @@ fun main() {
     println("보너스 번호를 입력해 주세요.")
     val bonusNumber = Console.readLine()
 
-    for (lottey in lotteys) {
+    for (lotto in lottoTickets) {
         var win = 0
-        for (lotto in lottey) {
-            if (splitedWinningNumber.contains(lotto.toString())) {
+        for (number in lotto) {
+            if (splitedWinningNumber.contains(number.toString())) {
                 win += 1
             }
         }
         if (win == 5) {
-            for (lotto in lottey) {
-                if (bonusNumber.toInt() == lotto) {
+            for (number in lotto) {
+                if (bonusNumber.toInt() == number) {
                     win = -1
                 }
             }
