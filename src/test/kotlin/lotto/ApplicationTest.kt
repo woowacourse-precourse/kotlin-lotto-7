@@ -4,6 +4,7 @@ import camp.nextstep.edu.missionutils.test.Assertions.assertRandomUniqueNumbersI
 import camp.nextstep.edu.missionutils.test.Assertions.assertSimpleTest
 import camp.nextstep.edu.missionutils.test.NsTest
 import org.assertj.core.api.Assertions.assertThat
+import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
 
 class ApplicationTest : NsTest() {
@@ -42,7 +43,7 @@ class ApplicationTest : NsTest() {
     }
 
     @Test
-    fun `예외 테스트`() {
+    fun `숫자 형식 예외 테스트`() {
         assertSimpleTest {
             runException("1000j")
             assertThat(output()).contains(ERROR_MESSAGE)
@@ -65,6 +66,20 @@ class ApplicationTest : NsTest() {
 
         assertSimpleTest {
             runException("\n")
+            assertThat(output()).contains(ERROR_MESSAGE)
+        }
+    }
+
+    @Test
+    @DisplayName("중복 예외 테스트")
+    fun `중복 예외 테스트`() {
+        assertSimpleTest {
+            runException("1000", "1,1,1,1,1,1")
+            assertThat(output()).contains(ERROR_MESSAGE)
+        }
+
+        assertSimpleTest {
+            runException("1000", "1,2,3,4,5,6", "1")
             assertThat(output()).contains(ERROR_MESSAGE)
         }
     }
