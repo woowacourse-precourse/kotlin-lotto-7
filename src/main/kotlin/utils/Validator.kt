@@ -28,7 +28,7 @@ object Validator {
         return inputMoney.toInt()
     }
 
-    fun validateWinningNumbers(inputWinningNumbers: String) {
+    fun validateWinningNumbers(inputWinningNumbers: String): List<Int> {
         val winningNumbers = inputWinningNumbers.split(",")
 
         WinningNumbersValidator.SHOULD_BE_SIX_COUNT.validate(winningNumbers)
@@ -38,6 +38,8 @@ object Validator {
         WinningNumbersValidator.SHOULD_BE_1_TO_45_NUMBER.validate(winningNumbers)
 
         WinningNumbersValidator.SHOULD_NOT_BE_DUPLICATE.validate(winningNumbers)
+
+        return winningNumbers.map { it.toInt() }
 
     }
 
