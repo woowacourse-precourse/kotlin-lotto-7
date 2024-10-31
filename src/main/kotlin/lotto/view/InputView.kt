@@ -5,24 +5,47 @@ import camp.nextstep.edu.missionutils.Console
 class InputView {
     private val validator = Validator()
 
-    fun amountTickets() = inputPayment().let { payment ->
-        require(payment % LOTTO_PRICE == REMAINDER_AFTER_DIVIDE) {
-            ErrorMessages.ERROR_PAYMENT_UNIT.message
+    fun amountTickets(): Int {
+        while (true) {
+            try {
+                val payment = inputPayment()
+                require(payment % LOTTO_PRICE == REMAINDER_AFTER_DIVIDE) {
+                    ErrorMessages.ERROR_PAYMENT_UNIT.message
+                }
+                return payment / LOTTO_PRICE
+            } catch(error: IllegalArgumentException) {
+                println(error.message)
+            }
         }
-        payment / LOTTO_PRICE
     }
 
-    private fun inputPayment() = Console.readLine().let { payment ->
-        validator.validatePayment(payment)
+    private fun inputPayment(): Int {
+        val payment = Console.readLine()
+        return validator.validatePayment(payment)
     }
 
-    fun inputPrizeNumber() = Console.readLine().let { prizeNumber ->
-        val numbers = prizeNumber.split(NUMBER_DELIMITER)
-        validator.validatePrizeNumber(numbers)
+    fun inputPrizeNumber(): List<Int> {
+        while (true) {
+            try {
+                val prizeNumber = Console.readLine()
+                val numbers = prizeNumber.split(NUMBER_DELIMITER)
+                val getPrizeNumber = validator.validatePrizeNumber(numbers)
+                return getPrizeNumber
+            } catch (error: IllegalArgumentException) {
+                println(error.message)
+            }
+        }
     }
 
-    fun inputBonusNumber() = Console.readLine().let  { number ->
-        validator.validateBonusNumber(number)
+    fun inputBonusNumber(): Int {
+        while (true) {
+            try {
+                val number = Console.readLine()
+                return validator.validateBonusNumber(number)
+            } catch (error: IllegalArgumentException) {
+                println(error.message)
+            }
+        }
     }
 
     companion object {

@@ -2,8 +2,8 @@ package lotto.model
 
 import camp.nextstep.edu.missionutils.Randoms
 
-class LottoGenerator {
-    fun purchaseLotto(tickets: Int): List<List<Int>> {
+class LottoGenerator(private val tickets: Int) {
+    fun purchaseLotto(): List<List<Int>> {
         val lottoTickets: MutableList<MutableList<Int>> = mutableListOf()
         repeat(tickets) { lottoTickets.add(generateLotto()) }
         return lottoTickets
