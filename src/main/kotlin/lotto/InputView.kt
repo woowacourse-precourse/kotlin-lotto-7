@@ -12,18 +12,18 @@ class InputView {
 
     fun getLuckNumbers(): String {
         informLuckNumbers()
-        val luckNumbers = getInput().trim()
+        val luckNumbers = getInput()
         return luckNumbers
     }
 
     fun getBonusNumber(): String {
         informBonusNumber()
-        val bonusNumber = getInput().trim()
+        val bonusNumber = getInput()
         return bonusNumber
     }
 
     private fun getInput(): String {
-        val userInput = Console.readLine()
+        val userInput = Console.readLine().trim()
         return userInput
     }
 
