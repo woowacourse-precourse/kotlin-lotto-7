@@ -1,10 +1,12 @@
 package util
 
+import java.util.TreeSet
+
 fun <T> List<T>.toMapByEachCount(): Map<T, Int> {
     return this.groupingBy { it }.eachCount()
 }
 
-fun <T> List<T>.printWithSquareBracket() {
+fun <T> TreeSet<T>.printWithSquareBracket() {
     println(
         this.joinToString(
             separator = ", ",
