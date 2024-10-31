@@ -86,6 +86,10 @@ class InputTest {
                 .isInstanceOf(IllegalArgumentException::class.java)
                 .hasMessage(Exception.INVALID_FORMAT.toString())
         }
+
+        @ParameterizedTest
+        @ValueSource(strings = [",,,", ",", "1", "1,2", "1,2,3", "1,2,3,4", "1,2,3,4,5", "1,2,3,4,5,6,7,8,9,10"])
+        fun `당첨 번호가 6개가 아닐 때 예외 테스트`(value: String) {
             val winningNumber = value.split(",")
             Assertions.assertThatThrownBy { inputErrorDelegate.isInvalidLottoSize(winningNumber) }
                 .isInstanceOf(IllegalArgumentException::class.java)
