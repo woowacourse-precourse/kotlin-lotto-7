@@ -1,6 +1,7 @@
 package lotto.controller
 
 import lotto.domain.Lotto
+import lotto.domain.WinningLotto
 import lotto.view.InputView
 import lotto.view.OutputView
 
@@ -9,6 +10,7 @@ object LottoController {
         val purchaseAmount = getValidPurchaseAmount()
         val lottoCount = purchaseAmount / 1_000
         val lottos = generateLottos(lottoCount)
+        val winningLotto = getVaildWinningLotto()
         OutputView.printPurchasedLottos(lottos)
     }
 
@@ -26,4 +28,16 @@ object LottoController {
     private fun generateLottos(count: Int): List<Lotto> {
         return List(count) { Lotto() }
     }
+
+    private fun getVaildWinningLotto() : WinningLotto {
+        while (true) {
+            try {
+                val winningNumbers = InputView.getWinningNumbers()
+                return WinningLotto(winningNumbers)
+            } catch (e: IllegalArgumentException) {
+                println(e.message)
+            }
+        }
+    }
+
 }
