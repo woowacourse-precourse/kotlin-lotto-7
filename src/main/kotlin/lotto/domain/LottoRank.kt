@@ -1,21 +1,21 @@
 package lotto.domain
 
-enum class LottoRank(val prize: Int) {
-    FIRST(2_000_000_000),
-    SECOND(30_000_000),
-    THIRD(1_500_000),
-    FOURTH(50_000),
-    FIFTH(5_000),
-    NONE(0);
+enum class LottoRank(val prize: Int, val matchCount: Int, val bonusMatch: Boolean) {
+    FIRST(2_000_000_000, 6, false),
+    SECOND(30_000_000, 5, true),
+    THIRD(1_500_000, 5, false),
+    FOURTH(50_000, 4, false),
+    FIFTH(5_000, 3, false),
+    NONE(0, 2, false);
 
     companion object {
         fun getRank(matchCount: Int, bonusMatch: Boolean): LottoRank {
             return when {
-                matchCount == 6 -> FIRST
-                matchCount == 5 && bonusMatch -> SECOND
-                matchCount == 5 -> THIRD
-                matchCount == 4 -> FOURTH
-                matchCount == 3 -> FIFTH
+                matchCount == FIRST.matchCount -> FIRST
+                matchCount == SECOND.matchCount && SECOND.bonusMatch == bonusMatch -> SECOND
+                matchCount == THIRD.matchCount -> THIRD
+                matchCount == FOURTH.matchCount -> FOURTH
+                matchCount == FIFTH.matchCount -> FIFTH
                 else -> NONE
             }
         }
