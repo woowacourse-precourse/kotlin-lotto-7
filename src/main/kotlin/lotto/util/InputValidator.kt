@@ -5,7 +5,7 @@ object InputValidator {
         if (input.toIntOrNull() == null) throw IllegalArgumentException(ErrorMessage.INPUT_NOT_NUMERIC)
     }
 
-    fun validateMoneyIsDivisible(lottoMoney: Int) {
-        if (lottoMoney % Constant.LOTTO_PRICE != 0) throw IllegalArgumentException(ErrorMessage.MONEY_NOT_DIVISIBLE)
+    fun validateMoneyIsDivisible(money: Int) {
+        if (money % Constant.LOTTO_PRICE != 0) throw IllegalArgumentException(ErrorMessage.MONEY_NOT_DIVISIBLE)
     }
 }

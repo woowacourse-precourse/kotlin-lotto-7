@@ -9,9 +9,9 @@ class InputView {
         println(PROMPT_LOTTO_MONEY)
         val input = Console.readLine()
         validateInputIsNumeric(input)
-        val lottoMoney = input.toInt()
-        validateMoneyIsDivisible(lottoMoney)
-        return lottoMoney
+        val money = input.toInt()
+        validateMoneyIsDivisible(money)
+        return money
     }
 
     companion object {
