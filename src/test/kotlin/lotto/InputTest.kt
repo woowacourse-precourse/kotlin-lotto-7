@@ -102,12 +102,22 @@ class InputTest {
         }
 
         @ParameterizedTest
-        @ValueSource(strings = ["0", "46"])
+        @ValueSource(strings = ["0, 46"])
         fun `당첨번호가 로또번호의 범위를 벗어날 때`(value: String){
             val type = Process.WINNING_NUMBER
-            Assertions.assertThatThrownBy { inputErrorDelegate.isExceededRange(value, type) }
+            val winningNumber = value.split(",")
+            Assertions.assertThatThrownBy { inputErrorDelegate.isExceededRange(winningNumber, type) }
                 .isInstanceOf(IllegalArgumentException::class.java)
                 .hasMessage(Exception.EXCEED_INPUT.toString())
+        }
+
+        @ParameterizedTest
+        @ValueSource(strings = ["1, 1, 1, 1, 1, 1", "1, 2, 3, 3, 3, 3", "1, 2, 3, 4, 5, 5"])
+        fun `당첨 번호가 중독됐을 때`(value: String){
+            val winningNumber = value.splitByComma().toMapByEachCount()
+            Assertions.assertThatThrownBy { inputErrorDelegate.isDuplicated(winningNumber) }
+                .isInstanceOf(IllegalArgumentException::class.java)
+                .hasMessage(Exception.INVALID_DUPLICATED.toString())
         }
     }
 }
