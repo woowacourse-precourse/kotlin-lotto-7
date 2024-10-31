@@ -57,7 +57,7 @@
     <tr>
       <td rowspan="5">로또 구입 금액</td>
       <td><input type="checkbox"></td>
-      <td>공백인 경우</td>
+      <td>빈 경우</td>
     </tr>
     <tr>
       <td><input type="checkbox"></td>
@@ -76,17 +76,13 @@
       <td>1000원 단위로 끝나지 않는 경우</td>
    </tr>
     <tr>
-      <td rowspan="9">당첨 번호</td>
+      <td rowspan="7">당첨 번호</td>
       <td><input type="checkbox"></td>
       <td>구분자 쉼표(,)가 없는 경우</td>
     </tr>
     <tr>
       <td><input type="checkbox"></td>
       <td>구분자만 들어오는 경우</td>
-    </tr>
-   <tr>
-      <td><input type="checkbox"></td>
-      <td>공백이 들어오는 경우</td>
     </tr>
    <tr>
       <td><input type="checkbox"></td>
@@ -100,10 +96,7 @@
       <td><input type="checkbox"></td>
       <td>당첨 번호 개수가 6개가 아닌 경우</td>
    </tr>
- <tr>
-      <td><input type="checkbox"></td>
-      <td>구분자와 숫자 사이에 공백이 들어오는 경우</td>
-   </tr>
+
  <tr>
       <td><input type="checkbox"></td>
       <td>중복된 숫자가 들어오는 경우</td>
@@ -112,9 +105,9 @@
       <td><input type="checkbox"></td>
       <td>소수가 들어오는 경우 </td>
    </tr>
-      <td rowspan="7">당첨 번호</td>
+      <td rowspan="5">당첨 번호</td>
       <td><input type="checkbox"></td>
-      <td>공백이 들어오는 경우</td>
+      <td>빈 경우</td>
     </tr>
    <tr>
       <td><input type="checkbox"></td>
@@ -123,10 +116,6 @@
    <tr>
       <td><input type="checkbox"></td>
       <td>숫자가 1~45사이가 아닌 경우</td>
-   </tr>
- <tr>
-      <td><input type="checkbox"></td>
-      <td>구분자와 숫자 사이에 공백이 들어오는 경우</td>
    </tr>
  <tr>
       <td><input type="checkbox"></td>
