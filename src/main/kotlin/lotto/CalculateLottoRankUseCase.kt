@@ -6,7 +6,7 @@ class CalculateLottoRankUseCase {
             winningNumbers.getNumbers().contains(number)
         }
         return when (matchCount) {
-            6 -> LottoRank.First
+            6 -> LottoRank.FIRST
             5 -> if (lotto.getNumbers().contains(winningNumbers.bonusNumber)) LottoRank.SECOND else LottoRank.FOURTH
             4 -> LottoRank.THIRD
             3 -> LottoRank.FIFTH

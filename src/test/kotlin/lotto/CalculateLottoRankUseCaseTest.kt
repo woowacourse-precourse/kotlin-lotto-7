@@ -11,7 +11,7 @@ class CalculateLottoRankUseCaseTest {
         val lotto = Lotto(listOf(1, 2, 3, 4, 5, 6))
         val winningNumbers = WinningNumbers(listOf(1, 2, 3, 4, 5, 6), 7)
         val rank = calculateLottoRankUseCase.execute(lotto, winningNumbers)
-        val expect = LottoRank.First
+        val expect = LottoRank.FIRST
         assertEquals(expect, rank)
     }
 
