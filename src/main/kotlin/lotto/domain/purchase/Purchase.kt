@@ -1,5 +1,6 @@
 package lotto.domain.purchase
 
+import lotto.validator.PURCHASE_AMOUNT_UNIT
 import lotto.validator.PurchaseAmountValidator
 
 class Purchase private constructor(private val amount: Int) {
@@ -13,6 +14,10 @@ class Purchase private constructor(private val amount: Int) {
 
     fun getAmount(): Int {
         return amount
+    }
+
+    fun getNumberOfLotto(): Int {
+        return amount / PURCHASE_AMOUNT_UNIT
     }
 
 }

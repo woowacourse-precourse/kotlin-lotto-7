@@ -3,8 +3,7 @@ package lotto.validator
 import lotto.exception.ExceptionCode
 import lotto.exception.LottoException
 
-
-private const val PURCHASE_AMOUNT_UNIT = 1_000
+const val PURCHASE_AMOUNT_UNIT = 1_000
 private const val PURCHASE_AMOUNT_LOWER_BOUND = 1_000
 private const val PURCHASE_AMOUNT_UPPER_BOUND = 100_000
 

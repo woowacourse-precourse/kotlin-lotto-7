@@ -17,4 +17,17 @@ class PurchaseTest {
         // then
         assertEquals(expected, purchase.getAmount())
     }
+
+    @Test
+    fun `Purchase 객체가 살 수 있는 로또 개수를 확인할 수 있다`() {
+        // given
+        val input = "15000"
+        val expected = 15
+
+        // when
+        val purchase = Purchase.valueOf(input)
+
+        // then
+        assertEquals(expected, purchase.getNumberOfLotto())
+    }
 }
