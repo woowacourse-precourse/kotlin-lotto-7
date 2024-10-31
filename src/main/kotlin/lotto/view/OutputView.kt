@@ -3,17 +3,16 @@ package lotto.view
 import lotto.model.Random
 
 class OutputView {
-    val randomGenerator = Random()
-    fun printPurchaseLottoCount(money: Int) {
-        val lottoCount = money / 1000
-        println("${lottoCount}$PRINT_PURCHASE_LOTTO_COUNT_MESSAGE")
-        println()
+
+    fun printPurchaseLottoCount(count: Int) {
+        println("${count}$PRINT_PURCHASE_LOTTO_COUNT_MESSAGE")
     }
 
     fun printPurchaseLotto(lottos: List<List<Int>>) {
-        for (lotto in lottos.indices) {
+        for (lotto in lottos) {
             println(lotto)
         }
+        println()
     }
 
     companion object {

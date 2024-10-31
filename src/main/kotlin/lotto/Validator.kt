@@ -23,4 +23,5 @@ object Validator {
             MoneyValidator.ERROR_NOT_DIVIDE_UP_1000.msg
         }
     }
+
 }
