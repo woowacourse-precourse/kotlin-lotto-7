@@ -17,17 +17,15 @@ object OutputConstants {
 
 
 object ErrorConstants {
-    const val ERROR_PRICE_ONLY_NUMERIC = "[ERROR] 구입금액은 숫자만 가능합니다."
     const val ERROR_PRICE_NOT_MULTIPLE_OF_1000 = "[ERROR] 구입 금액은 1000원 단위만 가능합니다."
     const val ERROR_PURCHASE_PRICE_MINIMUM = "[ERROR] 구입 금액은 1000원 이상이여야 합니다."
 
-    const val ERROR_WINNING_NUMBERS_ONLY_NUMERIC = "[ERROR] 당첨번호는 숫자만 가능합니다."
-    const val ERROR_WINNING_NUMBERS_COUNT = "[ERROR] 당첨 번호는 6개여야 합니다"
-    const val ERROR_WINNING_NUMBERS_DUPLICATE = "[ERROR] 당첨 번호는 중복된 숫자가 없어야 합니다."
+    const val ERROR_NUMBER_ONLY_NUMERIC = "[ERROR] 숫자만 입력 가능합니다."
+    const val ERROR_NUMBERS_COUNT = "[ERROR] 번호는 6개여야 합니다"
+    const val ERROR_NUMBERS_DUPLICATE = "[ERROR] 중복된 숫자가 없어야 합니다."
+    const val ERROR_NUMBER_RANGE = "[ERROR] 번호는 1-45 사이여야 합니다."
 
-    const val ERROR_BONUS_NUMBER_ONLY_NUMERIC = "[ERROR] 보너스번호는 숫자만 가능합니다."
-    const val ERROR_BONUS_NUMBER_RANGE = "[ERROR] 보너스 번호는 1-45 사이 입니다."
-
+    const val ERROR_LOTTOS_SIZE = "[ERROR] 구매금액만큼 로또를 생성해야합니다."
 }
 
 object LottoConstants {
