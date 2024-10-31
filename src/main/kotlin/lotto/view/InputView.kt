@@ -37,5 +37,20 @@ class InputView {
         require(amount > 0) { Constants.ERROR_AMOUNT_NOT_POSITIVE }
         require(amount % 1000 == 0) { Constants.ERROR_AMOUNT_NOT_DIVIDE_BY_1000 }
     }
+
+    private fun validateWinningNumbers(winningNumbers: List<String>) {
+        require(winningNumbers.all { it.toIntOrNull() != null }) {
+            Constants.ERROR_WINNING_NUMBERS_NOT_NUMBER
+        }
+        require(winningNumbers.size == 6) {
+            Constants.ERROR_WINNING_NUMBERS_INCORRECT_SIZE
+        }
+        require(winningNumbers.all { it.toInt() in 1..45 }) {
+            Constants.ERROR_WINNING_NUMBERS_OUT_OF_RANGE
+        }
+        require(winningNumbers.distinct().size == winningNumbers.size) {
+            Constants.ERROR_WINNING_NUMBERS_DUPLICATE
+        }
+    }
     }
 }
