@@ -1,6 +1,9 @@
 package delegate.input
 
 import domain.enums.Exception
+import domain.enums.Lotto.LOTTO_MIN
+import domain.enums.Lotto.LOTTO_MAX
+import domain.enums.Lotto.LOTTO_SIZE
 import domain.enums.Process
 import util.isThousandUnit
 
@@ -13,7 +16,7 @@ class InputErrorDelegator : InputErrorDelegate {
 
     override fun isExceededRange(input: List<String>, process: Process) {
         input.forEach {
-            require(it.toInt() in MIN_LOTTO_NUMBER..MAX_LOTTO_NUMBER) {
+            require(it.toInt() in LOTTO_MIN.value()..LOTTO_MAX.value()) {
                 Exception.EXCEED_INPUT
             }
         }
@@ -24,7 +27,7 @@ class InputErrorDelegator : InputErrorDelegate {
     }
 
     override fun isInvalidLottoSize(input: List<String>) {
-        require(input.size == LOTTO_SIZE) { Exception.INVALID_SIZE }
+        require(input.size == LOTTO_SIZE.value()) { Exception.INVALID_SIZE }
     }
 
     override fun isDuplicated(input: Map<String, Int>) {
@@ -32,9 +35,6 @@ class InputErrorDelegator : InputErrorDelegate {
     }
 
     companion object {
-        const val MIN_LOTTO_NUMBER = 1
-        const val MAX_LOTTO_NUMBER = 45
-        const val LOTTO_SIZE = 6
         const val REGEX = "^[0-9,]+$"
     }
 }
