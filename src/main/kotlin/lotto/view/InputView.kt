@@ -67,5 +67,10 @@ class InputView {
             Constants.ERROR_WINNING_NUMBERS_DUPLICATE
         }
     }
+
+    private fun validateBonusNumber(bonusNumber: String, winningNumbers: List<Int>) {
+        require(bonusNumber.toIntOrNull() != null) { Constants.ERROR_BONUS_NUMBER_NOT_NUMBER }
+        require(bonusNumber.toInt() in 1..45) { Constants.ERROR_BONUS_NUMBER_OUT_OF_RANGE }
+        require(bonusNumber.toInt() !in winningNumbers) { Constants.ERROR_BONUS_NUMBER_DUPLICATE }
     }
 }
