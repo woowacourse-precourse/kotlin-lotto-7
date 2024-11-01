@@ -15,6 +15,7 @@ class LottoController {
         val lottoCount = lottoMoney / Constant.LOTTO_PRICE
         outputView.printLottoCount(lottoCount)
 
-        lottoHandler.generateLottos(lottoCount)
+        val lottos = lottoHandler.generateLottos(lottoCount)
+        outputView.printLottos(lottos)
     }
 }
