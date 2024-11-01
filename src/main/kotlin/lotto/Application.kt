@@ -35,6 +35,10 @@ fun main() {
 
 }
 
+fun totalWinningRate(investingCost: Int, total: Long): Double {
+    return round((total / investingCost.toDouble()) * 10) / 10
+}
+
 private fun calculateTotalWinningProcess(
     scoreBoard: Map<LottoMachine.Rank, Int>
 ): Long {
