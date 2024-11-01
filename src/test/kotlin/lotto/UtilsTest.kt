@@ -1,6 +1,7 @@
 package lotto
 
 import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 
@@ -19,5 +20,14 @@ class UtilsTest {
         assertThrows<IllegalArgumentException> {
             convertInt("우테코")
         }
+    }
+
+    @Test
+    fun `,로 구분된 숫자 문자열을 List로 변환한다`() {
+        val input = listOf(1, 2, 3, 4)
+        val result = convertListInt(input.joinToString(","))
+
+        assertEquals(input.size, result.size)
+        input.forEach { assertTrue(result.contains(it)) }
     }
 }
