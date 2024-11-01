@@ -16,17 +16,18 @@ class LottoController {
     val lottoGenerator = LottoGenerator()
 
     fun start() {
-        val purchaseAmount = inputView.getPurchaseAmount() // 금액. 예외 처리 필요. / 1000한 값도 가져야 함
+        val purchaseAmount = inputView.getPurchaseAmount()
+
         // 구매 금액에 대한 예외 처리 -> 예외 처리는 모델에서?
-        // 입력 값이 잘못되면 다시 받아야 하니 input에서
+        // 입력 값이 잘못되면 다시 받아야 하니 input에서 -> 함수 처리해서 모델에서?
 
         // 구매 갯수 출력
-        val purchaseCount = getPurchaseCount(purchaseAmount.toInt())
+        val purchaseCount = getPurchaseCount(purchaseAmount)
+        iteration(purchaseCount)
+
         // 구매한 만큼 로또 번호 출력
 
-
-        val winningNumbers = inputView.getWinningNumbers()
-        // Lotto에 리스트를 넘겨야 함
+        getWinningNumbers()
 
         // 당첨 번호에 대한 예외 처리
 
@@ -38,7 +39,19 @@ class LottoController {
         // 수익률 출력
     }
 
-    fun iteration(count: Int) = lottoGenerator.generate()
+    private fun getWinningNumbers(): List<Int> {
+        while (true) {
+            try {
+                val winningNumbers = inputView.getWinningNumbers()
+                Lotto(winningNumbers)
+                return winningNumbers
+            } catch (e: IllegalArgumentException) {
+                println("${e.message}")
+            }
+        }
+    }
+
+    fun iteration(count: Int) = repeat(count) { lottoGenerator.generate() }
 
     fun getPurchaseCount(purchaseAmount: Int): Int = purchaseAmount / 1000
 }

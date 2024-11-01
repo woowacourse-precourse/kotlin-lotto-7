@@ -1,7 +1,7 @@
 package lotto.view
 
 import camp.nextstep.edu.missionutils.Console
-import lotto.utils.Constants.LOTTO_PRICE
+import lotto.utils.Constants
 import lotto.utils.ErrorConstants
 import lotto.utils.InputConstants
 
@@ -18,20 +18,23 @@ class InputView {
     fun getPurchaseAmount(): Int {
         while (true) {
             println(InputConstants.PURCHASE_AMOUNT_MESSAGE)
-            val purchaseAmount = Console.readLine().toIntOrNull() ?: println(ErrorConstants.NOT_NUMBER)
+            val purchaseAmount = Console.readLine().trim().toIntOrNull()
 
-//            when {
-//                purchaseAmount <= ZERO -> println(ERROR_NEGATIVE_NUMBER)
-//                purchaseAmount % LOTTO_PRICE != ZERO -> println(ERROR_NOT_DIVIDED)
-//                purchaseAmount > LIMIT_OF_PURCHASE -> println(ERROR_LIMIT_OF_PURCHASE)
-//                else -> return purchaseAmount
-//            }
+            when {
+                purchaseAmount == null -> println(ErrorConstants.NOT_NUMBER)
+                purchaseAmount <= Constants.ZERO -> println(ErrorConstants.NEGATIVE_NUMBER)
+                purchaseAmount % Constants.LOTTO_PRICE != Constants.ZERO -> println(ErrorConstants.NOT_DIVIDED)
+                purchaseAmount > Constants.LIMIT_OF_PURCHASE -> println(ErrorConstants.LIMIT_OF_PURCHASE)
+                else -> return purchaseAmount
+            }
         }
     }
 
-    fun getWinningNumbers(): String {
+    fun getWinningNumbers(): List<Int> {
         println(InputConstants.WINNING_NUMBERS_MESSAGE)
-        return Console.readLine()
+        val winningNumbers = Console.readLine()
+        return winningNumbers.split(",").map { it.toIntOrNull()!! } ?: throw IllegalArgumentException ("")
+
     }
 
     fun getBonusNumber(): String {
