@@ -1,4 +1,4 @@
-package lotto
+package lotto.model
 
 enum class Rank(val matchedNumber: Int, val winningPrice: Int) {
     NONE(0, 0),
