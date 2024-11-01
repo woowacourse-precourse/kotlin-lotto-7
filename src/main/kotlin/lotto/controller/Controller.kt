@@ -24,14 +24,22 @@ enum class Ranking(
 class Controller {
     private val inputView = InputView()
     private val outputView = OutputView()
+    private val lottoGame = LottoGame()
+
+    private val lottoTickets: MutableList<List<Int>> = mutableListOf()
+    private val winningGames = MutableList(5) {0}
 
     fun start() {
-        val lottoTickets: MutableList<List<Int>> = mutableListOf()
-        val winningGames = MutableList(5) {0}
-
-        outputView.showPrompt(REQUEST_PURCHASE_MESSAGE)
-        val price = inputView.readLine()
-        val count = price.toInt() / LOTTO_TICKET_PRICE
+        var price: String
+        do {
+            outputView.showPrompt(REQUEST_PURCHASE_MESSAGE)
+            price = inputView.readLine()
+            val a = lottoGame.validatePrice(price)
+            if (a is String) {
+                outputView.showPrompt(a)
+            }
+        } while (a is String)
+        val count = lottoGame.buy(price)
         outputView.showPrompt("$count" + CONFIRM_COUNT_MESSAGE)
 
         repeat(count) {
@@ -44,15 +52,16 @@ class Controller {
         outputView.showPrompt(REQUEST_WINNING_NUMBER_MESSAGE)
         val winningNumber = inputView.readLine()
         val splitedWinningNumber = winningNumber.split(SEPARATOR)
-        val winningNumbers: List<Int> = listOf()
-        splitedWinningNumber.forEach { winningNumbers.plus(it.toInt()) }
+        val winningNumbers: MutableList<Int> = mutableListOf()
+        splitedWinningNumber.forEach { winningNumbers.add(it.toInt()) }
 
         outputView.showPrompt(REQUEST_BONUS_NUMBER_MESSAGE)
         val bonusNumber = inputView.readLine()
 
         for (lotto in lottoTickets) {
-            val win = LottoGame(lotto).check(winningNumbers)
-            val bonus = LottoGame(lotto).isBonus(bonusNumber.toInt())
+            lottoGame.set(lotto)
+            val win = lottoGame.check(winningNumbers)
+            val bonus = lottoGame.isBonus(bonusNumber.toInt())
             when {
                 win == 6 -> winningGames[Ranking.FIRST.getIndex()] += 1
                 win == 5 && bonus -> winningGames[Ranking.SECOND.getIndex()] += 1
@@ -95,6 +104,5 @@ class Controller {
         const val MAX_BALL_NUMBER = 45
         const val MIN_BALL_NUMBER = 1
         const val WINNING_BALL_COUNT = 6
-        const val LOTTO_TICKET_PRICE = 1000
     }
 }
