@@ -12,11 +12,13 @@
 ---
 ## Project Description
 ### Feature
-![lotto_feature_flow.png](attachment/lotto_feature_flow.png)
+![lotto_feature_flow.png](attachments/lotto_feature_flow.png)
+
 1. 사용자 입력값 검사
    1. 로또 구입 금액 검사
-   2. 당첨 번호 검사
-   3. 보너스 번호 검사
+   2. 로또 번호 생성
+   3. 당첨 번호 검사
+   4. 보너스 번호 검사
 2. 로또 구매 정보 출력 기능
    1. 로또 구매 수량 및 번호 출력
 3. 로또 구매 정보 출력 기능
