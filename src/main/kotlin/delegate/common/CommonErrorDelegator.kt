@@ -2,7 +2,7 @@ package delegate.common
 
 import domain.enums.Exception
 import domain.enums.Process
-import util.isNumeric
+import util.ext.isNumeric
 
 class CommonErrorDelegator : CommonErrorDelegate {
     override fun isEmpty(input: String) {

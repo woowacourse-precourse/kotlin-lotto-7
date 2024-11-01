@@ -5,7 +5,7 @@ import domain.enums.LottoSetting.LOTTO_MIN
 import domain.enums.LottoSetting.LOTTO_MAX
 import domain.enums.LottoSetting.LOTTO_SIZE
 import domain.enums.Process
-import util.isThousandUnit
+import util.ext.isThousandUnit
 
 class InputErrorDelegator : InputErrorDelegate {
     override fun isThousandWonUnit(input: String) {

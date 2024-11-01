@@ -4,8 +4,8 @@ import delegate.common.CommonErrorDelegate
 import delegate.input.InputErrorDelegate
 import domain.enums.Output
 import domain.enums.Process
-import util.splitByComma
-import util.toMapByEachCount
+import util.ext.splitByComma
+import util.ext.toMapByEachCount
 
 class InputValidator(
     private val commonErrorDelegator: CommonErrorDelegate,
