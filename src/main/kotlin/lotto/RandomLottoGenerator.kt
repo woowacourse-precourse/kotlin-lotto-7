@@ -11,11 +11,11 @@ class RandomLottoGenerator(amount: Int) {
 
     fun lottoPurchase(amount: Int): MutableList<List<Int>> {
         val lottoCount = lottoCountCalculate(amount)
-        return matching(lottoCount)
+        return repeatGenerator(lottoCount)
 
     }
 
-    private fun matching(lottoGame: Int): MutableList<List<Int>> {
+    private fun repeatGenerator(lottoGame: Int): MutableList<List<Int>> {
         val randomLottoList = mutableListOf<List<Int>>()
         repeat(lottoGame) {
             val randomLottoNumber = randomLottoGenerate()
