@@ -61,7 +61,7 @@
     </tr>
     <tr>
       <td><input type="checkbox"></td>
-      <td>숫자가 아닌 경우</td>
+      <td>양의 정수가 아닌 경우</td>
     </tr>
 <tr>
       <td><input type="checkbox"></td>
