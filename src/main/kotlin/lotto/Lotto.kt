@@ -6,6 +6,4 @@ class Lotto(private val numbers: List<Int>) {
     }
 
     fun getNumbers() = numbers
-
-    fun isValidRange(): Boolean = numbers.map { it in 1..45 }.all { it }
 }
