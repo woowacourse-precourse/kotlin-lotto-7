@@ -3,6 +3,7 @@ package lotto.model
 import lotto.util.Constants.LOTTO_MAX_NUMBER
 import lotto.util.Constants.LOTTO_MIN_NUMBER
 import lotto.util.Constants.LOTTO_NUMBER_SIZE
+import lotto.util.Constants.WINNING_NUMBER_DELIMITER
 import lotto.util.ExceptionConstants.ERROR_MESSAGE_WINNING_NUMBER_DUPLICATE
 import lotto.util.ExceptionConstants.ERROR_MESSAGE_WINNING_NUMBER_RANGE
 import lotto.util.ExceptionConstants.ERROR_MESSAGE_WINNING_NUMBER_SIZE
@@ -15,7 +16,7 @@ class WinningNumber(private var winningNumbers: List<Int> = emptyList()) {
     fun setWinningNumbers(rawWinningNumbers: String) {
         validateWinningNumbers(rawWinningNumbers)
 
-        winningNumbers = rawWinningNumbers.split(",").map { it.trim().toInt() }
+        winningNumbers = rawWinningNumbers.split(WINNING_NUMBER_DELIMITER).map { it.trim().toInt() }
     }
 
     private fun validateWinningNumbers(rawWinningNumbers: String) {
