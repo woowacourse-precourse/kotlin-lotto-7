@@ -4,6 +4,9 @@ import camp.nextstep.edu.missionutils.Randoms
 import lotto.constant.ExceptionMessage.ERROR_DUPLICATE_NUMBER
 import lotto.constant.ExceptionMessage.ERROR_NOT_ITEM_LENGTH
 import lotto.constant.ExceptionMessage.ERROR_NOT_LOTTO_NUMBER
+import lotto.constant.LottoRule.END_NUMBER
+import lotto.constant.LottoRule.ITEM_LENGTH
+import lotto.constant.LottoRule.START_NUMBER
 
 class Lotto(private val numbers: List<Int>) {
     init {
@@ -36,10 +39,6 @@ class Lotto(private val numbers: List<Int>) {
     }
 
     companion object {
-        const val ITEM_LENGTH = 6
-        const val START_NUMBER = 1
-        const val END_NUMBER = 45
-        const val PRICE = 1_000
         fun create(): Lotto {
             return Lotto(Randoms.pickUniqueNumbersInRange(START_NUMBER, END_NUMBER, ITEM_LENGTH))
         }

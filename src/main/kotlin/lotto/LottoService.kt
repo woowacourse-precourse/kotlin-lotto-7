@@ -1,5 +1,6 @@
 package lotto
 
+import lotto.constant.LottoRule
 import lotto.domain.Lotto
 import lotto.domain.LottoPurchaseMoney
 import lotto.domain.LottoRank
@@ -11,7 +12,7 @@ class LottoService {
     val lottos: MutableList<Lotto> = mutableListOf()
 
     fun issueLottos(money: LottoPurchaseMoney) {
-        val count = money.amount / Lotto.PRICE
+        val count = money.amount / LottoRule.PRICE
         repeat(count) {
             lottos.add(Lotto.create())
         }
@@ -27,7 +28,7 @@ class LottoService {
     private fun getReturnOnInvestment(rankCount: Map<LottoRank, Int>): Double {
         val totalRevenue = calculatorRevenue(rankCount)
 
-        val roi = (totalRevenue / (lottos.size * Lotto.PRICE)) * 100
+        val roi = (totalRevenue / (lottos.size * LottoRule.PRICE)) * 100
         return round(roi * 10) / 10
     }
 
