@@ -14,8 +14,8 @@ import domain.enums.Process
 import domain.validator.InputValidator
 import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.Test
-import util.splitByComma
-import util.toMapByEachCount
+import util.ext.splitByComma
+import util.ext.toMapByEachCount
 
 class InputTest {
     private lateinit var commonErrorDelegate: CommonErrorDelegate
