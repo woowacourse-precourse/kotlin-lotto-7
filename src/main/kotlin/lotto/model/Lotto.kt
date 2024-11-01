@@ -8,5 +8,15 @@ class Lotto(private val numbers: List<Int>) {
         require(numbers.size == Constant.LOTTO_NUMBER_COUNT) { ErrorMessage.LOTTO_NUMBER_COUNT_MISMATCH }
     }
 
-    // TODO: 추가 기능 구현
+    override fun equals(other: Any?): Boolean {
+        return other is Lotto && this.numbers == other.numbers
+    }
+
+    override fun hashCode(): Int {
+        return numbers.hashCode()
+    }
+
+    override fun toString(): String {
+        return numbers.toString()
+    }
 }
