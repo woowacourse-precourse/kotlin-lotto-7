@@ -55,13 +55,17 @@
       <td>상황</td>
    </tr>
     <tr>
-      <td rowspan="5">로또 구입 금액</td>
+      <td rowspan="6">로또 구입 금액</td>
       <td><input type="checkbox"></td>
       <td>빈 경우</td>
     </tr>
     <tr>
       <td><input type="checkbox"></td>
       <td>숫자가 아닌 경우</td>
+    </tr>
+<tr>
+      <td><input type="checkbox"></td>
+      <td>소수인 경우</td>
     </tr>
    <tr>
       <td><input type="checkbox"></td>
