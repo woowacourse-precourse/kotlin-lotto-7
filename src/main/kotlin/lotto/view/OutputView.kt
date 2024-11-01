@@ -2,6 +2,7 @@ package lotto.view
 
 import lotto.util.OutputMessages
 import lotto.util.PrizeRank
+import java.text.DecimalFormat
 
 class OutputView {
     fun printRequirePaymentMessage() {
@@ -27,19 +28,25 @@ class OutputView {
         println(OutputMessages.MESSAGE_BONUS_NUMBER.message)
     }
 
-    fun printResult(prizeResult: MutableMap<PrizeRank, Int>, earningRate: String) {
+    fun printResult(prizeResult: MutableMap<PrizeRank, Int>, earningRate: Double) {
         val sb = StringBuilder(OutputMessages.MESSAGE_RESULT.message)
-        sb.append("${OutputMessages.PRINT_RESULT_THREE.message}${prizeResult[PrizeRank.FIFTH]}")
-        sb.append(OutputMessages.UNIT_CORRECT.message)
-        sb.append("${OutputMessages.PRINT_RESULT_FOUR.message}${prizeResult[PrizeRank.FOURTH]}")
-        sb.append(OutputMessages.UNIT_CORRECT.message)
-        sb.append("${OutputMessages.PRINT_RESULT_FIVE.message}${prizeResult[PrizeRank.THIRD]}")
-        sb.append(OutputMessages.UNIT_CORRECT.message)
-        sb.append("${OutputMessages.PRINT_RESULT_FIVE_WITH_BONUS.message}${prizeResult[PrizeRank.SECOND]}")
-        sb.append(OutputMessages.UNIT_CORRECT.message)
-        sb.append("${OutputMessages.PRINT_RESULT_ALL.message}${prizeResult[PrizeRank.FIRST]}")
-        sb.append(OutputMessages.UNIT_CORRECT.message)
-        sb.append("${OutputMessages.RESULT.message}$earningRate${OutputMessages.RESULT_SECOND.message}")
+        eachRankMessages.forEach { (rank, output) ->
+            sb.append("${output.message}${prizeResult[rank]}")
+            sb.append(OutputMessages.UNIT_CORRECT.message)
+        }
+        sb.append(OutputMessages.RESULT.message)
+        sb.append(DecimalFormat("#,###.#").format(earningRate))
+        sb.append(OutputMessages.RESULT_SECOND.message)
         println(sb)
+    }
+
+    companion object {
+        private val eachRankMessages = listOf(
+            PrizeRank.FIFTH to OutputMessages.PRINT_RESULT_THREE,
+            PrizeRank.FOURTH to OutputMessages.PRINT_RESULT_FOUR,
+            PrizeRank.THIRD to OutputMessages.PRINT_RESULT_FIVE,
+            PrizeRank.SECOND to OutputMessages.PRINT_RESULT_FIVE_WITH_BONUS,
+            PrizeRank.FIRST to OutputMessages.PRINT_RESULT_ALL
+        )
     }
 }

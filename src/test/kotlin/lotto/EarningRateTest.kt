@@ -22,11 +22,11 @@ class EarningRateTest {
 
     @Test
     fun `수익률이 올바르게 구해지는지 확인 1`() {
-        assertThat(verifyPrize.prizeResult(ticketOne, prizeNumber, bonusNumber)).isEqualTo("1500.0")
+        assertThat(verifyPrize.prizeResult(ticketOne, prizeNumber, bonusNumber)).isEqualTo(1500.0)
     }
 
     @Test
     fun `수익률이 올바르게 구해지는지 확인 2`() {
-        assertThat(verifyPrize.prizeResult(ticketTwo, prizeNumber, bonusNumber)).isEqualTo("1000166.7")
+        assertThat(verifyPrize.prizeResult(ticketTwo, prizeNumber, bonusNumber)).isEqualTo(1000166.7)
     }
 }

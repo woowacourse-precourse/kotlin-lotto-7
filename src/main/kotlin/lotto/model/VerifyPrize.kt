@@ -11,12 +11,12 @@ class VerifyPrize {
         PrizeRank.entries.forEach { rank -> countPrize[rank] = INIT_RANK_COUNT }
     }
 
-    fun prizeResult(tickets: List<List<Int>>, prizeNumber: List<Int>, bonusNumber: Int): String {
+    fun prizeResult(tickets: List<List<Int>>, prizeNumber: List<Int>, bonusNumber: Int): Double {
         tickets.forEach { ticket ->
             checkPrize(ticket, prizeNumber, bonusNumber)
         }
         val rate = earn / (tickets.size * LOTTO_PRICE) * PERCENTAGE
-        return String.format("%.1f", (rate * 10).roundToInt().toDouble() / 10)
+        return String.format("%.1f", (rate * 10).roundToInt().toDouble() / 10).toDouble()
     }
 
     private fun checkPrize(ticket: List<Int>, prizeNumber: List<Int>, bonusNumber: Int) {
