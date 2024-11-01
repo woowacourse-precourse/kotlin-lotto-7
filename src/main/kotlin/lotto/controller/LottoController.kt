@@ -5,16 +5,18 @@ import lotto.model.LottoMachine
 import lotto.model.PurchaseAmount
 import lotto.util.InputValidator.validateInputIsNotEmpty
 import lotto.view.InputView
+import lotto.view.OutputView
 
 class LottoController(
     private val inputView: InputView = InputView(),
+    private val outputView: OutputView = OutputView(),
 ) {
 
     fun run() {
         val purchaseAmount = receivePurchaseAmount()
         val lottos = purchaseLotto(purchaseAmount)
-
-        lottos.forEach { println(it.getLottoNumbers()) }
+        outputView.printPurchasedLottoCount(lottos.size)
+        outputView.printPurchasedLottoNumbers(lottos.map { it.getLottoNumbers() })
     }
 
     private fun receivePurchaseAmount(): PurchaseAmount {
