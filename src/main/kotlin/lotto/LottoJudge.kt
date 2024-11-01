@@ -1,7 +1,9 @@
 package lotto
 
 class LottoJudge {
-    fun setLottoWinnerNumber(number: List<Int>) {
+    var winnerNumbers: List<Int> = emptyList()
 
+    fun setLottoWinnerNumber(number: List<Int>) {
+        winnerNumbers = number
     }
 }
