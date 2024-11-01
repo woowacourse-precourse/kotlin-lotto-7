@@ -19,12 +19,12 @@ class LottoService {
 
     fun getLottoStatistics(winningInfo: LottoWinningInfo): LottoStatistics {
         val totalRankCount = getTotalRankResult(winningInfo)
-        val roi = getReturnOnInvestment(totalRankCount.toMap(), winningInfo)
+        val roi = getReturnOnInvestment(totalRankCount.toMap())
 
         return LottoStatistics(totalRankCount.toMap(), roi)
     }
 
-    private fun getReturnOnInvestment(rankCount: Map<LottoRank, Int>, winningInfo: LottoWinningInfo): Double {
+    private fun getReturnOnInvestment(rankCount: Map<LottoRank, Int>): Double {
         val totalRevenue = calculatorRevenue(rankCount)
 
         val roi = (totalRevenue / (lottos.size * Lotto.PRICE)) * 100
