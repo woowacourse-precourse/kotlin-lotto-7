@@ -4,18 +4,19 @@ import camp.nextstep.edu.missionutils.Console
 import camp.nextstep.edu.missionutils.Randoms
 import net.bytebuddy.pool.TypePool.Resolution.Illegal
 import org.jetbrains.annotations.Nullable
+import java.text.DecimalFormat
+import kotlin.math.round
 
 const val lottoPrice = 1000
 
 fun main() {
     // TODO: 프로그램 구현
-    val lottoMachine = LottoMachine()
 
     println("구입금액을 입력해 주세요.")
     val purchaseCost: Int = getPurchaseCost()
 
     val releaseLottoCount = purchaseCost.calculateLottoCount()
-    val lottos = lottoMachine.releaseLotto(releaseLottoCount)
+    val lottos = LottoMachine.releaseLotto(releaseLottoCount)
 
     println(lottos.joinToString("\n") { lotto ->
         "[${lotto.getNumbers().joinToString(", ")}]"
@@ -25,9 +26,53 @@ fun main() {
     val normalWinningNumbers = getUniqueNumbers(6)
 
     println("\n보너스 번호를 입력해 주세요.")
-    val bonusNumbers = getUniqueNumbers(1, normalWinningNumbers).first()
+    val bonusNumber = getUniqueNumbers(1, normalWinningNumbers).first()
 
     println("\n당첨 통계\n---")
+    val scoreBoard = divideRank(lottos, normalWinningNumbers, bonusNumber)
+    val totalWinning = calculateTotalWinningProcess(scoreBoard)
+
+
+}
+
+private fun calculateTotalWinningProcess(
+    scoreBoard: Map<LottoMachine.Rank, Int>
+): Long {
+    val scoreResult = StringBuilder()
+    val ranks = LottoMachine.Rank.getRanks()
+    var totalWinning = 0L
+
+    for (rank in ranks) {
+        scoreResult.append(
+            "${rank.description} (${DecimalFormat("#,###").format(rank.winningPrice)}원) - ${scoreBoard[rank] ?: 0}개\n"
+        )
+        totalWinning += rank.winningPrice
+    }
+
+    println(scoreResult)
+
+    return totalWinning
+}
+
+private fun divideRank(
+    lottos: List<Lotto>,
+    normalWinningNumbers: List<Int>,
+    bonusNumber: Int
+): Map<LottoMachine.Rank, Int> {
+    val scoreBoard = mutableMapOf<LottoMachine.Rank, Int>()
+    for (lotto in lottos) {
+        val lottoRank = LottoMachine.lottoRank(
+            lotto.getNumbers(),
+            normalWinningNumbers,
+            bonusNumber
+        )
+
+        if (lottoRank == LottoMachine.Rank.LOSE) continue;
+
+        scoreBoard[lottoRank] = (scoreBoard[lottoRank]?: 0) + 1
+    }
+
+    return scoreBoard
 }
 
 @Throws(IllegalArgumentException::class)
