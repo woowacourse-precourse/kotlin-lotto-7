@@ -16,7 +16,7 @@ class LottoController {
 
         OutputView.printLottoTickets(tickets)
 
-        getWholeNumber()
+        getAllLottoNumbers()
     }
 
     private fun generateLottoTickets(purchaseAmount: Int): List<LottoTicket> {
@@ -45,7 +45,7 @@ class LottoController {
         return Lotto(purchasePrice)
     }
 
-    private fun getWholeNumber(): BonusLotto {
+    private fun getAllLottoNumbers(): BonusLotto {
         val lotto = getWinningNumbers()
         val bonusNumber = InputView.askForBonusNumber().toIntOrNull()
             ?: throw IllegalArgumentException(ErrorMessage.INVALID_NUMBER_FORMAT.message)
