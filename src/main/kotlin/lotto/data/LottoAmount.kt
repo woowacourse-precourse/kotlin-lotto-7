@@ -5,9 +5,9 @@ class LottoAmount(private val amount: String) {
         require(amount.isNotEmpty()) { AMOUNT_EMPTY_ERROR_MESSAGE }
         require(amount.all { it.isDigit() }) { AMOUNT_NOT_ALL_NUMBER_ERROR_MESSAGE }
         require(amount.toIntOrNull() != null) { AMOUNT_RANGE_ERROR_MESSAGE }
-        require(amount.first() in AMOUNT_START_MIN_VALUE..AMOUNT_START_MAX_VALUE) { AMOUNT_FORMAT_ERROR_MESSAGE }
         require(amount.toInt() % AMOUNT_UNIT == EXPECTED_RESULT) { AMOUNT_UNIT_ERROR_MESSAGE }
         require(amount.toInt() in AMOUNT_UNIT..AMOUNT_MAX_VALUE) { AMOUNT_RANGE_ERROR_MESSAGE }
+        require(amount.first() in AMOUNT_START_MIN_VALUE..AMOUNT_START_MAX_VALUE) { AMOUNT_FORMAT_ERROR_MESSAGE }
     }
 
     companion object {
