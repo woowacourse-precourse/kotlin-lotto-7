@@ -53,7 +53,8 @@ class LottoTest {
 
     @Test
     fun `로또 번호가 6개 같으면 1등을 반환한다`() {
-        val lottoWinningInfo = LottoWinningInfo(listOf(1, 2, 3, 4, 5, 6), 7)
+        val lottoWinningInfo = LottoWinningInfo(listOf(1, 2, 3, 4, 5, 6))
+        lottoWinningInfo.bonusNumber = 7
         val lotto = Lotto(listOf(1, 2, 3, 4, 5, 6))
 
         val result = lotto.getLottoRank(lottoWinningInfo)
@@ -62,7 +63,8 @@ class LottoTest {
 
     @Test
     fun `로또 번호가 5개 같고 보너스 번호가 같으면 2등을 반환한다`() {
-        val lottoWinningInfo = LottoWinningInfo(listOf(1, 2, 3, 4, 5, 9), 7)
+        val lottoWinningInfo = LottoWinningInfo(listOf(1, 2, 3, 4, 5, 9))
+        lottoWinningInfo.bonusNumber = 7
         val lotto = Lotto(listOf(1, 2, 3, 4, 5, 7))
 
         val result = lotto.getLottoRank(lottoWinningInfo)
@@ -71,7 +73,8 @@ class LottoTest {
 
     @Test
     fun `로또 번호가 5개 같으면 3등을 반환한다`() {
-        val lottoWinningInfo = LottoWinningInfo(listOf(1, 2, 3, 4, 5, 9), 7)
+        val lottoWinningInfo = LottoWinningInfo(listOf(1, 2, 3, 4, 5, 9))
+        lottoWinningInfo.bonusNumber = 7
         val lotto = Lotto(listOf(1, 2, 3, 4, 5, 6))
 
         val result = lotto.getLottoRank(lottoWinningInfo)
@@ -80,7 +83,8 @@ class LottoTest {
 
     @Test
     fun `로또 번호가 4개 같으면 4등을 반환한다`() {
-        val lottoWinningInfo = LottoWinningInfo(listOf(1, 2, 3, 4, 8, 9), 6)
+        val lottoWinningInfo = LottoWinningInfo(listOf(1, 2, 3, 4, 8, 9))
+        lottoWinningInfo.bonusNumber = 7
         val lotto = Lotto(listOf(1, 2, 3, 4, 5, 6))
 
         val result = lotto.getLottoRank(lottoWinningInfo)
@@ -89,7 +93,8 @@ class LottoTest {
 
     @Test
     fun `로또 번호가 3개 같으면 5등을 반환한다`() {
-        val lottoWinningInfo = LottoWinningInfo(listOf(1, 2, 3, 8, 9, 10), 6)
+        val lottoWinningInfo = LottoWinningInfo(listOf(1, 2, 3, 8, 9, 10))
+        lottoWinningInfo.bonusNumber = 7
         val lotto = Lotto(listOf(1, 2, 3, 4, 5, 6))
 
         val result = lotto.getLottoRank(lottoWinningInfo)
@@ -98,7 +103,8 @@ class LottoTest {
 
     @Test
     fun `같은 로또 번호가 2개면 없음 등급을 반환한다`() {
-        val lottoWinningInfo = LottoWinningInfo(listOf(1, 2, 12, 11, 10, 9), 6)
+        val lottoWinningInfo = LottoWinningInfo(listOf(1, 2, 12, 11, 10, 9))
+        lottoWinningInfo.bonusNumber = 7
         val lotto = Lotto(listOf(1, 2, 3, 4, 5, 6))
 
         val result = lotto.getLottoRank(lottoWinningInfo)
@@ -107,7 +113,8 @@ class LottoTest {
 
     @Test
     fun `같은 로또 번호가 1개면 없음 등급을 반환한다`() {
-        val lottoWinningInfo = LottoWinningInfo(listOf(1, 13, 12, 11, 10, 9), 6)
+        val lottoWinningInfo = LottoWinningInfo(listOf(1, 13, 12, 11, 10, 9))
+        lottoWinningInfo.bonusNumber = 7
         val lotto = Lotto(listOf(1, 2, 3, 4, 5, 6))
 
         val result = lotto.getLottoRank(lottoWinningInfo)
@@ -116,7 +123,8 @@ class LottoTest {
 
     @Test
     fun `같은 로또 번호가 0개면 없음 등급을 반환한다`() {
-        val lottoWinningInfo = LottoWinningInfo(listOf(14, 13, 12, 11, 10, 9), 6)
+        val lottoWinningInfo = LottoWinningInfo(listOf(14, 13, 12, 11, 10, 9))
+        lottoWinningInfo.bonusNumber = 7
         val lotto = Lotto(listOf(1, 2, 3, 4, 5, 6))
 
         val result = lotto.getLottoRank(lottoWinningInfo)

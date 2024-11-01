@@ -1,17 +1,19 @@
 package lotto.domain
 
-class LottoWinningInfo(val numbers: List<Int>, val bonusNumber: Int) {
-    init {
-        validateLottoNumbers(numbers)
-        validateNumberRange(bonusNumber)
-    }
+class LottoWinningInfo(val numbers: List<Int>) {
+    var bonusNumber: Int? = null
+        set(value) {
+            validateNumberRange(value!!)
+            require(!numbers.contains(value)) { Lotto.ERROR_NOT_DUPLICATE_NUMBER }
+            field = value
+        }
 
-    private fun validateLottoNumbers(numbers: List<Int>) {
+    init {
         validateLottoNumberSize(numbers)
         for (number in numbers) {
             validateNumberRange(number)
         }
-        validateDuplicates(numbers, bonusNumber)
+        validateDuplicates(numbers)
     }
 
     private fun validateLottoNumberSize(numbers: List<Int>) {
@@ -22,9 +24,8 @@ class LottoWinningInfo(val numbers: List<Int>, val bonusNumber: Int) {
         require(number in Lotto.START_NUMBER..Lotto.END_NUMBER) { Lotto.ERROR_NOT_LOTTO_NUMBER }
     }
 
-    private fun validateDuplicates(numbers: List<Int>, bonusNumber: Int) {
+    private fun validateDuplicates(numbers: List<Int>) {
         val filterNumbers = numbers.toMutableSet()
-        filterNumbers.add(bonusNumber)
-        require(filterNumbers.size == Lotto.ITEM_LENGTH + 1) { Lotto.ERROR_NOT_DUPLICATE_NUMBER }
+        require(filterNumbers.size == Lotto.ITEM_LENGTH) { Lotto.ERROR_NOT_DUPLICATE_NUMBER }
     }
 }

@@ -47,7 +47,8 @@ class LottoServiceTest : NsTest() {
             {
                 val money = Money(3_000)
                 lottoService.issueLottos(money)
-                val winningInfo = LottoWinningInfo(listOf(1, 2, 3, 4, 5, 6), 7)
+                val winningInfo = LottoWinningInfo(listOf(1, 2, 3, 4, 5, 6))
+                winningInfo.bonusNumber = 7
 
                 val resultROI = lottoService.getRatOfReturn(winningInfo)
                 var expectedROI =
@@ -68,7 +69,8 @@ class LottoServiceTest : NsTest() {
             {
                 val money = Money(8_000)
                 lottoService.issueLottos(money)
-                val winningInfo = LottoWinningInfo(listOf(1, 2, 3, 4, 5, 6), 7)
+                val winningInfo = LottoWinningInfo(listOf(1, 2, 3, 4, 5, 6))
+                winningInfo.bonusNumber = 7
 
                 val resultROI = lottoService.getRatOfReturn(winningInfo)
                 var expectedROI = (LottoRank.FIFTH.prize / money.amount.toDouble()) * 100
