@@ -75,20 +75,24 @@ class LottoController {
                 (matchLottoCount[MatchingLottoCount.FIVE] ?: 0) + 1
 
             6 -> {
-                if (isMatchBonus) matchLottoCount[MatchingLottoCount.FIVE_BONUS] =
-                    (matchLottoCount[MatchingLottoCount.FIVE_BONUS] ?: 0) + 1
-                else matchLottoCount[MatchingLottoCount.SIX] =
+                if (isMatchBonus) {
+                    matchLottoCount[MatchingLottoCount.FIVE_BONUS] =
+                        (matchLottoCount[MatchingLottoCount.FIVE_BONUS] ?: 0) + 1
+                    return
+                }
+                matchLottoCount[MatchingLottoCount.SIX] =
                     (matchLottoCount[MatchingLottoCount.SIX] ?: 0) + 1
             }
         }
     }
+
 
     private fun isMatchBonusNumber(isMatchBonusCount: Boolean): Int {
         if (isMatchBonusCount) return 1
         return 0
     }
 
-    fun calculateProfit(matchLottoCount: Map<MatchingLottoCount, Int>): Long {
+    private fun calculateProfit(matchLottoCount: Map<MatchingLottoCount, Int>): Long {
         var profit = 0L
 
         for ((key, value) in matchLottoCount) {
