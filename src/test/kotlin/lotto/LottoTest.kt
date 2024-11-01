@@ -1,13 +1,29 @@
 package lotto
 
-import org.junit.jupiter.api.Test
-import org.junit.jupiter.api.assertThrows
+import org.junit.jupiter.api.*
 
 class LottoTest {
+
+    @Test
+    fun `로또 발행 오류 테스트`() {
+        assertDoesNotThrow {
+            for (i in 1 until 10000) {
+                Lotto(getLotto())
+            }
+        }
+    }
+
     @Test
     fun `로또 번호의 개수가 6개가 넘어가면 예외가 발생한다`() {
         assertThrows<IllegalArgumentException> {
             Lotto(listOf(1, 2, 3, 4, 5, 6, 7))
+        }
+    }
+
+    @Test
+    fun `로또 번호 중 하나라도 1부터 45까지의 범위를 넘어가면 예외가 발생한다`() {
+        assertThrows<IllegalArgumentException> {
+            Lotto(listOf(-1, 46, 0, -1, 5, 6, 7))
         }
     }
 
