@@ -38,7 +38,7 @@ fun main() {
 }
 
 fun totalWinningRate(originRate: Double): String {
-    return BigDecimal((round(originRate * 1000) / 1000) * 100).toString()
+    return String.format("%.1f", BigDecimal((round(originRate * 1000) / 1000) * 100))
 }
 
 private fun calculateTotalWinningProcess(
