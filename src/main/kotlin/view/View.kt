@@ -40,8 +40,7 @@ class View(private val viewModel: LottoViewModel) {
         retryWhenNoException {
             println(Input.INPUT_BONUS_NUMBER.toString())
             val bonusNumber = readLine()
-            val validBonusNumber = viewModel.checkBonusNumberValidation(bonusNumber)
-            viewModel.onCompleteInputBonusNumber(validBonusNumber)
+            viewModel.checkBonusNumberValidation(bonusNumber)
             printWinningStatics()
         }
     }

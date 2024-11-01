@@ -22,8 +22,10 @@ class LottoViewModel(
     fun checkWinningNumberValidation(winningNumber: String): List<Int> =
         validator.winningNumberValidation(winningNumber)
 
-    fun checkBonusNumberValidation(bonusNumber: String): Int =
-        validator.bonusNumberValidation(bonusNumber)
+    fun checkBonusNumberValidation(bonusNumber: String){
+        val validBonusNumber = validator.bonusNumberValidation(bonusNumber)
+        onCompleteInputBonusNumber(validBonusNumber)
+    }
 
     fun onCompleteInputPayment(pay: Int) {
         state = state.copy(purchaseLottoCount = pay)
@@ -34,7 +36,7 @@ class LottoViewModel(
         state = state.copy(winningNumber = winningNumber)
     }
 
-    fun onCompleteInputBonusNumber(bonusNumber: Int) {
+    private fun onCompleteInputBonusNumber(bonusNumber: Int) {
         state = state.copy(bonusNumber = bonusNumber)
         getLottoResult()
     }
