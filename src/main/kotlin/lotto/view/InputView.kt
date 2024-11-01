@@ -1,6 +1,9 @@
 package lotto.view
 
 import camp.nextstep.edu.missionutils.Console
+import lotto.utils.Constants.LOTTO_PRICE
+import lotto.utils.ErrorConstants
+import lotto.utils.InputConstants
 
 /**
  * 뷰는 모델에만 의존해야 하고, 컨트롤러에는 의존하면 안된다.
@@ -11,43 +14,28 @@ import camp.nextstep.edu.missionutils.Console
 
 class InputView {
 
+    // TODO: 예외 처리를 컨트롤러에서 하는게 나을지?
     fun getPurchaseAmount(): Int {
         while (true) {
-            println(PURCHASE_AMOUNT_INPUT_MESSAGE)
-            val purchaseAmount = Console.readLine().toIntOrNull()
+            println(InputConstants.PURCHASE_AMOUNT_MESSAGE)
+            val purchaseAmount = Console.readLine().toIntOrNull() ?: println(ErrorConstants.NOT_NUMBER)
 
-            when {
-                purchaseAmount == null -> println(ERROR_NOT_NUMBER)
-                purchaseAmount <= ZERO -> println(ERROR_NEGATIVE_NUMBER)
-                purchaseAmount % LOTTO_PRICE != ZERO -> println(ERROR_NOT_DIVIDED)
-                purchaseAmount > LIMIT_OF_PURCHASE -> println(ERROR_LIMIT_OF_PURCHASE)
-                else -> return purchaseAmount
-            }
+//            when {
+//                purchaseAmount <= ZERO -> println(ERROR_NEGATIVE_NUMBER)
+//                purchaseAmount % LOTTO_PRICE != ZERO -> println(ERROR_NOT_DIVIDED)
+//                purchaseAmount > LIMIT_OF_PURCHASE -> println(ERROR_LIMIT_OF_PURCHASE)
+//                else -> return purchaseAmount
+//            }
         }
     }
 
     fun getWinningNumbers(): String {
-        println(WINNING_NUMBERS_INPUT_MESSAGE)
+        println(InputConstants.WINNING_NUMBERS_MESSAGE)
         return Console.readLine()
     }
 
     fun getBonusNumber(): String {
-        println(BONUS_NUMBER_INPUT_MESSAGE)
+        println(InputConstants.BONUS_NUMBER_MESSAGE)
         return Console.readLine()
-    }
-
-    companion object {
-        const val PURCHASE_AMOUNT_INPUT_MESSAGE = "구입금액을 입력해 주세요."
-        const val WINNING_NUMBERS_INPUT_MESSAGE = "당첨 번호를 입력해 주세요."
-        const val BONUS_NUMBER_INPUT_MESSAGE = "보너스 번호를 입력해 주세요."
-
-        const val ERROR_NOT_NUMBER = "[ERROR] 정수형 숫자만 입력 가능합니다. 원화 단위로 입력해주세요."
-        const val ERROR_NEGATIVE_NUMBER = "[ERROR] 저희 가게는 외상을 받지 않습니다."
-        const val ERROR_NOT_DIVIDED = "[ERROR] 로또 1장당 1000원입니다. 잔돈은 필요 없어요!"
-        const val ERROR_LIMIT_OF_PURCHASE = "[ERROR] 1인당 최대 구매 가능 금액은 10만원입니다."
-
-        const val ZERO = 0
-        const val LOTTO_PRICE = 1000
-        const val LIMIT_OF_PURCHASE = 100000
     }
 }
