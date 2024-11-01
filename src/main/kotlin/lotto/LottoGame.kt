@@ -15,9 +15,19 @@ class LottoGame {
         return result
     }
     fun inputCost(): Int {
-        println("구입금액을 입력해 주세요.")
-        val cost = Console.readLine().toInt()
-        return cost
+        while (true) {
+            try {
+                println("구입금액을 입력해 주세요.")
+                val cost = Console.readLine().toIntOrNull() ?: throw NumberFormatException("[ERROR] 금액은 숫자로 입력해야 합니다.")
+                if (cost < 1000 || cost % 1000 != 0) throw IllegalArgumentException("[ERROR] 금액은 1,000원 단위로 입력해야 합니다.")
+                
+                return cost
+            } catch (e: IllegalArgumentException) {
+                println(e.message)
+            } catch (e: NumberFormatException) {
+                println(e.message)
+            }
+        }
     }
     fun inputWinningLotto(): Lotto {
         println("당첨 번호를 입력해 주세요.")
