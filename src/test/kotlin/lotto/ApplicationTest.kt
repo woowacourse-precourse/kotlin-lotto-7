@@ -84,6 +84,15 @@ class ApplicationTest : NsTest() {
         }
     }
 
+    @Test
+    @DisplayName("반올림 기능 테스트")
+    fun `반올림 기능 테스트`() {
+        assertSimpleTest {
+            assert(totalWinningRate(10000, 3343) == 0.3)
+            assert(totalWinningRate(10000, 3543) == 0.4)
+        }
+    }
+
     override fun runMain() {
         main()
     }
