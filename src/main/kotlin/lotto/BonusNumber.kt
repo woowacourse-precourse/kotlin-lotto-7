@@ -8,18 +8,18 @@ class BonusNumber {
     }
 
     private var validatorTest = false
-    private var bonusNumber: Int = 0
+    private var bonusNumber = ""
 
     fun bonusNumber(winningNumber: List<String>): Int {
         while (!validatorTest) {
             bonusNumberException(winningNumber)
         }
-        return bonusNumber
+        return bonusNumber.toInt()
     }
 
     private fun bonusNumberException(winningNumber: List<String>): Any {
         try {
-            val bonusNumber = bonusNumberInput()
+            bonusNumber = bonusNumberInput()
             checkBlank(bonusNumber)
             checkNumber(bonusNumber)
             checkRange(bonusNumber)
