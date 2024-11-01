@@ -1,5 +1,6 @@
 package lotto
 
+import lotto.model.Lotto
 import lotto.model.LottoGenerator
 import lotto.view.InputView
 import lotto.validator.*
@@ -19,33 +20,38 @@ class Controller {
         val randomLotto = getRandomLotto(numberOfLotto)
         output.displayLotto(numberOfLotto, randomLotto)
 
+        val winningNum = getWinningNum()
+
     }
 
     fun getNumberOfLotto(): Int {
         var money: String
         while (true) {
-            money = input.getMoney()
-            if (inputValidator.isValidMoney(money)) break
+            try {
+                money = input.getMoney()
+                inputValidator.isValidMoney(money)
+                return lottoGenerator.getNumberOfLotto(money)
+            } catch (e: IllegalArgumentException) {
+                println(e.message)
+            }
         }
-        return lottoGenerator.getNumberOfLotto(money)
     }
 
     fun getRandomLotto(numberOfLotto: Int): List<List<Int>> {
         return lottoGenerator.generateLotto(numberOfLotto)
     }
 
-    fun getWinningLotto() {
+    fun getWinningNum(): List<Int> {
         var winningNum: String
         while (true) {
-            winningNum = input.getWinningNum()
-            if (inputValidator.isValidWinningNum(winningNum)) break
+            try {
+                winningNum = input.getWinningNum()
+                inputValidator.isValidWinningNum(winningNum)
+                return winningNum.split(",").map { it.trim().toInt() }
+            } catch (e: IllegalArgumentException) {
+                println(e.message)
+            }
         }
-        var bonusNum: String
-        while (true) {
-            bonusNum = input.getBonusNum()
-            if (inputValidator.isValidBonusNum(bonusNum, winningNum)) break
-        }
-
     }
 
 }

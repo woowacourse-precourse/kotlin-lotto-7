@@ -5,62 +5,47 @@ const val AMOUNT_UNIT = 1000
 
 class InputValidator {
 
-    fun isValidMoney(input: String): Boolean {
+    fun isValidMoney(input: String) {
         val regex = Regex(MONEY_REGEX)
         val money = input.replace(",", "").toIntOrNull()
 
         if (input == "") {
-            ValidatorMessage.INVALID_INPUT.display()
-            return false
+            throw IllegalArgumentException(ValidatorMessage.INVALID_INPUT.message)
         } else if (!regex.matches(input)) {
-            ValidatorMessage.INVALID_INPUT.display()
-            return false
+            throw IllegalArgumentException(ValidatorMessage.INVALID_INPUT.message)
         } else if (money == null) {
-            ValidatorMessage.INVALID_INPUT.display()
-            return false
+            throw IllegalArgumentException(ValidatorMessage.INVALID_INPUT.message)
         } else if (money % AMOUNT_UNIT != 0 || money <= 0) {
-            ValidatorMessage.INVALID_INPUT.display()
-            return false
+            throw IllegalArgumentException(ValidatorMessage.INVALID_INPUT.message)
         }
-
-        return true
     }
 
-    fun isValidWinningNum(input: String): Boolean {
+    fun isValidWinningNum(input: String){
         val inputNumbers = input.split(",").map { it.trim() }
 
         if (input == "") {
-            ValidatorMessage.INVALID_INPUT.display()
-            return false
+            throw IllegalArgumentException(ValidatorMessage.INVALID_INPUT.message)
         } else if (inputNumbers.size != 6) {
-            ValidatorMessage.INVALID_COUNT_NUM.display()
-            return false
+            throw IllegalArgumentException(ValidatorMessage.INVALID_COUNT_NUM.message)
         } else if (inputNumbers.size != inputNumbers.distinct().size) {
-            ValidatorMessage.DUPLICATE_NUM.display()
-            return false
+            throw IllegalArgumentException(ValidatorMessage.DUPLICATE_NUM.message)
         }
         inputNumbers.forEach {
             val num = it.toIntOrNull()
             if (num == null || num < 1 || num > 45) {
-                ValidatorMessage.INVALID_RANGE_NUM.display()
-                return false
+                throw IllegalArgumentException(ValidatorMessage.INVALID_RANGE_NUM.message)
             }
         }
-        return true
     }
 
-    fun isValidBonusNum(input: String, winningNum: String): Boolean {
+    fun isValidBonusNum(input: String, winningNum: List<Int>) {
         val num = input.toIntOrNull()
-        val winningNumbers = winningNum.split(",").map { it.trim().toInt() }
 
         if (num == null || num < 1 || num > 45) {
-            ValidatorMessage.INVALID_RANGE_NUM.display()
-            return false
-        } else if (winningNumbers.contains(num)) {
-            ValidatorMessage.DUPLICATE_NUM.display()
-            return false
+            throw IllegalArgumentException(ValidatorMessage.INVALID_RANGE_NUM.message)
+        } else if (winningNum.contains(num)) {
+            throw IllegalArgumentException(ValidatorMessage.DUPLICATE_NUM.message)
         }
-        return true
     }
 }
 
