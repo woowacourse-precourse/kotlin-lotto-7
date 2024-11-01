@@ -2,6 +2,9 @@ package lotto.view
 
 import camp.nextstep.edu.missionutils.Console
 import lotto.utils.Constants
+import lotto.utils.Constants.LIMIT_OF_PURCHASE
+import lotto.utils.Constants.LOTTO_PRICE
+import lotto.utils.Constants.ZERO
 import lotto.utils.ErrorConstants
 import lotto.utils.InputConstants
 
@@ -22,9 +25,9 @@ class InputView {
 
             when {
                 purchaseAmount == null -> println(ErrorConstants.NOT_NUMBER)
-                purchaseAmount <= Constants.ZERO -> println(ErrorConstants.NEGATIVE_NUMBER)
-                purchaseAmount % Constants.LOTTO_PRICE != Constants.ZERO -> println(ErrorConstants.NOT_DIVIDED)
-                purchaseAmount > Constants.LIMIT_OF_PURCHASE -> println(ErrorConstants.LIMIT_OF_PURCHASE)
+                purchaseAmount <= ZERO -> println(ErrorConstants.NEGATIVE_NUMBER)
+                purchaseAmount % LOTTO_PRICE != ZERO -> println(ErrorConstants.NOT_DIVIDED)
+                purchaseAmount > LIMIT_OF_PURCHASE -> println(ErrorConstants.LIMIT_OF_PURCHASE)
                 else -> return purchaseAmount
             }
         }
@@ -32,10 +35,8 @@ class InputView {
 
     fun getWinningNumbers(): List<Int> {
         println(InputConstants.WINNING_NUMBERS_MESSAGE)
-        val winningNumbers = Console.readLine()
-        return winningNumbers.split(",").map { it.toIntOrNull()!! } ?: throw IllegalArgumentException ("")
-
-    }
+        return Console.readLine().split(",").map { it.toIntOrNull() ?: throw IllegalArgumentException("[ERROR] 당첨 번호는 1에서 45 사이 값으로 (,)로 구분해서 6자리 입력해주세요")
+    }}
 
     fun getBonusNumber(): String {
         println(InputConstants.BONUS_NUMBER_MESSAGE)

@@ -1,7 +1,7 @@
 package lotto.model
 
 import camp.nextstep.edu.missionutils.Randoms
-import lotto.utils.Constants.COUNT
+import lotto.utils.Constants.LOTTO_NUMBER_COUNT
 import lotto.utils.Constants.MAX_NUMBER
 import lotto.utils.Constants.MIN_NUMBER
 
@@ -12,7 +12,7 @@ import lotto.utils.Constants.MIN_NUMBER
 
 class LottoGenerator {
 
-    fun generate(): List<Int> {
-        return Randoms.pickUniqueNumbersInRange(MIN_NUMBER, MAX_NUMBER, COUNT).sorted()
+    fun generate(): List<Int>{
+        return Randoms.pickUniqueNumbersInRange(MIN_NUMBER, MAX_NUMBER, LOTTO_NUMBER_COUNT).sorted()
     }
 }

@@ -1,5 +1,10 @@
 package lotto.model
 
+import lotto.utils.Constants.MAX_NUMBER
+import lotto.utils.Constants.MIN_NUMBER
+import lotto.utils.Constants.LOTTO_NUMBER_COUNT
+import lotto.utils.ErrorConstants
+
 /**
  * 모델은 컨트롤러나 뷰에 의존하면 안된다.
  * 컨트롤러나 뷰의 코드가 있으면 안된다
@@ -10,9 +15,9 @@ package lotto.model
 // 공백 아닌지 판단 후 받음
 class Lotto(private val numbers: List<Int>) {
     init {
-        require(numbers.size == 6) { "[ERROR] 로또 번호는 6개여야 합니다." }
-        require(numbers.all { it in 1..45 }) { "[ERROR] 로또 번호는 1에서 45 이내여야 합니다." }
-        require(numbers.distinct().size == numbers.size) { "중복 안돼" }
+        require(numbers.size == LOTTO_NUMBER_COUNT) { ErrorConstants.LOTTO_NUMBER_COUNT }
+        require(numbers.all { it in MIN_NUMBER..MAX_NUMBER }) { ErrorConstants.LOTTO_NUMBER_RANGE }
+        require(numbers.distinct().size == LOTTO_NUMBER_COUNT) { ErrorConstants.LOTTO_NUMBER_DUPLICATE }
     }
 
     fun getLottoNumbers() = numbers

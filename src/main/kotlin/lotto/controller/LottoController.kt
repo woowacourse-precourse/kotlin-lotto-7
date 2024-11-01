@@ -46,7 +46,7 @@ class LottoController {
                 Lotto(winningNumbers)
                 return winningNumbers
             } catch (e: IllegalArgumentException) {
-                println("${e.message}")
+                println(e.message)
             }
         }
     }
