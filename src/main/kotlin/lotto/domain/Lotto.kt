@@ -23,6 +23,10 @@ class Lotto(private val numbers: List<Int>) {
         return LottoRank.getRank(matchCount, isBonusMatch)
     }
 
+    override fun toString(): String {
+        return numbers.sorted().toString()
+    }
+
     private fun validateDuplicates(numbers: List<Int>) {
         val filterNumbers = numbers.toSet()
         require(filterNumbers.size == ITEM_LENGTH) { ERROR_NOT_DUPLICATE_NUMBER }

@@ -1,12 +1,14 @@
 package lotto
 
 import camp.nextstep.edu.missionutils.Console
+import lotto.domain.Lotto
 import lotto.domain.LottoWinningInfo
 import lotto.domain.Money
 
 const val MESSAGE_INPUT_PURCHASE_AMOUNT = "구입금액을 입력해 주세요."
 const val MESSAGE_INPUT_BONUS_NUMBER = "보너스 번호를 입력해 주세요."
 const val MESSAGE_INPUT_WINNING_NUMBER = "당첨 번호를 입력해 주세요."
+const val MESSAGE_OUTPUT_LOTTO_COUNT = "%d개를 구매했습니다."
 
 fun getLottoPurchaseAmount(): Money {
     while (true) {
@@ -27,6 +29,12 @@ fun getLottoWinningInfo(): LottoWinningInfo {
     setLottoBonusNumber(winningInfo)
 
     return winningInfo
+}
+
+fun printPurchasedLottos(lottos: MutableList<Lotto>) {
+    println(MESSAGE_OUTPUT_LOTTO_COUNT.format(lottos.size))
+    lottos.forEach { println(it.toString()) }
+    println()
 }
 
 private fun setLottoBonusNumber(winningInfo: LottoWinningInfo) {
