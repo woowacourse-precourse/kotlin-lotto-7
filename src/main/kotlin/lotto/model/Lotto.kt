@@ -11,9 +11,6 @@ import lotto.utils.ErrorConstants
  * 컨트롤러나 뷰의 코드가 있으면 안된다
  */
 
-// 입력 값이 , 구분 되는지 판단
-// 문자 아닌지 판단
-// 공백 아닌지 판단 후 받음
 class Lotto(private val numbers: List<Int>) {
     init {
         require(numbers.size == LOTTO_NUMBER_COUNT) { ErrorConstants.LOTTO_NUMBER_COUNT }
@@ -21,9 +18,14 @@ class Lotto(private val numbers: List<Int>) {
         require(numbers.distinct().size == LOTTO_NUMBER_COUNT) { ErrorConstants.LOTTO_NUMBER_DUPLICATE }
     }
 
-    fun getLottoNumbers() = numbers
 
-    fun matchLottoNumbers(lotto: List<Int>) {
+    fun ComparisonOfWinningNumbers(lotto: List<List<Int>>) {
+        for (index in 0..lotto.size) {
+
+        }
+    }
+
+    fun ComparisonOfBonusNumber(bonusNumber: Int) {
 
     }
 

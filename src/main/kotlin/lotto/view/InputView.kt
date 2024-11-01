@@ -18,7 +18,6 @@ import lotto.utils.InputConstants
 
 class InputView {
 
-    // TODO: 예외 처리를 컨트롤러에서 하는게 나을지?
     fun getPurchaseAmount(): Int {
         while (true) {
             println(InputConstants.PURCHASE_AMOUNT_MESSAGE)
@@ -36,8 +35,9 @@ class InputView {
 
     fun getWinningNumbers(): List<Int> {
         println(InputConstants.WINNING_NUMBERS_MESSAGE)
-        return Console.readLine().split(DELIMETER).map { it.toIntOrNull() ?: throw IllegalArgumentException(ErrorConstants.LOTTO_INPUT_FORMAT)
-    }}
+        return Console.readLine().split(DELIMETER).sorted()
+            .map { it.toIntOrNull() ?: throw IllegalArgumentException(ErrorConstants.LOTTO_INPUT_FORMAT) }
+    }
 
     fun getBonusNumber(): Int {
         println(InputConstants.BONUS_NUMBER_MESSAGE)

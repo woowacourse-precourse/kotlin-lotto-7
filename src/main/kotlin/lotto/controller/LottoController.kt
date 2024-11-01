@@ -2,6 +2,7 @@ package lotto.controller
 
 import lotto.model.Lotto
 import lotto.utils.Constants.LOTTO_PRICE
+import lotto.utils.Constants.NEW_LINE
 import lotto.view.InputView
 import lotto.view.OutputView
 
@@ -21,21 +22,19 @@ class LottoController {
         val purchaseCount = getPurchaseCount(purchaseAmount)
         outputView.showPurchasedLottoCount(purchaseCount)
 
-        // 구매한 만큼 로또 번호 출력
-        val LottoList = Lotto.generate()
-        println(LottoList)
+        val purchaseLottoList = mutableListOf<List<Int>>()
+        repeat(purchaseCount){ purchaseLottoList.add(Lotto.generate()) }
+        println(purchaseLottoList.joinToString(NEW_LINE))
 
-        getWinningNumbers()
-
-        // 당첨 번호에 대한 예외 처리
+        val winningNumbers = getWinningNumbers()
+        // TODO: 당첨 번호에 대한 예외 처리
 
         val bonusNumber = inputView.getBonusNumber()
-        // 보너스 번호에 대한 예외 처리
+        // TODO: 보너스 번호에 대한 예외 처리(당첨 번호 오류 + 당첨번호와 중복인지)
 
-        // 당첨 통계 출력
-        outputView.showWinningStatisticsMessage()
+
         // 당첨 등급 출력
-        //outputView.showWinninfStatistics()
+        //outputView.showWinningStatistics()
 
         // 수익률 출력
         //outputView.showTotalReturnRate()
@@ -52,10 +51,6 @@ class LottoController {
             }
         }
     }
-
-    fun iteration(count: Int) = repeat(count) { Lotto.generate() }
-
-//    fun addLottoTicket(tickets: List<Int>) = tickets.add????
 
     fun getPurchaseCount(purchaseAmount: Int): Int = purchaseAmount / LOTTO_PRICE
 }

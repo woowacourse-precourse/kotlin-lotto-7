@@ -22,9 +22,9 @@ class OutputView {
     // 컨트롤러 -> 모델(LottoGenerator) -> 매개변수 받기 -> 컨트롤러에서 수행
     fun showPurchasedLottoList(count: Int) = println()
 
-    fun showWinningStatisticsMessage() = println(WINNING_STATISTICS)
-
-    fun showWinninfStatistics(matchCount: List<Int>) {
+    // TODO: 반복해서 코드를 줄일 수 있는 방법이 있지 않을까
+    fun showWinningStatistics(matchCount: List<Int>) {
+        println(WINNING_STATISTICS)
         println("${LottoRank.FIFTH.matchCount}개 일치 (${LottoRank.FIFTH.reward}) - ${matchCount[FIFTH]}개")
         println("${LottoRank.FOURTH.matchCount}개 일치 (${LottoRank.FOURTH.reward}) - ${matchCount[FOURTH]}개")
         println("${LottoRank.THIRD.matchCount}개 일치 (${LottoRank.THIRD.reward}) - ${matchCount[THIRD]}개")
