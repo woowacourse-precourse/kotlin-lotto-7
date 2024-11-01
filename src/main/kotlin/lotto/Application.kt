@@ -48,12 +48,14 @@ fun main()
 		var price = Lotto(numbers).determineWith(pickedNumbers, bonusNumber)
 		resultStorage.add(price)
 	}
+
 	var countMap = resultStorage.groupingBy { it }.eachCount()
-	var fifthCount = countMap[Price.FIFTH]
-	var fourthCount = countMap[Price.FOURTH]
-	var thirdCount = countMap[Price.THIRD]
-	var secondCount = countMap[Price.SECOND]
-	var firstCount = countMap[Price.FIRST]
+	var fifthCount = countMap.getOrElse(Price.FIFTH) { 0 }
+	var fourthCount = countMap.getOrElse(Price.FOURTH) { 0 }
+	var thirdCount = countMap.getOrElse(Price.THIRD) { 0 }
+	var secondCount = countMap.getOrElse(Price.SECOND) { 0 }
+	var firstCount =countMap.getOrElse(Price.FIRST) { 0 }
+
 	print("""
 		3개 일치 (5,000원) - ${fifthCount}개
 		4개 일치 (50,000원) - ${fourthCount}개
