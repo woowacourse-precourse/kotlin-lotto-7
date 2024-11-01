@@ -3,6 +3,22 @@ package lotto.controller
 import lotto.view.InputView
 
 class LottoController(val view: InputView) {
+    private var price: Int = 0
+    private var winLotto = emptyList<Int>()
+
+    private fun getValidPurchasePrice(): Int {
+        while (true) {
+            val input = view.getPurchasePrice()
+            try {
+                require(!input.isValidNumber())
+                require(!input.isZero())
+
+                return input.toInt()
+            } catch (e: IllegalArgumentException) {
+                println("[ERROR] 0 이상인 정수여야 합니다.")
+            }
+        }
+    }
 
     companion object {
         private fun String.isValidNumber() = this.all { it.isDigit() }
