@@ -56,27 +56,27 @@
    </tr>
     <tr>
       <td rowspan="6">로또 구입 금액</td>
-      <td><input type="checkbox"></td>
+      <td><input type="checkbox" checked></td>
       <td>빈 경우</td>
     </tr>
     <tr>
-      <td><input type="checkbox"></td>
+      <td><input type="checkbox" checked></td>
       <td>양의 정수가 아닌 경우</td>
     </tr>
 <tr>
-      <td><input type="checkbox"></td>
+      <td><input type="checkbox" checked></td>
       <td>소수인 경우</td>
     </tr>
    <tr>
-      <td><input type="checkbox"></td>
+      <td><input type="checkbox" checked></td>
       <td>0인 경우</td>
     </tr>
    <tr>
-      <td><input type="checkbox"></td>
+      <td><input type="checkbox" checked></td>
       <td>1000원 이하인 경우</td>
     </tr>
    <tr>
-      <td><input type="checkbox"></td>
+      <td><input type="checkbox" checked></td>
       <td>1000원 단위로 끝나지 않는 경우</td>
    </tr>
     <tr>
