@@ -42,4 +42,12 @@ class LottoJudgeTest {
 
         return exception
     }
+
+    @Test
+    fun `로또 당첨 번호는 1 이상, 45 이하로 입력되어야 한다`() {
+        val exception = assertThrows<IllegalArgumentException> {
+            lottoJudge.setLottoWinnerNumbers(listOf(1,2,3,4,5,46))
+        }
+        assertThat(exception.message).contains(ErrorMessage.INPUT_WINNER_NUMBER_OUT_OF_RANGE_COUNT_ERROR.getMessage())
+    }
 }
