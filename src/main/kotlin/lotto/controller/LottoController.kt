@@ -42,9 +42,11 @@ class LottoController(
             try {
                 val rawPurchaseAmount = inputView.receivePurchaseAmount()
                 validateInputIsNotEmpty(rawPurchaseAmount)
-                return PurchaseAmount().apply {
-                    setPurchaseAmount(rawPurchaseAmount)
-                }
+
+                val purchaseAmount = PurchaseAmount()
+                purchaseAmount.setPurchaseAmount(rawPurchaseAmount)
+
+                return purchaseAmount
             } catch (e: IllegalArgumentException) {
                 outputView.printExceptionMessage(e.message ?: "")
             }
@@ -66,9 +68,11 @@ class LottoController(
             try {
                 val rawWinningNumber = inputView.receiveWinningNumbers()
                 validateInputIsNotEmpty(rawWinningNumber)
-                return WinningNumber().apply {
-                    setWinningNumbers(rawWinningNumber)
-                }
+
+                val winningNumber = WinningNumber()
+                winningNumber.setWinningNumbers(rawWinningNumber)
+
+                return winningNumber
             } catch (e: IllegalArgumentException) {
                 outputView.printExceptionMessage(e.message ?: "")
             }
@@ -80,9 +84,11 @@ class LottoController(
             try {
                 val rawBonusNumber = inputView.receiveBonusNumber()
                 validateInputIsNotEmpty(rawBonusNumber)
-                return BonusNumber().apply {
-                    setBonusNumber(rawBonusNumber, winningNumbers)
-                }
+
+                val bonusNumber = BonusNumber()
+                bonusNumber.setBonusNumber(rawBonusNumber, winningNumbers)
+
+                return bonusNumber
             } catch (e: IllegalArgumentException) {
                 outputView.printExceptionMessage(e.message ?: "")
             }
