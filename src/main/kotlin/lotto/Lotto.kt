@@ -15,6 +15,7 @@ fun getLotto():MutableList<Int> {
     return lottoTicket
 }
 
+
 class Lotto(private val numbers: List<Int>) {
     init {
         var numbersNotDuplex:HashSet<Int> = numbers.toHashSet()
@@ -24,6 +25,12 @@ class Lotto(private val numbers: List<Int>) {
         numbers.all { it in 1..45 } || throw IllegalArgumentException("[ERROR] 로또 번호는 1부터 45 사이의 숫자여야 합니다.")
     }
 
+    fun determineWith(pickedNumbers:MutableList<Int>, bonusNumber:Int):Int {
+        pickedNumbers.add(bonusNumber)
+        val winningCount = numbers.count { it in pickedNumbers }
+        return winningCount
+    }
 
     // TODO: 추가 기능 구현
+
 }

@@ -1,6 +1,10 @@
 package lotto
 
+import org.assertj.core.util.Objects
 import org.junit.jupiter.api.*
+import org.junit.jupiter.params.ParameterizedTest
+import org.junit.jupiter.params.provider.CsvSource
+import org.junit.jupiter.params.provider.MethodSource
 
 class LottoTest {
 
@@ -10,6 +14,36 @@ class LottoTest {
             for (i in 1 until 10000) {
                 Lotto(getLotto())
             }
+        }
+    }
+
+    @Test
+    fun `로또 판별 테스트`() {
+        assertDoesNotThrow {
+            var expected = 6
+            var winningLotto = listOf(1,2,3,4,5,6)
+            var actual = Lotto(winningLotto).determineWith(mutableListOf(1,2,3,4,5,6), 7)
+            require(actual==expected)
+
+            expected = 5
+            winningLotto = listOf(1,2,3,4,5,15)
+            actual = Lotto(winningLotto).determineWith(mutableListOf(1,2,3,4,5,6), 7)
+            require(actual==expected)
+
+            expected = 5
+            winningLotto = listOf(1,2,3,4,5,15)
+            actual = Lotto(winningLotto).determineWith(mutableListOf(1,2,3,4,5,6), 7)
+            require(actual==expected)
+
+            expected = 4
+            winningLotto = listOf(11,2,3,4,5,15)
+            actual = Lotto(winningLotto).determineWith(mutableListOf(1,2,3,4,5,6), 7)
+            require(actual==expected)
+
+            expected = 3
+            winningLotto = listOf(11,2,3,4,25,15)
+            actual = Lotto(winningLotto).determineWith(mutableListOf(1,2,3,4,5,6), 7)
+            require(actual==expected)
         }
     }
 
@@ -35,5 +69,4 @@ class LottoTest {
         }
     }
 
-    // TODO: 추가 기능 구현에 따른 테스트 코드 작성
 }
