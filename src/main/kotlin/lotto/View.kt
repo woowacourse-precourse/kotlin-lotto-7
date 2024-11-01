@@ -15,6 +15,7 @@ const val MESSAGE_STATISTICS_TITLE = "당첨 통계\n---"
 const val MESSAGE_DEFAULT_MATCH = "%d개 일치 (%s원) - %d개"
 const val MESSAGE_BONUS_MATCH = "%d개 일치, 보너스 볼 일치 (%s원) - %d개"
 const val RETURN_ON_INVESTMENT = "총 수익률은 %,.1f%%입니다."
+const val DEFAULT_ERROR_MESSAGE = "알 수 없는 오류가 발생했습니다."
 
 fun getLottoPurchaseAmount(): LottoPurchaseMoney {
     while (true) {
@@ -24,8 +25,7 @@ fun getLottoPurchaseAmount(): LottoPurchaseMoney {
 
             return LottoPurchaseMoney(input)
         } catch (e: IllegalArgumentException) {
-            println(e.message)
-            println()
+            printErrorMessage(e.message)
         }
     }
 }
@@ -46,8 +46,7 @@ fun getLottoWinningNumbers(): LottoWinningInfo {
 
             return result
         } catch (e: IllegalArgumentException) {
-            println(e.message)
-            println()
+            printErrorMessage(e.message)
         }
     }
 }
@@ -86,8 +85,7 @@ private fun setLottoBonusNumber(winningInfo: LottoWinningInfo) {
             winningInfo.bonusNumber = convertInt(readLineAndLineBreak())
             break
         } catch (e: IllegalArgumentException) {
-            println(e.message)
-            println()
+            printErrorMessage(e.message)
         }
     }
 }
@@ -97,4 +95,11 @@ private fun readLineAndLineBreak(): String {
     println()
 
     return input
+}
+
+private fun printErrorMessage(message: String?) {
+    val outputMessage = message ?: DEFAULT_ERROR_MESSAGE
+
+    println(outputMessage)
+    println()
 }
