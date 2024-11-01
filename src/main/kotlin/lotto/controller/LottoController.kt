@@ -5,12 +5,19 @@ import lotto.view.InputView
 class LottoController(val view: InputView) {
     private var price: Int = 0
     private var winLotto = emptyList<Int>()
+    private var bonusNumber: Int = 0
+
+    fun run() {
+        price = getValidPurchasePrice()
+        winLotto = getValidWinningNumbers()
+        bonusNumber = getValidBonusNumber()
+    }
 
     private fun getValidPurchasePrice(): Int {
         while (true) {
             val input = view.getPurchasePrice()
             try {
-                require(!input.isValidNumber())
+                require(input.isValidNumber())
                 require(!input.isZero())
 
                 return input.toInt()
@@ -24,7 +31,7 @@ class LottoController(val view: InputView) {
         while (true) {
             val input = view.getWinningNumbers()
             try {
-                require(!input.isValidNumbers())
+                require(input.isValidNumbers())
                 return input.split(DELIMITER).map { it.toInt() }
             } catch (e: IllegalArgumentException) {
                 println("[ERROR] 유효하지 않은 당첨 번호 리스트입니다.")
@@ -36,10 +43,12 @@ class LottoController(val view: InputView) {
         while (true) {
             val input = view.getBonusNumber()
             try {
-                require(!input.isValidNumber())
+                require(input.isValidNumber())
+                require(!input.isZero())
+
                 return input.toInt()
             } catch (e: IllegalArgumentException) {
-                println("[ERROR] 유효하지 않은 보너스 번호입니다.")
+                println("[ERROR] 당첨 번호는 0 이상인 정수여야 합니다.")
             }
         }
     }
