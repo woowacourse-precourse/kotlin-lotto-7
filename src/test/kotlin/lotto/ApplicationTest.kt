@@ -43,6 +43,44 @@ class ApplicationTest : NsTest() {
     }
 
     @Test
+    fun `지수형 표현 테스트`() {
+        assertRandomUniqueNumbersInRangeTest(
+            {
+                run("10000", "1,2,3,4,5,6", "7")
+                assertThat(output()).contains(
+                    "10개를 구매했습니다.",
+                    "[1, 2, 3, 4, 5, 6]",
+                    "[1, 2, 3, 4, 5, 6]",
+                    "[1, 2, 3, 4, 5, 6]",
+                    "[1, 2, 3, 4, 5, 6]",
+                    "[1, 2, 3, 4, 5, 6]",
+                    "[1, 2, 3, 4, 5, 6]",
+                    "[1, 2, 3, 4, 5, 6]",
+                    "[1, 2, 3, 4, 5, 6]",
+                    "[1, 2, 3, 4, 5, 6]",
+                    "[1, 2, 3, 4, 5, 6]",
+                    "3개 일치 (5,000원) - 0개",
+                    "4개 일치 (50,000원) - 0개",
+                    "5개 일치 (1,500,000원) - 0개",
+                    "5개 일치, 보너스 볼 일치 (30,000,000원) - 0개",
+                    "6개 일치 (2,000,000,000원) - 10개",
+                    "총 수익률은 200000000%입니다."
+                )
+            },
+            listOf(1,2,3,4,5,6),
+            listOf(1,2,3,4,5,6),
+            listOf(1,2,3,4,5,6),
+            listOf(1,2,3,4,5,6),
+            listOf(1,2,3,4,5,6),
+            listOf(1,2,3,4,5,6),
+            listOf(1,2,3,4,5,6),
+            listOf(1,2,3,4,5,6),
+            listOf(1,2,3,4,5,6),
+            listOf(1,2,3,4,5,6),
+        )
+    }
+
+    @Test
     fun `숫자 형식 예외 테스트`() {
         assertSimpleTest {
             runException("1000j")
@@ -88,8 +126,8 @@ class ApplicationTest : NsTest() {
     @DisplayName("반올림 기능 테스트")
     fun `반올림 기능 테스트`() {
         assertSimpleTest {
-            assert(totalWinningRate(0.3355) == 0.336)
-            assert(totalWinningRate(0.3354) == 0.335)
+            assert(totalWinningRate(0.3355) == "33.6")
+            assert(totalWinningRate(0.3354) == "33.5")
         }
     }
 
