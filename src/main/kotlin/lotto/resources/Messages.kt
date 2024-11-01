@@ -25,7 +25,7 @@ enum class Messages(private val message: String) {
     INVALID_LOTTO_RANGE(
         "로또의 각 번호는 ${InputValidator.LOTTO_START_VALUE}이상 ${InputValidator.LOTTO_END_VALUE}이하로 입력해 주세요"
     ),
-    NOT_SIX_NUMBER("입력값이 ${InputValidator.LOTTO_LENGTH}자리가 아닙니다."),
+    NOT_SIX_NUMBER("입력값이 ${InputValidator.LOTTO_LENGTH}개의 숫자로 구성되지 않았습니다."),
     EMPTY_INPUT("입력값이 비어있습니다."),
     NOT_NUMBER("올바른 숫자 형식이 아니거나 너무 큰 값을 입력하셨습니다."),
     NOT_DIVIDED_BY_UNIT("${InputValidator.MONEY_UNIT}으로 나누어 떨어지는 양의 정수를 입력해주세요."),
