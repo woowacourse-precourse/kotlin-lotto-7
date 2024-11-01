@@ -20,10 +20,26 @@ class LottoJudgeTest {
 
     @Test
     fun `로또 당첨 번호는 6개 입력되어야 한다`() {
+        val exceptionForNumbersCountIsSeven = `로또 당첨 번호가 7개인 경우 예외가 발생해야 한다`()
+        assertThat(exceptionForNumbersCountIsSeven.message).contains(ErrorMessage.INPUT_WINNER_NUMBER_COUNT_ERROR.getMessage())
+
+        val exceptionForNumbersCountIsFive = `로또 당첨 번호가 5개인 경우 예외가 발생해야 한다`()
+        assertThat(exceptionForNumbersCountIsFive.message).contains(ErrorMessage.INPUT_WINNER_NUMBER_COUNT_ERROR.getMessage())
+    }
+
+    private fun `로또 당첨 번호가 7개인 경우 예외가 발생해야 한다`(): Exception {
         val exception = assertThrows<IllegalArgumentException> {
             lottoJudge.setLottoWinnerNumbers(listOf(1,2,3,4,5,6,7))
         }
 
-        assertThat(exception.message).contains(ErrorMessage.INPUT_WINNER_NUMBER_COUNT_ERROR.getMessage())
+        return exception
+    }
+
+    private fun `로또 당첨 번호가 5개인 경우 예외가 발생해야 한다`(): Exception {
+        val exception = assertThrows<IllegalArgumentException> {
+            lottoJudge.setLottoWinnerNumbers(listOf(1,2,3,4,5))
+        }
+
+        return exception
     }
 }
