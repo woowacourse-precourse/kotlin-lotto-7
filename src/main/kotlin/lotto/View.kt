@@ -31,19 +31,20 @@ fun getLottoPurchaseAmount(): LottoPurchaseMoney {
 }
 
 fun getLottoWinningInfo(): LottoWinningInfo {
-    val winningInfo = LottoWinningInfo(getLottoWinningNumbers())
+    val winningInfo = getLottoWinningNumbers()
     setLottoBonusNumber(winningInfo)
 
     return winningInfo
 }
 
-fun getLottoWinningNumbers(): List<Int> {
+fun getLottoWinningNumbers(): LottoWinningInfo {
     while (true) {
         try {
             println(MESSAGE_INPUT_WINNING_NUMBER)
             val input = convertListInt(readLineAndLineBreak())
+            val result = LottoWinningInfo(input)
 
-            return input
+            return result
         } catch (e: IllegalArgumentException) {
             println(e.message)
             println()
