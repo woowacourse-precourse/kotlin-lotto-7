@@ -34,6 +34,10 @@ class OutputView {
         println(LOTTO_PROFIT_RATE_PROMPT.format(profitRate.toDecimalCommaFormat()))
     }
 
+    fun printExceptionMessage(exceptionMessage: String) {
+        println(exceptionMessage)
+    }
+
     private fun printRankResult(matches: Int, winningAmount: Int, count: Int, includeBonus: Boolean = false) {
         val bonusText = if (includeBonus) BONUS_TEXT else ""
         println(RESULT_PROMPT.format(matches, bonusText, winningAmount.toIntegerCommaFormat(), count))

@@ -38,7 +38,7 @@ class LottoController(
 
                 return purchaseAmount
             } catch (e: IllegalArgumentException) {
-                println(e.message)
+                outputView.printExceptionMessage(e.message ?: "")
             }
         }
     }
@@ -61,7 +61,7 @@ class LottoController(
 
                 return winningNumber
             } catch (e: IllegalArgumentException) {
-                println(e.message)
+                outputView.printExceptionMessage(e.message ?: "")
             }
         }
     }
@@ -77,7 +77,7 @@ class LottoController(
 
                 return bonusNumber
             } catch (e: IllegalArgumentException) {
-                println(e.message)
+                outputView.printExceptionMessage(e.message ?: "")
             }
         }
     }
