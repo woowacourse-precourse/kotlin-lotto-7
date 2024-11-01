@@ -1,9 +1,6 @@
 package lotto.controller
 
-import lotto.model.Lotto
-import lotto.model.LottoMachine
-import lotto.model.PurchaseAmount
-import lotto.model.WinningNumber
+import lotto.model.*
 import lotto.util.InputValidator.validateInputIsNotEmpty
 import lotto.view.InputView
 import lotto.view.OutputView
@@ -20,6 +17,7 @@ class LottoController(
         outputView.printPurchasedLottoNumbers(lottos.map { it.getLottoNumbers() })
 
         val winningNumber = receiveWinningNumber()
+        val bonusNumber = receiveBonusNumber(winningNumber.getWinningNumbers())
     }
 
     private fun receivePurchaseAmount(): PurchaseAmount {
@@ -55,6 +53,22 @@ class LottoController(
                 winningNumber.setWinningNumbers(rawWinningNumber)
 
                 return winningNumber
+            } catch (e: IllegalArgumentException) {
+                println(e.message)
+            }
+        }
+    }
+
+    private fun receiveBonusNumber(winningNumbers: List<Int>): BonusNumber {
+        while (true) {
+            try {
+                val rawBonusNumber = inputView.receiveBonusNumber()
+                validateInputIsNotEmpty(rawBonusNumber)
+
+                val bonusNumber = BonusNumber()
+                bonusNumber.setBonusNumber(rawBonusNumber, winningNumbers)
+
+                return bonusNumber
             } catch (e: IllegalArgumentException) {
                 println(e.message)
             }
