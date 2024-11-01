@@ -17,34 +17,19 @@ fun main() {
 
 fun readAndValidateAmount() {
     while (true) {
-        try {
-            val amount = promptUserForAmount()
-            validateAmount(amount)
-            return
+        val amount = try {
+            promptUserForAmount()
         } catch (e: IllegalArgumentException) {
             println(e.message)
+            continue
         }
+        Validation.validateAmount(amount)
+        return
     }
 }
 
 fun promptUserForAmount(): Int {
     println("구입금액을 입력해 주세요.")
     val input = Console.readLine()?.trim()
-    return parseAmount(input)
-}
-
-fun parseAmount(amount: String?): Int {
-    if (amount.isNullOrEmpty()) {
-        throw LottoError.INVALID_AMOUNT.throwException()
-    }
-    return amount.toIntOrNull() ?: throw LottoError.INVALID_AMOUNT.throwException()
-}
-
-fun validateAmount(amount: Int) {
-    if (amount <= 0) {
-        throw LottoError.INVALID_AMOUNT.throwException()
-    }
-    if (amount % 1000 != 0) {
-        throw LottoError.INVALID_UNIT.throwException()
-    }
+    return Validation.parseAmount(input)
 }
