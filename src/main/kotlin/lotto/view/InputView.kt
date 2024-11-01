@@ -12,6 +12,12 @@ class InputView {
         return input.toInt()
     }
 
+    private fun parseWinningNumbers(input: String): List<Int> {
+        val numbers = mutableListOf<Int>()
+        input.split(WINNING_NUMBERS_DELIMITER).forEach { numbers.add(parseNumericInput(it)) }
+        return numbers.sorted()
+    }
+
     fun readLottoMoney(): Int {
         println(PROMPT_LOTTO_MONEY)
         val money = parseNumericInput(Console.readLine())
@@ -23,7 +29,7 @@ class InputView {
 
     fun readWinningNumbers(): List<Int> {
         println(PROMPT_WINNING_NUMBERS)
-        val numbers = Console.readLine().split(WINNING_NUMBERS_DELIMITER).map { it.toInt() }
+        val numbers = parseWinningNumbers(Console.readLine())
         return numbers
     }
 
