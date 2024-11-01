@@ -74,7 +74,7 @@ fun getBonusNumber():Int {
         throw IllegalArgumentException(ErrorMessage.notInRange)
     }
 
-    if (bonusNumber in pickedNumbers) {
+    if (bonusNumber.toInt() in pickedNumbers) {
         throw IllegalArgumentException(ErrorMessage.isDuplex)
     }
     return bonusNumber.toInt()
