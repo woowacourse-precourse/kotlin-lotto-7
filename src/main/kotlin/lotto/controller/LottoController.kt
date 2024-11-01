@@ -20,6 +20,18 @@ class LottoController(val view: InputView) {
         }
     }
 
+    private fun getValidWinningNumbers(): List<Int> {
+        while (true) {
+            val input = view.getWinningNumbers()
+            try {
+                require(!input.isValidNumbers())
+                return input.split(DELIMITER).map { it.toInt() }
+            } catch (e: NumberFormatException) {
+                println("[ERROR] 유효하지 않은 당첨 번호 리스트입니다.")
+            }
+        }
+    }
+
     companion object {
         private fun String.isValidNumber() = this.all { it.isDigit() }
 
