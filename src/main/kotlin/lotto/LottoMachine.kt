@@ -2,7 +2,7 @@ package lotto
 
 import camp.nextstep.edu.missionutils.Randoms
 
-class LottoMachine {
+object LottoMachine {
     fun releaseLotto(releaseCount: Int): List<Lotto> {
 
         val lottos = arrayListOf<Lotto>()
