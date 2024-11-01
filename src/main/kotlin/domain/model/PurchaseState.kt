@@ -7,4 +7,6 @@ data class PurchaseState (
     val winningNumber: List<Int> = emptyList(),
     val bonusNumber: Int = 0,
     val pickedLotto: List<TreeSet<Int>> = emptyList(),
+    val reward: WinningState = WinningState(),
+    val rateOfReturn: String = "0.0"
 )
