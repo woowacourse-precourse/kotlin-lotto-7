@@ -5,7 +5,7 @@ import lotto.resources.Messages.*
 
 class InputValidator {
     fun validateMoney(input: String): Long {
-        require(input.isNotBlank() && input.isNotEmpty()) { EMPTY_INPUT.errorMessage() }
+        validateEmptyInput(input)
         val money = input.toLongOrNull()
             ?: throw IllegalArgumentException(NOT_NUMBER.errorMessage())
         require(money > 0L && money % MONEY_UNIT == 0L) { NOT_DIVIDED_BY_UNIT.errorMessage() }
@@ -13,7 +13,7 @@ class InputValidator {
     }
 
     fun validateWinNumbers(input: String): Lotto {
-        require(input.isNotBlank() && input.isNotEmpty()) { EMPTY_INPUT.errorMessage() }
+        validateEmptyInput(input)
         val winningNumbersText = input.split(",")
         require(winningNumbersText.size == LOTTO_LENGTH) { NOT_SIX_NUMBER.errorMessage() }
         require(winningNumbersText.distinct().size == LOTTO_LENGTH) { DUPLICATE_LOTTO_NUMBER.errorMessage() }
@@ -25,12 +25,16 @@ class InputValidator {
     }
 
     fun validateBonusNumber(input: String, winNumbers: Lotto): Int {
-        require(input.isNotBlank() && input.isNotEmpty()) { EMPTY_INPUT.errorMessage() }
+        validateEmptyInput(input)
         val bonusNumber = input.toIntOrNull()
             ?: throw IllegalArgumentException(NOT_NUMBER.errorMessage())
         require(bonusNumber in LOTTO_RANGE) { INVALID_LOTTO_RANGE.errorMessage() }
         require(bonusNumber !in winNumbers.numbers()) { DUPLICATE_LOTTO_NUMBER.errorMessage() }
         return bonusNumber
+    }
+
+    private fun validateEmptyInput(input: String) {
+        require(input.isNotBlank() && input.isNotEmpty()) { EMPTY_INPUT.errorMessage() }
     }
 
     companion object {
