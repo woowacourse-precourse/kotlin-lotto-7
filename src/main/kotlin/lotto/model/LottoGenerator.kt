@@ -3,8 +3,9 @@ import camp.nextstep.edu.missionutils.*
 
 class LottoGenerator {
 
-    fun generateLotto(numberOfLotto : Int) : List<List<Int>>{
+    fun generateLotto(money : String) : List<List<Int>>{
         val randomLotto : MutableList<List<Int>> = mutableListOf()
+        val numberOfLotto = getNumberOfLotto(money)
 
         for(i in 0 until numberOfLotto){
             randomLotto.add(getRandomNumbers())

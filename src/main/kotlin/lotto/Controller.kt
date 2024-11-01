@@ -15,30 +15,31 @@ class Controller {
 
     fun start() {
 
-        val numberOfLotto = getNumberOfLotto()
+        val money = getNumberOfLotto()
 
-        val randomLotto = getRandomLotto(numberOfLotto)
-        output.displayLotto(numberOfLotto, randomLotto)
+        val randomLotto = getRandomLotto(money)
+        output.displayLotto(randomLotto)
 
         val winningNum = getWinningNum()
+        val bonusNum = getBonusNum(winningNum)
 
     }
 
-    fun getNumberOfLotto(): Int {
+    fun getNumberOfLotto(): String {
         var money: String
         while (true) {
             try {
                 money = input.getMoney()
                 inputValidator.isValidMoney(money)
-                return lottoGenerator.getNumberOfLotto(money)
+                return money
             } catch (e: IllegalArgumentException) {
                 println(e.message)
             }
         }
     }
 
-    fun getRandomLotto(numberOfLotto: Int): List<List<Int>> {
-        return lottoGenerator.generateLotto(numberOfLotto)
+    fun getRandomLotto(money: String): List<List<Int>> {
+        return lottoGenerator.generateLotto(money)
     }
 
     fun getWinningNum(): List<Int> {
@@ -54,4 +55,17 @@ class Controller {
         }
     }
 
+    fun getBonusNum(winningNum: List<Int>): Int {
+        var bonusNum: String
+
+        while (true) {
+            try {
+                bonusNum = input.getBonusNum()
+                inputValidator.isValidBonusNum(bonusNum, winningNum)
+                return bonusNum.toInt()
+            } catch (e: IllegalArgumentException) {
+                println(e.message)
+            }
+        }
+    }
 }
