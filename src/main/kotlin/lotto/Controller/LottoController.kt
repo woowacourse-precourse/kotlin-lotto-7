@@ -5,26 +5,26 @@ import lotto.Model.InputValidater
 import lotto.Model.RandomLottoMaker
 import lotto.View.InputView
 import lotto.View.OutputView
+import kotlin.properties.Delegates
 
 class LottoController {
     private val inputView = InputView()
     private val outputView = OutputView()
+    private var bonusNumber = 0
     private var releasedLottos = listOf<Lotto>()
-
-    companion object {
-        private const val LOTTO_SPLIT_DELIMITER = ","
-    }
+    private lateinit var winningLotto: Lotto
 
     fun execute() {
         getInputsAndReleaseLottos()
+        outputView.printLottoResult(releasedLottos, winningLotto, bonusNumber)
     }
 
     private fun getInputsAndReleaseLottos() {
         val purchaseAmount = getPurchaseInput()
         val lottoAmount = purchaseAmount / 1000
         releaseLottos(lottoAmount)
-        val winningLotto = getWinningLotto()
-        val bonusNumber = getBonusNumber(winningLotto)
+        winningLotto = getWinningLotto()
+        bonusNumber = getBonusNumber(winningLotto)
     }
 
     private fun getPurchaseInput(): Int {
@@ -68,5 +68,9 @@ class LottoController {
     private fun releaseLottos(lottoAmount: Int) {
         releasedLottos = RandomLottoMaker.makeLottos(lottoAmount)
         outputView.printLottos(releasedLottos)
+    }
+
+    companion object {
+        private const val LOTTO_SPLIT_DELIMITER = ","
     }
 }
