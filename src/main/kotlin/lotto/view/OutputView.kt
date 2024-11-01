@@ -22,7 +22,6 @@ class OutputView {
     // 컨트롤러 -> 모델(LottoGenerator) -> 매개변수 받기 -> 컨트롤러에서 수행
     fun showPurchasedLottoList(count: Int) = println()
 
-    // 당첨 통계 --- 간단 출력도 여기서?
     fun showWinningStatisticsMessage() = println(WINNING_STATISTICS)
 
     fun showWinninfStatistics(matchCount: List<Int>) {
@@ -32,6 +31,6 @@ class OutputView {
         println("${LottoRank.SECOND.matchCount}개 일치 (${LottoRank.SECOND.reward}) - ${matchCount[SECOND]}개")
         println("${LottoRank.FIRST.matchCount}개 일치 (${LottoRank.FIRST.reward}) - ${matchCount[FIRST]}개")
     }
-    // 수익률 출략
+
     fun showTotalReturnRate(totalReturnRate: Float) = println("총 수익률은 $totalReturnRate%입니다.")
 }

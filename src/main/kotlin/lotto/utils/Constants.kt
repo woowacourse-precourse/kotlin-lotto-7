@@ -12,4 +12,5 @@ object Constants {
     const val THIRD = 3
     const val FOURTH = 4
     const val FIFTH = 5
+    const val DELIMETER = ","
 }

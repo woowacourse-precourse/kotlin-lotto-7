@@ -2,6 +2,7 @@ package lotto.view
 
 import camp.nextstep.edu.missionutils.Console
 import lotto.utils.Constants
+import lotto.utils.Constants.DELIMETER
 import lotto.utils.Constants.LIMIT_OF_PURCHASE
 import lotto.utils.Constants.LOTTO_PRICE
 import lotto.utils.Constants.ZERO
@@ -35,11 +36,11 @@ class InputView {
 
     fun getWinningNumbers(): List<Int> {
         println(InputConstants.WINNING_NUMBERS_MESSAGE)
-        return Console.readLine().split(",").map { it.toIntOrNull() ?: throw IllegalArgumentException("[ERROR] 당첨 번호는 1에서 45 사이 값으로 (,)로 구분해서 6자리 입력해주세요")
+        return Console.readLine().split(DELIMETER).map { it.toIntOrNull() ?: throw IllegalArgumentException(ErrorConstants.LOTTO_INPUT_FORMAT)
     }}
 
-    fun getBonusNumber(): String {
+    fun getBonusNumber(): Int {
         println(InputConstants.BONUS_NUMBER_MESSAGE)
-        return Console.readLine()
+        return Console.readLine().toIntOrNull() ?: throw IllegalArgumentException(ErrorConstants.BONUS_NUMBER_RANGE)
     }
 }
