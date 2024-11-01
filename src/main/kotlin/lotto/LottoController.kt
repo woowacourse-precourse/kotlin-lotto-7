@@ -3,32 +3,21 @@ package lotto
 class LottoController(
     private val calculateLottoRankUseCase: CalculateLottoRankUseCase,
     private val calculateLottoReturnUseCase: CalculateLottoReturnUseCase,
+    private val createUserUseCase: CreateUserUseCase,
     private val lottoBuyView: LottoBuyView,
     private val winningNumberInputView: WinningNumberInputView,
     private val lottoResultView: LottoResultView
 ) {
     fun run() {
-        val lottoCost = getLottoCost()
-        val user = User(lottoCost.toInt())
+        val user = getUser()
         showLottoTicketsResult(user)
         val winningNumbers = getWinningNumbers()
         showLottoResult(user.getLottoTickets(), winningNumbers)
     }
 
-    private fun getLottoCost(): Int {
+    private fun getUser(): User {
         lottoBuyView.guidePurchaseAmount()
-        return parseLottoCost()
-    }
-
-    private fun parseLottoCost(): Int {
-        while (true) {
-            try {
-                val input = lottoBuyView.inputPurchaseAmount()
-                return input.toInt()
-            } catch (e: NumberFormatException) {
-                println("[ERROR] 숫자만 입력해주세요.")
-            }
-        }
+        return createUserUseCase.execute { lottoBuyView.inputPurchaseAmount() }
     }
 
     private fun showLottoTicketsResult(user: User) {
