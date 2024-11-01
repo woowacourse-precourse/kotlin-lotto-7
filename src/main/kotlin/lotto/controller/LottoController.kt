@@ -1,10 +1,12 @@
 package lotto.controller
 
+import lotto.domain.entity.Lotto
+import lotto.domain.entity.Lotto.Companion.toLottoNumbers
 import lotto.view.InputView
 
 class LottoController(val view: InputView) {
     private var price: Int = 0
-    private var winLotto = emptyList<Int>()
+    private lateinit var winLotto: Lotto
     private var bonusNumber: Int = 0
 
     fun run() {
@@ -27,14 +29,15 @@ class LottoController(val view: InputView) {
         }
     }
 
-    private fun getValidWinningNumbers(): List<Int> {
+    private fun getValidWinningNumbers(): Lotto {
         while (true) {
             val input = view.getWinningNumbers()
             try {
-                require(input.isValidNumbers())
-                return input.split(DELIMITER).map { it.toInt() }
+                require(input.isValidNumbers()) { "[ERROR] 유효하지 않은 당첨 번호 리스트입니다." }
+                val inputNumbers = input.split(DELIMITER).map { it.toInt() }
+                return inputNumbers.toLottoNumbers()
             } catch (e: IllegalArgumentException) {
-                println("[ERROR] 유효하지 않은 당첨 번호 리스트입니다.")
+                println(e.message)
             }
         }
     }
