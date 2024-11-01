@@ -38,9 +38,7 @@ class GameController(
 
     private fun showBoughtLotto(boughtLotto: List<Lotto>) {
         gameView.showMessage(INFO_BUY_AMOUNT.formattedMessage(boughtLotto.size))
-        boughtLotto.forEach {
-            gameView.showMessage(it.numbersText())
-        }
+        gameView.showMessage(boughtLotto.joinToString(separator = " \n") { it.numbersText() })
         gameView.showBlankLine()
     }
 
