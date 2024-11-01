@@ -28,6 +28,18 @@ class LottoGame {
             lotto
         }
     }
+    fun calculateResult(
+        lottoList: List<Lotto>,
+        winningLotto: Lotto,
+        bonusNumber: Int
+    ): LottoResult {
+        val result = LottoResult()
+        for (lotto in lottoList) {
+            val matchCount = lotto.getMatchCount(winningLotto)
+            val rank = LottoRank.getRank(matchCount, lotto.contains(bonusNumber))
+            result.addRank(rank)
+        }
+        return result
 
 
 
