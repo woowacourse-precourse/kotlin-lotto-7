@@ -10,7 +10,7 @@ class LottoGame {
         val lottoList = buyLottos(cost)
         val result = calculateResult(lottoList, winningLotto, bonusNumber)
         printResults(result)
-        printTotalReturn(result.cost)
+        printTotalReturn(result,cost)
 
         return result
     }
