@@ -11,7 +11,7 @@ import org.junit.jupiter.params.provider.ValueSource
 class LottoAmountTest {
     @DisplayName("숫자가 아닌 다른 문자를 포함한 경우")
     @ParameterizedTest
-    @ValueSource(strings = ["abcd", "1,000", "+35000", "-45000", "10000.0", "천원", "일만", "십억?"])
+    @ValueSource(strings = ["\n", "\t", "abcd", "1,000", "+35000", "-45000", "10000.0", "천원", "일만", "십억?"])
     fun amountContainsNonNumber(input: String) {
         assertThrows<IllegalArgumentException> { LottoAmount(input) }
     }
@@ -25,7 +25,6 @@ class LottoAmountTest {
 
     @DisplayName("구입 금액을 입력하지 않은 경우")
     @ParameterizedTest
-    @ValueSource(strings = ["\n", "\t"])
     @EmptySource
     fun amountEmpty(input: String) {
         assertThrows<IllegalArgumentException> { LottoAmount(input) }
