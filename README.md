@@ -24,11 +24,13 @@
 - Lotto 클래스
     - 6개가 아니면 throw IllegalArgumentException
     - 당첨 여부(일치 개수) 확인
-    -
 - enum class WinningLotto(당첨금: Int, 당첨개수: Int)
     - Three, Four, Five, FiveBonus, Six
 
-## 예외처리
+## 테스트
+- 로또 일치 시 현황 업데이트 되는가?
+
+## 예외처리 (테스트)
 - 구입 금액이 1,000원으로 나누어 떨어지지 않음
 - 당첨 번호가 정수가 아님
 - 당첨 번호가 6개가 아님
