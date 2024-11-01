@@ -8,25 +8,15 @@ import lotto.util.Constants.LOTTO_PRICE
 
 class LottoMachine {
 
-    fun purchaseLottos(purchaseAmount: Int): List<Lotto> {
+    fun issueLottos(purchaseAmount: Int): List<Lotto> {
         val issueCount = calculateIssueCount(purchaseAmount)
-        val lottos = mutableListOf<Lotto>()
-
-        repeat(issueCount) {
-            val newLotto = generateLotto()
-            lottos.add(newLotto)
-        }
-
-        return lottos
+        return List(issueCount) { generateLotto() }
     }
 
     private fun calculateIssueCount(purchaseAmount: Int): Int = purchaseAmount / LOTTO_PRICE
 
     private fun generateLotto(): Lotto {
-        val numbers = generateUniqueNumbers()
+        val numbers = Randoms.pickUniqueNumbersInRange(LOTTO_MIN_NUMBER, LOTTO_MAX_NUMBER, LOTTO_NUMBER_SIZE)
         return Lotto(numbers)
     }
-
-    private fun generateUniqueNumbers(): List<Int> =
-        Randoms.pickUniqueNumbersInRange(LOTTO_MIN_NUMBER, LOTTO_MAX_NUMBER, LOTTO_NUMBER_SIZE)
 }

@@ -38,7 +38,7 @@ class LottoController(
 
     private fun purchaseLotto(purchaseAmount: PurchaseAmount): List<Lotto> {
         val lottoMachine = LottoMachine()
-        val lottos = lottoMachine.purchaseLottos(purchaseAmount.getPurchaseAmount())
+        val lottos = lottoMachine.issueLottos(purchaseAmount.getPurchaseAmount())
 
         return lottos
     }
