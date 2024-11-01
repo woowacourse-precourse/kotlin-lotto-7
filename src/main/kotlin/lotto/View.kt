@@ -5,6 +5,7 @@ import lotto.domain.LottoWinningInfo
 import lotto.domain.Money
 
 const val MESSAGE_INPUT_PURCHASE_AMOUNT = "구입금액을 입력해 주세요."
+const val MESSAGE_INPUT_BONUS_NUMBER = "보너스 번호를 입력해 주세요."
 const val MESSAGE_INPUT_WINNING_NUMBER = "당첨 번호를 입력해 주세요."
 
 fun getLottoPurchaseAmount(): Money {
@@ -31,7 +32,7 @@ fun getLottoWinningInfo(): LottoWinningInfo {
 private fun setLottoBonusNumber(winningInfo: LottoWinningInfo) {
     while (true) {
         try {
-            println(MESSAGE_INPUT_PURCHASE_AMOUNT)
+            println(MESSAGE_INPUT_BONUS_NUMBER)
             winningInfo.bonusNumber = convertInt(readLineAndLineBreak())
             break
         } catch (e: IllegalArgumentException) {
