@@ -13,6 +13,24 @@ class LottoMachine {
         return List(issueCount) { generateLotto() }
     }
 
+    fun determineLottoRanks(
+        lottos: List<Lotto>,
+        winningNumber: List<Int>,
+        bonusNumber: Int
+    ): List<LottoRank> {
+        return lottos.map { lotto ->
+            determineLottoRank(lotto.getLottoNumbers(), winningNumber, bonusNumber)
+        }
+    }
+
+    private fun determineLottoRank(lotto: List<Int>, winningNumbers: List<Int>, bonusNumber: Int): LottoRank {
+        val matchedCount = winningNumbers.countMatchesWith(lotto)
+        val isBonusNumberMatched = lotto.contains(bonusNumber)
+        return LottoRank.determineRank(matchedCount, isBonusNumberMatched)
+    }
+
+    private fun List<Int>.countMatchesWith(numbers: List<Int>): Int = this.count { it in numbers }
+
     private fun calculateIssueCount(purchaseAmount: Int): Int = purchaseAmount / LOTTO_PRICE
 
     private fun generateLotto(): Lotto {

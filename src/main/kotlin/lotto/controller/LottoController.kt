@@ -18,6 +18,8 @@ class LottoController(
 
         val winningNumber = receiveWinningNumber()
         val bonusNumber = receiveBonusNumber(winningNumber.getWinningNumbers())
+
+        val lottoResults = determineLottoRanks(lottos, winningNumber, bonusNumber)
     }
 
     private fun receivePurchaseAmount(): PurchaseAmount {
@@ -73,5 +75,17 @@ class LottoController(
                 println(e.message)
             }
         }
+    }
+
+    private fun determineLottoRanks(
+        lottos: List<Lotto>,
+        winningNumber: WinningNumber,
+        bonusNumber: BonusNumber
+    ): List<LottoRank> {
+        val lottoMachine = LottoMachine()
+        val ranks =
+            lottoMachine.determineLottoRanks(lottos, winningNumber.getWinningNumbers(), bonusNumber.getBonusNumber())
+
+        return ranks
     }
 }
