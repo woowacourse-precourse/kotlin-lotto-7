@@ -1,6 +1,7 @@
 package lotto
 
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.assertDoesNotThrow
 import org.junit.jupiter.api.assertThrows
 
 class LottoTest {
@@ -27,9 +28,16 @@ class LottoTest {
     }
 
     @Test
-    fun testLottoNumBetween1And45() {
+    fun testLottoNumNotBetween1And45() {
         assertThrows<IllegalArgumentException> {
             Lotto(listOf(1, 2, 3, 4, 5, 46))
+        }
+    }
+
+    @Test
+    fun testLottoNumValidate() {
+        assertDoesNotThrow {
+            Lotto(listOf(1, 2, 3, 4, 5, 6))
         }
     }
 }

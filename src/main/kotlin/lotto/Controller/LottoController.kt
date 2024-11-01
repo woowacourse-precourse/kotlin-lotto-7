@@ -5,7 +5,6 @@ import lotto.Model.InputValidater
 import lotto.Model.RandomLottoMaker
 import lotto.View.InputView
 import lotto.View.OutputView
-import kotlin.properties.Delegates
 
 class LottoController {
     private val inputView = InputView()
@@ -21,7 +20,7 @@ class LottoController {
 
     private fun getInputsAndReleaseLottos() {
         val purchaseAmount = getPurchaseInput()
-        val lottoAmount = purchaseAmount / 1000
+        val lottoAmount = purchaseAmount / Lotto.cost
         releaseLottos(lottoAmount)
         winningLotto = getWinningLotto()
         bonusNumber = getBonusNumber(winningLotto)

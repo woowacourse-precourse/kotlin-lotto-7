@@ -49,4 +49,8 @@ class Lotto(private val numbers: List<Int>) {
             return LottoRank.Fifth
         return LottoRank.Lose
     }
+
+    companion object {
+        const val cost = 1000
+    }
 }
