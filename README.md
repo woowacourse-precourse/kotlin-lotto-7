@@ -43,5 +43,6 @@ Exception이 아닌 IllegalArgumentException, IllegalStateException 등과 같�
 3등 - 5개 일치  
 2등 - 5개 일치, 보너스 볼 일치  
 1등 - 6개 일치  
+
 ### 4. 수익률을 계산하는 기능
 

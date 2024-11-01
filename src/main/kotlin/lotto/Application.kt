@@ -1,7 +1,7 @@
 package lotto
 
 var purchaseAmount:Int = 0
-var pickedNumbers:List<String> = listOf()
+var pickedNumbers:MutableList<String> = mutableListOf()
 var bonusNumber:Int = 0
 val lottoStorage:MutableList<MutableList<Int>> = mutableListOf()
 
@@ -41,5 +41,9 @@ fun main()
 		} catch (err:Exception) {
 			print(err.message)
 		}
+	}
+
+	for (numbers in lottoStorage) {
+		Lotto(numbers).determineWith(pickedNumbers, bonusNumber)
 	}
 }

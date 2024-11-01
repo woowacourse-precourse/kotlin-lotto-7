@@ -36,10 +36,10 @@ fun getPurchaseAmount():Int {
     return purchaseAmount
 }
 
-fun getPickedNumbers():List<String> {
+fun getPickedNumbers():MutableList<Int> {
     print("당첨 번호를 입력해 주세요.\n")
-    var pickedNumbers = camp.nextstep.edu.missionutils.Console.readLine().split(',')
-
+    var pickedNumbers = camp.nextstep.edu.missionutils.Console.readLine().split(',').toMutableList()
+    var pickedNumbersChanged:MutableList<Int> = mutableListOf()
     if (pickedNumbers.size != 6) {
         throw IllegalArgumentException(ErrorMessage.notSixNumbers)
     }
@@ -53,7 +53,10 @@ fun getPickedNumbers():List<String> {
     if (pickedNumbers.toHashSet().size != 6) {
         throw IllegalArgumentException(ErrorMessage.isDuplex)
     }
-    return pickedNumbers
+    for (str in pickedNumbers) {
+        pickedNumbersChanged.add(str.toInt())
+    }
+    return pickedNumbersChanged
 
 }
 
