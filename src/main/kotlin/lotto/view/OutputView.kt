@@ -28,7 +28,7 @@ class OutputView {
         printRankResult(4, LOTTO_RANK_FOURTH_WINNING_AMOUNT, ranks[3])
         printRankResult(5, LOTTO_RANK_THIRD_WINNING_AMOUNT, ranks[2])
         printRankResult(5, LOTTO_RANK_SECOND_WINNING_AMOUNT, ranks[1], includeBonus = true)
-        printRankResult(3, LOTTO_RANK_FIRST_WINNING_AMOUNT, ranks[0])
+        printRankResult(6, LOTTO_RANK_FIRST_WINNING_AMOUNT, ranks[0])
     }
 
     fun printProfitRate(profitRate: Double) {
