@@ -1,8 +1,8 @@
 package lotto
 
-class LottoCounter {
+class LottoMatcher {
     // TODO: 두 개의 리스트가 모두 Set 이라면 intersect 메서드가 더 효율적일 것으로 예상
-    fun countWithWinningNumbers(
+    fun matchWithWinningNumbers(
         lotto: Lotto,
         winningNumbers: List<Int>,
     ): Int {
@@ -11,12 +11,11 @@ class LottoCounter {
         return matchCount
     }
 
-    fun countWithBonusNumber(
+    fun hasBonusNumber(
         lotto: Lotto,
         bonusNumber: Int,
-    ): Int {
+    ): Boolean {
         val lottoNumbers = lotto.getNumbers()
-        val bonusNumberCount = lottoNumbers.count { it == bonusNumber }
-        return bonusNumberCount
+        return lottoNumbers.contains(bonusNumber)
     }
 }
