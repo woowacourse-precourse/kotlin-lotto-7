@@ -59,5 +59,31 @@ class View(
         viewModel.onCompleteInputWinningNumber(winningNumber)
     }
 
+    private fun printWinningStatics() {
+        lineBreak()
+        println(Output.WINNING_STATISTICS)
+        println(Output.THREE_HYPHEN)
+        val result = viewModel.state.reward.winning
+        result.map { (key, value) ->
+            if (key.getReword() == Rank.SECOND.getReword()) printSecondRankResult(key, value)
+            else printOtherRankResult(key, value)
+        }
+    }
+
+    private fun printSecondRankResult(key: Rank, value: Int) {
+        println(
+            "${key.getMatchingCount()}개 일치, 보너스 볼 일치 (${
+                key.getReword().convertWithDigitComma()
+            }원) - ${value}개"
+        )
+    }
+
+    private fun printOtherRankResult(key: Rank, value: Int) {
+        println(
+            "${key.getMatchingCount()}개 일치 (${
+                key.getReword().convertWithDigitComma()
+            }원) - ${value}개"
+        )
+    }
     private fun lineBreak() = println()
 }
