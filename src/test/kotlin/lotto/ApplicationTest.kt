@@ -5,10 +5,12 @@ import camp.nextstep.edu.missionutils.test.Assertions.assertSimpleTest
 import camp.nextstep.edu.missionutils.test.NsTest
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.assertThrows
 
 class ApplicationTest : NsTest() {
     @Test
     fun `기능 테스트`() {
+
         assertRandomUniqueNumbersInRangeTest(
             {
                 run("8000", "1,2,3,4,5,6", "7")
@@ -48,6 +50,13 @@ class ApplicationTest : NsTest() {
             assertThat(output()).contains(ERROR_MESSAGE)
         }
     }
+
+//    @Test
+//    fun `구매 금액 문자 입력 예외 처리`() {
+//        assertThrows<IllegalArgumentException> {
+//            Validator.validatePurchaseMoney("잘못된_입력") // 숫자가 아닌 값 입력
+//        }
+//    }
 
     override fun runMain() {
         main()

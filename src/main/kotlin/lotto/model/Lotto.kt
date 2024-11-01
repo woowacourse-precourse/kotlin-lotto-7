@@ -1,10 +1,13 @@
 package lotto.model
 
+import lotto.Validator
 import lotto.WinLotteryValidator
 
 class Lotto(private val numbers: List<Int>) {
     init {
         require(numbers.size == LOTTO_SIZE) { WinLotteryValidator.ERROR_TOO_MANY_LOTTO_NUMBER.msg }
+        require(Validator.isOutOfRange(numbers)) { WinLotteryValidator.ERROR_OUT_OF_RANGE.msg }
+        require(Validator.isNotExistDuplicateNumber(numbers)) { WinLotteryValidator.ERROR_DUPLICATE_LOTTO_NUMBER.msg }
     }
 
     companion object {

@@ -33,7 +33,7 @@ object Validator {
         require(s.toIntOrNull() != null) {
             MoneyValidator.ERROR_NOT_NUMBER.msg
         }
-        require(s.toInt() >= 0) {
+        require(s.toInt() > 0) {
             MoneyValidator.ERROR_MINUS_MONEY.msg
         }
         require(s.toInt() % 1_000 == 0) {
@@ -54,13 +54,6 @@ object Validator {
         require(isChangeToInt(s)) {
             WinLotteryValidator.ERROR_NOT_NUMBER.msg
         }
-        require(isOutOfRange(s)) {
-            WinLotteryValidator.ERROR_OUT_OF_RANGE.msg
-        }
-        require(isNotExistDuplicateNumber(s)) {
-            WinLotteryValidator.ERROR_DUPLICATE_LOTTO_NUMBER.msg
-        }
-
     }
 
     fun validateBonusLottery(w: List<Int>, b: String) {
@@ -83,13 +76,13 @@ object Validator {
         val regex = "[,]".toRegex()
         return regex.containsMatchIn(input)
     }
+
     private fun isContainsConsecutiveCommas(input: String): Boolean {
         val regex = ",{2,}".toRegex()
         return !regex.containsMatchIn(input)
     }
 
-    private fun isOutOfRange(input: String): Boolean {
-        val lotto = input.split(",").map { it.trim().toInt() }
+    fun isOutOfRange(lotto: List<Int>): Boolean {
         for (i in lotto) {
             if (i !in 1..45) return false
         }
@@ -97,15 +90,14 @@ object Validator {
     }
 
     private fun isChangeToInt(input: String): Boolean {
-        val lotto = input.split(",").map { it.trim().toIntOrNull()}
+        val lotto = input.split(",").map { it.trim().toIntOrNull() }
         for (i in lotto) {
             if (i == null) return false
         }
         return true
     }
 
-    private fun isNotExistDuplicateNumber(input: String): Boolean {
-        val lotto = input.split(",").map { it.trim().toIntOrNull()}
+    fun isNotExistDuplicateNumber(lotto: List<Int>): Boolean {
         return lotto.size == lotto.distinct().size
     }
 

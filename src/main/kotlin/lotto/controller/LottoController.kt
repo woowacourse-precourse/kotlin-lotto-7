@@ -17,10 +17,17 @@ class LottoController {
     private var bonusLotteryNumber = NOT_INPUT_BONUS_LOTTERY_NUMBER_STATE
 
     fun purchaseLotto() {
-        money = inputView.printInputMoney()
-        generateLotto(money / LOTTO_PRICE)
-        outputView.printPurchaseLottoCount(money / LOTTO_PRICE)
-        outputView.printPurchaseLotto(lottos)
+        try {
+            money = inputView.printInputMoney()
+            generateLotto(money / LOTTO_PRICE)
+            outputView.printPurchaseLottoCount(money / LOTTO_PRICE)
+            outputView.printPurchaseLotto(lottos)
+        } catch (e: IllegalArgumentException) {
+            e.printStackTrace()
+            println(e.message)
+            println()
+            purchaseLotto()
+        }
     }
 
     fun setLotteryNumber() {
@@ -65,23 +72,15 @@ class LottoController {
         isMatchBonus: Boolean,
     ) {
         when (matchCount) {
-            3 -> matchLottoCount[MatchingLottoCount.THREE] =
-                (matchLottoCount[MatchingLottoCount.THREE] ?: 0) + 1
-
-            4 -> matchLottoCount[MatchingLottoCount.FOUR] =
-                (matchLottoCount[MatchingLottoCount.FOUR] ?: 0) + 1
-
-            5 -> matchLottoCount[MatchingLottoCount.FIVE] =
-                (matchLottoCount[MatchingLottoCount.FIVE] ?: 0) + 1
-
+            3 -> matchLottoCount[MatchingLottoCount.THREE] = (matchLottoCount[MatchingLottoCount.THREE] ?: 0) + 1
+            4 -> matchLottoCount[MatchingLottoCount.FOUR] = (matchLottoCount[MatchingLottoCount.FOUR] ?: 0) + 1
+            5 -> matchLottoCount[MatchingLottoCount.FIVE] = (matchLottoCount[MatchingLottoCount.FIVE] ?: 0) + 1
             6 -> {
                 if (isMatchBonus) {
-                    matchLottoCount[MatchingLottoCount.FIVE_BONUS] =
-                        (matchLottoCount[MatchingLottoCount.FIVE_BONUS] ?: 0) + 1
+                    matchLottoCount[MatchingLottoCount.FIVE_BONUS] = (matchLottoCount[MatchingLottoCount.FIVE_BONUS] ?: 0) + 1
                     return
                 }
-                matchLottoCount[MatchingLottoCount.SIX] =
-                    (matchLottoCount[MatchingLottoCount.SIX] ?: 0) + 1
+                matchLottoCount[MatchingLottoCount.SIX] = (matchLottoCount[MatchingLottoCount.SIX] ?: 0) + 1
             }
         }
     }
@@ -96,12 +95,12 @@ class LottoController {
         var profit = 0L
 
         for ((key, value) in matchLottoCount) {
-            when (key) {
-                MatchingLottoCount.THREE -> profit += value * PRIZE_MONEY_3MATCH
-                MatchingLottoCount.FOUR -> profit += value * PRIZE_MONEY_4MATCH
-                MatchingLottoCount.FIVE -> profit += value * PRIZE_MONEY_5MATCH
-                MatchingLottoCount.FIVE_BONUS -> profit += value * PRIZE_MONEY_5MATCH_BONUS
-                MatchingLottoCount.SIX -> profit += value * PRIZE_MONEY_6MATCH
+            profit += when (key) {
+                MatchingLottoCount.THREE -> value * PRIZE_MONEY_3MATCH
+                MatchingLottoCount.FOUR -> value * PRIZE_MONEY_4MATCH
+                MatchingLottoCount.FIVE -> value * PRIZE_MONEY_5MATCH
+                MatchingLottoCount.FIVE_BONUS -> value * PRIZE_MONEY_5MATCH_BONUS
+                MatchingLottoCount.SIX -> value * PRIZE_MONEY_6MATCH
             }
         }
         return profit

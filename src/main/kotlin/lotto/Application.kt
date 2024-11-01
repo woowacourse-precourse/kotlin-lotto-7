@@ -10,4 +10,5 @@ fun main() {
     lottoController.purchaseLotto()
     lottoController.setLotteryNumber()
     lottoController.resultLotto()
+
 }
