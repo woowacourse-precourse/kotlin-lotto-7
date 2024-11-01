@@ -21,7 +21,15 @@ class InputView {
         return money
     }
 
+    fun readWinningNumbers(): List<Int> {
+        println(PROMPT_WINNING_NUMBERS)
+        val numbers = Console.readLine().split(WINNING_NUMBERS_DELIMITER).map { it.toInt() }
+        return numbers
+    }
+
     companion object {
         const val PROMPT_LOTTO_MONEY = "구입금액을 입력해 주세요."
+        const val PROMPT_WINNING_NUMBERS = "당첨 번호를 입력해 주세요."
+        const val WINNING_NUMBERS_DELIMITER = ","
     }
 }

@@ -17,5 +17,7 @@ class LottoController {
 
         val lottos = lottoHandler.generateLottos(lottoCount)
         outputView.printLottos(lottos)
+
+        inputView.readWinningNumbers()
     }
 }
