@@ -33,17 +33,24 @@ class LottoGame {
         while (true) {
             try {
                 println("당첨 번호를 입력해 주세요.")
-                val winningLotto = Console.readLine().split(',').map { it.toIntOrNull() ?: throw NumberFormatException("[ERROR] 당첨번호는 숫자로 입력해야 합니다.")}
+                val winningLotto = Console.readLine().split(',').map { it.toIntOrNull() ?: throw IllegalArgumentException("[ERROR] 당첨번호는 숫자로 입력해야 합니다.")}
                 return Lotto(winningLotto)
-            } catch (e: NumberFormatException) {
+            } catch (e: IllegalArgumentException) {
                 println(e.message)
             }
         }
     }
     fun inputBonusNumber(): Int {
-        println("보너스 번호를 입력해 주세요.")
-        val bonusNumber = Console.readLine().toInt()
-        return bonusNumber
+        while(true) {
+            try {
+                println("보너스 번호를 입력해 주세요.")
+                val bonusNumber = Console.readLine().toIntOrNull()
+                    ?: throw IllegalArgumentException("[ERROR] 금액은 숫자로 입력 해야 합니다.")
+                return bonusNumber
+            } catch (e:IllegalArgumentException) {
+                println(e.message)
+            }
+        }
     }
     fun buyLottos(cost: Int): List<Lotto> {
         val lottoCount = cost / 1000
@@ -69,15 +76,15 @@ class LottoGame {
         return result
     }
     fun printResults(result: LottoResult) {
-        println("3개 일치 5,000원) - ${result.countRank(LottoRank.FIFTH)}개")
-        println("4개 일치 50,000원) - ${result.countRank(LottoRank.FOURTH)}개")
-        println("5개 일치 1,500,000원) - ${result.countRank(LottoRank.THIRD)}개")
+        println("3개 일치 (5,000원) - ${result.countRank(LottoRank.FIFTH)}개")
+        println("4개 일치 (50,000원) - ${result.countRank(LottoRank.FOURTH)}개")
+        println("5개 일치 (1,500,000원) - ${result.countRank(LottoRank.THIRD)}개")
         println("5개 일치, 보너스 볼 일치 (30,000,000원) - ${result.countRank(LottoRank.SECOND)}개")
         println("6개 일치 (2,000,000,000원) - ${result.countRank(LottoRank.FIRST)}개")
     }
     fun printTotalReturn(result: LottoResult, cost: Int) {
         val totalPrize = result.calculateTotalPrize()
-        val totalReturn = String.format("%.2f",(totalPrize.toDouble() / cost) * 100)
+        val totalReturn = Math.round((totalPrize.toDouble() / cost) * 100 * 10) / 10.0
         println("총 수익률은 ${totalReturn}%입니다.")
     }
 
