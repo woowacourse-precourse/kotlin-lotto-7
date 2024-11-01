@@ -27,7 +27,7 @@ class OutputView {
         println(OutputMessages.MESSAGE_BONUS_NUMBER.message)
     }
 
-    fun printResult(prizeResult: MutableMap<PrizeRank, Int>, earningRate: Double) {
+    fun printResult(prizeResult: MutableMap<PrizeRank, Int>, earningRate: String) {
         val sb = StringBuilder(OutputMessages.MESSAGE_RESULT.message)
         sb.append("${OutputMessages.PRINT_RESULT_THREE.message}${prizeResult[PrizeRank.FIFTH]}")
         sb.append(OutputMessages.UNIT_CORRECT.message)

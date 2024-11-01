@@ -1,6 +1,7 @@
 package lotto.model
 
 import lotto.util.PrizeRank
+import kotlin.math.roundToInt
 
 class VerifyPrize {
     val countPrize: MutableMap<PrizeRank, Int> = mutableMapOf()
@@ -10,11 +11,12 @@ class VerifyPrize {
         PrizeRank.entries.forEach { rank -> countPrize[rank] = INIT_RANK_COUNT }
     }
 
-    fun prizeResult(tickets: List<List<Int>>, prizeNumber: List<Int>, bonusNumber: Int): Double {
+    fun prizeResult(tickets: List<List<Int>>, prizeNumber: List<Int>, bonusNumber: Int): String {
         tickets.forEach { ticket ->
             checkPrize(ticket, prizeNumber, bonusNumber)
         }
-        return earn / (tickets.size * LOTTO_PRICE) * PERCENTAGE
+        val rate = earn / (tickets.size * LOTTO_PRICE) * PERCENTAGE
+        return String.format("%.1f", (rate * 10).roundToInt().toDouble() / 10)
     }
 
     private fun checkPrize(ticket: List<Int>, prizeNumber: List<Int>, bonusNumber: Int) {
@@ -22,7 +24,7 @@ class VerifyPrize {
         val rank = when (theNumber) {
             CORRECT_THREE -> PrizeRank.FIFTH
             CORRECT_FOUR -> PrizeRank.FOURTH
-            CORRECT_FIVE -> checkContainBonus(prizeNumber, bonusNumber)
+            CORRECT_FIVE -> checkContainBonus(ticket, bonusNumber)
             CORRECT_SIX -> PrizeRank.FIRST
             else -> PrizeRank.THE_LAST
         }
@@ -30,8 +32,8 @@ class VerifyPrize {
         earn += rank.prizeValue
     }
 
-    private fun checkContainBonus(prizeNumber: List<Int>, bonusNumber: Int): PrizeRank {
-        return if (prizeNumber.contains(bonusNumber)) PrizeRank.SECOND else PrizeRank.THIRD
+    private fun checkContainBonus(ticket: List<Int>, bonusNumber: Int): PrizeRank {
+        return if (ticket.contains(bonusNumber)) PrizeRank.SECOND else PrizeRank.THIRD
     }
 
     companion object {
