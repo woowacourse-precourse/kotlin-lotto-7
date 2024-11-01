@@ -20,7 +20,7 @@ class LottoGame {
                 println("구입금액을 입력해 주세요.")
                 val cost = Console.readLine().toIntOrNull() ?: throw NumberFormatException("[ERROR] 금액은 숫자로 입력해야 합니다.")
                 if (cost < 1000 || cost % 1000 != 0) throw IllegalArgumentException("[ERROR] 금액은 1,000원 단위로 입력해야 합니다.")
-                
+
                 return cost
             } catch (e: IllegalArgumentException) {
                 println(e.message)
@@ -30,9 +30,15 @@ class LottoGame {
         }
     }
     fun inputWinningLotto(): Lotto {
-        println("당첨 번호를 입력해 주세요.")
-        val winningLotto = Console.readLine().split(',').map { it.toInt() }
-        return Lotto(winningLotto)
+        while (true) {
+            try {
+                println("당첨 번호를 입력해 주세요.")
+                val winningLotto = Console.readLine().split(',').map { it.toIntOrNull() ?: throw NumberFormatException("[ERROR] 당첨번호는 숫자로 입력해야 합니다.")}
+                return Lotto(winningLotto)
+            } catch (e: NumberFormatException) {
+                println(e.message)
+            }
+        }
     }
     fun inputBonusNumber(): Int {
         println("보너스 번호를 입력해 주세요.")
