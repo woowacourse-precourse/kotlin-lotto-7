@@ -22,6 +22,7 @@ enum class BonusLotteryValidator(val msg: String) {
     ERROR_EMPTY_LOTTO_NUMBER("[ERROR] 보너스 번호는 공백이거나 빈 값일 수 없습니다."),
     ERROR_OUT_OF_RANGE("[ERROR] 1~45 사이의 숫자만 입력 가능합니다."),
     ERROR_NOT_NUMBER("[ERROR] 보너스300 번호는 숫자만 입력하실 수 있습니다."),
+    ERROR_DUPLICATE_LOTTO_NUMBER("[ERROR] 보너스 번호는 당첨 복권 번호와 중복될 수 없습니다.")
 }
 
 object Validator {
@@ -62,15 +63,18 @@ object Validator {
 
     }
 
-    fun validateBonusLottery(s: String) {
-        require(s.isNotBlank()) {
+    fun validateBonusLottery(w: List<Int>, b: String) {
+        require(b.isNotBlank()) {
             BonusLotteryValidator.ERROR_EMPTY_LOTTO_NUMBER.msg
         }
-        require(s.toIntOrNull() != null) {
+        require(b.toIntOrNull() != null) {
             BonusLotteryValidator.ERROR_NOT_NUMBER.msg
         }
-        require(s.toInt() in 1..45) {
+        require(b.toInt() in 1..45) {
             BonusLotteryValidator.ERROR_OUT_OF_RANGE.msg
+        }
+        require(b.toInt() !in w) {
+            BonusLotteryValidator.ERROR_DUPLICATE_LOTTO_NUMBER.msg
         }
 
     }

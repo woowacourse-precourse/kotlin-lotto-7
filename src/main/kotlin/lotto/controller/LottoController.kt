@@ -23,8 +23,9 @@ class LottoController {
     }
 
     fun setLotteryNumber() {
-        winLotteryNumber = Lotto(inputView.printInputWinLotteryNumber())
-        bonusLotteryNumber = inputView.printInputBonusLotteryNumber()
+        val winLotteryNumberList = inputView.printInputWinLotteryNumber()
+        winLotteryNumber = Lotto(winLotteryNumberList)
+        bonusLotteryNumber = inputView.printInputBonusLotteryNumber(winLotteryNumberList)
 
     }
 

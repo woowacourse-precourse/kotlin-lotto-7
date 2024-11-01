@@ -21,10 +21,10 @@ class InputView {
         return winLottery.split(",").map { it.trim().toInt() }
     }
 
-    fun printInputBonusLotteryNumber(): Int {
+    fun printInputBonusLotteryNumber(winLottery: List<Int>): Int {
         println(PRINT_PLEASE_INPUT_BONUS_LOTTERY_NUMBER)
         val bonusLottery = Console.readLine()
-        Validator.validateBonusLottery(bonusLottery)
+        Validator.validateBonusLottery(winLottery, bonusLottery)
         println()
         return bonusLottery.toInt()
     }
