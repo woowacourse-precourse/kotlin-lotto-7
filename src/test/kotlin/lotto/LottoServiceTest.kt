@@ -42,7 +42,7 @@ class LottoServiceTest : NsTest() {
     }
 
     @Test
-    fun `수익률 계산에 성공한다 - 큰 값`() {
+    fun `통계 계산에 성공한다 - 큰 값`() {
         assertRandomUniqueNumbersInRangeTest(
             {
                 val money = Money(3_000)
@@ -50,12 +50,15 @@ class LottoServiceTest : NsTest() {
                 val winningInfo = LottoWinningInfo(listOf(1, 2, 3, 4, 5, 6))
                 winningInfo.bonusNumber = 7
 
-                val resultROI = lottoService.getRatOfReturn(winningInfo)
+                val result = lottoService.getLottoStatistics(winningInfo)
                 var expectedROI =
                     ((LottoRank.FIRST.prize + LottoRank.SECOND.prize + LottoRank.THIRD.prize) / 3_000.0) * 100
                 expectedROI = round(expectedROI * 10) / 10
 
-                assertEquals(resultROI, expectedROI)
+                assertEquals(result.roi, expectedROI)
+                assertEquals(result.rankCount.get(LottoRank.FIRST), 1)
+                assertEquals(result.rankCount.get(LottoRank.SECOND), 1)
+                assertEquals(result.rankCount.get(LottoRank.THIRD), 1)
             },
             listOf(1, 2, 3, 4, 5, 6),
             listOf(1, 2, 3, 4, 5, 7),
@@ -64,7 +67,7 @@ class LottoServiceTest : NsTest() {
     }
 
     @Test
-    fun `수익률 계산에 성공한다 - 작은 값`() {
+    fun `통계 계산에 성공한다 - 작은 값`() {
         assertRandomUniqueNumbersInRangeTest(
             {
                 val money = Money(8_000)
@@ -72,11 +75,13 @@ class LottoServiceTest : NsTest() {
                 val winningInfo = LottoWinningInfo(listOf(1, 2, 3, 4, 5, 6))
                 winningInfo.bonusNumber = 7
 
-                val resultROI = lottoService.getRatOfReturn(winningInfo)
+                val result = lottoService.getLottoStatistics(winningInfo)
                 var expectedROI = (LottoRank.FIFTH.prize / money.amount.toDouble()) * 100
                 expectedROI = round(expectedROI * 10) / 10
 
-                assertEquals(resultROI, expectedROI)
+                assertEquals(result.roi, expectedROI)
+                assertEquals(result.rankCount.get(LottoRank.FIFTH), 1)
+                assertEquals(result.rankCount.get(LottoRank.NONE), 7)
             },
             listOf(8, 21, 23, 41, 42, 43),
             listOf(3, 5, 11, 16, 32, 38),

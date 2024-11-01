@@ -4,6 +4,7 @@ import lotto.domain.Lotto
 import lotto.domain.LottoRank
 import lotto.domain.LottoWinningInfo
 import lotto.domain.Money
+import lotto.dto.LottoStatistics
 import kotlin.math.round
 
 class LottoService {
@@ -18,15 +19,21 @@ class LottoService {
         }
     }
 
-    fun getRatOfReturn(winningInfo: LottoWinningInfo): Double {
+    fun getLottoStatistics(winningInfo: LottoWinningInfo): LottoStatistics {
         val totalRankCount = getTotalRankResult(winningInfo)
-        val totalRevenue = calculatorRevenue(totalRankCount)
+        val roi = getRatOfReturn(totalRankCount.toMap(), winningInfo)
+
+        return LottoStatistics(totalRankCount.toMap(), roi)
+    }
+
+    private fun getRatOfReturn(rankCount: Map<LottoRank, Int>, winningInfo: LottoWinningInfo): Double {
+        val totalRevenue = calculatorRevenue(rankCount)
 
         val roi = (totalRevenue / (lottos.size * Lotto.PRICE)) * 100
         return round(roi * 10) / 10
     }
 
-    private fun calculatorRevenue(rankCount: MutableMap<LottoRank, Int>): Double {
+    private fun calculatorRevenue(rankCount: Map<LottoRank, Int>): Double {
         var total = 0.0
         for (key in rankCount.keys) {
             total += key.prize * rankCount[key]!!
