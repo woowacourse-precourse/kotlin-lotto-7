@@ -7,6 +7,7 @@
 - 로또 구입 금액을 입력 받는다.
     - 1,000원으로 나누어 떨어지지 않는 경우 `IllegalArgumentException` 예외 발생
     - 숫자가 아닌 값을 입력 받았을 경우 `IllegalArgumentException` 예외 발생
+    - 빈 값을 입력 했을 경우 `IllegalArgumentException` 예외 발생
 - 당첨 번호를 입력 받는다.
     - 6개가 아닌 다른 갯수의 번호를 입력 받았을 경우 `IllegalArgumentException` 예외 발생
     - 숫자가 아닌 값을 입력 받았을 경우 `IllegalArgumentException` 예외 발생
