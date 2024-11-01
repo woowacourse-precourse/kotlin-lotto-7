@@ -15,7 +15,7 @@ class LottoFactory(private val purchaseAmountInput: String) {
     }
 
     private fun createNumber(): List<Int> {
-        val randomNumbers = Randoms.pickUniqueNumbersInRange(1, 45, 6)
+        val randomNumbers = Randoms.pickUniqueNumbersInRange(1, 45, 6).sorted()
         return randomNumbers
     }
 
