@@ -19,4 +19,8 @@ fun main() {
     lotto.forEach {
         println(it.getNumbers())
     }
+
+    val winNumber = Lotto(Console.readLine().split(",").mapNotNull { it.trim().toIntOrNull() }.distinct())
+    require(winNumber.getNumbers().size == 6)
+    require(winNumber.isValidRange())
 }
