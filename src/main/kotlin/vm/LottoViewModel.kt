@@ -3,16 +3,27 @@ package vm
 import domain.enums.Rank
 import domain.lotto.Lotto
 import domain.model.PurchaseState
+import domain.validator.InputValidate
 import sam.LottoFactory
 import util.convertRoundAtTwoDecimal
 import java.util.TreeSet
 
 class LottoViewModel(
+    private val validator: InputValidate,
     private val lottoFactory: LottoFactory
 ) {
 
     var state = PurchaseState()
         private set
+
+    fun checkPaymentValidation(pay: String): Pair<String, Int> =
+        validator.payValidation(pay)
+
+    fun checkWinningNumberValidation(winningNumber: String): List<Int> =
+        validator.winningNumberValidation(winningNumber)
+
+    fun checkBonusNumberValidation(bonusNumber: String): Int =
+        validator.bonusNumberValidation(bonusNumber)
 
     fun onCompleteInputPayment(pay: Int) {
         state = state.copy(purchaseLottoCount = pay)

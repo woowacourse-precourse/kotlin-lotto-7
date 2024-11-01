@@ -4,16 +4,12 @@ import camp.nextstep.edu.missionutils.Console.readLine
 import domain.enums.Input
 import domain.enums.Output
 import domain.enums.Rank
-import domain.validator.InputValidate
 import util.convertWithDigitComma
 import util.ext.printWithSquareBracket
 import util.retryWhenNoException
 import vm.LottoViewModel
 
-class View(
-    private val validator: InputValidate,
-    private val viewModel: LottoViewModel
-) {
+class View(private val viewModel: LottoViewModel) {
     init {
         getPayment()
         getWinningNumber()
@@ -25,7 +21,7 @@ class View(
         retryWhenNoException {
             println(Input.INPUT_PAY.toString())
             val pay = readLine()
-            val output = validator.payValidation(pay)
+            val output = viewModel.checkPaymentValidation(pay)
             printAndSetPurchase(output.first, output.second)
         }
     }
@@ -35,7 +31,7 @@ class View(
             lineBreak()
             println(Input.INPUT_WINNING_NUMBER.toString())
             val winningNumber = readLine()
-            val validWinningNumber = validator.winningNumberValidation(winningNumber)
+            val validWinningNumber = viewModel.checkWinningNumberValidation(winningNumber)
             printAndSetWinningNumber(validWinningNumber)
         }
     }
@@ -44,7 +40,7 @@ class View(
         retryWhenNoException {
             println(Input.INPUT_BONUS_NUMBER.toString())
             val bonusNumber = readLine()
-            val validBonusNumber = validator.bonusNumberValidation(bonusNumber)
+            val validBonusNumber = viewModel.checkBonusNumberValidation(bonusNumber)
             viewModel.onCompleteInputBonusNumber(validBonusNumber)
             printWinningStatics()
         }
