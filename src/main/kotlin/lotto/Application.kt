@@ -20,10 +20,11 @@ fun main() {
         println(it.getNumbers())
     }
 
-    val winNumber = Lotto(Console.readLine().split(",").mapNotNull { it.trim().toIntOrNull() }.distinct())
-    require(winNumber.getNumbers().size == 6)
-    require(Validation.isValidRange(*winNumber.getNumbers().toIntArray()))
+    val winNumber = Console.readLine().split(",").mapNotNull { it.trim().toIntOrNull() }.toSet()
+    require(winNumber.size == 6)
+    require(Validation.isValidRange(*winNumber.toIntArray()))
 
     val bonusNumber = Console.readLine().toIntOrNull() ?: throw IllegalArgumentException()
     require(Validation.isValidRange(bonusNumber))
+    require(Validation.isNotDuplicated(winNumber, bonusNumber))
 }
