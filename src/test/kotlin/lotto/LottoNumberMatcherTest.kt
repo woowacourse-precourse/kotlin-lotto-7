@@ -3,19 +3,19 @@ package lotto
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 
-class LottoMatcherTest {
+class LottoNumberMatcherTest {
 
-    private val lottoMatcher = LottoMatcher()
+    private val lottoNumberMatcher = LottoNumberMatcher()
 
     @Test
     fun `로또 번호 당첨 번호와 비교했을 때 3개 일치`() {
-        val count = lottoMatcher.matchWithWinningNumbers(lottoTestData, winningNumbersTestData)
+        val count = lottoNumberMatcher.matchWithWinningNumbers(lottoTestData, winningNumbersTestData)
         assertEquals(THREE_MATCHES, count)
     }
 
     @Test
     fun `로또 번호에 보너스 번호 포함`() {
-        val hasBonusNumber = lottoMatcher.hasBonusNumber(lottoTestData, BONUS_NUMBER)
+        val hasBonusNumber = lottoNumberMatcher.hasBonusNumber(lottoTestData, BONUS_NUMBER)
         assertEquals(HAS_BONUS_NUMBER, hasBonusNumber)
     }
 
