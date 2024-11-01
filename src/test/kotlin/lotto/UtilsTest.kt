@@ -4,6 +4,8 @@ import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
+import org.junit.jupiter.params.ParameterizedTest
+import org.junit.jupiter.params.provider.CsvSource
 
 class UtilsTest {
 
@@ -29,5 +31,11 @@ class UtilsTest {
 
         assertEquals(input.size, result.size)
         input.forEach { assertTrue(result.contains(it)) }
+    }
+
+    @ParameterizedTest
+    @CsvSource(value = ["1:1", "1030:1,030", "1000000:1,000,000"], delimiter = ':')
+    fun `숫자를 원 단위의 문자열로 출력한다`(input: Int, result: String) {
+        assertTrue(formatWon(input).contains(result))
     }
 }

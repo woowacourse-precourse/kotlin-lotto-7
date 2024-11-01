@@ -8,4 +8,5 @@ fun main() {
     printPurchasedLottos(lottoService.lottos)
 
     val winningNumbers = getLottoWinningInfo()
+    printStatistics(lottoService.getLottoStatistics(winningNumbers))
 }
