@@ -62,6 +62,9 @@ class ApplicationTest : NsTest() {
         assertThrows<IllegalArgumentException> {
             validMoney("")
         }
+        assertThrows<IllegalArgumentException> {
+            validMoney("1300")
+        }
     }
 
     @Test

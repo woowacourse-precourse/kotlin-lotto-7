@@ -21,5 +21,9 @@ fun validMoney(input: String) : Int  {
     if (money < 1000) {
         throw IllegalArgumentException(ErrorMessage.MONEY_ERROR.message)
     }
+    if (money % 1000 != 0) {
+        throw IllegalArgumentException (ErrorMessage.MONEY_DIVIDE_ERROR.message)
+    }
+
     return money
 }
