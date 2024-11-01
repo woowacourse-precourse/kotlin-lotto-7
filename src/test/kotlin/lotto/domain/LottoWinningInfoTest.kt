@@ -47,7 +47,6 @@ class LottoWinningInfoTest {
         }
     }
 
-
     @Test
     fun `로또 당첨 보너스 번호에 너무 작은 값이 들어가면 예외가 발생한다`() {
         val winningInfo = LottoWinningInfo(listOf(1, 2, 3, 4, 5, 6))

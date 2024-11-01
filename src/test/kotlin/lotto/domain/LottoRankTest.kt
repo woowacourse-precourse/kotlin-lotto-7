@@ -40,5 +40,4 @@ class LottoRankTest {
         val result = LottoRank.getRank(2, false)
         assertEquals(result, LottoRank.NONE)
     }
-
 }

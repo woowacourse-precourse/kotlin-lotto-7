@@ -14,7 +14,6 @@ class UtilsTest {
         assertEquals(result, input)
     }
 
-
     @Test
     fun `텍스트 문자열을 입력하면 예외가 발생한다`() {
         assertThrows<IllegalArgumentException> {
