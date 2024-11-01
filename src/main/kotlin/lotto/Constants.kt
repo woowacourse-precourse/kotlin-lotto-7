@@ -4,7 +4,7 @@ object Constants {
     const val INPUT_BUY_AMOUNT_MESSAGE = "구입금액을 입력해주세요."
     const val INPUT_WINNING_NUMBERS_MESSAGE = "당첨 번호를 입력해주세요."
     const val INPUT_BONUS_NUMBER_MESSAGE = "보너스 번호를 입력해주세요."
-    const val NUMBER_DELIMITER = ","
+    const val NUMBER_DELIMITER = ", "
     const val LOTTO_PRICE = 1000
     const val LOTTO_NUMBERS_SIZE = 6
     const val LOTTO_NUMBER_MIN = 1
