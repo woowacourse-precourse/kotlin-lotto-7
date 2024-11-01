@@ -3,6 +3,17 @@ import camp.nextstep.edu.missionutils.Randoms
 import camp.nextstep.edu.missionutils.Console
 
 class LottoGame {
+    fun start(): LottoResult {
+        val cost = inputCost()
+        val winningLotto = inputWinningLotto()
+        val bonusNumber = inputBonusNumber()
+        val lottoList = buyLottos(cost)
+        val result = calculateResult(lottoList, winningLotto, bonusNumber)
+        printResults(result)
+        printTotalReturn(result.cost)
+
+        return result
+    }
     fun inputCost(): Int {
         println("구입금액을 입력해 주세요.")
         val cost = Console.readLine().toInt()
