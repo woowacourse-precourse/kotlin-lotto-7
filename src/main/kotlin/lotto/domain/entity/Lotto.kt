@@ -6,6 +6,6 @@ class Lotto(private val numbers: List<Int>) {
     }
 
     companion object {
-        private fun List<Int>.toLottoNumbers(): Lotto = Lotto(this)
+        fun List<Int>.toLottoNumbers(): Lotto = Lotto(this)
     }
 }
