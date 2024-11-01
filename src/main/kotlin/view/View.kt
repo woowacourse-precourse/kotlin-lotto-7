@@ -76,23 +76,24 @@ class View(
     }
 
     private fun printSecondRankResult(key: Rank, value: Int) {
+        val matchCountFormat = Output.matchCountFormat(key.getMatchingCount())
+        val bonusMatchCount = Output.BONUS_MATCH_COUNT.toString()
+        val matchNumberFormat =
+            Output.matchingNumberFormat(key.getReword().convertWithDigitComma(), value)
         println(
-            "${key.getMatchingCount()}개 일치, 보너스 볼 일치 (${
-                key.getReword().convertWithDigitComma()
-            }원) - ${value}개"
+            "$matchCountFormat$bonusMatchCount $matchNumberFormat"
         )
     }
 
     private fun printOtherRankResult(key: Rank, value: Int) {
-        println(
-            "${key.getMatchingCount()}개 일치 (${
-                key.getReword().convertWithDigitComma()
-            }원) - ${value}개"
-        )
+        val matchCountFormat = Output.matchCountFormat(key.getMatchingCount())
+        val matchNumberFormat =
+            Output.matchingNumberFormat(key.getReword().convertWithDigitComma(), value)
+        println("$matchCountFormat $matchNumberFormat")
     }
 
-    private fun printRateOfReturn(){
-        println(Output.getTotalRateOfReturn(viewModel.state.rateOfReturn))
+    private fun printRateOfReturn() {
+        println(Output.totalRateOfReturnFormat(viewModel.state.rateOfReturn))
     }
 
     private fun lineBreak() = println()

@@ -17,7 +17,7 @@ class InputValidator(
         commonErrorDelegator.isEmpty(value)
         commonErrorDelegator.isNumeric(value, process)
         inputErrorDelegate.isThousandWonUnit(value)
-        return Output.getPurchase(value)
+        return Output.purchaseFormat(value)
     }
 
     override fun winningNumberValidation(value: String): List<Int> {
