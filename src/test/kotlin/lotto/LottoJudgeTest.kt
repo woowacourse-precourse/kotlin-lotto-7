@@ -15,6 +15,6 @@ class LottoJudgeTest {
 
     @Test
     fun `로또 당첨 번호를 입력할 수 있어야 한다`() {
-        lottoJudge.setLottoWinnerNumber(listOf(1,2,3,4,5,6))
+        lottoJudge.setLottoWinnerNumbers(listOf(1,2,3,4,5,6))
     }
 }
