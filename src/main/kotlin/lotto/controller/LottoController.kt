@@ -22,6 +22,8 @@ class LottoController(
         val lottoResults = determineLottoRanks(lottos, winningNumber, bonusNumber)
         val winningRecord = createWinningRecord(lottoResults)
         outputView.printLottoResult(winningRecord)
+
+        val profitRate = calculateProfitRate(lottoResults, purchaseAmount)
     }
 
     private fun receivePurchaseAmount(): PurchaseAmount {
@@ -94,5 +96,10 @@ class LottoController(
     private fun createWinningRecord(lottoResults: List<LottoRank>): List<Int> {
         val winningRecord = WinningRecord()
         return winningRecord.createRecord(lottoResults)
+    }
+
+    private fun calculateProfitRate(lottoResults: List<LottoRank>, purchaseAmount: PurchaseAmount): Double {
+        val winningRecord = WinningRecord()
+        return winningRecord.calculatorProfitRate(lottoResults, purchaseAmount.getPurchaseAmount())
     }
 }
