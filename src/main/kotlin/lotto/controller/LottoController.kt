@@ -8,22 +8,32 @@ import lotto.view.OutputView
 class LottoController(
     private val inputView: InputView = InputView(),
     private val outputView: OutputView = OutputView(),
+    private val lottoMachine: LottoMachine = LottoMachine()
 ) {
-
     fun run() {
         val purchaseAmount = receivePurchaseAmount()
         val lottos = purchaseLotto(purchaseAmount)
+        displayLottoInformation(lottos)
+
+        val winningInfo = receiveWinningInformation()
+        val lottoResults = determineLottoRanks(lottos, winningInfo)
+
+        displayLottoResults(lottoResults, purchaseAmount)
+    }
+
+    private fun displayLottoInformation(lottos: List<Lotto>) {
         outputView.printPurchasedLottoCount(lottos.size)
         outputView.printPurchasedLottoNumbers(lottos.map { it.getLottoNumbers() })
+    }
 
-        val winningNumber = receiveWinningNumber()
-        val bonusNumber = receiveBonusNumber(winningNumber.getWinningNumbers())
-
-        val lottoResults = determineLottoRanks(lottos, winningNumber, bonusNumber)
+    private fun displayLottoResults(
+        lottoResults: List<LottoRank>,
+        purchaseAmount: PurchaseAmount
+    ) {
         val winningRecord = createWinningRecord(lottoResults)
         outputView.printLottoResult(winningRecord)
 
-        val profitRate = calculateProfitRate(lottoResults, purchaseAmount)
+        val profitRate = calculateProfitRate(lottoResults, purchaseAmount.getPurchaseAmount())
         outputView.printProfitRate(profitRate)
     }
 
@@ -32,11 +42,9 @@ class LottoController(
             try {
                 val rawPurchaseAmount = inputView.receivePurchaseAmount()
                 validateInputIsNotEmpty(rawPurchaseAmount)
-
-                val purchaseAmount = PurchaseAmount()
-                purchaseAmount.setPurchaseAmount(rawPurchaseAmount)
-
-                return purchaseAmount
+                return PurchaseAmount().apply {
+                    setPurchaseAmount(rawPurchaseAmount)
+                }
             } catch (e: IllegalArgumentException) {
                 outputView.printExceptionMessage(e.message ?: "")
             }
@@ -44,10 +52,13 @@ class LottoController(
     }
 
     private fun purchaseLotto(purchaseAmount: PurchaseAmount): List<Lotto> {
-        val lottoMachine = LottoMachine()
-        val lottos = lottoMachine.issueLottos(purchaseAmount.getPurchaseAmount())
+        return lottoMachine.issueLottos(purchaseAmount.getPurchaseAmount())
+    }
 
-        return lottos
+    private fun receiveWinningInformation(): WinningInformation {
+        val winningNumber = receiveWinningNumber()
+        val bonusNumber = receiveBonusNumber(winningNumber.getWinningNumbers())
+        return WinningInformation(winningNumber, bonusNumber)
     }
 
     private fun receiveWinningNumber(): WinningNumber {
@@ -55,11 +66,9 @@ class LottoController(
             try {
                 val rawWinningNumber = inputView.receiveWinningNumbers()
                 validateInputIsNotEmpty(rawWinningNumber)
-
-                val winningNumber = WinningNumber()
-                winningNumber.setWinningNumbers(rawWinningNumber)
-
-                return winningNumber
+                return WinningNumber().apply {
+                    setWinningNumbers(rawWinningNumber)
+                }
             } catch (e: IllegalArgumentException) {
                 outputView.printExceptionMessage(e.message ?: "")
             }
@@ -71,11 +80,9 @@ class LottoController(
             try {
                 val rawBonusNumber = inputView.receiveBonusNumber()
                 validateInputIsNotEmpty(rawBonusNumber)
-
-                val bonusNumber = BonusNumber()
-                bonusNumber.setBonusNumber(rawBonusNumber, winningNumbers)
-
-                return bonusNumber
+                return BonusNumber().apply {
+                    setBonusNumber(rawBonusNumber, winningNumbers)
+                }
             } catch (e: IllegalArgumentException) {
                 outputView.printExceptionMessage(e.message ?: "")
             }
@@ -84,23 +91,23 @@ class LottoController(
 
     private fun determineLottoRanks(
         lottos: List<Lotto>,
-        winningNumber: WinningNumber,
-        bonusNumber: BonusNumber
+        winningInfo: WinningInformation
     ): List<LottoRank> {
-        val lottoMachine = LottoMachine()
-        val ranks =
-            lottoMachine.determineLottoRanks(lottos, winningNumber.getWinningNumbers(), bonusNumber.getBonusNumber())
-
-        return ranks
+        return lottoMachine.determineLottoRanks(
+            lottos,
+            winningInfo.winningNumber.getWinningNumbers(),
+            winningInfo.bonusNumber.getBonusNumber()
+        )
     }
 
     private fun createWinningRecord(lottoResults: List<LottoRank>): List<Int> {
-        val winningRecord = WinningRecord()
-        return winningRecord.createRecord(lottoResults)
+        return WinningRecord().createRecord(lottoResults)
     }
 
-    private fun calculateProfitRate(lottoResults: List<LottoRank>, purchaseAmount: PurchaseAmount): Double {
-        val winningRecord = WinningRecord()
-        return winningRecord.calculatorProfitRate(lottoResults, purchaseAmount.getPurchaseAmount())
+    private fun calculateProfitRate(
+        lottoResults: List<LottoRank>,
+        purchaseAmount: Int
+    ): Double {
+        return WinningRecord().calculatorProfitRate(lottoResults, purchaseAmount)
     }
 }
