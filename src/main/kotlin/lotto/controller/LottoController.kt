@@ -24,6 +24,7 @@ class LottoController(
         outputView.printLottoResult(winningRecord)
 
         val profitRate = calculateProfitRate(lottoResults, purchaseAmount)
+        outputView.printProfitRate(profitRate)
     }
 
     private fun receivePurchaseAmount(): PurchaseAmount {
