@@ -22,7 +22,7 @@ class PurchaseAmountValidator(
     }
 
     private fun validateIsDecimal() {
-        if (parsedDecimal != null && parsedDecimal % 1 != 0.0) throw IllegalArgumentException(
+        if (parsedDecimal != null && parsedDecimal % ONE != ZERO_EXPRESSED_IN_DECIMAL) throw IllegalArgumentException(
             NOT_DECIMAL.errorMessage
         )
     }
@@ -34,20 +34,28 @@ class PurchaseAmountValidator(
     }
 
     private fun validateIsZero() {
-        if (parsedInteger == 0) throw IllegalArgumentException(
+        if (parsedInteger == ZERO) throw IllegalArgumentException(
             ZERO_AMOUNT.errorMessage
         )
     }
 
     private fun validateUnder1000() {
         parsedInteger?.let {
-            if (it < 1000) throw IllegalArgumentException(LESS_THAN_1000.errorMessage)
+            if (it < MINIMUM_PURCHASE_AMOUNT) throw IllegalArgumentException(LESS_THAN_1000.errorMessage)
         }
     }
 
     private fun validateUnits1000() {
         parsedInteger?.let {
-            if (it % 1000 != 0) throw IllegalArgumentException(NOT_UNITS_OF_1000.errorMessage)
+            if (it % PRICE_PER_SHEET != ZERO) throw IllegalArgumentException(NOT_UNITS_OF_1000.errorMessage)
         }
+    }
+
+    companion object {
+        private const val ZERO_EXPRESSED_IN_DECIMAL = 0.0
+        private const val ONE = 1
+        private const val ZERO = 0
+        private const val MINIMUM_PURCHASE_AMOUNT = 1000
+        private const val PRICE_PER_SHEET = 1000
     }
 }
