@@ -14,15 +14,27 @@ class Controller {
 
     fun start() {
 
+        val numberOfLotto = getNumberOfLotto()
+
+        val randomLotto = getRandomLotto(numberOfLotto)
+        output.displayLotto(numberOfLotto, randomLotto)
+
+    }
+
+    fun getNumberOfLotto(): Int {
         var money: String
         while (true) {
             money = input.getMoney()
             if (inputValidator.isValidMoney(money)) break
         }
-        val numberOfLotto = lottoGenerator.getNumberOfLotto(money)
-        val randomLotto = lottoGenerator.generateLotto(numberOfLotto)
+        return lottoGenerator.getNumberOfLotto(money)
+    }
 
-        output.displayLotto(numberOfLotto, randomLotto)
+    fun getRandomLotto(numberOfLotto: Int): List<List<Int>> {
+        return lottoGenerator.generateLotto(numberOfLotto)
+    }
+
+    fun getWinningLotto() {
         var winningNum: String
         while (true) {
             winningNum = input.getWinningNum()
@@ -33,7 +45,7 @@ class Controller {
             bonusNum = input.getBonusNum()
             if (inputValidator.isValidBonusNum(bonusNum, winningNum)) break
         }
-    }
 
+    }
 
 }
