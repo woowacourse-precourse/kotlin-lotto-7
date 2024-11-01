@@ -13,15 +13,15 @@ class LottoController {
     private val profitRateCalculator = ProfitRateCalculator()
 
     fun start() {
-        val price = Price.validate(inputView.readPrice())
+        val price = repeatLogic { Price.validate(inputView.readPrice()) }
         val lottoCount = price / 1000
         val lotto = generateLotto(lottoCount)
 
         outputView.printLottoCount(lottoCount)
         outputView.printLotto(lotto)
 
-        val winningNumber = WinningNumber.validate(inputView.readWinningNumber())
-        val bonusNumber = BonusNumber.validate(inputView.readBonusNumber(), winningNumber)
+        val winningNumber = repeatLogic { WinningNumber.validate(inputView.readWinningNumber()) }
+        val bonusNumber = repeatLogic { BonusNumber.validate(inputView.readBonusNumber(), winningNumber) }
 
         val rankCount = countRank(lotto, winningNumber, bonusNumber)
 
@@ -48,5 +48,15 @@ class LottoController {
         }
         rankCount.remove(Rank.NONE)
         return rankCount
+    }
+
+    private fun <T> repeatLogic(logic: () -> T): T {
+        do {
+            try {
+                return logic()
+            } catch (e: IllegalArgumentException) {
+                println(e.message)
+            }
+        } while (true)
     }
 }
