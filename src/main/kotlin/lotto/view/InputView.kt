@@ -21,7 +21,7 @@ class InputView {
     fun getWinningNumbers(): List<Int> {
         while (true) {
             println(Constants.INPUT_WINNING_NUMBERS_MESSAGE)
-            val winningNumbers = Console.readLine().split(",")
+            val winningNumbers = Console.readLine().split(Constants.NUMBER_DELIMITER)
             try {
                 validateWinningNumbers(winningNumbers)
                 println()
@@ -50,17 +50,17 @@ class InputView {
         require(lottoAmount.toIntOrNull() != null) { Constants.ERROR_AMOUNT_NOT_NUMBER }
         val amount = lottoAmount.toInt()
         require(amount > 0) { Constants.ERROR_AMOUNT_NOT_POSITIVE }
-        require(amount % 1000 == 0) { Constants.ERROR_AMOUNT_NOT_DIVIDE_BY_1000 }
+        require(amount % Constants.LOTTO_PRICE == 0) { Constants.ERROR_AMOUNT_NOT_DIVIDE_BY_1000 }
     }
 
     private fun validateWinningNumbers(winningNumbers: List<String>) {
         require(winningNumbers.all { it.toIntOrNull() != null }) {
             Constants.ERROR_WINNING_NUMBERS_NOT_NUMBER
         }
-        require(winningNumbers.size == 6) {
+        require(winningNumbers.size == Constants.LOTTO_NUMBERS_SIZE) {
             Constants.ERROR_WINNING_NUMBERS_INCORRECT_SIZE
         }
-        require(winningNumbers.all { it.toInt() in 1..45 }) {
+        require(winningNumbers.all { it.toInt() in Constants.LOTTO_NUMBER_MIN..Constants.LOTTO_NUMBER_MAX }) {
             Constants.ERROR_WINNING_NUMBERS_OUT_OF_RANGE
         }
         require(winningNumbers.distinct().size == winningNumbers.size) {
@@ -70,7 +70,9 @@ class InputView {
 
     private fun validateBonusNumber(bonusNumber: String, winningNumbers: List<Int>) {
         require(bonusNumber.toIntOrNull() != null) { Constants.ERROR_BONUS_NUMBER_NOT_NUMBER }
-        require(bonusNumber.toInt() in 1..45) { Constants.ERROR_BONUS_NUMBER_OUT_OF_RANGE }
+        require(bonusNumber.toInt() in Constants.LOTTO_NUMBER_MIN..Constants.LOTTO_NUMBER_MAX) {
+            Constants.ERROR_BONUS_NUMBER_OUT_OF_RANGE
+        }
         require(bonusNumber.toInt() !in winningNumbers) { Constants.ERROR_BONUS_NUMBER_DUPLICATE }
     }
 }

@@ -24,7 +24,11 @@ class LottoController {
 
     private fun printLottoNumber(lottoCount: Int) {
         repeat(lottoCount) {
-            val lottoNumbers = Randoms.pickUniqueNumbersInRange(1, 45, 6)
+            val lottoNumbers = Randoms.pickUniqueNumbersInRange(
+                Constants.LOTTO_NUMBER_MIN,
+                Constants.LOTTO_NUMBER_MAX,
+                Constants.LOTTO_NUMBERS_SIZE
+            )
             println(lottoNumbers.sorted().joinToString(prefix = "[", postfix = "]"))
         }
         println()
