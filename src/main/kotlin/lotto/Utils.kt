@@ -1,8 +1,8 @@
 package lotto
 
+import lotto.constant.ExceptionMessage.ERROR_NOT_NUMBER
 import java.text.DecimalFormat
 
-const val ERROR_NOT_NUMBER = "[ERROR] 입력 값이 숫자가 아니거나 너무 큽니다."
 const val COMMA = ","
 
 fun convertInt(text: String): Int {

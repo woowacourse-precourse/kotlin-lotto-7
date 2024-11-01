@@ -1,6 +1,7 @@
 package lotto
 
 import camp.nextstep.edu.missionutils.Console
+import lotto.constant.ExceptionMessage.ERROR_MESSAGE_DEFAULT
 import lotto.domain.Lotto
 import lotto.domain.LottoPurchaseMoney
 import lotto.domain.LottoRank
@@ -15,7 +16,7 @@ const val MESSAGE_STATISTICS_TITLE = "당첨 통계\n---"
 const val MESSAGE_DEFAULT_MATCH = "%d개 일치 (%s원) - %d개"
 const val MESSAGE_BONUS_MATCH = "%d개 일치, 보너스 볼 일치 (%s원) - %d개"
 const val RETURN_ON_INVESTMENT = "총 수익률은 %,.1f%%입니다."
-const val DEFAULT_ERROR_MESSAGE = "알 수 없는 오류가 발생했습니다."
+const val ERROR_MESSAGE_FORMAT = "[ERROR] %s";
 
 fun getLottoPurchaseAmount(): LottoPurchaseMoney {
     while (true) {
@@ -98,8 +99,8 @@ private fun readLineAndLineBreak(): String {
 }
 
 private fun printErrorMessage(message: String?) {
-    val outputMessage = message ?: DEFAULT_ERROR_MESSAGE
+    val outputMessage = message ?: ERROR_MESSAGE_DEFAULT
 
-    println(outputMessage)
+    println(ERROR_MESSAGE_FORMAT.format(outputMessage))
     println()
 }
