@@ -4,16 +4,17 @@ import lotto.model.Lotto
 import lotto.model.Random
 import lotto.view.InputView
 import lotto.view.OutputView
+import kotlin.math.round
 
 class LottoController {
     private val inputView = InputView()
     private val outputView = OutputView()
     private val randomGenerator = Random()
 
-    private var money = NOT_INPUT_MONEY
+    private var money = NOT_INPUT_MONEY_STATE
     private var lottos = mutableListOf<Lotto>()
     private var winLotteryNumber: Lotto? = null
-    private var bonusLotteryNumber = NOT_INPUT_BONUS_LOTTERY_NUMBER
+    private var bonusLotteryNumber = NOT_INPUT_BONUS_LOTTERY_NUMBER_STATE
 
     fun purchaseLotto() {
         money = inputView.printInputMoney()
@@ -31,7 +32,9 @@ class LottoController {
 
     fun resultLotto() {
         val matchCount = matchLotto()
-        outputView.printWinStatistics(matchCount)
+        val profit = calculateProfit(matchCount)
+        val amountOfProfit = calculateAmountOfProfit(profit)
+        outputView.printWinStatistics(matchCount, amountOfProfit)
     }
 
     private fun generateLotto(count: Int) {
@@ -43,25 +46,39 @@ class LottoController {
     private fun matchLotto(): Map<MatchingLottoCount, Int> {
         val matchLottoNumber = MutableList(lottos.size) { 0 to false }
         for ((ind, lotto) in lottos.withIndex()) {
-            matchLottoNumber[ind] = winLotteryNumber?.let { lotto.getMatchCount(it) to lotto.isMatchBonusNumber(bonusLotteryNumber)}!!
+            matchLottoNumber[ind] = winLotteryNumber?.let {
+                lotto.getMatchCount(it) to lotto.isMatchBonusNumber(bonusLotteryNumber)
+            }!!
         }
 
         val matchLottoCount = mutableMapOf<MatchingLottoCount, Int>()
         for (i in matchLottoNumber) {
-            incrementMatchCount(matchLottoCount, i.first + isMatchBonusNumber(i.second), i.second)
+            increaseMatchCount(matchLottoCount, i.first + isMatchBonusNumber(i.second), i.second)
         }
 
         return matchLottoCount
     }
 
-    private fun incrementMatchCount(matchLottoCount: MutableMap<MatchingLottoCount, Int>, matchCount: Int, isMatchBonus: Boolean) {
-        when(matchCount) {
-            3 -> matchLottoCount[MatchingLottoCount.THREE] = (matchLottoCount[MatchingLottoCount.THREE] ?: 0) + 1
-            4 -> matchLottoCount[MatchingLottoCount.FOUR] = (matchLottoCount[MatchingLottoCount.FOUR] ?: 0) + 1
-            5 -> matchLottoCount[MatchingLottoCount.FIVE] = (matchLottoCount[MatchingLottoCount.FIVE] ?: 0) + 1
+    private fun increaseMatchCount(
+        matchLottoCount: MutableMap<MatchingLottoCount, Int>,
+        matchCount: Int,
+        isMatchBonus: Boolean,
+    ) {
+        when (matchCount) {
+            3 -> matchLottoCount[MatchingLottoCount.THREE] =
+                (matchLottoCount[MatchingLottoCount.THREE] ?: 0) + 1
+
+            4 -> matchLottoCount[MatchingLottoCount.FOUR] =
+                (matchLottoCount[MatchingLottoCount.FOUR] ?: 0) + 1
+
+            5 -> matchLottoCount[MatchingLottoCount.FIVE] =
+                (matchLottoCount[MatchingLottoCount.FIVE] ?: 0) + 1
+
             6 -> {
-                if (isMatchBonus) matchLottoCount[MatchingLottoCount.FIVE_BONUS] = (matchLottoCount[MatchingLottoCount.FIVE_BONUS] ?: 0) + 1
-                else matchLottoCount[MatchingLottoCount.SIX] = (matchLottoCount[MatchingLottoCount.SIX] ?: 0) + 1
+                if (isMatchBonus) matchLottoCount[MatchingLottoCount.FIVE_BONUS] =
+                    (matchLottoCount[MatchingLottoCount.FIVE_BONUS] ?: 0) + 1
+                else matchLottoCount[MatchingLottoCount.SIX] =
+                    (matchLottoCount[MatchingLottoCount.SIX] ?: 0) + 1
             }
         }
     }
@@ -71,11 +88,35 @@ class LottoController {
         return 0
     }
 
+    fun calculateProfit(matchLottoCount: Map<MatchingLottoCount, Int>): Long {
+        var profit = 0L
+
+        for ((key, value) in matchLottoCount) {
+            when (key) {
+                MatchingLottoCount.THREE -> profit += value * PRIZE_MONEY_3MATCH
+                MatchingLottoCount.FOUR -> profit += value * PRIZE_MONEY_4MATCH
+                MatchingLottoCount.FIVE -> profit += value * PRIZE_MONEY_5MATCH
+                MatchingLottoCount.FIVE_BONUS -> profit += value * PRIZE_MONEY_5MATCH_BONUS
+                MatchingLottoCount.SIX -> profit += value * PRIZE_MONEY_6MATCH
+            }
+        }
+        return profit
+    }
+
+    private fun calculateAmountOfProfit(profit: Long): Float =
+        round((profit.toFloat() / money) * 1000) / 10
+
 
     companion object {
-        const val NOT_INPUT_MONEY = 0
-        const val NOT_INPUT_BONUS_LOTTERY_NUMBER = 0
+        const val NOT_INPUT_MONEY_STATE = 0
+        const val NOT_INPUT_BONUS_LOTTERY_NUMBER_STATE = 0
         const val LOTTO_PRICE = 1_000
+        const val PRIZE_MONEY_6MATCH = 2_000_000_000
+        const val PRIZE_MONEY_5MATCH_BONUS = 30_000_000
+        const val PRIZE_MONEY_5MATCH = 1_500_000
+        const val PRIZE_MONEY_4MATCH = 50_000
+        const val PRIZE_MONEY_3MATCH = 5_000
+
     }
 }
 
