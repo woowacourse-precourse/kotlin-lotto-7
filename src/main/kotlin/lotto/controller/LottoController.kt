@@ -15,7 +15,7 @@ class LottoController(val view: InputView) {
 
                 return input.toInt()
             } catch (e: IllegalArgumentException) {
-                println("[ERROR] 0 이상인 정수여야 합니다.")
+                println("[ERROR] 구입 금액은 0 이상인 정수여야 합니다.")
             }
         }
     }
@@ -26,8 +26,20 @@ class LottoController(val view: InputView) {
             try {
                 require(!input.isValidNumbers())
                 return input.split(DELIMITER).map { it.toInt() }
-            } catch (e: NumberFormatException) {
+            } catch (e: IllegalArgumentException) {
                 println("[ERROR] 유효하지 않은 당첨 번호 리스트입니다.")
+            }
+        }
+    }
+
+    private fun getValidBonusNumber(): Int {
+        while (true) {
+            val input = view.getBonusNumber()
+            try {
+                require(!input.isValidNumber())
+                return input.toInt()
+            } catch (e: IllegalArgumentException) {
+                println("[ERROR] 유효하지 않은 보너스 번호입니다.")
             }
         }
     }
