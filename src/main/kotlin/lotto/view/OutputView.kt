@@ -1,6 +1,11 @@
 package lotto.view
 
 import lotto.model.LottoRank
+import lotto.utils.Constants.FIFTH
+import lotto.utils.Constants.FIRST
+import lotto.utils.Constants.FOURTH
+import lotto.utils.Constants.SECOND
+import lotto.utils.Constants.THIRD
 import lotto.utils.OutputConstants.WINNING_STATISTICS
 
 /**
@@ -20,12 +25,13 @@ class OutputView {
     // 당첨 통계 --- 간단 출력도 여기서?
     fun showWinningStatisticsMessage() = println(WINNING_STATISTICS)
 
-    fun showWinninfStatisticsMessage() {
-        //println("${LottoRank.FIFTH}개 일치 () - 개")
+    fun showWinninfStatistics(matchCount: List<Int>) {
+        println("${LottoRank.FIFTH.matchCount}개 일치 (${LottoRank.FIFTH.reward}) - ${matchCount[FIFTH]}개")
+        println("${LottoRank.FOURTH.matchCount}개 일치 (${LottoRank.FOURTH.reward}) - ${matchCount[FOURTH]}개")
+        println("${LottoRank.THIRD.matchCount}개 일치 (${LottoRank.THIRD.reward}) - ${matchCount[THIRD]}개")
+        println("${LottoRank.SECOND.matchCount}개 일치 (${LottoRank.SECOND.reward}) - ${matchCount[SECOND]}개")
+        println("${LottoRank.FIRST.matchCount}개 일치 (${LottoRank.FIRST.reward}) - ${matchCount[FIRST]}개")
     }
-
-
-    // 컨트롤러에서 LottoRank 값을 받아 통계 출력
-
     // 수익률 출략
+    fun showTotalReturnRate(totalReturnRate: Float) = println("총 수익률은 $totalReturnRate%입니다.")
 }

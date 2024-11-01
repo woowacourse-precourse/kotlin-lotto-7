@@ -34,9 +34,11 @@ class LottoController {
 
         // 당첨 통계 출력
         outputView.showWinningStatisticsMessage()
-
         // 당첨 등급 출력
+        //outputView.showWinninfStatistics()
+
         // 수익률 출력
+        //outputView.showTotalReturnRate()
     }
 
     private fun getWinningNumbers(): List<Int> {
