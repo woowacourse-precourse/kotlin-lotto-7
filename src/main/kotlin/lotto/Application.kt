@@ -44,9 +44,21 @@ fun main() {
         if(it.key == Rank.SECOND) print(", 보너스 볼 일치")
         println(" (${decimalFormatter(it.key.winningPrice)}원) - ${it.value}개")
     }
+
+    print("${getProfitRate(rankResult, price)}%")
 }
 
 fun decimalFormatter(number: Int): String {
     val decimalFormat = DecimalFormat("#,###")
     return decimalFormat.format(number)
+}
+
+fun getProfitRate(rankResult: Map<Rank, Int>, price: Int): String {
+    var profit = 0
+    for (it in rankResult.entries) {
+        if(it.key == Rank.NONE) continue
+        profit += it.key.winningPrice * it.value
+    }
+    println(profit)
+    return String.format("%.1f", profit / price.toDouble() * 100)
 }
