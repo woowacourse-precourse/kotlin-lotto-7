@@ -1,5 +1,9 @@
 package lotto.model
 
+import lotto.util.ExceptionConstants.ERROR_MESSAGE_PURCHASE_AMOUNT_LESS_THAN_MINIMUM
+import lotto.util.ExceptionConstants.ERROR_MESSAGE_PURCHASE_AMOUNT_NOT_MULTIPLE
+import lotto.util.ExceptionConstants.ERROR_MESSAGE_PURCHASE_AMOUNT_TYPE
+
 class PurchaseAmount(private var purchaseAmount: Int = 0) {
 
     fun getPurchaseAmount(): Int = purchaseAmount
@@ -10,14 +14,8 @@ class PurchaseAmount(private var purchaseAmount: Int = 0) {
     }
 
     private fun validatePurchaseAmount(rawPurchaseAmount: String) {
-        require(rawPurchaseAmount.toIntOrNull() != null) { NOT_NUMERIC_MESSAGE }
-        require(rawPurchaseAmount.toInt() >= 1000) { LESS_THAN_MINIMUM_MESSAGE }
-        require(rawPurchaseAmount.toInt() % 1000 == 0) { NOT_MULTIPLE_OF_THOUSAND_MESSAGE }
-    }
-
-    companion object {
-        const val NOT_NUMERIC_MESSAGE = "구입 금액은 숫자여야 합니다."
-        const val LESS_THAN_MINIMUM_MESSAGE = "구입 금액은 1,000원 이상이어야 합니다."
-        const val NOT_MULTIPLE_OF_THOUSAND_MESSAGE = "구입 금액은 1,000원 단위여야 합니다."
+        require(rawPurchaseAmount.toIntOrNull() != null) { ERROR_MESSAGE_PURCHASE_AMOUNT_TYPE }
+        require(rawPurchaseAmount.toInt() >= 1000) { ERROR_MESSAGE_PURCHASE_AMOUNT_LESS_THAN_MINIMUM }
+        require(rawPurchaseAmount.toInt() % 1000 == 0) { ERROR_MESSAGE_PURCHASE_AMOUNT_NOT_MULTIPLE }
     }
 }

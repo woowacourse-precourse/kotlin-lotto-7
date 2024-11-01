@@ -1,5 +1,8 @@
 package lotto.model
 
+import lotto.util.ExceptionConstants.ERROR_MESSAGE_PURCHASE_AMOUNT_LESS_THAN_MINIMUM
+import lotto.util.ExceptionConstants.ERROR_MESSAGE_PURCHASE_AMOUNT_NOT_MULTIPLE
+import lotto.util.ExceptionConstants.ERROR_MESSAGE_PURCHASE_AMOUNT_TYPE
 import org.assertj.core.api.Assertions.assertThatThrownBy
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
@@ -23,7 +26,7 @@ class PurchaseAmountTest {
 
         assertThatThrownBy { purchaseAmount.setPurchaseAmount(amountInput) }
             .isInstanceOf(IllegalArgumentException::class.java)
-            .hasMessage(PurchaseAmount.NOT_NUMERIC_MESSAGE)
+            .hasMessage(ERROR_MESSAGE_PURCHASE_AMOUNT_TYPE)
     }
 
     @Test
@@ -33,7 +36,7 @@ class PurchaseAmountTest {
 
         assertThatThrownBy { purchaseAmount.setPurchaseAmount(amountInput) }
             .isInstanceOf(IllegalArgumentException::class.java)
-            .hasMessage(PurchaseAmount.LESS_THAN_MINIMUM_MESSAGE)
+            .hasMessage(ERROR_MESSAGE_PURCHASE_AMOUNT_LESS_THAN_MINIMUM)
     }
 
     @Test
@@ -43,6 +46,6 @@ class PurchaseAmountTest {
 
         assertThatThrownBy { purchaseAmount.setPurchaseAmount(amountInput) }
             .isInstanceOf(IllegalArgumentException::class.java)
-            .hasMessage(PurchaseAmount.NOT_MULTIPLE_OF_THOUSAND_MESSAGE)
+            .hasMessage(ERROR_MESSAGE_PURCHASE_AMOUNT_NOT_MULTIPLE)
     }
 }

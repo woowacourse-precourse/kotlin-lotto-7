@@ -1,6 +1,6 @@
 package lotto.view
 
-import lotto.util.Constants.EXCEPTION_PREFIX
+import lotto.util.ExceptionConstants.EXCEPTION_PREFIX
 import lotto.util.Constants.LOTTO_RANK_FIFTH_WINNING_AMOUNT
 import lotto.util.Constants.LOTTO_RANK_FIRST_WINNING_AMOUNT
 import lotto.util.Constants.LOTTO_RANK_FOURTH_WINNING_AMOUNT

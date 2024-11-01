@@ -1,9 +1,9 @@
 package lotto.model
 
-import lotto.model.WinningNumber.Companion.NUMBER_DUPLICATE_MESSAGE
-import lotto.model.WinningNumber.Companion.NUMBER_RANGE_MESSAGE
-import lotto.model.WinningNumber.Companion.NUMBER_SIZE_MESSAGE
-import lotto.model.WinningNumber.Companion.NUMBER_TYPE_MESSAGE
+import lotto.util.ExceptionConstants.ERROR_MESSAGE_WINNING_NUMBER_DUPLICATE
+import lotto.util.ExceptionConstants.ERROR_MESSAGE_WINNING_NUMBER_RANGE
+import lotto.util.ExceptionConstants.ERROR_MESSAGE_WINNING_NUMBER_SIZE
+import lotto.util.ExceptionConstants.ERROR_MESSAGE_WINNING_NUMBER_TYPE
 import org.assertj.core.api.Assertions.assertThatThrownBy
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
@@ -37,7 +37,7 @@ class WinningNumberTest {
 
         assertThatThrownBy { winningNumber.setWinningNumbers(rawWinningNumbers) }
             .isInstanceOf(IllegalArgumentException::class.java)
-            .hasMessage(NUMBER_SIZE_MESSAGE)
+            .hasMessage(ERROR_MESSAGE_WINNING_NUMBER_SIZE)
     }
 
     @Test
@@ -47,7 +47,7 @@ class WinningNumberTest {
 
         assertThatThrownBy { winningNumber.setWinningNumbers(rawWinningNumbers) }
             .isInstanceOf(IllegalArgumentException::class.java)
-            .hasMessage(NUMBER_TYPE_MESSAGE)
+            .hasMessage(ERROR_MESSAGE_WINNING_NUMBER_TYPE)
     }
 
     @Test
@@ -57,7 +57,7 @@ class WinningNumberTest {
 
         assertThatThrownBy { winningNumber.setWinningNumbers(rawWinningNumbers) }
             .isInstanceOf(IllegalArgumentException::class.java)
-            .hasMessage(NUMBER_DUPLICATE_MESSAGE)
+            .hasMessage(ERROR_MESSAGE_WINNING_NUMBER_DUPLICATE)
     }
 
     @Test
@@ -67,6 +67,6 @@ class WinningNumberTest {
 
         assertThatThrownBy { winningNumber.setWinningNumbers(rawWinningNumbers) }
             .isInstanceOf(IllegalArgumentException::class.java)
-            .hasMessage(NUMBER_RANGE_MESSAGE)
+            .hasMessage(ERROR_MESSAGE_WINNING_NUMBER_RANGE)
     }
 }

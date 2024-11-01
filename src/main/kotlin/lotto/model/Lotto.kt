@@ -3,19 +3,16 @@ package lotto.model
 import lotto.util.Constants.LOTTO_MAX_NUMBER
 import lotto.util.Constants.LOTTO_MIN_NUMBER
 import lotto.util.Constants.LOTTO_NUMBER_SIZE
+import lotto.util.ExceptionConstants.ERROR_MESSAGE_LOTTO_NUMBER_DUPLICATE
+import lotto.util.ExceptionConstants.ERROR_MESSAGE_LOTTO_NUMBER_RANGE
+import lotto.util.ExceptionConstants.ERROR_MESSAGE_LOTTO_NUMBER_SIZE
 
 class Lotto(private val numbers: List<Int>) {
     init {
-        require(numbers.size == LOTTO_NUMBER_SIZE) { INVALID_LOTTO_SIZE_MESSAGE }
-        require(numbers.distinct().size == numbers.size) { DUPLICATE_LOTTO_NUMBERS_MESSAGE }
-        require(numbers.all { it in LOTTO_MIN_NUMBER..LOTTO_MAX_NUMBER }) { INVALID_LOTTO_RANGE_MESSAGE }
+        require(numbers.size == LOTTO_NUMBER_SIZE) { ERROR_MESSAGE_LOTTO_NUMBER_SIZE }
+        require(numbers.distinct().size == numbers.size) { ERROR_MESSAGE_LOTTO_NUMBER_DUPLICATE }
+        require(numbers.all { it in LOTTO_MIN_NUMBER..LOTTO_MAX_NUMBER }) { ERROR_MESSAGE_LOTTO_NUMBER_RANGE }
     }
 
     fun getLottoNumbers(): List<Int> = numbers.sorted()
-
-    companion object {
-        const val INVALID_LOTTO_SIZE_MESSAGE = "로또 번호는 6개여야 합니다."
-        const val DUPLICATE_LOTTO_NUMBERS_MESSAGE = "중복된 로또 번호가 없어야 합니다."
-        const val INVALID_LOTTO_RANGE_MESSAGE = "로또 번호는 1~45 사이의 숫자여야 합니다."
-    }
 }

@@ -1,5 +1,8 @@
 package lotto.model
 
+import lotto.util.ExceptionConstants.ERROR_MESSAGE_BONUS_NUMBER_DUPLICATE
+import lotto.util.ExceptionConstants.ERROR_MESSAGE_BONUS_NUMBER_RANGE
+import lotto.util.ExceptionConstants.ERROR_MESSAGE_BONUS_NUMBER_TYPE
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.assertj.core.api.Assertions.assertThatThrownBy
@@ -27,7 +30,7 @@ class BonusNumberTest {
         val rawBonusNumber = "A"
         assertThatThrownBy { bonusNumber.setBonusNumber(rawBonusNumber, winningNumbers) }
             .isInstanceOf(IllegalArgumentException::class.java)
-            .hasMessage(BonusNumber.BONUS_NUMBER_TYPE_MESSAGE)
+            .hasMessage(ERROR_MESSAGE_BONUS_NUMBER_TYPE)
     }
 
     @Test
@@ -35,7 +38,7 @@ class BonusNumberTest {
         val rawBonusNumber = "3"
         assertThatThrownBy { bonusNumber.setBonusNumber(rawBonusNumber, winningNumbers) }
             .isInstanceOf(IllegalArgumentException::class.java)
-            .hasMessage(BonusNumber.BONUS_NUMBER_DUPLICATE_MESSAGE)
+            .hasMessage(ERROR_MESSAGE_BONUS_NUMBER_DUPLICATE)
     }
 
     @Test
@@ -43,6 +46,6 @@ class BonusNumberTest {
         val rawBonusNumber = "50"
         assertThatThrownBy { bonusNumber.setBonusNumber(rawBonusNumber, winningNumbers) }
             .isInstanceOf(IllegalArgumentException::class.java)
-            .hasMessage(BonusNumber.BONUS_NUMBER_RANGE_MESSAGE)
+            .hasMessage(ERROR_MESSAGE_BONUS_NUMBER_RANGE)
     }
 }
