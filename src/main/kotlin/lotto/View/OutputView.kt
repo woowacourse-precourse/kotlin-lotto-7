@@ -35,7 +35,7 @@ class OutputView {
             totalWinningPrize += printRateOfReturn(releasedLottoRanks, currentOrder)
         }
         val rawTotalRateOfReturn =
-            totalWinningPrize.toDouble() / (releasedLottoRanks.size * Lotto.cost).toDouble() * 100
+            totalWinningPrize.toDouble() / (releasedLottoRanks.size * Lotto.COST).toDouble() * 100
         val totalRateOfReturn = round(rawTotalRateOfReturn * 10) / 10
         println("총 수익률은 ${totalRateOfReturn}%입니다.")
     }

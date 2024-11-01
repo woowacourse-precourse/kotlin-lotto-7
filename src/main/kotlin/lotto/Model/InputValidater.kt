@@ -8,7 +8,7 @@ object InputValidater {
         if (!purchaseAmount.all { it.isDigit() }) {
             throw IllegalArgumentException(ERROR.INPUT_NOT_INT)
         }
-        if (purchaseAmount.toInt() % 1000 != 0) {
+        if (purchaseAmount.toInt() % Lotto.COST != 0) {
             throw IllegalArgumentException(ERROR.INPUT_NOT_DIVIDE_1000)
         }
     }
@@ -27,7 +27,7 @@ object InputValidater {
             throw IllegalArgumentException(ERROR.INPUT_NOT_INT)
         }
         val bonusNumber = rawBonusNumber.toInt()
-        if (bonusNumber < 1 || bonusNumber > 45) {
+        if (bonusNumber < Lotto.MIN_VALUE || bonusNumber > Lotto.MAX_VALUE) {
             throw IllegalArgumentException(ERROR.INPUT_BETWEEN_1_AND_45)
         }
         if (winningLotto.checkIfMatchBonusNumber(bonusNumber)) {

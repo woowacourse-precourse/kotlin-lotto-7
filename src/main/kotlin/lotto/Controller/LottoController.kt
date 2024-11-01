@@ -20,7 +20,7 @@ class LottoController {
 
     private fun getInputsAndReleaseLottos() {
         val purchaseAmount = getPurchaseInput()
-        val lottoAmount = purchaseAmount / Lotto.cost
+        val lottoAmount = purchaseAmount / Lotto.COST
         releaseLottos(lottoAmount)
         winningLotto = getWinningLotto()
         bonusNumber = getBonusNumber(winningLotto)
