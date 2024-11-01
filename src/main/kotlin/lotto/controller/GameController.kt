@@ -17,10 +17,14 @@ class GameController(
         val boughtLottos = gameService.buyLottos(money)
         showBoughtLotto(boughtLottos)
 
+        val winningCounts = checkWinningStatus(boughtLottos)
+        showLottoResult(winningCounts, money)
+    }
+
+    private fun checkWinningStatus(boughtLottos: List<Lotto>): WinningCounter {
         val winNumbers = readWinNumbers()
         val bonusNumber = readBonusNumber(winNumbers)
-        val winningCounts = gameService.countWinnings(boughtLottos, winNumbers, bonusNumber)
-        showLottoResult(winningCounts, money)
+        return gameService.countWinnings(boughtLottos, winNumbers, bonusNumber)
     }
 
     private fun readMoney(): Long {
