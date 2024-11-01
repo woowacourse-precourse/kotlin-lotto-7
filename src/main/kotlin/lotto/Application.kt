@@ -4,6 +4,7 @@ import camp.nextstep.edu.missionutils.Console
 import camp.nextstep.edu.missionutils.Randoms
 import net.bytebuddy.pool.TypePool.Resolution.Illegal
 import org.jetbrains.annotations.Nullable
+import java.math.BigDecimal
 import java.text.DecimalFormat
 import kotlin.math.round
 
@@ -32,10 +33,12 @@ fun main() {
     val scoreBoard = divideRank(lottos, normalWinningNumbers, bonusNumber)
     val totalWinning = calculateTotalWinningProcess(scoreBoard)
     val winningRate = totalWinningRate(totalWinning.toDouble() / purchaseCost)
+
+    println("총 수익률은 ${winningRate}%입니다.")
 }
 
-fun totalWinningRate(originRate: Double): Double {
-    return round(originRate * 1000) / 1000
+fun totalWinningRate(originRate: Double): String {
+    return BigDecimal((round(originRate * 1000) / 1000) * 100).toString()
 }
 
 private fun calculateTotalWinningProcess(
@@ -49,10 +52,10 @@ private fun calculateTotalWinningProcess(
         scoreResult.append(
             "${rank.description} (${DecimalFormat("#,###").format(rank.winningPrice)}원) - ${scoreBoard[rank] ?: 0}개\n"
         )
-        totalWinning += rank.winningPrice
+        totalWinning += rank.winningPrice.toLong() * (scoreBoard[rank] ?: 0)
     }
 
-    println(scoreResult)
+    print(scoreResult)
 
     return totalWinning
 }
