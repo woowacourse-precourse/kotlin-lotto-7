@@ -6,10 +6,9 @@ import lotto.util.InputValidator
 class InputView {
     private val inputValidator = InputValidator()
 
-    fun inputPurchaseAmount(): Int {
+    fun inputPurchaseAmount(): String {
         val purchaseAmount = Console.readLine()
-        inputValidator.validatePurchaseAmount(purchaseAmount)
-        return purchaseAmount.toInt()
+        return purchaseAmount
     }
 
     fun inputWinningNumbers(): List<Int?> {

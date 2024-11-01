@@ -31,4 +31,14 @@ class OutputView {
         println(InputMessages.BONUS_NUMBER_PROMPT)
     }
 
+    fun printWinningStatistics(fifthCount: Int, fourthCount: Int, thirdCount: Int, secondCount: Int, firstCount: Int) {
+        println()
+        println(InfoMessages.WINNING_STATISTICS)
+        println(String.format(InfoMessages.MATCH_COUNT_PRIZE_MESSAGE, 3, "5,000", fifthCount))
+        println(String.format(InfoMessages.MATCH_COUNT_PRIZE_MESSAGE, 4, "50,000", fourthCount))
+        println(String.format(InfoMessages.MATCH_COUNT_PRIZE_MESSAGE, 5, "1,500,000", thirdCount))
+        println(String.format(InfoMessages.MATCH_COUNT_BONUS_PRIZE_MESSAGE, 5, "30,000,000", secondCount))
+        println(String.format(InfoMessages.MATCH_COUNT_PRIZE_MESSAGE, 6, "2,000,000,000", firstCount))
+    }
+
 }

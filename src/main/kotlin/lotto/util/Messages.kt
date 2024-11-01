@@ -31,5 +31,8 @@ object InputMessages {
 object InfoMessages {
 
     const val PURCHASE_AMOUNT_INFO = "개를 구매했습니다."
+    const val WINNING_STATISTICS = "당첨 통계\n---\n"
+    const val MATCH_COUNT_PRIZE_MESSAGE = "%d개 일치 (%s원) - %d개"
+    const val MATCH_COUNT_BONUS_PRIZE_MESSAGE = "%d개 일치, 보너스 볼 일치 (%s원) - %d개"
 
 }

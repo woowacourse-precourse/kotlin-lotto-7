@@ -2,11 +2,14 @@ package lotto.controller
 
 import lotto.model.LottoTicket
 import lotto.model.RandomLottoNumberGenerator
+import lotto.model.WinningStatistics
+import lotto.util.InputValidator
 import lotto.view.InputView
 import lotto.view.OutputView
 
 class MainController {
     private val inputView = InputView()
+    private val inputValidator = InputValidator()
     private val outputView = OutputView()
     private var purchaseAmount = 0
     private val lottoTicket = LottoTicket()
@@ -14,11 +17,21 @@ class MainController {
     private val lottoPurchaseController = LottoPurchaseController(lottoTicket, lottoNumberGenerator)
     private var winningNumbers = listOf<Int?>()
     private var bonusNumber = 0
+    private val winningStatistics = WinningStatistics()
 
     fun run() {
         // 로또 구매
-        outputView.printPurchaseAmountPrompt()
-        purchaseAmount = inputView.inputPurchaseAmount()
+        while (true) {
+            try {
+                outputView.printPurchaseAmountPrompt()
+                val purchaseAmountInput = inputView.inputPurchaseAmount()
+                inputValidator.validatePurchaseAmount(purchaseAmountInput)
+                purchaseAmount = purchaseAmountInput.toInt()
+                break
+            } catch (e: IllegalArgumentException) {
+                println(e.message)
+            }
+        }
 
         lottoPurchaseController.calculateNumberOfPurchase(purchaseAmount)
         outputView.printNumberOfPurchase(lottoTicket.numberOfPurchase)
@@ -34,6 +47,16 @@ class MainController {
         // 보너스 번호 입력
         outputView.printBonusNumberPrompt()
         bonusNumber = inputView.inputBonusNumber()
+
+        // 당첨 통계 출력
+        val lottoDrawingController = LottoDrawingController(lottoTicket, winningNumbers, bonusNumber, winningStatistics)
+        lottoDrawingController.calculateMatchCount()
+        val fifthCount = winningStatistics.matchCountStatistics[0]
+        val fourthCount = winningStatistics.matchCountStatistics[1]
+        val thirdCount = winningStatistics.matchCountStatistics[2]
+        val secondCount = winningStatistics.matchCountStatistics[3]
+        val firstCount = winningStatistics.matchCountStatistics[4]
+        outputView.printWinningStatistics(fifthCount, fourthCount, thirdCount, secondCount, firstCount)
 
     }
 
