@@ -20,6 +20,8 @@ class LottoController(
         val bonusNumber = receiveBonusNumber(winningNumber.getWinningNumbers())
 
         val lottoResults = determineLottoRanks(lottos, winningNumber, bonusNumber)
+        val winningRecord = createWinningRecord(lottoResults)
+        outputView.printLottoResult(winningRecord)
     }
 
     private fun receivePurchaseAmount(): PurchaseAmount {
@@ -87,5 +89,10 @@ class LottoController(
             lottoMachine.determineLottoRanks(lottos, winningNumber.getWinningNumbers(), bonusNumber.getBonusNumber())
 
         return ranks
+    }
+
+    private fun createWinningRecord(lottoResults: List<LottoRank>): List<Int> {
+        val winningRecord = WinningRecord()
+        return winningRecord.createRecord(lottoResults)
     }
 }
