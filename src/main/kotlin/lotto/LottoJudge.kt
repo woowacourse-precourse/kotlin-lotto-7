@@ -2,11 +2,16 @@ package lotto
 
 class LottoJudge {
     var winnerNumbers: List<Int> = emptyList()
+    var bonusNumber: Int = 0
 
     fun setLottoWinnerNumbers(numbers: List<Int>) {
         exceptWinnerNumberCount(numbers)
         exceptWinnerNumberRange(numbers)
         winnerNumbers = numbers
+    }
+
+    fun setLottoBonusNumber(number: Int) {
+        bonusNumber = number
     }
 
     private fun exceptWinnerNumberCount(numbers: List<Int>) {
