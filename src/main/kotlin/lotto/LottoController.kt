@@ -4,6 +4,7 @@ class LottoController(
     private val calculateLottoRankUseCase: CalculateLottoRankUseCase,
     private val calculateLottoReturnUseCase: CalculateLottoReturnUseCase,
     private val createUserUseCase: CreateUserUseCase,
+    private val createWinningNumbersUseCase: CreateWinningNumbersUseCase,
     private val lottoBuyView: LottoBuyView,
     private val winningNumberInputView: WinningNumberInputView,
     private val lottoResultView: LottoResultView
@@ -26,31 +27,15 @@ class LottoController(
     }
 
     private fun getWinningNumbers(): WinningNumbers {
-        val winningNumbers = parserWinningNumbers()
-        val bonusNumber = parserBonusNumbers()
-        return WinningNumbers(winningNumbers, bonusNumber)
-    }
-
-    private fun parserWinningNumbers(): List<Int> {
-        while (true) {
-            try {
-                val input = winningNumberInputView.inputWinningNumbers().split(",").map { it.toInt() }
-                return input
-            } catch (e: NumberFormatException) {
-                println("[ERROR] 숫자만 입력해주세요.")
-            }
+        val winningNumbers = {
+            winningNumberInputView.guideWinningNumbers()
+            winningNumberInputView.inputWinningNumbers()
         }
-    }
-
-    private fun parserBonusNumbers(): Int {
-        while (true) {
-            try {
-                val input = winningNumberInputView.inputBonusNumber().toInt()
-                return input
-            } catch (e: NumberFormatException) {
-                println("[ERROR] 숫자만 입력해주세요.")
-            }
+        val bonusNumber = {
+            winningNumberInputView.guideBonusNumber()
+            winningNumberInputView.inputBonusNumber()
         }
+        return createWinningNumbersUseCase.execute(winningNumbers, bonusNumber)
     }
 
     private fun showLottoResult(lottoTickets: List<Lotto>, winningNumbers: WinningNumbers) {

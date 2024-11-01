@@ -4,6 +4,7 @@ fun main() {
     val calculateLottoRankUseCase = CalculateLottoRankUseCase()
     val calculateLottoReturnUseCase = CalculateLottoReturnUseCase()
     val createUserUseCase = CreateUserUseCase()
+    val createWinningNumbersUseCase = CreateWinningNumbersUseCase()
     val lottoBuyView = LottoBuyView()
     val winningNumberInputView = WinningNumberInputView()
     val lottoResultView = LottoResultView()
@@ -11,6 +12,7 @@ fun main() {
         calculateLottoRankUseCase,
         calculateLottoReturnUseCase,
         createUserUseCase,
+        createWinningNumbersUseCase,
         lottoBuyView,
         winningNumberInputView,
         lottoResultView
