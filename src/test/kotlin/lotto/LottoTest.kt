@@ -20,27 +20,27 @@ class LottoTest {
     @Test
     fun `로또 판별 테스트`() {
         assertDoesNotThrow {
-            var expected = 6
+            var expected = Price.FIRST
             var winningLotto = listOf(1,2,3,4,5,6)
             var actual = Lotto(winningLotto).determineWith(mutableListOf(1,2,3,4,5,6), 7)
             require(actual==expected)
 
-            expected = 5
+            expected = Price.SECOND
+            winningLotto = listOf(1,2,3,4,5,7)
+            actual = Lotto(winningLotto).determineWith(mutableListOf(1,2,3,4,5,6), 7)
+            require(actual==expected)
+
+            expected = Price.THIRD
             winningLotto = listOf(1,2,3,4,5,15)
             actual = Lotto(winningLotto).determineWith(mutableListOf(1,2,3,4,5,6), 7)
             require(actual==expected)
 
-            expected = 5
-            winningLotto = listOf(1,2,3,4,5,15)
-            actual = Lotto(winningLotto).determineWith(mutableListOf(1,2,3,4,5,6), 7)
-            require(actual==expected)
-
-            expected = 4
+            expected = Price.FOURTH
             winningLotto = listOf(11,2,3,4,5,15)
             actual = Lotto(winningLotto).determineWith(mutableListOf(1,2,3,4,5,6), 7)
             require(actual==expected)
 
-            expected = 3
+            expected = Price.FIFTH
             winningLotto = listOf(11,2,3,4,25,15)
             actual = Lotto(winningLotto).determineWith(mutableListOf(1,2,3,4,5,6), 7)
             require(actual==expected)

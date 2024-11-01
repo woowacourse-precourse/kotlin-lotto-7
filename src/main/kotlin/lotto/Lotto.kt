@@ -15,6 +15,14 @@ fun getLotto():MutableList<Int> {
     return lottoTicket
 }
 
+enum class Price {
+    FIRST,
+    SECOND,
+    THIRD,
+    FOURTH,
+    FIFTH,
+    LOSE
+}
 
 class Lotto(private val numbers: List<Int>) {
     init {
@@ -25,10 +33,26 @@ class Lotto(private val numbers: List<Int>) {
         numbers.all { it in 1..45 } || throw IllegalArgumentException("[ERROR] 로또 번호는 1부터 45 사이의 숫자여야 합니다.")
     }
 
-    fun determineWith(pickedNumbers:MutableList<Int>, bonusNumber:Int):Int {
-        pickedNumbers.add(bonusNumber)
-        val winningCount = numbers.count { it in pickedNumbers }
-        return winningCount
+    fun determineWith(pickedNumbers:MutableList<Int>, bonusNumber:Int):Price {
+        var winningCount = numbers.count { it in pickedNumbers }
+        if (winningCount == 3) {
+            return Price.FIFTH
+        }
+        if (winningCount == 4) {
+            return Price.FOURTH
+        }
+        if (winningCount == 5) {
+            pickedNumbers.add(bonusNumber)
+            winningCount = numbers.count { it in pickedNumbers }
+            if (winningCount == 6) {
+                return Price.SECOND
+            }
+            return Price.THIRD
+        }
+        if (winningCount == 6) {
+            return Price.FIRST
+        }
+        return Price.LOSE
     }
 
     // TODO: 추가 기능 구현
