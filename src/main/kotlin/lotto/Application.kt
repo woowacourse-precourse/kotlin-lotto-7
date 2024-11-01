@@ -2,6 +2,15 @@ package lotto
 
 import camp.nextstep.edu.missionutils.Console
 
+enum class LottoError(val message: String) {
+    INVALID_AMOUNT("[ERROR] 유효한 금액을 입력해주세요."),
+    INVALID_UNIT("[ERROR] 로또 금액은 1000원 단위로 입력해야 합니다.");
+
+    fun throwException(): IllegalArgumentException {
+        return IllegalArgumentException(this.message)
+    }
+}
+
 fun main() {
     readAndValidateAmount()
 }
@@ -26,16 +35,16 @@ fun promptUserForAmount(): Int {
 
 fun parseAmount(amount: String?): Int {
     if (amount.isNullOrEmpty()) {
-        throw IllegalArgumentException("[ERROR] 유효한 금액을 입력해주세요.")
+        throw LottoError.INVALID_AMOUNT.throwException()
     }
-    return amount.toIntOrNull() ?: throw IllegalArgumentException("[ERROR] 유효한 금액을 입력해주세요.")
+    return amount.toIntOrNull() ?: throw LottoError.INVALID_AMOUNT.throwException()
 }
 
 fun validateAmount(amount: Int) {
     if (amount <= 0) {
-        throw IllegalArgumentException("[ERROR] 유효한 금액을 입력해주세요.")
+        throw LottoError.INVALID_AMOUNT.throwException()
     }
     if (amount % 1000 != 0) {
-        throw IllegalArgumentException("[ERROR] 로또 금액은 1000원 단위로 입력해야 합니다.")
+        throw LottoError.INVALID_UNIT.throwException()
     }
 }
