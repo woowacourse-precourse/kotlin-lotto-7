@@ -40,6 +40,15 @@ class LottoGame {
             result.addRank(rank)
         }
         return result
+    }
+    fun printResults(result: LottoResult) {
+        println("3개 일치 5,000원) - ${result.countRank(LottoRank.FIFTH)}개")
+        println("4개 일치 50,000원) - ${result.countRank(LottoRank.FOURTH)}개")
+        println("5개 일치 1,500,000원) - ${result.countRank(LottoRank.THIRD)}개")
+        println("5개 일치, 보너스 볼 일치 (30,000,000원) - ${result.countRank(LottoRank.SECOND)}개")
+        println("6개 일치 (2,000,000,000원) - ${result.countRank(LottoRank.FIRST)}개")
+    }
+    
 
 
 
