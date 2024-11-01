@@ -2,8 +2,11 @@ package view
 
 import camp.nextstep.edu.missionutils.Console.readLine
 import domain.enums.Input
+import domain.enums.Output
+import domain.enums.Rank
 import domain.validator.InputValidate
-import util.printWithSquareBracket
+import util.convertWithDigitComma
+import util.ext.printWithSquareBracket
 import util.retryWhenNoException
 import vm.LottoViewModel
 
@@ -15,6 +18,7 @@ class View(
         getPayment()
         getWinningNumber()
         getBonusNumber()
+        printRateOfReturn()
     }
 
     private fun getPayment() {
@@ -42,10 +46,11 @@ class View(
             val bonusNumber = readLine()
             val validBonusNumber = validator.bonusNumberValidation(bonusNumber)
             viewModel.onCompleteInputBonusNumber(validBonusNumber)
+            printWinningStatics()
         }
     }
 
-    private fun printAndSetPurchase(msg: String, purchase: Int){
+    private fun printAndSetPurchase(msg: String, purchase: Int) {
         lineBreak()
         println(msg)
         viewModel.onCompleteInputPayment(purchase)
@@ -54,7 +59,7 @@ class View(
         }
     }
 
-    private fun printAndSetWinningNumber(winningNumber: List<Int>){
+    private fun printAndSetWinningNumber(winningNumber: List<Int>) {
         lineBreak()
         viewModel.onCompleteInputWinningNumber(winningNumber)
     }
@@ -85,5 +90,10 @@ class View(
             }원) - ${value}개"
         )
     }
+
+    private fun printRateOfReturn(){
+        println(Output.getTotalRateOfReturn(viewModel.state.rateOfReturn))
+    }
+
     private fun lineBreak() = println()
 }
