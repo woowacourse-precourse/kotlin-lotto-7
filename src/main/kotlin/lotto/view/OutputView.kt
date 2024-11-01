@@ -1,5 +1,6 @@
 package lotto.view
 
+import lotto.util.Constants.EXCEPTION_PREFIX
 import lotto.util.Constants.LOTTO_RANK_FIFTH_WINNING_AMOUNT
 import lotto.util.Constants.LOTTO_RANK_FIRST_WINNING_AMOUNT
 import lotto.util.Constants.LOTTO_RANK_FOURTH_WINNING_AMOUNT
@@ -35,7 +36,7 @@ class OutputView {
     }
 
     fun printExceptionMessage(exceptionMessage: String) {
-        println(exceptionMessage)
+        println(EXCEPTION_PREFIX + exceptionMessage)
     }
 
     private fun printRankResult(matches: Int, winningAmount: Int, count: Int, includeBonus: Boolean = false) {

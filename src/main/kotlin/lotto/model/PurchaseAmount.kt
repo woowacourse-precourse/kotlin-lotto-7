@@ -1,7 +1,5 @@
 package lotto.model
 
-import lotto.util.Constants.EXCEPTION_PREFIX
-
 class PurchaseAmount(private var purchaseAmount: Int = 0) {
 
     fun getPurchaseAmount(): Int = purchaseAmount
@@ -18,8 +16,8 @@ class PurchaseAmount(private var purchaseAmount: Int = 0) {
     }
 
     companion object {
-        const val NOT_NUMERIC_MESSAGE = "${EXCEPTION_PREFIX}구입 금액은 숫자여야 합니다."
-        const val LESS_THAN_MINIMUM_MESSAGE = "${EXCEPTION_PREFIX}구입 금액은 1,000원 이상이어야 합니다."
-        const val NOT_MULTIPLE_OF_THOUSAND_MESSAGE = "${EXCEPTION_PREFIX}구입 금액은 1,000원 단위여야 합니다."
+        const val NOT_NUMERIC_MESSAGE = "구입 금액은 숫자여야 합니다."
+        const val LESS_THAN_MINIMUM_MESSAGE = "구입 금액은 1,000원 이상이어야 합니다."
+        const val NOT_MULTIPLE_OF_THOUSAND_MESSAGE = "구입 금액은 1,000원 단위여야 합니다."
     }
 }
