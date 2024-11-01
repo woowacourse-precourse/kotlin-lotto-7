@@ -45,5 +45,9 @@ Exception이 아닌 IllegalArgumentException, IllegalStateException 등과 같�
 1등 - 6개 일치  
 
 ### 4. 수익률을 계산하는 기능
-
+전체 수익률을 계산한 후 소수점 둘 째 자리를 반올림합니다
+수익률 계산 공식 :  
+$$
+\frac{전체 당첨 수익}{구입 금액} * 100
+$$
 

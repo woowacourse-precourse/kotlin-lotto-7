@@ -5,6 +5,7 @@ import org.junit.jupiter.api.*
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.CsvSource
 import org.junit.jupiter.params.provider.MethodSource
+import org.junit.jupiter.params.provider.ValueSource
 
 class LottoTest {
 
@@ -12,7 +13,26 @@ class LottoTest {
     fun `로또 발행 오류 테스트`() {
         assertDoesNotThrow {
             for (i in 1 until 10000) {
-                Lotto(getLotto())
+                Lotto(Lotto.getLotto())
+            }
+        }
+    }
+
+    @ParameterizedTest
+    @CsvSource(value = ["0,2,3,310.8", "0,0,0,0.0", "1,0,0, 4054.1"], delimiter = ',')
+    fun `수익률 계산 테스트`(a:String, b:String, c:String, expectedRate:String) {
+        assertDoesNotThrow {
+            var countMap = mapOf(
+                Price.FIRST to 0,
+                Price.SECOND to 0,
+                Price.THIRD to a.toInt(),
+                Price.FOURTH to b.toInt(),
+                Price.FIFTH to c.toInt()
+
+            )
+            purchaseAmount = 37
+            var incomeRate = Lotto.getRateOfReturn(countMap)
+            require(incomeRate == expectedRate.toDouble())
             }
         }
     }
@@ -69,4 +89,3 @@ class LottoTest {
         }
     }
 
-}

@@ -21,7 +21,7 @@ fun main()
 	print("${purchaseAmount}개를 구매했습니다.\n")
 
 	for (i in 0 until purchaseAmount) {
-		var lottoPicked = getLotto()
+		var lottoPicked = Lotto.getLotto()
 		println(lottoPicked)
 		lottoStorage.add(lottoPicked)
 	}
@@ -55,6 +55,7 @@ fun main()
 	var thirdCount = countMap.getOrElse(Price.THIRD) { 0 }
 	var secondCount = countMap.getOrElse(Price.SECOND) { 0 }
 	var firstCount =countMap.getOrElse(Price.FIRST) { 0 }
+	var incomeRate = Lotto.getRateOfReturn(countMap)
 
 	print("""
 		3개 일치 (5,000원) - ${fifthCount}개
@@ -62,6 +63,7 @@ fun main()
 		5개 일치 (1,500,000원) - ${thirdCount}개
 		5개 일치, 보너스 볼 일치 (30,000,000원) - ${secondCount}개
 		6개 일치 (2,000,000,000원) - ${firstCount}개
+		총 수익률은 ${incomeRate}%입니다.
 	""".trimIndent()
 	)
 }

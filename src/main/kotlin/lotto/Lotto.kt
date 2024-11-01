@@ -9,16 +9,6 @@ enum class Price {
     LOSE
 }
 
-class ErrorMessage () {
-    companion object {
-        val notValid = "[ERROR] 올바른 값을 입력해주세요.\n"
-        val notPerfectlyDivided = "[ERROR] 1000원 단위로 입력해주세요.\n"
-        val notSixNumbers = "[ERROR] 6개의 숫자를 입력해주세요\n"
-        val notInRange = "[ERROR] 로또 번호는 1부터 45 사이의 숫자여야 합니다.\n"
-        val isDuplex = "[ERROR] 로또 번호는 중복될 수 없습니다. \n"
-    }
-}
-
 fun getPurchaseAmount():Int {
     print("구입금액을 입력해 주세요.\n")
     var purchaseInput = camp.nextstep.edu.missionutils.Console.readLine()
@@ -79,22 +69,16 @@ fun getBonusNumber():Int {
     }
     return bonusNumber.toInt()
 }
-fun getLotto():MutableList<Int> {
-    val LOTTO_COUNT:Int = 6
-    val STRAT_LOTTO_NUM:Int = 1
-    val END_LOTTO_NUM:Int = 45
-    var lottoNotDuplex:HashSet<Int> = hashSetOf()
-    var lottoTicket:MutableList<Int> = mutableListOf()
 
-    while (lottoNotDuplex.size != 6) {
-        lottoTicket = camp.nextstep.edu.missionutils.Randoms.pickUniqueNumbersInRange(STRAT_LOTTO_NUM, END_LOTTO_NUM, LOTTO_COUNT)
-        lottoNotDuplex = lottoTicket.toHashSet()
+class ErrorMessage () {
+    companion object {
+        val notValid = "[ERROR] 올바른 값을 입력해주세요.\n"
+        val notPerfectlyDivided = "[ERROR] 1000원 단위로 입력해주세요.\n"
+        val notSixNumbers = "[ERROR] 6개의 숫자를 입력해주세요\n"
+        val notInRange = "[ERROR] 로또 번호는 1부터 45 사이의 숫자여야 합니다.\n"
+        val isDuplex = "[ERROR] 로또 번호는 중복될 수 없습니다. \n"
     }
-    lottoTicket.sort()
-    return lottoTicket
 }
-
-
 
 class Lotto(private val numbers: List<Int>) {
     init {
@@ -127,6 +111,33 @@ class Lotto(private val numbers: List<Int>) {
         return Price.LOSE
     }
 
-    // TODO: 추가 기능 구현
+    companion object {
+        fun getRateOfReturn(countMap:Map<Price, Int>):Double {
+            var fifthCountIncome = countMap.getOrElse(Price.FIFTH) { 0 } * 5000
+            var fourthCountIncome = countMap.getOrElse(Price.FOURTH) { 0 } * 50000
+            var thirdCountIncome = countMap.getOrElse(Price.THIRD) { 0 } * 1500000
+            var secondCountIncome = countMap.getOrElse(Price.SECOND) { 0 } * 30000000
+            var firstCountIncome = countMap.getOrElse(Price.FIRST) { 0 } * 2000000000
+            var income = fifthCountIncome+fourthCountIncome+thirdCountIncome+secondCountIncome+firstCountIncome
+            var incomeRate = income.toFloat() / (purchaseAmount*1000)*100
+            return "%.1f".format(incomeRate).toDouble()
+
+        }
+
+        fun getLotto():MutableList<Int> {
+            val LOTTO_COUNT:Int = 6
+            val STRAT_LOTTO_NUM:Int = 1
+            val END_LOTTO_NUM:Int = 45
+            var lottoNotDuplex:HashSet<Int> = hashSetOf()
+            var lottoTicket:MutableList<Int> = mutableListOf()
+
+            while (lottoNotDuplex.size != 6) {
+                lottoTicket = camp.nextstep.edu.missionutils.Randoms.pickUniqueNumbersInRange(STRAT_LOTTO_NUM, END_LOTTO_NUM, LOTTO_COUNT)
+                lottoNotDuplex = lottoTicket.toHashSet()
+            }
+            lottoTicket.sort()
+            return lottoTicket
+        }
+    }
 
 }

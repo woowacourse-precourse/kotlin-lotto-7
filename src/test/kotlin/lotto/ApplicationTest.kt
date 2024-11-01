@@ -49,10 +49,6 @@ class ApplicationTest : NsTest() {
         }
     }
 
-    @Test
-    fun `테스트`() {
-        "600ㅓ".toInt()
-    }
 
     override fun runMain() {
         main()
