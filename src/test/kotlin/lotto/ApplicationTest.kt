@@ -88,8 +88,8 @@ class ApplicationTest : NsTest() {
     @DisplayName("반올림 기능 테스트")
     fun `반올림 기능 테스트`() {
         assertSimpleTest {
-            assert(totalWinningRate(10000, 3343) == 0.3)
-            assert(totalWinningRate(10000, 3543) == 0.4)
+            assert(totalWinningRate(0.3355) == 0.336)
+            assert(totalWinningRate(0.3354) == 0.335)
         }
     }
 

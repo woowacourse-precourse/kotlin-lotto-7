@@ -31,12 +31,11 @@ fun main() {
     println("\n당첨 통계\n---")
     val scoreBoard = divideRank(lottos, normalWinningNumbers, bonusNumber)
     val totalWinning = calculateTotalWinningProcess(scoreBoard)
-
-
+    val winningRate = totalWinningRate(totalWinning.toDouble() / purchaseCost)
 }
 
-fun totalWinningRate(investingCost: Int, total: Long): Double {
-    return round((total / investingCost.toDouble()) * 10) / 10
+fun totalWinningRate(originRate: Double): Double {
+    return round(originRate * 1000) / 1000
 }
 
 private fun calculateTotalWinningProcess(
