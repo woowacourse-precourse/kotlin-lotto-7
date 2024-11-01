@@ -18,7 +18,7 @@ class LottoController {
         outputView.printLottoAmountMessage(lottoCount)
 
         generateLotto(lottoCount)
-        printLottoNumber()
+        outputView.printLottoNumber(lottoTickets)
 
         val winningNumbers = inputView.getWinningNumbers()
 
@@ -38,7 +38,4 @@ class LottoController {
         }
     }
 
-    private fun printLottoNumber() {
-        lottoTickets.forEach { lotto -> println(lotto.getNumbers()) }
-    }
 }
