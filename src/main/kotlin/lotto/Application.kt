@@ -22,5 +22,8 @@ fun main() {
 
     val winNumber = Lotto(Console.readLine().split(",").mapNotNull { it.trim().toIntOrNull() }.distinct())
     require(winNumber.getNumbers().size == 6)
-    require(winNumber.isValidRange())
+    require(Validation.isValidRange(*winNumber.getNumbers().toIntArray()))
+
+    val bonusNumber = Console.readLine().toIntOrNull() ?: throw IllegalArgumentException()
+    require(Validation.isValidRange(bonusNumber))
 }
