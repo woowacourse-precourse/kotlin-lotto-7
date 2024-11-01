@@ -37,6 +37,20 @@ fun getLottoWinningInfo(): LottoWinningInfo {
     return winningInfo
 }
 
+fun getLottoWinningNumbers(): List<Int> {
+    while (true) {
+        try {
+            println(MESSAGE_INPUT_WINNING_NUMBER)
+            val input = convertListInt(readLineAndLineBreak())
+
+            return input
+        } catch (e: IllegalArgumentException) {
+            println(e.message)
+            println()
+        }
+    }
+}
+
 fun printPurchasedLottos(lottos: MutableList<Lotto>) {
     println(MESSAGE_OUTPUT_LOTTO_COUNT.format(lottos.size))
     lottos.forEach { println(it.toString()) }
@@ -70,20 +84,6 @@ private fun setLottoBonusNumber(winningInfo: LottoWinningInfo) {
             println(MESSAGE_INPUT_BONUS_NUMBER)
             winningInfo.bonusNumber = convertInt(readLineAndLineBreak())
             break
-        } catch (e: IllegalArgumentException) {
-            println(e.message)
-            println()
-        }
-    }
-}
-
-fun getLottoWinningNumbers(): List<Int> {
-    while (true) {
-        try {
-            println(MESSAGE_INPUT_WINNING_NUMBER)
-            val input = convertListInt(readLineAndLineBreak())
-
-            return input
         } catch (e: IllegalArgumentException) {
             println(e.message)
             println()
