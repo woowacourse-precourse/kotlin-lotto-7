@@ -3,7 +3,9 @@ package lotto
 import camp.nextstep.edu.missionutils.Randoms
 import lotto.model.Lotto
 import lotto.model.Rank
-import lotto.utils.Validation
+import lotto.utils.BonusNumber
+import lotto.utils.Price
+import lotto.utils.WinningNumber
 import lotto.view.InputView
 import lotto.view.OutputView
 
@@ -11,10 +13,7 @@ fun main() {
     val inputView = InputView()
     val outputView = OutputView()
 
-    val price = inputView.readPrice().toIntOrNull() ?: throw IllegalArgumentException()
-    require(price > 0)
-    require(price % 1000 == 0)
-
+    val price = Price.validate(inputView.readPrice())
     val lottoCount = price / 1000
     val lotto = mutableListOf<Lotto>()
     lotto.apply {
@@ -26,13 +25,8 @@ fun main() {
     outputView.printLottoCount(lottoCount)
     outputView.printLotto(lotto)
 
-    val winningNumber = inputView.readWinningNumber().split(",").mapNotNull { it.trim().toIntOrNull() }.toSet()
-    require(winningNumber.size == 6)
-    require(Validation.isValidRange(*winningNumber.toIntArray()))
-
-    val bonusNumber = inputView.readBonusNumber().toIntOrNull() ?: throw IllegalArgumentException()
-    require(Validation.isValidRange(bonusNumber))
-    require(Validation.isNotDuplicated(winningNumber, bonusNumber))
+    val winningNumber = WinningNumber.validate(inputView.readWinningNumber())
+    val bonusNumber = BonusNumber.validate(inputView.readBonusNumber(), winningNumber)
 
     val rankCount = mutableMapOf<Rank, Int>()
     Rank.entries.forEach {
@@ -45,7 +39,6 @@ fun main() {
 
     rankCount.remove(Rank.NONE)
     outputView.printWinningStats(rankCount)
-
     outputView.printProfitRate(getProfitRate(rankCount, price))
 }
 
