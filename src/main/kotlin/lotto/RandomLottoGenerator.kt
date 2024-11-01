@@ -25,7 +25,7 @@ class RandomLottoGenerator(amount: Int) {
     }
 
     private fun lottoCountCalculate(amount: Int): Int {
-        return (amount / 1000)
+        return (amount / SettingValue.LOTTO_PRICE)
     }
 
     private fun randomLottoGenerate(): List<Int> {
