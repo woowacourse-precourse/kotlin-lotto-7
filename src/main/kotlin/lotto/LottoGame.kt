@@ -48,7 +48,12 @@ class LottoGame {
         println("5개 일치, 보너스 볼 일치 (30,000,000원) - ${result.countRank(LottoRank.SECOND)}개")
         println("6개 일치 (2,000,000,000원) - ${result.countRank(LottoRank.FIRST)}개")
     }
-    
+    fun printTotalReturn(result: LottoResult, cost: Int) {
+        val totalPrize = result.calculateTotalPrize()
+        val totalReturn = String.format("%.2f",(totalPrize.toDouble() / cost) * 100)
+        println("총 수익률은 ${totalReturn}%입니다.")
+    }
+
 
 
 
