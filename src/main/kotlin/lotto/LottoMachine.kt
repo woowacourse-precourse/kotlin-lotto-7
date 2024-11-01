@@ -11,6 +11,10 @@ class LottoMachine {
         payment = getCorrectPayment(input)
     }
 
+    fun calculateAmountOfLotto(): Int {
+        return payment % 1000
+    }
+
     private fun getCorrectPayment(input: String): Int {
         var tempInput = input
 
