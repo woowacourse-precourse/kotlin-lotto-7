@@ -42,6 +42,6 @@ class GameService {
     }
 
     companion object {
-        const val ONE_LOTTO_PRICE = 1000
+        const val ONE_LOTTO_PRICE = 1_000
     }
 }

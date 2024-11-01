@@ -34,7 +34,7 @@ class InputValidator {
     }
 
     companion object {
-        const val MONEY_UNIT = 1000
+        const val MONEY_UNIT = 1_000
         const val LOTTO_LENGTH = 6
         const val LOTTO_START_VALUE = 1
         const val LOTTO_END_VALUE = 45

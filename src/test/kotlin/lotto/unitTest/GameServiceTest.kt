@@ -47,6 +47,21 @@ class GameServiceTest {
         assertThat(countWinnings.inOrderNumbers()).isEqualTo(listOf(0, 0, 1, 1, 1))
     }
 
+    @Test
+    fun calculateReturnRateTest() {
+        // given
+        val boughtLottos = createTestLottos()
+        val winLotto = Lotto(listOf(1, 2, 3, 4, 5, 6))
+        val countWinnings = gameService.countWinnings(boughtLottos, winLotto, 7)
+        val spentMoney = boughtLottos.size * GameService.ONE_LOTTO_PRICE.toLong()
+
+        // when
+        val returnRate = gameService.calculateReturnRate(countWinnings, spentMoney)
+
+        // then
+        assertThat(returnRate).isEqualTo("67716666.7%") // (2,031,500,000/ 3,000) * 100
+    }
+
     private fun createTestLottos(): List<Lotto> {
         return listOf(
             Lotto(listOf(1, 2, 3, 4, 5, 6)),
@@ -56,6 +71,6 @@ class GameServiceTest {
     }
 
     companion object {
-        private const val TEST_MONEY = 500000
+        private const val TEST_MONEY = 500_000
     }
 }

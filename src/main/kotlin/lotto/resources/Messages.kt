@@ -23,7 +23,7 @@ enum class Messages(private val message: String) {
     ERROR("[ERROR] %s"),
     DUPLICATE_LOTTO_NUMBER("로또 번호에 중복값이 존재합니다"),
     INVALID_LOTTO_RANGE(
-        "로또의 각 번호는 ${InputValidator.LOTTO_START_VALUE}이상 ${InputValidator.LOTTO_END_VALUE}이하로 입력해 주세요"
+        "로또 번호는 ${InputValidator.LOTTO_START_VALUE}부터 ${InputValidator.LOTTO_END_VALUE} 사이의 숫자여야 합니다."
     ),
     NOT_SIX_NUMBER("입력값이 ${InputValidator.LOTTO_LENGTH}개의 숫자로 구성되지 않았습니다."),
     EMPTY_INPUT("입력값이 비어있습니다."),

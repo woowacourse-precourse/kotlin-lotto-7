@@ -16,10 +16,10 @@ class WinningCounter {
     }
 
     enum class WinningCategory(val prize: Long) {
-        MATCH_THREE(5000L),
-        MATCH_FOUR(50000L),
-        MATCH_FIVE(1500000L),
-        MATCH_FIVE_BONUS(30000000L),
-        MATCH_SIX(2000000000L)
+        MATCH_THREE(5_000L),
+        MATCH_FOUR(50_000L),
+        MATCH_FIVE(1_500_000L),
+        MATCH_FIVE_BONUS(30_000_000L),
+        MATCH_SIX(2_000_000_000L)
     }
 }
