@@ -15,7 +15,7 @@ class LottoNumberMatcherTest {
 
     @Test
     fun `로또 번호에 보너스 번호 포함`() {
-        val hasBonusNumber = lottoNumberMatcher.hasBonusNumber(lottoTestData, BONUS_NUMBER)
+        val hasBonusNumber = lottoNumberMatcher.matchWithBonusNumber(lottoTestData, BONUS_NUMBER)
         assertEquals(HAS_BONUS_NUMBER, hasBonusNumber)
     }
 

@@ -11,7 +11,7 @@ class LottoNumberMatcher {
         return matchCount
     }
 
-    fun hasBonusNumber(
+    fun matchWithBonusNumber(
         lotto: Lotto,
         bonusNumber: Int,
     ): Boolean {

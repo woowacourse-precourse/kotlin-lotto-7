@@ -5,33 +5,34 @@ class LottoResult(
     private val winningNumbers: List<Int>,
     private val bonusNumber: Int,
 ) {
+    private val lottoMatcher = LottoNumberMatcher()
 
-    fun getMatchingCount(): List<Int> {
-        val lottoResults = mutableListOf<Int>()
-        val lottoNumberList = lottoList.toNumberList()
-        lottoNumberList.forEach { numbers ->
-            // TODO: 리팩토링 필요
-            val intersectCount = numbers.intersect(winningNumbers).size
-            val bonusCount = numbers.getBonusCount(intersectCount)
-            val count = intersectCount + bonusCount
-            lottoResults.add(count)
+    private fun getLottoRankList(): List<LottoRank> {
+        val lottoRankList = mutableListOf<LottoRank>()
+        lottoList.forEach { lotto ->
+            val winningCount = lottoMatcher.matchWithWinningNumbers(lotto, winningNumbers)
+            val hasBonusNumber = hasBonusNumber(winningCount, lotto)
+            if (hasBonusNumber) {
+                lottoRankList.add(LottoRank.FIVE_AND_BONUS_MATCHES)
+            }
+            val winningLottoRank = winningCount.toLottoRank()
+            lottoRankList.add(winningLottoRank)
         }
-        return lottoResults
+        return lottoRankList
     }
 
-    private fun List<Int>.getBonusCount(intersectionCount: Int): Int {
-        val isContainBonusNumber = this.contains(bonusNumber)
-        if (isContainBonusNumber &&
-            intersectionCount == FIVE_MATCHES
-        ) {
-            return BONUS_NUMBER
+    private fun hasBonusNumber(
+        winningCount: Int,
+        lotto: Lotto,
+    ): Boolean {
+        if (winningCount == FIVE_MATCHES) {
+            val hasBonusNumber = lottoMatcher.matchWithBonusNumber(lotto, bonusNumber)
+            return hasBonusNumber
         }
-        return NOT_BONUS_NUMBER
+        return false
     }
 
     companion object {
         private const val FIVE_MATCHES = 5
-        private const val BONUS_NUMBER = 1
-        private const val NOT_BONUS_NUMBER = 0
     }
 }
