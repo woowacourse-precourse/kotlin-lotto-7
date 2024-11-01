@@ -44,13 +44,12 @@ class LottoController {
         for ((ind, lotto) in lottos.withIndex()) {
             matchLottoNumber[ind] = winLotteryNumber?.let { lotto.getMatchCount(it) to lotto.isMatchBonusNumber(bonusLotteryNumber)}!!
         }
-        println("matchLottoNumber: $matchLottoNumber")
 
         val matchLottoCount = mutableMapOf<MatchingLottoCount, Int>()
         for (i in matchLottoNumber) {
             incrementMatchCount(matchLottoCount, i.first + isMatchBonusNumber(i.second), i.second)
         }
-        println("matchLottoCount: $matchLottoCount")
+
         return matchLottoCount
     }
 

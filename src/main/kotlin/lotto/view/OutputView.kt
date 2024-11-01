@@ -18,29 +18,13 @@ class OutputView {
     }
 
     fun printWinStatistics(lottoMatch: Map<MatchingLottoCount, Int>) {
-        val matchCount = mutableListOf<Int>()
-        for (i in MatchingLottoCount.entries) {
-            matchCount.add(lottoMatch[i] ?: 0)
-        }
-
-        val winningMsg = listOf(
-            PRINT_MATCH_THREE_LOTTO_NUMBER_MESSAGE,
-            PRINT_MATCH_FOUR_LOTTO_NUMBER_MESSAGE,
-            PRINT_MATCH_FIVE_LOTTO_NUMBER_MESSAGE,
-            PRINT_MATCH_FIVE_LOTTO_NUMBER_AND_BONUS_MESSAGE,
-            PRINT_MATCH_SIX_LOTTO_NUMBER_MESSAGE
-        )
-
-        val msg = winningMsg.zip(matchCount) { msg, count ->
-            "${msg}${count}$PRINT_COUNT_UNIT_MESSAGE"
-        }
-
         println(PRINT_WINNING_STATISTICS_MESSAGE)
         println("---")
-        repeat(msg.size) {
-            println(msg[it])
-        }
-
+        println("$PRINT_MATCH_THREE_LOTTO_NUMBER_MESSAGE ${lottoMatch[MatchingLottoCount.THREE] ?: 0} $PRINT_COUNT_UNIT_MESSAGE")
+        println("$PRINT_MATCH_FOUR_LOTTO_NUMBER_MESSAGE ${lottoMatch[MatchingLottoCount.FOUR] ?: 0} $PRINT_COUNT_UNIT_MESSAGE")
+        println("$PRINT_MATCH_FIVE_LOTTO_NUMBER_MESSAGE ${lottoMatch[MatchingLottoCount.FIVE] ?: 0} $PRINT_COUNT_UNIT_MESSAGE")
+        println("$PRINT_MATCH_FIVE_LOTTO_NUMBER_AND_BONUS_MESSAGE ${lottoMatch[MatchingLottoCount.FIVE_BONUS] ?: 0} $PRINT_COUNT_UNIT_MESSAGE")
+        println("$PRINT_MATCH_SIX_LOTTO_NUMBER_MESSAGE ${lottoMatch[MatchingLottoCount.SIX] ?: 0} $PRINT_COUNT_UNIT_MESSAGE")
     }
 
     companion object {
