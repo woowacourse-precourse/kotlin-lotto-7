@@ -67,4 +67,9 @@ class LottoJudgeTest {
 
         return exception
     }
+
+    @Test
+    fun `보너스 번호는 1개 입력되어야 한다`() {
+        lottoJudge.setLottoBonusNumber(1)
+    }
 }
