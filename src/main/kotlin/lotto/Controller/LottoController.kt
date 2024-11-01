@@ -3,27 +3,28 @@ package lotto.Controller
 import lotto.Lotto
 import lotto.Model.InputValidater
 import lotto.Model.RandomLottoMaker
+import lotto.Model.WinningLottoResult
 import lotto.View.InputView
 import lotto.View.OutputView
 
 class LottoController {
     private val inputView = InputView()
     private val outputView = OutputView()
-    private var bonusNumber = 0
     private var releasedLottos = listOf<Lotto>()
-    private lateinit var winningLotto: Lotto
+    lateinit var winningLottoResult: WinningLottoResult
 
     fun execute() {
         getInputsAndReleaseLottos()
-        outputView.printLottoResult(releasedLottos, winningLotto, bonusNumber)
+        outputView.printLottoResult(releasedLottos, winningLottoResult)
     }
 
     private fun getInputsAndReleaseLottos() {
         val purchaseAmount = getPurchaseInput()
         val lottoAmount = purchaseAmount / Lotto.COST
         releaseLottos(lottoAmount)
-        winningLotto = getWinningLotto()
-        bonusNumber = getBonusNumber(winningLotto)
+        val winningLotto = getWinningLotto()
+        val bonusNumber = getBonusNumber(winningLotto)
+        winningLottoResult = WinningLottoResult(winningLotto, bonusNumber)
     }
 
     private fun getPurchaseInput(): Int {

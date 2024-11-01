@@ -1,6 +1,7 @@
 package lotto
 
 import lotto.Model.LottoRank
+import lotto.Model.WinningLottoResult
 
 class Lotto(private val numbers: List<Int>) {
     init {
@@ -20,8 +21,10 @@ class Lotto(private val numbers: List<Int>) {
         return numbers
     }
 
-    fun getLottoResult(winningLotto: Lotto, bonusNumber: Int): LottoRank {
-        val winningLottoNumbers = winningLotto.getNumbers()
+    fun getLottoResult(winningLottoResult: WinningLottoResult): LottoRank {
+        val firstRank = winningLottoResult.getWinningLotto()
+        val bonusNumber = winningLottoResult.getBonusNumber()
+        val winningLottoNumbers = firstRank.getNumbers()
         val numberMatchCount = getMatchCount(winningLottoNumbers)
         return getLottoRank(bonusNumber, numberMatchCount)
     }

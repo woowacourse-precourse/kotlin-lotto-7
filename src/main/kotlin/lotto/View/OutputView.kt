@@ -2,6 +2,7 @@ package lotto.View
 
 import lotto.Lotto
 import lotto.Model.LottoRank
+import lotto.Model.WinningLottoResult
 import kotlin.math.round
 
 class OutputView {
@@ -13,16 +14,16 @@ class OutputView {
         println()
     }
 
-    fun printLottoResult(lottos: List<Lotto>, winningLotto: Lotto, bonusNumber: Int) {
+    fun printLottoResult(lottos: List<Lotto>, winningLottoResult: WinningLottoResult) {
         println("당첨 통계")
-        val releasedLottoRanks = getReleasedLottoRanks(lottos, winningLotto, bonusNumber)
+        val releasedLottoRanks = getReleasedLottoRanks(lottos, winningLottoResult)
         printStatics(releasedLottoRanks)
     }
 
-    private fun getReleasedLottoRanks(lottos: List<Lotto>, winningLotto: Lotto, bonusNumber: Int): List<LottoRank> {
+    private fun getReleasedLottoRanks(lottos: List<Lotto>, winningLottoResult: WinningLottoResult): List<LottoRank> {
         val releasedLottoRanks = mutableListOf<LottoRank>()
         lottos.forEach { lotto: Lotto ->
-            releasedLottoRanks.add(lotto.getLottoResult(winningLotto, bonusNumber))
+            releasedLottoRanks.add(lotto.getLottoResult(winningLottoResult))
         }
         return releasedLottoRanks
     }
