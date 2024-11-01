@@ -1,7 +1,7 @@
 package lotto.controller
 
 import lotto.model.Lotto
-import lotto.model.LottoGenerator
+import lotto.utils.Constants.LOTTO_PRICE
 import lotto.view.InputView
 import lotto.view.OutputView
 
@@ -13,19 +13,18 @@ import lotto.view.OutputView
 class LottoController {
     val inputView = InputView()
     val outputView = OutputView()
-    val lottoGenerator = LottoGenerator()
 
     fun start() {
         val purchaseAmount = inputView.getPurchaseAmount()
+        // TODO: purchaseAmount 예외처리 위치 변경하기
 
-        // 구매 금액에 대한 예외 처리 -> 예외 처리는 모델에서?
-        // 입력 값이 잘못되면 다시 받아야 하니 input에서 -> 함수 처리해서 모델에서?
-
-        // 구매 갯수 출력
         val purchaseCount = getPurchaseCount(purchaseAmount)
-        iteration(purchaseCount)
+        outputView.showPurchasedLottoCount(purchaseCount)
 
         // 구매한 만큼 로또 번호 출력
+        var Lottos = listOf<List<Int>>()
+        Lotto.generate()
+
 
         getWinningNumbers()
 
@@ -51,7 +50,9 @@ class LottoController {
         }
     }
 
-    fun iteration(count: Int) = repeat(count) { lottoGenerator.generate() }
+    fun iteration(count: Int) = repeat(count) { Lotto.generate() }
 
-    fun getPurchaseCount(purchaseAmount: Int): Int = purchaseAmount / 1000
+//    fun addLottoTicket(tickets: List<Int>) = tickets.add????
+
+    fun getPurchaseCount(purchaseAmount: Int): Int = purchaseAmount / LOTTO_PRICE
 }

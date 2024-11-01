@@ -9,7 +9,7 @@ package lotto.view
 
 class OutputView {
 
-    fun showPurchasedLottoCount(count: Int) = println("${count}개를 구매했습니다.")
+    fun showPurchasedLottoCount(count: Int) = println("\n${count}개를 구매했습니다.")
 
     // 컨트롤러 -> 모델(LottoGenerator) -> 매개변수 받기 -> 컨트롤러에서 수행
     fun showPurchasedLottoList(count: Int) = println()

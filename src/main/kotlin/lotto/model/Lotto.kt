@@ -1,5 +1,6 @@
 package lotto.model
 
+import camp.nextstep.edu.missionutils.Randoms
 import lotto.utils.Constants.MAX_NUMBER
 import lotto.utils.Constants.MIN_NUMBER
 import lotto.utils.Constants.LOTTO_NUMBER_COUNT
@@ -21,6 +22,10 @@ class Lotto(private val numbers: List<Int>) {
     }
 
     fun getLottoNumbers() = numbers
+
+    companion object {
+        fun generate(): List<Int> = Randoms.pickUniqueNumbersInRange(MIN_NUMBER, MAX_NUMBER, LOTTO_NUMBER_COUNT).sorted()
+    }
 
     // TODO: 추가 기능 구현
     // 여기선 뭘 해야하지????
