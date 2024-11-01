@@ -4,7 +4,7 @@ class LottoWinningInfo(val numbers: List<Int>) {
     var bonusNumber: Int? = null
         set(value) {
             validateNumberRange(value!!)
-            require(!numbers.contains(value)) { Lotto.ERROR_NOT_DUPLICATE_NUMBER }
+            require(!numbers.contains(value)) { Lotto.ERROR_DUPLICATE_NUMBER }
             field = value
         }
 
@@ -26,6 +26,6 @@ class LottoWinningInfo(val numbers: List<Int>) {
 
     private fun validateDuplicates(numbers: List<Int>) {
         val filterNumbers = numbers.toMutableSet()
-        require(filterNumbers.size == Lotto.ITEM_LENGTH) { Lotto.ERROR_NOT_DUPLICATE_NUMBER }
+        require(filterNumbers.size == Lotto.ITEM_LENGTH) { Lotto.ERROR_DUPLICATE_NUMBER }
     }
 }

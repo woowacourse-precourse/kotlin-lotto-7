@@ -29,7 +29,7 @@ class Lotto(private val numbers: List<Int>) {
 
     private fun validateDuplicates(numbers: List<Int>) {
         val filterNumbers = numbers.toSet()
-        require(filterNumbers.size == ITEM_LENGTH) { ERROR_NOT_DUPLICATE_NUMBER }
+        require(filterNumbers.size == ITEM_LENGTH) { ERROR_DUPLICATE_NUMBER }
     }
 
     companion object {
@@ -39,7 +39,7 @@ class Lotto(private val numbers: List<Int>) {
         const val PRICE = 1_000
         const val ERROR_NOT_ITEM_LENGTH = "[ERROR] 로또 번호는 6개여야 합니다."
         const val ERROR_NOT_LOTTO_NUMBER = "[ERROR] 로또 번호는 1부터 45까지 가능합니다."
-        const val ERROR_NOT_DUPLICATE_NUMBER = "[ERROR] 로또 번호는 중복될 수 없습니다."
+        const val ERROR_DUPLICATE_NUMBER = "[ERROR] 로또 번호는 중복될 수 없습니다."
         fun create(): Lotto {
             return Lotto(Randoms.pickUniqueNumbersInRange(START_NUMBER, END_NUMBER, ITEM_LENGTH))
         }
