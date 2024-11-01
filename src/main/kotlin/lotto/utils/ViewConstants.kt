@@ -7,5 +7,5 @@ object InputConstants {
 }
 
 object OutputConstants {
-
+    const val WINNING_STATISTICS = "당첨 통계\n---"
 }

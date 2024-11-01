@@ -22,9 +22,8 @@ class LottoController {
         outputView.showPurchasedLottoCount(purchaseCount)
 
         // 구매한 만큼 로또 번호 출력
-        var Lottos = listOf<List<Int>>()
-        Lotto.generate()
-
+        val LottoList = Lotto.generate()
+        println(LottoList)
 
         getWinningNumbers()
 
@@ -34,6 +33,8 @@ class LottoController {
         // 보너스 번호에 대한 예외 처리
 
         // 당첨 통계 출력
+        outputView.showWinningStatisticsMessage()
+
         // 당첨 등급 출력
         // 수익률 출력
     }

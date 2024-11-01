@@ -23,6 +23,10 @@ class Lotto(private val numbers: List<Int>) {
 
     fun getLottoNumbers() = numbers
 
+    fun matchLottoNumbers(lotto: List<Int>) {
+
+    }
+
     companion object {
         fun generate(): List<Int> = Randoms.pickUniqueNumbersInRange(MIN_NUMBER, MAX_NUMBER, LOTTO_NUMBER_COUNT).sorted()
     }
@@ -36,7 +40,6 @@ class Lotto(private val numbers: List<Int>) {
     /**
      * 모델이 수행할 기능 목록
      *
-     * 로또 번호 생성 -> 제네레이터
      * 로또 번호와 당첨 번호 비교 -> 여기서 번호가 유효하면
      * enum 클래스와 비교해서 일치한 정보 전달 -> 위와 같이
      * 총 수익률 계산

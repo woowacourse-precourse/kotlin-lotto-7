@@ -1,5 +1,8 @@
 package lotto.view
 
+import lotto.model.LottoRank
+import lotto.utils.OutputConstants.WINNING_STATISTICS
+
 /**
  * 뷰는 모델에만 의존해야 하고, 컨트롤러에는 의존하면 안된다.
  * 뷰 내부는 모델 코드만 있을 수 있다.
@@ -15,6 +18,12 @@ class OutputView {
     fun showPurchasedLottoList(count: Int) = println()
 
     // 당첨 통계 --- 간단 출력도 여기서?
+    fun showWinningStatisticsMessage() = println(WINNING_STATISTICS)
+
+    fun showWinninfStatisticsMessage() {
+        //println("${LottoRank.FIFTH}개 일치 () - 개")
+    }
+
 
     // 컨트롤러에서 LottoRank 값을 받아 통계 출력
 
