@@ -1,6 +1,6 @@
 package lotto.domain
 
-class Money(val amount: Int) {
+open class Money(val amount: Int) {
 
     init {
         require(amount > 0) { ERROR_NOT_POSITIVE }

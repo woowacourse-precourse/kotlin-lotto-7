@@ -2,9 +2,9 @@ package lotto
 
 import camp.nextstep.edu.missionutils.Console
 import lotto.domain.Lotto
+import lotto.domain.LottoPurchaseMoney
 import lotto.domain.LottoRank
 import lotto.domain.LottoWinningInfo
-import lotto.domain.Money
 import lotto.dto.LottoStatistics
 
 const val MESSAGE_INPUT_PURCHASE_AMOUNT = "구입금액을 입력해 주세요."
@@ -16,13 +16,13 @@ const val MESSAGE_DEFAULT_MATCH = "%d개 일치 (%s원) - %d개"
 const val MESSAGE_BONUS_MATCH = "%d개 일치, 보너스 볼 일치 (%s원) - %d개"
 const val RETURN_ON_INVESTMENT = "총 수익률은 %,.1f%%입니다."
 
-fun getLottoPurchaseAmount(): Money {
+fun getLottoPurchaseAmount(): LottoPurchaseMoney {
     while (true) {
         try {
             println(MESSAGE_INPUT_PURCHASE_AMOUNT)
             val input = convertInt(readLineAndLineBreak())
 
-            return Money(input)
+            return LottoPurchaseMoney(input)
         } catch (e: IllegalArgumentException) {
             println(e.message)
             println()
