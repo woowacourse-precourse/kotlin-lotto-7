@@ -1,6 +1,9 @@
 package lotto.model
 
 import camp.nextstep.edu.missionutils.Randoms
+import lotto.utils.Constants.COUNT
+import lotto.utils.Constants.MAX_NUMBER
+import lotto.utils.Constants.MIN_NUMBER
 
 /**
  * 모델은 컨트롤러나 뷰에 의존하면 안된다.
@@ -10,12 +13,6 @@ import camp.nextstep.edu.missionutils.Randoms
 class LottoGenerator {
 
     fun generate(): List<Int> {
-        return Randoms.pickUniqueNumbersInRange(MIN_NUMBER, MAX_NUMBER, COUNT)
-    }
-
-    companion object {
-        const val MIN_NUMBER = 1
-        const val MAX_NUMBER = 45
-        const val COUNT = 6
+        return Randoms.pickUniqueNumbersInRange(MIN_NUMBER, MAX_NUMBER, COUNT).sorted()
     }
 }
