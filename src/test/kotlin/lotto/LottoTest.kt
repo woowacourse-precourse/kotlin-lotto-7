@@ -20,4 +20,15 @@ class LottoTest {
     }
 
     // TODO: 추가 기능 구현에 따른 테스트 코드 작성
+    @Test
+    fun `로또 번호 반환 테스트`() {
+        val lottoFactory = dependencyInjector.injectLottoFactory()
+        val lotto = lottoFactory()
+        repeat(100000) {
+            assertEquals(lotto.size, 6)
+            assertTrue(lotto.minOrNull() in 1..45)
+            assertTrue(lotto.maxOrNull() in 1..45)
+            assertTrue(lotto.size == lotto.distinct().size)
+        }
+    }
 }
