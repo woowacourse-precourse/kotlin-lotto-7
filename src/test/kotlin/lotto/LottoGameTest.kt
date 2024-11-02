@@ -60,6 +60,20 @@ class LottoGameTest {
         }
     }
 
+    @Test
+    fun `구입 금액에 따른 로또 목록이 생성된다`() {
+        val cost = 3000
+        val lottoList = lottoGame.buyLottos(cost)
+        assertThat(lottoList.size).isEqualTo(cost / 1000)
+        lottoList.forEach { lotto ->
+            val numbers = lotto.getNumbers()
+            assertThat(numbers.size).isEqualTo(6)
+            assertThat(numbers.distinct().size).isEqualTo(6)
+            assertThat(numbers.all { it in 1..45 }).isTrue()
+        }
+    }
+
+
 
 
 }
