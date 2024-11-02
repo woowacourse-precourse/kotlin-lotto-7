@@ -15,41 +15,47 @@ class LottoGameTest {
 
     @Test
     fun `유효한 구입 금액을 입력하면 해당 금액을 반환한다`() {
-        val cost = 3000
-        assertThat(lottoGame.inputCost()).isEqualTo(cost)
+        val game = LottoGame(readLine = { "3000" })
+        val cost = game.inputCost()
+        assertThat(cost).isEqualTo(3000)
     }
 
     @Test
     fun `금액이 1000원 미만이면 예외가 발생한다`() {
+        val game = LottoGame(readLine = { "900" })
         assertThrows<IllegalArgumentException> {
-            lottoGame.inputCost()
+            game.inputCost()
         }
     }
 
     @Test
     fun `금액이 1000 단위가 아니면 예외가 발생한다`() {
+        val game = LottoGame(readLine = { "790" })
         assertThrows<IllegalArgumentException> {
-            lottoGame.inputCost()
+            game.inputCost()
         }
     }
 
     @Test
     fun `유효한 당첨 번호를 입력하면 해당 로또를 반환한다`() {
-        val winningLotto = listOf(1, 2, 3, 4, 5, 6)
-        assertThat(lottoGame.inputWinningLotto()).isEqualTo(winningLotto)
+        val game = LottoGame(readLine = { "1, 2, 3, 4, 5, 6" })
+        val winningLotto = game.inputWinningLotto()
+        assertThat(winningLotto).isEqualTo(listOf(1, 2, 3, 4, 5, 6))
     }
 
     @Test
     fun `당첨 번호가 유효하지 않으면 예외가 발생한다`() {
+        val game = LottoGame(readLine = { "1, 2, 3, 4, 5" })
         assertThrows<IllegalArgumentException> {
-            lottoGame.inputWinningLotto()
+            game.inputWinningLotto()
         }
     }
 
     @Test
     fun `유효한 보너스 번호를 입력하면 해당 번호를 반환한다`() {
-        val bonusNumber = 9
-        assertThat(lottoGame.inputBonusNumber()).isEqualTo(bonusNumber)
+        val game = LottoGame(readLine = { "8" })
+        val bonusNumber = game.inputBonusNumber()
+        assertThat(bonusNumber).isEqualTo(8)
     }
 
     @Test
