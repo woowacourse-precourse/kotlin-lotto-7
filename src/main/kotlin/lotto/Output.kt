@@ -8,4 +8,12 @@ class Output {
         println("구입금액을 입력해 주세요.\n")
     }
 
+    fun outPutTicket(ticket : Int, lottoList : List<List<Int>>){
+        println("${ticket}개를 구매했습니다.\n")
+        for(list in lottoList){
+            println(list)
+        }
+        println()
+    }
+
 }
