@@ -26,6 +26,10 @@ class PurchaseMoney(moneyINput: String) {
         return purchaseMoney
     }
 
+    fun getUnitPrice() : Int {
+        return LOTTO_UNIT_PRICE
+    }
+
     companion object {
         private const val MIN_PURCHASE_MONEY = 1000
         private const val LOTTO_UNIT_PRICE = 1000
