@@ -17,7 +17,7 @@ class Lotto() {
     }
 
     private fun makeLotto(): Set<Int> {
-        return Randoms.pickUniqueNumbersInRange(MIN_LOTTO_NUMBER, MAX_LOTTO_NUMBER, LOTTO_SIZE).toSet()
+        return Randoms.pickUniqueNumbersInRange(MIN_LOTTO_NUMBER, MAX_LOTTO_NUMBER, LOTTO_SIZE).toSortedSet()
     }
 
     private fun validateLottoSize() {
