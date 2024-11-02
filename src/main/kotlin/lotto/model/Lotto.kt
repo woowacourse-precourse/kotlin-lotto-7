@@ -3,6 +3,7 @@ package lotto.model
 import lotto.utils.Constants
 
 class Lotto(private val numbers: List<Int>) {
+
     init {
         require(numbers.size == Constants.LOTTO_NUMBERS_SIZE) { Constants.ERROR_LOTTO_NUMBERS_INCORRECT_SIZE }
         require(numbers.all { it in Constants.LOTTO_NUMBER_MIN..Constants.LOTTO_NUMBER_MAX }) {
@@ -15,7 +16,4 @@ class Lotto(private val numbers: List<Int>) {
         return numbers.sorted()
     }
 
-    fun printNumbers(): String {
-        return getNumbers().joinToString(prefix = "[", postfix = "]")
-    }
 }
