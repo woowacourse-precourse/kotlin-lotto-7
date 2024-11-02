@@ -3,6 +3,12 @@ package lotto
 class LottoResult {
     val winnersCount: MutableMap<LottoRank, Int> = HashMap()
 
+    init {
+        LottoRank.values().forEach { rank ->
+            winnersCount[rank] = 0
+        }
+    }
+
     /* 당첨자 수 추가 함수 */
     fun addWinners(rank: LottoRank) {
         winnersCount[rank] = (winnersCount[rank] ?: 0) + 1
