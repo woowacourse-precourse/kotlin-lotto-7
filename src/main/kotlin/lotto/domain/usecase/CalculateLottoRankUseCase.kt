@@ -10,12 +10,21 @@ class CalculateLottoRankUseCase {
         val matchCount = lotto.getNumbers().count { number ->
             winningNumbers.getNumbers().contains(number)
         }
-        return when (matchCount) {
-            6 -> LottoRank.FIRST
-            5 -> if (lotto.getNumbers().contains(bonusNumber.number)) LottoRank.SECOND else LottoRank.FOURTH
-            4 -> LottoRank.THIRD
-            3 -> LottoRank.FIFTH
-            else -> LottoRank.SIXTH
+        return determineLottoRank(matchCount, lotto, bonusNumber)
+    }
+
+    private fun determineLottoRank(matchCount: Int, lotto: Lotto, bonusNumber: BonusNumber): LottoRank {
+        when (matchCount) {
+            LottoRank.FIRST.matchCount -> return LottoRank.FIRST
+            LottoRank.THIRD.matchCount -> return determineRankWithBonus(lotto, bonusNumber)
+            LottoRank.FOURTH.matchCount -> return LottoRank.FOURTH
+            LottoRank.FIFTH.matchCount -> return LottoRank.FIFTH
         }
+        return LottoRank.SIXTH
+    }
+
+    private fun determineRankWithBonus(lotto: Lotto, bonusNumber: BonusNumber): LottoRank {
+        if (lotto.getNumbers().contains(bonusNumber.number)) return LottoRank.SECOND
+        return LottoRank.THIRD
     }
 }
