@@ -9,7 +9,7 @@ object OutputView {
     }
 
     fun printLotto(lotto: Lotto) {
-        println(lotto.getNumbers())
+        println(lotto.getNumbers().sorted())
     }
 
     fun printLottos(lottos: Lottos) {
