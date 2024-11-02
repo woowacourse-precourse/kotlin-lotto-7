@@ -76,6 +76,10 @@ class MainController {
         val firstCount = winningStatistics.matchCountStatistics[4]
         outputView.printWinningStatistics(fifthCount, fourthCount, thirdCount, secondCount, firstCount)
 
+        // 수익률 계산 및 출력
+        lottoDrawingController.calculateTotalPrize()
+        val returnRate = lottoDrawingController.calculateReturnRate(purchaseAmount)
+        outputView.printReturnRate(returnRate)
     }
 
 }

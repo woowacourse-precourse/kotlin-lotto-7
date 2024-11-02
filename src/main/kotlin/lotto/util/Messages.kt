@@ -35,5 +35,6 @@ object InfoMessages {
     const val WINNING_STATISTICS = "당첨 통계\n---\n"
     const val MATCH_COUNT_PRIZE_MESSAGE = "%d개 일치 (%s원) - %d개"
     const val MATCH_COUNT_BONUS_PRIZE_MESSAGE = "%d개 일치, 보너스 볼 일치 (%s원) - %d개"
+    const val RETURN_RATE_INFO = "총 수익률은 %.1f%%입니다."
 
 }

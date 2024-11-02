@@ -14,7 +14,7 @@ class WinningStatistics {
         get() = _totalPrize
 
     fun addTotalPrize(prize: Int) {
-        _totalPrize + prize
+        _totalPrize += prize
     }
 
 }

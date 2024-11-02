@@ -3,6 +3,7 @@ package lotto.controller
 import lotto.model.LottoMatchRank
 import lotto.model.LottoTicket
 import lotto.model.WinningStatistics
+import kotlin.math.round
 
 class LottoDrawingController(
     private val lottoTicket: LottoTicket,
@@ -31,6 +32,11 @@ class LottoDrawingController(
 
             winningStatistics.addTotalPrize(count * prize)
         }
+    }
+
+    fun calculateReturnRate(purchaseAmount: Int): Double {
+        val returnRate = winningStatistics.totalPrize.toDouble() / purchaseAmount * 100
+        return round(returnRate * 10) / 10
     }
 
     private fun determineRank(matchCount: Int, hasBonus: Boolean): LottoMatchRank? {

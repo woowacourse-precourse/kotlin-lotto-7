@@ -41,4 +41,8 @@ class OutputView {
         println(String.format(InfoMessages.MATCH_COUNT_PRIZE_MESSAGE, 6, "2,000,000,000", firstCount))
     }
 
+    fun printReturnRate(returnRate: Double) {
+        println(String.format(InfoMessages.RETURN_RATE_INFO, returnRate, "%"))
+    }
+
 }
