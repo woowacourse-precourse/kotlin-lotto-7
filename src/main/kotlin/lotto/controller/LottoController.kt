@@ -5,6 +5,7 @@ import lotto.model.PurchaseMoney
 import lotto.model.WinningLotto
 import lotto.view.InputView.getPurchaseMoneyInput
 import lotto.view.InputView.getWinningLottoInput
+import lotto.view.InputView.getBonusNumberInput
 import lotto.view.OutputView.printLottoCount
 import lotto.view.OutputView.printLottoNumber
 
@@ -20,6 +21,7 @@ class LottoController {
         printLottoNubmers(lottos)
 
         val winningLotto = getWinningLotto()
+        getBonusNumber(winningLotto)
 
     }
 
@@ -47,5 +49,9 @@ class LottoController {
         return WinningLotto(winningLottoInput)
     }
 
+    private fun getBonusNumber(winningLotto: WinningLotto) {
+        val bonusNumberInput = getBonusNumberInput()
+        winningLotto.addBonusNumber(bonusNumberInput)
+    }
 
 }
