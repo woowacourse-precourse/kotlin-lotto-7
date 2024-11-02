@@ -4,6 +4,7 @@ import lotto.Lotto
 import lotto.model.LottoIssuance
 import lotto.model.Processor
 import lotto.view.InputView
+import lotto.view.OutputView
 
 class LottoController {
     fun draw() {
@@ -16,5 +17,6 @@ class LottoController {
         val lotto = Lotto(winningNum)
 
         val matchNum = lotto.compLottoList(lottoIssuance.lottoList, bonusNum)
+        OutputView.printResult(matchNum)
     }
 }
