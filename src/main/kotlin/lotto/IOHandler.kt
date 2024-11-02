@@ -7,4 +7,16 @@ class IOHandler {
         println(instruction)
         return readLine() ?: exceptionOfNull
     }
+
+    fun outputForPurchasedLotto(purchasedLotto: PurchasedLotto) {
+        val output = StringBuilder()
+
+        output.append(purchasedLotto.amountOfLotto, "개를 구매했습니다.")
+        purchasedLotto.purchasedLotto.forEach { output.append("\n", it) }
+        println(output)
+    }
+
+    fun outputForZeroOfLotto() {
+        println("지불하신 금액이 0원이므로 종료합니다.")
+    }
 }

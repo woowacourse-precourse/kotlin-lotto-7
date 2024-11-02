@@ -1,5 +1,8 @@
 package lotto
 
+import camp.nextstep.edu.missionutils.test.Assertions.assertRandomUniqueNumbersInRangeTest
+import camp.nextstep.edu.missionutils.test.Assertions.assertSimpleTest
+import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 
@@ -19,5 +22,34 @@ class LottoTest {
         }
     }
 
-    // TODO: 추가 기능 구현에 따른 테스트 코드 작성
+    @Test
+    fun `로또 번호 생성 정상 확인`() {
+        assertRandomUniqueNumbersInRangeTest(
+            {
+                val lottoNumber = LottoNumbering().lottoNumbering()
+                assertThat(lottoNumber).isEqualTo(listOf(1, 2, 3, 4, 5, 6))
+            }, listOf(5, 4, 3, 2, 1, 6)
+        )
+    }
+
+    @Test
+    fun `로또 번호 숫자 6개 예외 함수`() {
+        assertThrows<IllegalArgumentException> {
+            Validation().isAmountOfNumberSix(listOf(1, 2, 3, 4, 5))
+        }
+    }
+
+    @Test
+    fun `로또 번호 범위 예외 함수`() {
+        assertThrows<IllegalArgumentException> {
+            Validation().isNumbersRange1To45(listOf(0, 1, 2, 3, 4, 5))
+        }
+    }
+
+    @Test
+    fun `로또 번호 중복 예외 함수`() {
+        assertThrows<IllegalArgumentException> {
+            Validation().isNumbersNotDuplicate(listOf(1, 2, 3, 3, 4, 5))
+        }
+    }
 }
