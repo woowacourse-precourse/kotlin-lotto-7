@@ -1,7 +1,7 @@
 package lotto
 
 class Lotto(private val numbers: List<Int>) {
-    val lottoNumber: List<Int>
+    val lottoNumbers: List<Int>
         get() = numbers
 
     init {
@@ -10,5 +10,20 @@ class Lotto(private val numbers: List<Int>) {
         require(numbers.distinct().size == 6) { "[ERROR] 로또 번호는 중복이 없어야 합니다." }
     }
 
-    // TODO: 추가 기능 구현
+    fun compareWinningLotto(winningLotto: WinningLotto): LottoPrize {
+        var matchingCount = 0
+        var isMatchingBonusNumber = false
+
+        lottoNumbers.forEach { lottoNumber ->
+            if (winningLotto.lotto.lottoNumbers.contains(lottoNumber)) {
+                matchingCount++
+            }
+
+            if (lottoNumber == winningLotto.bonusNumber) {
+                isMatchingBonusNumber = true
+            }
+        }
+
+        return LottoPrize.fromMatchingCount(matchingCount, isMatchingBonusNumber)
+    }
 }
