@@ -35,4 +35,11 @@ class LottoTest {
         val lotto = Lotto(listOf(1, 2, 3, 4, 5, 6))
         assert(!lotto.contain(7))
     }
+
+    @Test
+    fun `로또 번호가 일치하는 개수를 반환한다`() {
+        val lotto = Lotto(listOf(1, 2, 3, 4, 5, 6))
+        val target = Lotto(listOf(1, 2, 3, 4, 5, 7))
+        assert(lotto.countMatching(target) == 5)
+    }
 }
