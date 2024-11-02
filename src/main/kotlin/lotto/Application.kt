@@ -5,14 +5,13 @@ import camp.nextstep.edu.missionutils.Console
 fun main() {
     // TODO: 프로그램 구현
     val money = moneyInput()
+    val repeat = money / 1000
+    val lottoList: List<LottoPaper> = makeAll(repeat)
     val numberList: List<Int> = numberInput()
-
     val lotto = Lotto(numberList)
     lotto.inputBonus()
+    //result(lotto,lottoList)
 
-    val repeat = money / 1000
-
-    //printLotto(repeat)
 }
 
 fun moneyInput(): Int {
@@ -31,4 +30,15 @@ fun numberInput(): List<Int> {
         numberList.add(number)
     }
     return numberList
+}
+
+fun makeAll(repeat: Int): List<LottoPaper> {
+    val lottoList: MutableList<LottoPaper> = mutableListOf()
+    println("${repeat}개를 구매했습니다")
+    for (i in 1..repeat) {
+        val paper = LottoPaper()
+        paper.printNumber()
+        lottoList.add(paper)
+    }
+    return lottoList
 }

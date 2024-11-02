@@ -22,6 +22,32 @@ class Lotto(private val numbers: List<Int>) {
         bonusNumber = Console.readLine().toIntOrNull() ?: throw (IllegalArgumentException("[ERROR] 숫자가 아닙니다. "))
     }
 
+    fun findNumbers(paperNumber: List<Int>): Int {
+        var matched = 0
+        for (number in paperNumber) {
+            if (matchNumber(number)) {
+                matched++
+            }
+        }
+        return matched
+    }
 
-    // TODO: 추가 기능 구현
+    private fun matchNumber(number: Int): Boolean {
+        for (nowNumber in numbers) {
+            if (number == nowNumber) {
+                return true
+            }
+        }
+        return false
+    }
+
+    fun findBonus(paperNumber: List<Int>): Boolean {
+        for (number in paperNumber) {
+            if (number == bonusNumber) {
+                return true
+            }
+        }
+        return false
+    }
+
 }
