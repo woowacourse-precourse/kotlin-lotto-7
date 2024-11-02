@@ -1,9 +1,8 @@
 package view
 
 import domain.enums.Input
-import util.ext.printWithSquareBracket
-import util.retryWhenNoException
 import vm.LottoViewModel
+import util.retryWhenNoException
 
 class MainView(
     private val inputView: InputView,
@@ -22,7 +21,7 @@ class MainView(
             outputView.printGuideMessage(Input.INPUT_PAY.toString())
             val pay = inputView.userInput()
             val validPayment = viewModel.checkPaymentValidation(pay)
-            printAndSetPurchaseAmount(validPayment.first, validPayment.second)
+            setPurchaseAmount(validPayment.first, validPayment.second)
         }
     }
 
@@ -31,7 +30,7 @@ class MainView(
             outputView.printWithLineBreak(Input.INPUT_WINNING_NUMBER.toString())
             val winningNumber = inputView.userInput()
             val validWinningNumber = viewModel.checkWinningNumberValidation(winningNumber)
-            printAndSetWinningNumber(validWinningNumber)
+            setWinningNumber(validWinningNumber)
         }
     }
 
@@ -40,24 +39,22 @@ class MainView(
             outputView.printGuideMessage(Input.INPUT_BONUS_NUMBER.toString())
             val bonusNumber = inputView.userInput()
             viewModel.checkBonusNumberValidation(bonusNumber)
-            printAndSetWinningStatics()
+            setWinningStatics()
         }
     }
 
-    private fun printAndSetPurchaseAmount(msg: String, purchase: Int) {
+    private fun setPurchaseAmount(msg: String, purchase: Int) {
         outputView.printWithLineBreak(msg)
         viewModel.onCompleteInputPayment(purchase)
-        viewModel.state.pickedLotto.forEach { lotto ->
-            lotto.printWithSquareBracket()
-        }
+        outputView.printPurchaseLotto(viewModel.state.pickedLotto)
     }
 
-    private fun printAndSetWinningNumber(winningNumber: List<Int>) {
+    private fun setWinningNumber(winningNumber: List<Int>) {
         outputView.lineBreak()
         viewModel.onCompleteInputWinningNumber(winningNumber)
     }
 
-    private fun printAndSetWinningStatics() {
+    private fun setWinningStatics() {
         outputView.printWinningStatics()
         val result = viewModel.state.reward.winning
         outputView.printRankResult(result)

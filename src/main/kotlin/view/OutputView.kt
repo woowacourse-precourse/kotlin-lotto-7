@@ -6,6 +6,8 @@ import domain.enums.Output.Companion.matchingNumberFormat
 import domain.enums.Output.Companion.totalRateOfReturnFormat
 import domain.enums.Rank
 import util.convertWithDigitComma
+import util.ext.joinToStringWithSquareBracket
+import java.util.TreeSet
 
 class OutputView {
     fun printGuideMessage(message: String) {
@@ -15,6 +17,12 @@ class OutputView {
     fun printWithLineBreak(msg: String) {
         lineBreak()
         println(msg)
+    }
+
+    fun printPurchaseLotto(purchaseLotto: List<TreeSet<Int>>){
+        purchaseLotto.forEach { lotto ->
+            println(lotto.joinToStringWithSquareBracket())
+        }
     }
 
     fun printWinningStatics() {

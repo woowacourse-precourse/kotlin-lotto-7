@@ -6,12 +6,6 @@ fun <T> List<T>.toMapByEachCount(): Map<T, Int> {
     return this.groupingBy { it }.eachCount()
 }
 
-fun <T> TreeSet<T>.printWithSquareBracket() {
-    println(
-        this.joinToString(
-            separator = ", ",
-            prefix = "[",
-            postfix = "]"
-        )
-    )
+fun <T> TreeSet<T>.joinToStringWithSquareBracket(): String {
+    return this.joinToString(separator = ", ", prefix = "[", postfix = "]")
 }
