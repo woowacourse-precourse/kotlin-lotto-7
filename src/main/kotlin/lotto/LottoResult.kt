@@ -22,7 +22,9 @@ class LottoResult {
     /* 전체 당첨 결과 출력 함수 */
     fun showResult() {
         println("\n당첨 통계\n---")
-        for ((rank, count) in winnersCount) {
+        val sortedRanks = listOf(LottoRank.FIFTH, LottoRank.FOUTH, LottoRank.THIRD, LottoRank.SECOND, LottoRank.FIRST)
+        for (rank in sortedRanks) {
+            val count = winnersCount[rank] ?: 0
             println("${rank.description} (${String.format("%,d", rank.prize)}원) - ${count}개")
         }
     }
