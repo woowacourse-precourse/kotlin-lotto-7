@@ -69,6 +69,15 @@ class LottoJudgeTest {
     }
 
     @Test
+    fun `로또 당첨 번호에 중복된 숫자가 있는 경우 예외가 발생해야 한다`() {
+        val exception = assertThrows<IllegalArgumentException> {
+            lottoJudge.setLottoWinnerNumbers(listOf(1,1,2,3,4,5))
+        }
+
+        assertThat(exception.message).contains(ErrorMessage.INPUT_WINNER_NUMBER_NO_DUPLICATE.getMessage())
+    }
+
+    @Test
     fun `보너스 번호는 1개 입력되어야 한다`() {
         lottoJudge.setLottoBonusNumber(1)
     }
