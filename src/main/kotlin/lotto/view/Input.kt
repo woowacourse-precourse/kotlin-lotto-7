@@ -2,22 +2,23 @@ package lotto.view
 
 import camp.nextstep.edu.missionutils.Console
 import lotto.util.Constants
+import lotto.util.Transformer
 
 class Input {
-    fun readWinningNumber():List<String>{
-        Output.printWinningNumberToInput()
+    fun readWinningNumber():List<Int>{
+        Output().printWinningNumberToInput()
         val winningNumber = Console.readLine()
-        return winningNumber.split(',')
+        return Transformer().stringToIntList(winningNumber.split(','))
     }
 
     fun readBonusNumber():Int{
-        Output.printBonusNumberToInput()
+        Output().printBonusNumberToInput()
         val bonusNumber = Console.readLine()
         return bonusNumber.toInt()
     }
 
     fun readMoney():Int{
-        Output.printMoneyToInput()
+        Output().printMoneyToInput()
         val money = Console.readLine()
         return money.toInt()
     }

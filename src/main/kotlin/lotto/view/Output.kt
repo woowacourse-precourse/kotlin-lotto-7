@@ -2,7 +2,7 @@ package lotto.view
 
 import lotto.util.Constants
 
-object Output {
+class Output {
     fun printWinningDetails(){
 
     }
