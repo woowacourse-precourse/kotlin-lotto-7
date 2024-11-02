@@ -18,12 +18,12 @@ class LottoController(val view: InputView) {
     private fun getValidPurchasePrice(input: String): Int {
         while (true) {
             try {
-                require(input.isValidNumber())
-                require(!input.isZero())
+                require(input.isValidNumber()) { INVALID_INT_NUMBER_EXCEPTION_MSG }
+                require(!input.isZero()) { NOT_ZERO_EXCEPTION_MSG }
 
                 return input.toInt()
             } catch (e: IllegalArgumentException) {
-                println("[ERROR] 구입 금액은 0 이상인 정수여야 합니다.")
+                println(e.message)
             }
         }
     }
@@ -31,7 +31,7 @@ class LottoController(val view: InputView) {
     private fun getValidWinningNumbers(input: String): Lotto {
         while (true) {
             try {
-                require(input.isValidNumbers()) { "[ERROR] 유효하지 않은 당첨 번호 리스트입니다." }
+                require(input.isValidNumbers()) { INVALID_NUMBERS_EXCEPTION_MSG }
                 val inputNumbers = input.split(DELIMITER).map { it.toInt() }
                 return inputNumbers.toLottoNumbers()
             } catch (e: IllegalArgumentException) {
@@ -43,12 +43,13 @@ class LottoController(val view: InputView) {
     private fun getValidBonusNumber(input: String): Int {
         while (true) {
             try {
-                require(input.isValidNumber())
-                require(!input.isZero())
+                require(input.isValidNumber()) { INVALID_INT_NUMBER_EXCEPTION_MSG }
+                require(!input.isZero()) { NOT_ZERO_EXCEPTION_MSG }
+                require(input.toInt() in MIN_LOTTO_NUMBER..MAX_LOTTO_NUMBER) { OVER_RANGE_EXCEPTION_MSG }
 
                 return input.toInt()
             } catch (e: IllegalArgumentException) {
-                println("[ERROR] 당첨 번호는 0 이상인 정수여야 합니다.")
+                println(e.message)
             }
         }
     }
@@ -67,5 +68,12 @@ class LottoController(val view: InputView) {
             }
 
         private const val DELIMITER = ','
+        private const val MIN_LOTTO_NUMBER = 1
+        private const val MAX_LOTTO_NUMBER = 45
+
+        private const val INVALID_INT_NUMBER_EXCEPTION_MSG = "[ERROR] 유효하지 않은 정수입니다."
+        private const val INVALID_NUMBERS_EXCEPTION_MSG = "[ERROR] 유효하지 않은 당첨 번호 리스트입니다."
+        private const val NOT_ZERO_EXCEPTION_MSG = "[ERROR] 구입 금액은 0원보다 커야 합니다."
+        private const val OVER_RANGE_EXCEPTION_MSG = "[ERROR] 로또 번호는 45 이하여야 합니다."
     }
 }
