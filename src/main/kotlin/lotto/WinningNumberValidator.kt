@@ -1,5 +1,6 @@
 package lotto
 
+import view.ErrorMessage
 import view.Input
 
 class WinningNumberValidator {
@@ -36,18 +37,18 @@ class WinningNumberValidator {
     }
 
     private fun checkInt(number: String) {
-        require(number.toIntOrNull() != null) { ErrorList.NOT_NUMBERS }
+        require(number.toIntOrNull() != null) { ErrorMessage.NOT_NUMBERS }
     }
 
     private fun checkRange(number: String) {
-        require(number.toInt() in 0..45) { ErrorList.NOT_LOTTO_NUMBER_RANGE }
+        require(number.toInt() in 0..45) { ErrorMessage.NOT_LOTTO_NUMBER_RANGE }
     }
 
     private fun checkSize(userInput: List<String>) {
-        require(userInput.size == 6) { ErrorList.NOT_INPUT_SIX_NUMBER }
+        require(userInput.size == 6) { ErrorMessage.NOT_INPUT_SIX_NUMBER }
     }
 
     private fun checkDuplicates(number: List<String>) {
-        require(number.size == number.toSet().size) { ErrorList.DUPLICATED_NUMBERS }
+        require(number.size == number.toSet().size) { ErrorMessage.DUPLICATED_NUMBERS }
     }
 }

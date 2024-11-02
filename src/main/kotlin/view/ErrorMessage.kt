@@ -1,6 +1,6 @@
-package lotto
+package view
 
-class ErrorList {
+class ErrorMessage {
     companion object {
         const val BLANK = "[ERROR] 구입 금액을 입력해 주세요."
         const val NOT_NUMBERS = "[ERROR] 숫자만 입력 가능합니다."

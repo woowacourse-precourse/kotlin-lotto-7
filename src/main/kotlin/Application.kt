@@ -1,4 +1,4 @@
-package lotto
+import control.LottoController
 
 fun main() {
     LottoController().play()

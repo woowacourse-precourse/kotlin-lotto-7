@@ -1,5 +1,6 @@
 package lotto
 
+import view.ErrorMessage
 import view.Input
 
 class BonusNumberValidator {
@@ -28,18 +29,18 @@ class BonusNumberValidator {
     }
 
     private fun checkBlank(bonusNumber: String) {
-        require(bonusNumber.isNotBlank()) { ErrorList.BLANK }
+        require(bonusNumber.isNotBlank()) { ErrorMessage.BLANK }
     }
 
     private fun checkNumber(bonusNumber: String) {
-        require(bonusNumber.contains(Regex("^[0-9]*$"))) { ErrorList.NOT_NUMBERS }
+        require(bonusNumber.contains(Regex("^[0-9]*$"))) { ErrorMessage.NOT_NUMBERS }
     }
 
     private fun checkRange(bonusNumber: String) {
-        require(bonusNumber.toInt() in 1..45) { ErrorList.NOT_LOTTO_NUMBER_RANGE }
+        require(bonusNumber.toInt() in 1..45) { ErrorMessage.NOT_LOTTO_NUMBER_RANGE }
     }
 
     private fun checkDuplicate(bonusNumber: String, winningNumber: List<Int>) {
-        require(!winningNumber.contains(bonusNumber.toInt())) { ErrorList.DUPLICATED_NUMBERS }
+        require(!winningNumber.contains(bonusNumber.toInt())) { ErrorMessage.DUPLICATED_NUMBERS }
     }
 }

@@ -1,9 +1,8 @@
 package view
 
-import lotto.Lotto
 import lotto.LottoMatchingCount
 import lotto.LottoStatistic
-import lotto.SettingValue
+import util.SettingValue
 
 class Output {
 
@@ -23,7 +22,7 @@ class Output {
         }
         println(
             TOTAL_RETURN_INTRO
-                    + String.format("%.1f", LottoStatistic().calculateRateOfReturn(amount))
+                    + "%,.1f".format(LottoStatistic().calculateRateOfReturn(amount))
                     + TOTAL_RETURN_OUTRO
         )
     }

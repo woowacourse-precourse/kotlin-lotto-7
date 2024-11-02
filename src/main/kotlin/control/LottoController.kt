@@ -1,5 +1,6 @@
-package lotto
+package control
 
+import lotto.*
 import view.Output
 
 class LottoController {

@@ -1,5 +1,6 @@
 package lotto
 
+import view.ErrorMessage
 import view.Input
 
 class PurchaseAmountValidator {
@@ -28,14 +29,14 @@ class PurchaseAmountValidator {
     }
 
     private fun checkBlank(amount: String) {
-        require(amount.isNotBlank()) { ErrorList.BLANK }
+        require(amount.isNotBlank()) { ErrorMessage.BLANK }
     }
 
     private fun checkNumber(amount: String) {
-        require(amount.contains(Regex("^[0-9]*$"))) { ErrorList.NOT_NUMBERS }
+        require(amount.contains(Regex("^[0-9]*$"))) { ErrorMessage.NOT_NUMBERS }
     }
 
     private fun checkDivide(amount: String) {
-        require(amount.toInt() % 1000 == 0 && amount.toInt() != 0) { ErrorList.NOT_DIVIDE_THOUSAND }
+        require(amount.toInt() % 1000 == 0 && amount.toInt() != 0) { ErrorMessage.NOT_DIVIDE_THOUSAND }
     }
 }

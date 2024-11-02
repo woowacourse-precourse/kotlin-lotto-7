@@ -3,8 +3,8 @@ package lotto
 class LottoStatistic {
 
     fun confirmWinning(purchasedLottos: List<List<Int>>, winningNumber: List<Int>, bonusNumber: Int) {
-        for (i in purchasedLottos) {
-            analyzeWinningCount(winningNumber, i, bonusNumber)
+        purchasedLottos.forEach { game ->
+            analyzeWinningCount(winningNumber, game, bonusNumber)
         }
     }
 
