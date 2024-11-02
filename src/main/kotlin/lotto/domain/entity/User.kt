@@ -19,10 +19,11 @@ class User(
     }
 
     fun getLottoTickets(): List<Lotto> {
-        return checkNotNull(lottoTickets) { println("[ERROR] 사용자의 로또 티켓들이 아직 초기화 되지 않았습니다.") }
+        return checkNotNull(lottoTickets) { println(LOTTO_NOT_INITIALIZED_ERROR_MESSAGE) }
     }
 
     companion object {
         private val purchasePriceValidator by lazy { PurchasePriceValidator() }
+        private const val LOTTO_NOT_INITIALIZED_ERROR_MESSAGE = "[ERROR] 사용자의 로또 티켓들이 아직 초기화 되지 않았습니다."
     }
 }
