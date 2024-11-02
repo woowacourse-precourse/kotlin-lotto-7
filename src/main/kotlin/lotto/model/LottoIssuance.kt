@@ -1,9 +1,12 @@
 package lotto.model
 
 import camp.nextstep.edu.missionutils.Randoms
+import lotto.view.OutputView
 
 class LottoIssuance(private val numberOfIssuance: Int) {
-    lateinit var lottoList: MutableList<List<Int>>
+
+    var lottoList: MutableList<List<Int>> = mutableListOf()
+
     init {
         issuance()
     }
@@ -16,5 +19,6 @@ class LottoIssuance(private val numberOfIssuance: Int) {
         for (i in 1..numberOfIssuance) {
             lottoList.add(getLotto())
         }
+        OutputView.printLotto(lottoList)
     }
 }
