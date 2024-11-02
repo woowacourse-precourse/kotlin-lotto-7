@@ -85,32 +85,32 @@
       <td>빈 경우</td>
     </tr>
 <tr>
-      <td><input type="checkbox"></td>
+      <td><input type="checkbox" checked></td>
       <td>구분자 쉼표(,)가 없는 경우</td>
     </tr>
     <tr>
-      <td><input type="checkbox"></td>
+      <td><input type="checkbox" checked></td>
       <td>구분자만 들어오는 경우</td>
     </tr>
    <tr>
-      <td><input type="checkbox"></td>
+      <td><input type="checkbox" checked></td>
       <td>숫자가 아닌 경우</td>
     </tr>
    <tr>
-      <td><input type="checkbox"></td>
+      <td><input type="checkbox" checked></td>
       <td>숫자가 1~45사이가 아닌 경우</td>
    </tr>
  <tr>
-      <td><input type="checkbox"></td>
+      <td><input type="checkbox" checked></td>
       <td>당첨 번호 개수가 6개가 아닌 경우</td>
    </tr>
 
  <tr>
-      <td><input type="checkbox"></td>
+      <td><input type="checkbox" checked></td>
       <td>중복된 숫자가 들어오는 경우</td>
    </tr>
  <tr>
-      <td><input type="checkbox"></td>
+      <td><input type="checkbox" checked></td>
       <td>소수가 들어오는 경우 </td>
    </tr>
       <td rowspan="5">보너스 번호</td>
