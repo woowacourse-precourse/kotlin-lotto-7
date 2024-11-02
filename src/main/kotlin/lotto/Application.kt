@@ -2,7 +2,8 @@ package lotto
 
 fun main() {
     inputMoney()
-    inputLottoNumbers()
+    val lottoNum = inputLottoNumbers()
+    val bonusNum = inputBonusNumber(lottoNum)
 
 }
 
