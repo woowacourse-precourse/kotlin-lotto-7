@@ -21,4 +21,7 @@ class OutputView {
         println(Constants.SECOND_MATCH_PRIZE_MESSAGE.format(rankCount[LottoRank.SECOND] ?: 0))
         println(Constants.FIRST_MATCH_PRIZE_MESSAGE.format(rankCount[LottoRank.FIRST] ?: 0))
     }
+
+    fun printProfit(profit: Double) = println("총 수익률은 ${profit}%입니다.")
+
 }

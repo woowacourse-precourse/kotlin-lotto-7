@@ -26,6 +26,8 @@ class LottoController(private val lottoService: LottoService) {
 
         outputView.printResult(rankCount)
 
+        val profit = lottoService.calculateProfit(rankCount, lottoAmount)
+        outputView.printProfit(profit)
     }
 
 }
