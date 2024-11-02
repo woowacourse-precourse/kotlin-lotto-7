@@ -3,6 +3,7 @@ package lotto.view
 import lotto.constants.OutputMessage
 import lotto.model.Lotto
 import lotto.model.Rank
+import lotto.model.Stat
 import lotto.utils.Formatter
 
 class OutputView {
@@ -17,14 +18,19 @@ class OutputView {
         }
     }
 
-    fun printWinningStats(rankCount: Map<Rank, Int>) {
+    fun printStats(stats: List<Stat>) {
         println()
         println(OutputMessage.RESULT_TITLE)
-        rankCount.entries.forEach { (rank, count) ->
-            print("${rank.matchedNumber}" + OutputMessage.MATCH_COUNT)
-            if (rank == Rank.SECOND) print(OutputMessage.MATCH_BONUS_NUMBER)
-            print(OutputMessage.PRICE_OPEN_BRACKET + Formatter.decimalFormatter(rank.winningPrice) + OutputMessage.PRICE_CLOSE_BRACKET)
-            println("$count" + OutputMessage.COUNT)
+        stats.forEach { stat ->
+            val rank = stat.getRank()
+            val count = stat.getCount()
+            val bonusBallText = if(rank == Rank.SECOND) OutputMessage.MATCH_BONUS_NUMBER else ""
+            val winningPrice = Formatter.decimalFormatter(rank.winningPrice)
+            println(
+                "${rank.matchedNumber}" + OutputMessage.MATCH_COUNT + bonusBallText +
+                OutputMessage.PRICE_OPEN_BRACKET + winningPrice + OutputMessage.PRICE_CLOSE_BRACKET +
+                "$count" + OutputMessage.COUNT
+            )
         }
     }
 
