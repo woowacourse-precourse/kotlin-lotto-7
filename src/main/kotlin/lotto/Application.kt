@@ -22,6 +22,8 @@ fun startLotto() {
     val bonusNumber = inputBonusNumber()
 
     val lottoResults = checkResult(lottos, winningNumbers, bonusNumber) //로또 당첨 결과
+
+
 }
 
 /* 로또 구입 금액 입력 함수 */
@@ -113,6 +115,8 @@ fun checkResult(lottos: MutableList<Lotto>, winningNumbers: List<Int>, bonusNumb
             lottoResults.addWinners(rank)
         }
     }
+
+    lottoResults.showResult()
 
     return lottoResults
 }
