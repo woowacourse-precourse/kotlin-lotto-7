@@ -23,6 +23,7 @@ object Processor {
 
     fun bonusNumValidate(bonusNum: Int?): Int {
         if (bonusNum == null) throw IllegalArgumentException("[ERROR] 보너스 번호를 잘못 입력했습니다.")
+        if (bonusNum < 1 || bonusNum > 45) throw IllegalArgumentException("[ERROR] 1부터 45 사이의 숫자를 입력하세요.")
         return bonusNum
     }
 }
