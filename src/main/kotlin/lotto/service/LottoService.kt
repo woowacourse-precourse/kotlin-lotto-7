@@ -8,7 +8,7 @@ import lotto.domain.entity.increase
 class LottoService {
     private fun createRandomLotto() = Lotto(Randoms.pickUniqueNumbersInRange(1, 45, 6).sorted())
 
-    fun matchLotto(winLotto: Lotto, comparingLotto: Lotto, bonusNumber: Int): Pair<Int, Boolean> {
+    private fun matchLotto(winLotto: Lotto, comparingLotto: Lotto, bonusNumber: Int): Pair<Int, Boolean> {
         val matchAmount = winLotto.nums.intersect(comparingLotto.nums.toSet()).size
         val hasBonus = comparingLotto.nums.contains(bonusNumber)
         return matchAmount to hasBonus
