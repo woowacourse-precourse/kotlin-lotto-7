@@ -3,6 +3,12 @@ package lotto
 import camp.nextstep.edu.missionutils.Console.readLine
 
 fun main() {
+    startLotto()
+}
+
+/* 로또 실행 함수 */
+fun startLotto() {
+    val lottoCnt = inputMoney() //구입한 로또 개수
 }
 
 /* 로또 구입 금액 입력 함수 */
