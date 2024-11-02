@@ -11,8 +11,6 @@ class LottoGameTest {
         private const val ERROR_MESSAGE: String = "[ERROR]"
     }
 
-    private val lottoGame = LottoGame()
-
     @Test
     fun `유효한 구입 금액을 입력하면 해당 금액을 반환한다`() {
         val game = LottoGame(readLine = { "3000" })
@@ -40,7 +38,7 @@ class LottoGameTest {
     fun `유효한 당첨 번호를 입력하면 해당 로또를 반환한다`() {
         val game = LottoGame(readLine = { "1, 2, 3, 4, 5, 6" })
         val winningLotto = game.inputWinningLotto()
-        assertThat(winningLotto).isEqualTo(listOf(1, 2, 3, 4, 5, 6))
+        assertThat(winningLotto.getNumbers()).isEqualTo(listOf(1, 2, 3, 4, 5, 6))
     }
 
     @Test
@@ -65,7 +63,7 @@ class LottoGameTest {
         val bonusNumber = game.inputBonusNumber()
         assertThat(bonusNumber).isEqualTo(7)
     }
-    
+
 
     @Test
     fun `구입 금액에 따른 로또 목록이 생성된다`() {
@@ -91,7 +89,8 @@ class LottoGameTest {
             Lotto(listOf(1, 10, 20, 30, 40, 41)),
             Lotto(listOf(7, 8, 11, 19, 20, 23))
         )
-        val result = lottoGame.calculateResult(lottoList,winningLotto, bonusNumber)
+        val game = LottoGame(readLine = { "" })
+        val result = game.calculateResult(lottoList,winningLotto, bonusNumber)
 
         assertThat(result.countRank(LottoRank.FIRST)).isEqualTo(1)
         assertThat(result.countRank(LottoRank.NONE)).isEqualTo(2)

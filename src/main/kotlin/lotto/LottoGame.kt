@@ -16,43 +16,57 @@ class LottoGame(
 
         return result
     }
+
     fun inputCost(): Int {
-        while (true) {
-            try {
-                println("구입금액을 입력해 주세요.")
-                val cost = readLine().toIntOrNull() ?: throw NumberFormatException("[ERROR] 금액은 숫자로 입력해야 합니다.")
-                if (cost < 1000 || cost % 1000 != 0) throw IllegalArgumentException("[ERROR] 금액은 1,000원 단위로 입력해야 합니다.")
-                return cost
-            } catch (e: IllegalArgumentException) {
-                println(e.message)
-            } catch (e: NumberFormatException) {
-                println(e.message)
-            }
+        println("구입금액을 입력해 주세요.")
+        return try {
+            val input = readLine()
+            parseCost(input)
+        } catch (e: IllegalArgumentException) {
+            println(e.message)
+            inputCost()
         }
     }
+
+    private fun parseCost(input: String): Int {
+        val cost =
+            input.toIntOrNull() ?: throw IllegalArgumentException("[ERROR] 금액은 숫자로 입력해야 합니다.")
+        if (cost < 1000 || cost % 1000 != 0) throw IllegalArgumentException("[ERROR] 금액은 1,000원 단위로 입력해야 합니다.")
+        return cost
+    }
+
     fun inputWinningLotto(): Lotto {
-        while (true) {
-            try {
-                println("당첨 번호를 입력해 주세요.")
-                val winningLotto = readLine().split(',').map { it.toIntOrNull() ?: throw IllegalArgumentException("[ERROR] 당첨번호는 숫자로 입력해야 합니다.")}
-                return Lotto(winningLotto)
-            } catch (e: IllegalArgumentException) {
-                println(e.message)
-            }
+        println("당첨 번호를 입력해 주세요.")
+        val input = readLine()
+        return try {
+            parseWinningLotto(input)
+        } catch (e: IllegalArgumentException) {
+            println(e.message)
+            inputWinningLotto()
         }
     }
+
+    private fun parseWinningLotto(input: String): Lotto {
+        val winningLotto = input.split(',')
+            .map { it.toIntOrNull() ?: throw IllegalArgumentException("[ERROR] 당첨번호는 숫자로 입력해야 합니다.") }
+        return Lotto(winningLotto)
+    }
+
     fun inputBonusNumber(): Int {
-        while(true) {
-            try {
-                println("보너스 번호를 입력해 주세요.")
-                val bonusNumber = readLine().toIntOrNull()
-                    ?: throw IllegalArgumentException("[ERROR] 금액은 숫자로 입력 해야 합니다.")
-                return bonusNumber
-            } catch (e:IllegalArgumentException) {
-                println(e.message)
-            }
+        println("보너스 번호를 입력해 주세요.")
+        val input = readLine()
+        return try {
+            parseBonusNumber(input)
+        } catch (e: IllegalArgumentException) {
+            println(e.message)
+            inputBonusNumber()
         }
     }
+
+    private fun parseBonusNumber(input: String): Int {
+        return input.toIntOrNull() ?: throw IllegalArgumentException("[ERROR] 보너스 번호는 숫자로 입력해야 합니다.")
+    }
+
     fun buyLottos(cost: Int): List<Lotto> {
         val lottoCount = cost / 1000
         println("${lottoCount}개를 구매했습니다.")
@@ -63,10 +77,8 @@ class LottoGame(
             lotto
         }
     }
-    fun calculateResult(
-        lottoList: List<Lotto>,
-        winningLotto: Lotto,
-        bonusNumber: Int
+
+    fun calculateResult(lottoList: List<Lotto>, winningLotto: Lotto, bonusNumber: Int
     ): LottoResult {
         val result = LottoResult()
         for (lotto in lottoList) {
@@ -76,6 +88,7 @@ class LottoGame(
         }
         return result
     }
+
     fun printResults(result: LottoResult) {
         println("3개 일치 (5,000원) - ${result.countRank(LottoRank.FIFTH)}개")
         println("4개 일치 (50,000원) - ${result.countRank(LottoRank.FOURTH)}개")
@@ -83,13 +96,10 @@ class LottoGame(
         println("5개 일치, 보너스 볼 일치 (30,000,000원) - ${result.countRank(LottoRank.SECOND)}개")
         println("6개 일치 (2,000,000,000원) - ${result.countRank(LottoRank.FIRST)}개")
     }
+
     fun printTotalReturn(result: LottoResult, cost: Int) {
         val totalPrize = result.calculateTotalPrize()
         val totalReturn = Math.round((totalPrize.toDouble() / cost) * 100 * 10) / 10.0
         println("총 수익률은 ${totalReturn}%입니다.")
     }
-
-
-
-
 }
