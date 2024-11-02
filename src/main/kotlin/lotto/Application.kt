@@ -32,17 +32,27 @@ fun inputMoney(): Int {
     while (true) {
         try {
             println("구입금액을 입력해 주세요.")
-            val money = readLine()?.toInt() ?: throw IllegalArgumentException("[ERROR] 입력 값이 없습니다.")
+            val input = readLine()
 
+            //입력 값이 없는 경우 예외 처리
+            if (input.isNullOrEmpty()) {
+                throw IllegalArgumentException("[ERROR] 입력 값이 없습니다.")
+            }
+
+            //입력 값이 숫자가 아닌 경우 예외 처리
+            val money = input.toIntOrNull()
+            if (money == null) {
+                throw IllegalArgumentException("[ERROR] 숫자를 입력해 주세요.")
+            }
+
+            //입력한 숫자가 1000으로 나누어 떨어지지 않는 경우 예외 처리
             if (money % 1000 != 0) {
                 throw IllegalArgumentException("[ERROR] 금액이 1000으로 나누어 떨어지지 않습니다.")
             }
 
             return money / 1000
-        } catch(e: IllegalArgumentException) {
+        } catch (e: IllegalArgumentException) {
             println(e.message)
-        } catch (e: NumberFormatException) {
-            println("[ERROR] 숫자를 입력해 주세요.")
         }
     }
 }
