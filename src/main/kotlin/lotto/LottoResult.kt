@@ -21,13 +21,21 @@ class LottoResult(
         lottoList.forEach { lotto ->
             val winningCount = lottoMatcher.matchWithWinningNumbers(lotto, winningNumbers)
             val hasBonusNumber = hasBonusNumber(winningCount, lotto)
-            if (hasBonusNumber) {
-                lottoRankList.add(LottoRank.FIVE_AND_BONUS_MATCHES)
-            }
-            val winningLottoRank = winningCount.toLottoRank()
-            lottoRankList.add(winningLottoRank)
+            val lottoLank = getLottoLank(winningCount, hasBonusNumber)
+            lottoRankList.add(lottoLank)
         }
         return lottoRankList
+    }
+
+    private fun getLottoLank(
+        winningCount: Int,
+        hasBonusNumber: Boolean,
+    ): LottoRank {
+        if (hasBonusNumber) {
+            return LottoRank.FIVE_AND_BONUS_MATCHES
+        }
+        val winningLottoRank = winningCount.toLottoRank()
+        return winningLottoRank
     }
 
     private fun hasBonusNumber(
