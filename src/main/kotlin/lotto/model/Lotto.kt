@@ -2,9 +2,9 @@ package lotto.model
 
 import lotto.utils.ErrorFormatter.getErrorMessage
 import camp.nextstep.edu.missionutils.Randoms
-import constant.LOTTO_SIZE
-import constant.MAX_LOTTO_NUMBER
-import constant.MIN_LOTTO_NUMBER
+import lotto.constant.LOTTO_SIZE
+import lotto.constant.MAX_LOTTO_NUMBER
+import lotto.constant.MIN_LOTTO_NUMBER
 
 
 class Lotto() {

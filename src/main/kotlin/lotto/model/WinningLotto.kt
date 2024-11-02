@@ -1,12 +1,13 @@
 package lotto.model
 
 import lotto.utils.ErrorFormatter.getErrorMessage
-import constant.LOTTO_SIZE
-import constant.MAX_LOTTO_NUMBER
-import constant.MIN_LOTTO_NUMBER
+import lotto.constant.LOTTO_SIZE
+import lotto.constant.MAX_LOTTO_NUMBER
+import lotto.constant.MIN_LOTTO_NUMBER
 
 class WinningLotto(winningLottoInput: String) {
     val winningNumbers: Set<Int>
+    var bonusNumber: Int? = null
 
     init {
         winningNumbers = validateWinningLotto(winningLottoInput)
@@ -40,9 +41,8 @@ class WinningLotto(winningLottoInput: String) {
         return validatedNumbers
     }
 
-    fun addBonusNumber(bonusNumberInput: String) {
-        val bonusNumber = validateBonusNumber(bonusNumberInput)
-        winningNumbers.plus(bonusNumber)
+    fun setBonusNumber(bonusNumberInput: String) {
+        bonusNumber = validateBonusNumber(bonusNumberInput)
     }
 
     private fun validateBonusNumber(bonusNumberInput: String): Int {

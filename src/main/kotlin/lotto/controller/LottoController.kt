@@ -54,7 +54,7 @@ class LottoController {
 
     private fun getBonusNumber(winningLotto: WinningLotto) {
         val bonusNumberInput = getBonusNumberInput()
-        winningLotto.addBonusNumber(bonusNumberInput)
+        winningLotto.setBonusNumber(bonusNumberInput)
     }
 
 }
