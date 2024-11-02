@@ -19,6 +19,7 @@ fun startLotto() {
     showLottoInfo(lottoList)
 
     val winningNumbers = inputWinningNumbers()
+    val bonusNumber = inputBonusNumber()
 }
 
 /* 로또 구입 금액 입력 함수 */
@@ -71,6 +72,18 @@ fun inputWinningNumbers(): List<Int> {
             return numbers
         } catch (e: IllegalArgumentException) {
             println(e.message)
+        } catch (e: NumberFormatException) {
+            println("[ERROR] 숫자를 입력해 주세요.")
+        }
+    }
+}
+
+/* 보너스 번호 입력 함수 */
+fun inputBonusNumber(): Int {
+    while(true) {
+        try {
+            println("\n보너스 번호를 입력해 주세요.")
+            val bonusNumber = readLine().toInt()
         } catch (e: NumberFormatException) {
             println("[ERROR] 숫자를 입력해 주세요.")
         }
