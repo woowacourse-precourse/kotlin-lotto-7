@@ -6,10 +6,6 @@ class IOHandler {
         return readLine() ?: EXCEPTIONOFNULL
     }
 
-    fun inputWinningNumbers(): String {
-        return inputToUser(WINNINGNUMBERINSTRUCTION)
-    }
-
     fun outputForPurchasedLotto(purchasedLotto: PurchasedLotto) {
         val output = StringBuilder()
 
@@ -19,11 +15,11 @@ class IOHandler {
     }
 
     fun outputForZeroOfLotto() {
-        println("지불하신 금액이 0원이므로 종료합니다.")
+        println(EXITLOTTONUMBERGENERATOR)
     }
 
     companion object {
         const val EXCEPTIONOFNULL = "입력값을 확인할 수 없습니다. 다시 입력해주세요."
-        const val WINNINGNUMBERINSTRUCTION = "당첨 번호를 입력해 주세요."
+        const val EXITLOTTONUMBERGENERATOR = "지불하신 금액이 0원이므로 종료합니다."
     }
 }

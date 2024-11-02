@@ -44,14 +44,11 @@ class LottoMachine {
 }
 
 class LottoNumbering {
-    private val validation = Validation()
 
     fun lottoNumbering(): List<Int> {
         val lottoNumbers = pickLottoNumber()
 
-        validation.isAmountOfNumberSix(lottoNumbers)
-        validation.isNumbersRange1To45(lottoNumbers)
-        validation.isNumbersNotDuplicate(lottoNumbers)
+        Validation().checkNumbering(lottoNumbers)
         return sortLottoNumber(lottoNumbers)
     }
 

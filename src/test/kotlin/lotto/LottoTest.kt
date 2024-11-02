@@ -1,7 +1,6 @@
 package lotto
 
 import camp.nextstep.edu.missionutils.test.Assertions.assertRandomUniqueNumbersInRangeTest
-import camp.nextstep.edu.missionutils.test.Assertions.assertSimpleTest
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
@@ -51,5 +50,15 @@ class LottoTest {
         assertThrows<IllegalArgumentException> {
             Validation().isNumbersNotDuplicate(listOf(1, 2, 3, 3, 4, 5))
         }
+    }
+
+    @Test
+    fun `당첨 번호 입력시 공백 제거`() {
+        assertThat(DrawingWinningNumbers().deleteBlank("1, 2, 3, 4, 5, 6")).isEqualTo("1,2,3,4,5,6")
+    }
+
+    @Test
+    fun `당첨 번호 타입 숫자로 이루어진 리스트로 변경`() {
+        assertThat(DrawingWinningNumbers().transferType("1,2,3,4,5,6")).isEqualTo(listOf(1, 2, 3, 4, 5, 6))
     }
 }
