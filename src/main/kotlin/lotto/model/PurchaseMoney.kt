@@ -2,12 +2,12 @@ package lotto.model
 
 import lotto.utils.ErrorFormatter
 
-class PurchaseMoney(moneyINput: String) {
+class PurchaseMoney(moneyInput: String) {
 
     val money : Int
 
     init {
-        money = validatePurchaseMoney(moneyINput)
+        money = validatePurchaseMoney(moneyInput)
     }
 
     private fun validatePurchaseMoney(input: String) : Int {

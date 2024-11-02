@@ -1,25 +1,33 @@
 package lotto.controller
 
+import lotto.model.Lotto
 import lotto.model.PurchaseMoney
 import lotto.view.InputView.getPurchaseMoneyInput
 import lotto.view.OutputView.printLottoCount
+import lotto.view.OutputView.printLottoNumber
 
 
-class LottoController{
+class LottoController {
 
     fun run() {
         val purchaseMoney = getPurchaseMoney()
         val lottoCount = getLottoCount(purchaseMoney.money, purchaseMoney.getUnitPrice())
         printLottoCount(lottoCount)
+
+        val lottos: MutableList<Lotto> = MutableList(lottoCount) { Lotto() }
+        lottos.forEach { lotto ->
+            printLottoNumber(lotto.numbers)
+        }
     }
 
-    private fun getPurchaseMoney() : PurchaseMoney  {
+    private fun getPurchaseMoney(): PurchaseMoney {
         val moneyinput = getPurchaseMoneyInput()
         return PurchaseMoney(moneyinput)
     }
 
-    private fun getLottoCount(purchaseMoney: Int, unitPrice : Int) : Int {
+    private fun getLottoCount(purchaseMoney: Int, unitPrice: Int): Int {
         return purchaseMoney / unitPrice
     }
+
 
 }
