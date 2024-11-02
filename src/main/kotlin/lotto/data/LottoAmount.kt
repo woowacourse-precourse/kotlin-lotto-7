@@ -21,5 +21,7 @@ class LottoAmount(private val amount: String) {
         private const val AMOUNT_UNIT = 1_000
         private const val EXPECTED_RESULT = 0
         private const val AMOUNT_MAX_VALUE = 100_000
+
+        fun LottoAmount.convertAmountToQuantity() = amount.toInt() / AMOUNT_UNIT
     }
 }
