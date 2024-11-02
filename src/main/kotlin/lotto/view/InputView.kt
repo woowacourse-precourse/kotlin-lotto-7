@@ -1,11 +1,7 @@
 package lotto.view
 
 import camp.nextstep.edu.missionutils.Console
-import lotto.utils.Constants
 import lotto.utils.Constants.DELIMETER
-import lotto.utils.Constants.LIMIT_OF_PURCHASE
-import lotto.utils.Constants.LOTTO_PRICE
-import lotto.utils.Constants.ZERO
 import lotto.utils.ErrorConstants
 import lotto.utils.InputConstants
 
@@ -18,19 +14,9 @@ import lotto.utils.InputConstants
 
 class InputView {
 
-    fun getPurchaseAmount(): Int {
-        while (true) {
-            println(InputConstants.PURCHASE_AMOUNT_MESSAGE)
-            val purchaseAmount = Console.readLine().trim().toIntOrNull()
-
-            when {
-                purchaseAmount == null -> println(ErrorConstants.NOT_NUMBER)
-                purchaseAmount <= ZERO -> println(ErrorConstants.NEGATIVE_NUMBER)
-                purchaseAmount % LOTTO_PRICE != ZERO -> println(ErrorConstants.NOT_DIVIDED)
-                purchaseAmount > LIMIT_OF_PURCHASE -> println(ErrorConstants.LIMIT_OF_PURCHASE)
-                else -> return purchaseAmount
-            }
-        }
+    fun getPurchaseAmount(): Int? {
+        println(InputConstants.PURCHASE_AMOUNT_MESSAGE)
+        return Console.readLine().trim().toIntOrNull()
     }
 
     fun getWinningNumbers(): List<Int> {

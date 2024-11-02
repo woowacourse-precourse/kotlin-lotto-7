@@ -18,7 +18,7 @@ class Lotto(private val numbers: List<Int>) {
         require(numbers.distinct().size == LOTTO_NUMBER_COUNT) { ErrorConstants.LOTTO_NUMBER_DUPLICATE }
     }
 
-
+    // TODO: 새로운 모델을 만들어서 할까
     fun ComparisonOfWinningNumbers(lotto: List<List<Int>>) {
         for (index in 0..lotto.size) {
 
@@ -33,7 +33,6 @@ class Lotto(private val numbers: List<Int>) {
         fun generate(): List<Int> = Randoms.pickUniqueNumbersInRange(MIN_NUMBER, MAX_NUMBER, LOTTO_NUMBER_COUNT).sorted()
     }
 
-    // TODO: 추가 기능 구현
     // 여기서 예외 처리를 하고, 당첨 번호와 맞는지 판단 해야할 듯?
     /**
      * 모델이 수행할 기능 목록

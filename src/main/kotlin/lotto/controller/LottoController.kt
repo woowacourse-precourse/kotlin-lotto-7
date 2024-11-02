@@ -1,5 +1,6 @@
 package lotto.controller
 
+import lotto.model.InputValidator
 import lotto.model.Lotto
 import lotto.utils.Constants.LOTTO_PRICE
 import lotto.utils.Constants.NEW_LINE
@@ -16,22 +17,19 @@ class LottoController {
     val outputView = OutputView()
 
     fun start() {
-        val purchaseAmount = inputView.getPurchaseAmount()
-        // TODO: purchaseAmount 예외처리 위치 변경하기
+        val purchaseAmount = getVaildPurchaseAmount()
 
-        val purchaseCount = getPurchaseCount(purchaseAmount)
+        val purchaseCount = purchaseAmount / LOTTO_PRICE
         outputView.showPurchasedLottoCount(purchaseCount)
 
         val purchaseLottoList = mutableListOf<List<Int>>()
         repeat(purchaseCount){ purchaseLottoList.add(Lotto.generate()) }
-        println(purchaseLottoList.joinToString(NEW_LINE))
+        println(purchaseLottoList.joinToString(NEW_LINE)) // 뷰로 옮기기
 
-        val winningNumbers = getWinningNumbers()
-        // TODO: 당첨 번호에 대한 예외 처리
+        val winningNumbers = getVaildWinningNumbers()
 
         val bonusNumber = inputView.getBonusNumber()
         // TODO: 보너스 번호에 대한 예외 처리(당첨 번호 오류 + 당첨번호와 중복인지)
-
 
         // 당첨 등급 출력
         //outputView.showWinningStatistics()
@@ -40,7 +38,7 @@ class LottoController {
         //outputView.showTotalReturnRate()
     }
 
-    private fun getWinningNumbers(): List<Int> {
+    private fun getVaildWinningNumbers(): List<Int> {
         while (true) {
             try {
                 val winningNumbers = inputView.getWinningNumbers()
@@ -52,5 +50,15 @@ class LottoController {
         }
     }
 
-    fun getPurchaseCount(purchaseAmount: Int): Int = purchaseAmount / LOTTO_PRICE
+    private fun getVaildPurchaseAmount(): Int {
+        while (true) {
+            try {
+                val purchaseAmount = inputView.getPurchaseAmount()
+                InputValidator.validatePurchaseAmount(purchaseAmount)
+                return purchaseAmount!!
+            } catch (e: IllegalArgumentException) {
+                println(e.message)
+            }
+        }
+    }
 }
