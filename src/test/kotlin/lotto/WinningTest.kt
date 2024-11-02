@@ -18,9 +18,16 @@ class WinningTest {
         assertEquals(result.message, "[ERROR] 당첨 번호가 입력되지 않았습니다. 6개의 번호를 쉼표(,)를 기준으로 입력해주세요.")
     }
 
+    @DisplayName(",을 기준하여 6개가 아닐 경우")
+    @ParameterizedTest
+    @ValueSource(strings = ["1,2,3,4,5,6,7", "11,12,13,14,15,16,17"])
+    fun numberCountIsNotSix(input: String) {
+        val result = assertThrows<IllegalArgumentException> { Winning(input) }
+        assertEquals(result.message, "[ERROR] 6개의 당첨 번호를 입력해주세요.")
+    }
+
     @DisplayName(",을 기준하여 숫자로만 이루어져 있지 않은 경우")
     @ParameterizedTest
-    @EmptySource
     @ValueSource(strings = ["1,Q,2,W,3,E", "1,2,3,4.0,5,6", "1,2,3,4,5 ,6", "1,2,3,4, 5,6"])
     fun numberIsNotAllDigit(input: String) {
         val result = assertThrows<IllegalArgumentException> { Winning(input) }
