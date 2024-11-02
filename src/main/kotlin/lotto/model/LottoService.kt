@@ -2,6 +2,7 @@ package lotto.model
 
 import camp.nextstep.edu.missionutils.Randoms
 import lotto.Constants
+import kotlin.math.round
 
 class LottoService {
     private fun generateLottoNumbers(): List<Int> {
@@ -37,5 +38,11 @@ class LottoService {
             matchCount == 3 -> LottoRank.FIFTH
             else -> LottoRank.NONE
         }
+    }
+
+    fun calculateProfit(rankCount: Map<LottoRank, Int>, lottoAmount: Int): Double {
+        val totalPrize = rankCount.entries.sumOf { (rank, count) -> rank.prize * count }
+        val profit = totalPrize.toDouble() / lottoAmount
+        return round(profit * 10000) / 100
     }
 }
