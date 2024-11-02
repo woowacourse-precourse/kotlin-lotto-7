@@ -52,7 +52,7 @@ object InputView {
         try {
             val price = inputPrice.toInt()
 
-            if (price % 1000 != 0) {
+            if (price % Constants.LOTTO_PRICE != 0) {
                 throw IllegalArgumentException(ErrorMessage.INVALID_AMOUNT.getMessage())
             }
             return price
@@ -64,13 +64,13 @@ object InputView {
     private fun validateWinningNumbers(inputNumbers: String): List<Int> {
         try {
             val numbers = inputNumbers.split(",").map { it.trim().toInt() }
-            if (numbers.size != 6) {
+            if (numbers.size != Constants.LOTTO_SIZE) {
                 throw IllegalArgumentException(ErrorMessage.INVALID_LOTTO_NUMBERS.getMessage())
             }
             if (numbers.any { it !in Constants.RANDOM_MIN..Constants.RANDOM_MAX }) {
                 throw IllegalArgumentException(ErrorMessage.INVALID_LOTTO_NUMBER.getMessage())
             }
-            if (numbers.toSet().size != 6) {
+            if (numbers.toSet().size != Constants.LOTTO_SIZE) {
                 throw IllegalArgumentException(ErrorMessage.INVALID_DUPLICATE_NUMBER.getMessage())
             }
             return numbers

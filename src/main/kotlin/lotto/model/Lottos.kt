@@ -5,11 +5,19 @@ import lotto.utils.Constants
 
 class Lottos {
     private val lottos = mutableListOf<Lotto>()
-    
+
     fun buyLottos(price: Int) {
-        val count = price / 1000
+        val count = price / Constants.LOTTO_PRICE
         repeat(count) {
-            lottos.add(Lotto(Randoms.pickUniqueNumbersInRange(Constants.RANDOM_MIN, Constants.RANDOM_MAX, 6)))
+            lottos.add(
+                Lotto(
+                    Randoms.pickUniqueNumbersInRange(
+                        Constants.RANDOM_MIN,
+                        Constants.RANDOM_MAX,
+                        Constants.LOTTO_SIZE
+                    )
+                )
+            )
         }
     }
 
