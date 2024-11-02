@@ -7,3 +7,5 @@ enum class WinningLotto(val rewardPrice: Int, var amount: Int) {
     FiveBonus(RewardPrice.PRICE_OF_FIVE_BONUS_WIN, 0),
     Six(RewardPrice.PRICE_OF_SIX_WIN, 0)
 }
+
+fun WinningLotto.increase() = this.amount++
