@@ -7,6 +7,7 @@ class LottoJudge {
     fun setLottoWinnerNumbers(numbers: List<Int>) {
         exceptWinnerNumberCount(numbers)
         exceptWinnerNumberRange(numbers)
+        exceptDuplicates(numbers)
         winnerNumbers = numbers
     }
 
@@ -30,6 +31,12 @@ class LottoJudge {
     private fun exceptBonusNumberRange(number: Int) {
         if (number < LottoMaker.FIRST_NUMBER || number > LottoMaker.LAST_NUMBER ) {
             throw IllegalArgumentException(ErrorMessage.INPUT_WINNER_NUMBER_OUT_OF_RANGE_ERROR.getMessage())
+        }
+    }
+
+    private fun exceptDuplicates(numbers: List<Int>) {
+        if (numbers.toSet().size != numbers.size) {
+            throw IllegalArgumentException(ErrorMessage.INPUT_WINNER_NUMBER_NO_DUPLICATE.getMessage())
         }
     }
 }
