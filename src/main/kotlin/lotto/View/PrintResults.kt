@@ -4,8 +4,7 @@ import lotto.Controller.getPrizesToPrint
 import lotto.Model.Prize
 
 fun printResults(results: Map<Prize, Int>, profitRate: Double) {
-    println("당첨 통계")
-    println("---")
+    println("당첨 통계\n---")
 
     val prizesToPrint = getPrizesToPrint()
     prizesToPrint.forEach { prize ->
