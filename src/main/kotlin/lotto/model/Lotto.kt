@@ -1,8 +1,12 @@
 package lotto.model
 
+import lotto.constants.ErrorMessage
+import lotto.utils.Validation
+
 class Lotto(private val numbers: List<Int>) {
     init {
-        require(numbers.size == 6) { "[ERROR] 로또 번호는 6개여야 합니다." }
+        require(numbers.size == 6) { ErrorMessage.LOTTO_COUNT_ERROR }
+        require(numbers.distinct().size == numbers.size) { ErrorMessage.DUPLICATED_NUMBER }
     }
 
     fun getNumbers() = numbers

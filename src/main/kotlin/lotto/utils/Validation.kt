@@ -19,10 +19,11 @@ object Price {
 
 object WinningNumber {
     fun validate(inputWinningNumber: String): Set<Int> {
-        val winningNumber = inputWinningNumber.split(",").mapNotNull { it.trim().toIntOrNull() }.toSet()
+        val winningNumber = inputWinningNumber.split(",").mapNotNull { it.trim().toIntOrNull() }
         require(winningNumber.size == 6) { ErrorMessage.LOTTO_COUNT_ERROR }
+        require(winningNumber.size == winningNumber.distinct().size) { ErrorMessage.DUPLICATED_NUMBER }
         require(Validation.isValidRange(*winningNumber.toIntArray())) { ErrorMessage.RANGE_ERROR }
-        return winningNumber
+        return winningNumber.toSet()
     }
 }
 
