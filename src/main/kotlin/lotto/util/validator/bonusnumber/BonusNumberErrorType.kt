@@ -1,4 +1,4 @@
-package lotto
+package lotto.util.validator.bonusnumber
 
 enum class BonusNumberErrorType(
     private val _errorMessage: String

@@ -1,5 +1,7 @@
-package lotto
+package lotto.util
 
+import lotto.util.validator.luckynumbers.LuckyNumbersErrorType
+import lotto.util.validator.luckynumbers.LuckyNumbersValidator
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.assertThrows
 import org.junit.jupiter.params.ParameterizedTest

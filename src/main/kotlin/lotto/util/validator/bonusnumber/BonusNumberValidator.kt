@@ -1,6 +1,7 @@
-package lotto
+package lotto.util.validator.bonusnumber
 
-import lotto.BonusNumberErrorType.*
+import lotto.Lotto
+import lotto.util.validator.bonusnumber.BonusNumberErrorType.*
 
 class BonusNumberValidator(
     private val lotto: Lotto,

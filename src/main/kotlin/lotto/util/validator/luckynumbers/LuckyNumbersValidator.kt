@@ -1,6 +1,6 @@
-package lotto
+package lotto.util.validator.luckynumbers
 
-import lotto.LuckyNumbersErrorType.*
+import lotto.util.validator.luckynumbers.LuckyNumbersErrorType.*
 
 class LuckyNumbersValidator(
     private val inputLuckyNumbers: String

@@ -1,6 +1,6 @@
-package lotto
+package lotto.util.validator.purchaseamount
 
-import lotto.PurchaseAmountErrorType.*
+import lotto.util.validator.purchaseamount.PurchaseAmountErrorType.*
 
 class PurchaseAmountValidator(
     private val purchaseAmount: String

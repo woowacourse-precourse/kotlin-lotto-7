@@ -1,4 +1,4 @@
-package lotto
+package lotto.util.validator.purchaseamount
 
 enum class PurchaseAmountErrorType(
     private val _errorMessage: String

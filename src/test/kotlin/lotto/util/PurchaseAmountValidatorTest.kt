@@ -1,5 +1,7 @@
-package lotto
+package lotto.util
 
+import lotto.util.validator.purchaseamount.PurchaseAmountErrorType
+import lotto.util.validator.purchaseamount.PurchaseAmountValidator
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.assertThrows
 import org.junit.jupiter.params.ParameterizedTest
