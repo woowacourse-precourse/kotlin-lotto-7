@@ -1,4 +1,4 @@
-package lotto
+package validator
 
 enum class ErrorMessage(private val message: String) {
     INPUT_NOT_NUMBER("입력값은 정수여야 합니다."),

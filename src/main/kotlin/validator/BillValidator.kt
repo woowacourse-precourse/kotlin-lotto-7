@@ -1,4 +1,4 @@
-package lotto
+package validator
 
 class BillValidator {
     fun billCheck(billInput: Int) {

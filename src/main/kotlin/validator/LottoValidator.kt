@@ -1,4 +1,4 @@
-package lotto
+package validator
 
 class LottoValidator {
     fun lottoCheck(lottoInput: List<Int>) {
