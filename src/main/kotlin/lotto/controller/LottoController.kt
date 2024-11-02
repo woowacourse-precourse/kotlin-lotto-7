@@ -11,6 +11,7 @@ class LottoController(private val lottoService: LottoService) {
 
     fun start() {
         val lottoAmount = inputView.getLottoAmount()
+
         val lottoCount = lottoAmount / Constants.LOTTO_PRICE
         outputView.printLottoAmountMessage(lottoCount)
 
@@ -18,10 +19,13 @@ class LottoController(private val lottoService: LottoService) {
         outputView.printLottoNumber(lottoTickets)
 
         val winningNumbers = inputView.getWinningNumbers()
-
         val bonusNumber = inputView.getBonusNumber(winningNumbers)
 
-        outputView.printResult()
+        val lottoRanks = lottoService.calculateMatchingNumbers(lottoTickets, winningNumbers, bonusNumber)
+        val rankCount = lottoRanks.distinct().associateWith { rank -> lottoRanks.count { it == rank } }
+
+        outputView.printResult(rankCount)
+
     }
 
 }
