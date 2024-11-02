@@ -1,9 +1,6 @@
 package lotto
 
-import lotto.domain.usecase.CalculateLottoRankUseCase
-import lotto.domain.usecase.CalculateLottoReturnUseCase
-import lotto.domain.usecase.CreateUserUseCase
-import lotto.domain.usecase.CreateWinningNumbersUseCase
+import lotto.domain.usecase.*
 import lotto.ui.view.LottoBuyView
 import lotto.ui.controller.LottoController
 import lotto.ui.view.LottoResultView
@@ -14,6 +11,7 @@ fun main() {
     val calculateLottoReturnUseCase = CalculateLottoReturnUseCase()
     val createUserUseCase = CreateUserUseCase()
     val createWinningNumbersUseCase = CreateWinningNumbersUseCase()
+    val createLottoUseCase = CreateLottoUseCase()
     val lottoBuyView = LottoBuyView()
     val winningNumberInputView = WinningNumberInputView()
     val lottoResultView = LottoResultView()
@@ -22,6 +20,7 @@ fun main() {
         calculateLottoReturnUseCase,
         createUserUseCase,
         createWinningNumbersUseCase,
+        createLottoUseCase,
         lottoBuyView,
         winningNumberInputView,
         lottoResultView

@@ -3,10 +3,7 @@ package lotto.ui.controller
 import lotto.domain.entity.User
 import lotto.domain.entity.Lotto
 import lotto.domain.entity.WinningNumbers
-import lotto.domain.usecase.CalculateLottoRankUseCase
-import lotto.domain.usecase.CalculateLottoReturnUseCase
-import lotto.domain.usecase.CreateUserUseCase
-import lotto.domain.usecase.CreateWinningNumbersUseCase
+import lotto.domain.usecase.*
 import lotto.ui.view.LottoBuyView
 import lotto.ui.view.LottoResultView
 import lotto.ui.view.WinningNumberInputView
@@ -16,12 +13,14 @@ class LottoController(
     private val calculateLottoReturnUseCase: CalculateLottoReturnUseCase,
     private val createUserUseCase: CreateUserUseCase,
     private val createWinningNumbersUseCase: CreateWinningNumbersUseCase,
+    private val createLottoUseCase: CreateLottoUseCase,
     private val lottoBuyView: LottoBuyView,
     private val winningNumberInputView: WinningNumberInputView,
     private val lottoResultView: LottoResultView
 ) {
     fun run() {
         val user = getUser()
+        buyLottoTickets(user)
         showLottoTicketsResult(user)
         val winningNumbers = getWinningNumbers()
         showLottoResult(user.getLottoTickets(), winningNumbers)
@@ -30,6 +29,12 @@ class LottoController(
     private fun getUser(): User {
         lottoBuyView.guidePurchaseAmount()
         return createUserUseCase.execute { lottoBuyView.inputPurchaseAmount() }
+    }
+
+    private fun buyLottoTickets(user: User) {
+        user.buyLottoTickets { lottoCount ->
+            List(lottoCount) { createLottoUseCase.execute() }
+        }
     }
 
     private fun showLottoTicketsResult(user: User) {
