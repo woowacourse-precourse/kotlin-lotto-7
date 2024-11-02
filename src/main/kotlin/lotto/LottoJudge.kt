@@ -16,19 +16,19 @@ class LottoJudge {
     }
 
     private fun exceptWinnerNumberCount(numbers: List<Int>) {
-        if (numbers.size != 6) {
+        if (numbers.size != LottoMaker.NUMBERS_COUNT) {
             throw IllegalArgumentException(ErrorMessage.INPUT_WINNER_NUMBER_COUNT_ERROR.getMessage())
         }
     }
 
     private fun exceptWinnerNumberRange(numbers: List<Int>) {
-        if (numbers.any { it < 1 || it > 45 }) {
+        if (numbers.any { it < LottoMaker.FIRST_NUMBER || it > LottoMaker.LAST_NUMBER }) {
             throw IllegalArgumentException(ErrorMessage.INPUT_WINNER_NUMBER_OUT_OF_RANGE_ERROR.getMessage())
         }
     }
 
     private fun exceptBonusNumberRange(number: Int) {
-        if (number < 1 || number > 45 ) {
+        if (number < LottoMaker.FIRST_NUMBER || number > LottoMaker.LAST_NUMBER ) {
             throw IllegalArgumentException(ErrorMessage.INPUT_WINNER_NUMBER_OUT_OF_RANGE_ERROR.getMessage())
         }
     }
