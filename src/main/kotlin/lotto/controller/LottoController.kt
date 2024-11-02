@@ -1,5 +1,6 @@
 package lotto.controller
 
+import lotto.domain.GameResult
 import lotto.domain.LottoGenerator
 import lotto.domain.WinningNumber
 import lotto.view.InputView
@@ -16,5 +17,11 @@ class LottoController {
         val winningNumbers = InputView.inputWinningNumbers()
         val bonusNumber = InputView.inputBonusNumber()
         val winningNumber = WinningNumber(winningNumbers.getNumbers(), bonusNumber)
+
+        val gameResult = GameResult()
+        for (lotto in lottos) {
+            val rank = winningNumber.getRank(lotto)
+            gameResult.addWinningDetail(rank)
+        }
     }
 }
