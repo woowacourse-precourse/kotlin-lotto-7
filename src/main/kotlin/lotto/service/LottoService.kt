@@ -4,7 +4,7 @@ import camp.nextstep.edu.missionutils.Randoms
 import lotto.domain.entity.Lotto
 
 class LottoService {
-    private fun createRandomLotto() = Lotto(Randoms.pickUniqueNumbersInRange(1, 45, 6))
+    private fun createRandomLotto() = Lotto(Randoms.pickUniqueNumbersInRange(1, 45, 6).sorted())
 
     fun matchLotto(winLotto: Lotto, comparingLotto: Lotto, bonusNumber: Int): Pair<Int, Boolean> {
         val matchAmount = winLotto.nums.intersect(comparingLotto.nums.toSet()).size
