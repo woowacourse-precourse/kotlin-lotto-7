@@ -32,6 +32,22 @@ object InputView {
         }
     }
 
+    fun inputBonusNumber(): Int {
+        while (true) {
+            try {
+                println(InputMessage.INPUT_BONUS_NUMBER.getMessage())
+                val bonusNumber = validateBonusNumber(readLine())
+                if (bonusNumber !in Constants.RANDOM_MIN..Constants.RANDOM_MAX) {
+                    throw IllegalArgumentException(ErrorMessage.INVALID_BONUS_NUMBER.getMessage())
+                }
+                return bonusNumber
+            } catch (e: IllegalArgumentException) {
+                println(e.message ?: ErrorMessage.UNKNOWN_ERROR.getMessage())
+                println()
+            }
+        }
+    }
+
     private fun validateLottoPrice(inputPrice: String): Int {
         try {
             val price = inputPrice.toInt()
@@ -46,13 +62,34 @@ object InputView {
     }
 
     private fun validateWinningNumbers(inputNumbers: String): List<Int> {
-        val numbers = inputNumbers.split(",").map { it.trim().toInt() }
-        if (numbers.size != 6) {
-            throw IllegalArgumentException(ErrorMessage.INVALID_LOTTO_NUMBERS.getMessage())
+        try {
+            val numbers = inputNumbers.split(",").map { it.trim().toInt() }
+            if (numbers.size != 6) {
+                throw IllegalArgumentException(ErrorMessage.INVALID_LOTTO_NUMBERS.getMessage())
+            }
+            if (numbers.any { it !in Constants.RANDOM_MIN..Constants.RANDOM_MAX }) {
+                throw IllegalArgumentException(ErrorMessage.INVALID_LOTTO_NUMBER.getMessage())
+            }
+            if (numbers.toSet().size != 6) {
+                throw IllegalArgumentException(ErrorMessage.INVALID_DUPLICATE_NUMBER.getMessage())
+            }
+            return numbers
+        } catch (e: NumberFormatException) {
+            throw IllegalArgumentException(ErrorMessage.NOT_NUMBER.getMessage())
         }
-        if (numbers.any { it !in Constants.RANDOM_MIN..Constants.RANDOM_MAX }) {
-            throw IllegalArgumentException(ErrorMessage.INVALID_LOTTO_NUMBER.getMessage())
+
+    }
+
+    private fun validateBonusNumber(inputBonusNumber: String): Int {
+        try {
+            val bonusNumber = inputBonusNumber.toInt()
+            if (bonusNumber !in Constants.RANDOM_MIN..Constants.RANDOM_MAX) {
+                throw IllegalArgumentException(ErrorMessage.INVALID_BONUS_NUMBER.getMessage())
+            }
+            return bonusNumber
+        } catch (e: NumberFormatException) {
+            throw IllegalArgumentException(ErrorMessage.NOT_NUMBER.getMessage())
         }
-        return numbers
+
     }
 }
