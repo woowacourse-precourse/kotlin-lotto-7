@@ -21,7 +21,7 @@ class Lotto(private val numbers: List<Int>) {
             matchCount == 5 -> Rank.THIRD
             matchCount == 4 -> Rank.FOURTH
             matchCount == 3 -> Rank.FIFTH
-            else -> Rank.FIFTH // 3개 미만인 경우를 처리할 수 있습니다.
+            else -> Rank.MISS // 이 부분은 필요 없다면 삭제
         }
     }
 }

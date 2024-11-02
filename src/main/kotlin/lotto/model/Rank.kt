@@ -7,5 +7,6 @@ enum class Rank(val matchCount: Int, val bonusMatch: Boolean, val prize: Int, va
     THIRD(5, false, 1_500_000, "5개 일치 (1,500,000원) - "),
     FOURTH(4, false, 50_000, "4개 일치 (50,000원) - "),
     FIFTH(3, false, 5_000, "3개 일치 (5,000원) - "),
+    MISS(0, false, 0, "");
 }
 

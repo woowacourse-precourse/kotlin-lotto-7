@@ -10,7 +10,9 @@ class LottoStatistics {
 
         for (lotto in issuedLottos) {
             val rank = lotto.compareWithWinningNumbers(winningNumbers, bonusNumber)
-            statistics[rank] = statistics.getOrDefault(rank, 0) + 1
+            if (rank != Rank.MISS) { // MISS는 통계에 추가하지 않음
+                statistics[rank] = statistics.getOrDefault(rank, 0) + 1
+            }
         }
 
         return statistics

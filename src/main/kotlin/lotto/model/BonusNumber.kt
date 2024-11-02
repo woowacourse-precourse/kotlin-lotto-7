@@ -1,8 +1,15 @@
 package lotto.model
 
-class BonusNumber {
-    fun getBonusNumber(bonusNumber: Int, winningNumbers: List<Int>): Boolean {
-        return isValidateBonusNumber(bonusNumber, winningNumbers)
+import lotto.view.LottoView
+
+class BonusNumber(private val lottoView: LottoView) {
+    fun getBonusNumber(winningNumbers: List<Int>): Int {
+        while (true) {
+            val bonusNumber = lottoView.readBonusNumber() // LottoView의 메서드 사용
+            if (isValidateBonusNumber(bonusNumber, winningNumbers)) {
+                return bonusNumber
+            }
+        }
     }
 
     private fun isValidateBonusNumber(bonusNumber: Int, winningNumbers: List<Int>): Boolean {
