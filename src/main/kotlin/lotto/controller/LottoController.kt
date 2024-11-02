@@ -1,6 +1,7 @@
 package lotto.controller
 
 import lotto.domain.LottoGenerator
+import lotto.domain.WinningNumber
 import lotto.view.InputView
 import lotto.view.OutputView
 
@@ -12,7 +13,8 @@ class LottoController {
         val lottos = List(purchaseAmount.getCount()) { LottoGenerator().generate() }
         lottos.forEach { OutputView.printLottoNumbers(it) }
 
-        val winningNumbers = InputView.inputWinningNumber()
+        val winningNumbers = InputView.inputWinningNumbers()
         val bonusNumber = InputView.inputBonusNumber()
+        val winningNumber = WinningNumber(winningNumbers.getNumbers(), bonusNumber)
     }
 }

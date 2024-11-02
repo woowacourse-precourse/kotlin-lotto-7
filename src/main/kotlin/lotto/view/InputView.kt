@@ -11,7 +11,7 @@ object InputView {
         return PurchaseAmount(money)
     }
 
-    fun inputWinningNumber(): Lotto {
+    fun inputWinningNumbers(): Lotto {
         println(INPUT_WINNING_NUMBER_MESSAGE)
         val winningNumbers = Console.readLine().split(NUMBER_DELIMITER).map { it.toInt() }
         return Lotto(winningNumbers)
