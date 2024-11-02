@@ -3,7 +3,6 @@ package lotto
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 import org.assertj.core.api.Assertions.assertThat
-import camp.nextstep.edu.missionutils.test.Assertions.assertSimpleTest
 
 
 class LottoGameTest {
@@ -88,8 +87,4 @@ class LottoGameTest {
         assertThat(result.countRank(LottoRank.FIRST)).isEqualTo(1)
         assertThat(result.countRank(LottoRank.NONE)).isEqualTo(2)
     }
-
-
-
-
 }
