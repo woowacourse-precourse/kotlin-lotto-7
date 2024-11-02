@@ -14,7 +14,7 @@ class Lotto(private val numbers: List<Int>) {
         return numbers.count { target.contain(it) }
     }
 
-    fun getNumbers(): String {
-        return numbers.joinToString(",")
+    fun getNumbers(): List<Int> {
+        return numbers
     }
 }
