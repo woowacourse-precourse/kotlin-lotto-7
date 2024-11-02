@@ -1,4 +1,6 @@
-package lotto
+package lotto.model
+
+import lotto.utils.LottoMachine
 
 class LottoSeller(private val money: Int) {
     init {
