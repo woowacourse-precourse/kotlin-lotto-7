@@ -73,6 +73,22 @@ class LottoGameTest {
         }
     }
 
+    @Test
+    fun `로또들과 당첨 로또를 비교하여 각 등수 개수 정확하게 계산`() {
+        val winningLotto = Lotto(listOf(1, 2, 3, 4, 5, 6))
+        val bonusNumber = 9
+
+        val lottoList = listOf(
+            Lotto(listOf(1, 2, 3, 4, 5, 6)),
+            Lotto(listOf(1, 10, 20, 30, 40, 41)),
+            Lotto(listOf(7, 8, 11, 19, 20, 23))
+        )
+        val result = lottoGame.calculateResult(lottoList,winningLotto, bonusNumber)
+
+        assertThat(result.countRank(LottoRank.FIRST)).isEqualTo(1)
+        assertThat(result.countRank(LottoRank.NONE)).isEqualTo(2)
+    }
+
 
 
 
