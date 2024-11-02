@@ -1,12 +1,12 @@
 package domain.validator
 
-import delegate.common.CommonErrorDelegate
-import delegate.input.InputErrorDelegate
+import domain.validator.delegate.common.CommonErrorDelegate
+import domain.validator.delegate.input.InputErrorDelegate
 import domain.enums.Output
 import domain.enums.Output.Companion.purchaseFormat
 import domain.enums.Process
-import util.ext.splitByComma
-import util.ext.toMapByEachCount
+import domain.util.ext.splitByComma
+import domain.util.ext.toMapByEachCount
 
 class InputValidator(
     private val commonErrorDelegator: CommonErrorDelegate,

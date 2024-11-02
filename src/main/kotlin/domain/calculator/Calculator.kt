@@ -1,7 +1,7 @@
 package domain.calculator
 
 import domain.enums.Rank
-import util.convertRoundAtTwoDecimal
+import domain.util.convertRoundAtTwoDecimal
 
 class Calculator : Calculate {
     override fun calculateWinningMoney(winning: Map<Rank, Int>): Long {

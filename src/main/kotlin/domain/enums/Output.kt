@@ -1,6 +1,6 @@
 package domain.enums
 
-import util.ext.toThousandUnit
+import domain.util.ext.toThousandUnit
 
 enum class Output(private val msg: String) {
     PURCHASE("%d개를 구매했습니다."),

@@ -2,7 +2,7 @@ package view
 
 import domain.enums.Input
 import vm.LottoViewModel
-import util.retryWhenNoException
+import domain.util.retryWhenNoException
 
 class MainView(
     private val inputView: InputView,

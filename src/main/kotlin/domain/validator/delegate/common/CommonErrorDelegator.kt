@@ -1,8 +1,8 @@
-package delegate.common
+package domain.validator.delegate.common
 
 import domain.enums.Exception
 import domain.enums.Process
-import util.ext.isNumeric
+import domain.util.ext.isNumeric
 
 class CommonErrorDelegator : CommonErrorDelegate {
     override fun isEmpty(input: String) {

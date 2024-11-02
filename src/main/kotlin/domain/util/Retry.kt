@@ -1,4 +1,4 @@
-package util
+package domain.util
 
 fun <T> retryWhenNoException(action: () -> T): T {
     while (true) {

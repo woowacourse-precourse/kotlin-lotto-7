@@ -1,4 +1,4 @@
-package util.ext
+package domain.util.ext
 
 fun String.isNumeric(): Boolean {
     return this.toIntOrNull() != null

@@ -1,4 +1,4 @@
-package util
+package domain.util
 
 fun Int.convertWithDigitComma(): String = "%,d".format(this)
 

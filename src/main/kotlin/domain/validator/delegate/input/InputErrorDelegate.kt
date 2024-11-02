@@ -1,4 +1,4 @@
-package delegate.input
+package domain.validator.delegate.input
 
 import domain.enums.Process
 

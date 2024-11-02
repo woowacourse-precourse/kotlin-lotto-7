@@ -5,8 +5,8 @@ import domain.enums.Output.Companion.matchCountFormat
 import domain.enums.Output.Companion.matchingNumberFormat
 import domain.enums.Output.Companion.totalRateOfReturnFormat
 import domain.enums.Rank
-import util.convertWithDigitComma
-import util.ext.joinToStringWithSquareBracket
+import domain.util.convertWithDigitComma
+import domain.util.ext.joinToStringWithSquareBracket
 import java.util.TreeSet
 
 class OutputView {

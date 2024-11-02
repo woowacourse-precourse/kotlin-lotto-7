@@ -1,9 +1,9 @@
 package di
 
-import delegate.common.CommonErrorDelegate
-import delegate.common.CommonErrorDelegator
-import delegate.input.InputErrorDelegate
-import delegate.input.InputErrorDelegator
+import domain.validator.delegate.common.CommonErrorDelegate
+import domain.validator.delegate.common.CommonErrorDelegator
+import domain.validator.delegate.input.InputErrorDelegate
+import domain.validator.delegate.input.InputErrorDelegator
 import domain.validator.InputValidator
 import view.MainView
 import vm.LottoViewModel
