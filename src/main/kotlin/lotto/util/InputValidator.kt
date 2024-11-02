@@ -28,7 +28,7 @@ class InputValidator {
         }
     }
 
-    fun validateBonusNumber(bonusNumber: String) {
+    fun validateBonusNumber(bonusNumber: String, winningNumbers: List<Int?>) {
         val parsedBonusNumber = bonusNumber.toIntOrNull()
 
         require(parsedBonusNumber != null) {
@@ -36,6 +36,9 @@ class InputValidator {
         }
         require(parsedBonusNumber in 1..45) {
             ErrorMessages.INVALID_BONUS_NUMBER_RANGE
+        }
+        require(parsedBonusNumber !in winningNumbers) {
+            ErrorMessages.BONUS_NUMBER_ALREADY_IN_WINNING_NUMBERS
         }
     }
 

@@ -2,8 +2,8 @@ package lotto.util
 
 object ErrorMessages {
     // 로또 구입 금액 입력 에러 메시지
-    const val INVALID_PURCHASE_AMOUNT_FORMAT = "[ERROR] 구입 금액은 정수 형태여야 합니다."
-    const val INVALID_PURCHASE_AMOUNT_UNIT = "[ERROR] 구입 금액은 1,000원 단위로 입력해야 합니다."
+    const val INVALID_PURCHASE_AMOUNT_FORMAT = "[ERROR] 구입 금액은 정수 형태여야 합니다.\n"
+    const val INVALID_PURCHASE_AMOUNT_UNIT = "[ERROR] 구입 금액은 1,000원 단위로 입력해야 합니다.\n"
 
     // 로또 번호 에러 메시지
     const val INVALID_LOTTO_NUMBER_COUNT = "[ERROR] 로또 번호는 6개여야 합니다."
@@ -18,6 +18,7 @@ object ErrorMessages {
     // 보너스 번호 입력 에러 메시지
     const val INVALID_BONUS_NUMBER_FORMAT = "[ERROR] 보너스 번호는 정수 형태여야 합니다."
     const val INVALID_BONUS_NUMBER_RANGE = "[ERROR] 보너스 번호는 0보다 크고 46보다 작아야 합니다."
+    const val BONUS_NUMBER_ALREADY_IN_WINNING_NUMBERS = "[ERROR] 보너스 번호는 당첨 번호에 포함된 값일 수 없습니다."
 }
 
 object InputMessages {

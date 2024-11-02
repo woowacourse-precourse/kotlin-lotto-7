@@ -32,7 +32,6 @@ class MainController {
                 println(e.message)
             }
         }
-
         lottoPurchaseController.calculateNumberOfPurchase(purchaseAmount)
         outputView.printNumberOfPurchase(lottoTicket.numberOfPurchase)
 
@@ -41,12 +40,31 @@ class MainController {
         outputView.printUserLottoNumbers(lottoTicket.userLottoNumbers)
 
         // 당첨 번호 입력
-        outputView.printWinningNumbersPrompt()
-        winningNumbers = inputView.inputWinningNumbers()
+        while (true) {
+            try {
+                outputView.printWinningNumbersPrompt()
+                val winningNumbersInput = inputView.inputWinningNumbers()
+                val parsedWinningNumbers = winningNumbersInput.split(",").map { it.trim().toIntOrNull() }
+                inputValidator.validateWinningNumbers(parsedWinningNumbers)
+                winningNumbers = parsedWinningNumbers
+                break
+            } catch (e: IllegalArgumentException) {
+                println(e.message)
+            }
+        }
 
         // 보너스 번호 입력
-        outputView.printBonusNumberPrompt()
-        bonusNumber = inputView.inputBonusNumber()
+        while (true) {
+            try {
+                outputView.printBonusNumberPrompt()
+                val bonusNumberInput = inputView.inputBonusNumber()
+                inputValidator.validateBonusNumber(bonusNumberInput, winningNumbers)
+                bonusNumber = bonusNumberInput.toInt()
+                break
+            } catch (e: IllegalArgumentException) {
+                println(e.message)
+            }
+        }
 
         // 당첨 통계 출력
         val lottoDrawingController = LottoDrawingController(lottoTicket, winningNumbers, bonusNumber, winningStatistics)
