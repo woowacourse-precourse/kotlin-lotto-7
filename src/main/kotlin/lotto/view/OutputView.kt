@@ -9,7 +9,8 @@ object OutputView {
     }
 
     fun printLotto(lotto: Lotto) {
-        println(lotto.getNumbers().sorted())
+        val numbers = lotto.getNumbers().map { it.getNumber() }
+        println(numbers.sorted())
     }
 
     fun printLottos(lottos: Lottos) {
