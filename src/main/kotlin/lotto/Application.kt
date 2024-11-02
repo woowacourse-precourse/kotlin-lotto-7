@@ -31,6 +31,7 @@ fun main() {
     println()
 
     val lottoResult = LottoResult(lottoList, winningNumbers, bonusNumber)
-    val matchingCount = lottoResult.getMatchingCount()
-    println(matchingCount)
+    val lottoResultDetail = lottoResult.getResult()
+    println("lottoResultDetail.lottoRankList: ${lottoResultDetail.lottoRankList}")
+    println("lottoResultDetail.rateOfReturn: ${lottoResultDetail.roundedRateOfReturn}")
 }

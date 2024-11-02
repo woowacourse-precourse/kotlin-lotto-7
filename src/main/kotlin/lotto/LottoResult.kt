@@ -41,11 +41,11 @@ class LottoResult(
         return false
     }
 
-    private fun getRateOfReturn(lottoRankList: List<LottoRank>): Float {
-        // (최종 수익 / 구입 금액) * 100
+    // 최종 수익률: (최종 수익 / 구입 금액) * 100
+    private fun getRateOfReturn(lottoRankList: List<LottoRank>): Double {
         val purchasePrice = lottoList.size * LottoConstants.PRICE
         val finalProfit = lottoRankList.sumOf { it.price }
-        val rateOfReturn = (finalProfit / purchasePrice).toFloat() * PERCENTAGE_MULTIPLIER
+        val rateOfReturn = (finalProfit / purchasePrice).toDouble() * PERCENTAGE_MULTIPLIER
         return rateOfReturn
     }
 
