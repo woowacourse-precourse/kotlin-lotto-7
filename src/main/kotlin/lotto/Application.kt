@@ -20,6 +20,8 @@ fun startLotto() {
 
     val winningNumbers = inputWinningNumbers()
     val bonusNumber = inputBonusNumber()
+
+    val lottoResults = checkResult(lottos, winningNumbers, bonusNumber) //로또 당첨 결과
 }
 
 /* 로또 구입 금액 입력 함수 */
@@ -98,4 +100,19 @@ fun checkLottoRank(lotto: List<Int>, winningNumbers: List<Int>, bonusNumber: Int
     val hasBonusNumber = lotto.contains(bonusNumber)
 
     return LottoRank.from(matchingCnt, hasBonusNumber)
+}
+
+/* 당첨 결과 확인 함수 */
+fun checkResult(lottos: MutableList<Lotto>, winningNumbers: List<Int>, bonusNumber: Int): LottoResult {
+    val lottoResults = LottoResult()
+
+    for (lotto in lottos) {
+        val rank = checkLottoRank(lotto.getNumbers(), winningNumbers, bonusNumber)
+
+        if (rank != null) {
+            lottoResults.addWinners(rank)
+        }
+    }
+
+    return lottoResults
 }
