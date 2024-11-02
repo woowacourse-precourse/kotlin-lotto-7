@@ -15,7 +15,7 @@ fun inputPurchaseAmount(): Int {
         println("[ERROR] 구입금액은 숫자로 입력해야 합니다.")
         inputPurchaseAmount()
     } catch (e: IllegalArgumentException) {
-        println(e.message) // 오류 메시지 출력
-        inputPurchaseAmount() // 다시 입력받기
+        println(e.message)
+        inputPurchaseAmount()
     }
 }
