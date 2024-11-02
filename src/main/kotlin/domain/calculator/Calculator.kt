@@ -11,8 +11,8 @@ class Calculator : Calculate {
     }
 
     override fun calculateRateOfReturn(winningMoney: Long, purchaseLottoCount: Int): String {
-        val totalPurchaseAmount = purchaseLottoCount * 1000
-        val rateOfReturn = (winningMoney.toDouble() / totalPurchaseAmount) * 100
+        val totalPurchaseAmount = (purchaseLottoCount * 1000).toDouble()
+        val rateOfReturn = (winningMoney / totalPurchaseAmount) * 100
         return rateOfReturn.convertRoundAtTwoDecimal()
     }
 }
