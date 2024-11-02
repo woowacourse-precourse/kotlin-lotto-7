@@ -10,4 +10,5 @@ enum class LottoPrize(
     THIRD_PRIZE(5, 1_500_000, false),
     FOURTH_PRIZE(4, 50_000, false),
     FIFTH_PRIZE(3, 5_000, false),
+    NONE_PRIZE(0, 0, false),
 }
