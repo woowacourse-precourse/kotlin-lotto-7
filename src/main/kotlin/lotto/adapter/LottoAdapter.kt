@@ -1,6 +1,6 @@
 package lotto.adapter
 
-import lotto.Lotto
+import lotto.domain.model.Lotto
 
 object LottoAdapter {
     private const val DELIMITER: String = ","

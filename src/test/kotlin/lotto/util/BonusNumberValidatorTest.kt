@@ -1,6 +1,6 @@
 package lotto.util
 
-import lotto.Lotto
+import lotto.domain.model.Lotto
 import lotto.util.validator.bonusnumber.BonusNumberErrorType
 import lotto.util.validator.bonusnumber.BonusNumberValidator
 import org.junit.jupiter.api.DisplayName

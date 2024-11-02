@@ -1,6 +1,6 @@
 package lotto.adapter
 
-import lotto.BonusNumber
+import lotto.domain.model.BonusNumber
 
 object BonusNumberAdapter {
     fun toBonusNumberModel(input: String): BonusNumber {

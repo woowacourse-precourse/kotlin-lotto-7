@@ -1,6 +1,6 @@
 package lotto.adapter
 
-import lotto.PurchaseAmount
+import lotto.domain.model.PurchaseAmount
 
 object PurchaseAmountAdapter {
     fun toPurchaseAmountModel(input: String): PurchaseAmount {

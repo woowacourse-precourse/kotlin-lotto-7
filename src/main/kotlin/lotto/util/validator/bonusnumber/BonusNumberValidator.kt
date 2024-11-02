@@ -1,6 +1,6 @@
 package lotto.util.validator.bonusnumber
 
-import lotto.Lotto
+import lotto.domain.model.Lotto
 import lotto.util.validator.bonusnumber.BonusNumberErrorType.*
 
 class BonusNumberValidator(
