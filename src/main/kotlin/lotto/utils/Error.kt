@@ -1,5 +1,6 @@
 package lotto.utils
 
+import lotto.constants.ErrorConstants.ERROR_INPUTNUMBER_BONUSNUMBER_DUPLICATE
 import lotto.constants.ErrorConstants.ERROR_NUMBERS_COUNT
 import lotto.constants.ErrorConstants.ERROR_NUMBERS_DUPLICATE
 import lotto.constants.ErrorConstants.ERROR_NUMBER_ONLY_NUMERIC
@@ -37,11 +38,13 @@ object Error {
             throw IllegalArgumentException(ERROR_NUMBER_RANGE)
     }
 
-    fun bonusNumberError(bonusNumber: String) {
+    fun bonusNumberError(bonusNumber: String, winningNumbers: String) {
         val number = bonusNumber.toIntOrNull()
             ?: throw IllegalArgumentException(ERROR_NUMBER_ONLY_NUMERIC)
 
         if (number !in MIN_LOTTO_NUMBER..MAX_LOTTO_NUMBER)
             throw IllegalArgumentException(ERROR_NUMBER_RANGE)
+        if (winningNumbers.contains(bonusNumber))
+            throw IllegalArgumentException(ERROR_INPUTNUMBER_BONUSNUMBER_DUPLICATE)
     }
 }

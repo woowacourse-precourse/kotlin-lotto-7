@@ -19,7 +19,7 @@ class LottoController {
 
         val winningNumbers = getValidWinningNumbers()
 
-        val bonusNumber = getValidBonusNumber()
+        val bonusNumber = getValidBonusNumber(winningNumbers)
         val inputNumbers = InputNumbers(winningNumbers, bonusNumber)
 
         totalResult(lottoAmount.purchasePrice, lottoAmount, inputNumbers)
@@ -53,12 +53,12 @@ class LottoController {
         }
     }
 
-    private fun getValidBonusNumber(): String {
+    private fun getValidBonusNumber(winningNumbers: String): String {
         while (true) {
             try {
                 input.bonusNumberMessage()
                 val bonusNumber = Console.readLine()
-                Error.bonusNumberError(bonusNumber)
+                Error.bonusNumberError(bonusNumber, winningNumbers)
                 return bonusNumber
             } catch (e: IllegalArgumentException) {
                 println(e)
