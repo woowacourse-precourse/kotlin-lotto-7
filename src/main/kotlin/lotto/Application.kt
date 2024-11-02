@@ -21,7 +21,7 @@ fun startLotto() {
     showLottoInfo(lottos)
 
     val winningNumbers = inputWinningNumbers()
-    val bonusNumber = inputBonusNumber()
+    val bonusNumber = inputBonusNumber(winningNumbers)
     val lottoResults = checkResult(lottos, winningNumbers, bonusNumber) //로또 당첨 결과
 
     calculateProfit(lottoCnt, lottoResults)
@@ -114,15 +114,31 @@ fun inputWinningNumbers(): List<Int> {
 }
 
 /* 보너스 번호 입력 함수 */
-fun inputBonusNumber(): Int {
+fun inputBonusNumber(winningNumbers: List<Int>): Int {
     while(true) {
         try {
             println("\n보너스 번호를 입력해 주세요.")
-            val bonusNumber = readLine().toInt()
+            val input = readLine()
+
+            //입력 값이 없는 경우 예외 처리
+            if (input.isNullOrEmpty()) {
+                throw IllegalArgumentException("[ERROR] 입력 값이 없습니다.")
+            }
+
+            //입력 값이 숫자가 아닌 경우 예외 처리
+            val bonusNumber = input.toIntOrNull()
+            if (bonusNumber == null) {
+                throw IllegalArgumentException("[ERROR] 숫자를 입력해 주세요.")
+            }
+
+            //입력한 숫자가 당첨 번호와 중복되는 경우 예외 처리
+            if (bonusNumber in winningNumbers) {
+                throw IllegalArgumentException("[ERROR] 로또 번호와 중복되는 숫자입니다.")
+            }
 
             return bonusNumber
-        } catch (e: NumberFormatException) {
-            println("[ERROR] 숫자를 입력해 주세요.")
+        } catch (e: IllegalArgumentException) {
+            println(e.message)
         }
     }
 }
