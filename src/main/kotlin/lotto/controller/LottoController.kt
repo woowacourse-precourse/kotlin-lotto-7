@@ -2,12 +2,14 @@ package lotto.controller
 
 import lotto.domain.Lotto
 import lotto.domain.LottoNumber
-import lotto.domain.PurchaseMoney
+import lotto.domain.PurchaseAmount
 import lotto.view.InputView
+import lotto.view.OutputView
 
 class LottoController {
     fun start() {
-        val purchaseMoney = PurchaseMoney(InputView.inputPurchaseMoney())
+        val purchaseAmount = PurchaseAmount(InputView.inputPurchaseMoney())
+        OutputView.printPurchaseAmount(purchaseAmount.getCount())
         val winningNumbers = Lotto(InputView.inputWinningNumber())
         val bonusNumber = LottoNumber(InputView.inputBonusNumber())
     }
