@@ -1,5 +1,6 @@
 package lotto
 
+import lotto.domain.usecase.CalculateLottoReturnUseCase
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 

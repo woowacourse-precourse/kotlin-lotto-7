@@ -1,4 +1,8 @@
-package lotto
+package lotto.domain.usecase
+
+import lotto.domain.entity.Lotto
+import lotto.common.LottoRank
+import lotto.domain.entity.WinningNumbers
 
 class CalculateLottoRankUseCase {
     fun execute(lotto: Lotto, winningNumbers: WinningNumbers): LottoRank {

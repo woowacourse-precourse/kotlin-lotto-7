@@ -1,4 +1,6 @@
-package lotto
+package lotto.domain.usecase
+
+import lotto.domain.entity.User
 
 class CreateUserUseCase {
     fun execute(input: () -> String): User {

@@ -1,4 +1,4 @@
-package lotto
+package lotto.domain.usecase
 
 import java.math.BigDecimal
 import java.math.RoundingMode

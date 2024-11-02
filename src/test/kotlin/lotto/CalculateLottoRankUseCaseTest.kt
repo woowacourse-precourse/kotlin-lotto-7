@@ -1,5 +1,9 @@
 package lotto
 
+import lotto.common.LottoRank
+import lotto.domain.entity.Lotto
+import lotto.domain.entity.WinningNumbers
+import lotto.domain.usecase.CalculateLottoRankUseCase
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 

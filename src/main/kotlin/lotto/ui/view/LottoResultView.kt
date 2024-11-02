@@ -1,4 +1,6 @@
-package lotto
+package lotto.ui.view
+
+import lotto.common.LottoRank
 
 class LottoResultView {
     fun outputWinningStatistics(lottoTicketsRank: List<LottoRank>) {

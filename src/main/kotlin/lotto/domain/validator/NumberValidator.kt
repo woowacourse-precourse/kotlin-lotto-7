@@ -1,4 +1,4 @@
-package lotto
+package lotto.domain.validator
 
 open class NumberValidator {
     fun parseNumberInput(input: String): Int {

@@ -1,4 +1,4 @@
-package lotto
+package lotto.domain.entity
 
 import camp.nextstep.edu.missionutils.Randoms
 

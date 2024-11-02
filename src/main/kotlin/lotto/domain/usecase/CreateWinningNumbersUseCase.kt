@@ -1,4 +1,8 @@
-package lotto
+package lotto.domain.usecase
+
+import lotto.domain.validator.BonusNumberValidator
+import lotto.domain.validator.LottoNumberValidator
+import lotto.domain.entity.WinningNumbers
 
 class CreateWinningNumbersUseCase(
     private val lottoNumbersValidator: LottoNumberValidator = LottoNumberValidator(),

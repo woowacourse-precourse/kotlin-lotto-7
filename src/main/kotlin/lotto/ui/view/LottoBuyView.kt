@@ -1,6 +1,7 @@
-package lotto
+package lotto.ui.view
 
 import camp.nextstep.edu.missionutils.Console
+import lotto.domain.entity.Lotto
 
 class LottoBuyView {
     fun guidePurchaseAmount() = println("구입금액을 입력해 주세요.")

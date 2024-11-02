@@ -1,4 +1,4 @@
-package lotto
+package lotto.domain.validator
 
 class BonusNumberValidator : NumberValidator() {
     fun validateBonusNumber(bonusNumber: Int, numbers: List<Int>) {

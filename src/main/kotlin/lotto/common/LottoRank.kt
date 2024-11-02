@@ -1,4 +1,4 @@
-package lotto
+package lotto.common
 
 enum class LottoRank(val price: Int) {
     FIRST(2_000_000_000),
