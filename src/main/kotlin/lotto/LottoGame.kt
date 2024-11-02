@@ -27,8 +27,8 @@ class LottoGame(
             inputCost()
         }
     }
-
-    private fun parseCost(input: String): Int {
+    // 테스트 코드에 접근할 수 있도록 하기 위해 internal 로 설정
+    internal fun parseCost(input: String): Int {
         val cost =
             input.toIntOrNull() ?: throw IllegalArgumentException("[ERROR] 금액은 숫자로 입력해야 합니다.")
         if (cost < 1000 || cost % 1000 != 0) throw IllegalArgumentException("[ERROR] 금액은 1,000원 단위로 입력해야 합니다.")
@@ -46,7 +46,7 @@ class LottoGame(
         }
     }
 
-    private fun parseWinningLotto(input: String): Lotto {
+    internal fun parseWinningLotto(input: String): Lotto {
         val winningLotto = input.split(',')
             .map { it.trim().toIntOrNull() ?: throw IllegalArgumentException("[ERROR] 당첨번호는 숫자로 입력해야 합니다.") }
         return Lotto(winningLotto)
@@ -63,7 +63,7 @@ class LottoGame(
         }
     }
 
-    private fun parseBonusNumber(input: String): Int {
+    internal fun parseBonusNumber(input: String): Int {
         return input.toIntOrNull() ?: throw IllegalArgumentException("[ERROR] 보너스 번호는 숫자로 입력해야 합니다.")
     }
 
