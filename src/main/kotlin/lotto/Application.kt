@@ -84,6 +84,8 @@ fun inputBonusNumber(): Int {
         try {
             println("\n보너스 번호를 입력해 주세요.")
             val bonusNumber = readLine().toInt()
+
+            return bonusNumber
         } catch (e: NumberFormatException) {
             println("[ERROR] 숫자를 입력해 주세요.")
         }
