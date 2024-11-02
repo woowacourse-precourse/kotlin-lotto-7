@@ -170,8 +170,13 @@ fun checkResult(lottos: MutableList<Lotto>, winningNumbers: List<Int>, bonusNumb
 
 /* 수익률 계산 함수 */
 fun calculateProfit(lottoCnt: Int, lottoResults: LottoResult) {
-    val totalPrize = lottoResults.getTotalPrize()
-    val profitRate = totalPrize / lottoCnt * 1000 * 100 //수익률 = 당첨 금액 / 구입 금액 * 100
-    val roundingProfitRate = BigDecimal(profitRate).setScale(2, RoundingMode.HALF_UP).toDouble()
-    println("총 수익률은 ${roundingProfitRate}%입니다.")
+    val totalPrize = lottoResults.getTotalPrize().toDouble()
+    val purchaseAmount = (lottoCnt * 1000).toDouble()
+    val profitRate = (totalPrize / purchaseAmount) * 100 //수익률 = 당첨 금액 / 구입 금액 * 100
+    println("총 수익률은 ${roundToTwo(profitRate)}%입니다.")
+}
+
+/* 소수점 두번째에서 반올림 계산 함수 */
+fun roundToTwo(number: Double): Double {
+    return BigDecimal(number).setScale(2, RoundingMode.HALF_UP).toDouble()
 }
