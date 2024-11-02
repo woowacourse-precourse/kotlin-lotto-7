@@ -1,6 +1,6 @@
 package lotto.data
 
-class LottoAmount(private val amount: String) {
+class Client(private val amount: String) {
     init {
         require(amount.isNotEmpty()) { AMOUNT_EMPTY_ERROR_MESSAGE }
         require(amount.all { it.isDigit() }) { AMOUNT_NOT_ALL_NUMBER_ERROR_MESSAGE }
@@ -22,6 +22,6 @@ class LottoAmount(private val amount: String) {
         private const val EXPECTED_RESULT = 0
         private const val AMOUNT_MAX_VALUE = 100_000
 
-        fun LottoAmount.convertAmountToQuantity() = amount.toInt() / AMOUNT_UNIT
+        fun Client.convertAmountToQuantity() = amount.toInt() / AMOUNT_UNIT
     }
 }
