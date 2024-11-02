@@ -74,21 +74,41 @@ fun inputWinningNumbers(): List<Int> {
     while (true) {
         try {
             println("\n당첨 번호를 입력해 주세요.")
-            val input = readLine() ?: throw IllegalArgumentException("[ERROR] 입력 값이 없습니다.")
+            val input = readLine()
 
-            val numbers = input.split(",")
-                .map { it.trim().toIntOrNull() } //숫자로 변환
-                .filterNotNull() //null 제거
+            //입력 값이 없는 경우 예외 처리
+            if (input.isNullOrEmpty()) {
+                throw IllegalArgumentException("[ERROR] 입력 값이 없습니다.")
+            }
 
-            if (numbers.size != 6) {
+            val numbers = input.split(",").map { it.trim() }
+
+            for (number in numbers) {
+                if (!number.all { it.isDigit() }) {
+                    throw IllegalArgumentException("[ERROR] 숫자를 입력해 주세요.")
+                }
+            }
+
+            val intNumbers = numbers.map { it.toInt() }
+
+            //6개를 입력하지 않은 경우 예외 처리
+            if (intNumbers.size != 6) {
                 throw IllegalArgumentException("[ERROR] 6개를 입력해 주세요.")
             }
 
-            return numbers
+            //중복된 숫자를 입력한 경우 예외 처리
+            if (intNumbers.distinct().size != intNumbers.size) {
+                throw IllegalArgumentException("[ERROR] 중복된 숫자가 포함되어 있습니다.")
+            }
+
+            //범위 밖의 숫자를 입력한 경우 예외 처리
+            if (!intNumbers.all { it in 1..45 }) {
+                throw IllegalArgumentException("[ERROR] 1에서 45 사이의 숫자를 입력해 주세요.")
+            }
+
+            return intNumbers
         } catch (e: IllegalArgumentException) {
             println(e.message)
-        } catch (e: NumberFormatException) {
-            println("[ERROR] 숫자를 입력해 주세요.")
         }
     }
 }
