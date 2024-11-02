@@ -6,6 +6,6 @@ import lotto.repository.Repository
 import lotto.view.InputView
 
 fun main() {
-    val mainController = MainController(InputController(Repository()))
+    val mainController = MainController(Repository())
     mainController.run()
 }

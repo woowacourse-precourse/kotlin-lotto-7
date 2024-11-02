@@ -1,14 +1,14 @@
 package lotto.controller
 
-import lotto.constants.ErrorConstant
 import lotto.repository.Repository
-import lotto.view.InputView
 
 class MainController (
-    private val inputController: InputController,
+    private val repo: Repository
 ) {
+    private val inputController = InputController(repo)
     fun run() {
         inputController.inputPurchaseAmount()
+        repo.createLottos()
         inputController.inputWinningNumber()
         inputController.inputBonusNumber()
     }
