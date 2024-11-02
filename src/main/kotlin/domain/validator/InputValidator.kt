@@ -15,8 +15,7 @@ class InputValidator(
 
     override fun payValidation(value: String): Pair<String, Int> {
         val process = Process.PAY
-        commonErrorDelegator.isEmpty(value)
-        commonErrorDelegator.isNumeric(value, process)
+        commonValidation(value, process)
         inputErrorDelegate.isThousandWonUnit(value)
         return purchaseFormat(value)
     }
@@ -34,9 +33,14 @@ class InputValidator(
 
     override fun bonusNumberValidation(value: String): Int {
         val process = Process.BONUS_NUMBER
-        commonErrorDelegator.isEmpty(value)
-        commonErrorDelegator.isNumeric(value, process)
+        commonValidation(value, process)
         inputErrorDelegate.isExceededRange(listOf(value), process)
         return value.toInt()
+    }
+
+    override fun commonValidation(value: String, process: Process) {
+        commonErrorDelegator.isEmpty(value)
+        commonErrorDelegator.isNumeric(value, process)
+        commonErrorDelegator.isOverIntMaxValue(value)
     }
 }
