@@ -8,6 +8,14 @@ object Constants {
     const val OUTPUT_RESULT_MESSAGE = "\n당첨 통계"
     const val LINE_SEPARATOR = "---"
 
+    private const val MATCH_AMOUNT = "%d개"
+    const val FIRST_MATCH_PRIZE_MESSAGE = "6개 일치 (2,000,000,000원) - $MATCH_AMOUNT"
+    const val SECOND_MATCH_PRIZE_MESSAGE = "5개 일치, 보너스 볼 일치 (30,000,000원) - $MATCH_AMOUNT"
+    const val THIRD_MATCH_PRIZE_MESSAGE = "5개 일치 (1,500,000원) - $MATCH_AMOUNT"
+    const val FOURTH_MATCH_PRIZE_MESSAGE = "4개 일치 (50,000원) - $MATCH_AMOUNT"
+    const val FIFTH_MATCH_PRIZE_MESSAGE = "3개 일치 (5,000원) - $MATCH_AMOUNT"
+
+    const val NUMBER_DELIMITER = ","
     const val LOTTO_PRICE = 1000
     const val LOTTO_NUMBERS_SIZE = 6
     const val LOTTO_NUMBER_MIN = 1
