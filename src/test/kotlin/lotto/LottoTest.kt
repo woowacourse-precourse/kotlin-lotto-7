@@ -6,28 +6,28 @@ import org.junit.jupiter.api.assertThrows
 
 class LottoTest {
     @Test
-    fun `로또 번호의 개수가 6개가 넘어가면 예외가 발생한다`() {
+    fun `로또 번호 개수가 6개 이상 - 예외 발생`() {
         assertThrows<IllegalArgumentException> {
             Lotto(listOf(1, 2, 3, 4, 5, 6, 7))
         }
     }
 
     @Test
-    fun `로또 번호에 중복된 숫자가 있으면 예외가 발생한다`() {
+    fun `중복된 로또 번호 - 예외 발생`() {
         assertThrows<IllegalArgumentException> {
             Lotto(listOf(1, 2, 3, 4, 5, 5))
         }
     }
 
     @Test
-    fun `로또 번호가 6개가 아닐 때 예외 발생`() {
+    fun `로또 번호 개수 6개 이하 - 예외 발생`() {
         assertThrows<IllegalArgumentException> {
             Lotto(listOf(1, 2, 3, 4, 5))
         }
     }
 
     @Test
-    fun `로또 번호가 1에서 45의 범위를 벗어나면 예외가 발생한다`() {
+    fun `로또 번호 오류(1~45의 값이 아닌 경우) - 예외 발생`() {
         assertThrows<IllegalArgumentException> {
             Lotto(listOf(0, 2, 3, 4, 5, 6))
         }
@@ -37,7 +37,7 @@ class LottoTest {
     }
 
     @Test
-    fun `로또 번호에 음수가 있으면 예외가 발생한다`() {
+    fun `로또 번호가 음수인 경우 - 예외 발생`() {
         assertThrows<IllegalArgumentException> {
             Lotto(listOf(-1, 2, 3, 4, 5, 6))
         }
