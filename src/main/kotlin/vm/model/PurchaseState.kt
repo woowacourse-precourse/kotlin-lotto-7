@@ -1,8 +1,8 @@
-package domain.model
+package vm.model
 
 import java.util.TreeSet
 
-data class PurchaseState (
+data class PurchaseState(
     val purchaseLottoCount: Int = 0,
     val winningNumber: List<Int> = emptyList(),
     val bonusNumber: Int = 0,

@@ -3,7 +3,7 @@ package domain.calculator
 import domain.enums.Rank
 import util.convertRoundAtTwoDecimal
 
-class Calculator: Calculate {
+class Calculator : Calculate {
     override fun calculateWinningMoney(winning: Map<Rank, Int>): Long {
         return winning.entries.sumOf { (rank, count) ->
             rank.getReword() * count

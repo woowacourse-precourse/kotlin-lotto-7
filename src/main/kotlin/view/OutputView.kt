@@ -19,7 +19,7 @@ class OutputView {
         println(msg)
     }
 
-    fun printPurchaseLotto(purchaseLotto: List<TreeSet<Int>>){
+    fun printPurchaseLotto(purchaseLotto: List<TreeSet<Int>>) {
         purchaseLotto.forEach { lotto ->
             println(lotto.joinToStringWithSquareBracket())
         }

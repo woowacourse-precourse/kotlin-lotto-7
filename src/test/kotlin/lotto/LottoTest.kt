@@ -54,13 +54,13 @@ class LottoTest {
 
     @ParameterizedTest
     @MethodSource("provideLottoNumbers")
-    fun `당첨 등수 반환 테스트`(values: List<Int>, bonusNumber: Int, expect: Rank){
+    fun `당첨 등수 반환 테스트`(values: List<Int>, bonusNumber: Int, expect: Rank) {
         val toTreeSet = TreeSet(values)
         val lotto = Lotto(listOf(1, 2, 3, 4, 5, 6))
         assertEquals(expect, lotto.getMatches(toTreeSet, bonusNumber))
     }
 
-    companion object{
+    companion object {
         @JvmStatic
         fun provideLottoNumbers(): Stream<Arguments> = Stream.of(
             // 1등

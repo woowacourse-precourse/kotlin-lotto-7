@@ -1,8 +1,8 @@
-package domain.model
+package vm.model
 
 import domain.enums.Rank
 
-data class WinningState (
+data class WinningState(
     val winning: MutableMap<Rank, Int> = mutableMapOf(
         Rank.FIFTH to 0,
         Rank.FOURTH to 0,

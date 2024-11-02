@@ -50,6 +50,7 @@ class DependencyInjector {
         val calculator = injectCalculator()
         return LottoViewModel(inputValidator, calculator, lottoFactory)
     }
+
     private fun injectCalculator(): Calculate = Calculator()
     private fun injectInputView(): InputView = InputView()
     private fun injectOutPutView(): OutputView = OutputView()

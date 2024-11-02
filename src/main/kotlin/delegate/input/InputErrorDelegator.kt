@@ -31,7 +31,7 @@ class InputErrorDelegator : InputErrorDelegate {
     }
 
     override fun isDuplicated(input: Map<String, Int>) {
-        require(input.count{ it.value > 1 } == 0) { Exception.INVALID_DUPLICATED }
+        require(input.count { it.value > 1 } == 0) { Exception.INVALID_DUPLICATED }
     }
 
     companion object {

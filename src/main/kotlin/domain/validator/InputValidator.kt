@@ -11,7 +11,7 @@ import util.ext.toMapByEachCount
 class InputValidator(
     private val commonErrorDelegator: CommonErrorDelegate,
     private val inputErrorDelegate: InputErrorDelegate
-): InputValidate {
+) : InputValidate {
 
     override fun payValidation(value: String): Pair<String, Int> {
         val process = Process.PAY

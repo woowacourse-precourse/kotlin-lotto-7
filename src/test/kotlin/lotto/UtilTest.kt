@@ -31,7 +31,7 @@ class UtilTest {
         assertTrue(결과 == 기댓값)
     }
 
-    companion object{
+    companion object {
         @JvmStatic
         fun `천단위_쉼표로_문자열_분리_테스트용_데이터`() = listOf(
             Arguments.of(100, "100"),

@@ -4,7 +4,7 @@ import datasource.LottoDataSource
 import domain.calculator.Calculate
 import domain.enums.Rank
 import domain.lotto.Lotto
-import domain.model.PurchaseState
+import vm.model.PurchaseState
 import domain.validator.InputValidate
 import java.util.TreeSet
 
@@ -23,7 +23,7 @@ class LottoViewModel(
     fun checkWinningNumberValidation(winningNumber: String): List<Int> =
         validator.winningNumberValidation(winningNumber)
 
-    fun checkBonusNumberValidation(bonusNumber: String){
+    fun checkBonusNumberValidation(bonusNumber: String) {
         val validBonusNumber = validator.bonusNumberValidation(bonusNumber)
         onCompleteInputBonusNumber(validBonusNumber)
     }

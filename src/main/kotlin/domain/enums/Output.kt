@@ -19,7 +19,7 @@ enum class Output(private val msg: String) {
             return Pair(PURCHASE.toString().format(purchaseLottoCount), purchaseLottoCount)
         }
 
-        fun matchCountFormat(count: Int): String{
+        fun matchCountFormat(count: Int): String {
             return MATCH_COUNT.toString().format(count)
         }
 

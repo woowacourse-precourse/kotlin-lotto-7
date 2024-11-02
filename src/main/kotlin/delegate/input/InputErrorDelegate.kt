@@ -1,4 +1,5 @@
 package delegate.input
+
 import domain.enums.Process
 
 interface InputErrorDelegate {

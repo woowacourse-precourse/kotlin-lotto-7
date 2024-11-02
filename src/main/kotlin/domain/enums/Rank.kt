@@ -9,7 +9,7 @@ enum class Rank(
     THIRD(1500000, 5),
     FOURTH(50000, 4),
     FIFTH(5000, 3),
-    NONE(0,0);
+    NONE(0, 0);
 
     companion object {
         fun getRank(matchingCount: Int, bonusMatched: Boolean): Rank {

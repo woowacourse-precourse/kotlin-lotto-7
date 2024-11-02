@@ -5,6 +5,7 @@ import domain.enums.LottoSetting.LOTTO_MIN
 import domain.enums.LottoSetting.LOTTO_MAX
 import domain.enums.LottoSetting.LOTTO_SIZE
 import domain.enums.Rank
+import domain.enums.Rank.Companion.getRank
 import java.util.TreeSet
 
 class Lotto(
@@ -26,5 +27,4 @@ class Lotto(
         return rank
     }
 
-    private fun getRank(matches: Int, bonusMatched: Boolean): Rank = getRank(matches, bonusMatched)
 }

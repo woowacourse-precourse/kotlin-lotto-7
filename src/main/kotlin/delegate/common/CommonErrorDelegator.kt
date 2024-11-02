@@ -13,5 +13,4 @@ class CommonErrorDelegator : CommonErrorDelegate {
         val title = process.toString()
         require(input.isNumeric()) { "${title}은(는) ${Exception.INVALID_INPUT}" }
     }
-
 }

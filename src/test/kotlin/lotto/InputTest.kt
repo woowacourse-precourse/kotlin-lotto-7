@@ -90,17 +90,22 @@ class InputTest {
 
         @ParameterizedTest
         @ValueSource(strings = ["0, 46"])
-        fun `당첨번호가 로또번호의 범위를 벗어날 때`(value: String){
+        fun `당첨번호가 로또번호의 범위를 벗어날 때`(value: String) {
             val type = Process.WINNING_NUMBER
             val winningNumber = value.splitByComma()
-            Assertions.assertThatThrownBy { inputErrorDelegate.isExceededRange(winningNumber, type) }
+            Assertions.assertThatThrownBy {
+                inputErrorDelegate.isExceededRange(
+                    winningNumber,
+                    type
+                )
+            }
                 .isInstanceOf(IllegalArgumentException::class.java)
                 .hasMessage(Exception.EXCEED_INPUT.toString())
         }
 
         @ParameterizedTest
         @ValueSource(strings = ["1, 1, 1, 1, 1, 1", "1, 2, 3, 3, 3, 3", "1, 2, 3, 4, 5, 5"])
-        fun `당첨 번호가 중복 됐을 때`(value: String){
+        fun `당첨 번호가 중복 됐을 때`(value: String) {
             val winningNumber = value.splitByComma().toMapByEachCount()
             Assertions.assertThatThrownBy { inputErrorDelegate.isDuplicated(winningNumber) }
                 .isInstanceOf(IllegalArgumentException::class.java)
@@ -109,7 +114,7 @@ class InputTest {
     }
 
     @Nested
-    inner class BonusNumberTest{
+    inner class BonusNumberTest {
 
         @ParameterizedTest
         @ValueSource(strings = ["abc", "ㄱㄴㄷ", "!@#$", "100,23,22"])
@@ -122,10 +127,15 @@ class InputTest {
 
         @ParameterizedTest
         @ValueSource(strings = ["0, 46"])
-        fun `보너스 번호가 로또번호의 범위를 벗어날 때`(value: String){
+        fun `보너스 번호가 로또번호의 범위를 벗어날 때`(value: String) {
             val type = Process.BONUS_NUMBER
             val winningNumber = value.splitByComma()
-            Assertions.assertThatThrownBy { inputErrorDelegate.isExceededRange(winningNumber, type) }
+            Assertions.assertThatThrownBy {
+                inputErrorDelegate.isExceededRange(
+                    winningNumber,
+                    type
+                )
+            }
                 .isInstanceOf(IllegalArgumentException::class.java)
                 .hasMessage(Exception.EXCEED_INPUT.toString())
         }
