@@ -47,6 +47,19 @@ class LottoGameTest {
         }
     }
 
+    @Test
+    fun `유효한 보너스 번호를 입력하면 해당 번호를 반환한다`() {
+        val bonusNumber = 9
+        assertThat(lottoGame.inputBonusNumber()).isEqualTo(bonusNumber)
+    }
+
+    @Test
+    fun `보너스 번호가 숫자가 아니면 예외가 발생한다`() {
+        assertThrows<IllegalArgumentException> {
+            lottoGame.inputBonusNumber()
+        }
+    }
+
 
 
 }
