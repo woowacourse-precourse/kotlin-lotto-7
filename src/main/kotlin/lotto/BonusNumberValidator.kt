@@ -2,7 +2,7 @@ package lotto
 
 import lotto.BonusNumberErrorType.*
 
-class BonusNumberValidatort(
+class BonusNumberValidator(
     private val lotto: Lotto,
     private val bonusNumber: String
 ) {
@@ -19,11 +19,6 @@ class BonusNumberValidatort(
 
     private fun checkEmpty() {
         if (bonusNumber.isEmpty()) throw IllegalArgumentException(EMPTY_INPUT.errorMessage)
-    }
-
-    private fun checkBonusNumberCount() {
-        val bonusNumbers: List<Int?> = bonusNumber.split(DELIMITER).map { it.trim().toIntOrNull() }
-        if (bonusNumbers.size != 1 && null !in bonusNumbers) throw IllegalArgumentException(ONLY_ONE.errorMessage)
     }
 
     private fun checkDecimal() {
@@ -54,6 +49,5 @@ class BonusNumberValidatort(
         private const val ONE: Int = 1
         private const val START_NUMBER: Int = 1
         private const val END_NUMBER: Int = 45
-        private const val DELIMITER = ","
     }
 }
