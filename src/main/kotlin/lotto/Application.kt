@@ -15,6 +15,8 @@ fun startLotto() {
     repeat(lottoCnt) {
         pickLottoNumbers(lottoList)
     }
+
+    showLottoInfo(lottoList)
 }
 
 /* 로또 구입 금액 입력 함수 */
@@ -39,4 +41,10 @@ fun inputMoney(): Int {
 fun pickLottoNumbers(lottoList: MutableList<Lotto>) {
     val lottoNumbers = pickUniqueNumbersInRange(1, 45, 6)
     lottoList.add(Lotto(lottoNumbers))
+}
+
+/* 발행한 로또 정보 출력 함수 */
+fun showLottoInfo(lottoList: MutableList<Lotto>) {
+    println("\n${lottoList.size}개를 구매했습니다.")
+    lottoList.forEach { println(it.toString()) }
 }
