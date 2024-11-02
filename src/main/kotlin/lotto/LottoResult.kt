@@ -20,4 +20,15 @@ class LottoResult {
             println("${rank.description} (${String.format("%,d", rank.prize)}원) - ${count}개")
         }
     }
+
+    /* 총 당첨 금액 계산 함수 */
+    fun getTotalPrize(): Long {
+        var totalPrize = 0L
+
+        for ((rank, count) in winnersCount) {
+            totalPrize += rank.prize * count
+        }
+
+        return totalPrize
+    }
 }
