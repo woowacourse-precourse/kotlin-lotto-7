@@ -13,11 +13,18 @@ fun main() {
 
     purchase.displayPurchaseCount(issuedLottos.size)
     issuedLottos.forEach { println(it) }
+
+    val winningNumber = WinningNumber()
+    val winningNumbers = winningNumber.getWinningNumber()
+    val bonusNumber = winningNumber.getBonusNumber()
+
+    println("당첨 번호: $winningNumbers")
+    println("보너스 번호: $bonusNumber")
+
 }
 
 class LottoIssue {
-    // 로또 번호 한 세트를 생성
-    fun issueLotto(): List<Int> {
+    private fun issueLotto(): List<Int> {
         return Randoms.pickUniqueNumbersInRange(1, 45, 6).sorted()
     }
 
@@ -27,8 +34,7 @@ class LottoIssue {
     }
 }
 
-class LottoPurchase{
-
+class LottoPurchase {
     fun displayPurchaseCount(count: Int) {
         println("${count}개를 구매했습니다.")
     }
@@ -36,11 +42,7 @@ class LottoPurchase{
     fun getPurchaseAmount(): Int {
         while (true) {
             try {
-                println("구입금액을 입력해 주세요.")
-                val input = Console.readLine()
-                val amount = input.toInt()
-                require(amount % 1000 == 0) { "[ERROR] 구입 금액은 1,000원 단위여야 합니다." }
-                return amount
+                return readPurchaseAmount()
             } catch (e: NumberFormatException) {
                 println("[ERROR] 유효한 숫자를 입력해야 합니다.")
             } catch (e: IllegalArgumentException) {
@@ -48,7 +50,66 @@ class LottoPurchase{
             }
         }
     }
+
+    private fun readPurchaseAmount(): Int {
+        println("구입금액을 입력해 주세요.")
+        val input = Console.readLine()
+        val amount = input.toInt()
+        validatePurchaseAmount(amount)
+        return amount
+    }
+
+    private fun validatePurchaseAmount(amount: Int) {
+        require(amount % 1000 == 0) { "[ERROR] 구입 금액은 1,000원 단위여야 합니다." }
+    }
+
     fun calculateLottoCount(amount: Int): Int {
         return amount / 1000
+    }
+}
+
+class WinningNumber {
+    fun getWinningNumber(): List<Int> {
+        while (true) {
+            val numbers = readWinningNumbers()
+            if (isValidNumbersCheck(numbers)) {
+                return numbers.filterNotNull()
+            }
+        }
+    }
+
+
+    private fun readWinningNumbers(): List<Int?> {
+        println("당첨 번호를 입력해 주세요.")
+        val input = Console.readLine()
+        return input.split(",").map { it.trim().toIntOrNull() }
+    }
+
+    private fun isValidNumbersCheck(numbers: List<Int?>): Boolean {
+        if (numbers.any { it == null } || numbers.size != 6) {
+            println("[ERROR] 당첨 번호는 6개를 입력해야 합니다.")
+            return false
+        }
+
+        if (numbers.any { it !in 1..45 }) {
+            println("[ERROR] 당첨 번호는 1부터 45 사이의 숫자여야 합니다.")
+            return false
+        }
+
+        return true
+    }
+
+    fun getBonusNumber(): Int {
+        while (true) {
+            println("보너스 번호를 입력해 주세요.")
+            val input = Console.readLine()
+            try {
+                val bonusNumber = input.toInt()
+                require(bonusNumber in 1..45) { "[ERROR] 보너스 번호는 1부터 45 사이의 숫자여야 합니다." }
+                return bonusNumber
+            } catch (e: Exception) {
+                println(e.message)
+            }
+        }
     }
 }
