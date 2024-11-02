@@ -12,4 +12,12 @@ class LottoResult {
     fun getWinnersCount(rank: LottoRank): Int {
         return winnersCount[rank] ?: 0
     }
+
+    /* 전체 당첨 결과 출력 함수 */
+    fun showResult() {
+        println("\n당첨 통계\n---\n")
+        for ((rank, count) in winnersCount) {
+            println("${rank.description} (${String.format("%,d", rank.prize)}원) - ${count}개")
+        }
+    }
 }
