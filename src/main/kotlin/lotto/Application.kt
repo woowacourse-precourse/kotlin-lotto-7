@@ -10,13 +10,13 @@ fun main() {
 /* 로또 실행 함수 */
 fun startLotto() {
     val lottoCnt = inputMoney() //구입한 로또 개수
-    val lottoList = mutableListOf<Lotto>() //발행한 로또 리스트
+    val lottos = mutableListOf<Lotto>() //발행한 로또 리스트
 
     repeat(lottoCnt) {
-        pickLottoNumbers(lottoList)
+        pickLottoNumbers(lottos)
     }
 
-    showLottoInfo(lottoList)
+    showLottoInfo(lottos)
 
     val winningNumbers = inputWinningNumbers()
     val bonusNumber = inputBonusNumber()
@@ -43,15 +43,15 @@ fun inputMoney(): Int {
 }
 
 /* 로또 발행 함수 */
-fun pickLottoNumbers(lottoList: MutableList<Lotto>) {
+fun pickLottoNumbers(lottos: MutableList<Lotto>) {
     val lottoNumbers = pickUniqueNumbersInRange(1, 45, 6)
-    lottoList.add(Lotto(lottoNumbers))
+    lottos.add(Lotto(lottoNumbers))
 }
 
 /* 발행한 로또 정보 출력 함수 */
-fun showLottoInfo(lottoList: MutableList<Lotto>) {
-    println("\n${lottoList.size}개를 구매했습니다.")
-    lottoList.forEach { println(it.toString()) }
+fun showLottoInfo(lottos: MutableList<Lotto>) {
+    println("\n${lottos.size}개를 구매했습니다.")
+    lottos.forEach { println(it.toString()) }
 }
 
 /* 당첨 번호 입력 함수 */
