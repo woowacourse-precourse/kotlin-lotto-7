@@ -12,11 +12,12 @@ fun main() {
     val issuedLottos = lottoIssue.issueLottos(lottoCount)
 
     purchase.displayPurchaseCount(issuedLottos.size)
-    issuedLottos.forEach { println(it) }
+    issuedLottos.forEach { println(it.getNumbers()) }
 
     val winningNumber = WinningNumber()
     val winningNumbers = winningNumber.getWinningNumber()
-    val bonusNumber = winningNumber.getBonusNumber()
+
+    val bonusNumber = BonusNumber().getBonusNumber()
 
     println("당첨 번호: $winningNumbers")
     println("보너스 번호: $bonusNumber")
@@ -24,12 +25,13 @@ fun main() {
 }
 
 class LottoIssue {
-    fun issueLotto(): List<Int> {
-        return Randoms.pickUniqueNumbersInRange(1, 45, 6).sorted()
+    fun issueLotto(): Lotto {
+        val numbers = Randoms.pickUniqueNumbersInRange(1, 45, 6)
+        return Lotto(numbers.sorted()) // Lotto 객체 생성
     }
 
     // 여러 개의 로또 발행
-    fun issueLottos(count: Int): List<List<Int>> {
+    fun issueLottos(count: Int): List<Lotto> {
         return List(count) { issueLotto() }
     }
 }
@@ -107,18 +109,47 @@ class WinningNumber {
 
         return true
     }
+}
 
+class BonusNumber {
     fun getBonusNumber(): Int {
         while (true) {
-            println("보너스 번호를 입력해 주세요.")
-            val input = Console.readLine()
-            try {
-                val bonusNumber = input.toInt()
-                require(bonusNumber in 1..45) { "[ERROR] 보너스 번호는 1부터 45 사이의 숫자여야 합니다." }
-                return bonusNumber
-            } catch (e: Exception) {
-                println(e.message)
+            val bonusNumber = readBonusNumber()
+            if (bonusNumber == -1) {
+                // 입력이 유효하지 않은 경우 다시 요청
+                continue
             }
+            if (isValidateBonusNumber(bonusNumber)) {
+                return bonusNumber
+            }
+        }
+    }
+
+    private fun readBonusNumber(): Int {
+        println("보너스 번호를 입력해 주세요.")
+        val input = Console.readLine()
+
+        // 입력이 비어있으면 오류 처리
+        if (input.isEmpty()) {
+            println("[ERROR] 보너스 번호는 비워둘 수 없습니다.")
+            return -1 // 비어있을 경우 -1 반환하여 재입력을 유도
+        }
+
+        // 입력된 문자열을 Int로 변환
+        return input.toIntOrNull() ?: run {
+            println("[ERROR] 유효한 정수를 입력해야 합니다.")
+            -1 // 유효하지 않은 경우 -1 반환하여 재입력을 유도
+        }
+    }
+
+    private fun isValidateBonusNumber(bonusNumber: Int): Boolean {
+        // 보너스 번호가 1~45 사이인지 확인
+        return when {
+            bonusNumber < 1 || bonusNumber > 45 -> {
+                println("[ERROR] 보너스 번호는 1부터 45 사이의 숫자여야 합니다.")
+                false
+            }
+            else -> true
         }
     }
 }
