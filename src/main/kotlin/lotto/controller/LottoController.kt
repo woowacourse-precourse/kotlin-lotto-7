@@ -74,6 +74,6 @@ class LottoController(val view: InputView) {
         private const val INVALID_INT_NUMBER_EXCEPTION_MSG = "[ERROR] 유효하지 않은 정수입니다."
         private const val INVALID_NUMBERS_EXCEPTION_MSG = "[ERROR] 유효하지 않은 당첨 번호 리스트입니다."
         private const val NOT_ZERO_EXCEPTION_MSG = "[ERROR] 구입 금액은 0원보다 커야 합니다."
-        private const val OVER_RANGE_EXCEPTION_MSG = "[ERROR] 로또 번호는 45 이하여야 합니다."
+        private const val OVER_RANGE_EXCEPTION_MSG = "[ERROR] 로또 번호는 1이상 45 이하여야 합니다."
     }
 }
