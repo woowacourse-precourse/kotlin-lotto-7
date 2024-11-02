@@ -1,6 +1,9 @@
 package view
 
 import domain.enums.Output
+import domain.enums.Output.Companion.matchCountFormat
+import domain.enums.Output.Companion.matchingNumberFormat
+import domain.enums.Output.Companion.totalRateOfReturnFormat
 import domain.enums.Rank
 import util.convertWithDigitComma
 
@@ -20,32 +23,31 @@ class OutputView {
         println(Output.THREE_HYPHEN)
     }
 
-    fun printRankResult(result: Map<Rank, Int>){
+    fun printRankResult(result: Map<Rank, Int>) {
         result.map { (key, value) ->
-            if (key.getReword() == Rank.SECOND.getReword()) printSecondRankResult(key, value)
-            else printOtherRankResult(key, value)
+            val reword = key.getReword()
+            when (reword) {
+                Rank.SECOND.getReword() -> printSecondRankResult(key, value)
+                else -> printOtherRankResult(key, value)
+            }
         }
     }
 
     private fun printSecondRankResult(key: Rank, value: Int) {
-        val matchCountFormat = Output.matchCountFormat(key.getMatchingCount())
+        val matchCountFormat = matchCountFormat(key.getMatchingCount())
         val bonusMatchCount = Output.BONUS_MATCH_COUNT.toString()
-        val matchNumberFormat =
-            Output.matchingNumberFormat(key.getReword().convertWithDigitComma(), value)
-        println(
-            "$matchCountFormat$bonusMatchCount $matchNumberFormat"
-        )
+        val matchNumberFormat = matchingNumberFormat(key.getReword().convertWithDigitComma(), value)
+        println("$matchCountFormat$bonusMatchCount $matchNumberFormat")
     }
 
     private fun printOtherRankResult(key: Rank, value: Int) {
-        val matchCountFormat = Output.matchCountFormat(key.getMatchingCount())
-        val matchNumberFormat =
-            Output.matchingNumberFormat(key.getReword().convertWithDigitComma(), value)
+        val matchCountFormat = matchCountFormat(key.getMatchingCount())
+        val matchNumberFormat = matchingNumberFormat(key.getReword().convertWithDigitComma(), value)
         println("$matchCountFormat $matchNumberFormat")
     }
 
     fun printRateOfReturn(rateOfReturn: String) {
-        println(Output.totalRateOfReturnFormat(rateOfReturn))
+        println(totalRateOfReturnFormat(rateOfReturn))
     }
 
     fun lineBreak() = println()

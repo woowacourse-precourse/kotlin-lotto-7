@@ -26,6 +26,5 @@ class Lotto(
         return rank
     }
 
-    private fun getRank(matches: Int, bonusMatched: Boolean): Rank =
-        Rank.getRank(matches, bonusMatched)
+    private fun getRank(matches: Int, bonusMatched: Boolean): Rank = getRank(matches, bonusMatched)
 }
