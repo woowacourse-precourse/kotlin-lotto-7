@@ -16,7 +16,7 @@ class LottoController(private val inputView: InputView, private val outputView: 
         val lottos = service.purchaseLottos(price)
         outputView.showRandomLottos(lottos)
 
-        winLotto = getValidWinningNumbers(inputView.getWinningNumbers())
+        winLotto = getValidWinningLotto(inputView.getWinningNumbers())
         bonusNumber = getValidBonusNumber(inputView.getBonusNumber())
 
 
@@ -35,7 +35,7 @@ class LottoController(private val inputView: InputView, private val outputView: 
         }
     }
 
-    private fun getValidWinningNumbers(input: String): Lotto {
+    private fun getValidWinningLotto(input: String): Lotto {
         while (true) {
             try {
                 require(input.isValidNumbers()) { INVALID_NUMBERS_EXCEPTION_MSG }
