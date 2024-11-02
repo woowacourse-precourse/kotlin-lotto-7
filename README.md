@@ -122,6 +122,9 @@
 
 - 사용자로부터 보너스 번호를 입력받는다.
 - 유효한 입력인 경우, 보너스 번호를 저장한다.
+- 보너스 번호가 정수가 아닌 경우: IllegalArgumentException 발생
+- 보너스 번호의 범위가 1 ~ 45가 아닌 경우: IllegalArgumentException 발생
+- 보너스 번호가 당첨 번호에 포함되는 경우: IllegalArgumentException 발생
 
 ### 6. 당첨 내역 확인 기능
 
