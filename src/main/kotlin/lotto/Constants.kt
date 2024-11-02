@@ -2,13 +2,12 @@ package lotto
 
 object Constants {
     const val INPUT_BUY_AMOUNT_MESSAGE = "구입금액을 입력해주세요."
-    const val INPUT_WINNING_NUMBERS_MESSAGE = "당첨 번호를 입력해주세요."
-    const val INPUT_BONUS_NUMBER_MESSAGE = "보너스 번호를 입력해주세요."
+    const val INPUT_WINNING_NUMBERS_MESSAGE = "\n당첨 번호를 입력해주세요."
+    const val INPUT_BONUS_NUMBER_MESSAGE = "\n보너스 번호를 입력해주세요."
 
-    const val OUTPUT_RESULT_MESSAGE = "당첨 통계"
+    const val OUTPUT_RESULT_MESSAGE = "\n당첨 통계"
     const val LINE_SEPARATOR = "---"
 
-    const val NUMBER_DELIMITER = ", "
     const val LOTTO_PRICE = 1000
     const val LOTTO_NUMBERS_SIZE = 6
     const val LOTTO_NUMBER_MIN = 1
