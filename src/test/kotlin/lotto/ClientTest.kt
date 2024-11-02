@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.assertThrows
 import org.junit.jupiter.params.ParameterizedTest
+import org.junit.jupiter.params.provider.CsvSource
 import org.junit.jupiter.params.provider.EmptySource
 import org.junit.jupiter.params.provider.ValueSource
 
@@ -48,5 +49,17 @@ class ClientTest {
     fun amountRange(input: String) {
         val result = assertThrows<IllegalArgumentException> { Client(input) }
         assertEquals(result.message, "[ERROR] 1,000원 ~ 100,000원 이내로만 구매 가능합니다.")
+    }
+
+    @DisplayName("구매 금액에 따른 로또 생성 갯수 확인")
+    @ParameterizedTest
+    @CsvSource(
+        "1000, 1",
+        "3000, 3",
+        "100000, 100",
+        "85000, 85"
+    )
+    fun createLottoOnPurchaseAmount(amount: String, quantity: Int) {
+        assertEquals(Client(amount).lotto.size, quantity)
     }
 }
