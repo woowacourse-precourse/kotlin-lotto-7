@@ -1,7 +1,7 @@
 package lotto
 
 enum class PurchaseAmountErrorType(
-    private var _errorMessage: String
+    private val _errorMessage: String
 ) {
     EMPTY_INPUT("로또 구매 금액은 빈 문자를 입력하면 안됩니다."),
     NOT_DECIMAL("로또 구매 금액은 소수를 입력하면 안됩니다."),
