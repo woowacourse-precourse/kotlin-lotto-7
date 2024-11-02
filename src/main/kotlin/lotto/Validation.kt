@@ -11,6 +11,18 @@ class Validation {
         return convertedPayment
     }
 
+    fun checkNumbering(lottoNumbers: List<Int>) {
+        isAmountOfNumberSix(lottoNumbers)
+        isNumbersRange1To45(lottoNumbers)
+        isNumbersNotDuplicate(lottoNumbers)
+    }
+
+    fun checkWinningNumbers(winningNumbers: List<Int>) {
+        isAmountOfNumberSix(winningNumbers)
+        isNumbersRange1To45(winningNumbers)
+        isNumbersNotDuplicate(winningNumbers)
+    }
+
     fun isDigit(input: String): Boolean {
         input.forEach {
             if (!it.isDigit()) {
