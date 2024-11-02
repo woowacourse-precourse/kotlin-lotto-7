@@ -1,8 +1,9 @@
 package lotto.unitTest
 
 import camp.nextstep.edu.missionutils.test.Assertions.assertSimpleTest
-import lotto.domain.InputValidator
+import lotto.domain.InputService
 import lotto.model.Lotto
+import lotto.view.GameView
 import org.junit.jupiter.api.BeforeEach
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.DisplayName
@@ -11,12 +12,12 @@ import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.CsvSource
 import org.junit.jupiter.params.provider.ValueSource
 
-class InputValidatorTest {
-    private lateinit var inputValidator: InputValidator
+class InputServiceTest {
+    private lateinit var inputService: InputService
 
     @BeforeEach
     fun setUp() {
-        inputValidator = InputValidator()
+        inputService = InputService(GameView())
     }
 
     @ParameterizedTest
@@ -25,7 +26,7 @@ class InputValidatorTest {
     fun validateMoneyExceptTest(input: String) {
         assertSimpleTest {
             assertThrows<IllegalArgumentException> {
-                inputValidator.validateMoney(input)
+                inputService.validateMoney(input)
             }
         }
     }
@@ -35,7 +36,7 @@ class InputValidatorTest {
     @ValueSource(strings = ["1000", "2000", "10000"])
     fun validateMoneyTest(input: String) {
         assertSimpleTest {
-            val result = inputValidator.validateMoney(input)
+            val result = inputService.validateMoney(input)
             assertThat(result).isEqualTo(input.toLong())
         }
     }
@@ -58,7 +59,7 @@ class InputValidatorTest {
     fun validateWinNumbersExceptTest(input: String) {
         assertSimpleTest {
             assertThrows<IllegalArgumentException> {
-                inputValidator.validateWinNumbers(input)
+                inputService.validateWinNumbers(input)
             }
         }
     }
@@ -71,7 +72,7 @@ class InputValidatorTest {
         "45,44,22,33,15,1|160", delimiter = '|'
     )
     fun validateWinNumbersTest(input: String, inputSum: String) {
-        val result = inputValidator.validateWinNumbers(input)
+        val result = inputService.validateWinNumbers(input)
         assertThat(result.numbers()).hasSize(6)
         assertThat(result.numbers()).allMatch { it in 1..45 }
         assertThat(result.numbers()).doesNotHaveDuplicates()
@@ -87,7 +88,7 @@ class InputValidatorTest {
         val winLotto = Lotto(listOf(2, 3, 4, 5, 6, 7))
 
         // when
-        val result = inputValidator.validateBonusNumber(input, winLotto)
+        val result = inputService.validateBonusNumber(input, winLotto)
 
         // then
         assertThat(result).isEqualTo(input.toInt())
@@ -103,7 +104,7 @@ class InputValidatorTest {
         // then
         assertSimpleTest {
             assertThrows<IllegalArgumentException> {
-                inputValidator.validateBonusNumber(input, winLotto)
+                inputService.validateBonusNumber(input, winLotto)
             }
         }
     }

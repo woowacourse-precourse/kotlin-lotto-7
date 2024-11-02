@@ -2,14 +2,14 @@ package lotto.controller
 
 import lotto.model.Lotto
 import lotto.view.GameView
-import lotto.domain.InputValidator
+import lotto.domain.InputService
 import lotto.domain.GameService
 import lotto.model.WinningCounter
 import lotto.resources.Messages.*
 
 class GameController(
     private val gameView: GameView,
-    private val validator: InputValidator,
+    private val inputService: InputService,
     private val gameService: GameService
 ) {
     fun gameStart() {
@@ -21,22 +21,9 @@ class GameController(
         showLottoResult(winningCounts, money)
     }
 
-    private fun checkWinningStatus(boughtLottos: List<Lotto>): WinningCounter {
-        val winNumbers = readWinNumbers()
-        val bonusNumber = readBonusNumber(winNumbers)
-        return gameService.countWinnings(boughtLottos, winNumbers, bonusNumber)
-    }
-
     private fun readMoney(): Long {
-        gameView.showMessage(INFO_INPUT_MONEY.message())
-        while (true) {
-            try {
-                val money = validator.validateMoney(gameView.readLine())
-                gameView.showBlankLine()
-                return money
-            } catch (e: IllegalArgumentException) {
-                gameView.showMessage(e.message ?: INVALID_ERROR.errorMessage())
-            }
+        return inputService.readValidInput(INFO_INPUT_MONEY.message()) { input ->
+            inputService.validateMoney(input)
         }
     }
 
@@ -46,29 +33,21 @@ class GameController(
         gameView.showBlankLine()
     }
 
+    private fun checkWinningStatus(boughtLottos: List<Lotto>): WinningCounter {
+        val winNumbers = readWinNumbers()
+        val bonusNumber = readBonusNumber(winNumbers)
+        return gameService.countWinnings(boughtLottos, winNumbers, bonusNumber)
+    }
+
     private fun readWinNumbers(): Lotto {
-        gameView.showMessage(INFO_INPUT_WINNING_NUMBER.message())
-        while (true) {
-            try {
-                val winNumbers = validator.validateWinNumbers(gameView.readLine())
-                gameView.showBlankLine()
-                return winNumbers
-            } catch (e: IllegalArgumentException) {
-                gameView.showMessage(e.message ?: INVALID_ERROR.errorMessage())
-            }
+        return inputService.readValidInput(INFO_INPUT_WINNING_NUMBER.message()) { input ->
+            inputService.validateWinNumbers(input)
         }
     }
 
     private fun readBonusNumber(winNumbers: Lotto): Int {
-        gameView.showMessage(INFO_INPUT_BONUS_NUMBER.message())
-        while (true) {
-            try {
-                val bonusNumber = validator.validateBonusNumber(gameView.readLine(), winNumbers)
-                gameView.showBlankLine()
-                return bonusNumber
-            } catch (e: IllegalArgumentException) {
-                gameView.showMessage(e.message ?: INVALID_ERROR.errorMessage())
-            }
+        return inputService.readValidInput(INFO_INPUT_BONUS_NUMBER.message()){ input ->
+            inputService.validateBonusNumber(input, winNumbers)
         }
     }
 
@@ -87,9 +66,9 @@ class GameController(
     companion object {
         fun create(): GameController {
             val gameView = GameView()
-            val inputValidator = InputValidator()
+            val inputService = InputService(gameView)
             val gameService = GameService()
-            return GameController(gameView, inputValidator, gameService)
+            return GameController(gameView, inputService, gameService)
         }
     }
 }

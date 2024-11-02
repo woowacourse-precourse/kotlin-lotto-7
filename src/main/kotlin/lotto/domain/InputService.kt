@@ -2,8 +2,22 @@ package lotto.domain
 
 import lotto.model.Lotto
 import lotto.resources.Messages.*
+import lotto.view.GameView
 
-class InputValidator {
+class InputService(private val gameView: GameView) {
+    fun <T> readValidInput(infoMessage: String, validator: (String) -> T): T {
+        gameView.showMessage(infoMessage)
+        while (true) {
+            try {
+                val input = validator(gameView.readLine())
+                gameView.showBlankLine()
+                return input
+            } catch (e: IllegalArgumentException) {
+                gameView.showMessage(e.message ?: INVALID_ERROR.errorMessage())
+            }
+        }
+    }
+
     fun validateMoney(input: String): Long {
         validateEmptyInput(input)
         val money = input.toLongOrNull()
