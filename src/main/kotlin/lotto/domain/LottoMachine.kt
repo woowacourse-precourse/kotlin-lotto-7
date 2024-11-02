@@ -1,38 +1,33 @@
 package lotto.domain
 
-import lotto.data.LottoAmount
-import lotto.data.LottoAmount.Companion.convertAmountToQuantity
+import lotto.data.Client
+import lotto.data.Lotto
 import lotto.ui.InputView
 import lotto.ui.OutputView
-import lotto.utils.Random
 
 class LottoMachine(
     private val inputView: InputView,
     private val outputView: OutputView
 ) {
     fun start() {
-        val lottoAmount = buildLottoAmount()
-        val lottoQuality = lottoAmount.convertAmountToQuantity()
-        printLottoQuantity(lottoQuality)
-        val lottoNumbers = createLottoNumbers(lottoQuality)
-        printLottoNumbers(lottoNumbers)
+        val client = buildClient()
+        printLottoQuantity(client.lotto)
+        printLottoNumbers(client.lottoNumbers)
     }
 
-    private fun buildLottoAmount(): LottoAmount {
+    private fun buildClient(): Client {
         return try {
-            LottoAmount(inputView.readLottoAmount())
+            Client(inputView.readLottoAmount())
         } catch (e: IllegalArgumentException) {
             printErrorCauseMessage(e.message)
-            buildLottoAmount()
+            buildClient()
         }
     }
 
-    private fun printLottoQuantity(quantity: Int) {
+    private fun printLottoQuantity(lotto: List<Lotto>) {
         outputView.printNewLine()
-        outputView.printLottoQuantity(quantity)
+        outputView.printLottoQuantity(lotto.size)
     }
-
-    private fun createLottoNumbers(quantity: Int) = List(quantity) { Random.crateLottoNumbers() }
 
     private fun printLottoNumbers(lottoNumbers: List<List<Int>>) {
         for (lottoNumber in lottoNumbers) {

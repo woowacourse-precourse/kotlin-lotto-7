@@ -1,6 +1,12 @@
 package lotto.data
 
+import lotto.utils.Random
+
 class Client(private val amount: String) {
+
+    val lottoNumbers: List<List<Int>>
+    val lotto: List<Lotto>
+
     init {
         require(amount.isNotEmpty()) { AMOUNT_EMPTY_ERROR_MESSAGE }
         require(amount.all { it.isDigit() }) { AMOUNT_NOT_ALL_NUMBER_ERROR_MESSAGE }
@@ -8,6 +14,8 @@ class Client(private val amount: String) {
         require(amount.toInt() % AMOUNT_UNIT == EXPECTED_RESULT) { AMOUNT_UNIT_ERROR_MESSAGE }
         require(amount.toInt() in AMOUNT_UNIT..AMOUNT_MAX_VALUE) { AMOUNT_RANGE_ERROR_MESSAGE }
         require(amount.first() in AMOUNT_START_MIN_VALUE..AMOUNT_START_MAX_VALUE) { AMOUNT_FORMAT_ERROR_MESSAGE }
+        lottoNumbers = createLottoNumbers(amount)
+        lotto = lottoNumbers.toLotto()
     }
 
     companion object {
@@ -22,6 +30,9 @@ class Client(private val amount: String) {
         private const val EXPECTED_RESULT = 0
         private const val AMOUNT_MAX_VALUE = 100_000
 
-        fun Client.convertAmountToQuantity() = amount.toInt() / AMOUNT_UNIT
+        private fun createLottoNumbers(amount: String) =
+            List(amount.toInt() / AMOUNT_UNIT) { Random.crateLottoNumbers() }
+
+        private fun List<List<Int>>.toLotto() = this.map { Lotto(it) }
     }
 }
