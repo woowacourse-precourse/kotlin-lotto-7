@@ -13,23 +13,20 @@ class LottoDrawingController(
 ) {
 
     fun calculateMatchCount() {
-        for (index in 0 until lottoTicket.numberOfPurchase) {
-            val lotto = lottoTicket.userLottoNumbers[index]
+        lottoTicket.userLottoNumbers.forEachIndexed { _, lotto ->
             val matchCount = lotto.getNumbers().intersect(winningNumbers.toSet()).size
             val hasBonus = lotto.getNumbers().contains(bonusNumber)
 
             val rank = determineRank(matchCount, hasBonus)
-            rank?.ordinal?.let { ordinalIndex ->
-                winningStatistics.addMatchCountStatistics(ordinalIndex)
+            rank?.ordinal?.let {
+                winningStatistics.addMatchCountStatistics(it)
             }
         }
     }
 
     fun calculateTotalPrize() {
-        for (index in 0 until winningStatistics.matchCountStatistics.size) {
-            val count = winningStatistics.matchCountStatistics[index]
-            val prize = getPrizeByRankIndex(index)
-
+        winningStatistics.matchCountStatistics.forEachIndexed { index, count ->
+            val prize = LottoMatchRank.entries.getOrNull(index)?.prize ?: 0
             winningStatistics.addTotalPrize(count * prize)
         }
     }
@@ -47,17 +44,6 @@ class LottoDrawingController(
             matchCount == LottoMatchRank.SECOND.matchCount && hasBonus -> LottoMatchRank.SECOND
             matchCount == LottoMatchRank.FIRST.matchCount -> LottoMatchRank.FIRST
             else -> null
-        }
-    }
-
-    private fun getPrizeByRankIndex(index: Int): Int {
-        return when (index) {
-            0 -> LottoMatchRank.FIFTH.prize
-            1 -> LottoMatchRank.FOURTH.prize
-            2 -> LottoMatchRank.THIRD.prize
-            3 -> LottoMatchRank.SECOND.prize
-            4 -> LottoMatchRank.FIRST.prize
-            else -> 0
         }
     }
 
