@@ -23,6 +23,7 @@ object ErrorConstants {
     const val ERROR_NUMBERS_DUPLICATE = "[ERROR] 중복된 숫자가 없어야 합니다."
     const val ERROR_NUMBER_RANGE = "[ERROR] 번호는 1-45 사이여야 합니다."
     const val ERROR_LOTTOS_SIZE = "[ERROR] 구매금액만큼 로또를 생성해야합니다."
+    const val ERROR_INPUTNUMBER_BONUSNUMBER_DUPLICATE ="[ERROR] 당첨번호와 보너스번호는 중복되지 않아야합니다."
 }
 
 object LottoConstants {

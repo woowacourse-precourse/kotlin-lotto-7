@@ -43,6 +43,13 @@ class InputNumbersTest {
     }
 
     @Test
+    fun `당첨 번호와 보너스 번호가 중복되면 예외가 발생한다`() {
+        assertThrows<IllegalArgumentException> {
+            InputNumbers("1,2,3,4,5,6", "6")
+        }
+    }
+
+    @Test
     fun `당첨번호 숫자리스트 변환 테스트`() {
         val result = InputNumbers("1,2,3,4,5,6", "7").winningNumbers
         val expected = listOf(1, 2, 3, 4, 5, 6)
