@@ -2,9 +2,9 @@ package lotto
 
 import camp.nextstep.edu.missionutils.Randoms
 
-class LottoMachine(private val lottoCount: Int) {
+class LottoMachine {
 
-    fun createLotto(): List<Lotto> {
+    fun createLottos(lottoCount: Int): List<Lotto> {
         val lottos = mutableListOf<Lotto>()
 
         repeat(lottoCount) {
