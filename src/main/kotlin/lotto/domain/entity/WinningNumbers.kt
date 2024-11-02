@@ -4,7 +4,6 @@ import lotto.domain.validator.LottoNumberValidator
 
 class WinningNumbers(
     private val numbers: List<Int>,
-    val bonusNumber: Int,
     validator: LottoNumberValidator = lottoNumberValidator
 ) {
 
