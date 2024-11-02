@@ -20,6 +20,7 @@ class WinningResult(private val lottos: List<Lotto>, private val inputNumbers: I
 
     private fun getBonusCount(i: Int): Int {
         if (lottos[i].isBonus(inputNumbers)) return countByMatchCount[3]++
+
         return countByMatchCount[2]++
     }
 
@@ -29,6 +30,7 @@ class WinningResult(private val lottos: List<Lotto>, private val inputNumbers: I
             .sum()
         val rate = totalPrize / purchasedPrice.toFloat() * 100
         val formatedRate = String.format(TWO_DECIMAL_FORMAT, rate).toFloat()
+
         return formatedRate
     }
 

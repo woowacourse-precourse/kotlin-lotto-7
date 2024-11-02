@@ -31,6 +31,7 @@ class LottoController {
                 input.purchasePriceMsg()
                 val purchasePrice = Console.readLine()
                 Error.priceError(purchasePrice)
+
                 return LottoAmount(purchasePrice)
             } catch (e: IllegalArgumentException) {
                 println(e)
@@ -44,6 +45,7 @@ class LottoController {
                 input.winningNumbersMsg()
                 val winningNumbers = Console.readLine()
                 Error.winningNumberError(winningNumbers)
+
                 return winningNumbers
             } catch (e: IllegalArgumentException) {
                 println(e)

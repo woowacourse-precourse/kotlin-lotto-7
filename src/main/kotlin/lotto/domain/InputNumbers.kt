@@ -15,6 +15,7 @@ class InputNumbers(rawWinningNumbers: String, rawBonusNumber: String) {
         val numbers = rawWinningNumbers
             .split(COMMA)
             .map { it.toIntOrNull() ?: throw IllegalArgumentException(ERROR_NUMBER_ONLY_NUMERIC) }
+
         winningNumbers = numbers
         bonusNumber = rawBonusNumber.toIntOrNull()
             ?: throw IllegalArgumentException(ERROR_NUMBER_ONLY_NUMERIC)
