@@ -1,5 +1,6 @@
 package lotto.domain.entity
 
+import lotto.common.LOTTO_PRICE
 import lotto.domain.validator.PurchasePriceValidator
 
 class User(
@@ -13,7 +14,7 @@ class User(
     }
 
     fun buyLottoTickets(lottoTickets: (Int) -> List<Lotto>) {
-        val lottoCount = money.div(1000)
+        val lottoCount = money.div(LOTTO_PRICE)
         this.lottoTickets = lottoTickets(lottoCount)
     }
 

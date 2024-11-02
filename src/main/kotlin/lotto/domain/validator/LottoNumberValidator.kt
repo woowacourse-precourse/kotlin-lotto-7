@@ -1,5 +1,7 @@
 package lotto.domain.validator
 
+import lotto.common.LOTTO_NUMBERS_SIZE
+
 class LottoNumberValidator : NumberValidator() {
 
     fun validateLottoNumbers(numbers: List<Int>) {
@@ -9,7 +11,7 @@ class LottoNumberValidator : NumberValidator() {
     }
 
     private fun validateNumbersSize(numbers: List<Int>) {
-        require(numbers.size == 6) { "[ERROR] 로또 번호는 6개여야 합니다." }
+        require(numbers.size == LOTTO_NUMBERS_SIZE) { "[ERROR] 로또 번호는 6개여야 합니다." }
     }
 
     private fun validateNumbersDuplicate(numbers: List<Int>) {

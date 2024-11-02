@@ -16,8 +16,12 @@ class CreateWinningNumbersUseCase {
     }
 
     private fun parseNumbersInput(input: String): List<Int> {
-        return input.split(",").map { numberInput ->
+        return input.split(DELIMITER).map { numberInput ->
             numberInput.parseToIntOrThrow()
         }
+    }
+
+    companion object {
+        private const val DELIMITER = ","
     }
 }

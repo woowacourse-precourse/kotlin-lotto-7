@@ -1,5 +1,6 @@
 package lotto.ui.controller
 
+import lotto.common.LOTTO_PRICE
 import lotto.domain.entity.BonusNumber
 import lotto.domain.entity.User
 import lotto.domain.entity.Lotto
@@ -67,7 +68,8 @@ class LottoController(
         }
         lottoResultView.outputWinningStatistics(lottoTicketsRank)
         val winningPrizes = lottoTicketsRank.map { it.price }
-        val lottoTotalProfitRate = calculateLottoReturnUseCase.execute(winningPrizes, lottoTickets.size.times(1000))
+        val lottoTotalProfitRate =
+            calculateLottoReturnUseCase.execute(winningPrizes, lottoTickets.size.times(LOTTO_PRICE))
         lottoResultView.outputTotalProfitRate(lottoTotalProfitRate)
     }
 }
