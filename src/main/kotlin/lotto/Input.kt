@@ -11,7 +11,7 @@ class Input {
         val input = Console.readLine()
         val money = confirmInteger(input)
         confirmNegativeOrZero(money)
-
+        ticket = confirmDivider(money)
     }
 
     //숫자가 아닌 경우
@@ -31,6 +31,12 @@ class Input {
             throw IllegalArgumentException("[ERROR] 티켓은 양의 정수만 입력할 수 있습니다.")
     }
 
-
+    //티켓이 1000원 단위로 나누어 떨어 지지 않는 경우
+    private fun confirmDivider(ticket : Int) : Int{
+        if(ticket % 1000 != 0){
+            throw IllegalArgumentException("[ERROR] 티켓은 1000원 단위로만 입력할 수 있습니다.")
+        }
+        return ticket / 1000
+    }
 
 }
