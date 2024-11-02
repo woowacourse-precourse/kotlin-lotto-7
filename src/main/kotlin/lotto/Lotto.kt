@@ -13,4 +13,8 @@ class Lotto(private val numbers: List<Int>) {
     fun countMatching(target: Lotto): Int {
         return numbers.count { target.contain(it) }
     }
+
+    fun getNumbers(): String {
+        return numbers.joinToString(",")
+    }
 }
