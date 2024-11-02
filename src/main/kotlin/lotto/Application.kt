@@ -17,7 +17,7 @@ fun main() {
     val winningNumber = WinningNumber()
     val winningNumbers = winningNumber.getWinningNumber()
 
-    val bonusNumber = BonusNumber().getBonusNumber()
+    val bonusNumber = BonusNumber().getBonusNumber(winningNumbers)
 
     println("당첨 번호: $winningNumbers")
     println("보너스 번호: $bonusNumber")
@@ -112,14 +112,14 @@ class WinningNumber {
 }
 
 class BonusNumber {
-    fun getBonusNumber(): Int {
+    fun getBonusNumber(winningNumbers: List<Int>): Int {
         while (true) {
             val bonusNumber = readBonusNumber()
             if (bonusNumber == -1) {
                 // 입력이 유효하지 않은 경우 다시 요청
                 continue
             }
-            if (isValidateBonusNumber(bonusNumber)) {
+            if (isValidateBonusNumber(bonusNumber, winningNumbers)) {
                 return bonusNumber
             }
         }
@@ -142,11 +142,15 @@ class BonusNumber {
         }
     }
 
-    private fun isValidateBonusNumber(bonusNumber: Int): Boolean {
-        // 보너스 번호가 1~45 사이인지 확인
+    private fun isValidateBonusNumber(bonusNumber: Int, winningNumbers: List<Int>): Boolean {
+        // 보너스 번호가 1~45 사이인지 확인 및 당첨 번호와 중복되지 않는지 확인
         return when {
             bonusNumber < 1 || bonusNumber > 45 -> {
                 println("[ERROR] 보너스 번호는 1부터 45 사이의 숫자여야 합니다.")
+                false
+            }
+            bonusNumber in winningNumbers -> {
+                println("[ERROR] 보너스 번호는 당첨 번호와 중복될 수 없습니다.")
                 false
             }
             else -> true
