@@ -21,7 +21,7 @@ class Repository {
     }
 
     fun setBonusNumber(number: Int) {
-        bonusNumber = BonusNumber(number)
+        bonusNumber = BonusNumber(number, winningNumber)
     }
 
     fun createLottos() {
