@@ -1,17 +1,17 @@
 package vm
 
+import datasource.LottoDataSource
+import domain.calculator.Calculate
 import domain.enums.Rank
 import domain.lotto.Lotto
 import domain.model.PurchaseState
 import domain.validator.InputValidate
-import sam.LottoFactory
-import util.convertRoundAtTwoDecimal
 import java.util.TreeSet
 
 class LottoViewModel(
     private val validator: InputValidate,
-    private val lottoFactory: LottoFactory
     private val calculator: Calculate,
+    private val lottoDataSource: LottoDataSource
 ) {
 
     var state = PurchaseState()
@@ -46,7 +46,7 @@ class LottoViewModel(
         val purchaseLottoAmount = state.purchaseLottoCount
         val pickedLotto = mutableListOf<TreeSet<Int>>()
         repeat(purchaseLottoAmount) {
-            pickedLotto.add(lottoFactory())
+            pickedLotto.add(lottoDataSource())
         }
         state = state.copy(pickedLotto = pickedLotto)
     }
@@ -65,16 +65,9 @@ class LottoViewModel(
         }
 
         state = state.copy(reward = updatedReward)
-        calculateRateOfReturn()
+        getRateOfReturn()
     }
 
-    private fun calculateRateOfReturn() {
-        // 당첨 금액
-        var winningMoney = 0L
-        val totalPurchaseAmount = state.purchaseLottoCount * 1000
-        state.reward.winning.mapKeys {
-            winningMoney += it.key.getReword() * it.value
-        }
     private fun getRateOfReturn() {
         val winningMoney = calculator.calculateWinningMoney(state.reward.winning)
 

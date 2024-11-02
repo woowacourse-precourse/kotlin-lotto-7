@@ -5,10 +5,12 @@ import delegate.common.CommonErrorDelegator
 import delegate.input.InputErrorDelegate
 import delegate.input.InputErrorDelegator
 import domain.validator.InputValidator
-import sam.LottoFactory
 import view.MainView
 import vm.LottoViewModel
 import camp.nextstep.edu.missionutils.Randoms.pickUniqueNumbersInRange
+import datasource.LottoDataSource
+import domain.calculator.Calculate
+import domain.calculator.Calculator
 import domain.enums.LottoSetting.LOTTO_SIZE
 import domain.enums.LottoSetting.LOTTO_MAX
 import domain.enums.LottoSetting.LOTTO_MIN
@@ -32,7 +34,7 @@ class DependencyInjector {
         return InputValidator(commonErrorDelegator, inputErrorDelegate)
     }
 
-    fun injectLottoFactory(): LottoFactory = LottoFactory {
+    fun injectLottoDataSource(): LottoDataSource = LottoDataSource {
         TreeSet(
             pickUniqueNumbersInRange(
                 LOTTO_MIN.value(),
@@ -43,8 +45,12 @@ class DependencyInjector {
     }
 
     private fun injectLottoViewModel(): LottoViewModel {
-        return LottoViewModel(injectInputValidator(), injectLottoFactory())
+        val inputValidator = injectInputValidator()
+        val lottoFactory = injectLottoDataSource()
+        val calculator = injectCalculator()
+        return LottoViewModel(inputValidator, calculator, lottoFactory)
     }
+    private fun injectCalculator(): Calculate = Calculator()
     private fun injectInputView(): InputView = InputView()
     private fun injectOutPutView(): OutputView = OutputView()
     private fun injectCommonErrorDelegate(): CommonErrorDelegate = CommonErrorDelegator()

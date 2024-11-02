@@ -42,7 +42,7 @@ class LottoTest {
 
     @Test
     fun `로또 번호 반환 테스트`() {
-        val lottoFactory = dependencyInjector.injectLottoFactory()
+        val lottoFactory = dependencyInjector.injectLottoDataSource()
         val lotto = lottoFactory()
         repeat(100000) {
             assertEquals(lotto.size, 6)
