@@ -14,10 +14,8 @@ class LottoController {
         val lottoCount = getLottoCount(purchaseMoney.money, purchaseMoney.getUnitPrice())
         printLottoCount(lottoCount)
 
-        val lottos: MutableList<Lotto> = MutableList(lottoCount) { Lotto() }
-        lottos.forEach { lotto ->
-            printLottoNumber(lotto.numbers)
-        }
+        val lottos = getLottos(lottoCount)
+        printLottoNubmers(lottos)
     }
 
     private fun getPurchaseMoney(): PurchaseMoney {
@@ -27,6 +25,16 @@ class LottoController {
 
     private fun getLottoCount(purchaseMoney: Int, unitPrice: Int): Int {
         return purchaseMoney / unitPrice
+    }
+
+    private fun getLottos(lottoCount: Int): MutableList<Lotto> {
+        return MutableList(lottoCount) { Lotto() }
+    }
+
+    private fun printLottoNubmers(lottos : MutableList<Lotto>) {
+        lottos.forEach { lotto ->
+            printLottoNumber(lotto.numbers)
+        }
     }
 
 
