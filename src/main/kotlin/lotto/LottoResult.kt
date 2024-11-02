@@ -53,12 +53,14 @@ class LottoResult(
     private fun getRateOfReturn(lottoRankList: List<LottoRank>): Double {
         val purchasePrice = lottoList.size * LottoConstants.PRICE
         val finalProfit = lottoRankList.sumOf { it.price }
-        val rateOfReturn = (finalProfit / purchasePrice).toDouble() * PERCENTAGE_MULTIPLIER
+        val rateOfReturn =
+            ((finalProfit.toDouble() / purchasePrice) * PERCENTAGE_MULTIPLIER).round(2)
         return rateOfReturn
     }
 
     companion object {
         private const val FIVE_MATCHES = 5
         private const val PERCENTAGE_MULTIPLIER = 100
+        private fun Double.round(decimals: Int): Double = "%.${decimals}f".format(this).toDouble()
     }
 }
