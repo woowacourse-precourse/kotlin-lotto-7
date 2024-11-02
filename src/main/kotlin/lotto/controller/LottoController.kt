@@ -1,23 +1,20 @@
 package lotto.controller
 
-import camp.nextstep.edu.missionutils.Randoms
 import lotto.Constants
-import lotto.model.Lotto
+import lotto.model.LottoService
 import lotto.view.InputView
 import lotto.view.OutputView
 
-class LottoController {
+class LottoController(private val lottoService: LottoService) {
     private val inputView = InputView()
     private val outputView = OutputView()
-    private var lottoTickets = mutableListOf<Lotto>()
 
     fun start() {
         val lottoAmount = inputView.getLottoAmount()
-
         val lottoCount = lottoAmount / Constants.LOTTO_PRICE
         outputView.printLottoAmountMessage(lottoCount)
 
-        generateLotto(lottoCount)
+        val lottoTickets = lottoService.generateLottoTickets(lottoCount)
         outputView.printLottoNumber(lottoTickets)
 
         val winningNumbers = inputView.getWinningNumbers()
@@ -25,17 +22,6 @@ class LottoController {
         val bonusNumber = inputView.getBonusNumber(winningNumbers)
 
         outputView.printResult()
-    }
-
-    private fun generateLotto(lottoCount: Int) {
-        repeat(lottoCount) {
-            val lottoNumbers = Randoms.pickUniqueNumbersInRange(
-                Constants.LOTTO_NUMBER_MIN,
-                Constants.LOTTO_NUMBER_MAX,
-                Constants.LOTTO_NUMBERS_SIZE
-            )
-            lottoTickets.add(Lotto(lottoNumbers))
-        }
     }
 
 }
