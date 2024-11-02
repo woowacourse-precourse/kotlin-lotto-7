@@ -1,4 +1,4 @@
-package lotto
+package lotto.utils
 
 object Constants {
     const val INPUT_BUY_AMOUNT_MESSAGE = "구입금액을 입력해주세요."
