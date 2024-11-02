@@ -1,6 +1,6 @@
 package lotto.controller
 
-import lotto.utils.Validator
+import lotto.model.PurchaseMoney
 import lotto.view.InputView
 
 
@@ -10,9 +10,8 @@ class LottoController{
         val purchaseMoney = getPurchaseMoney()
     }
 
-    private fun getPurchaseMoney() : Int  {
-        val input = InputView.getPurchaseMoney()
-        Validator.isValidPurchaseMoney(input)
-        return input.toInt()
+    private fun getPurchaseMoney() : PurchaseMoney  {
+        val moneyinput = InputView.getPurchaseMoney()
+        return PurchaseMoney(moneyinput)
     }
 }
