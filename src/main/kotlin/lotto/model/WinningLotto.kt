@@ -1,6 +1,9 @@
 package lotto.model
 
 import lotto.utils.ErrorFormatter.getErrorMessage
+import constant.LOTTO_SIZE
+import constant.MAX_LOTTO_NUMBER
+import constant.MIN_LOTTO_NUMBER
 
 class WinningLotto(winningLottoInput: String) {
     val winningNumbers: Set<Int>
@@ -63,9 +66,6 @@ class WinningLotto(winningLottoInput: String) {
     }
 
     companion object {
-        private const val LOTTO_SIZE = 6
-        private const val MIN_LOTTO_NUMBER = 1
-        private const val MAX_LOTTO_NUMBER = 45
         private const val INVALID_WINNING_NUMBERS_SIZE = "당첨 번호는 ${LOTTO_SIZE}개여야 합니다."
         private const val INVALID_WINNING_LOTTO_NUMBER =
             "당첨 번호는 ${MIN_LOTTO_NUMBER}과 ${MAX_LOTTO_NUMBER}사이 숫자만 가능합니다."
