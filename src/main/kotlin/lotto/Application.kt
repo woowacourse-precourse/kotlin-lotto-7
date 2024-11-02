@@ -22,9 +22,9 @@ fun startLotto() {
 
     val winningNumbers = inputWinningNumbers()
     val bonusNumber = inputBonusNumber()
-
     val lottoResults = checkResult(lottos, winningNumbers, bonusNumber) //로또 당첨 결과
-    val profitRate = calculateProfit(lottoCnt, lottoResults)
+
+    calculateProfit(lottoCnt, lottoResults)
 }
 
 /* 로또 구입 금액 입력 함수 */
@@ -123,8 +123,9 @@ fun checkResult(lottos: MutableList<Lotto>, winningNumbers: List<Int>, bonusNumb
 }
 
 /* 수익률 계산 함수 */
-fun calculateProfit(lottoCnt: Int, lottoResults: LottoResult): Double {
+fun calculateProfit(lottoCnt: Int, lottoResults: LottoResult) {
     val totalPrize = lottoResults.getTotalPrize()
     val profitRate = totalPrize / lottoCnt * 1000 * 100 //수익률 = 당첨 금액 / 구입 금액 * 100
-    return BigDecimal(profitRate).setScale(2, RoundingMode.HALF_UP).toDouble()
+    val roundingProfitRate = BigDecimal(profitRate).setScale(2, RoundingMode.HALF_UP).toDouble()
+    println("총 수익률은 ${roundingProfitRate}%입니다.")
 }
