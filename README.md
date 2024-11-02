@@ -81,7 +81,7 @@
    </tr>
     <tr>
       <td rowspan="8">당첨 번호</td>
-      <td><input type="checkbox"></td>
+      <td><input type="checkbox" checked></td>
       <td>빈 경우</td>
     </tr>
 <tr>
