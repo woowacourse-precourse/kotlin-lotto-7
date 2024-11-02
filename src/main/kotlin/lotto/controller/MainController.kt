@@ -20,63 +20,79 @@ class MainController {
     private val winningStatistics = WinningStatistics()
 
     fun run() {
-        // 로또 구매
-        while (true) {
+        processPurchaseAmount()
+        purchaseLottoTickets()
+        processWinningNumbers()
+        processBonusNumber()
+        calculateStatistics()
+    }
+
+    // 구입 금액 입력 처리
+    private fun processPurchaseAmount() {
+        var isValid = false
+        while (!isValid) {
             try {
                 outputView.printPurchaseAmountPrompt()
                 val purchaseAmountInput = inputView.inputPurchaseAmount()
                 inputValidator.validatePurchaseAmount(purchaseAmountInput)
                 purchaseAmount = purchaseAmountInput.toInt()
-                break
+                isValid = true
             } catch (e: IllegalArgumentException) {
                 println(e.message)
             }
         }
+    }
+
+    // 구매한 로또 개수 계산 및 로또 저장
+    private fun purchaseLottoTickets() {
         lottoPurchaseController.calculateNumberOfPurchase(purchaseAmount)
         outputView.printNumberOfPurchase(lottoTicket.numberOfPurchase)
 
-        // 구매한 로또 저장 및 출력
         lottoPurchaseController.saveUserLottoNumbers()
         outputView.printUserLottoNumbers(lottoTicket.userLottoNumbers)
+    }
 
-        // 당첨 번호 입력
-        while (true) {
+    // 당첨 번호 입력 처리
+    private fun processWinningNumbers() {
+        var isValid = false
+        while (!isValid) {
             try {
                 outputView.printWinningNumbersPrompt()
                 val winningNumbersInput = inputView.inputWinningNumbers()
                 val parsedWinningNumbers = winningNumbersInput.split(",").map { it.trim().toIntOrNull() }
                 inputValidator.validateWinningNumbers(parsedWinningNumbers)
                 winningNumbers = parsedWinningNumbers
-                break
+                isValid = true
             } catch (e: IllegalArgumentException) {
                 println(e.message)
             }
         }
+    }
 
-        // 보너스 번호 입력
-        while (true) {
+    // 보너스 번호 입력 처리
+    private fun processBonusNumber() {
+        var isValid = false
+        while (!isValid) {
             try {
                 outputView.printBonusNumberPrompt()
                 val bonusNumberInput = inputView.inputBonusNumber()
                 inputValidator.validateBonusNumber(bonusNumberInput, winningNumbers)
                 bonusNumber = bonusNumberInput.toInt()
-                break
+                isValid = true
             } catch (e: IllegalArgumentException) {
                 println(e.message)
             }
         }
+    }
 
-        // 당첨 통계 출력
+    // 당첨 통계 및 수익률 계산
+    private fun calculateStatistics() {
         val lottoDrawingController = LottoDrawingController(lottoTicket, winningNumbers, bonusNumber, winningStatistics)
         lottoDrawingController.calculateMatchCount()
-        val fifthCount = winningStatistics.matchCountStatistics[0]
-        val fourthCount = winningStatistics.matchCountStatistics[1]
-        val thirdCount = winningStatistics.matchCountStatistics[2]
-        val secondCount = winningStatistics.matchCountStatistics[3]
-        val firstCount = winningStatistics.matchCountStatistics[4]
+
+        val (fifthCount, fourthCount, thirdCount, secondCount, firstCount) = winningStatistics.matchCountStatistics
         outputView.printWinningStatistics(fifthCount, fourthCount, thirdCount, secondCount, firstCount)
 
-        // 수익률 계산 및 출력
         lottoDrawingController.calculateTotalPrize()
         val returnRate = lottoDrawingController.calculateReturnRate(purchaseAmount)
         outputView.printReturnRate(returnRate)
