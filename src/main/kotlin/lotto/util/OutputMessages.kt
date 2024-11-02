@@ -11,8 +11,10 @@ enum class OutputMessages(val message: String) {
     PRINT_RESULT_FIVE("5개 일치 (1,500,000원) - "),
     PRINT_RESULT_FIVE_WITH_BONUS("5개 일치, 보너스 볼 일치 (30,000,000원) - "),
     PRINT_RESULT_ALL("6개 일치 (2,000,000,000원) - "),
-    UNIT_CORRECT("개\n"),
     RESULT("총 수익률은 "),
+    UNIT_CORRECT("개\n"),
     RESULT_SECOND("%입니다."),
-    LINE_FEED("\n")
+    RATE_FORMAT("#,###.#"),
+    NUMBER_FORMAT("#,###"),
+    NEW_LINE("\n")
 }

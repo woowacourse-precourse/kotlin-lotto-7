@@ -16,7 +16,8 @@ class VerifyPrize {
             checkPrize(ticket, prizeNumber, bonusNumber)
         }
         val rate = earn / (tickets.size * LOTTO_PRICE) * PERCENTAGE
-        return String.format("%.1f", (rate * 10).roundToInt().toDouble() / 10).toDouble()
+        val formattedRate = (rate * SHIFT_DECIMAL_POINT).roundToInt().toDouble() / RESTORE_DECIMAL_POINT
+        return String.format(DECIMAL_PLACES, formattedRate).toDouble()
     }
 
     private fun checkPrize(ticket: List<Int>, prizeNumber: List<Int>, bonusNumber: Int) {
@@ -37,6 +38,9 @@ class VerifyPrize {
     }
 
     companion object {
+        private const val DECIMAL_PLACES = "%.1f"
+        private const val SHIFT_DECIMAL_POINT = 10
+        private const val RESTORE_DECIMAL_POINT = 10
         private const val INIT_EARN = 0.0
         private const val INIT_RANK_COUNT = 0
         private const val LOTTO_PRICE = 1000

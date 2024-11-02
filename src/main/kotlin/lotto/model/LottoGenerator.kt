@@ -10,12 +10,12 @@ class LottoGenerator(private val tickets: Int) {
     }
 
     private fun generateLotto(): MutableList<Int> {
-        return Randoms.pickUniqueNumbersInRange(LOWER_RANGE_LOTTO_NUMBER, UPPER_RANGE_LOTTO_NUMBER, TICKETS)
+        return Randoms.pickUniqueNumbersInRange(LOWER_RANGE_NUMBER, UPPER_RANGE_NUMBER, TICKETS)
     }
 
     companion object {
-        private const val LOWER_RANGE_LOTTO_NUMBER = 1
-        private const val UPPER_RANGE_LOTTO_NUMBER = 45
+        private const val LOWER_RANGE_NUMBER = 1
+        private const val UPPER_RANGE_NUMBER = 45
         private const val TICKETS = 6
     }
 }

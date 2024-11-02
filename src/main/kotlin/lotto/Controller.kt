@@ -12,11 +12,7 @@ class Controller {
     fun start() {
         val tickets = payment()
         val verifyPrize = VerifyPrize()
-        val earningValue = verifyPrize.prizeResult(
-            purchaseLotto(tickets),
-            prizeNumber(),
-            bonusNumber()
-        )
+        val earningValue = verifyPrize.prizeResult(purchaseLotto(tickets), prizeNumber(), bonusNumber())
         outputView.printResult(verifyPrize.countPrize, earningValue)
     }
 

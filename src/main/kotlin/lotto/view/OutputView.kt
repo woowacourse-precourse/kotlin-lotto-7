@@ -11,11 +11,12 @@ class OutputView {
 
     fun printAmountTickets(tickets: Int) {
         println()
-        println("$tickets${OutputMessages.PRINT_AMOUNT_TICKETS.message}")
+        print(DecimalFormat(OutputMessages.NUMBER_FORMAT.message).format(tickets))
+        println(OutputMessages.PRINT_AMOUNT_TICKETS.message)
     }
 
     fun printInformationLotto(lotto: List<List<Int>>) {
-        println(lotto.joinToString(OutputMessages.LINE_FEED.message))
+        println(lotto.joinToString(OutputMessages.NEW_LINE.message))
     }
 
     fun printRequirePrizeNumber() {
@@ -31,11 +32,12 @@ class OutputView {
     fun printResult(prizeResult: MutableMap<PrizeRank, Int>, earningRate: Double) {
         val sb = StringBuilder(OutputMessages.MESSAGE_RESULT.message)
         eachRankMessages.forEach { (rank, output) ->
-            sb.append("${output.message}${prizeResult[rank]}")
+            sb.append(output.message)
+            sb.append(DecimalFormat(OutputMessages.NUMBER_FORMAT.message).format(prizeResult[rank]))
             sb.append(OutputMessages.UNIT_CORRECT.message)
         }
         sb.append(OutputMessages.RESULT.message)
-        sb.append(DecimalFormat("#,###.#").format(earningRate))
+        sb.append(DecimalFormat(OutputMessages.RATE_FORMAT.message).format(earningRate))
         sb.append(OutputMessages.RESULT_SECOND.message)
         println(sb)
     }
