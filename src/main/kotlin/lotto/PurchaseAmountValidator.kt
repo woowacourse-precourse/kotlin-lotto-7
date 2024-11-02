@@ -3,9 +3,9 @@ package lotto
 import camp.nextstep.edu.missionutils.Console
 
 class PurchaseAmount {
-    init {
-        purchaseAmountMessage()
-    }
+//    init {
+//        purchaseAmountMessage()
+//    }
 
     private var validatorTest = false
     private var amount = ""
@@ -35,27 +35,19 @@ class PurchaseAmount {
         return Console.readLine()
     }
 
-//    private fun validateAmount(amount: String): Int {
-//        checkBlank(amount)
-//        checkNumber(amount)
-//        checkDivide(amount)
-//        return amount.toInt()
-//    }
-
     private fun checkBlank(amount: String) {
-        require(amount.isNotBlank()) { ExceptionMessage.BLANK }
+        require(amount.isNotBlank()) { ErrorList.BLANK }
     }
 
     private fun checkNumber(amount: String) {
-        require(amount.contains(Regex("^[0-9]*$"))) { ExceptionMessage.NOT_NUMBERS }
+        require(amount.contains(Regex("^[0-9]*$"))) { ErrorList.NOT_NUMBERS }
     }
 
     private fun checkDivide(amount: String) {
-        require(amount.toInt() % 1000 == 0) { ExceptionMessage.NOT_DIVIDE_THOUSAND }
+        require(amount.toInt() % 1000 == 0) { ErrorList.NOT_DIVIDE_THOUSAND }
     }
 
-
-    private fun purchaseAmountMessage() {
-        return println(Message.ENTER_PURCHASE_AMOUNT)
-    }
+//    private fun purchaseAmountMessage() {
+//        return println(Message.ENTER_PURCHASE_AMOUNT)
+//    }
 }
