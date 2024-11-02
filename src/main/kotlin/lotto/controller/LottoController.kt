@@ -7,5 +7,8 @@ class LottoController {
     fun draw() {
         val money = InputView.getMoney()
         val winningNum = Processor.winningNumSplit(InputView.getWinningNumber())
+        val bonusNum = InputView.getBonusNumber()
+
+
     }
 }
