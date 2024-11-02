@@ -48,7 +48,7 @@ class LottoGame(
 
     private fun parseWinningLotto(input: String): Lotto {
         val winningLotto = input.split(',')
-            .map { it.toIntOrNull() ?: throw IllegalArgumentException("[ERROR] 당첨번호는 숫자로 입력해야 합니다.") }
+            .map { it.trim().toIntOrNull() ?: throw IllegalArgumentException("[ERROR] 당첨번호는 숫자로 입력해야 합니다.") }
         return Lotto(winningLotto)
     }
 

@@ -19,7 +19,7 @@ class LottoGameTest {
     }
 
     @Test
-    fun `금액이 1000원 미만이면 예외가 발생한다`() {
+    fun `금액이 1000원 미만이면 예외가 발생후 재입력 받아 정상 종료된다`() {
         val inputs = listOf("900", "2000")  // 첫 입력은 잘못된 값, 두 번째는 올바른 값
         val game = LottoGame(readLine = inputs.iterator()::next)
         val cost = game.inputCost()
