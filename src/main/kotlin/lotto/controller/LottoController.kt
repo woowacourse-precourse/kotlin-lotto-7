@@ -9,8 +9,8 @@ class LottoController {
         val purchaseAmount = InputView.inputPurchaseMoney()
         OutputView.printPurchaseAmount(purchaseAmount.getCount())
 
-        val lottos = LottoGenerator().generateLottos(purchaseAmount.getCount())
-        OutputView.printLottos(lottos)
+        val lottos = List(purchaseAmount.getCount()) { LottoGenerator().generate() }
+        lottos.forEach { OutputView.printLottoNumbers(it) }
 
         val winningNumbers = InputView.inputWinningNumber()
         val bonusNumber = InputView.inputBonusNumber()
