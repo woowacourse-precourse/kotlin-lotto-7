@@ -1,17 +1,13 @@
 package lotto.domain.usecase
 
 import lotto.domain.entity.User
-import lotto.domain.validator.PurchasePriceValidator
+import lotto.extention.parseToIntOrThrow
 
-class CreateUserUseCase(
-    private val purchasePriceValidator: PurchasePriceValidator = PurchasePriceValidator()
-) {
+class CreateUserUseCase {
     fun execute(priceInput: () -> String): User {
         while (true) {
             try {
-                val input = priceInput()
-                val lottoCost = purchasePriceValidator.parseNumberInput(input)
-                purchasePriceValidator.validateMoney(lottoCost)
+                val lottoCost = priceInput().parseToIntOrThrow()
                 return User(lottoCost)
             } catch (e: IllegalArgumentException) {
                 println(e.message)
