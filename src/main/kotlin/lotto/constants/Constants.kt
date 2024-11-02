@@ -1,15 +1,15 @@
 package lotto.constants
 
 object InputConstants {
-    const val PURCHASE_PRICE_MSG = "구입금액을 입력해 주세요."
-    const val WINNING_NUMBERS_MSG = "당첨 번호를 입력해 주세요."
-    const val BONUS_NUMBER_MSG = "보너스 번호를 입력해 주세요."
-    const val PURCHASED_QUANTITY_MSG = "개를 구매했습니다."
+    const val PURCHASE_PRICE_MESSAGE = "구입금액을 입력해 주세요."
+    const val WINNING_NUMBERS_MESSAGE = "당첨 번호를 입력해 주세요."
+    const val BONUS_NUMBER_MESSAGE = "보너스 번호를 입력해 주세요."
+    const val PURCHASED_QUANTITY_MESSAGE = "개를 구매했습니다."
 }
 
 object OutputConstants {
-    const val WINNING_RESULT_MSG = "당첨 통계\n" + "---"
-    const val PROFIT_RATE_MSG = "총 수익률은 %s입니다."
+    const val WINNING_RESULT_MESSAGE = "당첨 통계\n" + "---"
+    const val PROFIT_RATE_MESSAGE = "총 수익률은 %s입니다."
     const val PERCENT = "%"
     const val COUNT = "개"
     const val TWO_DECIMAL_FORMAT = "%.2f"
@@ -41,9 +41,9 @@ object RankingConstants {
     const val SECOND_PRIZE = 30_000_000
     const val FIRST_PRIZE = 2_000_000_000
 
-    const val FIFTH_MSG = "3개 일치 (5,000원) - "
-    const val FOURTH_MSG = "4개 일치 (50,000원) - "
-    const val THIRD_MSG = "5개 일치 (1,500,000원) - "
-    const val SECOND_MSG = "5개 일치, 보너스 볼 일치 (30,000,000원) - "
-    const val FIRST_MSG = "6개 일치 (2,000,000,000원) - "
+    const val FIFTH_MESSAGE = "3개 일치 (5,000원) - "
+    const val FOURTH_MESSAGE = "4개 일치 (50,000원) - "
+    const val THIRD_MESSAGE = "5개 일치 (1,500,000원) - "
+    const val SECOND_MESSAGE = "5개 일치, 보너스 볼 일치 (30,000,000원) - "
+    const val FIRST_MESSAGE = "6개 일치 (2,000,000,000원) - "
 }

@@ -15,7 +15,7 @@ class LottoController {
     fun run() {
         val lottoAmount = getValidPurchasePrice()
 
-        input.purchasedQuantityMsg(lottoAmount.purchaseCount, lottoAmount.lottos)
+        input.purchasedQuantityMessage(lottoAmount.purchaseCount, lottoAmount.lottos)
 
         val winningNumbers = getValidWinningNumbers()
 
@@ -28,7 +28,7 @@ class LottoController {
     private fun getValidPurchasePrice(): LottoAmount {
         while (true) {
             try {
-                input.purchasePriceMsg()
+                input.purchasePriceMessage()
                 val purchasePrice = Console.readLine()
                 Error.priceError(purchasePrice)
 
@@ -42,7 +42,7 @@ class LottoController {
     private fun getValidWinningNumbers(): String {
         while (true) {
             try {
-                input.winningNumbersMsg()
+                input.winningNumbersMessage()
                 val winningNumbers = Console.readLine()
                 Error.winningNumberError(winningNumbers)
 
@@ -56,7 +56,7 @@ class LottoController {
     private fun getValidBonusNumber(): String {
         while (true) {
             try {
-                input.bonusNumberMsg()
+                input.bonusNumberMessage()
                 val bonusNumber = Console.readLine()
                 Error.bonusNumberError(bonusNumber)
                 return bonusNumber
@@ -73,7 +73,7 @@ class LottoController {
     ) {
         val winningResult = WinningResult(lottoAmount.lottos, inputNumbers)
 
-        output.winningResultMsg(winningResult.getPrizeRankMsg())
-        output.rateOfReturnMsg(winningResult.getRateOfReturn(purchasedPrice))
+        output.winningResultMessage(winningResult.getPrizeRankMessage())
+        output.rateOfReturnMessage(winningResult.getRateOfReturn(purchasedPrice))
     }
 }

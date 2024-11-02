@@ -34,11 +34,11 @@ class WinningResult(private val lottos: List<Lotto>, private val inputNumbers: I
         return formatedRate
     }
 
-    fun getPrizeRankMsg(): List<String> {
+    fun getPrizeRankMessage(): List<String> {
         countByMatchCount = getMatchCount()
 
         return Ranking.entries.mapIndexed { index, ranking ->
-            "${ranking.formattedMsg()}${countByMatchCount[index]}"
+            "${ranking.formattedMessage()}${countByMatchCount[index]}"
         }
     }
 }
