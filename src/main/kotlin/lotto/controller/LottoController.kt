@@ -2,6 +2,7 @@ package lotto.controller
 
 import lotto.model.Lotto
 import lotto.model.Rank
+import lotto.model.Stat
 import lotto.utils.*
 import lotto.view.InputView
 import lotto.view.OutputView
@@ -23,10 +24,10 @@ class LottoController {
         val winningNumber = repeatLogic { WinningNumber.validate(inputView.readWinningNumber()) }
         val bonusNumber = repeatLogic { BonusNumber.validate(inputView.readBonusNumber(), winningNumber) }
 
-        val rankCount = countRank(lotto, winningNumber, bonusNumber)
+        val stats = getStats(lotto, winningNumber, bonusNumber)
 
-        outputView.printWinningStats(rankCount)
-        outputView.printProfitRate(profitRateCalculator.calculate(rankCount, price))
+        outputView.printStats(stats)
+        outputView.printProfitRate(profitRateCalculator.calculate(stats, price))
     }
 
     private fun generateLotto(lottoCount: Int): List<Lotto> {
@@ -37,17 +38,17 @@ class LottoController {
         return lotto
     }
 
-    private fun countRank(lotto: List<Lotto>, winningNumber: Set<Int>, bonusNumber: Int): Map<Rank, Int> {
-        val rankCount = mutableMapOf<Rank, Int>()
-        Rank.entries.forEach {
-            rankCount[it] = 0
+    private fun getStats(lotto: List<Lotto>, winningNumber: Set<Int>, bonusNumber: Int): List<Stat> {
+        val stats = mutableListOf<Stat>()
+        Rank.entries.forEach { rank ->
+            stats.add(Stat(rank))
         }
         lotto.forEach {
             val rank = it.getRank(winningNumber, bonusNumber)
-            rankCount[rank] = (rankCount[rank] ?: 0) + 1
+            stats[rank.index].increaseCount()
         }
-        rankCount.remove(Rank.NONE)
-        return rankCount
+        stats.removeAt(Rank.NONE.index)
+        return stats
     }
 
     private fun <T> repeatLogic(logic: () -> T): T {

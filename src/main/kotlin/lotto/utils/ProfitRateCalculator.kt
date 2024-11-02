@@ -1,11 +1,13 @@
 package lotto.utils
 
-import lotto.model.Rank
+import lotto.model.Stat
 
 class ProfitRateCalculator {
-    fun calculate(rankCount: Map<Rank, Int>, price: Int): String {
+    fun calculate(stats: List<Stat>, price: Int): String {
         var profit = 0
-        rankCount.forEach { (rank, count) ->
+        stats.forEach { stat ->
+            val rank = stat.getRank()
+            val count = stat.getCount()
             profit += rank.winningPrice * count
         }
         return String.format("%.1f", profit / price.toDouble() * 100)
