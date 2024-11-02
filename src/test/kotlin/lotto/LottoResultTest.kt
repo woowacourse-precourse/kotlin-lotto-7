@@ -21,7 +21,7 @@ class LottoResultTest {
     }
 
     @Test
-    fun `로또번호와 당첨번호 비교 후 당첨 통계 테스트`() {
+    fun `로또 번호와 당첨 번호 비교 후 당첨 통계 테스트`() {
         lottoResult = LottoResult(expectedLottoList, expectedWinningNumbersWithThreeMatches, BONUS_NUMBER)
         expectedRateOfReturn = (LottoRank.THREE_MATCHES.price / 1000).toDouble() * 100
         expectedLottoRankList = listOf(LottoRank.THREE_MATCHES)
@@ -33,7 +33,7 @@ class LottoResultTest {
     }
 
     @Test
-    fun `로또번호와 보너스 번호 당첨 통계 테스트`() {
+    fun `로또 번호와 보너스 번호 당첨 통계 테스트`() {
         lottoResult =
             LottoResult(expectedLottoList, expectedWinningNumbersWithBonusNumber, BONUS_NUMBER)
         expectedRateOfReturn = (LottoRank.FIVE_AND_BONUS_MATCHES.price / 1000).toDouble() * 100
