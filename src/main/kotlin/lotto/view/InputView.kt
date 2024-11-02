@@ -1,24 +1,27 @@
 package lotto.view
 
 import camp.nextstep.edu.missionutils.Console
+import lotto.domain.Lotto
+import lotto.domain.LottoNumber
+import lotto.domain.PurchaseAmount
 
 object InputView {
-    fun inputPurchaseMoney(): Int {
+    fun inputPurchaseMoney(): PurchaseAmount {
         println(INPUT_PURCHASE_MONEY_MESSAGE)
         val money = Console.readLine().toInt()
-        return money
+        return PurchaseAmount(money)
     }
 
-    fun inputWinningNumber(): List<Int> {
+    fun inputWinningNumber(): Lotto {
         println(INPUT_WINNING_NUMBER_MESSAGE)
-        val winningNumbers = Console.readLine().split(NUMBER_DELIMITER)
-        return winningNumbers.map { it.toInt() }
+        val winningNumbers = Console.readLine().split(NUMBER_DELIMITER).map { it.toInt() }
+        return Lotto(winningNumbers.map { LottoNumber(it) })
     }
 
-    fun inputBonusNumber(): Int {
+    fun inputBonusNumber(): LottoNumber {
         println(INPUT_BONUS_NUMBER_MESSAGE)
         val bonusNumber = Console.readLine().toInt()
-        return bonusNumber
+        return LottoNumber(bonusNumber)
     }
 
     private const val INPUT_PURCHASE_MONEY_MESSAGE = "구입금액을 입력해 주세요."
