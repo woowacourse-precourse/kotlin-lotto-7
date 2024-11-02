@@ -3,12 +3,15 @@ package lotto.domain
 import lotto.constants.ErrorConstants.ERROR_NUMBERS_COUNT
 import lotto.constants.ErrorConstants.ERROR_NUMBERS_DUPLICATE
 import lotto.constants.ErrorConstants.ERROR_NUMBER_RANGE
+import lotto.constants.LottoConstants.LOTTO_NUMBER_RANGE
+import lotto.constants.LottoConstants.MAX_LOTTO_NUMBER
+import lotto.constants.LottoConstants.MIN_LOTTO_NUMBER
 
 class Lotto(private val numbers: List<Int>) {
     init {
-        require(numbers.size == 6) { ERROR_NUMBERS_COUNT }
-        require(numbers.toSet().size == 6) { ERROR_NUMBERS_DUPLICATE }
-        require(numbers.all { it in 1..45 }) { ERROR_NUMBER_RANGE }
+        require(numbers.size == LOTTO_NUMBER_RANGE) { ERROR_NUMBERS_COUNT }
+        require(numbers.toSet().size == numbers.size) { ERROR_NUMBERS_DUPLICATE }
+        require(numbers.all { it in MIN_LOTTO_NUMBER..MAX_LOTTO_NUMBER }) { ERROR_NUMBER_RANGE }
     }
 
     fun winningCount(inputNumbers: InputNumbers): Int {

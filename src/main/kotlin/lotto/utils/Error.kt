@@ -6,6 +6,10 @@ import lotto.constants.ErrorConstants.ERROR_NUMBER_ONLY_NUMERIC
 import lotto.constants.ErrorConstants.ERROR_NUMBER_RANGE
 import lotto.constants.ErrorConstants.ERROR_PRICE_NOT_MULTIPLE_OF_1000
 import lotto.constants.LottoConstants.COMMA
+import lotto.constants.LottoConstants.LOTTO_NUMBER_RANGE
+import lotto.constants.LottoConstants.LOTTO_PRICE
+import lotto.constants.LottoConstants.MAX_LOTTO_NUMBER
+import lotto.constants.LottoConstants.MIN_LOTTO_NUMBER
 
 object Error {
 
@@ -13,7 +17,7 @@ object Error {
         val price = purchasePrice.toIntOrNull()
             ?: throw IllegalArgumentException(ERROR_NUMBER_ONLY_NUMERIC)
 
-        if (price % 1000 != 0)
+        if (price % LOTTO_PRICE != 0)
             throw IllegalArgumentException(ERROR_PRICE_NOT_MULTIPLE_OF_1000)
     }
 
@@ -25,11 +29,11 @@ object Error {
                     ?: throw IllegalArgumentException(ERROR_NUMBER_ONLY_NUMERIC)
             }
 
-        if (numbers.size != 6)
+        if (numbers.size != LOTTO_NUMBER_RANGE)
             throw IllegalArgumentException(ERROR_NUMBERS_COUNT)
-        if (numbers.toSet().size != 6)
+        if (numbers.toSet().size != numbers.size)
             throw IllegalArgumentException(ERROR_NUMBERS_DUPLICATE)
-        if (!numbers.all { it in 1..45 })
+        if (!numbers.all { it in MIN_LOTTO_NUMBER..MAX_LOTTO_NUMBER })
             throw IllegalArgumentException(ERROR_NUMBER_RANGE)
     }
 
@@ -37,7 +41,7 @@ object Error {
         val number = bonusNumber.toIntOrNull()
             ?: throw IllegalArgumentException(ERROR_NUMBER_ONLY_NUMERIC)
 
-        if (number !in 1..45)
+        if (number !in MIN_LOTTO_NUMBER..MAX_LOTTO_NUMBER)
             throw IllegalArgumentException(ERROR_NUMBER_RANGE)
     }
 }
