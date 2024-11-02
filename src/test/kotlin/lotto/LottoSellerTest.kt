@@ -10,4 +10,11 @@ class LottoSellerTest {
             LottoSeller(999)
         }
     }
+
+    @Test
+    fun `구입 금액이 1000원 단위가 아니면 예외가 발생한다`() {
+        assertThrows<IllegalArgumentException> {
+            LottoSeller(1500)
+        }
+    }
 }
