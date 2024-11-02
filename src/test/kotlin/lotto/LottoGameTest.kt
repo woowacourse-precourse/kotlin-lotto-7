@@ -34,5 +34,19 @@ class LottoGameTest {
         }
     }
 
+    @Test
+    fun `유효한 당첨 번호를 입력하면 해당 로또를 반환한다`() {
+        val winningLotto = listOf(1, 2, 3, 4, 5, 6)
+        assertThat(lottoGame.inputWinningLotto()).isEqualTo(winningLotto)
+    }
+
+    @Test
+    fun `당첨 번호가 유효하지 않으면 예외가 발생한다`() {
+        assertThrows<IllegalArgumentException> {
+            lottoGame.inputWinningLotto()
+        }
+    }
+
+
 
 }
