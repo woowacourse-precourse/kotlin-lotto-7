@@ -1,14 +1,16 @@
 package lotto.view
 
-class Output {
-    fun printWinnigDetails(){
+import lotto.util.Constants
+
+object Output {
+    fun printWinningDetails(){
 
     }
     fun printReturnRate(){
 
     }
     fun printMoneyToInput(){
-
+        println(Constants.INSERT_MONEY)
     }
     fun printPurchaseDetails(){
 
