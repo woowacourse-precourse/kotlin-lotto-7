@@ -11,7 +11,7 @@ class LottoController {
     private val inputView = InputView()
     private val outputView = OutputView()
     private val lottoGenerator = LottoGenerator()
-    private val profitRateCalculator = ProfitRateCalculator()
+    private val statCalculator = StatCalculator()
 
     fun start() {
         val price = repeatLogic { Price.validate(inputView.readPrice()) }
@@ -27,7 +27,7 @@ class LottoController {
         val stats = getStats(lotto, winningNumber, bonusNumber)
 
         outputView.printStats(stats)
-        outputView.printProfitRate(profitRateCalculator.calculate(stats, price))
+        outputView.printProfitRate(statCalculator.getProfitRate(stats, price))
     }
 
     private fun generateLotto(lottoCount: Int): List<Lotto> {
@@ -43,8 +43,8 @@ class LottoController {
         Rank.entries.forEach { rank ->
             stats.add(Stat(rank))
         }
-        lotto.forEach {
-            val rank = it.getRank(winningNumber, bonusNumber)
+        lotto.forEach { lottoItem ->
+            val rank = statCalculator.getRank(lottoItem.getNumbers(), winningNumber, bonusNumber)
             stats[rank.index].increaseCount()
         }
         stats.removeAt(Rank.NONE.index)
