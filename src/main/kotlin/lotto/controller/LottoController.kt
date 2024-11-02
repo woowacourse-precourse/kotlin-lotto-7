@@ -6,5 +6,6 @@ class LottoController {
     fun start() {
         val purchaseMoney = InputView.inputPurchaseMoney()
         val winningNumbers = InputView.inputWinningNumber()
+        val bonusNumber = InputView.inputBonusNumber()
     }
 }
