@@ -1,5 +1,11 @@
 package lotto
 
+import lotto.controller.InputController
+import lotto.controller.MainController
+import lotto.repository.Repository
+import lotto.view.InputView
+
 fun main() {
-    // TODO: 프로그램 구현
+    val mainController = MainController(InputController(Repository()))
+    mainController.run()
 }
