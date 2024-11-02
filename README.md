@@ -49,5 +49,6 @@
   * [ ] 당첨과 보너스 중복
   * [ ] 구매 금액 1000 단위 x
 
-<a href="https://ibb.co/0GN9Wpz"><img src="https://i.ibb.co/sVS1DpX/lotto-drawio.png" alt="lotto-drawio" border="0"></a>
+## class diagram
+<a href="https://ibb.co/z5LqwxK"><img src="https://i.ibb.co/GJ1zjpg/lotto-drawio-1.png" alt="lotto-drawio-1" border="0"></a><br /><a target='_blank' href='https://dedupelist.com/'>find duplicate lines</a><br />
 

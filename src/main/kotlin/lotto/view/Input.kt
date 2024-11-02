@@ -12,4 +12,5 @@ class Input {
     fun readMoney(){
 
     }
+
 }
