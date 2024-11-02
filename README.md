@@ -80,7 +80,11 @@
       <td>1000원 단위로 끝나지 않는 경우</td>
    </tr>
     <tr>
-      <td rowspan="7">당첨 번호</td>
+      <td rowspan="8">당첨 번호</td>
+      <td><input type="checkbox"></td>
+      <td>빈 경우</td>
+    </tr>
+<tr>
       <td><input type="checkbox"></td>
       <td>구분자 쉼표(,)가 없는 경우</td>
     </tr>
