@@ -12,8 +12,9 @@ class LottoController {
         val lottoIssuance: LottoIssuance = LottoIssuance(money)
 
         val winningNum = Processor.winningNumSplit(InputView.getWinningNumber())
-        val bonusNum = InputView.getBonusNumber()
-
+        val bonusNum = InputView.getBonusNumber().toInt()
         val lotto = Lotto(winningNum)
+
+        val matchNum = lotto.compLottoList(lottoIssuance.lottoList, bonusNum)
     }
 }
