@@ -1,5 +1,7 @@
 package lotto
 
+import org.assertj.core.internal.BigDecimals
+
 enum class Price {
     FIRST,
     SECOND,
@@ -12,7 +14,6 @@ enum class Price {
 fun getPurchaseAmount():Int {
     print("구입금액을 입력해 주세요.\n")
     var purchaseInput = camp.nextstep.edu.missionutils.Console.readLine()
-    var purchaseAmount = purchaseInput.toInt() / 1000
 
     try {
         purchaseInput.toInt() / 1000
@@ -22,6 +23,7 @@ fun getPurchaseAmount():Int {
     if (purchaseInput.toInt() % 1000 != 0) {
         throw IllegalArgumentException(ErrorMessage.notPerfectlyDivided)
     }
+    var purchaseAmount = purchaseInput.toInt() / 1000
 
     return purchaseAmount
 }
@@ -77,6 +79,7 @@ class ErrorMessage () {
         val notSixNumbers = "[ERROR] 6개의 숫자를 입력해주세요\n"
         val notInRange = "[ERROR] 로또 번호는 1부터 45 사이의 숫자여야 합니다.\n"
         val isDuplex = "[ERROR] 로또 번호는 중복될 수 없습니다. \n"
+        val tryFailed = "[ERROR] 제한 시도를 초과하였습니다 다시 시도해주세요. \n"
     }
 }
 
@@ -112,7 +115,7 @@ class Lotto(private val numbers: List<Int>) {
     }
 
     companion object {
-        fun getRateOfReturn(countMap:Map<Price, Int>):Double {
+        fun getRateOfReturn(countMap:Map<Price, Int>):String {
             var fifthCountIncome = countMap.getOrElse(Price.FIFTH) { 0 } * 5000
             var fourthCountIncome = countMap.getOrElse(Price.FOURTH) { 0 } * 50000
             var thirdCountIncome = countMap.getOrElse(Price.THIRD) { 0 } * 1500000
@@ -120,7 +123,7 @@ class Lotto(private val numbers: List<Int>) {
             var firstCountIncome = countMap.getOrElse(Price.FIRST) { 0 } * 2000000000
             var income = fifthCountIncome+fourthCountIncome+thirdCountIncome+secondCountIncome+firstCountIncome
             var incomeRate = income.toFloat() / (purchaseAmount*1000)*100
-            return "%.1f".format(incomeRate).toDouble()
+            return "%.1f".format(incomeRate)
 
         }
 

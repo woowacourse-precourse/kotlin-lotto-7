@@ -32,11 +32,9 @@ class LottoTest {
             )
             purchaseAmount = 37
             var incomeRate = Lotto.getRateOfReturn(countMap)
-            require(incomeRate == expectedRate.toDouble())
+            require(incomeRate.toDouble() == expectedRate.toDouble())
             }
         }
-    }
-
     @Test
     fun `로또 판별 테스트`() {
         assertDoesNotThrow {
@@ -88,4 +86,8 @@ class LottoTest {
             Lotto(listOf(1, 2, 3, 4, 5, 5))
         }
     }
+}
+
+
+
 

@@ -4,11 +4,14 @@ import camp.nextstep.edu.missionutils.test.Assertions.assertRandomUniqueNumbersI
 import camp.nextstep.edu.missionutils.test.Assertions.assertSimpleTest
 import camp.nextstep.edu.missionutils.test.NsTest
 import org.assertj.core.api.Assertions.assertThat
+import org.assertj.core.api.Assertions.assertThatThrownBy
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.params.ParameterizedTest
+import org.junit.jupiter.params.provider.CsvSource
 
 class ApplicationTest : NsTest() {
     @Test
-    fun `기능 테스트`() {
+    fun `전체 기능 테스트1`() {
         assertRandomUniqueNumbersInRangeTest(
             {
                 run("8000", "1,2,3,4,5,6", "7")
@@ -42,12 +45,54 @@ class ApplicationTest : NsTest() {
     }
 
     @Test
-    fun `예외 테스트`() {
+    fun `전체 기능 테스트2`() {
+        assertRandomUniqueNumbersInRangeTest(
+            {
+                run("5000", "1,2,3,4,5,6", "7")
+                assertThat(output()).contains(
+                    "5개를 구매했습니다.",
+                    "[1, 2, 3, 4, 5, 6]",
+                    "[2, 3, 4, 5, 6, 7]",
+                    "[7, 11, 16, 35, 36, 44]",
+                    "[1, 8, 11, 31, 41, 42]",
+                    "[13, 14, 16, 38, 42, 45]",
+                    "3개 일치 (5,000원) - 0개",
+                    "4개 일치 (50,000원) - 0개",
+                    "5개 일치 (1,500,000원) - 0개",
+                    "5개 일치, 보너스 볼 일치 (30,000,000원) - 1개",
+                    "6개 일치 (2,000,000,000원) - 1개",
+                    "총 수익률은 40600000.0%입니다."
+                )
+            },
+            listOf(1, 2, 3, 4, 5, 6),
+            listOf(2, 3, 4, 5, 6, 7),
+            listOf(7, 11, 16, 35, 36, 44),
+            listOf(1, 8, 11, 31, 41, 42),
+            listOf(13, 14, 16, 38, 42, 45),
+        )
+    }
+
+    @ParameterizedTest
+    @CsvSource(value=
+        ["1000j: 0: 0",
+        "1500: 0: 0",
+        "1000:1,2,3:0",
+        "1000:46,-1,2,3,4,5:0",
+        "1000:1,2,3,4,5,6:6",
+        "1000:1,2,3,4,5,6,7:0",
+        "1000:1,f,3,4,5,6:0",
+        "1000:1,2,3,4,,5:0",
+        "1000:1,2,3,4,5,6:60",
+        "1000:1,2,3,4,5,6:,"]
+        , delimiter = ':')
+
+    fun `예외 테스트`(a:String,b:String,c:String) {
         assertSimpleTest {
-            runException("1000j")
+            runException(a, b, c)
             assertThat(output()).contains(ERROR_MESSAGE)
         }
     }
+
 
 
     override fun runMain() {
@@ -56,5 +101,6 @@ class ApplicationTest : NsTest() {
 
     companion object {
         private const val ERROR_MESSAGE: String = "[ERROR]"
+
     }
 }

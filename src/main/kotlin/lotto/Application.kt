@@ -9,7 +9,10 @@ var resultStorage:MutableList<Price> = mutableListOf()
 fun main()
 {
 	//구입금액을 입력받습니다
-	while (true) {
+	for (i in 0 until 5) {
+		if (i == 5) {
+			throw IllegalArgumentException(ErrorMessage.tryFailed)
+		}
 		try {
 			purchaseAmount = getPurchaseAmount()
 			break
@@ -26,7 +29,10 @@ fun main()
 		lottoStorage.add(lottoPicked)
 	}
 	//당첨번호를 입력받습니다
-	while (true) {
+	for (i in 0 until 5) {
+		if (i == 5) {
+			throw IllegalArgumentException(ErrorMessage.tryFailed)
+		}
 		try {
 			pickedNumbers = getPickedNumbers()
 			break
@@ -35,7 +41,10 @@ fun main()
 		}
 	}
 	//보너스 번호를 입력받습니다
-	while (true) {
+	for (i in 0 until 5) {
+		if (i == 5) {
+			throw IllegalArgumentException(ErrorMessage.tryFailed)
+		}
 		try {
 			bonusNumber = getBonusNumber()
 			break
