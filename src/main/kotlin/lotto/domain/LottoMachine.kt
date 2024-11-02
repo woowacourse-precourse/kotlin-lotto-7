@@ -1,5 +1,6 @@
 package lotto.domain
 
+import lotto.data.Bonus
 import lotto.data.Client
 import lotto.data.Lotto
 import lotto.data.Winning
@@ -15,6 +16,7 @@ class LottoMachine(
         printLottoQuantity(client.lotto)
         printLottoNumbers(client.lottoNumbers)
         val winning = buildWinning()
+        val bonus = buildBonus(winning)
     }
 
     private fun buildClient(): Client {
@@ -44,6 +46,16 @@ class LottoMachine(
         } catch (e: IllegalArgumentException) {
             printErrorCauseMessage(e.message)
             buildWinning()
+        }
+    }
+
+    private fun buildBonus(winning: Winning): Bonus {
+        return try {
+            outputView.printNewLine()
+            Bonus(inputView.readBonusNumber(), winning)
+        } catch (e: IllegalArgumentException) {
+            printErrorCauseMessage(e.message)
+            buildBonus(winning)
         }
     }
 
