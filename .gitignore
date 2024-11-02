@@ -33,3 +33,11 @@ out/
 
 ### Mac OS ###
 .DS_Store
+
+### Kotlin ###
+# Compiled class file
+*.class
+
+# Android Studio
+/*/build/
+/*/local.properties
