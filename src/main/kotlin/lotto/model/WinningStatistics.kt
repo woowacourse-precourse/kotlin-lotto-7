@@ -1,7 +1,7 @@
 package lotto.model
 
 class WinningStatistics {
-    private var _matchCountStatistics = mutableListOf(0, 0, 0, 0, 0, 0)
+    private var _matchCountStatistics = mutableListOf(0, 0, 0, 0, 0)
     val matchCountStatistics
         get() = _matchCountStatistics
 
