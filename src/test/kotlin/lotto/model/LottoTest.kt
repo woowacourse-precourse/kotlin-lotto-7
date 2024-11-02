@@ -1,8 +1,10 @@
 package lotto.model
 
 import org.assertj.core.api.Assertions
+import org.assertj.core.api.Assertions.assertThat
 import org.assertj.core.api.Assertions.assertThatThrownBy
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.assertDoesNotThrow
 import org.junit.jupiter.api.assertThrows
 
 class LottoTest {
@@ -31,12 +33,4 @@ class LottoTest {
             .isInstanceOf(IllegalArgumentException::class.java)
             .hasMessage("[ERROR] 로또 번호는 1에서 45 이내여야 합니다.")
     }
-
-    @Test
-    fun `로또 번호가 아무튼 다를 경우`() {
-
-    }
-
-    // TODO: 문자, 공백, 소수, 구분자가 다를 경우
-
 }
