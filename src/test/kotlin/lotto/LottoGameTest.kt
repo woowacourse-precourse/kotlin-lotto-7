@@ -22,18 +22,18 @@ class LottoGameTest {
 
     @Test
     fun `금액이 1000원 미만이면 예외가 발생한다`() {
-        val game = LottoGame(readLine = { "900" })
-        assertThrows<IllegalArgumentException> {
-            game.inputCost()
-        }
+        val inputs = listOf("900", "2000")  // 첫 입력은 잘못된 값, 두 번째는 올바른 값
+        val game = LottoGame(readLine = inputs.iterator()::next)
+        val cost = game.inputCost()
+        assertThat(cost).isEqualTo(2000)
     }
 
     @Test
-    fun `금액이 1000 단위가 아니면 예외가 발생한다`() {
-        val game = LottoGame(readLine = { "790" })
-        assertThrows<IllegalArgumentException> {
-            game.inputCost()
-        }
+    fun `금액이 1000 단위가 아니면 예외가 발생 후 재입력 받아 정상 종료된다`() {
+        val inputs = listOf("1500", "2000")  // 첫 입력은 잘못된 값, 두 번째는 올바른 값
+        val game = LottoGame(readLine = inputs.iterator()::next)
+        val cost = game.inputCost()
+        assertThat(cost).isEqualTo(2000)
     }
 
     @Test
@@ -44,11 +44,11 @@ class LottoGameTest {
     }
 
     @Test
-    fun `당첨 번호가 유효하지 않으면 예외가 발생한다`() {
-        val game = LottoGame(readLine = { "1, 2, 3, 4, 5" })
-        assertThrows<IllegalArgumentException> {
-            game.inputWinningLotto()
-        }
+    fun `당첨 번호가 유효하지 않으면 예외가 발생후 재입력 받아 정상 종료된다`() {
+        val inputs = listOf("1,2,3,4,5", "1,2,3,4,5,6")  // 첫 입력은 잘못된 당첨 번호, 두 번째는 올바른 값
+        val game = LottoGame(readLine = inputs.iterator()::next)
+        val winningLotto = game.inputWinningLotto()
+        assertThat(winningLotto.getNumbers()).isEqualTo(listOf(1, 2, 3, 4, 5, 6))
     }
 
     @Test
@@ -60,11 +60,12 @@ class LottoGameTest {
 
     @Test
     fun `보너스 번호가 유효하지 않으면 예외가 발생한다`() {
-        val game = LottoGame(readLine = { "k" })
-        assertThrows<IllegalArgumentException> {
-            game.inputBonusNumber()
-        }
+        val inputs = listOf("abc", "7")  // 첫 입력은 잘못된 보너스 번호, 두 번째는 올바른 값
+        val game = LottoGame(readLine = inputs.iterator()::next)
+        val bonusNumber = game.inputBonusNumber()
+        assertThat(bonusNumber).isEqualTo(7)
     }
+    
 
     @Test
     fun `구입 금액에 따른 로또 목록이 생성된다`() {
