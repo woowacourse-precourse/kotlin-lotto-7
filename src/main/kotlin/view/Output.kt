@@ -12,7 +12,7 @@ class Output {
     }
 
     fun randomLottoList(randomLottoNumber: List<List<Int>>) {
-        Lotto(randomLottoNumber).randomLottoList(randomLottoNumber)
+        Lotto(randomLottoNumber)
     }
 
     fun winningStatistics(amount: Int) {
