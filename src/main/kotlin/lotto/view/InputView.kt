@@ -10,7 +10,6 @@ class InputView {
             val input = Console.readLine()
             try {
                 validateLottoAmount(input)
-                println()
                 return input.toInt()
             } catch (e: IllegalArgumentException) {
                 println(e.message)
@@ -24,7 +23,6 @@ class InputView {
             val winningNumbers = Console.readLine().split(Constants.NUMBER_DELIMITER)
             try {
                 validateWinningNumbers(winningNumbers)
-                println()
                 return winningNumbers.map { it.toInt() }
             } catch (e: IllegalArgumentException) {
                 println(e.message)
@@ -38,7 +36,6 @@ class InputView {
             val bonusNumber = Console.readLine()
             try {
                 validateBonusNumber(bonusNumber, winningNumbers)
-                println()
                 return bonusNumber.toInt()
             } catch (e: IllegalArgumentException) {
                 println(e.message)
