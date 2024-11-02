@@ -1,7 +1,7 @@
 package lotto.model
 
 import camp.nextstep.edu.missionutils.Randoms
-import lotto.Constants
+import lotto.utils.Constants
 import kotlin.math.round
 
 class LottoService {

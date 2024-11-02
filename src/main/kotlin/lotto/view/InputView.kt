@@ -4,7 +4,7 @@ import camp.nextstep.edu.missionutils.Console
 import lotto.utils.Constants
 import lotto.utils.Validator
 
-class InputView {
+object InputView {
     fun getLottoAmount(): Int {
         while (true) {
             println(Constants.INPUT_BUY_AMOUNT_MESSAGE)

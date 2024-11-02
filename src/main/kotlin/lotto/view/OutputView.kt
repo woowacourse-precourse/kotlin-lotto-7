@@ -1,10 +1,10 @@
 package lotto.view
 
-import lotto.Constants
+import lotto.utils.Constants
 import lotto.model.Lotto
 import lotto.model.LottoRank
 
-class OutputView {
+object OutputView {
     fun printLottoAmountMessage(amount: Int) = println("\n${amount}개를 구매했습니다.")
 
     fun printLottoNumber(lottoTickets: List<Lotto>) {
