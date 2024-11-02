@@ -38,6 +38,7 @@ class InputTest {
                 .isInstanceOf(IllegalArgumentException::class.java)
                 .hasMessage(Exception.EMPTY_INPUT.toString())
         }
+
         @Test
         fun `사용자의 입력값이 정수로 표현할 수 있는 범위를 넘어갈 때`(){
             val value = "10000000000000000"
@@ -65,6 +66,13 @@ class InputTest {
             Assertions.assertThatThrownBy { inputErrorDelegate.isThousandWonUnit(value) }
                 .isInstanceOf(IllegalArgumentException::class.java)
                 .hasMessage(Exception.INVALID_UNIT.toString())
+        }
+
+        @Test
+        fun `구입 금액이 10만원을 넘을 때`(){
+            val value = "1000001"
+            Assertions.assertThatThrownBy { inputErrorDelegate.isOverMaxPrice(value) }
+                .isInstanceOf(IllegalArgumentException::class.java)
         }
 
         @Test
