@@ -14,15 +14,15 @@ class LottoController {
     private val statCalculator = StatCalculator()
 
     fun start() {
-        val price = repeatLogic { Price.validate(inputView.readPrice()) }
+        val price = repeatLogic { Validator.getPrice(inputView.readPrice()) }
         val lottoCount = price / 1000
         val lotto = generateLotto(lottoCount)
 
         outputView.printLottoCount(lottoCount)
         outputView.printLotto(lotto)
 
-        val winningNumber = repeatLogic { WinningNumber.validate(inputView.readWinningNumber()) }
-        val bonusNumber = repeatLogic { BonusNumber.validate(inputView.readBonusNumber(), winningNumber) }
+        val winningNumber = repeatLogic { Validator.getWinningNumber(inputView.readWinningNumber()) }
+        val bonusNumber = repeatLogic { Validator.getBonusNumber(inputView.readBonusNumber(), winningNumber) }
 
         val stats = getStats(lotto, winningNumber, bonusNumber)
 
