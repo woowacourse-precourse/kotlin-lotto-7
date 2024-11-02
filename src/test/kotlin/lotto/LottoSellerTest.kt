@@ -17,4 +17,16 @@ class LottoSellerTest {
             LottoSeller(1500)
         }
     }
+
+    @Test
+    fun `로또 구매 개수를 반환한다`() {
+        val lottoSeller = LottoSeller(5000)
+        assert(lottoSeller.lottoCount == 5)
+    }
+
+    @Test
+    fun `로또를 판매한다`() {
+        val lottoSeller = LottoSeller(5000)
+        assert(lottoSeller.sell().size == 5)
+    }
 }
