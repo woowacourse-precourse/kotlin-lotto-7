@@ -19,6 +19,6 @@ class LottoIssuance(private val numberOfIssuance: Int) {
         for (i in 1..numberOfIssuance) {
             lottoList.add(getLotto())
         }
-        OutputView.printLotto(lottoList)
+        OutputView.printLotto(lottoList, numberOfIssuance)
     }
 }

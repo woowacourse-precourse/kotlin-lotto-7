@@ -17,6 +17,7 @@ class LottoController {
         val lotto = Lotto(winningNum)
 
         val matchNum = lotto.compLottoList(lottoIssuance.lottoList, bonusNum)
-        OutputView.printResult(matchNum)
+        val yields = lotto.calcutateYields(matchNum, money)
+        OutputView.printResult(matchNum, yields)
     }
 }
