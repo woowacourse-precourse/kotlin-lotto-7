@@ -2,7 +2,9 @@ package lotto.controller
 
 import lotto.model.Lotto
 import lotto.model.PurchaseMoney
+import lotto.model.WinningLotto
 import lotto.view.InputView.getPurchaseMoneyInput
+import lotto.view.InputView.getWinningLottoInput
 import lotto.view.OutputView.printLottoCount
 import lotto.view.OutputView.printLottoNumber
 
@@ -16,6 +18,9 @@ class LottoController {
 
         val lottos = getLottos(lottoCount)
         printLottoNubmers(lottos)
+
+        val winningLotto = getWinningLotto()
+
     }
 
     private fun getPurchaseMoney(): PurchaseMoney {
@@ -35,6 +40,11 @@ class LottoController {
         lottos.forEach { lotto ->
             printLottoNumber(lotto.numbers)
         }
+    }
+
+    private fun getWinningLotto() : WinningLotto {
+        val winningLottoInput = getWinningLottoInput()
+        return WinningLotto(winningLottoInput)
     }
 
 

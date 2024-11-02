@@ -9,7 +9,7 @@ object OutputView {
         println(PURCHASE_COUNT_SCRIPT.format(lottoCount))
     }
 
-    fun printLottoNumber(numbers: List<Int>) {
+    fun printLottoNumber(numbers: Set<Int>) {
         println(numbers)
     }
 }

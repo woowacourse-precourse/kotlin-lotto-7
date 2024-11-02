@@ -5,7 +5,7 @@ import camp.nextstep.edu.missionutils.Randoms
 
 
 class Lotto() {
-    val numbers: List<Int>
+    val numbers: Set<Int>
 
     init {
         numbers = makeLotto()
@@ -13,8 +13,8 @@ class Lotto() {
         validateLottoNumber()
     }
 
-    private fun makeLotto(): List<Int> {
-        return Randoms.pickUniqueNumbersInRange(MIN_LOTTO_NUMBER, MAX_LOTTO_NUMBER, LOTTO_SIZE)
+    private fun makeLotto(): Set<Int> {
+        return Randoms.pickUniqueNumbersInRange(MIN_LOTTO_NUMBER, MAX_LOTTO_NUMBER, LOTTO_SIZE).toSet()
     }
 
     private fun validateLottoSize() {
@@ -28,10 +28,10 @@ class Lotto() {
     }
 
     companion object {
-        private const val INVALID_LOTTO_SIZE = "로또 번호는 6개여야 합니다."
-        private const val INVALID_LOTTO_NUMBER = "로또 번호는 1 이상 45이하이어야 합니다."
         private const val LOTTO_SIZE = 6
         private const val MIN_LOTTO_NUMBER = 1
         private const val MAX_LOTTO_NUMBER = 45
+        private const val INVALID_LOTTO_SIZE = "로또 번호는 ${LOTTO_SIZE}개여야 합니다."
+        private const val INVALID_LOTTO_NUMBER = "로또 번호는 $MIN_LOTTO_NUMBER 이상 ${MIN_LOTTO_NUMBER}이하여야 합니다."
     }
 }
