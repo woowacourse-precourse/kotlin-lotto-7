@@ -19,5 +19,20 @@ class LottoTest {
         }
     }
 
-    // TODO: 추가 기능 구현에 따른 테스트 코드 작성
+    @Test
+    fun `로또 번호에 중복된 숫자가 없으면 예외가 발생하지 않는다`() {
+        Lotto(listOf(1, 2, 3, 4, 5, 6))
+    }
+
+    @Test
+    fun `로또에 특정 번호가 포함 되어 있으면 True를 반환한다`() {
+        val lotto = Lotto(listOf(1, 2, 3, 4, 5, 6))
+        assert(lotto.contain(6))
+    }
+
+    @Test
+    fun `로또에 특정 번호가 포함 되어 있지 않으면 False를 반환한다`() {
+        val lotto = Lotto(listOf(1, 2, 3, 4, 5, 6))
+        assert(!lotto.contain(7))
+    }
 }
