@@ -24,7 +24,7 @@ fun main() {
 }
 
 class LottoIssue {
-    private fun issueLotto(): List<Int> {
+    fun issueLotto(): List<Int> {
         return Randoms.pickUniqueNumbersInRange(1, 45, 6).sorted()
     }
 
@@ -44,7 +44,7 @@ class LottoPurchase {
             try {
                 return readPurchaseAmount()
             } catch (e: NumberFormatException) {
-                println("[ERROR] 유효한 숫자를 입력해야 합니다.")
+                println("[ERROR] 유효한 숫자(정수)를 입력해야 합니다.")
             } catch (e: IllegalArgumentException) {
                 println(e.message)
             }
@@ -72,7 +72,7 @@ class WinningNumber {
     fun getWinningNumber(): List<Int> {
         while (true) {
             val numbers = readWinningNumbers()
-            if (isValidNumbersCheck(numbers)) {
+            if (isValidNumberscheck(numbers)) {
                 return numbers.filterNotNull()
             }
         }
@@ -85,14 +85,23 @@ class WinningNumber {
         return input.split(",").map { it.trim().toIntOrNull() }
     }
 
-    private fun isValidNumbersCheck(numbers: List<Int?>): Boolean {
+    private fun isValidNumberscheck(numbers: List<Int?>): Boolean {
+        // 숫자가 null인지 확인하고, 개수가 6이 아니고, 정수가 아니면  오류 메시지 출력
         if (numbers.any { it == null } || numbers.size != 6) {
-            println("[ERROR] 당첨 번호는 6개를 입력해야 합니다.")
+            println("[ERROR] 당첨 번호는 6개의 정수만 입력해야 합니다.")
             return false
         }
 
+        // 숫자가 1 ~ 45 사이인지 확인
         if (numbers.any { it !in 1..45 }) {
             println("[ERROR] 당첨 번호는 1부터 45 사이의 숫자여야 합니다.")
+            return false
+        }
+
+        // 중복 값이 있는지 확인
+        val distinctNumbers = numbers.distinct()
+        if (distinctNumbers.size != numbers.size) {
+            println("[ERROR] 당첨 번호에는 중복이 있을 수 없습니다.")
             return false
         }
 
