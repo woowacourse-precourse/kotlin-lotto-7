@@ -1,7 +1,7 @@
 package lotto
 
 enum class LottoPrize(
-    private val matchingNumber: Int,
+    private val matchingCount: Int,
     private val price: Int,
     private val isMatchingBonusNumber: Boolean,
 ) {
