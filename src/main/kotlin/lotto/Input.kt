@@ -5,10 +5,15 @@ import java.lang.NumberFormatException
 
 class Input {
     var ticket = 0
-        get() = field
+    lateinit var lotto : List<List<Int>>
 
-    fun inputMoney() {
-        val input = Console.readLine()
+    //오류 발생 시 재입력 함수
+    private fun input() : String {
+        return Console.readLine()
+    }
+
+    fun ticketScript(){
+        val input = input()
         val money = confirmInteger(input)
         confirmNegativeOrZero(money)
         ticket = confirmDivider(money)
@@ -38,5 +43,6 @@ class Input {
         }
         return ticket / 1000
     }
+
 
 }
