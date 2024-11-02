@@ -7,4 +7,9 @@ class LottoResult {
     fun addWinners(rank: LottoRank) {
         winnersCount[rank] = (winnersCount[rank] ?: 0) + 1
     }
+
+    /* 당첨자 수 가져오는 함수 */
+    fun getWinnersCount(rank: LottoRank): Int {
+        return winnersCount[rank] ?: 0
+    }
 }
