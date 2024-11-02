@@ -39,7 +39,7 @@ class WinningTest {
     @ValueSource(strings = ["1,2,3,05,06,07"])
     fun numberStartZero(input: String) {
         val result = assertThrows<IllegalArgumentException> { Winning(input) }
-        assertEquals(result.message, "ERROR] 0으로 시작하지 않는 6개의 번호를 쉼표(,)를 기준으로 입력해주세요.")
+        assertEquals(result.message, "[ERROR] 0으로 시작하지 않는 6개의 번호를 쉼표(,)를 기준으로 입력해주세요.")
     }
 
     @DisplayName("중복된 값이 존재할 경우")
