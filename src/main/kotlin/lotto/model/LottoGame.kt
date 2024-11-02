@@ -1,27 +1,25 @@
 package lotto.model
 
 import camp.nextstep.edu.missionutils.Randoms.pickUniqueNumbersInRange
+import lotto.controller.Ranking
 
 class LottoGame {
-    private var numbers: List<Int> = listOf()
+    private var _winningNumbers: List<Int> = listOf()
+    private val lottoTickets: MutableList<List<Int>> = mutableListOf()
 
-    fun set(lottoNumbers: List<Int>) {
-        numbers = lottoNumbers
+    fun set(winningNumbers: List<Int>) {
+        _winningNumbers = winningNumbers
     }
 
-    fun validatePrice(price: String): String? {
-        if (price.toIntOrNull() == null) {
-            return "[ERROR] 구매 가격은 숫자여야 합니다."
-        }
-        return null
+    fun validatePrice(price: String): Int? {
+        return price.toIntOrNull()
     }
 
-    fun buy(price: String): Int {
-        return price.toInt() / LOTTO_TICKET_PRICE
+    fun buy(price: Int): Int {
+        return price / LOTTO_TICKET_PRICE
     }
 
     fun generateLottoTickets(count: Int): List<List<Int>> {
-        val lottoTickets: MutableList<List<Int>> = mutableListOf()
         repeat(count) {
             val numbers = pickUniqueNumbersInRange(MIN_BALL_NUMBER, MAX_BALL_NUMBER, WINNING_BALL_COUNT)
             val lottoTicket = Lotto(numbers).sort()
@@ -31,10 +29,10 @@ class LottoGame {
         return lottoTickets
     }
 
-    fun check(winningNumbers: List<Int>): Int {
+    fun checkScore(lottoNumber: List<Int>): Int {
         var winningCount = 0
-        winningNumbers.forEach {
-            if (numbers.contains(it)) {
+        lottoNumber.forEach {
+            if (_winningNumbers.contains(it)) {
                 winningCount ++
             }
         }
@@ -42,7 +40,23 @@ class LottoGame {
     }
 
     fun isBonus(bonusNumber: Int): Boolean {
-        return numbers.contains(bonusNumber)
+        return _winningNumbers.contains(bonusNumber)
+    }
+
+    fun getWinnings(bonusNumber: String): List<Int> {
+        val winningGames = MutableList(5) { 0 }
+        for (lotto in lottoTickets) {
+            val win = checkScore(lotto)
+            val bonus = isBonus(bonusNumber.toInt())
+            when {
+                win == 6 -> winningGames[Ranking.FIRST.getIndex()] += 1
+                win == 5 && bonus -> winningGames[Ranking.SECOND.getIndex()] += 1
+                win == 5 && !bonus -> winningGames[Ranking.THIRD.getIndex()] += 1
+                win == 4 -> winningGames[Ranking.FOURTH.getIndex()] += 1
+                win == 3 -> winningGames[Ranking.FIFTH.getIndex()] += 1
+            }
+        }
+        return winningGames
     }
 
     companion object {
