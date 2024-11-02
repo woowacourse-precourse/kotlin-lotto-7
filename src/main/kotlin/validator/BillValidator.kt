@@ -3,7 +3,6 @@ package validator
 class BillValidator {
     fun billCheck(billInput: Int) {
         try {
-            print(billInput)
             isBillEnough(billInput)
             isBillDivided(billInput)
         } catch (e: IllegalArgumentException) {

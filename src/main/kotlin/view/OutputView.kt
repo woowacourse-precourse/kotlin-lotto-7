@@ -2,6 +2,13 @@ package view
 
 class OutputView {
 
+    fun printLottoNumbers(count: Int, lottos: List<List<Int>>) {
+        println(amountNotice.format(count))
+        for (i in 0..lottos.lastIndex) {
+            println(lottos[i])
+        }
+    }
+
     companion object {
         const val amountNotice = "%d개를 구매했습니다."
         const val winStaticNotice = "당첨 통계"

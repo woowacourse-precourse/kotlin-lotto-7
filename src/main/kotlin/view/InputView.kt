@@ -1,12 +1,14 @@
 package view
 
+import controller.BillsController
 import camp.nextstep.edu.missionutils.Console
 
 class InputView {
 
     fun start() {
-        getBills()
+        val billsController = BillsController(getBills())
         println()
+        billsController.showLotto()
     }
 
     private fun resume() {
@@ -16,9 +18,10 @@ class InputView {
         println()
     }
 
-    private fun getBills() {
+    private fun getBills(): String {
         println(billRequirement)
         val bill = Console.readLine()
+        return bill
     }
 
     private fun getWinNumber() {
