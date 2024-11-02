@@ -1,19 +1,39 @@
 package lotto.ui.view
 
 import lotto.common.LottoRank
+import java.text.DecimalFormat
 
 class LottoResultView {
     fun outputWinningStatistics(lottoTicketsRank: List<LottoRank>) {
-        println("당첨 통계")
-        println("---")
-        println("3개 일치 (5,000원) - ${lottoTicketsRank.count { it == LottoRank.FIFTH }}개")
-        println("4개 일치 (50,000원) - ${lottoTicketsRank.count { it == LottoRank.FOURTH }}개")
-        println("5개 일치 (1,500,000원) - ${lottoTicketsRank.count { it == LottoRank.THIRD }}개")
-        println("5개 일치, 보너스 볼 일치 (30,000,000원) - ${lottoTicketsRank.count { it == LottoRank.SECOND }}개")
-        println("6개 일치 (2,000,000,000원) - ${lottoTicketsRank.count { it == LottoRank.FIRST }}개")
+        println(WINNING_STATISTIC_MESSAGE)
+        println(DIVIDER)
+        LottoRank.getWinningRanks().forEach { lottoRank ->
+            println(formatLottoRankResult(lottoRank, lottoTicketsRank))
+        }
+    }
+
+    private fun formatLottoRankResult(lottoRank: LottoRank, lottoTicketsRank: List<LottoRank>): String {
+        val matchCount = lottoRank.matchCount
+        val price = lottoRank.price.priceFormat()
+        val lottoCount = lottoTicketsRank.count { lottoTicketRank -> lottoTicketRank == lottoRank }
+        if (lottoRank == LottoRank.SECOND) {
+            return "${matchCount}개 일치, 보너스 볼 일치 (${price}) - ${lottoCount}개"
+        }
+        return "${matchCount}개 일치 (${price}) - ${lottoCount}개"
     }
 
     fun outputTotalProfitRate(lottoProfitRate: String) {
         println("총 수익률은 ${lottoProfitRate}입니다.")
+    }
+
+    private fun Int.priceFormat(): String {
+        val formatter = DecimalFormat(WON_FORMAT_PATTERN)
+        return formatter.format(this)
+    }
+
+    companion object {
+        private const val WINNING_STATISTIC_MESSAGE = "당첨 통계"
+        private const val DIVIDER = "---"
+        private const val WON_FORMAT_PATTERN = "#,###원"
     }
 }
