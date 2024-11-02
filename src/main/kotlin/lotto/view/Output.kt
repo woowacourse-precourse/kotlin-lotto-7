@@ -16,7 +16,7 @@ object Output {
 
     }
     fun printWinningNumberToInput(){
-
+        println(Constants.INSERT_WINNIG_NUNBER)
     }
     fun printBonusNumberToInput(){
 
