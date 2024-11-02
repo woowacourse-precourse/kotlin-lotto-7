@@ -2,6 +2,7 @@ package lotto.domain
 
 import lotto.data.Client
 import lotto.data.Lotto
+import lotto.data.Winning
 import lotto.ui.InputView
 import lotto.ui.OutputView
 
@@ -13,6 +14,7 @@ class LottoMachine(
         val client = buildClient()
         printLottoQuantity(client.lotto)
         printLottoNumbers(client.lottoNumbers)
+        val winning = buildWinning()
     }
 
     private fun buildClient(): Client {
@@ -32,6 +34,16 @@ class LottoMachine(
     private fun printLottoNumbers(lottoNumbers: List<List<Int>>) {
         for (lottoNumber in lottoNumbers) {
             outputView.printLottoNumber(lottoNumber)
+        }
+    }
+
+    private fun buildWinning(): Winning {
+        return try {
+            outputView.printNewLine()
+            Winning(inputView.readWinningNumbers())
+        } catch (e: IllegalArgumentException) {
+            printErrorCauseMessage(e.message)
+            buildWinning()
         }
     }
 
