@@ -1,6 +1,6 @@
 package lotto.resources
 
-import lotto.domain.InputService
+import lotto.resources.LottoConfig.*
 
 enum class Messages(private val message: String) {
     INFO_INPUT_MONEY("구입금액을 입력해 주세요."),
@@ -21,14 +21,14 @@ enum class Messages(private val message: String) {
     INFO_RETURN_RATE("총 수익률은 %s입니다."),
 
     ERROR("[ERROR] %s"),
-    DUPLICATE_LOTTO_NUMBER("로또 번호에 중복값이 존재합니다"),
+    DUPLICATE_LOTTO_NUMBER("로또 번호에 중복값이 존재합니다."),
     INVALID_LOTTO_RANGE(
-        "로또 번호는 ${InputService.LOTTO_START_VALUE}부터 ${InputService.LOTTO_END_VALUE} 사이의 숫자여야 합니다."
+        "로또 번호는 ${LOTTO_START.value}부터 ${LOTTO_END.value} 사이의 숫자여야 합니다."
     ),
-    NOT_SIX_NUMBER("입력값이 ${InputService.LOTTO_LENGTH}개의 숫자로 구성되지 않았습니다."),
+    NOT_SIX_NUMBER("로또 번호는 ${LOTTO_LENGTH.value}개여야 합니다."),
     EMPTY_INPUT("입력값이 비어있습니다."),
     NOT_NUMBER("올바른 숫자 형식이 아니거나 너무 큰 값을 입력하셨습니다."),
-    NOT_DIVIDED_BY_UNIT("${InputService.MONEY_UNIT}으로 나누어 떨어지는 양의 정수를 입력해주세요."),
+    NOT_DIVIDED_BY_UNIT("${LOTTO_PRICE.value}으로 나누어 떨어지는 양의 정수를 입력해주세요."),
     INVALID_ERROR("알 수 없는 오류가 발생했습니다.");
 
     fun message(): String = message

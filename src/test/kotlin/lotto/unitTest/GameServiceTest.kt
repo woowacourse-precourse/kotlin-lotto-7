@@ -6,6 +6,7 @@ import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import lotto.model.WinningCounter.WinningCategory.*
+import lotto.resources.LottoConfig.*
 
 class GameServiceTest {
     private lateinit var gameService: GameService
@@ -18,7 +19,7 @@ class GameServiceTest {
     @Test
     fun buyLottosTest() {
         // given
-        val lottoAmount = TEST_MONEY / GameService.ONE_LOTTO_PRICE
+        val lottoAmount = TEST_MONEY / LOTTO_PRICE.value
 
         // when
         val lottos = gameService.buyLottos(TEST_MONEY.toLong())
@@ -53,7 +54,7 @@ class GameServiceTest {
         val boughtLottos = createTestLottos()
         val winLotto = Lotto(listOf(1, 2, 3, 4, 5, 6))
         val countWinnings = gameService.countWinnings(boughtLottos, winLotto, 7)
-        val spentMoney = boughtLottos.size * GameService.ONE_LOTTO_PRICE.toLong()
+        val spentMoney = boughtLottos.size * LOTTO_PRICE.value.toLong()
 
         // when
         val returnRate = gameService.calculateReturnRate(countWinnings, spentMoney)

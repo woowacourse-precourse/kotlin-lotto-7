@@ -46,7 +46,7 @@ class GameController(
     }
 
     private fun readBonusNumber(winNumbers: Lotto): Int {
-        return inputService.readValidInput(INFO_INPUT_BONUS_NUMBER.message()){ input ->
+        return inputService.readValidInput(INFO_INPUT_BONUS_NUMBER.message()) { input ->
             inputService.validateBonusNumber(input, winNumbers)
         }
     }

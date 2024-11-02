@@ -4,16 +4,17 @@ import lotto.model.Lotto
 import camp.nextstep.edu.missionutils.Randoms
 import lotto.model.WinningCounter
 import lotto.model.WinningCounter.WinningCategory.*
+import lotto.resources.LottoConfig.*
 
 class GameService {
     fun buyLottos(money: Long): List<Lotto> {
-        val lottoAmount = (money / ONE_LOTTO_PRICE).toInt()
+        val lottoAmount = (money / LOTTO_PRICE.value).toInt()
 
         return List(lottoAmount) { generateLotto() }
     }
 
     private fun generateLotto(): Lotto {
-        val lottoNumbers = Randoms.pickUniqueNumbersInRange(1, 45, 6)
+        val lottoNumbers = Randoms.pickUniqueNumbersInRange(LOTTO_START.value, LOTTO_END.value, LOTTO_LENGTH.value)
         lottoNumbers.sort()
 
         return Lotto(lottoNumbers)
@@ -41,7 +42,4 @@ class GameService {
         return String.format("%.1f%%", returnRate)
     }
 
-    companion object {
-        const val ONE_LOTTO_PRICE = 1_000
-    }
 }
