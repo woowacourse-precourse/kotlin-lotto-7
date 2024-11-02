@@ -1,7 +1,11 @@
 package domain.util.ext
 
 fun String.isNumeric(): Boolean {
-    return this.toIntOrNull() != null
+    return this.all { it.isDigit() }
+}
+
+fun String.isOverPurchasablePrice(): Boolean {
+    return this.toLong() <= 100000L
 }
 
 fun String.isThousandUnit(): Boolean {

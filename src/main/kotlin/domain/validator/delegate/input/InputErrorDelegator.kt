@@ -5,13 +5,16 @@ import domain.enums.LottoSetting.LOTTO_MIN
 import domain.enums.LottoSetting.LOTTO_MAX
 import domain.enums.LottoSetting.LOTTO_SIZE
 import domain.enums.Process
+import domain.util.ext.isOverPurchasablePrice
 import domain.util.ext.isThousandUnit
 
 class InputErrorDelegator : InputErrorDelegate {
     override fun isThousandWonUnit(input: String) {
-        require(input.isThousandUnit()) {
-            Exception.INVALID_UNIT
-        }
+        require(input.isThousandUnit()) { Exception.INVALID_UNIT }
+    }
+
+    override fun isOverMaxPrice(input: String) {
+        require(input.isOverPurchasablePrice()) { Exception.OVER_MAX_PRICE }
     }
 
     override fun isExceededRange(input: List<String>, process: Process) {

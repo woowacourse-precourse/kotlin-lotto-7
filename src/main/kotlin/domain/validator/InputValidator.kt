@@ -5,6 +5,7 @@ import domain.validator.delegate.input.InputErrorDelegate
 import domain.enums.Output
 import domain.enums.Output.Companion.purchaseFormat
 import domain.enums.Process
+import domain.util.ext.mapToInt
 import domain.util.ext.splitByComma
 import domain.util.ext.toMapByEachCount
 
@@ -16,6 +17,7 @@ class InputValidator(
     override fun payValidation(value: String): Pair<String, Int> {
         val process = Process.PAY
         commonValidation(value, process)
+        inputErrorDelegate.isOverMaxPrice(value)
         inputErrorDelegate.isThousandWonUnit(value)
         return purchaseFormat(value)
     }
@@ -28,7 +30,7 @@ class InputValidator(
         inputErrorDelegate.isInvalidLottoSize(winningNumber)
         inputErrorDelegate.isExceededRange(winningNumber, process)
         inputErrorDelegate.isDuplicated(winningNumber.toMapByEachCount())
-        return winningNumber.map { it.toInt() }
+        return winningNumber.mapToInt()
     }
 
     override fun bonusNumberValidation(value: String): Int {
