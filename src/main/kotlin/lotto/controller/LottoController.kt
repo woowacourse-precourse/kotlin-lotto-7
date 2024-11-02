@@ -1,5 +1,9 @@
 package lotto.controller
 
+import lotto.view.InputView
+
 class LottoController {
-    fun start() {}
+    fun start() {
+        val purchaseMoney = InputView.inputPurchaseMoney()
+    }
 }
