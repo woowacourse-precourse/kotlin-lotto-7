@@ -8,6 +8,8 @@ fun main() {
     val numberList: List<Int> = numberInput()
 
     val lotto = Lotto(numberList)
+    lotto.inputBonus()
+
 }
 
 fun moneyInput(): Int {
