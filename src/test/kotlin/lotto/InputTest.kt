@@ -38,6 +38,13 @@ class InputTest {
                 .isInstanceOf(IllegalArgumentException::class.java)
                 .hasMessage(Exception.EMPTY_INPUT.toString())
         }
+        @Test
+        fun `사용자의 입력값이 정수로 표현할 수 있는 범위를 넘어갈 때`(){
+            val value = "10000000000000000"
+            Assertions.assertThatThrownBy { commonErrorDelegate.isOverIntMaxValue(value) }
+                .isInstanceOf(IllegalArgumentException::class.java)
+                .hasMessage(Exception.EXCEED_MAX_INT.toString())
+        }
     }
 
     @Nested
