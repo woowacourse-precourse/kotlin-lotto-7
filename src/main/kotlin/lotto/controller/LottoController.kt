@@ -2,17 +2,18 @@ package lotto.controller
 
 import lotto.domain.entity.Lotto
 import lotto.domain.entity.Lotto.Companion.toLottoNumbers
+import lotto.service.LottoService
 import lotto.view.InputView
 
-class LottoController(private val view: InputView) {
+class LottoController(private val inputView: InputView, private val service: LottoService) {
     private var price: Int = 0
     private lateinit var winLotto: Lotto
     private var bonusNumber: Int = 0
 
     fun run() {
-        price = getValidPurchasePrice(view.getPurchasePrice())
-        winLotto = getValidWinningNumbers(view.getWinningNumbers())
-        bonusNumber = getValidBonusNumber(view.getBonusNumber())
+        price = getValidPurchasePrice(inputView.getPurchasePrice())
+        winLotto = getValidWinningNumbers(inputView.getWinningNumbers())
+        bonusNumber = getValidBonusNumber(inputView.getBonusNumber())
     }
 
     private fun getValidPurchasePrice(input: String): Int {
