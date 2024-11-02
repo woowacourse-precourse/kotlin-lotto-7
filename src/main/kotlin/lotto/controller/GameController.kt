@@ -22,7 +22,7 @@ class GameController(
     }
 
     private fun readMoney(): Long {
-        return inputService.readValidInput(INFO_INPUT_MONEY.message()) { input ->
+        return inputService.readUntilValidInput(INFO_INPUT_MONEY.message()) { input ->
             inputService.validateMoney(input)
         }
     }
@@ -40,13 +40,13 @@ class GameController(
     }
 
     private fun readWinNumbers(): Lotto {
-        return inputService.readValidInput(INFO_INPUT_WINNING_NUMBER.message()) { input ->
+        return inputService.readUntilValidInput(INFO_INPUT_WINNING_NUMBER.message()) { input ->
             inputService.validateWinNumbers(input)
         }
     }
 
     private fun readBonusNumber(winNumbers: Lotto): Int {
-        return inputService.readValidInput(INFO_INPUT_BONUS_NUMBER.message()) { input ->
+        return inputService.readUntilValidInput(INFO_INPUT_BONUS_NUMBER.message()) { input ->
             inputService.validateBonusNumber(input, winNumbers)
         }
     }

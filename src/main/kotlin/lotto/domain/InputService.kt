@@ -7,7 +7,7 @@ import lotto.resources.LottoConfig.*
 import lotto.view.GameView
 
 class InputService(private val gameView: GameView) {
-    fun <T> readValidInput(infoMessage: String, validator: (String) -> T): T {
+    fun <T> readUntilValidInput(infoMessage: String, validator: (String) -> T): T {
         gameView.showMessage(infoMessage)
         while (true) {
             try {
