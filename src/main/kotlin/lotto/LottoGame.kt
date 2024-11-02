@@ -83,7 +83,7 @@ class LottoGame(
         val result = LottoResult()
         for (lotto in lottoList) {
             val matchCount = lotto.getMatchCount(winningLotto)
-            val rank = LottoRank.getRank(matchCount, lotto.contains(bonusNumber))
+            val rank = LottoRank.getRank(matchCount, lotto.containBonusNum(bonusNumber))
             result.addRank(rank)
         }
         return result

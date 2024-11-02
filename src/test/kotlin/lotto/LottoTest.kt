@@ -49,14 +49,14 @@ class LottoTest {
     @Test
     fun `로또가 보너스 번호를 포함하면 true를 반환한다`() {
         val lotto = Lotto(listOf(1, 2, 3, 4, 5, 6))
-        val containBonus = lotto.contains(4)
+        val containBonus = lotto.containBonusNum(4)
 
         assertThat(containBonus).isTrue
     }
     @Test
     fun `로또가 보너스 번호를 포함하지 않으면 false를 반환한다`() {
         val lotto = Lotto(listOf(1, 2, 3, 4, 5, 6))
-        val containBonus = lotto.contains(9)
+        val containBonus = lotto.containBonusNum(9)
 
         assertThat(containBonus).isFalse
     }

@@ -12,7 +12,7 @@ class Lotto(private val numbers: List<Int>) {
     fun getMatchCount(winningLotto: Lotto): Int {
         return numbers.intersect(winningLotto.numbers.toSet()).size
     }
-    fun contains(number: Int): Boolean {
+    fun containBonusNum(number: Int): Boolean {
         return number in numbers
     }
     override fun toString(): String {
