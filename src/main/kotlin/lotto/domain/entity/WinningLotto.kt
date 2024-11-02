@@ -1,5 +1,7 @@
 package lotto.domain.entity
 
+import java.text.DecimalFormat
+
 enum class WinningLotto(val rewardPrice: Int, var amount: Int) {
     Three(RewardPrice.PRICE_OF_THREE_WIN, 0),
     Four(RewardPrice.PRICE_OF_FOUR_WIN, 0),
@@ -9,3 +11,5 @@ enum class WinningLotto(val rewardPrice: Int, var amount: Int) {
 }
 
 fun WinningLotto.increase() = this.amount++
+
+fun WinningLotto.toPriceString() = DecimalFormat("#,###").format(this.rewardPrice)
