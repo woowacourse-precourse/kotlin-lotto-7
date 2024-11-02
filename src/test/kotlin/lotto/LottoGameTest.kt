@@ -59,9 +59,10 @@ class LottoGameTest {
     }
 
     @Test
-    fun `보너스 번호가 숫자가 아니면 예외가 발생한다`() {
+    fun `보너스 번호가 유효하지 않으면 예외가 발생한다`() {
+        val game = LottoGame(readLine = { "k" })
         assertThrows<IllegalArgumentException> {
-            lottoGame.inputBonusNumber()
+            game.inputBonusNumber()
         }
     }
 
