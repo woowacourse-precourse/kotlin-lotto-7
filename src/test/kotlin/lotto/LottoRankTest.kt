@@ -32,5 +32,10 @@ class LottoRankTest {
         val rank = LottoRank.getRank(matchCount = 6, matchBonus = false)
         assertThat(rank).isEqualTo(LottoRank.FIFTH)
     }
+    @Test
+    fun `2개 이하의 번호가 일치하면 NONE`() {
+        val rank = LottoRank.getRank(matchCount = 2, matchBonus = false)
+        assertThat(rank).isEqualTo(LottoRank.NONE)
+    }
 
 }
