@@ -10,6 +10,6 @@ class LottoResult {
         return rankCounts.getValue(rank)
     }
     fun calculateTotalPrize(): Int {
-        return rankCounts.entries.sumBy { (rank, count) -> rank.prize * count }
+        return rankCounts.entries.sumOf { (rank, count) -> rank.prize * count }
     }
 }
