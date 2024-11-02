@@ -6,7 +6,7 @@ fun inputPurchaseAmount(): Int {
     println("구입금액을 입력해 주세요.")
     return try {
         val amount = Console.readLine().toInt()
-        if (amount < 1000 || amount % 1000 != 0) {
+        require(amount >= 1000 && amount % 1000 == 0) {
             println("[ERROR] 구입금액은 1000원 이상, 1000원 단위로 입력해야 합니다.")
             inputPurchaseAmount()
         }
