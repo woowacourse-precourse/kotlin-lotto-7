@@ -1,5 +1,6 @@
 package lotto.ui.controller
 
+import lotto.domain.entity.BonusNumber
 import lotto.domain.entity.User
 import lotto.domain.entity.Lotto
 import lotto.domain.entity.WinningNumbers
@@ -14,6 +15,7 @@ class LottoController(
     private val createUserUseCase: CreateUserUseCase,
     private val createWinningNumbersUseCase: CreateWinningNumbersUseCase,
     private val createLottoUseCase: CreateLottoUseCase,
+    private val createBonusNumberUseCase: CreateBonusNumberUseCase,
     private val lottoBuyView: LottoBuyView,
     private val winningNumberInputView: WinningNumberInputView,
     private val lottoResultView: LottoResultView
@@ -23,7 +25,8 @@ class LottoController(
         buyLottoTickets(user)
         showLottoTicketsResult(user)
         val winningNumbers = getWinningNumbers()
-        showLottoResult(user.getLottoTickets(), winningNumbers)
+        val bonusNumber = getBonusNumber(winningNumbers.getNumbers())
+        showLottoResult(user.getLottoTickets(), winningNumbers, bonusNumber)
     }
 
     private fun getUser(): User {
@@ -47,16 +50,20 @@ class LottoController(
             winningNumberInputView.guideWinningNumbers()
             winningNumberInputView.inputWinningNumbers()
         }
+        return createWinningNumbersUseCase.execute(winningNumbers)
+    }
+
+    private fun getBonusNumber(winningNumbers: List<Int>): BonusNumber {
         val bonusNumber = {
             winningNumberInputView.guideBonusNumber()
             winningNumberInputView.inputBonusNumber()
         }
-        return createWinningNumbersUseCase.execute(winningNumbers, bonusNumber)
+        return createBonusNumberUseCase.execute(bonusNumber, winningNumbers)
     }
 
-    private fun showLottoResult(lottoTickets: List<Lotto>, winningNumbers: WinningNumbers) {
+    private fun showLottoResult(lottoTickets: List<Lotto>, winningNumbers: WinningNumbers, bonusNumber: BonusNumber) {
         val lottoTicketsRank = lottoTickets.map { lotto ->
-            calculateLottoRankUseCase.execute(lotto, winningNumbers)
+            calculateLottoRankUseCase.execute(lotto, winningNumbers, bonusNumber)
         }
         lottoResultView.outputWinningStatistics(lottoTicketsRank)
         val winningPrizes = lottoTicketsRank.map { it.price }
