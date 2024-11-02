@@ -69,7 +69,8 @@ class LottoGameTest {
     @Test
     fun `구입 금액에 따른 로또 목록이 생성된다`() {
         val cost = 3000
-        val lottoList = lottoGame.buyLottos(cost)
+        val game = LottoGame(readLine = { "3000" })
+        val lottoList = game.buyLottos(cost)
         assertThat(lottoList.size).isEqualTo(cost / 1000)
         lottoList.forEach { lotto ->
             val numbers = lotto.getNumbers()
