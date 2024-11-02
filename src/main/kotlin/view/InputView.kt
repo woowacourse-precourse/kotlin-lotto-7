@@ -6,9 +6,12 @@ import camp.nextstep.edu.missionutils.Console
 class InputView {
 
     fun start() {
-        val billsController = BillsController(getBills())
-        println()
-        billsController.showLotto()
+        var error = true
+        while (error) {
+            val billsController = BillsController(getBills())
+            error = billsController.showLotto()
+            println()
+        }
     }
 
     private fun resume() {

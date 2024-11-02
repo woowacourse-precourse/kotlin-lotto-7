@@ -1,13 +1,16 @@
 package validator
 
 class BillValidator {
-    fun billCheck(billInput: Int) {
+    fun billCheck(billInput: Int): Boolean {
+        var error = false
         try {
             isBillEnough(billInput)
             isBillDivided(billInput)
         } catch (e: IllegalArgumentException) {
             println(e.message)
+            error = true
         }
+        return error
     }
 
     private fun isBillEnough(billNumber: Int) {

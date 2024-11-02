@@ -1,13 +1,16 @@
 package validator
 
 class InputValidator {
-    fun inputCheck(input: String) {
+    fun inputCheck(input: String): Boolean {
+        var error = false
         try {
             isNull(input)
             isNumber(input)
         } catch (e: IllegalArgumentException) {
             println(e.message)
+            error = true
         }
+        return error
     }
 
     private fun isNumber(input:String) {

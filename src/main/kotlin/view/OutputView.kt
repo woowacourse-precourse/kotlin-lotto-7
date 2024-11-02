@@ -3,10 +3,12 @@ package view
 class OutputView {
 
     fun printLottoNumbers(count: Int, lottos: List<List<Int>>) {
+        println()
         println(amountNotice.format(count))
         for (i in 0..lottos.lastIndex) {
             println(lottos[i])
         }
+        println()
     }
 
     companion object {

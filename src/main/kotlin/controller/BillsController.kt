@@ -13,12 +13,17 @@ class BillsController(private val input: String) {
     private val lottoShop = LottoShop()
     private val outputView = OutputView()
 
-    fun showLotto() {
-        inputValidator.inputCheck(input)
+    fun showLotto(): Boolean {
+        if(inputValidator.inputCheck(input)) {
+            return true
+        }
         val bills = input.toInt()
-        billValidator.billCheck(bills)
+        if(billValidator.billCheck(bills)) {
+            return true
+        }
         val lottoCount = bills / 1000
         outputView.printLottoNumbers(lottoCount, buyLotto(lottoCount))
+        return false
     }
 
     private fun buyLotto(count: Int): List<List<Int>> {
