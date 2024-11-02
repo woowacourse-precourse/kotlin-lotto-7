@@ -11,6 +11,7 @@ import java.util.TreeSet
 class LottoViewModel(
     private val validator: InputValidate,
     private val lottoFactory: LottoFactory
+    private val calculator: Calculate,
 ) {
 
     var state = PurchaseState()
@@ -74,11 +75,13 @@ class LottoViewModel(
         state.reward.winning.mapKeys {
             winningMoney += it.key.getReword() * it.value
         }
+    private fun getRateOfReturn() {
+        val winningMoney = calculator.calculateWinningMoney(state.reward.winning)
 
         if (winningMoney != 0L) {
-            val rateOfReturn = (winningMoney.toDouble() / totalPurchaseAmount) * 100
-            val formattedRateOfReturn = rateOfReturn.convertRoundAtTwoDecimal()
-            state = state.copy(rateOfReturn = formattedRateOfReturn)
+            val purchaseAmount = state.purchaseLottoCount
+            val rateOfReturn = calculator.calculateRateOfReturn(winningMoney, purchaseAmount)
+            state = state.copy(rateOfReturn = rateOfReturn)
         }
     }
 }
