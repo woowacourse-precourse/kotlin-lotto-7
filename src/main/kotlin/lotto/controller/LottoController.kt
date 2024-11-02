@@ -1,10 +1,7 @@
 package lotto.controller
 
 import camp.nextstep.edu.missionutils.Console.readLine
-import lotto.Cashier
-import lotto.Lotto
-import lotto.LottoAmount
-import lotto.LottoMachine
+import lotto.*
 
 class LottoController(
     private val cashier: Cashier,
@@ -41,5 +38,7 @@ class LottoController(
         println("당첨 번호를 입력해 주세요.")
         val winningLottoNumber = Lotto(readLine().split(",").map { it.toInt() })
         val winningBonusNumber = readLine().toInt()
+
+        val winningLotto = WinningLotto(winningLottoNumber, winningBonusNumber)
     }
 }
