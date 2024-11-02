@@ -1,6 +1,6 @@
 package lotto.controller
 
-import lotto.Lotto
+import lotto.model.Lotto
 import lotto.model.LottoNumberGenerator
 import lotto.model.LottoTicket
 

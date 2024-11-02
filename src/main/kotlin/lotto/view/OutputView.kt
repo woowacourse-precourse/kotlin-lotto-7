@@ -1,6 +1,6 @@
 package lotto.view
 
-import lotto.Lotto
+import lotto.model.Lotto
 import lotto.util.InfoMessages
 import lotto.util.InputMessages
 

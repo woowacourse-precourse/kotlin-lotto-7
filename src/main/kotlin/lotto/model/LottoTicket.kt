@@ -1,7 +1,5 @@
 package lotto.model
 
-import lotto.Lotto
-
 class LottoTicket {
     private var _numberOfPurchase = 0
 
