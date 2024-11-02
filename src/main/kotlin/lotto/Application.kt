@@ -1,19 +1,12 @@
 package lotto
 
 import lotto.ui.Ui
+import lotto.util.keepCallingForSuccessResult
 
 fun main() {
     val ui = Ui()
 
-    val budget = keepRequestingForValidBudget(ui)
+    val budget = keepCallingForSuccessResult(onFailure = ui::handleFailure, actionToCall = ui::requestBudget)
 }
 
-private fun keepRequestingForValidBudget(ui: Ui): Int {
-    while (true) {
-        ui.requestBudget().onSuccess { budget ->
-            return budget
-        }.onFailure { exception ->
-            ui.displayExceptionMessage(exception.message)
-        }
-    }
-}
+fun Ui.handleFailure(exception: Throwable): Unit = displayExceptionMessage(exception.message)
