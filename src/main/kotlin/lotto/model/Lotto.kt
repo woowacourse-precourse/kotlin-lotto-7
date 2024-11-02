@@ -10,4 +10,18 @@ class Lotto(private val numbers: List<Int>) {
     fun getNumbers(): List<Int> {
         return numbers.sorted() // 번호를 오름차순으로 정렬해서 반환
     }
+
+    fun compareWithWinningNumbers(winningNumbers: List<Int>, bonusNumber: Int): Rank {
+        val matchCount = numbers.count { it in winningNumbers }
+        val bonusMatch = numbers.contains(bonusNumber)
+
+        return when {
+            matchCount == 6 -> Rank.FIRST
+            matchCount == 5 && bonusMatch -> Rank.SECOND
+            matchCount == 5 -> Rank.THIRD
+            matchCount == 4 -> Rank.FOURTH
+            matchCount == 3 -> Rank.FIFTH
+            else -> Rank.FIFTH // 3개 미만인 경우를 처리할 수 있습니다.
+        }
+    }
 }

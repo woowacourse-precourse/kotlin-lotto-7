@@ -1,6 +1,7 @@
 package lotto.view
 
 import camp.nextstep.edu.missionutils.Console
+import lotto.model.Rank
 
 class LottoView {
     fun displayWinningNumbers(winningNumbers: List<Int>) {
@@ -48,5 +49,21 @@ class LottoView {
     fun displayPurchaseCount(count: Int) {
         println()
         println("${count}개를 구매했습니다.")
+    }
+
+    fun displayStatistics(statistics: Map<Rank, Int>) {
+        Rank.values().forEach { rank ->
+            val count = statistics.getOrDefault(rank, 0)
+            println("${rank.message} $count")
+        }
+    }
+
+    fun displayYield(yield: Double) {
+        println("총 수익률은 ${"%.1f".format(yield)}%입니다.") // 소수점 1자리까지 포맷하여 출력
+    }
+
+    fun displayWinningStatistics() {
+        println("당첨 통계")
+        println("---")
     }
 }
