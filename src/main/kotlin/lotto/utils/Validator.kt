@@ -1,5 +1,6 @@
 package lotto.utils
 
+import lotto.constants.Constants
 import lotto.constants.ErrorMessage
 
 object Validator {
@@ -11,7 +12,7 @@ object Validator {
     }
 
     fun getWinningNumber(inputWinningNumber: String): Set<Int> {
-        val winningNumber = inputWinningNumber.split(",").mapNotNull { it.trim().toIntOrNull() }
+        val winningNumber = inputWinningNumber.split(Constants.DELIMITER).mapNotNull { it.trim().toIntOrNull() }
         require(checkSize(winningNumber)) { ErrorMessage.LOTTO_COUNT_ERROR }
         require(isDuplicatedNumbers(winningNumber)) { ErrorMessage.DUPLICATED_NUMBER }
         require(isValidRange(*winningNumber.toIntArray())) { ErrorMessage.RANGE_ERROR }
@@ -26,16 +27,17 @@ object Validator {
         return bonusNumber
     }
 
-    private fun isValidRange(vararg numbers: Int): Boolean = numbers.map { it in 1..45 }.all { it }
+    fun isDuplicatedNumbers(winningNumber: List<Int>) = winningNumber.size != winningNumber.distinct().size
 
-    private fun isDuplicatedNumbers(winningNumber: List<Int>) = winningNumber.size != winningNumber.distinct().size
+    private fun isValidRange(vararg numbers: Int): Boolean =
+        numbers.map { it in Constants.LOTTO_RANGE_START..Constants.LOTTO_RANGE_END }.all { it }
 
     private fun isDuplicatedBonusNumber(winningNumber: Set<Int>, bonusNumber: Int): Boolean =
         !winningNumber.contains(bonusNumber)
 
     private fun isPositive(price: Int) = price > 0
 
-    private fun isDivisible(price: Int) = price % 1000 == 0
+    private fun isDivisible(price: Int) = price % Constants.DIVISOR == 0
 
-    private fun checkSize(winningNumber: List<Int>) = winningNumber.size == 6
+    private fun checkSize(winningNumber: List<Int>) = winningNumber.size == Constants.LOTTO_SIZE
 }

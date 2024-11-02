@@ -1,5 +1,6 @@
 package lotto.controller
 
+import lotto.constants.Constants
 import lotto.model.Lotto
 import lotto.model.Rank
 import lotto.model.Stat
@@ -15,7 +16,7 @@ class LottoController {
 
     fun start() {
         val price = repeatLogic { Validator.getPrice(inputView.readPrice()) }
-        val lottoCount = price / 1000
+        val lottoCount = price / Constants.DIVISOR
         val lotto = generateLotto(lottoCount)
 
         outputView.printLottoCount(lottoCount)
