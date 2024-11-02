@@ -19,9 +19,12 @@ fun main() {
     val lottoNumber = randomNumber.randomLottos(lottoCount)
     output.printLottoNumbers(lottoNumber)
 
+    val lottos = lottoNumber.map { Lotto(it) }
 
     val inputNumbers = input.getLottoNumbers()
     val inputBonusNumber = input.getLottoBonusNumbers()
+
+    lottos.forEach{ println(it.getRank(inputNumbers, inputBonusNumber)) }
 
 
 }
