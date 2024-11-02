@@ -10,6 +10,9 @@ fun main() {
     val lotto = Lotto(numberList)
     lotto.inputBonus()
 
+    val repeat = money / 1000
+
+    //printLotto(repeat)
 }
 
 fun moneyInput(): Int {
