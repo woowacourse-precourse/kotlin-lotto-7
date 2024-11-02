@@ -10,8 +10,10 @@ class Input {
         return winningNumber.split(',')
     }
 
-    fun readBonusNumber(){
-
+    fun readBonusNumber():Int{
+        Output.printBonusNumberToInput()
+        val bonusNumber = Console.readLine()
+        return bonusNumber.toInt()
     }
 
     fun readMoney():Int{
