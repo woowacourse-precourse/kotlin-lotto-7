@@ -1,26 +1,22 @@
 package lotto
 
-import camp.nextstep.edu.missionutils.Console
+import view.Input
 
-class PurchaseAmount {
-//    init {
-//        purchaseAmountMessage()
-//    }
+class PurchaseAmountValidator {
 
     private var validatorTest = false
     private var amount = ""
 
-    fun lottoPurchased(): Int {
+    fun validate(): Int {
         while (!validatorTest) {
             purchaseAmountException()
         }
         return amount.toInt()
     }
 
-
     private fun purchaseAmountException(): Any {
         try {
-            amount = purchaseAmountInput()
+            amount = Input().purchaseAmountInput()
             checkBlank(amount)
             checkNumber(amount)
             checkDivide(amount)
@@ -29,10 +25,6 @@ class PurchaseAmount {
         } catch (ex: Exception) {
             return println(ex.message)
         }
-    }
-
-    private fun purchaseAmountInput(): String {
-        return Console.readLine()
     }
 
     private fun checkBlank(amount: String) {
@@ -44,10 +36,6 @@ class PurchaseAmount {
     }
 
     private fun checkDivide(amount: String) {
-        require(amount.toInt() % 1000 == 0) { ErrorList.NOT_DIVIDE_THOUSAND }
+        require(amount.toInt() % 1000 == 0 && amount.toInt() != 0) { ErrorList.NOT_DIVIDE_THOUSAND }
     }
-
-//    private fun purchaseAmountMessage() {
-//        return println(Message.ENTER_PURCHASE_AMOUNT)
-//    }
 }

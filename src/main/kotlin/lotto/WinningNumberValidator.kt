@@ -1,33 +1,26 @@
 package lotto
 
-import camp.nextstep.edu.missionutils.Console
+import view.Input
 
-class WinningNumber {
-//    init {
-//        winningNumberMessege()
-//    }
+class WinningNumberValidator {
 
     private var validatorTest = false
     private lateinit var winningNumber: List<String>
 
-    fun winningNumber(): List<Int> {
+    fun validate(): List<Int> {
         while (!validatorTest) {
             winningNumberException()
         }
         return winningNumber.map { it.toInt() }
     }
 
-    private fun winningNumberInput(): List<String> {
-        return separateWinningNumber(Console.readLine())
-    }
-
     private fun winningNumberException(): Any {
         try {
-            winningNumber = validateWinningNumber(winningNumberInput())
+            winningNumber = validateWinningNumber(Input().winningNumberInput())
             validatorTest = true
             return winningNumber
         } catch (ex: Exception) {
-            return println(ex.message)
+            return print(ex.message)
         }
     }
 
@@ -57,12 +50,4 @@ class WinningNumber {
     private fun checkDuplicates(number: List<String>) {
         require(number.size == number.toSet().size) { ErrorList.DUPLICATED_NUMBERS }
     }
-
-    private fun separateWinningNumber(readLine: String): List<String> {
-        return readLine.split(SettingValue.NUMBER_DELIMITER).filter { it.isNotEmpty() }
-    }
-
-//    private fun winningNumberMessege() {
-//        return println(Message.ENTER_WINNING_NUMBER)
-//    }
 }

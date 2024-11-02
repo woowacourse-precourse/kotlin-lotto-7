@@ -1,16 +1,12 @@
 package lotto
 
-import camp.nextstep.edu.missionutils.Console
+import view.Input
 
-class BonusNumber {
-//    init {
-//        bonusNumberMessege()
-//    }
-
+class BonusNumberValidator {
     private var validatorTest = false
     private var bonusNumber = ""
 
-    fun bonusNumber(winningNumber: List<Int>): Int {
+    fun validate(winningNumber: List<Int>): Int {
         while (!validatorTest) {
             bonusNumberException(winningNumber)
         }
@@ -19,7 +15,7 @@ class BonusNumber {
 
     private fun bonusNumberException(winningNumber: List<Int>): Any {
         try {
-            bonusNumber = bonusNumberInput()
+            bonusNumber = Input().bonusNumberInput()
             checkBlank(bonusNumber)
             checkNumber(bonusNumber)
             checkRange(bonusNumber)
@@ -27,12 +23,8 @@ class BonusNumber {
             validatorTest = true
             return bonusNumber
         } catch (ex: Exception) {
-            return println(ex.message)
+            return print(ex.message)
         }
-    }
-
-    private fun bonusNumberInput(): String {
-        return Console.readLine()
     }
 
     private fun checkBlank(bonusNumber: String) {
@@ -50,8 +42,4 @@ class BonusNumber {
     private fun checkDuplicate(bonusNumber: String, winningNumber: List<Int>) {
         require(!winningNumber.contains(bonusNumber.toInt())) { ErrorList.DUPLICATED_NUMBERS }
     }
-
-//    private fun bonusNumberMessege() {
-//        return println(Message.ENTER_BONUS_NUMBER)
-//    }
 }

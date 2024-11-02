@@ -3,29 +3,21 @@ package lotto
 import camp.nextstep.edu.missionutils.Randoms
 
 
-class RandomLottoGenerator(amount: Int) {
-    init {
-        println()
-        println(lottoCountCalculate(amount).toString() + Message.NUMBER_OF_LOTTO)
-    }
+class RandomLottoGenerator {
+    private var lottoCount = 0
 
     fun lottoPurchase(amount: Int): MutableList<List<Int>> {
-        val lottoCount = lottoCountCalculate(amount)
+        lottoCount = amount / SettingValue.LOTTO_PRICE
         return repeatGenerator(lottoCount)
-
     }
 
-    private fun repeatGenerator(lottoGame: Int): MutableList<List<Int>> {
+    private fun repeatGenerator(lottoCount: Int): MutableList<List<Int>> {
         val randomLottoList = mutableListOf<List<Int>>()
-        repeat(lottoGame) {
+        repeat(lottoCount) {
             val randomLottoNumber = randomLottoGenerate()
             randomLottoList.add(randomLottoNumber)
         }
         return randomLottoList
-    }
-
-    private fun lottoCountCalculate(amount: Int): Int {
-        return (amount / SettingValue.LOTTO_PRICE)
     }
 
     private fun randomLottoGenerate(): List<Int> {
