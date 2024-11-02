@@ -89,3 +89,11 @@ fun inputBonusNumber(): Int {
         }
     }
 }
+
+/* 당첨 순위 확인 함수 */
+fun checkLottoRank(lotto: List<Int>, winningNumbers: List<Int>, bonusNumber: Int): LottoRank? {
+    val matchingCnt = lotto.intersect(winningNumbers.toSet()).size //일치한 숫자의 개수
+    val hasBonusNumber = lotto.contains(bonusNumber)
+
+    return LottoRank.from(matchingCnt, hasBonusNumber)
+}
