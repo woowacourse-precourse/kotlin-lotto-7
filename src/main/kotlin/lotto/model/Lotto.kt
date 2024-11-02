@@ -7,7 +7,11 @@ class Lotto(private val numbers: List<Int>) {
         require(numbers.size == 6) { "[ERROR] 로또 번호는 6개여야 합니다." }
     }
 
-    fun getNumbers(): String {
-        return numbers.sorted().joinToString(prefix = "[", postfix = "]")
+    fun getNumbers(): List<Int> {
+        return numbers.sorted()
+    }
+
+    fun printNumbers(): String {
+        return getNumbers().joinToString(prefix = "[", postfix = "]")
     }
 }
