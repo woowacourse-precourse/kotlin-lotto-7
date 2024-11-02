@@ -1,26 +1,29 @@
 package lotto.ui.controller
 
 import lotto.common.LOTTO_PRICE
+import lotto.di.AppContainer
 import lotto.domain.entity.BonusNumber
-import lotto.domain.entity.User
 import lotto.domain.entity.Lotto
+import lotto.domain.entity.User
 import lotto.domain.entity.WinningNumbers
-import lotto.domain.usecase.*
 import lotto.ui.view.LottoBuyView
 import lotto.ui.view.LottoResultView
 import lotto.ui.view.WinningNumberInputView
 
 class LottoController(
-    private val calculateLottoRankUseCase: CalculateLottoRankUseCase,
-    private val calculateLottoReturnUseCase: CalculateLottoReturnUseCase,
-    private val createUserUseCase: CreateUserUseCase,
-    private val createWinningNumbersUseCase: CreateWinningNumbersUseCase,
-    private val createLottoUseCase: CreateLottoUseCase,
-    private val createBonusNumberUseCase: CreateBonusNumberUseCase,
+    appContainer: AppContainer,
     private val lottoBuyView: LottoBuyView,
     private val winningNumberInputView: WinningNumberInputView,
     private val lottoResultView: LottoResultView
 ) {
+
+    private val createUserUseCase = appContainer.createUserUseCase
+    private val createLottoUseCase = appContainer.createLottoUseCase
+    private val createWinningNumbersUseCase = appContainer.createWinningNumbersUseCase
+    private val createBonusNumberUseCase = appContainer.createBonusNumberUseCase
+    private val calculateLottoRankUseCase = appContainer.calculateLottoRankUseCase
+    private val calculateLottoReturnUseCase = appContainer.calculateLottoReturnUseCase
+
     fun run() {
         val user = getUser()
         buyLottoTickets(user)
