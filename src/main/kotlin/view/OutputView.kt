@@ -24,6 +24,7 @@ object OutputView {
     }
 
     fun printWinningStatistics() {
+        println()
         println(WINNING_STATISTICS_OUTPUT_MESSAGE)
         println(DASH_OUTPUT_MESSAGE)
         Prize.entries.forEach {
