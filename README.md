@@ -45,7 +45,7 @@
 ## 구현할 기능 목록
 
 - [x] 입력 기능
-- [ ] 로또 랜덤 구입 기능
+- [x] 로또 랜덤 구입 기능
 - [ ] 당첨 여부 확인 기능
 - [ ] 당첨 통계 기능
 - [ ] 출력 기능
@@ -61,10 +61,6 @@
 object Instructions {
     fun purchaseAmountInstructions(){
         println("구입금액을 입력해 주세요.")
-    }
-
-    fun numberOfPurchasesInstructions(purchaseAmount:Int){
-        println("\n${purchaseAmount}개를 구매했습니다.")
     }
 
     fun winningNumberInstructions(){
@@ -93,16 +89,19 @@ object Input {
     private fun inputPurchaseAmount(){
         Instructions.purchaseAmountInstructions()
         val purchaseAmount = readln().toInt()
+        LottoSystem.savePurchaseAmount(purchaseAmount)
     }
 
     private fun inputWinningNumber(){
         Instructions.winningNumberInstructions()
         val winningNumber = readLine()!!.split(",").map { it.trim().toInt() }
+        LottoSystem.saveWinningNumber(winningNumber)
     }
 
     private fun inputBonusNumber(){
         Instructions.bonusNumberInstructions()
         val bonusNumber = readln().toInt()
+        LottoSystem.saveBonusNumber(bonusNumber)
     }
 
 }
@@ -112,3 +111,88 @@ object Input {
 - 구입 금액, 당첨 번호, 보너스 번호를 입력 받음
 - 싱글톤 객체로 작성
 - 객체 생성시 Instructions 객체를 통해 안내 문구를 출력 후 `readln()`, `readLine()`함수로 입력을 받음
+- 입력받은 값은 LottoSystem 객체에 저장
+
+### 로또 랜덤 구입 기능
+
+#### LottoSystem
+
+```kotlin
+object LottoSystem {
+    private lateinit var winningNumber: List<Int>
+    private var bonusNumber: Int = 0
+    private var purchaseAmount: Int = 0
+    private var numberOfPurchases: Int = 0
+    private var randomNumbers = mutableListOf<MutableList<Int>?>()
+
+    init {
+        Input
+    }
+    ...
+}
+```
+- 로또의 전반적인 시스템을 관리하는 싱글톤 객체
+- `LottoSystem` 객체 생성시 즉, 시스템 실행 시 `Input` 객체를 생성해 사용자로부터 입력을 받음
+
+#### 구입 개수 저장
+
+```kotlin
+object LottoSystem {
+    ...
+    fun savePurchaseAmount(purchaseAmount: Int) {
+        this.purchaseAmount = purchaseAmount
+        saveNumberOfPurchases()
+    }
+    private fun saveNumberOfPurchases() {
+        numberOfPurchases = purchaseAmount / 1000
+        PrintResult.numberOfPurchasesInstructions(numberOfPurchases)
+        saveRandomNumbers(numberOfPurchases)
+    }
+    ...
+}
+```
+- `Input` 객체에서 호출한 `savePurchaseAmount()` 함수에서 구입 금액을 받은 후 `saveNumberOfPurchases()` 함수를 호출해 구입 개수를 구한 후 저장
+- 저장된 구입 개수는 `PrintResult` 객체를 통해 출력
+- `saveNumberOfPurchases()` 함수에서 `saveRandomNumbers()` 함수를 호출하여 구입 개수 만큼 랜덤 번호를 생성
+
+
+#### 구입 개수 만큼 랜덤 구입
+
+```kotlin
+object LottoSystem {
+    ...
+    private fun saveRandomNumbers(numberOfPurchases: Int) {
+        repeat(numberOfPurchases) {
+            val randomNumber = pickRandomNumbers()
+            randomNumbers.add(randomNumber!!.sorted().toMutableList())
+        }
+        PrintResult.printRandomNumbers()
+    }
+
+    private fun pickRandomNumbers(): MutableList<Int>? = Randoms.pickUniqueNumbersInRange(1, 45, 6)
+
+    ...
+}
+```
+- `saveRandomNumbers()` 함수에서 `pickRandomNumbers()` 함수를 호출하여 랜덤한 번호를 구입한 개수 만큼 생성
+- `pickRandomNumbers()` 함수에서 1~45 사이의 값중 중복이 되지 않는 6개의 수를 뽑은 리스트를 리턴
+- 리턴하여 받은 랜덤 번호를 정렬후 `randomNumbers` 리스트에 저장
+- 생성된 랜덤 번호를 `PrintResult` 객체를 통해 출력
+
+#### PrintResult
+
+```kotlin
+object PrintResult {
+    fun printRandomNumbers() {
+        val randomNumbers = LottoSystem.getRandomNumbers()
+        randomNumbers.forEach { println(it) }
+    }
+
+    fun numberOfPurchasesInstructions(purchaseAmount:Int){
+        println("\n${purchaseAmount}개를 구매했습니다.")
+    }
+    
+}
+```
+- 결과를 출력하는 싱글톤 객체
+- 구입한 로또 개수, 생성된 로또 번호 등을 출력
