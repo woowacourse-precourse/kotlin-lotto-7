@@ -2,6 +2,7 @@ package lotto.utils
 
 import lotto.constants.Constants
 import lotto.constants.ErrorMessage
+import lotto.model.Lotto
 
 object Validator {
     fun getPrice(inputPrice: String): Int {
@@ -27,7 +28,14 @@ object Validator {
         return bonusNumber
     }
 
-    fun isUniqueNumbers(winningNumber: List<Int>) = winningNumber.size == winningNumber.distinct().size
+    fun validateLotto(lotto: Lotto) {
+        val numbers = lotto.getNumbers()
+        require(numbers.size == Constants.LOTTO_SIZE) { ErrorMessage.LOTTO_COUNT_ERROR }
+        require(isUniqueNumbers(numbers)) { ErrorMessage.DUPLICATED_NUMBER }
+        require(isValidRange(*numbers.toIntArray())) { ErrorMessage.RANGE_ERROR }
+    }
+
+    private fun isUniqueNumbers(winningNumber: List<Int>) = winningNumber.size == winningNumber.distinct().size
 
     private fun isValidRange(vararg numbers: Int): Boolean =
         numbers.map { it in Constants.LOTTO_RANGE_START..Constants.LOTTO_RANGE_END }.all { it }

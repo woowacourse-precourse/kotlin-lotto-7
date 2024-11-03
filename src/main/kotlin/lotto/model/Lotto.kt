@@ -1,13 +1,10 @@
 package lotto.model
 
-import lotto.constants.Constants
-import lotto.constants.ErrorMessage
 import lotto.utils.Validator
 
 class Lotto(private val numbers: List<Int>) {
     init {
-        require(numbers.size == Constants.LOTTO_SIZE) { ErrorMessage.LOTTO_COUNT_ERROR }
-        require(Validator.isUniqueNumbers(numbers)) { ErrorMessage.DUPLICATED_NUMBER }
+        Validator.validateLotto(this)
     }
 
     fun getNumbers() = numbers
