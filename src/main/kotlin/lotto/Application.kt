@@ -1,5 +1,8 @@
 package lotto
 
+import lotto.view.InputView
+import lotto.view.OutputView
+
 fun main() {
-    // TODO: 프로그램 구현
+    LottoMachine(InputView(), OutputView(), LottoService()).start()
 }
