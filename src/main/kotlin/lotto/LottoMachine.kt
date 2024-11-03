@@ -35,6 +35,14 @@ class LottoMachine(private val payment: String) {
         return result
     }
 
+    fun countPrize(prizeList: List<Pair<Int, Boolean>>): Map<Rank?, Int> {
+        val rank = prizeList.groupingBy {
+            Rank.matchRankInfo(it.first, it.second)
+        }.eachCount()
+
+        return rank
+    }
+
     companion object {
         const val LOTTO_PRICE = 1000
         const val LOTTO_MIN_NUM = 1
