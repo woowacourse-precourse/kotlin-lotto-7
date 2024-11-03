@@ -2,8 +2,11 @@ package lotto
 
 class Lotto(private val numbers: List<Int>) {
     init {
-        require(numbers.size == 6) { "[ERROR] 로또 번호는 6개여야 합니다." }
+        require(numbers.size == 6) { "$ERROR $LOTTO_SIZE_MESSAGE" }
     }
 
-    // TODO: 추가 기능 구현
+    companion object {
+        const val ERROR = "[ERROR]"
+        const val LOTTO_SIZE_MESSAGE = "로또 번호는 6개여야 합니다."
+    }
 }
