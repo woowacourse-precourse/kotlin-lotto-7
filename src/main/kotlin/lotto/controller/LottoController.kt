@@ -3,6 +3,7 @@ package lotto.controller
 import camp.nextstep.edu.missionutils.Console.readLine
 import lotto.*
 import lotto.LottoPrize.NONE_PRIZE
+import lotto.LottoPrize.SECOND_PRIZE
 import java.text.DecimalFormat
 
 class LottoController(
@@ -10,12 +11,13 @@ class LottoController(
     private val lottoMachine: LottoMachine,
 ) {
     private var purchasedLottos = emptyList<Lotto>()
+    private lateinit var amount: LottoAmount
 
     fun start() {
         println("구입금액을 입력해 주세요.")
         val inputAmount = readLine()
         require(inputAmount.isNotBlank()) { "[ERROR] 공백은 입력할 수 없습니다." }
-        val amount =
+        amount =
             LottoAmount(
                 inputAmount.toIntOrNull()
                     ?: throw IllegalArgumentException("[ERROR] 정수만 입력할 수 있습니다.")
@@ -62,8 +64,17 @@ class LottoController(
             .filter { it != NONE_PRIZE }
             .forEach { prize ->
                 val count = prizeCounts[prize] ?: 0
+                
                 println("${prize.matchingCount}개 일치 (${THOUSAND_COMMA.format(prize.price)}원) - ${count}개")
             }
+
+        printLottoYield(prizes)
+    }
+
+    private fun printLottoYield(prizes: List<LottoPrize>) {
+        val totalPrizeMoney = prizes.sumOf { it.price }
+        val yield = (totalPrizeMoney.toDouble() / amount.lottoAmount) * 100
+        println("총 수익률은 ${yield}%입니다.")
     }
 
     companion object {
