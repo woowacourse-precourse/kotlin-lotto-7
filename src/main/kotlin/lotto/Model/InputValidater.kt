@@ -13,7 +13,7 @@ object InputValidater {
         }
     }
 
-    fun validateLottoNumbers(lottoNumbers: List<String>) {
+    fun validateFirstPrizeNumbers(lottoNumbers: List<String>) {
         val isLottoNumbersAllDigit = lottoNumbers.all { lottoNumber ->
             lottoNumber.all { it.isDigit() }
         }

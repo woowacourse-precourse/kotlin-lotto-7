@@ -10,11 +10,11 @@ class InputView {
         return inputPurchaseAmount
     }
 
-    fun getWinningNumbers(): String {
+    fun getFirstPrizeNumbers(): String {
         println("당첨 번호를 입력해주세요.")
-        val winningNumbers = Console.readLine()
+        val firstPrizeNumbers = Console.readLine()
         println()
-        return winningNumbers
+        return firstPrizeNumbers
     }
 
     fun getBonusNumber(): String {

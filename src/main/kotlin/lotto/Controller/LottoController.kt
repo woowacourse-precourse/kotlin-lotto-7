@@ -24,9 +24,9 @@ class LottoController {
         val purchaseAmount = getPurchaseInput()
         val lottoAmount = purchaseAmount / Lotto.COST
         releaseLottos(lottoAmount)
-        val winningLotto = getWinningLotto()
-        val bonusNumber = getBonusNumber(winningLotto)
-        winningLottoResult = WinningLottoResult(winningLotto, bonusNumber)
+        val firstPrizeLotto = getFirstPrizeLotto()
+        val bonusNumber = getBonusNumber(firstPrizeLotto)
+        winningLottoResult = WinningLottoResult(firstPrizeLotto, bonusNumber)
     }
 
     private fun getPurchaseInput(): Int {
@@ -41,12 +41,12 @@ class LottoController {
         }
     }
 
-    private fun getWinningLotto(): Lotto {
+    private fun getFirstPrizeLotto(): Lotto {
         while (true) {
             try {
-                val inputWinningLotto = inputView.getWinningNumbers()
+                val inputWinningLotto = inputView.getFirstPrizeNumbers()
                 val rawLottoNumbers = inputWinningLotto.split(LOTTO_SPLIT_DELIMITER)
-                InputValidater.validateLottoNumbers(rawLottoNumbers)
+                InputValidater.validateFirstPrizeNumbers(rawLottoNumbers)
                 val lottoNumbers = rawLottoNumbers.map { it.toInt() }
                 return Lotto(lottoNumbers)
             } catch (e: IllegalArgumentException) {
