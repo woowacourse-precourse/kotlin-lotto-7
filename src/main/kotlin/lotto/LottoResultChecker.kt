@@ -25,6 +25,6 @@ object LottoResultChecker {
         val profit =
             winningCounts[3] * 5000 + winningCounts[4] * 50000 + winningCounts[5] * 1500000 + winningCounts[6] * 2000000000 + bonusWin * 30000000
         val profitRate = profit.toDouble() / money
-        return profitRate
+        return profitRate * 100
     }
 }

@@ -2,7 +2,7 @@ package lotto
 
 class OutputView {
     fun purchasedMessage(num: Int) {
-        println("$num 개를 구매했습니다.")
+        println("${num}개를 구매했습니다.")
     }
 
     fun lottoList(lottos: List<Lotto>) {
@@ -21,6 +21,6 @@ class OutputView {
                 "${5}개 일치 (1,500,000원) - ${winningCounts[5]}개\n" +
                 "${5}개 일치, 보너스 볼 일치 (30,000,000원) - ${bonusWin}개\n" +
                 "${6}개 일치 (2,000,000,000원) - ${winningCounts[6]}개\n")
-        println("총 수익률은 ${profitRatio}입니다.")
+        println("총 수익률은 ${profitRatio}%입니다.")
     }
 }

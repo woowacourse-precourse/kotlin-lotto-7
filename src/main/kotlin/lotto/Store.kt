@@ -14,7 +14,7 @@ class Store {
         return purchasedLottos
     }
 
-    private fun generateLotto(): Lotto {
+    fun generateLotto(): Lotto {
         var numbers = Randoms.pickUniqueNumbersInRange(1, 45, 6)
         while (numbers.distinct().size != numbers.size) {
             numbers = Randoms.pickUniqueNumbersInRange(1, 45, 6)
