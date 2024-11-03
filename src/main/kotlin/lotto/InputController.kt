@@ -6,32 +6,24 @@ class InputController(
 ) {
 
     fun getValidPurchaseAmount(): Int {
-        while (true) {
-            try {
-                val input = inputView.getPurchaseAmount()
-                return inputValidator.validatePurchaseAmount(input)
-            } catch (e: IllegalArgumentException) {
-                println(e.message)
-            }
-        }
+        return getValidInput { inputView.getPurchaseAmount() }
+            .let { inputValidator.validatePurchaseAmount(it) }
     }
 
     fun getValidWinningNumbers(): List<Int> {
-        while (true) {
-            try {
-                val input = inputView.getWinningNumbers()
-                return inputValidator.validateWinningNumbers(input)
-            } catch (e: IllegalArgumentException) {
-                println(e.message)
-            }
-        }
+        return getValidInput { inputView.getWinningNumbers() }
+            .let { inputValidator.validateWinningNumbers(it) }
     }
 
     fun getValidBonusNumber(winningNumbers: List<Int>): Int {
+        return getValidInput { inputView.getBonusNumber() }
+            .let { inputValidator.validateBonusNumber(it, winningNumbers) }
+    }
+
+    private fun <T> getValidInput(inputProvider: () -> T): T {
         while (true) {
             try {
-                val input = inputView.getBonusNumber()
-                return inputValidator.validateBonusNumber(input, winningNumbers)
+                return inputProvider()
             } catch (e: IllegalArgumentException) {
                 println(e.message)
             }
