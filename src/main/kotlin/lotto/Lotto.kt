@@ -10,6 +10,10 @@ class Lotto(private val numbers: List<Int>) {
         return bonusNumer in numbers
     }
 
+    fun countMatchingNumbers(winningNumbers: List<Int>): Int {
+        return numbers.count { it in winningNumbers }
+    }
+
     override fun toString(): String {
         return numbers.joinToString(", ", "[", "]")
     }
