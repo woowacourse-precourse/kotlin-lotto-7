@@ -19,6 +19,10 @@ class GameResult {
     }
 
     fun getEarningRate(): Double {
-        return totalPrizeMoney.toDouble() / (gameCount * 1000)
+        return totalPrizeMoney.toDouble() / (gameCount * LOTTO_PRICE)
+    }
+
+    companion object {
+        private const val LOTTO_PRICE = 1000
     }
 }

@@ -4,7 +4,6 @@ import lotto.domain.GameResult
 import lotto.domain.Lotto
 import lotto.domain.Rank
 import java.text.DecimalFormat
-import kotlin.math.round
 
 object OutputView {
     fun printPurchaseAmount(amount: Int) {
