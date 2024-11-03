@@ -1,21 +1,20 @@
 package lotto
 
-import kotlin.math.round
-
 class TotalLottoResult(
     private val purchasedLotto: PurchasedLotto,
     private val winningNumbers: WinningNumbers,
     private val bonusNumber: BonusNumber
 ) {
-    val winningStatus = mutableMapOf(1 to 0, 2 to 0, 3 to 0, 4 to 0, 5 to 0)
-    val rank = mapOf(1 to WinnerRank.FIRST, 2 to WinnerRank.SECOND, 3 to WinnerRank.THIRD, 4 to WinnerRank.FOURTH, 5 to WinnerRank.FIFTH)
+    val winningStatus = mutableMapOf(5 to 0, 4 to 0, 3 to 0, 2 to 0, 1 to 0)
+    private val rankStandard = mapOf(1 to WinnerRank.FIRST, 2 to WinnerRank.SECOND, 3 to WinnerRank.THIRD, 4 to WinnerRank.FOURTH, 5 to WinnerRank.FIFTH)
 
     init {
         checkAllLotto()
-        calculateRateOfReturn()
+        val rateOfReturn = Formatting().formatRound2(calculateRateOfReturn())
+        IOHandler().outputForWinningStaus(winningStatus, rankStandard, rateOfReturn)
     }
 
-    fun checkAllLotto() {
+    private fun checkAllLotto() {
         purchasedLotto.purchasedLotto.forEach {
             val rank = Lotto(it).checkRank(winningNumbers, bonusNumber)
 
@@ -30,7 +29,7 @@ class TotalLottoResult(
         var totalPrize = 0
 
         winningStatus.forEach {
-            totalPrize += rank[it.key]!!.prize * it.value
+            totalPrize += rankStandard[it.key]!!.prize * it.value
         }
         return totalPrize.toFloat() / payment * 100
     }

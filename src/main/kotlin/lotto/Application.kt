@@ -2,5 +2,8 @@ package lotto
 
 fun main() {
     val lottoMachine = LottoMachine()
-    println(lottoMachine.payment)
+    val winningNumber = WinningNumbers(DrawingWinningNumbers().drawingWinningNumbers())
+    val bonusNumber = BonusNumber(DrawingWinningNumbers().drawingBonusNumber(winningNumber))
+
+    TotalLottoResult(lottoMachine.purchasedLotto, winningNumber, bonusNumber)
 }

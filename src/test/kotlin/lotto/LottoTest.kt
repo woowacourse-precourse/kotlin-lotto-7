@@ -75,4 +75,9 @@ class LottoTest {
             Validation().checkBonusNumber(1, listOf(1, 2, 3, 4, 5, 6))
         }
     }
+
+    @Test
+    fun `소수점 둘째 자리까지 반올림`() {
+        assertThat(Formatting().formatRound2(20.18548f)).isEqualTo("20.2")
+    }
 }
