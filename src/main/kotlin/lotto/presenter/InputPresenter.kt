@@ -20,4 +20,17 @@ class InputPresenter(
             }
         }
     }
+
+    fun onWinningNumbersInput(): List<Int> {
+        while (true) {
+            try {
+                val numbers = inputView.readWinningNumbers()
+                outputView.printNewLine()
+                // TODO 검증예외처리
+                return numbers.split(",").map { it.toInt() }
+            } catch (e: IllegalArgumentException) {
+                println(e.message)
+            }
+        }
+    }
 }
