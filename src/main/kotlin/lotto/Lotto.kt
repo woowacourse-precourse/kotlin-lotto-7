@@ -16,6 +16,10 @@ class Lotto(private val numbers: List<Int>) {
         if (match == 5) {
             bonus = numbers.contains(bonusNumber)
         }
+        return winConditions(match, bonus)
+    }
+
+    private fun winConditions(match: Int, bonus: Boolean): WinCondition {
         try {
             val win = findCondition(match, bonus)
             return win

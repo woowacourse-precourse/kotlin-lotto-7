@@ -21,7 +21,7 @@ class OutputView {
         println(THIRD_WIN_NOTICE.format(winCount[2]))
         println(SECOND_WIN_NOTICE.format(winCount[1]))
         println(FIRST_WIN_NOTICE.format(winCount[0]))
-        println(rateNotice.format(winRate))
+        println(RATE_NOTICE.format(winRate))
     }
 
     companion object {
@@ -32,6 +32,6 @@ class OutputView {
         const val THIRD_WIN_NOTICE = "5개 일치 (1,500,000원) - %d개"
         const val SECOND_WIN_NOTICE = "5개 일치, 보너스 볼 일치 (30,000,000원) - %d개"
         const val FIRST_WIN_NOTICE = "6개 일치 (2,000,000,000원) - %d개"
-        const val rateNotice = "총 수익률은 %.1f%%입니다."
+        const val RATE_NOTICE = "총 수익률은 %.1f%%입니다."
     }
 }

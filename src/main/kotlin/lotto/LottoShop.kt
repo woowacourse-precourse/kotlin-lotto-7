@@ -2,7 +2,6 @@ package lotto
 
 import camp.nextstep.edu.missionutils.Randoms
 import kotlin.math.roundToInt
-import kotlin.math.roundToLong
 
 class LottoShop() {
     private val soldLottoNumber = ArrayList<List<Int>>()
