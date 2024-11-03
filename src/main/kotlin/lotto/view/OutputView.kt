@@ -6,7 +6,7 @@ import lotto.utils.OutputConstants.WINNING_STATISTICS
 
 class OutputView {
 
-    fun showPurchasedLottoCount(count: Int, tikets: List<LottoTicket>) {
+    fun showPurchaseLottoDetails(count: Int, tikets: List<LottoTicket>) {
         println("\n${count}개를 구매했습니다.")
         tikets.forEach { println(it.numbers) }
     }

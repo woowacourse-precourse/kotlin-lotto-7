@@ -14,22 +14,22 @@ class LottoController {
 
     lateinit var lotto: Lotto
 
-    private val rankCounts = mutableMapOf<LottoRank, Int>()
+    private val lottoRankCounts = mutableMapOf<LottoRank, Int>()
 
     fun start() {
         val purchaseAmount = getVaildPurchaseAmount()
         val purchaseCount = purchaseAmount / LOTTO_PRICE
-        val purchaseLottoTickets =  List(purchaseCount) { LottoTicket.generate() }
+        val lottoTickets =  List(purchaseCount) { LottoTicket.generate() }
 
-        outputView.showPurchasedLottoCount(purchaseCount, purchaseLottoTickets)
+        outputView.showPurchaseLottoDetails(purchaseCount, lottoTickets)
 
         val winningNumbers = getVaildWinningNumbers()
         val bonusNumber = getValidBonusNumber(winningNumbers)
 
-        rankCounts.putAll(lotto.calculateLottoResults(purchaseLottoTickets, bonusNumber))
-        outputView.showLottoResult(rankCounts)
+        lottoRankCounts.putAll(lotto.calculateLottoResults(lottoTickets, bonusNumber))
+        outputView.showLottoResult(lottoRankCounts)
 
-        val totalReturnRate = lotto.calculateTotalReturnRate(rankCounts, purchaseAmount)
+        val totalReturnRate = lotto.calculateTotalReturnRate(lottoRankCounts, purchaseAmount)
         outputView.showTotalReturnRate(totalReturnRate)
     }
 
