@@ -17,7 +17,7 @@ class LottoController {
 
     fun execute() {
         getInputsAndReleaseLottos()
-        outputView.printLottoResult(winningLottoResult)
+        outputView.printLottoResults(winningLottoResult)
     }
 
     private fun getInputsAndReleaseLottos() {

@@ -14,28 +14,28 @@ class OutputView(private val releasedLottos: List<Lotto>) {
         println()
     }
 
-    fun printLottoResult(winningLottoResult: WinningLottoResult) {
+    fun printLottoResults(winningLottoResult: WinningLottoResult) {
         println("당첨 통계")
-        val releasedLottoRanks = getReleasedLottoRanks(winningLottoResult)
-        printStatics(releasedLottoRanks)
+        val lottoRankResults = getLottoRankResults(winningLottoResult)
+        printStatics(lottoRankResults)
     }
 
-    private fun getReleasedLottoRanks(winningLottoResult: WinningLottoResult): List<LottoRank> {
-        val releasedLottoRanks = mutableListOf<LottoRank>()
+    private fun getLottoRankResults(winningLottoResult: WinningLottoResult): List<LottoRank> {
+        val lottoRankResults = mutableListOf<LottoRank>()
         releasedLottos.forEach { lotto: Lotto ->
-            releasedLottoRanks.add(lotto.getLottoResult(winningLottoResult))
+            lottoRankResults.add(lotto.getLottoResult(winningLottoResult))
         }
-        return releasedLottoRanks
+        return lottoRankResults
     }
 
-    private fun printStatics(releasedLottoRanks: List<LottoRank>) {
+    private fun printStatics(lottoRankResult: List<LottoRank>) {
         val printOrder = listOf(LottoRank.Fifth, LottoRank.Fourth, LottoRank.Third, LottoRank.Second, LottoRank.First)
         var totalWinningPrize = 0L
         printOrder.forEach { currentOrder ->
-            printLottoRankResult(releasedLottoRanks, currentOrder)
-            totalWinningPrize += printRateOfReturn(releasedLottoRanks, currentOrder)
+            printEachLottoRankResult(lottoRankResult, currentOrder)
+            totalWinningPrize += printRateOfReturn(lottoRankResult, currentOrder)
         }
-        val totalRateOfReturn = getTotalRateOfReturn(totalWinningPrize, releasedLottoRanks.size)
+        val totalRateOfReturn = getTotalRateOfReturn(totalWinningPrize, lottoRankResult.size)
         val formattedTotalRateOfReturn = formatWithCommas(totalRateOfReturn)
         println("총 수익률은 ${formattedTotalRateOfReturn}%입니다.")
     }
@@ -50,17 +50,17 @@ class OutputView(private val releasedLottos: List<Lotto>) {
         return "%,.1f".format(totalRateOfReturn)
     }
 
-    private fun printLottoRankResult(lottoRanks: List<LottoRank>, lottoRank: LottoRank) {
-        val count = getCount(lottoRanks, lottoRank)
-        println("${lottoRank.description} - ${count}개")
+    private fun printEachLottoRankResult(lottoRankResults: List<LottoRank>, lottoRankToPrint: LottoRank) {
+        val count = getCount(lottoRankResults, lottoRankToPrint)
+        println("${lottoRankToPrint.description} - ${count}개")
     }
 
-    private fun printRateOfReturn(lottoRanks: List<LottoRank>, lottoRank: LottoRank): Long {
-        val count = getCount(lottoRanks, lottoRank)
+    private fun printRateOfReturn(lottoRankResults: List<LottoRank>, lottoRank: LottoRank): Long {
+        val count = getCount(lottoRankResults, lottoRank)
         return lottoRank.prize.toLong() * count
     }
 
-    private fun getCount(lottoRanks: List<LottoRank>, lottoRank: LottoRank): Int {
-        return lottoRanks.count { it.name == lottoRank.name }
+    private fun getCount(lottoRankResults: List<LottoRank>, lottoRank: LottoRank): Int {
+        return lottoRankResults.count { it.name == lottoRank.name }
     }
 }
