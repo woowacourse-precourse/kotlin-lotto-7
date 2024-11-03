@@ -14,14 +14,14 @@ class LottoMachineTest {
             Lotto(listOf(1, 5, 9, 21, 26, 41)),
             Lotto(listOf(1, 2, 9, 25, 40, 44)),
         )
-        val winningNumber = WinningNumber("1, 3, 9, 21, 41, 45")
+        val winningNumber = WinningNumber("1,3,9,21,41,45")
         val bonusNumber = BonusNumber("10", winningNumber)
 
         val result = lottoMachine.winningLotteryResult(lottos, bonusNumber)
 
         val expectResult = listOf(
             Pair(4, true),
-            Pair(3, false),
+            Pair(4, false),
             Pair(2, false),
         )
 
