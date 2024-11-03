@@ -13,6 +13,7 @@ import utils.OutputMessages.TOTAL_RETURN_OUTPUT_MESSAGE
 import utils.OutputMessages.WINNING_COUNT_OUTPUT_MESSAGE
 import utils.OutputMessages.WINNING_STATISTICS_OUTPUT_MESSAGE
 import java.text.DecimalFormat
+import kotlin.math.round
 
 object OutputView {
     fun printLotto(count: Int, lottoes: List<Lotto>) {
@@ -51,7 +52,8 @@ object OutputView {
     }
 
     fun printEarningRate(earningRate: Double) {
-        println(TOTAL_RETURN_OUTPUT_MESSAGE + earningRate + EARNING_END_OUTPUT_MESSAGE)
+        val roundRate = round(earningRate * 100) / 100
+        println(TOTAL_RETURN_OUTPUT_MESSAGE + roundRate + EARNING_END_OUTPUT_MESSAGE)
     }
 }
 

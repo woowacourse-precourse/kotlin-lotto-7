@@ -41,11 +41,6 @@ class LottoController {
 
     }
 
-    private fun getEarningRate(earningMoney: Int, money: Int): Double {
-        val netProfit = earningMoney - money
-        return netProfit.toDouble() / money * 100
-    }
-
     private fun getWinningLotto(): WinningLotto {
         val winningNumbers = InputView.getWinningNumbers()
 
@@ -56,7 +51,7 @@ class LottoController {
         )
     }
 
-    private fun calculatePrize(lottoes: List<Lotto>, winningLotto: WinningLotto) {
+    fun calculatePrize(lottoes: List<Lotto>, winningLotto: WinningLotto) {
 
         lottoes.map { lotto ->
             val matchCount = lotto.matchCount(winningLotto)
@@ -89,8 +84,12 @@ class LottoController {
         }
     }
 
-    private fun calculateEarningMoney(): Int {
+    fun calculateEarningMoney(): Int {
         return Prize.entries.sumOf { it.prize * it.winningCount }
+    }
+
+    fun getEarningRate(earningMoney: Int, money: Int): Double {
+        return earningMoney.toDouble() / money * 100
     }
 
     companion object {
