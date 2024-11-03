@@ -49,8 +49,8 @@
 
 ### 랜덤숫자
 
-- [ ] `Randoms`의 `pickUniqueNumbersInRange()`를 활용한다.
-- [ ] 1 ~ 45 범위내에서 6개의 숫자를 생성한다.
+- [x] `Randoms`의 `pickUniqueNumbersInRange()`를 활용한다.
+- [x] 1 ~ 45 범위내에서 6개의 숫자를 생성한다.
 
 ### 로또
 
