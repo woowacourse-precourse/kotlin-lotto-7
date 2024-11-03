@@ -16,12 +16,12 @@ class LottoController(
     private var bonusNumber: Int = 0
 
     fun run() {
-        purchasePrice = getValidPurchasePrice(inputView.getPurchasePrice())
+        purchasePrice = loopUntilValid { getValidPurchasePrice(inputView.getPurchasePrice()) }
         val lottos = service.purchaseLottos(purchasePrice)
         outputView.showRandomLottos(lottos)
 
-        winLotto = getValidWinningLotto(inputView.getWinningNumbers())
-        bonusNumber = getValidBonusNumber(inputView.getBonusNumber())
+        winLotto = loopUntilValid { getValidWinningLotto(inputView.getWinningNumbers()) }
+        bonusNumber = loopUntilValid { getValidBonusNumber(inputView.getBonusNumber()) }
 
         service.matchAllLotto(winLotto, lottos, bonusNumber)
         outputView.showStatus()
@@ -32,38 +32,29 @@ class LottoController(
     }
 
     private fun getValidPurchasePrice(input: String): Int {
-        while (true) {
-            try {
-                require(input.isValidNumber()) { INVALID_INT_NUMBER_EXCEPTION_MSG }
-                require(input.toInt() >= MIN_PURCHASE_PRICE && input.toInt() % 1000 == 0) { INVALID_PRICE_RANGE_EXCEPTION_MSG }
-
-                return input.toInt()
-            } catch (e: IllegalArgumentException) {
-                println(e.message)
-            }
-        }
+        require(input.isValidNumber()) { INVALID_INT_NUMBER_EXCEPTION_MSG }
+        require(input.toInt() >= MIN_PURCHASE_PRICE && input.toInt() % 1000 == 0) { INVALID_PRICE_RANGE_EXCEPTION_MSG }
+        return input.toInt()
     }
 
     private fun getValidWinningLotto(input: String): Lotto {
-        while (true) {
-            try {
-                require(input.isValidNumbers()) { INVALID_NUMBERS_EXCEPTION_MSG }
-                require(input.isNoDuplicateNumbers()) { HAS_DUPLICATE_NUMBER_EXCEPTION_MSG }
-                val inputNumbers = input.split(DELIMITER).map { it.toInt() }
-                return inputNumbers.toLottoNumbers()
-            } catch (e: IllegalArgumentException) {
-                println(e.message)
-            }
-        }
+        require(input.isValidNumbers()) { INVALID_NUMBERS_EXCEPTION_MSG }
+        require(input.isNoDuplicateNumbers()) { HAS_DUPLICATE_NUMBER_EXCEPTION_MSG }
+        val inputNumbers = input.split(DELIMITER).map { it.toInt() }
+        return inputNumbers.toLottoNumbers()
     }
 
     private fun getValidBonusNumber(input: String): Int {
+        require(input.isValidNumber()) { INVALID_INT_NUMBER_EXCEPTION_MSG }
+        require(input.toInt() in MIN_LOTTO_NUMBER..MAX_LOTTO_NUMBER) { OVER_RANGE_EXCEPTION_MSG }
+        require(input.toInt() !in winLotto.nums) { DUPLICATE_BONUS_NUMBER_EXCEPTION_MSG }
+        return input.toInt()
+    }
+
+    private fun <T> loopUntilValid(action: () -> T): T {
         while (true) {
             try {
-                require(input.isValidNumber()) { INVALID_INT_NUMBER_EXCEPTION_MSG }
-                require(input.toInt() in MIN_LOTTO_NUMBER..MAX_LOTTO_NUMBER) { OVER_RANGE_EXCEPTION_MSG }
-                require(input.toInt() !in winLotto.nums) { DUPLICATE_BONUS_NUMBER_EXCEPTION_MSG }
-                return input.toInt()
+                return action()
             } catch (e: IllegalArgumentException) {
                 println(e.message)
             }
