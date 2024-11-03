@@ -86,6 +86,9 @@ class LottoController(
 
         val prizeCounts = prizes.groupingBy { it }.eachCount()
 
+        println()
+        println("당첨 통계\n---")
+
         LottoPrize.entries
             .reversed()
             .filter { it != NONE_PRIZE }
@@ -105,7 +108,8 @@ class LottoController(
     private fun printLottoYield(prizes: List<LottoPrize>) {
         val totalPrizeMoney = prizes.sumOf { it.price }
         val yield = (totalPrizeMoney.toDouble() / amount.lottoAmount) * 100
-        println("총 수익률은 ${yield}%입니다.")
+        val formattedYield = String.format("%.1f", yield)
+        println("총 수익률은 ${formattedYield}%입니다.")
     }
 
     companion object {
