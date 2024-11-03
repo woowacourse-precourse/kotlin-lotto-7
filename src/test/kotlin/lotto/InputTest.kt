@@ -5,16 +5,23 @@ import org.junit.jupiter.api.assertThrows
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.ValueSource
 
-import lotto.util.InputValidator.validateInputIsNumeric
+import lotto.util.InputParser.parseNumericInput
+import lotto.util.InputParser.parseWinningNumbers
 import lotto.util.InputValidator.validateMoneyIsNotNegative
 import lotto.util.InputValidator.validateMoneyIsEnough
 import lotto.util.InputValidator.validateMoneyIsDivisible
 
-class InputValidatorTest {
+class InputTest {
     @ParameterizedTest
     @ValueSource(strings = ["", "abc"])
     fun `숫자로 변환될 수 없는 문자열이 입력된 경우 예외가 발생한다`(input: String) {
-        assertThrows<IllegalArgumentException> { validateInputIsNumeric(input) }
+        assertThrows<IllegalArgumentException> { parseNumericInput(input) }
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = ["1,2,3,4,5,a", ",,,,,", "1,2,,4,5,6", ",1,2,3,4,"])
+    fun `당첨 번호 중 숫자로 변환될 수 없는 문자열이 있을 경우 예외가 발생한다`(input: String) {
+        assertThrows<IllegalArgumentException> { parseWinningNumbers(input) }
     }
 
     @Test
