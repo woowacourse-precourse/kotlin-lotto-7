@@ -1,5 +1,6 @@
 package lotto
 
+import lotto.domain.Lotto
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 
@@ -20,4 +21,7 @@ class LottoTest {
     }
 
     // TODO: 추가 기능 구현에 따른 테스트 코드 작성
+    fun `로또 번호는 오름차순으로 정렬하여 보여준다`() {
+
+    }
 }
