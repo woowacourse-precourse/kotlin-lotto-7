@@ -17,4 +17,10 @@ class ResultCalculator {
         }
         return results
     }
+
+    // User의 수익률을 계산
+    fun calculateProfitRate(user: User): Double {
+        val totalSpent = user.purchasedLottoCount * 1000 // 로또 구매에 사용한 총 금액
+        return if (totalSpent > 0) (user.profit.toDouble() / totalSpent) * 100 else 0.0
+    }
 }

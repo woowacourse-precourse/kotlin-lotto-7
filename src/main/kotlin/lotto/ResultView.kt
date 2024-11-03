@@ -33,7 +33,7 @@ class ResultView {
         }
     }
 
-    fun displayResults(results: Map<Prize, Int>) {
+    fun displayResults(results: Map<Prize, Int>, profitRate: Double) {
         println(RESULTS_PROMPT)
         println(RESULTS_START_SEPARATOR)
         println("${MATCH_THREE} - ${results[Prize.FIFTH] ?: 0}개")
@@ -41,6 +41,7 @@ class ResultView {
         println("${MATCH_FIVE} - ${results[Prize.THIRD] ?: 0}개")
         println("${MATCH_FIVE_BONUS} - ${results[Prize.SECOND] ?: 0}개")
         println("${MATCH_SIX} - ${results[Prize.FIRST] ?: 0}개")
+        println("${PROFIT_PROMPT_FIRST}${"%.1f".format(profitRate)}${PROFIT_PROMPT_SECOND}")
     }
 
     companion object {
@@ -51,6 +52,8 @@ class ResultView {
         const val MATCH_FIVE = "5개 일치 (1,500,000원)"
         const val MATCH_FIVE_BONUS = "5개 일치, 보너스 볼 일치 (30,000,000원)"
         const val MATCH_SIX = "6개 일치 (2,000,000,000원)"
+        const val PROFIT_PROMPT_FIRST = "총 수익률은 "
+        const val PROFIT_PROMPT_SECOND = "%입니다."
 
         const val WINNINGNUMBER_PROMPT_MESSAGE = "\n당첨 번호를 입력해 주세요."
         const val BONUSNUMBER_PROMPT_MESSAGE = "\n보너스 번호를 입력해 주세요."

@@ -15,8 +15,9 @@ fun main() {
     val bonusNumber = resultView.getBonusNumber(winningNumbers)
     LotteryMachine.setWinningLotto(winningNumbers, bonusNumber) // LotteryMachine의 당첨 번호와 보너스 번호 설정
 
-    // 당첨 등수 계산 및 출력
+    // 당첨 등수, 수익률 계산 및 출력
     val resultCalculator = ResultCalculator()
     val results = resultCalculator.calculateResults(user)
-    resultView.displayResults(results)
+    val profitRate = resultCalculator.calculateProfitRate(user)
+    resultView.displayResults(results, profitRate)
 }
