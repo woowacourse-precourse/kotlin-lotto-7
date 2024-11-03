@@ -4,8 +4,8 @@ class Payment(private val payment: String) {
 
     init {
         require(isNumber()) { "$ERROR $NOT_NUMBER_MESSAGE" }
-        require(isNegativeAndZeroNumber()) {"$ERROR $MORE_THAN_ZERO"}
-        require(isLottoUnit()) {"$ERROR $NOT_LOTTO_UNIT"}
+        require(isNegativeAndZeroNumber()) { "$ERROR $MORE_THAN_ZERO" }
+        require(isLottoUnit()) { "$ERROR $NOT_LOTTO_UNIT" }
     }
 
     private fun isLottoUnit() = payment.toInt() % LOTTO_UNIT == LOTTO_CHANGE
