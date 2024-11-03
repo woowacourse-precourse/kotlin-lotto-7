@@ -8,9 +8,9 @@ class Lotto(private val numbers: List<Int>) {
         val nameCounts = numbers.groupingBy { it }.eachCount()
         val minNum = numbers.minOf { it }
         val maxNum = numbers.maxOf { it }
-        require(numbers.size == 6) { "[ERROR] 로또 번호는 6개여야 합니다." }
-        require(nameCounts.maxOf { it.value } == 1) { "[ERROR] 로또 번호는 중복되지 않아야 합니다." }
-        require(minNum >= MIN_VALUE && maxNum <= MAX_VALUE) { "[ERROR] 로또 번호는 1부터 45 사이의 값이어야 합니다." }
+        require(numbers.size == 6) { NUMBERS_SIZE_NOT_VALIDATE }
+        require(nameCounts.maxOf { it.value } == 1) { NUMBERS_DUPLICATED }
+        require(minNum >= MIN_VALUE && maxNum <= MAX_VALUE) { NUMBERS_NOT_BETWEEN_LOTTO_NUM }
     }
 
     fun checkIfMatchBonusNumber(bonusNumber: Int): Boolean {
@@ -57,5 +57,8 @@ class Lotto(private val numbers: List<Int>) {
         const val COST = 1000
         const val MIN_VALUE = 1
         const val MAX_VALUE = 45
+        const val NUMBERS_SIZE_NOT_VALIDATE = "[ERROR] 로또 번호는 6개여야 합니다."
+        const val NUMBERS_DUPLICATED = "[ERROR] 로또 번호는 중복되지 않아야 합니다."
+        const val NUMBERS_NOT_BETWEEN_LOTTO_NUM = "[ERROR] 로또 번호는 ${MIN_VALUE}부터 $MAX_VALUE 사이의 값이어야 합니다."
     }
 }
