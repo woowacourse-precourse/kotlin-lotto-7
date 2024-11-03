@@ -16,6 +16,8 @@ class LottoController {
     val inputView = InputView()
     val outputView = OutputView()
 
+    //val winningNumbers by lazy { getVaildWinningNumbers() }
+
     fun start() {
         val purchaseAmount = getVaildPurchaseAmount()
         val purchaseCount = purchaseAmount / LOTTO_PRICE
@@ -24,8 +26,7 @@ class LottoController {
         outputView.showPurchasedLottoCount(purchaseCount, purchaseLottoTickets)
 
         val winningNumbers = getVaildWinningNumbers()
-        val bonusNumber = inputView.getBonusNumber()
-        // TODO: 보너스 번호에 대한 예외 처리(당첨 번호 오류 + 당첨번호와 중복인지)
+        val bonusNumber = getValidBonusNumber(winningNumbers)
 
         // 당첨 등급 출력
         //outputView.showWinningStatistics()
@@ -58,12 +59,14 @@ class LottoController {
         }
     }
 
-    private fun getValidBonusNumber(): Int {
+    private fun getValidBonusNumber(winningNumbers: List<Int>): Int {
         while (true) {
             try {
-
-            } catch (e: IllegalArgumentException) {
-
+                val bonusNumber = inputView.getBonusNumber()
+                InputValidator.validateBonusNumber(bonusNumber, winningNumbers)
+                return bonusNumber!!
+            } catch (e: Exception) {
+                println(e.message)
             }
         }
     }

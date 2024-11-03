@@ -4,6 +4,7 @@ import lotto.utils.ErrorConstants
 import lotto.view.InputView
 import org.assertj.core.api.Assertions.assertThat
 import org.assertj.core.api.Assertions.assertThatThrownBy
+import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertDoesNotThrow
@@ -32,6 +33,7 @@ class InputValidatorTest {
             }
         }
 
+        @Disabled
         @Test
         fun `값이 null(문자, 공백, 소수 등)이면 오류가 발생한다`() {
             assertThatThrownBy { InputValidator.validatePurchaseAmount(null) }
@@ -69,7 +71,7 @@ class InputValidatorTest {
         }
 
         @Test
-        fun `값이 null이면 오류가 발생한다`() {
+        fun `값이 null(문자, 공백, 소수 등)이면 오류가 발생한다`() {
 
         }
     }

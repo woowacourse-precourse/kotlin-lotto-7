@@ -25,8 +25,8 @@ class InputView {
             .map { it.toIntOrNull() ?: throw IllegalArgumentException(ErrorConstants.LOTTO_INPUT_FORMAT) }
     }
 
-    fun getBonusNumber(): Int {
+    fun getBonusNumber(): Int? {
         println(InputConstants.BONUS_NUMBER_MESSAGE)
-        return Console.readLine().toIntOrNull() ?: throw IllegalArgumentException(ErrorConstants.BONUS_NUMBER_RANGE)
+        return Console.readLine().toIntOrNull()// ?: throw IllegalArgumentException(ErrorConstants.BONUS_NUMBER_RANGE)
     }
 }
