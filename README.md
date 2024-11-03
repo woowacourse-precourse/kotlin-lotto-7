@@ -44,10 +44,71 @@
 
 ## 구현할 기능 목록
 
-- [ ] 입력 기능
+- [x] 입력 기능
 - [ ] 로또 랜덤 구입 기능
 - [ ] 당첨 여부 확인 기능
 - [ ] 당첨 통계 기능
 - [ ] 출력 기능
 - [ ] 예외 처리
 
+## 문제 해결 과정
+
+### 입력 기능
+
+#### Instructions 클래스
+
+```kotlin
+object Instructions {
+    fun purchaseAmountInstructions(){
+        println("구입금액을 입력해 주세요.")
+    }
+
+    fun numberOfPurchasesInstructions(purchaseAmount:Int){
+        println("\n${purchaseAmount}개를 구매했습니다.")
+    }
+
+    fun winningNumberInstructions(){
+        println("\n당첨 번호를 입력해 주세요.")
+    }
+
+    fun bonusNumberInstructions(){
+        println("\n보너스 번호를 입력해 주세요.")
+    }
+
+}
+```
+- 사용자에게 입력을 받을 때 안내 문구를 출력하는 클래스
+- 싱글톤 객체로 작성
+
+#### Input 클래스
+
+```kotlin
+object Input {
+
+    init {
+        inputPurchaseAmount()
+        inputWinningNumber()
+        inputBonusNumber()
+    }
+    private fun inputPurchaseAmount(){
+        Instructions.purchaseAmountInstructions()
+        val purchaseAmount = readln().toInt()
+    }
+
+    private fun inputWinningNumber(){
+        Instructions.winningNumberInstructions()
+        val winningNumber = readLine()!!.split(",").map { it.trim().toInt() }
+    }
+
+    private fun inputBonusNumber(){
+        Instructions.bonusNumberInstructions()
+        val bonusNumber = readln().toInt()
+    }
+
+}
+```
+
+- 사용자에게 입력을 받는 클래스
+- 구입 금액, 당첨 번호, 보너스 번호를 입력 받음
+- 싱글톤 객체로 작성
+- 객체 생성시 Instructions 객체를 통해 안내 문구를 출력 후 `readln()`, `readLine()`함수로 입력을 받음
