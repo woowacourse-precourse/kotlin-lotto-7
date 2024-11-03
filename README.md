@@ -36,6 +36,7 @@
 ## 기능 목록
 ### 입력
 - [x] 구매할 로또 금액 입력
+  - 복권 및 복권기금법 제3조 (1인당 1회 판매한도) 법 제5조제2항에서 "대통령령이 정하는 금액"이라 함은 10만원을 말한다.
 - [x] 당첨 번호 입력
   - 쉼표(,)를 기준으로 구분
 - [x] 보너스 번호 입력
@@ -56,18 +57,20 @@
   - [x] 둘째 자리에서 반올림
 
 ### 프로세스
+- [x] 로또 번호 생성
 - [x] 구매한 로또 번호와 당첨 번호 비교
-- [x] 수익률 계산
+- [x] 총 수익률 계산
+
 
 ### 예외
 - [x] 잘못된 값을 입력할 경우 `IllegalArgumentException` 발생
   - `[ERROR]` 로 시작하는 에러 메시지 출력 후 그 부분부터 입력을 다시 받음
   - `Exception`이 아닌 `IllegalArgumentException`, `IllegalStateException` 등과 같은 명확한 유형을 처리
 - [x] 로또 구입금액
-  - [x] 로또 구입 금액이 숫자가 아닌 경우
-  - [x] 로또 구입 금액이 음수인 경우
-  - [x] 로또 구입 금액이 1000원으로 나누어 떨어지지 않을 경우
-  - [x] 로또 구입 금액 한도가 넘어가는 경우
+  - [x] 구입 금액이 숫자가 아닌 경우
+  - [x] 구입 금액이 음수거나 0인 경우
+  - [x] 구입 금액이 1000원으로 나누어 떨어지지 않을 경우
+  - [x] 구입 금액 한도가 넘어가는 경우(10만 원)
 - [X] 로또 당첨 번호
   - [x] 당첨 번호가 1~45 범위가 아닌 경우
   - [x] 당첨 번호가 숫자가 아닌 경우
@@ -76,46 +79,45 @@
   - [X] 보너스 번호가 1~45 범위가 아닌 경우
   - [x] 보너스 번호가 1개가 아닌 경우
   - [x] 보너스 번호가 문자인 경우
+  - [x] 보너스 번호가 당첨 번호와 중복되는 경우
+- [x] 그 외에 입력 값이 문자, 공백, 소수, 음수, 0, 다른 구분자, 일정 금액(ex. int형 범위)을 벗어난 경우
 
-- [x] 입력 값이 문자, 공백, 소수, 음수, 0, 다른 구분자, 일정 금액(ex. int형 범위)을 벗어난 경우
-
-## 파일 구조
+## 파일 구조 (MVC 패턴 적용)
 ```text
 🎫 lotto
 ├── 🚀 Application.kt
-│   └── 🔹 main()
+│   └── 🔹 main()                          # 앱의 진입점
 ├── 📂 controller
 │   ├── 🎛️ LottoController.kt
 │   │   ├── ⚙️ start()
-│   │   ├── 🔍 getVaildPurchaseAmount()
-│   │   ├── 🔍 getVaildWinningNumbers()
-│   │   └── 🔍 getValidBonusNumber()
+│   │   ├── 🔍 getVaildPurchaseAmount()    # 구매 금액 예외 처리 및 반복 입력 처리
+│   │   ├── 🔍 getVaildWinningNumbers()    # 당첨 번호 예외 처리 및 반복 입력 처리
+│   │   └── 🔍 getValidBonusNumber()       # 보너스 번호 예외 처리 및 반복 입력 처리
 ├── 🗂️ model
 │   ├── 🎲 Lotto.kt
-│   │   ├── 🔄 ComparisonOfWinningNumbers()
-│   │   ├── 🔄 ComparisonOfBonusNumber()
-│   │   └── 🎲 generate()
+│   │   ├── 🔄 calculateLottoResults()     # 구매한 로또와 당첨 번호 비교
+│   │   └── 🔄 calculateTotalReturnRate()  # 총 수익률 계산 
 │   ├── 🏅 LottoRank.kt
-│   │   ├── 📜 Enum: LottoRank
-│   │   └── 🧩 getRank()
+│   │   ├── 📜 Enum: LottoRank             # 당첨 등급 관리 클래스
+│   │   └── 🧩 getRank()                   # 등급을 비교해 반환
 │   ├── 🎟️ LottoTicket.kt
-│   │   └── 📜 Data Class: LottoTicket
+│   │   ├── 📜 Data Class: LottoTicket     # 발급 받은 로또 티켓 데이터 클래스
+│   │   └── 🎲 generate()                  # 로또 티켓 생성
 │   └── 🛡️ InputValidator.kt
-│       ├── ✔️ validatePurchaseAmount()
-│       └── ✔️ validateBonusNumber()
+│       ├── ✔️ validatePurchaseAmount()    # 구매 금액 예외
+│       └── ✔️ validateBonusNumber()       # 보너스 번호 예외
 ├── 🗂️ view
 │   ├── 📝 InputView.kt
-│   │   ├── 🧾 getPurchaseAmount()
-│   │   ├── 🧾 getWinningNumbers()
-│   │   └── 🧾 getBonusNumber()
+│   │   ├── 🧾 getPurchaseAmount()         # 구매 금액 입력 및 최소한의 검증
+│   │   ├── 🧾 getWinningNumbers()         # 당첨 번호 입력 및 최소한의 검증
+│   │   └── 🧾 getBonusNumber()            # 보너스 번호 입력 및 최소한의 검증
 │   └── 📊 OutputView.kt
-│       ├── 📈 showPurchasedLottoCount()
-│       ├── 📊 showWinningStatistics()
-│       └── 💰 showTotalReturnRate()
+│       ├── 📈 showPurchasedLottoCount()   # 로또 구매 개수 출력
+│       ├── 📊 showLottoResult()           # 당첨 번호 비교 리스트 출력
+│       └── 💰 showTotalReturnRate()       # 총 수익률 출력
 └── 🛠️ utils
-    ├── 📍 Constants.kt
-    ├── 🚫 ErrorConstants.kt
-    └── 📑 ViewConstants.kt
-
+    ├── 📑 ViewConstants.kt                # 뷰(input, output)관련 상수
+    ├── 🚫 ErrorConstants.kt               # 예외 관련 상수
+    └── 📍 Constants.kt                    # 그 외 상수
 
 ```
