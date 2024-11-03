@@ -36,8 +36,8 @@ class LottoService {
     private fun createRandomLotto() = Lotto(Randoms.pickUniqueNumbersInRange(1, 45, 6).sorted())
 
     private fun matchLotto(winLotto: Lotto, comparingLotto: Lotto, bonusNumber: Int): Pair<Int, Boolean> {
-        val matchAmount = winLotto.nums.intersect(comparingLotto.nums.toSet()).size
-        val hasBonus = comparingLotto.nums.contains(bonusNumber)
+        val matchAmount = winLotto.getNumbers().intersect(comparingLotto.getNumbers().toSet()).size
+        val hasBonus = comparingLotto.getNumbers().contains(bonusNumber)
         return matchAmount to hasBonus
     }
 
