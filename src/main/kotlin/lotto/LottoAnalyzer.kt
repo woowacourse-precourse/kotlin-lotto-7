@@ -1,11 +1,14 @@
 package lotto
 
+import view.Output
+
 class LottoStatistic {
 
     fun confirmWinning(purchasedLottos: List<List<Int>>, winningNumber: List<Int>, bonusNumber: Int) {
         purchasedLottos.forEach { game ->
             analyzeWinningCount(winningNumber, game, bonusNumber)
         }
+        Output().winningStatistics(purchasedLottos.size*1000)
     }
 
     private fun analyzeWinningCount(winningNumber: List<Int>, randomLotto: List<Int>, bonusNumber: Int): Any {

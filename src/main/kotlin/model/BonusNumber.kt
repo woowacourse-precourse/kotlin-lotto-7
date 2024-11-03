@@ -9,6 +9,7 @@ class BonusNumberValidator {
 
     fun validate(winningNumber: List<Int>): Int {
         while (!validatorTest) {
+            bonusNumber = Input().bonusNumberInput()
             bonusNumberException(winningNumber)
         }
         return bonusNumber.toInt()
@@ -16,7 +17,6 @@ class BonusNumberValidator {
 
     private fun bonusNumberException(winningNumber: List<Int>): Any {
         try {
-            bonusNumber = Input().bonusNumberInput()
             checkBlank(bonusNumber)
             checkNumber(bonusNumber)
             checkRange(bonusNumber)

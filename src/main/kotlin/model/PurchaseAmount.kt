@@ -10,6 +10,7 @@ class PurchaseAmountValidator {
 
     fun validate(): Int {
         while (!validatorTest) {
+            amount = Input().purchaseAmountInput()
             purchaseAmountException()
         }
         return amount.toInt()
@@ -17,7 +18,6 @@ class PurchaseAmountValidator {
 
     private fun purchaseAmountException(): Any {
         try {
-            amount = Input().purchaseAmountInput()
             checkBlank(amount)
             checkNumber(amount)
             checkDivide(amount)

@@ -5,10 +5,9 @@ import util.SettingValue
 
 
 class RandomLottoGenerator {
-    private var lottoCount = 0
 
     fun lottoPurchase(amount: Int): MutableList<List<Int>> {
-        lottoCount = amount / SettingValue.LOTTO_PRICE
+        val lottoCount = (amount / SettingValue.LOTTO_PRICE)
         return repeatGenerator(lottoCount)
     }
 
