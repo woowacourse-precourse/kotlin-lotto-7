@@ -18,18 +18,14 @@ class WinningCalculator {
         bonus: Int,
         winningDetails: MutableList<Int>
     ): MutableList<Int> {
-        var count = 0
-        purchasedLotto.getNumbers().forEach {
-            if (winningLotto.getNumbers().contains(it)) {
-                count++
-            }
-        }
+        val union = purchasedLotto.getNumbers() + winningLotto.getNumbers()
+        val lotteryCount = union.groupBy { it }.filter { it.value.size > 1 }.flatMap { it.value }.distinct().size
         when {
-            count == 3 -> winningDetails[4]++
-            count == 4 -> winningDetails[3]++
-            count == 5 && winningLotto.getNumbers().contains(bonus) -> winningDetails[2]++
-            count == 5 -> winningDetails[1]++
-            count == 6 -> winningDetails[0]++
+            lotteryCount == 3 -> winningDetails[4]++
+            lotteryCount == 4 -> winningDetails[3]++
+            lotteryCount == 5 && winningLotto.getNumbers().contains(bonus) -> winningDetails[2]++
+            lotteryCount == 5 -> winningDetails[1]++
+            lotteryCount == 6 -> winningDetails[0]++
         }
         return winningDetails
     }

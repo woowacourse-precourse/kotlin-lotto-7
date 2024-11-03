@@ -1,15 +1,15 @@
 package lotto.model
 
-class LottoGenerator {
-    private val lottoes = mutableListOf<Lotto>()
+class LotteryGenerator {
+    private val lotteries = mutableListOf<Lotto>()
     fun makeLotto(money: Int) {
         val random = Random()
         repeat(money / 1000) {
-            lottoes.add(Lotto(random.generate()))
+            lotteries.add(Lotto(random.generateSixNumber()))
         }
     }
 
-    fun getLottoes(): List<Lotto> {
-        return lottoes
+    fun getLotteries(): List<Lotto> {
+        return lotteries
     }
 }
