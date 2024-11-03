@@ -8,6 +8,10 @@ class Lotto(private val numbers: List<Int>) {
         require(numbers.size == Constant.LOTTO_NUMBERS_COUNT) { ErrorMessage.LOTTO_NUMBERS_COUNT_MISMATCH }
     }
 
+    fun countMatches(winningNumbers: List<Int>): Int {
+        return numbers.intersect(winningNumbers).size
+    }
+
     override fun equals(other: Any?): Boolean {
         return other is Lotto && this.numbers == other.numbers
     }

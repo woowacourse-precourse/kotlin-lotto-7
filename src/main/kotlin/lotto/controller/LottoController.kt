@@ -18,7 +18,9 @@ class LottoController {
         val lottos = lottoHandler.generateLottos(lottoCount)
         outputView.printLottos(lottos)
 
-        inputView.readWinningNumbers()
-        inputView.readBonusNumber()
+        val winningNumbers = inputView.readWinningNumbers()
+        val bonusNumber = inputView.readBonusNumber()
+
+        lottos.forEach { it.countMatches(winningNumbers) }
     }
 }
