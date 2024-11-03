@@ -36,5 +36,6 @@ class Output {
     }
 
     fun outPutCorrectNumber() = println("\n당첨 번호를 입력해 주세요.")
+    fun outPutBonusNumber() = println("\n보너스 번호를 입력해 주세요.")
 
 }
