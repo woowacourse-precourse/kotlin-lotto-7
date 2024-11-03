@@ -64,7 +64,11 @@ class LottoController(
             .filter { it != NONE_PRIZE }
             .forEach { prize ->
                 val count = prizeCounts[prize] ?: 0
-                
+
+                if (prize == SECOND_PRIZE) {
+                    println("${prize.matchingCount}개 일치, 보너스 볼 일치 (${THOUSAND_COMMA.format(prize.price)}원) - ${count}개")
+                    return@forEach
+                }
                 println("${prize.matchingCount}개 일치 (${THOUSAND_COMMA.format(prize.price)}원) - ${count}개")
             }
 
