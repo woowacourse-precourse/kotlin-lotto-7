@@ -1,7 +1,7 @@
 package lotto.domain.entity
 
 class Lotto(private val numbers: List<Int>) {
-    val nums = numbers
+    fun getNumbers() = numbers
 
     init {
         require(numbers.size == 6) { "[ERROR] 로또 번호는 6개여야 합니다." }
@@ -9,7 +9,7 @@ class Lotto(private val numbers: List<Int>) {
     }
 
     override fun toString(): String {
-        return "[" + this.nums.joinToString(", ") + "]"
+        return "[" + this.numbers.joinToString(", ") + "]"
     }
 
     companion object {
