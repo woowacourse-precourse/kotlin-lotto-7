@@ -26,7 +26,7 @@ class OutputView {
             val rank = stat.getRank()
             val count = stat.getCount()
             val bonusBallText = if(rank == Rank.SECOND) OutputMessage.MATCH_BONUS_NUMBER else ""
-            val winningPrice = Formatter.decimalFormatter(rank.winningPrice)
+            val winningPrice = Formatter.addCommas(rank.winningPrice)
             println(
                 "${rank.matchedNumber}" + OutputMessage.MATCH_COUNT + bonusBallText +
                 OutputMessage.PRICE_OPEN_BRACKET + winningPrice + OutputMessage.PRICE_CLOSE_BRACKET +
@@ -36,8 +36,9 @@ class OutputView {
     }
 
     fun printProfitRate(profitRate: String) {
+        val formattedProfitRate = Formatter.addCommasToDecimal(profitRate.toDouble())
         print(OutputMessage.PROFIT_RATE_START)
-        println(profitRate + OutputMessage.PROFIT_RATE_END)
+        println(formattedProfitRate + OutputMessage.PROFIT_RATE_END)
     }
 
     fun printErrorMessage(errorMessage: String?) {
