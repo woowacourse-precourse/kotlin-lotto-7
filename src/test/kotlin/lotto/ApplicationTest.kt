@@ -4,7 +4,11 @@ import camp.nextstep.edu.missionutils.test.Assertions.assertRandomUniqueNumbersI
 import camp.nextstep.edu.missionutils.test.Assertions.assertSimpleTest
 import camp.nextstep.edu.missionutils.test.NsTest
 import org.assertj.core.api.Assertions.assertThat
+import org.junit.jupiter.api.DisplayName
+import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.params.ParameterizedTest
+import org.junit.jupiter.params.provider.ValueSource
 
 class ApplicationTest : NsTest() {
     @Test
@@ -41,11 +45,34 @@ class ApplicationTest : NsTest() {
         )
     }
 
-    @Test
-    fun `예외 테스트`() {
-        assertSimpleTest {
-            runException("1000j")
-            assertThat(output()).contains(ERROR_MESSAGE)
+    @Nested
+    @DisplayName("예외 테스트")
+    inner class ExceptionTest {
+        @ParameterizedTest
+        @ValueSource(strings = ["100", "0", "-1000", "1000j", "1000.0"])
+        fun `잘못된 금액 입력 시 오류가 발생한다`(price: String) {
+            assertSimpleTest {
+                runException(price)
+                assertThat(output()).contains(ERROR_MESSAGE)
+            }
+        }
+
+        @ParameterizedTest
+        @ValueSource(strings = ["1.2.3.4.5.6", "123456", "-1,2,3,4,5,6", "1,2,3,4,5,5", "1,2,3,4,5", "1,2,3,4,5,6,7", "1,2,3,4,5,46"])
+        fun `잘못된 당첨 숫자 입력 시 오류가 발생한다`(winningNumber: String) {
+            assertSimpleTest {
+                runException("1000", winningNumber)
+                assertThat(output()).contains(ERROR_MESSAGE)
+            }
+        }
+
+        @ParameterizedTest
+        @ValueSource(strings = ["-1", "0", "46", "aa"])
+        fun `잘못된 보너스 숫자 입력 시 오류가 발생한다`(bonusNumber: String) {
+            assertSimpleTest {
+                runException("1000", "1,2,3,4,5,6", bonusNumber)
+                assertThat(output()).contains(ERROR_MESSAGE)
+            }
         }
     }
 
