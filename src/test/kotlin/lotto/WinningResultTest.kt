@@ -24,6 +24,18 @@ class WinningResultTest {
         assertEquals(WinningResult(lottoNumbers, winningNumbers, bonusNumber).details, expectedResult)
     }
 
+    @DisplayName("1~5등 까지 당첨 되지 않았을 경우")
+    @ParameterizedTest
+    @MethodSource("rankNotMatchSource")
+    fun rankNotMatch(
+        winningNumbers: List<Int>,
+        bonusNumber: Int,
+        lottoNumbers: List<List<Int>>,
+        expectedResult: Map<Rank, Int>
+    ) {
+        assertEquals(WinningResult(lottoNumbers, winningNumbers, bonusNumber).details, expectedResult)
+    }
+
     companion object {
         @JvmStatic
         fun rankSource(): Stream<Arguments> = Stream.of(
@@ -74,6 +86,23 @@ class WinningResultTest {
                     Rank.THIRD to 6,
                     Rank.FOURTH to 6,
                     Rank.FIFTH to 6,
+                )
+            )
+        )
+
+        @JvmStatic
+        fun rankNotMatchSource(): Stream<Arguments> = Stream.of(
+            arguments(
+                listOf(1, 2, 3, 4, 5, 6), 7,
+                listOf(
+                    listOf(10, 11, 12, 13, 14, 15)
+                ),
+                mapOf(
+                    Rank.FIRST to 0,
+                    Rank.SECOND to 0,
+                    Rank.THIRD to 0,
+                    Rank.FOURTH to 0,
+                    Rank.FIFTH to 0,
                 )
             )
         )
