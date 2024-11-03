@@ -12,7 +12,7 @@ class WinningCalculator {
         return winningDetails
     }
 
-    fun calculateDetail(
+    private fun calculateDetail(
         purchasedLotto: Lotto,
         winningLotto: Lotto,
         bonus: Int,
@@ -35,7 +35,7 @@ class WinningCalculator {
     }
 
     fun calculateReturnRate(money:Int,winningDetails: MutableList<Int>) : Double {
-        return (calculatePrize(winningDetails) / money * 100).toDouble()
+        return calculatePrize(winningDetails).toDouble() / money.toDouble() * 100
     }
 
     fun calculatePrize(winningDetails: MutableList<Int>):Int{

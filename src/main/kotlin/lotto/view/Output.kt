@@ -12,8 +12,8 @@ class Output {
     fun printMoneyToInput(){
         println(Constants.INSERT_MONEY)
     }
-    fun printPurchaseDetails(){
-
+    fun printPurchaseDetails(money:Int){
+        println("${money/1000}" + Constants.INSERT_MONEY_RESULT)
     }
     fun printWinningNumberToInput(){
         println(Constants.INSERT_WINNIG_NUNBER)
