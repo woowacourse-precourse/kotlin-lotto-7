@@ -1,8 +1,8 @@
 package lotto
 
 class LottoAmount(private val amount: Int) {
-    var lottoAmount = amount
-        private set
+    val lottoAmount
+        get() = amount
 
     init {
         require(amount > 0) { "[ERROR] 로또 구매 금액은 0원 이상이어야 합니다." }
