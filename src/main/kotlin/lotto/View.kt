@@ -18,9 +18,9 @@ class View {
         return WinningNumber(input)
     }
 
-    fun inputBonusNumber(lotto: Lotto): BonusNumber {
+    fun inputBonusNumber(winningNumber: WinningNumber): BonusNumber {
         broadcast.printInputBonusNumberMessage()
         val input = Console.readLine()
-        return BonusNumber(input, lotto)
+        return BonusNumber(input, winningNumber)
     }
 }
