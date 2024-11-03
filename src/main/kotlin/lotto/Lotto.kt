@@ -3,30 +3,16 @@ package lotto
 import camp.nextstep.edu.missionutils.Randoms.pickUniqueNumbersInRange
 
 class Lotto(private val numbers: List<Int>) {
+    fun getLottoResultAsRank(winningNumbers: List<Int>, bonusNumber: Int): Int {
+        val matchCount = numbers.count { it in winningNumbers }
 
-    fun runAndGetResult() {
-
-    }
-
-    fun buyTickets(payment: Int): List<List<Int>> {
-        val ticketCount = payment / 1000
-        val ticketList = mutableListOf<List<Int>>()
-        for (i in 0 until ticketCount) {
-            val ticket = generateTicketRandomly()
-            val sortedTicket = sortTicketAscend(ticket)
-            ticketList.add(sortedTicket)
+        return when (matchCount) {
+            6 -> 1
+            5 -> if (bonusNumber in numbers) 2 else 3
+            4 -> 4
+            3 -> 5
+            else -> 6
         }
-
-        return ticketList.toList()
     }
-
-    private fun generateTicketRandomly(): List<Int> {
-        return pickUniqueNumbersInRange(1, 45, 6)
-    }
-
-    private fun sortTicketAscend(ticket: List<Int>): List<Int> {
-        return ticket.sorted()
-    }
-
 
 }
