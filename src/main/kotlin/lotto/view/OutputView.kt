@@ -1,5 +1,6 @@
 package lotto.view
 
+import lotto.constants.ErrorMessage
 import lotto.constants.OutputMessage
 import lotto.model.Lotto
 import lotto.model.Rank
@@ -37,5 +38,9 @@ class OutputView {
     fun printProfitRate(profitRate: String) {
         print(OutputMessage.PROFIT_RATE_START)
         println(profitRate + OutputMessage.PROFIT_RATE_END)
+    }
+
+    fun printErrorMessage(errorMessage: String?) {
+        println(errorMessage?: ErrorMessage.DEFAULT_ERROR)
     }
 }
