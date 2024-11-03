@@ -5,7 +5,7 @@ class WinningNumber(
     private val bonusNumber: Int
 ) {
 
-    fun getRank(lotto: Lotto): Rank {
+    fun getRank(lotto: Lotto): Rank? {
         val matchCount: Int = getMatchCount(lotto.getNumbers())
         val matchBonus: Boolean = getMatchBonus(lotto.getNumbers())
         return Rank.valueOf(matchCount, matchBonus)
