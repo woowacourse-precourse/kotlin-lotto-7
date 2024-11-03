@@ -4,8 +4,8 @@ object Validator {
     fun validateLottoAmount(lottoAmount: String) {
         require(lottoAmount.toIntOrNull() != null) { Constants.ERROR_AMOUNT_NOT_NUMBER }
         val amount = lottoAmount.toInt()
-        require(amount > 0) { Constants.ERROR_AMOUNT_NOT_POSITIVE }
-        require(amount % Constants.LOTTO_PRICE == 0) { Constants.ERROR_AMOUNT_NOT_DIVIDE_BY_1000 }
+        require(amount >= Constants.LOTTO_PRICE) { Constants.ERROR_AMOUNT_UNDER_1000 }
+        require(amount % Constants.LOTTO_PRICE == Constants.ZERO) { Constants.ERROR_AMOUNT_NOT_DIVIDE_BY_1000 }
     }
 
     fun validateWinningNumbers(winningNumbers: List<String>) {
