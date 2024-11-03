@@ -13,10 +13,6 @@ class InputErrorDelegator : InputErrorDelegate {
         require(input.isThousandUnit()) { Exception.INVALID_UNIT }
     }
 
-    override fun isOverMaxPrice(input: String) {
-        require(input.isOverPurchasablePrice()) { Exception.OVER_MAX_PRICE }
-    }
-
     override fun isExceededRange(input: List<String>, process: Process) {
         input.forEach {
             require(it.toInt() in LOTTO_MIN.value()..LOTTO_MAX.value()) {

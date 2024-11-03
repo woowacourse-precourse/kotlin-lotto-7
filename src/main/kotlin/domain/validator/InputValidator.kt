@@ -16,7 +16,6 @@ class InputValidator(
     override fun payValidation(value: String): Pair<String, Int> {
         val process = Process.PAY
         commonValidation(value, process)
-        inputErrorDelegate.isOverMaxPrice(value)
         inputErrorDelegate.isThousandWonUnit(value)
         return purchaseFormat(value)
     }

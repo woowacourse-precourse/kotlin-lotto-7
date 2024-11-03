@@ -5,7 +5,6 @@ enum class Exception(private val msg: String) {
     INVALID_INPUT("정수만 입력해주세요."),
     INVALID_FORMAT("숫자와 구분자 쉼표(,)만 입력해주세요."),
     INVALID_UNIT("구입 금액은 천원 단위로만 입력해주세요."),
-    OVER_MAX_PRICE("1회 최대 구입 금액은 10만원 입니다."),
     EXCEED_MAX_INT("입력한 값이 범위를 벗어났어요."),
     EXCEED_INPUT("로또 번호는 1부터 45 사이의 숫자여야 합니다."),
     INVALID_SIZE("당첨 번호는 6개를 입력해주세요."),
