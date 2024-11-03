@@ -6,7 +6,7 @@ import lotto.model.Lotto
 object LottoMachine {
     
     fun generate(): Lotto {
-        val numbers = Randoms.pickUniqueNumbersInRange(1, 45, 6)
+        val numbers = Randoms.pickUniqueNumbersInRange(1, 45, 6).sorted()
         return Lotto(numbers)
     }
 }
