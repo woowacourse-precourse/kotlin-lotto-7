@@ -21,17 +21,19 @@ class LottoGameTest {
     @Test
     fun `금액이 1000원 미만이면 예외가 발생후 재입력 받아 정상 종료된다`() {
         val game = LottoGame(readLine = { "900" })
-        assertThrows<IllegalArgumentException> {
+        val exception = assertThrows<IllegalArgumentException> {
             game.parseCost("900")
         }
+        assertThat(exception.message).contains("[ERROR] 금액은 1,000원 단위로 입력해야 합니다.")
     }
 
     @Test
     fun `금액이 1000 단위가 아니면 예외가 발생한다`() {
         val game = LottoGame(readLine = { "1500" })
-        assertThrows<IllegalArgumentException> {
+        val exception = assertThrows<IllegalArgumentException> {
             game.parseCost("1500")
         }
+        assertThat(exception.message).contains("[ERROR] 금액은 1,000원 단위로 입력해야 합니다.")
     }
 
     @Test
@@ -45,9 +47,10 @@ class LottoGameTest {
     fun `당첨 번호가 유효하지 않으면 예외가 발생한다`() {
         val game = LottoGame(readLine = { "" })
 
-        assertThrows<IllegalArgumentException> {
+        val exception = assertThrows<IllegalArgumentException> {
             game.parseWinningLotto("1,2,3,4,5")  // 5개만 입력된 경우
         }
+        assertThat(exception.message).contains("[ERROR] 당첨 번호는 숫자로 입력해야 합니다.")
     }
 
 
@@ -62,9 +65,10 @@ class LottoGameTest {
     fun `보너스 번호가 유효하지 않으면 예외가 발생한다`() {
         val game = LottoGame(readLine = { "" })
 
-        assertThrows<IllegalArgumentException> {
+        val exception = assertThrows<IllegalArgumentException> {
             game.parseBonusNumber("abc")
         }
+        assertThat(exception.message).contains("[ERROR] 보너스 번호는 숫자로 입력해야 합니다.")
     }
 
 
