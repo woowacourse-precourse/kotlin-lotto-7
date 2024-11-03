@@ -1,10 +1,15 @@
 package lotto.view
+import lotto.constant.BonusResult
+import lotto.constant.LottoRank
+import lotto.model.WinningResult
+import java.text.NumberFormat
+import java.util.Locale
 
 object OutputView {
     private const val PURCHASE_COUNT_SCRIPT = "%d개를 구매했습니다."
     private const val WINNING_RESULT_SCRIPT = "당첨 통계\n---"
-    private const val LOTTO_MATCH_FORMAT = "%d개 일치 (%d원) - %d개"
-    private const val LOTTO_MATCH_FORMAT_WITH_BONUS = "%d개 일치, 보너스 볼 일치 (%d원) - %d개"
+    private const val LOTTO_MATCH_FORMAT = "%s개 일치 (%s원) - %d개"
+    private const val LOTTO_MATCH_FORMAT_WITH_BONUS = "%s개 일치, 보너스 볼 일치 (%s원) - %d개"
 
 
     fun printLottoCount(lottoCount: Int) {
@@ -15,7 +20,18 @@ object OutputView {
         println(numbers)
     }
 
-    fun printWinningResult() {
+    fun printWinningResult(winningResult: WinningResult) {
         println(WINNING_RESULT_SCRIPT)
+        winningResult.result.map { (rank, count) ->
+            if (rank == LottoRank.MISS) return@map
+            else if (rank.bonusResult == BonusResult.BONUS_MISMATCH) {
+                println(LOTTO_MATCH_FORMAT.format(rank.matchCount, formatNumber(rank.prizeMoney), count))
+            } else println(LOTTO_MATCH_FORMAT_WITH_BONUS.format(rank.matchCount, formatNumber(rank.prizeMoney),count))
+        }
+    }
+
+    private fun formatNumber(number: Int): String {
+        val numberFormat = NumberFormat.getNumberInstance(Locale.US)
+        return numberFormat.format(number)
     }
 }

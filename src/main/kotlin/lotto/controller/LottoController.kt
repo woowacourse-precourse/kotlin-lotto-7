@@ -3,6 +3,7 @@ package lotto.controller
 import lotto.model.Lotto
 import lotto.model.PurchaseMoney
 import lotto.model.WinningLotto
+import lotto.model.WinningResult
 import lotto.view.InputView.getPurchaseMoneyInput
 import lotto.view.InputView.getWinningLottoInput
 import lotto.view.InputView.getBonusNumberInput
@@ -24,7 +25,8 @@ class LottoController {
         val winningLotto = getWinningLotto()
         getBonusNumber(winningLotto)
 
-        printWinningResult()
+        val winningResult = getWinningResult(lottos, winningLotto)
+        printWinningResult(winningResult)
     }
 
     private fun getPurchaseMoney(): PurchaseMoney {
@@ -56,8 +58,8 @@ class LottoController {
         winningLotto.setBonusNumber(bonusNumberInput)
     }
 
-    private fun getWinningResult(lottos: List<Lotto>, winningLotto: WinningLotto) {
-
+    private fun getWinningResult(lottos: List<Lotto>, winningLotto: WinningLotto): WinningResult {
+        val lottoRanks = lottos.map { winningLotto.getRank(it) }
+        return WinningResult.convertToResult(lottoRanks)
     }
-
 }
