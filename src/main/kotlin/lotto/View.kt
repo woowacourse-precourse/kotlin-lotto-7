@@ -17,4 +17,10 @@ class View {
         val input = Console.readLine()
         return WinningNumber(input)
     }
+
+    fun inputBonusNumber(lotto: Lotto): BonusNumber {
+        broadcast.printInputBonusNumberMessage()
+        val input = Console.readLine()
+        return BonusNumber(input, lotto)
+    }
 }
