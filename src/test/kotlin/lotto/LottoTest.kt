@@ -32,4 +32,10 @@ class LottoTest {
         val lotto = Lotto(listOf(1, 2, 3, 4, 5, 6))
         assertEquals("[1, 2, 3, 4, 5, 6]", lotto.toString())
     }
+
+    @Test
+    fun `로또 객체는 당첨 번호와 일치하는 수의 개수를 반환해야 한다`() {
+        val lotto = Lotto(listOf(1, 2, 3, 4, 5, 6))
+        assertEquals(3, lotto.countMatchingNumbers(listOf(1, 3, 5, 7, 9, 11)))
+    }
 }
