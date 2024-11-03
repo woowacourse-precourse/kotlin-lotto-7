@@ -16,9 +16,16 @@ class BonusNumberTest {
     }
 
     @Test
-    fun `보너스 번호가 당첨 번호와 중복이 될 경우`() {
+    fun `보너스 번호가 당첨 번호와 중복이 될 경우 오류를 출력한다`() {
         assertThrows<IllegalArgumentException> {
             BonusNumber("1", winningNumber)
+        }
+    }
+
+    @Test
+    fun `보너스 번호가 1부터 45 사이의 숫자가 아닐 경우 오류를 출력한다`() {
+        assertThrows<IllegalArgumentException> {
+            BonusNumber("66", winningNumber)
         }
     }
 }
