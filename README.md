@@ -43,6 +43,9 @@
     - 예외 유형은 `IllegalArgumentException` 등 명확한 예외로 처리한다.
     - 예를 들어, 잘못된 로또 번호 범위(1~45 이외)나 중복된 번호 입력 시 예외 처리한다.
 - 사용자가 입력한 로또 구매 금액이 1000원 단위로 나누어 떨어지지 않으면, `IllegalArgumentException` 를 발생시킨다.
+- 시스템이 생성한 자동 로또 번호가 6개의 숫자가 아니거나, 중복된 숫자가 안에 있을 경우 `IllegalArgumentException`를 발생시킨다.
+- 사용자가 입력한 로또 당첨 번호가 6개의 숫자가 아니거나, 중복된 숫자가 안에 있을 경우 마찬가지로 `IllegalArgumentException`를 발생시킨다.
+- 사용자가 입력한 보너스 번호가 숫자가 아닐 경우 `IllegalArgumentException`를 발생시킨다.
 
 ## **설계 및 구현 규칙**
 
