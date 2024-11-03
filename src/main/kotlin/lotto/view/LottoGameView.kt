@@ -3,11 +3,22 @@ package lotto.view
 import camp.nextstep.edu.missionutils.Console
 import lotto.controller.dto.PurchasedLottoNumbersDto
 import lotto.controller.dto.PurchasedLottoTicketsDto
+import lotto.controller.dto.WinningProfitRateDto
+import lotto.controller.dto.WinningStatisticsDto
+import lotto.domain.enum.Prize
 
 const val LOTTO_PRICE = 1000
 const val WINNING_NUMBERS_SIZE = 6
 const val LOTTO_NUMBER_MIN_VALUE = 1
 const val LOTTO_NUMBER_MAX_VALUE = 45
+val WINNING_RESULT_TEMPLATE = """
+                    3개 일치 (5,000원) - %d개
+                    4개 일치 (50,000원) - %d개
+                    5개 일치 (1,500,000원) - %d개
+                    5개 일치, 보너스 볼 일치 (30,000,000원) - %d개
+                    6개 일치 (2,000,000,000원) - %d개
+                    총 수익률은 %s%%입니다.
+""".trimIndent()
 
 class LottoGameView {
     fun getPurchaseAmount(): Int {
@@ -37,6 +48,27 @@ class LottoGameView {
         val bonusNumber = getBonusNumber(winningNumbers)
 
         return PurchasedLottoNumbersDto(winningNumbers, bonusNumber)
+    }
+
+    fun displayLottoGameResults(results: WinningStatisticsDto, profitRate: WinningProfitRateDto) {
+        printWithBlankLines {
+            println("당첨 통계")
+            println("---")
+
+            val matchCounts = listOf(
+                results.winningStatisticsDto[Prize.FIFTH],
+                results.winningStatisticsDto[Prize.FOURTH],
+                results.winningStatisticsDto[Prize.THIRD],
+                results.winningStatisticsDto[Prize.SECOND],
+                results.winningStatisticsDto[Prize.FIRST]
+            )
+
+            val formattedProfitRate = String.format("%.1f", profitRate.profit)
+            val formattedResult =
+                String.format(WINNING_RESULT_TEMPLATE, *matchCounts.toTypedArray(), formattedProfitRate)
+
+            println(formattedResult)
+        }
     }
 
     private fun getWinningNumbers(): List<Int> {
@@ -107,9 +139,6 @@ class LottoGameView {
         }
         require(numbers.all { it in LOTTO_NUMBER_MIN_VALUE..LOTTO_NUMBER_MAX_VALUE }) {
             throw IllegalArgumentException(LottoGameViewMessage.ERROR_WINNING_NUMBERS_RANGE.getErrorMessage())
-        }
-        require(numbers.distinct().size == numbers.size) {
-            throw IllegalArgumentException(LottoGameViewMessage.ERROR_DUPLICATED_WINNING_NUMBERS.getErrorMessage())
         }
     }
 

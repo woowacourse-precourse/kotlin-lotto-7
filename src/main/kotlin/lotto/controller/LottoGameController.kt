@@ -20,5 +20,6 @@ class LottoGameController(
         val results: WinningStatisticsDto =
             lottoGameService.calculateResults(purchasedLottoTickets, purchasedLottoNumbers)
         val profitRate: WinningProfitRateDto = lottoGameService.calculateProfitRate(results, purchaseAmount)
+        lottoGameView.displayLottoGameResults(results, profitRate)
     }
 }
