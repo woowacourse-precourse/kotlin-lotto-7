@@ -42,6 +42,62 @@ class ApplicationTest : NsTest() {
     }
 
     @Test
+    fun `구입 금액 입력 시 숫자가 아닌 값을 입력하면 예외가 발생한다`() {
+        assertSimpleTest {
+            runException("abc")
+            assertThat(output()).contains(ERROR_MESSAGE)
+        }
+    }
+
+    @Test
+    fun `구입 금액이 1000으로 나누어 떨어지지 않으면 예외가 발생한다`() {
+        assertSimpleTest {
+            runException("1500")
+            assertThat(output()).contains(ERROR_MESSAGE)
+        }
+    }
+
+    @Test
+    fun `당첨 번호 입력 시 숫자가 아닌 값을 입력하면 예외가 발생한다`() {
+        assertSimpleTest {
+            runException("5000", "1,2,3,4,5,a", "7")
+            assertThat(output()).contains(ERROR_MESSAGE)
+        }
+    }
+
+    @Test
+    fun `보너스 번호 입력 시 숫자가 아닌 값을 입력하면 예외가 발생한다`() {
+        assertSimpleTest {
+            runException("5000", "1,2,3,4,5,6", "b")
+            assertThat(output()).contains(ERROR_MESSAGE)
+        }
+    }
+
+    @Test
+    fun `구입 금액 입력 시 소수점을 입력하면 예외가 발생한다`() {
+        assertSimpleTest {
+            runException("5000.5")
+            assertThat(output()).contains(ERROR_MESSAGE)
+        }
+    }
+
+    @Test
+    fun `당첨 번호 입력 시 소수점이 포함된 숫자를 입력하면 예외가 발생한다`() {
+        assertSimpleTest {
+            runException("5000", "1,2,3,4,5,6.5", "7")
+            assertThat(output()).contains(ERROR_MESSAGE)
+        }
+    }
+
+    @Test
+    fun `보너스 번호 입력 시 소수점을 입력하면 예외가 발생한다`() {
+        assertSimpleTest {
+            runException("5000", "1,2,3,4,5,6", "7.5")
+            assertThat(output()).contains(ERROR_MESSAGE)
+        }
+    }
+
+    @Test
     fun `예외 테스트`() {
         assertSimpleTest {
             runException("1000j")
