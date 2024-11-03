@@ -3,6 +3,7 @@ package lotto.view
 import camp.nextstep.edu.missionutils.Console
 import lotto.util.InputParser.parseNumericInput
 import lotto.util.InputParser.parseWinningNumbers
+import lotto.util.InputValidator.validateBonusNumberDistinctness
 import lotto.util.InputValidator.validateLottoNumberInRange
 import lotto.util.InputValidator.validateMoneyIsNotNegative
 import lotto.util.InputValidator.validateMoneyIsEnough
@@ -11,6 +12,8 @@ import lotto.util.InputValidator.validateWinningNumbersCount
 import lotto.util.InputValidator.validateWinningNumbersDistinctness
 
 class InputView {
+    private val winningNumbers = mutableListOf<Int>()
+
     fun readLottoMoney(): Int {
         println(PROMPT_LOTTO_MONEY)
         val money = parseNumericInput(Console.readLine())
@@ -22,17 +25,18 @@ class InputView {
 
     fun readWinningNumbers(): List<Int> {
         println(PROMPT_WINNING_NUMBERS)
-        val numbers = parseWinningNumbers(Console.readLine())
-        validateWinningNumbersCount(numbers)
-        validateWinningNumbersDistinctness(numbers)
-        numbers.forEach { validateLottoNumberInRange(it) }
-        return numbers
+        winningNumbers.addAll(parseWinningNumbers(Console.readLine()))
+        validateWinningNumbersCount(winningNumbers)
+        validateWinningNumbersDistinctness(winningNumbers)
+        winningNumbers.forEach { validateLottoNumberInRange(it) }
+        return winningNumbers
     }
 
     fun readBonusNumber(): Int {
         println(PROMPT_BONUS_NUMBER)
-        val number = parseNumericInput(Console.readLine())
-        return number
+        val bonusNumber = parseNumericInput(Console.readLine())
+        validateBonusNumberDistinctness(bonusNumber, winningNumbers)
+        return bonusNumber
     }
 
     companion object {

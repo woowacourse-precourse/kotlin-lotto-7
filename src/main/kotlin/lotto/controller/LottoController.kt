@@ -19,5 +19,6 @@ class LottoController {
         outputView.printLottos(lottos)
 
         inputView.readWinningNumbers()
+        inputView.readBonusNumber()
     }
 }
