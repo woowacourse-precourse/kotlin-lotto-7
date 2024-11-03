@@ -21,6 +21,10 @@ class LottoController(private val inputView: InputView, private val outputView: 
 
         service.matchAllLotto(winLotto, lottos, bonusNumber)
         outputView.showStatus()
+
+        val resultMoney = service.getResultMoney()
+        val profitRate = service.getProfitRate(purchasePrice, resultMoney)
+        outputView.showProfitRate(profitRate)
     }
 
     private fun getValidPurchasePrice(input: String): Int {
