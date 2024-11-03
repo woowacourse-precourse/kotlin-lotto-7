@@ -25,12 +25,12 @@ class OutputView {
         stats.forEach { stat ->
             val rank = stat.getRank()
             val count = stat.getCount()
-            val bonusBallText = if(rank == Rank.SECOND) OutputMessage.MATCH_BONUS_NUMBER else ""
+            val bonusBallText = if (rank == Rank.SECOND) OutputMessage.MATCH_BONUS_NUMBER else ""
             val winningPrice = Formatter.addCommas(rank.winningPrice)
             println(
                 "${rank.matchedNumber}" + OutputMessage.MATCH_COUNT + bonusBallText +
-                OutputMessage.PRICE_OPEN_BRACKET + winningPrice + OutputMessage.PRICE_CLOSE_BRACKET +
-                "$count" + OutputMessage.COUNT
+                        OutputMessage.PRICE_OPEN_BRACKET + winningPrice + OutputMessage.PRICE_CLOSE_BRACKET +
+                        "$count" + OutputMessage.COUNT
             )
         }
     }
@@ -42,6 +42,6 @@ class OutputView {
     }
 
     fun printErrorMessage(errorMessage: String?) {
-        println(errorMessage?: ErrorMessage.DEFAULT_ERROR)
+        println(errorMessage ?: ErrorMessage.DEFAULT_ERROR)
     }
 }

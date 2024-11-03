@@ -19,17 +19,17 @@ object StatCalculator {
         var matchedNumber = 0
         var matchBonusNumber = false
         numbers.forEach { num ->
-            if(winningNumber.contains(num)) matchedNumber++
-            if(num == bonusNumber) matchBonusNumber = true
+            if (winningNumber.contains(num)) matchedNumber++
+            if (num == bonusNumber) matchBonusNumber = true
         }
         return getRankFromMatchedNumber(matchedNumber, matchBonusNumber)
     }
 
     private fun getRankFromMatchedNumber(matchedNumber: Int, matchBonusNumber: Boolean): Rank {
-        return when(matchedNumber) {
+        return when (matchedNumber) {
             Rank.FIFTH.matchedNumber -> Rank.FIFTH
             Rank.FOURTH.matchedNumber -> Rank.FOURTH
-            Rank.THIRD.matchedNumber -> if(matchBonusNumber) Rank.SECOND else Rank.THIRD
+            Rank.THIRD.matchedNumber -> if (matchBonusNumber) Rank.SECOND else Rank.THIRD
             Rank.FIRST.matchedNumber -> Rank.FIRST
             else -> Rank.NONE
         }

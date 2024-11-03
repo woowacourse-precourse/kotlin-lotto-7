@@ -4,7 +4,9 @@ import lotto.constants.Constants
 import lotto.model.Lotto
 import lotto.model.Rank
 import lotto.model.Stat
-import lotto.utils.*
+import lotto.utils.LottoGenerator
+import lotto.utils.StatCalculator
+import lotto.utils.Validator
 import lotto.view.InputView
 import lotto.view.OutputView
 
