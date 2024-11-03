@@ -1,12 +1,12 @@
 package lotto.domain.entity
 
 class Lotto(private val numbers: List<Int>) {
-    fun getNumbers() = numbers
-
     init {
         require(numbers.size == 6) { "[ERROR] 로또 번호는 6개여야 합니다." }
         require(numbers.toSet().size == 6) { HAS_DUPLICATE_NUMBER_EXCEPTION_MSG }
     }
+
+    fun getNumbers() = numbers
 
     override fun toString(): String {
         return "[" + this.numbers.joinToString(", ") + "]"
