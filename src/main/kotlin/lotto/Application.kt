@@ -1,5 +1,11 @@
 package lotto
 
+import camp.nextstep.edu.missionutils.Console.readLine
+
 fun main() {
-    // TODO: 프로그램 구현
+    val lottoSalesMachine = LottoSalesMachine()
+    println(lottoSalesMachine.guideInputLottoPurchaseAmount())
+    val inputLottoPurchaseWon = readLine()
+    val lottos = lottoSalesMachine.purchase(inputLottoPurchaseWon.toInt())
+
 }

@@ -9,7 +9,9 @@ class LottoSalesMachine {
 
     fun purchase(won: Int): List<Lotto> {
         exceptNotDevideThousand(won)
-        return List(won / 1000) { LottoMaker.make() }
+        val lottoCount = won / 1000
+        println("${lottoCount}개를 구매했습니다.")
+        return List(lottoCount) { LottoMaker.make() }
     }
 
     private fun exceptNotDevideThousand(won: Int) {
