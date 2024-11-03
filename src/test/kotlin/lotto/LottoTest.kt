@@ -1,8 +1,8 @@
 package lotto
 
-import app.DependencyInjector
-import domain.enums.Rank
-import domain.lotto.Lotto
+import lotto.app.DependencyInjector
+import lotto.domain.enums.Rank
+import lotto.domain.lotto.Lotto
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.BeforeEach

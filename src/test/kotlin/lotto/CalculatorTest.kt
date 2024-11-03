@@ -1,8 +1,8 @@
 package lotto
 
-import domain.calculator.Calculate
-import domain.calculator.Calculator
-import domain.enums.Rank
+import lotto.domain.calculator.Calculate
+import lotto.domain.calculator.Calculator
+import lotto.domain.enums.Rank
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.params.ParameterizedTest

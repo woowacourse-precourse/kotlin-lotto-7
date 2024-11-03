@@ -1,8 +1,7 @@
 package lotto
 
-import domain.enums.Rank
-import domain.enums.Rank.Companion.getRank
-import domain.lotto.Lotto
+import lotto.domain.enums.Rank
+import lotto.domain.enums.Rank.Companion.getRank
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 

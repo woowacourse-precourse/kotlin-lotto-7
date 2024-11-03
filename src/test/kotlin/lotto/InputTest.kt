@@ -1,21 +1,21 @@
 package lotto
 
-import domain.validator.delegate.common.CommonErrorDelegate
-import domain.validator.delegate.common.CommonErrorDelegator
-import domain.validator.delegate.input.InputErrorDelegate
-import domain.validator.delegate.input.InputErrorDelegator
+import lotto.domain.validator.delegate.common.CommonErrorDelegate
+import lotto.domain.validator.delegate.common.CommonErrorDelegator
+import lotto.domain.validator.delegate.input.InputErrorDelegate
+import lotto.domain.validator.delegate.input.InputErrorDelegator
 import org.assertj.core.api.Assertions
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.EmptySource
 import org.junit.jupiter.params.provider.ValueSource
-import domain.enums.Exception
-import domain.enums.Process
-import domain.validator.InputValidator
+import lotto.domain.enums.Exception
+import lotto.domain.enums.Process
+import lotto.domain.validator.InputValidator
 import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.Test
-import domain.util.ext.splitByComma
-import domain.util.ext.toMapByEachCount
+import lotto.domain.util.ext.splitByComma
+import lotto.domain.util.ext.toMapByEachCount
 
 class InputTest {
     private lateinit var commonErrorDelegate: CommonErrorDelegate
