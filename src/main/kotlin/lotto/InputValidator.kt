@@ -3,28 +3,58 @@ package lotto
 class InputValidator {
 
     fun validatePurchaseAmount(input: String): Int {
-        require(input.matches(Regex("\\d+"))) { ERROR_INVALID_PURCHASE_AMOUNT_FORMAT }
+        validatePurchaseAmountFormat(input)
         val amount = input.toInt()
-        require(amount > 0) { ERROR_INVALID_PURCHASE_AMOUNT_NONPOSITIVE }
-        require(amount % 1000 == 0) { ERROR_INVALID_PURCHASE_AMOUNT_UNIT }
+        validatePositivePurchaseAmount(amount)
+        validatePurchaseAmountUnit(amount)
         return amount
     }
 
     fun validateWinningNumbers(input: String): List<Int> {
-        val numbers = input.split(",").mapNotNull {
-            it.trim().toIntOrNull()
-        }
-        require(numbers.size == 6) { ERROR_INVALID_WINNING_NUMBERS_COUNT }
-        require(numbers.all { it in 1..45 }) { ERROR_INVALID_WINNING_NUMBER_RANGE }
-        require(numbers.distinct().size == numbers.size) { ERROR_DUPLICATE_WINNING_NUMBERS }
+        val numbers = input.split(",").mapNotNull { it.trim().toIntOrNull() }
+        validateWinningNumbersCount(numbers)
+        validateWinningNumberRange(numbers)
+        validateNoDuplicateWinningNumbers(numbers)
         return numbers
     }
 
     fun validateBonusNumber(input: String, winningNumbers: List<Int>): Int {
         val bonus = input.toIntOrNull() ?: throw IllegalArgumentException(ERROR_INVALID_BONUS_NUMBER_FORMAT)
-        require(bonus in 1..45) { ERROR_INVALID_WINNING_NUMBER_RANGE }
-        require(bonus !in winningNumbers) { ERROR_DUPLICATE_BONUS_NUMBER }
+        validateBonusNumberRange(bonus)
+        validateNoDuplicateBonusNumber(bonus, winningNumbers)
         return bonus
+    }
+
+    private fun validatePurchaseAmountFormat(input: String) {
+        require(input.matches(Regex("\\d+"))) { ERROR_INVALID_PURCHASE_AMOUNT_FORMAT }
+    }
+
+    private fun validatePositivePurchaseAmount(amount: Int) {
+        require(amount > 0) { ERROR_INVALID_PURCHASE_AMOUNT_NONPOSITIVE }
+    }
+
+    private fun validatePurchaseAmountUnit(amount: Int) {
+        require(amount % 1000 == 0) { ERROR_INVALID_PURCHASE_AMOUNT_UNIT }
+    }
+
+    private fun validateWinningNumbersCount(numbers: List<Int>) {
+        require(numbers.size == 6) { ERROR_INVALID_WINNING_NUMBERS_COUNT }
+    }
+
+    private fun validateWinningNumberRange(numbers: List<Int>) {
+        require(numbers.all { it in 1..45 }) { ERROR_INVALID_WINNING_NUMBER_RANGE }
+    }
+
+    private fun validateNoDuplicateWinningNumbers(numbers: List<Int>) {
+        require(numbers.distinct().size == numbers.size) { ERROR_DUPLICATE_WINNING_NUMBERS }
+    }
+
+    private fun validateBonusNumberRange(bonus: Int) {
+        require(bonus in 1..45) { ERROR_INVALID_WINNING_NUMBER_RANGE }
+    }
+
+    private fun validateNoDuplicateBonusNumber(bonus: Int, winningNumbers: List<Int>) {
+        require(bonus !in winningNumbers) { ERROR_DUPLICATE_BONUS_NUMBER }
     }
 
     companion object {
