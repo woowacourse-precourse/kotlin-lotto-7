@@ -1,7 +1,8 @@
 package lotto.view
 
 import camp.nextstep.edu.missionutils.Console
-import lotto.Constants
+import lotto.utils.PurchaseAmount
+import lotto.utils.WinningNumbers
 
 class InputView {
     fun getPurchaseAmount(): Int {
@@ -12,7 +13,7 @@ class InputView {
             validatePurchaseAmount(amount)
             amount
         } catch (e: Exception) {
-            println("[ERROR] 구입 금액은 ${Constants.LOTTO_PRICE}원 단위이며, ${Constants.MIN_PURCHASE_AMOUNT}원 이상, ${Constants.MAX_PURCHASE_AMOUNT}원 이하여야 합니다.")
+            println("[ERROR] 구입 금액은 ${PurchaseAmount.LOTTO_PRICE.value}원 단위이며, ${PurchaseAmount.MIN_PURCHASE_AMOUNT.value}원 이상, ${PurchaseAmount.MAX_PURCHASE_AMOUNT.value}원 이하여야 합니다.")
             getPurchaseAmount()
         }
     }
@@ -29,7 +30,7 @@ class InputView {
             validateWinningNumbers(numbers)
             numbers
         } catch (e: Exception) {
-            println("[ERROR] 당첨 번호는 중복되지 않는 ${Constants.MIN_LOTTO_NUMBER}~${Constants.MAX_LOTTO_NUMBER} 사이의 숫자 ${Constants.WINNING_NUMBER_COUNT}개로 입력해야 합니다.\n숫자 외에는 구분자인 쉼표(,)만 입력할 수 있습니다.")
+            println("[ERROR] 당첨 번호는 중복되지 않는 ${WinningNumbers.MIN_LOTTO_NUMBER.value}~${WinningNumbers.MAX_LOTTO_NUMBER.value} 사이의 숫자 ${WinningNumbers.WINNING_NUMBER_COUNT.value}개로 입력해야 합니다.\n숫자 외에는 구분자인 쉼표(,)만 입력할 수 있습니다.")
             getWinningNumbers()
         }
     }
@@ -42,25 +43,25 @@ class InputView {
             validateBonusNumber(bonusNumber, winningNumbers)
             bonusNumber
         } catch (e: Exception) {
-            println("[ERROR] 보너스 번호는 당첨 번호와 중복되지 않는 ${Constants.MIN_LOTTO_NUMBER}~${Constants.MAX_LOTTO_NUMBER} 사이의 숫자로 입력해야 합니다.")
+            println("[ERROR] 보너스 번호는 당첨 번호와 중복되지 않는 ${WinningNumbers.MIN_LOTTO_NUMBER.value}~${WinningNumbers.MAX_LOTTO_NUMBER.value} 사이의 숫자로 입력해야 합니다.")
             getBonusNumber(winningNumbers)
         }
     }
 
     private fun validatePurchaseAmount(amount: Int) {
-        if (amount % Constants.LOTTO_PRICE != 0 || amount < Constants.MIN_PURCHASE_AMOUNT || amount > Constants.MAX_PURCHASE_AMOUNT) {
+        if (amount % PurchaseAmount.LOTTO_PRICE.value != 0 || amount < PurchaseAmount.MIN_PURCHASE_AMOUNT.value || amount > PurchaseAmount.MAX_PURCHASE_AMOUNT.value) {
             throw IllegalArgumentException()
         }
     }
 
     private fun validateWinningNumbers(numbers: Set<Int>) {
-        if (numbers.size != Constants.WINNING_NUMBER_COUNT || numbers.any { it !in Constants.MIN_LOTTO_NUMBER..Constants.MAX_LOTTO_NUMBER }) {
+        if (numbers.size != WinningNumbers.WINNING_NUMBER_COUNT.value || numbers.any { it !in WinningNumbers.MIN_LOTTO_NUMBER.value..WinningNumbers.MAX_LOTTO_NUMBER.value }) {
             throw IllegalArgumentException()
         }
     }
 
     private fun validateBonusNumber(bonusNumber: Int, winningNumbers: Set<Int>) {
-        if (bonusNumber !in Constants.MIN_LOTTO_NUMBER..Constants.MAX_LOTTO_NUMBER || winningNumbers.contains(bonusNumber)) {
+        if (bonusNumber !in WinningNumbers.MIN_LOTTO_NUMBER.value..WinningNumbers.MAX_LOTTO_NUMBER.value || winningNumbers.contains(bonusNumber)) {
             throw IllegalArgumentException()
         }
     }

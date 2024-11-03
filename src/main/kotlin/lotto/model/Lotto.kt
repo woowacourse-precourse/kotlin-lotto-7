@@ -1,10 +1,10 @@
 package lotto.model
 
-import lotto.Constants
+import lotto.utils.WinningNumbers
 
 class Lotto(private val numbers: List<Int>) {
     init {
-        require(numbers.size == Constants.WINNING_NUMBER_COUNT) { "[ERROR] 로또 번호는 ${Constants.WINNING_NUMBER_COUNT}개여야 합니다." }
+        require(numbers.size == WinningNumbers.WINNING_NUMBER_COUNT.value) { "[ERROR] 로또 번호는 ${WinningNumbers.WINNING_NUMBER_COUNT.value}개여야 합니다." }
     }
 
     // TODO: 추가 기능 구현
