@@ -1,11 +1,12 @@
 package lotto.model
 
+import lotto.constant.ValidatorMessage
 import lotto.constant.WinningPrize
-
 
 class Lotto(private val numbers: List<Int>) {
     init {
         require(numbers.size == 6) { "[ERROR] 로또 번호는 6개여야 합니다." }
+        require(numbers.size == numbers.distinct().size) { ValidatorMessage.DUPLICATE_NUM.errorMessage() }
     }
 
     fun get(): List<Int> {
@@ -27,7 +28,6 @@ class Lotto(private val numbers: List<Int>) {
         else if (count == 5) LottoResult.third++
         else if (count == 4) LottoResult.fourth++
         else if (count == 3) LottoResult.fifth++
-
     }
 
     fun recordPrice(money: Int) {
@@ -40,13 +40,4 @@ class Lotto(private val numbers: List<Int>) {
 
         LottoResult.priceRatio = (total / money * 100f)
     }
-}
-
-object LottoResult {
-    var first: Int = 0
-    var second: Int = 0
-    var third: Int = 0
-    var fourth: Int = 0
-    var fifth: Int = 0
-    var priceRatio: Float = 0f
 }

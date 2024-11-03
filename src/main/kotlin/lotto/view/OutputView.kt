@@ -4,14 +4,15 @@ import lotto.constant.OutputMessage
 import lotto.model.LottoResult
 
 class OutputView {
-    fun displayLotto(lotto : List<List<Int>>){
+    fun displayLotto(lotto: List<List<Int>>) {
         OutputMessage.PURCHASE_LOTTO_COUNT.display(lotto.size)
-        lotto.forEach{
+        lotto.forEach {
             println(it)
         }
         println()
     }
-    fun displayResult(){
+
+    fun displayResult() {
         OutputMessage.RESULT_TITLE.display()
         OutputMessage.FIFTH.display(LottoResult.fifth)
         OutputMessage.FOURTH.display(LottoResult.fourth)

@@ -48,6 +48,7 @@ class Controller {
 
     fun getWinningNum(): List<Int> {
         var winningNum: String
+
         while (true) {
             try {
                 winningNum = input.getWinningNum()
