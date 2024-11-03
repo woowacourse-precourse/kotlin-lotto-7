@@ -1,6 +1,8 @@
 package lotto.input
 
+import lotto.values.Consts.TICKET_COST
 import lotto.values.ErrorMessages
+
 
 object InputValidator {
     fun validatePaymentInput(input: String) {
@@ -8,7 +10,7 @@ object InputValidator {
         val payment = input.toIntOrNull()
         require(payment != null) { ErrorMessages.PAYMENT_NOT_A_NUMBER }
         require(payment > 0) { ErrorMessages.PAYMENT_NEGATIVE_NUMBER }
-        require(payment % 1000 == 0) { ErrorMessages.PAYMENT_NOT_DIVISIBLE_BY_1000 }
+        require(payment % TICKET_COST == 0) { ErrorMessages.PAYMENT_NOT_DIVISIBLE_BY_1000 }
     }
 
     fun validateWinningNumbersInput(input: String) {

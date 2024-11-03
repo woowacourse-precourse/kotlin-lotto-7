@@ -1,8 +1,10 @@
 package lotto
 
 import camp.nextstep.edu.missionutils.Randoms
-
-const val TICKET_COST = 1000
+import lotto.values.Consts.NUMBER_RANGE_END_INCLUSIVE
+import lotto.values.Consts.NUMBER_RANGE_START_INCLUSIVE
+import lotto.values.Consts.TICKET_COST
+import lotto.values.Consts.WINNING_NUMBERS_COUNT
 
 class LottoGame {
     var ticketList = mutableListOf<Lotto>()
@@ -25,7 +27,12 @@ class LottoGame {
     }
 
     private fun generateTicketRandomly(): Lotto {
-        val randomNumbers = Randoms.pickUniqueNumbersInRange(1, 45, 6)
+        val randomNumbers =
+            Randoms.pickUniqueNumbersInRange(
+                NUMBER_RANGE_START_INCLUSIVE,
+                NUMBER_RANGE_END_INCLUSIVE,
+                WINNING_NUMBERS_COUNT
+            )
         val sortedNumbers = randomNumbers.sorted()
         return Lotto(sortedNumbers)
     }

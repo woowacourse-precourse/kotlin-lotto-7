@@ -1,15 +1,12 @@
 package lotto
 
-import camp.nextstep.edu.missionutils.Randoms.pickUniqueNumbersInRange
+import lotto.values.Consts.FIFTH_PRIZE
+import lotto.values.Consts.FIRST_PRIZE
+import lotto.values.Consts.FOURTH_PRIZE
+import lotto.values.Consts.NONE_PRIZE
+import lotto.values.Consts.SECOND_PRIZE
+import lotto.values.Consts.THIRD_PRIZE
 
-enum class LottoRank(val prize: Int) {
-    NONE(0),
-    FIRST(2_000_000_000),
-    SECOND(30_000_000),
-    THIRD(1_500_000),
-    FOURTH(50_000),
-    FIFTH(5_000)
-}
 
 class Lotto(private val numbers: List<Int>) {
     fun getNumbers(): List<Int> {
