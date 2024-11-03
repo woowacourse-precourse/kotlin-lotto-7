@@ -7,6 +7,7 @@ import org.junit.jupiter.params.provider.ValueSource
 
 import lotto.util.InputParser.parseNumericInput
 import lotto.util.InputParser.parseWinningNumbers
+import lotto.util.InputValidator.validateLottoNumberInRange
 import lotto.util.InputValidator.validateMoneyIsNotNegative
 import lotto.util.InputValidator.validateMoneyIsEnough
 import lotto.util.InputValidator.validateMoneyIsDivisible
@@ -53,5 +54,12 @@ class InputTest {
     fun `당첨 번호 중 중복되는 것이 있을 경우 예외가 발생한다`() {
         val numbers = parseWinningNumbers("1,1,1,1,1,1")
         assertThrows<IllegalArgumentException> { validateWinningNumbersDistinctness(numbers) }
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = ["0,1,2,3,4,5", "1,2,3,4,5,999"])
+    fun `당첨 번호 중 1 이상 45 이하가 아닌 것이 있을 경우 예외가 발생한다`(input: String) {
+        val numbers = parseWinningNumbers(input)
+        assertThrows<IllegalArgumentException> { numbers.forEach { validateLottoNumberInRange(it) } }
     }
 }
