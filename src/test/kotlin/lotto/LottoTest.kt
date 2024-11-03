@@ -1,8 +1,6 @@
 package lotto
 
-import com.sun.source.tree.Tree
-import com.sun.source.util.Trees
-import di.DependencyInjector
+import app.DependencyInjector
 import domain.enums.Rank
 import domain.lotto.Lotto
 import org.junit.jupiter.api.Assertions.assertEquals
@@ -13,7 +11,6 @@ import org.junit.jupiter.api.assertThrows
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.Arguments
 import org.junit.jupiter.params.provider.MethodSource
-import org.junit.jupiter.params.provider.ValueSource
 import java.util.TreeSet
 import java.util.stream.Stream
 

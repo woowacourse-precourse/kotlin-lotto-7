@@ -1,4 +1,4 @@
-import di.DependencyInjector
+import app.DependencyInjector
 
 fun main() {
     val injector = DependencyInjector()

@@ -1,31 +1,29 @@
-package di
+package app
 
 import domain.validator.delegate.common.CommonErrorDelegate
 import domain.validator.delegate.common.CommonErrorDelegator
 import domain.validator.delegate.input.InputErrorDelegate
 import domain.validator.delegate.input.InputErrorDelegator
 import domain.validator.InputValidator
-import view.MainView
-import vm.LottoViewModel
+import presentation.view.View
+import presentation.vm.LottoViewModel
 import camp.nextstep.edu.missionutils.Randoms.pickUniqueNumbersInRange
-import datasource.LottoDataSource
+import data.LottoDataSource
 import domain.calculator.Calculate
 import domain.calculator.Calculator
 import domain.enums.LottoSetting.LOTTO_SIZE
 import domain.enums.LottoSetting.LOTTO_MAX
 import domain.enums.LottoSetting.LOTTO_MIN
 import domain.validator.InputValidate
-import view.InputView
-import view.OutputView
+import domain.printer.Printer
 import java.util.TreeSet
 
 class DependencyInjector {
 
     fun injectView() {
         val viewModel = injectLottoViewModel()
-        val inputView = injectInputView()
         val outputView = injectOutPutView()
-        MainView(inputView, outputView, viewModel)
+        View(outputView, viewModel)
     }
 
     private fun injectInputValidator(): InputValidate {
@@ -52,8 +50,7 @@ class DependencyInjector {
     }
 
     private fun injectCalculator(): Calculate = Calculator()
-    private fun injectInputView(): InputView = InputView()
-    private fun injectOutPutView(): OutputView = OutputView()
+    private fun injectOutPutView(): Printer = Printer()
     private fun injectCommonErrorDelegate(): CommonErrorDelegate = CommonErrorDelegator()
     private fun injectInputErrorDelegate(): InputErrorDelegate = InputErrorDelegator()
 }

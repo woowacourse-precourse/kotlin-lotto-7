@@ -2,7 +2,6 @@ package domain.validator
 
 import domain.validator.delegate.common.CommonErrorDelegate
 import domain.validator.delegate.input.InputErrorDelegate
-import domain.enums.Output
 import domain.enums.Output.Companion.purchaseFormat
 import domain.enums.Process
 import domain.util.ext.mapToInt
