@@ -63,8 +63,6 @@ class LottoController(
     companion object {
         private fun String.isValidNumber() = this.all { it.isDigit() }
 
-        private fun String.isZero() = this.toInt() == 0
-
         private fun String.isValidNumbers(): Boolean =
             try {
                 this.split(',').map { it.toInt() }
@@ -72,11 +70,6 @@ class LottoController(
             } catch (e: NumberFormatException) {
                 false
             }
-
-        private fun String.isNoDuplicateNumbers(): Boolean {
-            val numbers = this.split(',').map { it.toInt() }
-            return numbers.toSet().size == 6
-        }
 
         private const val DELIMITER = ','
         private const val MIN_LOTTO_NUMBER = 1
