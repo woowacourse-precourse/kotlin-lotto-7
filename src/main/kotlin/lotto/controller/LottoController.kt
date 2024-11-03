@@ -1,14 +1,15 @@
 package lotto.controller
 
-import lotto.*
-import lotto.LottoPrize.NONE_PRIZE
-import lotto.LottoPrize.SECOND_PRIZE
-import java.text.DecimalFormat
+import lotto.model.*
+import lotto.model.LottoPrize.NONE_PRIZE
+import lotto.view.InputView
+import lotto.view.OutputView
 
 class LottoController(
     private val cashier: Cashier,
     private val lottoMachine: LottoMachine,
     private val inputView: InputView,
+    private val outputView: OutputView,
 ) {
     private var purchasedLottos = emptyList<Lotto>()
     private lateinit var amount: LottoAmount
@@ -28,9 +29,8 @@ class LottoController(
 
     private fun printLottos() {
         val lottosCount = cashier.calculateLottoCount(amount)
+        outputView.printLottosCount(lottosCount)
 
-        println()
-        println("${lottosCount}개를 구매했습니다.")
         val lottos = lottoMachine.createLottos(lottosCount)
         lottos.forEach { lotto ->
             println(lotto.lottoNumbers.sorted())
@@ -76,21 +76,14 @@ class LottoController(
         purchasedLottos.forEach { prizes.add(it.compareWinningLotto(winningLotto)) }
 
         val prizeCounts = prizes.groupingBy { it }.eachCount()
-
-        println()
-        println("당첨 통계\n---")
+        outputView.printWinningStatisticsTitle()
 
         LottoPrize.entries
             .reversed()
             .filter { it != NONE_PRIZE }
             .forEach { prize ->
                 val count = prizeCounts[prize] ?: 0
-
-                if (prize == SECOND_PRIZE) {
-                    println("${prize.matchingCount}개 일치, 보너스 볼 일치 (${THOUSAND_COMMA.format(prize.price)}원) - ${count}개")
-                    return@forEach
-                }
-                println("${prize.matchingCount}개 일치 (${THOUSAND_COMMA.format(prize.price)}원) - ${count}개")
+                outputView.printWinningStatistics(prize, count)
             }
 
         printLottoYield(prizes)
@@ -99,11 +92,6 @@ class LottoController(
     private fun printLottoYield(prizes: List<LottoPrize>) {
         val totalPrizeMoney = prizes.sumOf { it.price }
         val yield = (totalPrizeMoney.toDouble() / amount.lottoAmount) * 100
-        val formattedYield = String.format("%.1f", yield)
-        println("총 수익률은 ${formattedYield}%입니다.")
-    }
-
-    companion object {
-        private val THOUSAND_COMMA = DecimalFormat("#,###")
+        outputView.printLottoYield(yield)
     }
 }
