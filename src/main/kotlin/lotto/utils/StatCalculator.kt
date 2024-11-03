@@ -14,11 +14,11 @@ class StatCalculator {
         return String.format("%.1f", profit / price.toDouble() * 100)
     }
 
-    fun getRank(numbers: List<Int>, winningLotto: Set<Int>, bonusNumber: Int): Rank {
+    fun getRank(numbers: List<Int>, winningNumber: Set<Int>, bonusNumber: Int): Rank {
         var matchedNumber = 0
         var matchBonusNumber = false
         numbers.forEach { num ->
-            if(winningLotto.contains(num)) matchedNumber++
+            if(winningNumber.contains(num)) matchedNumber++
             if(num == bonusNumber) matchBonusNumber = true
         }
         return getRankFromMatchedNumber(matchedNumber, matchBonusNumber)
