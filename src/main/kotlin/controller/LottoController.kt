@@ -70,6 +70,7 @@ class LottoController {
             5 -> {
                 if (matchBonus) {
                     Prize.SECOND.plusCount()
+                    return
                 }
                 Prize.THIRD.plusCount()
             }
