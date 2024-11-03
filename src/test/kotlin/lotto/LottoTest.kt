@@ -6,11 +6,11 @@ import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 
 class LottoTest {
+    private val winningNumbers = listOf(1, 2, 3, 4, 5, 6)
+    private val bonusNumber = 7
+
     @Test
     fun `getLottoResultAsRank가 올바른 등수를 반환한다`() {
-        val winningNumbers = listOf(1, 2, 3, 4, 5, 6)
-        val bonusNumber = 7
-
         val firstPrizeTicket = listOf(1, 2, 3, 4, 5, 6)
         val secondPrizeTicket = listOf(1, 2, 3, 4, 5, 7)
         val thirdPrizeTicket = listOf(1, 2, 3, 4, 5, 45)
