@@ -6,11 +6,9 @@ import utils.OutputMessages.BONUS_BALL_MATCH_OUTPUT_MESSAGE
 import utils.OutputMessages.BUYING_OUTPUT_MESSAGE
 import utils.OutputMessages.COUNT_MATCH_OUTPUT_MESSAGE
 import utils.OutputMessages.DASH_OUTPUT_MESSAGE
-import utils.OutputMessages.DECIMAL_PATTERN
 import utils.OutputMessages.DECIMAL_PATTERN_OUTPUT_MESSAGE
 import utils.OutputMessages.EARNING_END_OUTPUT_MESSAGE
 import utils.OutputMessages.MONEY_OUTPUT_MESSAGE
-import utils.OutputMessages.TOTAL_RETURN
 import utils.OutputMessages.TOTAL_RETURN_OUTPUT_MESSAGE
 import utils.OutputMessages.WINNING_COUNT_OUTPUT_MESSAGE
 import utils.OutputMessages.WINNING_STATISTICS_OUTPUT_MESSAGE
@@ -52,5 +50,8 @@ object OutputView {
         return decimalFormat.format(this)
     }
 
+    fun printEarningRate(earningRate: Double) {
+        println(TOTAL_RETURN_OUTPUT_MESSAGE + earningRate + EARNING_END_OUTPUT_MESSAGE)
+    }
 }
 
