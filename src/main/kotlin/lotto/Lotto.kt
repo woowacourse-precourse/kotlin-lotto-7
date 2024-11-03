@@ -1,6 +1,12 @@
 package lotto
 
 class Lotto(private val numbers: List<Int>) {
+    init {
+        Validation().isAmountOfNumberSix(numbers)
+        Validation().isNumbersNotDuplicate(numbers)
+        Validation().isNumbersRange1To45(numbers)
+    }
+
     fun checkRank(winningNumbers: WinningNumbers, bonusNumber: BonusNumber): Int {
         val countedSameNumber = checkNumbers(winningNumbers, bonusNumber)
 

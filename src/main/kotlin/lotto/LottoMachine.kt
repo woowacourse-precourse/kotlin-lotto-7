@@ -9,9 +9,7 @@ class LottoMachine {
     private val ioHandler = IOHandler()
 
     init {
-        val input = ioHandler.inputToUser(PAYMENRFIRSTINSTRUCTION)
-
-        payment = getCorrectPayment(input)
+        payment = insertMoney(PAYMENRFIRSTINSTRUCTION)
         purchasedLotto.amountOfLotto = calculateAmountOfLotto()
         repeat(purchasedLotto.amountOfLotto) {
             purchasedLotto.purchasedLotto.add(LottoNumbering().lottoNumbering())
@@ -22,18 +20,22 @@ class LottoMachine {
         }
     }
 
+    private fun insertMoney(inputInstruction: String): Int {
+        val input = ioHandler.inputToUser(inputInstruction)
+
+        return getCorrectPayment(input)
+    }
+
     private fun calculateAmountOfLotto(): Int {
         return payment / 1000
     }
 
     private fun getCorrectPayment(input: String): Int {
-        var tempInput = input
-
         return try {
-            Validation().checkPayment(tempInput)
+            Validation().checkPayment(input)
         } catch (e: IllegalArgumentException) {
-            tempInput = ioHandler.inputToUser("${e.message} $PAYMENTRETRYINSTRUCTION")
-            getCorrectPayment(tempInput)
+            println(e.message)
+            insertMoney(PAYMENTRETRYINSTRUCTION)
         }
     }
 
@@ -44,7 +46,6 @@ class LottoMachine {
 }
 
 class LottoNumbering {
-
     fun lottoNumbering(): List<Int> {
         val lottoNumbers = pickLottoNumber()
 

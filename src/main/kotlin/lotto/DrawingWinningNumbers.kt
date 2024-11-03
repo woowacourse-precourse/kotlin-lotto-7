@@ -3,18 +3,33 @@ package lotto
 class DrawingWinningNumbers {
     fun drawingWinningNumbers(): List<Int> {
         val inputWinningNumbers = IOHandler().inputToUser(WINNINGNUMBERINSTRUCTION)
-        val winningNumbers = transferType(inputWinningNumbers)
+        var winningNumbers: List<Int>
 
-        Validation().checkWinningNumbers(winningNumbers)
+        try {
+            winningNumbers = transferType(inputWinningNumbers)
+
+            Validation().checkWinningNumbers(winningNumbers)
+        } catch (e: IllegalArgumentException) {
+            println(e.message)
+            winningNumbers = drawingWinningNumbers()
+        }
+
         return winningNumbers
     }
 
     fun drawingBonusNumber(winningNumbers: WinningNumbers): Int {
         val inputBonusNumber = IOHandler().inputToUser(BONUSNUMBERINSTRUCTION)
-        require(Validation().isDigit(inputBonusNumber)) { EXCEPTIONOFNOTDIGIT }
-        val bonusNumber = inputBonusNumber.toInt()
+        var bonusNumber: Int
 
-        Validation().checkBonusNumber(bonusNumber, winningNumbers.winningNumbers)
+        try {
+            require(Validation().isDigit(inputBonusNumber)) { EXCEPTIONOFNOTDIGIT }
+
+            bonusNumber = inputBonusNumber.toInt()
+            Validation().checkBonusNumber(bonusNumber, winningNumbers.winningNumbers)
+        } catch (e: IllegalArgumentException){
+            println(e.message)
+            bonusNumber = drawingBonusNumber(winningNumbers)
+        }
         return bonusNumber
     }
 
