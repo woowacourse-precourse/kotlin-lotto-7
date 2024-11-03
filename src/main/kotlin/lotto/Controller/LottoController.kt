@@ -13,7 +13,7 @@ class LottoController {
         printLottoInfo(lottoCount, purchasedLottos)
 
         val winningNumbers = inputWinningNumbers()
-        val bonusNumber = inputBonusNumber()
+        val bonusNumber = inputBonusNumber(winningNumbers)
 
         val results = calculateResults(purchasedLottos, winningNumbers, bonusNumber)
         val profitRate = calculateProfitRate(results, purchaseAmount)
