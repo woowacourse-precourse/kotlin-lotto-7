@@ -28,6 +28,7 @@ enum class Prize(
                 else -> NONE
             }
         }
+
         private const val FIRST_COUNT = 6
         private const val SECOND_COUNT = 5
         private const val THIRD_COUNT = 5

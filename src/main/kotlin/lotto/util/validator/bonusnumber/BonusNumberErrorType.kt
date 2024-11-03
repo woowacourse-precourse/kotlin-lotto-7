@@ -2,7 +2,7 @@ package lotto.util.validator.bonusnumber
 
 enum class BonusNumberErrorType(
     private val _errorMessage: String
-){
+) {
     EMPTY_INPUT("보너스 번호는 빈 문자를 입력하면 안 됩니다."),
     NOT_DECIMAL("보너스 번호는 소수를 입력하면 안 됩니다."),
     NOT_INTEGER("보너스 번호는 정수 외 다른 것을 입력하면 안 됩니다."),

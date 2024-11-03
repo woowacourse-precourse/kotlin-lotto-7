@@ -5,7 +5,6 @@ import lotto.adapter.LottoAdapter.makeLottoModel
 import lotto.adapter.PurchaseInfoAdapter
 import lotto.domain.model.BonusNumber
 import lotto.domain.model.Lotto
-import lotto.domain.model.Prize
 import lotto.domain.model.PurchaseInfo
 import lotto.domain.usecase.LottoPrizeCalculator
 import lotto.domain.usecase.MatchingLottoNumber

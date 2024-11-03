@@ -7,7 +7,7 @@ data class Lotto(
 ) {
     init {
         require(numbers.size == 6) { WinningNumbersErrorType.LUCKY_NUMBERS_6 }
-        require(numbers.size == numbers.toSet().size) { WinningNumbersErrorType.NO_DUPLICATE_LUCKY_NUMBERS}
+        require(numbers.size == numbers.toSet().size) { WinningNumbersErrorType.NO_DUPLICATE_LUCKY_NUMBERS }
     }
 
     val lottoNumbers: List<Int>

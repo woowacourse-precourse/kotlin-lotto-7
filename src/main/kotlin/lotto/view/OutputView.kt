@@ -32,7 +32,7 @@ object OutputView {
             val count = prizeCount[prize] ?: ZERO
             val result = when (prize) {
                 Prize.SECOND -> String.format(SECOND_RANK_MESSAGE, prize.prizeAmount, count)
-                else -> String.format(RANK_MESSAGE,prize.matchingNumberCount, prize.prizeAmount, count)
+                else -> String.format(RANK_MESSAGE, prize.matchingNumberCount, prize.prizeAmount, count)
             }
             println(result)
         }
