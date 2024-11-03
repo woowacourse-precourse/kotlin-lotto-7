@@ -38,8 +38,8 @@ class LottoMachineTest {
         )
 
         val expectResult = mapOf(
-            Rank.THIRD_RANK to 2,
-            Rank.MISS to 1,
+            Rank.FOURTH_RANK to 2,
+            null to 1,
         )
 
         val result = lottoMachine.countPrize(winningResult)
