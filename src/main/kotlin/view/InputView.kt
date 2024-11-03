@@ -25,16 +25,21 @@ object InputView {
             val inputWinningNumbers = Console.readLine()
 
             winningNumbers = Validator.validateWinningNumbers(inputWinningNumbers)
-        }while (winningNumbers.isEmpty())
+        } while (winningNumbers.isEmpty())
 
         return winningNumbers
     }
 
     fun getBonusNumber(winningNumbers: List<Int>): Int {
-        println(BONUS_NUMBER_INPUT_MESSAGE)
-        val inputBonusNumber = Console.readLine()
+        var bonusNumber = 0
+        do {
+            println(BONUS_NUMBER_INPUT_MESSAGE)
+            val inputBonusNumber = Console.readLine()
 
-        return Validator.validateBonusNumber(inputBonusNumber, winningNumbers)
+            bonusNumber = Validator.validateBonusNumber(inputBonusNumber, winningNumbers)
+        } while (bonusNumber == 0)
+
+        return bonusNumber
     }
 
 }
