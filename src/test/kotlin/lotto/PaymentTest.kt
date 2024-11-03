@@ -16,7 +16,15 @@ class PaymentTest {
 
     @ParameterizedTest
     @ValueSource(strings = ["0", "-5000"])
-    fun `0과 음수를 받았을 때`(payment: String) {
+    fun `0이하의 숫자일 때`(payment: String) {
+        assertThrows<IllegalArgumentException> {
+            Payment(payment)
+        }
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = ["1500", "112233"])
+    fun `1000 단위로 나누어 떨어지지 않을 때`(payment: String) {
         assertThrows<IllegalArgumentException> {
             Payment(payment)
         }
