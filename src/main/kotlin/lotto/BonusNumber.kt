@@ -1,6 +1,6 @@
 package lotto
 
-class BonusNumber(private val number: String, val lotto: WinningNumber) {
+class BonusNumber(private val number: String, private val lotto: WinningNumber) {
     init {
         require(isNumber()) { "$ERROR $NOT_NUMBER_MESSAGE" }
         require(isNumberInRange()) { "$ERROR $BONUS_NUMBER_NOT_IN_RANGE_MESSAGE" }
@@ -12,9 +12,17 @@ class BonusNumber(private val number: String, val lotto: WinningNumber) {
     private fun isNumberInRange() = number.toInt() in MIN_NUM..MAX_NUM
 
     private fun isContains(): Boolean {
-        val lottoNumber = lotto.getWinningNumber()
+        val lottoNumber = getWinningNumber()
         val bonusNumber = number.toInt()
         return !lottoNumber.contains(bonusNumber)
+    }
+
+    fun getWinningNumber(): List<Int> {
+        return lotto.getWinningNumber()
+    }
+
+    fun getBonusNumber(): Int {
+        return number.toInt()
     }
 
     companion object {

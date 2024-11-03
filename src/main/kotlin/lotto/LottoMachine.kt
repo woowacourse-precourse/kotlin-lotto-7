@@ -1,12 +1,10 @@
 package lotto
 
-import camp.nextstep.edu.missionutils.Randoms
-
 class LottoMachine(private val payment: String) {
 
     private val lottoGenerator = LottoGenerator()
     private val lottoCount = calculateTotalLottoCount()
-    
+
     val lottoList = makeLotto()
 
     private fun calculateTotalLottoCount(): Int {
@@ -19,6 +17,22 @@ class LottoMachine(private val payment: String) {
             lottoList.add(lottoGenerator.generateLotto())
         }
         return lottoList.toList()
+    }
+
+    fun winningLotteryResult(
+        lottos: List<Lotto>,
+        bonusNumber: BonusNumber
+    ): List<Pair<Int, Boolean>> {
+        val winningNumber = bonusNumber.getWinningNumber()
+        val bonus = bonusNumber.getBonusNumber()
+        val result = lottos.map { lotto ->
+            val lottoNumber = lotto.getLottoNumbers()
+            val matchNumber = lottoNumber.count { it in winningNumber }
+            val winningBonus = bonus in lottoNumber
+            matchNumber to winningBonus
+        }
+
+        return result
     }
 
     companion object {
