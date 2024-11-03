@@ -68,6 +68,13 @@ class Input {
     }
 
     //빈 값
+    private fun confirmLottoCount(lottos: List<String>) {
+        if (lottos.size != 6) {
+            throw CustomErrorHandler("[ERROR] 로또 번호는 6개여야 합니다.", CustomException.BLANK)
+        }
+    }
+
+    //6글자
     private fun confirmNullOrBlank(inputNumber: String) {
         if (inputNumber.isBlank()) {
             throw CustomErrorHandler("[ERROR] 로또 번호가 비어있습니다.", CustomException.BLANK)
@@ -91,8 +98,10 @@ class Input {
                 output.printLotto(LottoType.LOTTO)
                 val resultLotto = input()
                 correctLotto = resultLotto.split(",")
+                confirmLottoCount(correctLotto)
                 correctLotto.forEach { lottoCheck(it) }
                 correctIntLotto = correctLotto.map { it.toInt() }
+                checkLottoDuplicate(correctIntLotto)  // 중복 체크 추가
                 lotto = Lotto(correctIntLotto)
                 break
             } catch (e: CustomErrorHandler) {
@@ -127,7 +136,12 @@ class Input {
         }
     }
 
-
+    //중복 체크
+    private fun checkLottoDuplicate(numbers: List<Int>) {
+        if (numbers.distinct().size != 6) {
+            throw CustomErrorHandler("[ERROR] 로또 번호에 중복된 숫자가 있습니다.", CustomException.DUPLICATE)
+        }
+    }
     private fun checkBonusDuplicate(numbers: Int) {
         if (correctIntLotto.contains(numbers)) {
             throw CustomErrorHandler("[ERROR] 로또 번호에 중복된 숫자가 있습니다.", CustomException.DUPLICATE)
