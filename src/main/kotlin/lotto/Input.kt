@@ -93,7 +93,6 @@ class Input {
                 correctLotto = resultLotto.split(",")
                 correctLotto.forEach { lottoCheck(it) }
                 correctIntLotto = correctLotto.map { it.toInt() }
-                checkLottoDuplicate(correctIntLotto)  // 중복 체크 추가
                 lotto = Lotto(correctIntLotto)
                 break
             } catch (e: CustomErrorHandler) {
@@ -128,12 +127,7 @@ class Input {
         }
     }
 
-    //중복 체크
-    private fun checkLottoDuplicate(numbers: List<Int>) {
-        if (numbers.distinct().size != 6) {
-            throw CustomErrorHandler("[ERROR] 중복되지 않는 숫자를 입력해야 합니다.", CustomException.DUPLICATE)
-        }
-    }
+
     private fun checkBonusDuplicate(numbers: Int) {
         if (correctIntLotto.contains(numbers)) {
             throw CustomErrorHandler("[ERROR] 로또 번호에 중복된 숫자가 있습니다.", CustomException.DUPLICATE)
