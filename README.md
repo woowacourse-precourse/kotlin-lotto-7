@@ -134,7 +134,7 @@ object LottoSystem {
 - 로또의 전반적인 시스템을 관리하는 싱글톤 객체
 - `LottoSystem` 객체 생성시 즉, 시스템 실행 시 `Input` 객체를 생성해 사용자로부터 입력을 받음
 
-#### 구입 개수 저장
+##### 구입 개수 저장
 
 ```kotlin
 object LottoSystem {
@@ -156,7 +156,7 @@ object LottoSystem {
 - `saveNumberOfPurchases()` 함수에서 `saveRandomNumbers()` 함수를 호출하여 구입 개수 만큼 랜덤 번호를 생성
 
 
-#### 구입 개수 만큼 랜덤 구입
+##### 구입 개수 만큼 랜덤 구입
 
 ```kotlin
 object LottoSystem {
@@ -246,3 +246,43 @@ class Lotto(private val numbers: List<Int>) {
 - 매개 변수로 로또 번호 6개를 입력 받음
 - `LottoSystem` 객체로부터 당첨 번호와 보너스 번호를 받음
 - `getMatchCount()` 함수에서 매개변수로 전달받은 로또 번호와 당첨 번호를 대조후 맞는 숫자의 개수와 보너스 번호 일치 여부를 포함하는 리스트를 리턴
+
+#### LottoSystem 당첨 여부 확인
+
+```kotlin
+object LottoSystem {
+    ...
+    private fun checkWinning(){
+        randomNumbers.forEach {
+            val lotto = Lotto(it!!.toList())
+            val matchCount = lotto.getMatchCount()
+            matchCounts.add(matchCount)
+        }
+        saveRanks(matchCounts)
+    }
+
+    private fun saveRanks(matchCounts: MutableList<MutableList<Int>>) {
+        setRanks()
+        matchCounts.forEach {
+            if(it[0]==6){
+                ranks[LottoRank.ONE] = ranks[LottoRank.ONE]!! + 1
+            }else if(it[0]==5&&it[1]==1){
+                ranks[LottoRank.TWO] = ranks[LottoRank.TWO]!! + 1
+            }else if(it[0]==5&&it[1]==0){
+                ranks[LottoRank.THREE] = ranks[LottoRank.THREE]!! + 1
+            }else if(it[0]==4){
+                ranks[LottoRank.FOUR] = ranks[LottoRank.FOUR]!! + 1
+            }else if(it[0]==3){
+                ranks[LottoRank.FIVE] = ranks[LottoRank.FIVE]!! + 1
+            }
+        }
+    }
+    ...
+}
+```
+- `checkWinning()` 함수에서 저장된 랜덤 번호 리스트에 담긴 번호를 통해 `Lotto` 클래스를 생성
+- 각각의 로또 클래스를 생성 후 맞춘 번호 수를 `getMatchCount()` 함수를 통해 얻음
+- 각 로또 번호에 대한 맞춘 개수들을 저장하는 `matchCounts` 리스트에 맞춘 개수를 추가
+- 각 로또 번호에 대한 맞춘 개수를 모두 저장한 후 `saveRanks()` 함수를 호출
+- `saveRanks()` 함수에서 각 로또 번호에 대한 맞춘 개수에 맞는 순위를 확인
+- `ranks` 맵에 각 로또 번호에 대한 맞는 순위에 더하여 각 순위별 당첨 개수를 저장
