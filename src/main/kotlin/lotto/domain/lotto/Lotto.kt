@@ -31,6 +31,6 @@ class Lotto(private val numbers: List<Int>) {
     }
 
     override fun toString(): String {
-        return numbers.joinToString(separator = ", ", prefix = "[", postfix = "]") { it.toString() }
+        return numbers.sorted().joinToString(separator = ", ", prefix = "[", postfix = "]") { it.toString() }
     }
 }
