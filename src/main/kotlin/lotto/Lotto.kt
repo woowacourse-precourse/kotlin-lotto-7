@@ -44,13 +44,7 @@ class Lotto(private val numbers: List<Int>) {
         }
         return 0
     }
-    
-    //맞춘 갯수에 따라 판별
-    // 6 6 4
-    // 5+보너스 7 3
-    // 5 5 2
-    // 4 4 1
-    // 3 3 0
+
     private fun checkedRank(score: Int, lotto: List<Int>): CorrectType {
         val checkIndex = score - CHECKBOUND
         if (score == BONUSSCORE) {
