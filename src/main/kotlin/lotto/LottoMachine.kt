@@ -10,12 +10,19 @@ class LottoMachine(private val payment: String) {
 
     fun generateLotto(): Lotto {
         val number = lottoGenerator()
-        return Lotto(number)
+        return Lotto(number.sorted())
     }
 
-    private fun lottoGenerator(): MutableList<Int> =
+    private fun lottoGenerator(): List<Int> =
         Randoms.pickUniqueNumbersInRange(LOTTO_MIN_NUM, LOTTO_MAX_NUM, LOTTO_COUNT)
 
+    fun makeLotto(lottoCount: Int): List<Lotto> {
+        val lottoList = mutableListOf<Lotto>()
+        repeat(lottoCount) {
+            lottoList.add(generateLotto())
+        }
+        return lottoList.toList()
+    }
 
     companion object {
         const val LOTTO_PRICE = 1000
