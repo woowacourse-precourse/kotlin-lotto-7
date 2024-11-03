@@ -45,6 +45,9 @@ class LottoOutput {
         return String.format("%,d", prize)
     }
 
+    fun printProfitRate(profitRate: String) {
+        println(String.format(PROFIT_RATE_MESSAGE, profitRate))    }
+
     companion object {
         private const val TICKET_COUNT_MESSAGE = "개의 로또를 구매했습니다."
         private const val RESULT_HEADER = "\n당첨 통계"
@@ -52,5 +55,6 @@ class LottoOutput {
         private const val FORMAT_RESULT = "%s (%s원) - %d개"
         private const val FORMAT_MATCH_DESCRIPTION = "%d개 일치%s"
         private const val BONUS_MATCH_MESSAGE = ", 보너스 볼 일치"
+        private const val PROFIT_RATE_MESSAGE = "총 수익률은 %s%%입니다."
     }
 }

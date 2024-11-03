@@ -12,7 +12,6 @@ class LottoGame {
 
     fun startLotto() {
         val purchasePrice = checkValidatedPurchasePrice()
-
         val lottoTicketCount = purchasePrice / 1000
         lottoOutput.printTicketCount(lottoTicketCount)
 
@@ -20,11 +19,11 @@ class LottoGame {
         lottoOutput.printLottoTickets(lottoTickets)
 
         val winningNumbers = checkValidatedWinningNumbers()
-
         val bonusNumber = checkValidatedBonusNumber(winningNumbers)
 
         calculateResults(lottoTickets, winningNumbers, bonusNumber)
         lottoOutput.printResult(lottoResult.getResults())
+        calculateProfitRate(lottoResult.getResults(), purchasePrice)
     }
 
     private fun checkValidatedPurchasePrice(): Int {
@@ -55,5 +54,12 @@ class LottoGame {
             val rank = Rank.from(matchCount, isBonusMatched)
             lottoResult.addResult(rank)
         }
+    }
+
+    private fun calculateProfitRate(results: Map<Rank, Int>, purchasePrice: Int) {
+        val totalPrize = results.entries.sumOf { (rank, count) -> rank.prize * count }
+        val profitRate = (totalPrize.toDouble() / purchasePrice) * 100
+        val roundedProfitRate = String.format("%.1f", profitRate)
+        lottoOutput.printProfitRate(roundedProfitRate)
     }
 }
