@@ -20,6 +20,11 @@ class LottoService {
         return lottos
     }
 
+    fun getProfitRate(originalMoney: Int, resultMoney: Int): String {
+        val profit = resultMoney.toDouble() / originalMoney.toDouble()
+        return String.format("%.2f", profit)
+    }
+
     private fun createRandomLotto() = Lotto(Randoms.pickUniqueNumbersInRange(1, 45, 6).sorted())
 
     private fun matchLotto(winLotto: Lotto, comparingLotto: Lotto, bonusNumber: Int): Pair<Int, Boolean> {
