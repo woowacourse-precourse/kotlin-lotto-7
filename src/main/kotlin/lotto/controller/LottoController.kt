@@ -20,7 +20,7 @@ fun getPurchaseAmount(): Int {
     println("구입금액을 입력해 주세요.")
     val input = Console.readLine()
     return try {
-        val amount = input.toInt()
+        val amount = input.trim().toInt()
         validatePurchaseAmount(amount)
         amount
     } catch (e: Exception) {
@@ -49,7 +49,11 @@ fun getWinningNumbers(): Set<Int> {
     println("당첨 번호를 입력해 주세요.")
     val input = Console.readLine()
     return try {
-        val numbers = input.split(",").map { it.trim().toInt() }.toSet()
+        val numbers = input.split(",")
+            .map { it.trim() }
+            .filter { it.isNotEmpty() }
+            .map { it.toInt() }
+            .toSet()
         validateWinningNumbers(numbers)
         numbers
     } catch (e: Exception) {
@@ -68,7 +72,7 @@ fun getBonusNumber(winningNumbers: Set<Int>): Int {
     println("보너스 번호를 입력해 주세요.")
     val input = Console.readLine()
     return try {
-        val bonusNumber = input.toInt()
+        val bonusNumber = input.trim().toInt()
         validateBonusNumber(bonusNumber, winningNumbers)
         bonusNumber
     } catch (e: Exception) {
