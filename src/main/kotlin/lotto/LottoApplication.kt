@@ -2,16 +2,17 @@ package lotto
 
 import lotto.presenter.InputPresenter
 import lotto.presenter.LottoPresenter
-import lotto.view.InputViewImpl
-import lotto.view.OutputViewImpl
+import lotto.view.InputView
+import lotto.view.OutputView
 
-class LottoApplication {
+class LottoApplication(
+    private val inputView: InputView,
+    private val outputView: OutputView,
+) {
 
     fun run() {
-        val inputView = InputViewImpl()
-        val outputView = OutputViewImpl()
-        val inputPresenter = InputPresenter(inputView, outputView)
-        val lottoPresenter = LottoPresenter(inputPresenter, outputView)
+        val inputPresenter = createInputPresenter()
+        val lottoPresenter = createLottoPresenter(inputPresenter)
 
         val lottoBundle = lottoPresenter.purchaseLotto()
         val winningTicket = lottoPresenter.getWinningTicket()
@@ -19,5 +20,13 @@ class LottoApplication {
         val lottoResult = lottoPresenter.calculateLottoResult(lottoBundle, winningTicket)
 
         lottoPresenter.displayResults(lottoResult)
+    }
+
+    private fun createInputPresenter(): InputPresenter {
+        return InputPresenter(inputView, outputView)
+    }
+
+    private fun createLottoPresenter(inputPresenter: InputPresenter): LottoPresenter {
+        return LottoPresenter(inputPresenter, outputView)
     }
 }
