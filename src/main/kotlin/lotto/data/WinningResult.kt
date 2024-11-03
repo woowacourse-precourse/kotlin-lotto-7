@@ -8,10 +8,9 @@ class WinningResult(
     val details: Map<Rank, Int>
 
     init {
-        val ranks = calculateRanks()
         details = Rank.entries
             .filter { it != Rank.MISS }
-            .associateWith { rank -> ranks.count { it == rank } }
+            .associateWith { rank -> calculateRanks().count { it == rank } }
     }
 
     private fun calculateRanks() =
