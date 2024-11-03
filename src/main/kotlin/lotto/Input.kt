@@ -172,6 +172,6 @@ class Input {
 
 
     private fun rate(){
-        output.printRate(lotto.resultMoney*10,ticket*1000)
+        output.printRate(lotto.resultMoney,ticket*1000)
     }
 }
