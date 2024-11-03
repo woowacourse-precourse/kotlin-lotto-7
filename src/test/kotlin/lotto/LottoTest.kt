@@ -18,27 +18,27 @@ class LottoTest {
         val fifthPrizeTicket = listOf(1, 2, 3, 43, 44, 45)
         val nonePrizeTicket = listOf(1, 2, 42, 43, 44, 45)
         assertEquals(
-            1,
+            LottoRank.FIRST,
             Lotto(firstPrizeTicket).getLottoResultAsRank(winningNumbers, bonusNumber)
         )
         assertEquals(
-            2,
+            LottoRank.SECOND,
             Lotto(secondPrizeTicket).getLottoResultAsRank(winningNumbers, bonusNumber)
         )
         assertEquals(
-            3,
+            LottoRank.THIRD,
             Lotto(thirdPrizeTicket).getLottoResultAsRank(winningNumbers, bonusNumber)
         )
         assertEquals(
-            4,
+            LottoRank.FOURTH,
             Lotto(fourthPrizeTicket).getLottoResultAsRank(winningNumbers, bonusNumber)
         )
         assertEquals(
-            5,
+            LottoRank.FIFTH,
             Lotto(fifthPrizeTicket).getLottoResultAsRank(winningNumbers, bonusNumber)
         )
         assertEquals(
-            6,
+            LottoRank.NONE,
             Lotto(nonePrizeTicket).getLottoResultAsRank(winningNumbers, bonusNumber)
         )
     }
