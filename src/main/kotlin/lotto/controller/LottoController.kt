@@ -6,10 +6,8 @@ import lotto.domain.lotto.Lotto
 import lotto.domain.lotto.LottoFactory
 import lotto.domain.numbergenerator.NumberGenerator
 import lotto.domain.purchase.Purchase
-import lotto.view.bonusNumberView
-import lotto.view.purchaseAmountView
-import lotto.view.purchaseLottoView
-import lotto.view.winningNumberView
+import lotto.domain.winning.WinningManager
+import lotto.view.*
 
 class LottoController(
     private val numberGenerator: NumberGenerator
@@ -18,8 +16,13 @@ class LottoController(
         val purchase = getPurchaseAmount()
         val lottoTicket = LottoFactory.buyLottoTicket(purchase, numberGenerator)
         purchaseLottoView(purchase.getNumberOfLotto(), lottoTicket)
+
         val winningNumber = getWinningNumber()
         val bonusNumber = getBonusNumber(winningNumber)
+
+        val winningManager = WinningManager(purchase, lottoTicket, winningNumber, bonusNumber)
+        printWinningStatistics(winningManager.getWinningStatistics())
+        printProfitRate(winningManager.getProfitRate())
     }
 
     private fun getPurchaseAmount(): Purchase {
