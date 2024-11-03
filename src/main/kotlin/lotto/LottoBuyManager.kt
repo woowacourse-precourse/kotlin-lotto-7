@@ -10,8 +10,31 @@ class LottoBuyManager {
 
     fun requestMoney() {
         println(REQUEST_MONEY_MESSAGE)
-        money = Console.readLine().toInt()
-        println()
+        val moneyInput = Console.readLine()
+        try {
+            validateMoneyInput(moneyInput)
+            println()
+        } catch (e: IllegalArgumentException) {
+            println(e.message)
+            println()
+            requestMoney()
+        }
+    }
+
+    private fun validateMoneyInput(moneyInput: String) {
+        if (!moneyInput.matches(Regex(REGEX_NUMBER_PATTERN))) {
+            throw IllegalArgumentException("$ERROR_TITLE $ERROR_NOT_NUMBER_MESSAGE")
+        }
+
+        money = moneyInput.toInt()
+
+        if (money < LOTTO_PRICE) {
+            throw IllegalArgumentException("$ERROR_TITLE $ERROR_MINIMUM_AMOUNT_MESSAGE")
+        }
+
+        if (money % LOTTO_PRICE != 0) {
+            throw IllegalArgumentException("$ERROR_TITLE $ERROR_UNIT_AMOUNT_MESSAGE")
+        }
     }
 
     fun buyLottos() {
@@ -32,5 +55,10 @@ class LottoBuyManager {
         private const val LOTTO_RANGE_START = 1
         private const val LOTTO_RANGE_END = 45
         private const val LOTTO_COUNT = 6
+        private const val REGEX_NUMBER_PATTERN = "^[0-9]+\$"
+        private const val ERROR_TITLE = "[ERROR]"
+        private const val ERROR_NOT_NUMBER_MESSAGE = "금액은 숫자여야 합니다."
+        private const val ERROR_MINIMUM_AMOUNT_MESSAGE = "로또 구입금액은 1000원 이상이어야 합니다."
+        private const val ERROR_UNIT_AMOUNT_MESSAGE = "로또 구입금액은 1000원 단위여야 합니다."
     }
 }
