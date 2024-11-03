@@ -61,20 +61,19 @@ class Output {
         }
 
     fun printRate(money: Long, ticket: Int) {
-        if (money < 0) {
-            println("총 수익률은 ${-rateCalc(money, ticket)}% 입니다.")
-            return
+        val rate = rateCalc(money, ticket)
+        if (rate < 0) {
+            println("총 수익률은 ${-rate}%입니다.")
+        } else {
+            println("총 수익률은 ${rate}%입니다.")
         }
-        println("총 수익률은 ${rateCalc(money, ticket)}% 입니다.")
     }
-
 
     private fun rateCalc(money: Long, ticket: Int): Double {
         val dMoney = money.toDouble()
         val dTicket = ticket.toDouble()
-        val percentage = ((dMoney - dTicket) / dTicket) * 100  // 순수익을 초기 투자 비용으로 나눈 후 100을 곱해 수익률 계산
-        val roundedPercentage = Math.round(percentage * 100) / 100.0  // 소수 둘째 자리 반올림
-        return roundedPercentage
+        val percentage = (dMoney / dTicket) * 100
+        return Math.round(percentage * 100) / 100.0 // 소수 둘째 자리 반올림
     }
 
     fun converterCorrectType(correctCount: Int): CorrectType {
