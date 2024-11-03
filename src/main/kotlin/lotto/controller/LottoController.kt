@@ -1,6 +1,7 @@
 package lotto.controller
 
 import lotto.model.LottoHandler
+import lotto.model.LottoRank
 import lotto.util.Constant
 import lotto.view.InputView
 import lotto.view.OutputView
@@ -21,7 +22,12 @@ class LottoController {
         val winningNumbers = inputView.readWinningNumbers()
         val bonusNumber = inputView.readBonusNumber()
 
-        lottos.forEach { it.countMatches(winningNumbers) }
-        lottos.forEach { it.hasBonus(bonusNumber) }
+        val results = mutableMapOf<LottoRank, Int>().withDefault { 0 }
+        lottos.forEach {
+            val matchCount = it.countMatches(winningNumbers)
+            val hasBonus = it.hasBonus(bonusNumber)
+            val rank = LottoRank.getRank(matchCount, hasBonus)
+            results[rank] = results.getValue(rank) + 1
+        }
     }
 }
