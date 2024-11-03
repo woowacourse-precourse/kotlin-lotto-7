@@ -8,6 +8,7 @@ fun <R> keepCallingForSuccessResult(
         actionToCall().onSuccess { value ->
             return value
         }.onFailure { exception ->
+            if (exception is NoSuchElementException) throw exception
             onFailure?.invoke(exception)
         }
     }
