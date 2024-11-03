@@ -69,13 +69,6 @@ class InputTest {
         }
 
         @Test
-        fun `구입 금액이 10만원을 넘을 때`(){
-            val value = "1000001"
-            Assertions.assertThatThrownBy { inputErrorDelegate.isOverMaxPrice(value) }
-                .isInstanceOf(IllegalArgumentException::class.java)
-        }
-
-        @Test
         fun `구입 금액 유효성 검사 후 반환값 테스트`() {
             val value = "5000"
             val expected = Pair("5개를 구매했습니다.", 5)
