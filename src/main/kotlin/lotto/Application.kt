@@ -1,5 +1,9 @@
 package lotto
 
 fun main() {
-    // TODO: 프로그램 구현
+    val lottoMachine = LottoMachine()
+    val winningNumber = WinningNumbers(DrawingWinningNumbers().drawingWinningNumbers())
+    val bonusNumber = BonusNumber(DrawingWinningNumbers().drawingBonusNumber(winningNumber))
+
+    TotalLottoResult(lottoMachine.purchasedLotto, winningNumber, bonusNumber)
 }
