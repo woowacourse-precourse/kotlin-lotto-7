@@ -15,7 +15,9 @@ class Controller {
     val lottoGenerator = LottoGenerator()
 
     fun start() {
+        //LottoResult 객체 초기화
         LottoResult.reset()
+
         val money = getMoney()
 
         val randomLotto = getRandomLotto(money)

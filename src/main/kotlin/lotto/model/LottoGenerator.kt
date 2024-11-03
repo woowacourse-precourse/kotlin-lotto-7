@@ -6,6 +6,7 @@ import lotto.constant.LOTTO_SIZE
 import lotto.constant.MAX_LOTTO_NUM
 import lotto.constant.MIN_LOTTO_NUM
 
+//구매한 로또를 생성하는 클래스
 class LottoGenerator {
 
     fun generateLotto(money: Int): List<List<Int>> {
