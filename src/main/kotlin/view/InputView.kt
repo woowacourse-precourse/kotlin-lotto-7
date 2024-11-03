@@ -6,12 +6,11 @@ import lotto.model.lotto.Money
 import lotto.model.lotto.WinningNumbers
 
 class InputView {
-
     fun getPurchaseMoney(): Int {
         var money = 0
         while (true) {
             try {
-                print("구매 금액을 입력하세요: ")
+                print("구매 금액을 입력하세요. ")
                 val input = Console.readLine().trim()
 
                 money = input.toIntOrNull() ?: throw IllegalArgumentException("[ERROR] 금액은 숫자여야 합니다.")
@@ -49,7 +48,7 @@ class InputView {
             try {
                 println()
                 println("보너스 번호를 입력해 주세요.")
-                val bonusNumber = readLine()!!.toIntOrNull() ?: throw IllegalArgumentException("[ERROR] 숫자가 아닙니다. 다시 입력해주세요")
+                val bonusNumber = Console.readLine()!!.toIntOrNull() ?: throw IllegalArgumentException("[ERROR] 숫자가 아닙니다. 다시 입력해주세요")
 
                 WinningNumbers(winningNumbers, bonusNumber)
 
