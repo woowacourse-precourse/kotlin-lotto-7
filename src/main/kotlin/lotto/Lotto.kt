@@ -7,6 +7,7 @@ class Lotto(private val numbers: List<Int>) {
         numbers.forEach {
             require(isNumberInRange(it)) { "$ERROR $LOTTO_NUMBER_NOT_IN_RANGE_MESSAGE" }
         }
+        require(numbers == numbers.sorted()) {"$ERROR $LOTTO_NUMBER_NOT_ASCENDING"}
     }
 
     private fun isLottoNumberSize() = numbers.size == LOTTO_SIZE
@@ -24,5 +25,6 @@ class Lotto(private val numbers: List<Int>) {
         const val LOTTO_SIZE_MESSAGE = "로또 번호는 6개여야 합니다."
         const val LOTTO_NUMBER_DUPLICATE_MESSAGE = "로또 번호는 중복될 수 없습니다."
         const val LOTTO_NUMBER_NOT_IN_RANGE_MESSAGE = "로또 번호는 중복될 수 없습니다."
+        const val LOTTO_NUMBER_NOT_ASCENDING = "로또 번호가 오름차순 정렬되지 않았습니다."
     }
 }
