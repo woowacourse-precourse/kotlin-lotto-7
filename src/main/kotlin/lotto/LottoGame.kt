@@ -10,7 +10,7 @@ class LottoGame {
     private val lottoMachine = LottoMachine()
 
     fun startLotto() {
-        val purchasePrice = checkValidatedPurchaseAmount()
+        val purchasePrice = checkValidatedPurchasePrice()
 
         val lottoTicketCount = purchasePrice / 1000
         lottoOutput.printTicketCount(lottoTicketCount)
@@ -19,13 +19,15 @@ class LottoGame {
         lottoOutput.printLottoTickets(lottoTickets)
 
         val winningNumbers = checkValidatedWinningNumbers()
+
+        val bonusNumber = checkValidatedBonusNumber(winningNumbers)
     }
 
-    private fun checkValidatedPurchaseAmount(): Int {
+    private fun checkValidatedPurchasePrice(): Int {
         return generateSequence {
             val input = lottoInput.getPurchasePrice()
             validator.validatePurchasePrice(input)
-        }.firstNotNullOfOrNull { it } ?: checkValidatedPurchaseAmount()
+        }.firstNotNullOfOrNull { it } ?: checkValidatedPurchasePrice()
     }
 
     private fun checkValidatedWinningNumbers(): List<Int> {
@@ -33,5 +35,12 @@ class LottoGame {
             val input = lottoInput.getWinningNumbers()
             validator.validateWinningNumbers(input)
         }.firstNotNullOfOrNull { it } ?: checkValidatedWinningNumbers()
+    }
+
+    private fun checkValidatedBonusNumber(winningNumbers: List<Int>): Int {
+        return generateSequence {
+            val input = lottoInput.getBonusNumber()
+            validator.validateBonusNumber(input, winningNumbers)
+        }.firstNotNullOfOrNull { it } ?: checkValidatedBonusNumber(winningNumbers)
     }
 }
