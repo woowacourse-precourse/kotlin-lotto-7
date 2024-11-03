@@ -13,7 +13,7 @@ class Ui {
 
     fun displayExceptionMessage(exception: Throwable) {
         val message = exception.message ?: ExceptionMessages.DEFAULT_EXCEPTION_MESSAGE
-        System.err.println("$EXCEPTION_MESSAGE_HEADER $message")
+        println("$EXCEPTION_MESSAGE_HEADER $message")
     }
 
     private fun displayEnterBudgetMessage(): Unit = println(ENTER_BUDGET_MESSAGE)
