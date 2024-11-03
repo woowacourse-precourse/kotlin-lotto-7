@@ -53,6 +53,18 @@ class Output {
         println("${correct + PLUSCORRECTNUM}개 일치 (${resultScoreBoard(converterCorrectType(correct + PLUSCORRECTNUM))}원) - ${result[correct]}개")
     }
 
+    fun printLotto(lottoType: LottoType) =
+        when (lottoType) {
+            BONUS -> outPutBonusNumber()
+            LOTTO -> outPutCorrectNumber()
+        }
+
+    fun printRate(money: Int, ticket: Int) {
+        if (money == 0) {
+            println(-ticket)
+        }
+        println("총 수익률은 ${rateCalc(money,ticket)}% 입니다.")
+    }
 
     private fun rateCalc(money: Int, ticket: Int) : Double{
         val dMoney = money.toDouble()
