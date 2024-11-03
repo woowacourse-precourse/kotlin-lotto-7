@@ -1,8 +1,9 @@
 package lotto.controller
 
 import lotto.view.InputView
-import lotto.Validator
 import lotto.view.OutputView
+import lotto.Validator
+import lotto.model.Lotto
 
 class LottoController {
     private val inputView = InputView()
@@ -14,6 +15,7 @@ class LottoController {
         val ticket = countLottoTicket(purchaseAmount)
         outputView.countTicketsMessage(ticket)
         outputView.generateTicketsMessage(ticket)
+        val winLottoNumbers = Lotto(inputView.getWinLottoNumbers())
     }
 
     private fun getLottoPurchaseAmount(): Int {
