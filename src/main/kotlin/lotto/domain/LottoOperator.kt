@@ -22,7 +22,7 @@ class LottoOperator(
     }
 
     companion object {
-        fun buy(purchasePrice: Int): List<Lotto> {
+        fun buy(purchasePrice: Long): List<Lotto> {
             return (1..purchasePrice / PRICE).map { Lotto.generate() }
         }
     }
