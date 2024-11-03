@@ -1,9 +1,20 @@
 package lotto
 
+
 class Lotto(private val numbers: List<Int>) {
-    init {
-        require(numbers.size == 6) { "[ERROR] 로또 번호는 6개여야 합니다." }
+    fun getNumbers(): List<Int> {
+        return numbers
     }
 
-    // TODO: 추가 기능 구현
+    fun getLottoResultAsRank(winningNumbers: List<Int>, bonusNumber: Int): LottoRank {
+        val matchCount = numbers.count { it in winningNumbers }
+
+        return when (matchCount) {
+            6 -> LottoRank.FIRST
+            5 -> if (bonusNumber in numbers) LottoRank.SECOND else LottoRank.THIRD
+            4 -> LottoRank.FOURTH
+            3 -> LottoRank.FIFTH
+            else -> LottoRank.NONE
+        }
+    }
 }

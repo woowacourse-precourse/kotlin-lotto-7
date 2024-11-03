@@ -42,10 +42,98 @@ class ApplicationTest : NsTest() {
     }
 
     @Test
-    fun `예외 테스트`() {
+    fun `구입 금액 입력이 비어 있을 때 예외 발생`() {
+        assertSimpleTest {
+            runException("\n")
+            assertThat(output()).contains(ERROR_MESSAGE, "구입 금액을 입력해야 합니다.")
+        }
+    }
+
+    @Test
+    fun `구입 금액이 숫자가 아닐 때 예외 발생`() {
         assertSimpleTest {
             runException("1000j")
-            assertThat(output()).contains(ERROR_MESSAGE)
+            assertThat(output()).contains(ERROR_MESSAGE, "구입 금액은 숫자여야 합니다.")
+        }
+    }
+
+    @Test
+    fun `구입 금액이 음수일 때 예외 발생`() {
+        assertSimpleTest {
+            runException("-5000")
+            assertThat(output()).contains(ERROR_MESSAGE, "구입 금액은 양수여야 합니다.")
+        }
+    }
+
+    @Test
+    fun `구입 금액이 1,000원 단위가 아닐 때 예외 발생`() {
+        assertSimpleTest {
+            runException("1500")
+            assertThat(output()).contains(ERROR_MESSAGE, "구입 금액은 1,000원 단위여야 합니다.")
+        }
+    }
+
+    @Test
+    fun `당첨 번호 입력이 비어 있을 때 예외 발생`() {
+        assertSimpleTest {
+            runException("1000", "\n")
+            assertThat(output()).contains(ERROR_MESSAGE, "당첨 번호를 입력해야 합니다.")
+        }
+    }
+
+    @Test
+    fun `당첨 번호의 개수가 6개가 아닐 때 예외 발생`() {
+        assertSimpleTest {
+            runException("1000", "1,2,3,4,5")
+            assertThat(output()).contains(ERROR_MESSAGE, "당첨 번호는 6개를 입력해야 합니다.")
+        }
+    }
+
+    @Test
+    fun `당첨 번호가 1부터 45 사이가 아닐 때 예외 발생`() {
+        assertSimpleTest {
+            runException("1000", "1,2,3,4,5,46")
+            assertThat(output()).contains(ERROR_MESSAGE, "당첨 번호는 1부터 45 사이의 숫자여야 합니다.")
+        }
+    }
+
+    @Test
+    fun `당첨 번호에 중복된 숫자가 있을 때 예외 발생`() {
+        assertSimpleTest {
+            runException("1000", "1,2,3,4,5,5")
+            assertThat(output()).contains(ERROR_MESSAGE, "당첨 번호는 중복되지 않은 수로 이루어져야 합니다.")
+        }
+    }
+
+    @Test
+    fun `보너스 번호 입력이 비어 있을 때 예외 발생`() {
+        assertSimpleTest {
+            runException("1000", "1,2,3,4,5,6", "\n")
+            assertThat(output()).contains(ERROR_MESSAGE, "보너스 번호를 입력해야 합니다.")
+        }
+    }
+
+    @Test
+    fun `보너스 번호가 숫자가 아닐 때 예외 발생`() {
+        assertSimpleTest {
+            runException("1000", "1,2,3,4,5,6", "abc")
+            assertThat(output()).contains(ERROR_MESSAGE, "보너스 번호는 숫자여야 합니다.")
+        }
+    }
+
+    @Test
+    fun `보너스 번호가 1부터 45 사이가 아닐 때 예외 발생`() {
+        assertSimpleTest {
+            runException("1000", "1,2,3,4,5,6", "46")
+            assertThat(output()).contains(ERROR_MESSAGE, "보너스 번호는 1부터 45 사이의 숫자여야 합니다.")
+        }
+    }
+
+    @Test
+    fun `보너스 번호가 당첨 번호와 중복될 때 예외 발생`() {
+        assertSimpleTest {
+            runException("1000", "1,2,3,4,5,6", "6")
+            assertThat(output()).contains(ERROR_MESSAGE, "보너스 번호는 당첨 번호와 중복되지 않아야 합니다.")
         }
     }
 
