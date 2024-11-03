@@ -1,24 +1,35 @@
 package validator
 
 class LottoValidator {
-    fun lottoCheck(lottoInput: List<Int>) {
+    fun lottoCheck(lottoInput: List<Int>): Boolean {
+        var error = false
         try {
             isLottoSix(lottoInput)
             lottoInput.forEach {
                 isLottoInRange(it)
             }
+            isLottoDuplicate(lottoInput)
         } catch (e: IllegalArgumentException) {
             println(e.message)
+            println()
+            error = true
         }
+        return error
     }
 
-    fun lottoBonusCheck(lottoInput: List<Int>) {
+    fun lottoBonusCheck(lottoInput: Int, winNumber: List<Int>): Boolean {
+        var error = false
         try {
-            isLottoBonusOne(lottoInput)
-            isLottoInRange(lottoInput[0])
+            isLottoInRange(lottoInput)
+            val numbers = winNumber.toMutableList()
+            numbers.add(lottoInput)
+            isBonusDuplicate(numbers)
         } catch (e: IllegalArgumentException) {
             println(e.message)
+            println()
+            error = true
         }
+        return error
     }
 
     private fun isLottoInRange(lottoInput: Int) {
@@ -35,9 +46,18 @@ class LottoValidator {
         }
     }
 
-    private fun isLottoBonusOne(lottoInput: List<Int>) {
-        if (lottoInput.size != 1) {
-            val errorMessage = ErrorMessage.LOTTO_BONUS_NOT_ONE
+    private fun isLottoDuplicate(lottoInput: List<Int>) {
+        val duplicationRemoval = lottoInput.distinct()
+        if (duplicationRemoval.size != 6) {
+            val errorMessage = ErrorMessage.LOTTO_DUPLICATE
+            throw IllegalArgumentException(errorMessage.getMessage())
+        }
+    }
+
+    private fun isBonusDuplicate(lottoInput: List<Int>) {
+        val duplicationRemoval = lottoInput.distinct()
+        if (duplicationRemoval.size != 7) {
+            val errorMessage = ErrorMessage.LOTTO_DUPLICATE
             throw IllegalArgumentException(errorMessage.getMessage())
         }
     }

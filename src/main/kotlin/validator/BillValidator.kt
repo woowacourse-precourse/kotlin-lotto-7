@@ -8,6 +8,7 @@ class BillValidator {
             isBillDivided(billInput)
         } catch (e: IllegalArgumentException) {
             println(e.message)
+            println()
             error = true
         }
         return error

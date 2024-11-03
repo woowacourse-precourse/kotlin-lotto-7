@@ -8,7 +8,7 @@ class IOSTest : NsTest() {
     @Test
     fun `입력 테스트`() {
         run("5000")
-        assertThat(output()).contains(InputView.billRequirement)
+        assertThat(output()).contains(InputView.BILL_REQUIREMENT)
     }
 
     override fun runMain() {

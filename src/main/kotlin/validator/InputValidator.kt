@@ -8,6 +8,7 @@ class InputValidator {
             isNumber(input)
         } catch (e: IllegalArgumentException) {
             println(e.message)
+            println()
             error = true
         }
         return error
