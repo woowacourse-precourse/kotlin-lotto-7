@@ -9,21 +9,15 @@ import org.junit.jupiter.api.assertThrows
 
 class InputViewTest {
     @Test
-    fun `구매금액이 숫자가 아닌 경우 오류`() {
+    fun `구매금액이 숫자가 아닌 경우 예외가 발생한다`() {
         assertThrows<IllegalArgumentException> {
             ExceptionProcess.validPrice("hello")
-        }
-    }
-
-    @Test
-    fun `구매금액이 음수인 경우 오류`() {
-        assertThrows<IllegalArgumentException> {
             ExceptionProcess.validPrice("-1000")
         }
     }
 
     @Test
-    fun `구매금액이 1000원 미만인 경우 오류`() {
+    fun `구매금액이 1000원 미만인 경우 예외가 발생한다`() {
         assertThrows<IllegalArgumentException> {
             ExceptionProcess.validPrice("900")
         }
@@ -69,6 +63,21 @@ class InputViewTest {
     fun `당첨번호가 문자이면 예외가 발생한다`() {
         assertThrows<IllegalArgumentException> {
             ExceptionProcess.validLottoNumber("1, 3, 2, 4, 5, 6")
+        }
+    }
+
+    @Test
+    fun `보너스 번호가 숫자가 아닌 경우 예외가 발생한다`() {
+        assertThrows<IllegalArgumentException> {
+            ExceptionProcess.validPrice("hello")
+            ExceptionProcess.validPrice("-1000")
+        }
+    }
+
+    @Test
+    fun `보너스 번호가 1~45사이의 숫자가 아니면 예외가 발생한다`() {
+        assertThrows<IllegalArgumentException> {
+            ExceptionProcess.validLottoNumber("1,2,3,4,5,333")
         }
     }
 }

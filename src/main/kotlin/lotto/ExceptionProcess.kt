@@ -14,7 +14,7 @@ object ExceptionProcess {
         }
     }
 
-    fun validLottoNumber(input: String){
+    fun validLottoNumber(input: String) {
         try {
             var numbers = input.split(",").map { it.toInt() }
             numbers = numbers.sorted()
@@ -22,6 +22,18 @@ object ExceptionProcess {
             require(numbers.distinct().size == numbers.size) { LottoErrorMessages.DUPLICATE_NUMBERS }
             require(numbers.all { it in 1..45 }) { LottoErrorMessages.OUT_OF_RANGE }
             require(numbers == numbers.sorted()) { LottoErrorMessages.NOT_SORTED }
+        } catch (e: NumberFormatException) {
+            throw IllegalArgumentException("[ERROR]: 입력은 숫자여야 합니다")
+        } catch (e: IllegalArgumentException) {
+            throw IllegalArgumentException("[ERROR]: ${e.message}")
+        }
+    }
+
+    fun validBonusNumber(input: String) {
+        try {
+            val bonusNumber = input.toInt()
+            require(bonusNumber in 1..45) { LottoErrorMessages.OUT_OF_RANGE }
+
         } catch (e: NumberFormatException) {
             throw IllegalArgumentException("[ERROR]: 입력은 숫자여야 합니다")
         } catch (e: IllegalArgumentException) {
