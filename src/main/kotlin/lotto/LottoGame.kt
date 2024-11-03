@@ -4,31 +4,28 @@ import camp.nextstep.edu.missionutils.Randoms
 
 
 class LottoGame {
-    var ticketList = mutableListOf<List<Int>>()
-    var
+    private var ticketList = mutableListOf<Lotto>()
 
-    fun buyTickets(payment: Int): List<List<Int>> {
+    fun buyTickets(payment: Int) {
         val ticketCount = payment / 1000
-        val ticketList = mutableListOf<List<Int>>()
         for (i in 0 until ticketCount) {
             val ticket = generateTicketRandomly()
-            val sortedTicket = ticket.sorted()
-            ticketList.add(sortedTicket)
+            ticketList.add(ticket)
         }
-
-        return ticketList.toList()
     }
 
-    private fun generateTicketRandomly(): List<Int> {
-        return Randoms.pickUniqueNumbersInRange(1, 45, 6)
+    private fun generateTicketRandomly(): Lotto {
+        val randomNumbers = Randoms.pickUniqueNumbersInRange(1, 45, 6)
+        val sortedNumbers = randomNumbers.sorted()
+        return Lotto(sortedNumbers)
     }
 
-    fun printTicketList(ticketList: List<List<Int>>) {
+    fun printTicketList() {
         println("${ticketList.size}개를 구매했습니다.")
-        ticketList.forEach { it -> println(it.toString()) }
+        ticketList.forEach { it -> println(it.getNumbers().toString()) }
     }
 
-    fun printWinningResults(lotto: Lotto) {
+    fun printWinningResults() {
 
     }
 }

@@ -12,6 +12,10 @@ enum class LottoRank(val prize: Int) {
 }
 
 class Lotto(private val numbers: List<Int>) {
+    fun getNumbers(): List<Int> {
+        return numbers
+    }
+
     fun getLottoResultAsRank(winningNumbers: List<Int>, bonusNumber: Int): LottoRank {
         val matchCount = numbers.count { it in winningNumbers }
 
