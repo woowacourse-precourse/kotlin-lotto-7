@@ -3,7 +3,7 @@ package lotto.utils
 import lotto.model.Rank
 import lotto.model.Stat
 
-class StatCalculator {
+object StatCalculator {
     fun getProfitRate(stats: List<Stat>, price: Int): String {
         var profit = 0
         stats.forEach { stat ->
