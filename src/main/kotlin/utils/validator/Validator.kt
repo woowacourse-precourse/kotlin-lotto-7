@@ -11,7 +11,6 @@ object Validator {
             MoneyValidator.SHOULD_BE_1000_UNIT.validate(inputMoney)
 
             MoneyValidator.SHOULD_BE_UNDER_MAX.validate(inputMoney)
-
         } catch (e: IllegalArgumentException) {
             println(e.message)
             return 0
@@ -22,7 +21,6 @@ object Validator {
     fun validateWinningNumbers(inputWinningNumbers: String): List<Int> {
         val winningNumbers: List<String> = inputWinningNumbers.split(",")
         try {
-
             WinningNumbersValidator.SHOULD_BE_SIX_COUNT.validate(winningNumbers)
 
             WinningNumbersValidator.SHOULD_BE_NUMBER.validate(winningNumbers)
@@ -34,13 +32,10 @@ object Validator {
             println(e.message)
             return emptyList()
         }
-
         return winningNumbers.map { it.toInt() }
-
     }
 
     fun validateBonusNumber(inputBonusNumber: String, winningNumbers: List<Int>): Int {
-
         try {
             BonusNumberValidator.SHOULD_BE_NUMBER.validate(inputBonusNumber)
 
@@ -51,7 +46,6 @@ object Validator {
             println(e.message)
             return 0
         }
-
         return inputBonusNumber.toInt()
     }
 
