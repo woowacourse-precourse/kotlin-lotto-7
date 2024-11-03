@@ -3,8 +3,7 @@ package lotto.model
 import lotto.model.LottoWinning.*
 
 class LottoResultCalculator(
-    private val winningNumbers: Lotto,
-    private val bonusNumber: Int
+    private val winningTicket: WinningTicket
 ) {
 
     private val results = mutableMapOf(
@@ -18,7 +17,7 @@ class LottoResultCalculator(
 
     fun countMatchingNumber(lottoBundle: List<Lotto>): MutableMap<LottoWinning, Int> {
         for (lotto in lottoBundle) {
-            val matchingCount = lotto.countMatching(winningNumbers)
+            val matchingCount = lotto.countMatching(winningTicket.lotto)
             matchResult(matchingCount, lotto)
         }
 
@@ -29,7 +28,7 @@ class LottoResultCalculator(
         when (matchingCount) {
             FIRST.count -> results[FIRST] = results[FIRST]!! + 1
             SECOND.count ->
-                if (lotto.contain(bonusNumber)) results[SECOND] = results[SECOND]!! + 1
+                if (lotto.contain(winningTicket.bonusNumber)) results[SECOND] = results[SECOND]!! + 1
                 else results[THIRD] = results[THIRD]!! + 1
 
             FOURTH.count -> results[FOURTH] = results[FOURTH]!! + 1

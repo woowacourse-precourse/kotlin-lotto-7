@@ -16,13 +16,9 @@ class LottoApplication {
         val lottoPresenter = LottoPresenter(inputPresenter, outputView)
 
         val lottoBundle =lottoPresenter.purchaseLotto()
+        val winningTicket = lottoPresenter.getWinningTicket()
 
-        val winningNumbers = inputPresenter.onWinningNumbersInput()
-        val winningLotto = Lotto(winningNumbers)
-
-        val bonusNumber = inputPresenter.onBonusNumberInput()
-
-        val lottoResultCalculator = LottoResultCalculator(winningLotto, bonusNumber)
+        val lottoResultCalculator = LottoResultCalculator(winningTicket)
 
         val result = lottoResultCalculator.countMatchingNumber(lottoBundle)
         outputView.printWinningStatistics(result)
