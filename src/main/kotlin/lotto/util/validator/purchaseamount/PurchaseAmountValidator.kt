@@ -9,45 +9,45 @@ class PurchaseAmountValidator(
     private val parsedDecimal: Double? = purchaseAmount.toDoubleOrNull()
 
     fun validatePurchaseAmount() {
-        validateIsEmpty()
-        validateIsDecimal()
-        validateIsInteger()
-        validateIsZero()
-        validateUnder1000()
-        validateUnits1000()
+        checkIsEmpty()
+        checkIsDecimal()
+        checkIsInteger()
+        checkIsZero()
+        checkUnder1000()
+        checkUnits1000()
     }
 
-    private fun validateIsEmpty() {
+    private fun checkIsEmpty() {
         if (purchaseAmount.isEmpty()) throw IllegalArgumentException(EMPTY_INPUT.errorMessage)
     }
 
-    private fun validateIsDecimal() {
+    private fun checkIsDecimal() {
         if (parsedDecimal != null && parsedDecimal % ONE != ZERO_EXPRESSED_IN_DECIMAL) throw IllegalArgumentException(
             NOT_DECIMAL.errorMessage
         )
     }
 
-    private fun validateIsInteger() {
+    private fun checkIsInteger() {
         if (parsedInteger == null) throw IllegalArgumentException(
             NOT_INTEGER.errorMessage
         )
     }
 
-    private fun validateIsZero() {
+    private fun checkIsZero() {
         if (parsedInteger == ZERO) throw IllegalArgumentException(
             ZERO_AMOUNT.errorMessage
         )
     }
 
-    private fun validateUnder1000() {
+    private fun checkUnder1000() {
         parsedInteger?.let {
-            if (it < MINIMUM_PURCHASE_AMOUNT) throw IllegalArgumentException(LESS_THAN_1000.errorMessage)
+            if (it < PRICE_PER_ROW) throw IllegalArgumentException(LESS_THAN_1000.errorMessage)
         }
     }
 
-    private fun validateUnits1000() {
+    private fun checkUnits1000() {
         parsedInteger?.let {
-            if (it % PRICE_PER_SHEET != ZERO) throw IllegalArgumentException(NOT_UNITS_OF_1000.errorMessage)
+            if (it % PRICE_PER_ROW != ZERO) throw IllegalArgumentException(NOT_UNITS_OF_1000.errorMessage)
         }
     }
 
@@ -55,7 +55,6 @@ class PurchaseAmountValidator(
         private const val ZERO_EXPRESSED_IN_DECIMAL = 0.0
         private const val ONE = 1
         private const val ZERO = 0
-        private const val MINIMUM_PURCHASE_AMOUNT = 1000
-        private const val PRICE_PER_SHEET = 1000
+        private const val PRICE_PER_ROW = 1000
     }
 }
