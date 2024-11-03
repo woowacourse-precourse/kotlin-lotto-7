@@ -2,12 +2,10 @@ package presentation.vm
 
 import data.LottoDataSource
 import domain.calculator.Calculate
-import domain.enums.Output.Companion.totalRateOfReturnFormat
 import domain.enums.Rank
 import domain.lotto.Lotto
-import domain.util.ext.joinToStringWithSquareBracket
-import presentation.vm.model.PurchaseState
 import domain.validator.InputValidate
+import presentation.vm.model.PurchaseState
 import java.util.TreeSet
 
 class LottoViewModel(
@@ -16,72 +14,69 @@ class LottoViewModel(
     private val lottoDataSource: LottoDataSource
 ) {
 
-    private var _state = PurchaseState()
-    val state: PurchaseState get() = _state
+    var state = PurchaseState()
+        private set
 
-    fun checkPaymentValidation(pay: String) {
-        val validPayment = validator.payValidation(pay)
-        _state = _state.copy(
-            purchaseLottoCount = validPayment.second,
-            message = validPayment.first
-        )
-    }
+    fun checkPaymentValidation(pay: String): Pair<String, Int> =
+        validator.payValidation(pay)
 
-    fun checkWinningNumberValidation(winningNumber: String) {
-        val validWinningNumber = validator.winningNumberValidation(winningNumber)
-        _state = _state.copy(winningNumber = validWinningNumber)
-    }
+    fun checkWinningNumberValidation(winningNumber: String): List<Int> =
+        validator.winningNumberValidation(winningNumber)
 
     fun checkBonusNumberValidation(bonusNumber: String) {
         val validBonusNumber = validator.bonusNumberValidation(bonusNumber)
-        _state = _state.copy(bonusNumber = validBonusNumber)
+        onCompleteInputBonusNumber(validBonusNumber)
+    }
+
+    fun onCompleteInputPayment(pay: Int) {
+        state = state.copy(purchaseLottoCount = pay)
+        pickLotto()
+    }
+
+    fun onCompleteInputWinningNumber(winningNumber: List<Int>) {
+        state = state.copy(winningNumber = winningNumber)
+    }
+
+    private fun onCompleteInputBonusNumber(bonusNumber: Int) {
+        state = state.copy(bonusNumber = bonusNumber)
         getLottoResult()
     }
 
-    fun pickLotto() {
-        val purchaseLottoAmount = _state.purchaseLottoCount
+    private fun pickLotto() {
+        val purchaseLottoAmount = state.purchaseLottoCount
         val pickedLotto = mutableListOf<TreeSet<Int>>()
         repeat(purchaseLottoAmount) {
             pickedLotto.add(lottoDataSource())
         }
-        _state = _state.copy(
-            pickedLotto = pickedLotto,
-            message = pickedLotto.joinToString(",\n") {
-                it.joinToStringWithSquareBracket()
-            }
-        )
+        state = state.copy(pickedLotto = pickedLotto)
     }
 
     private fun getLottoResult() {
-        val lotto = Lotto(_state.winningNumber)
-        val updatedWinningResult = _state.winningResult.toMutableMap()
+        val lotto = Lotto(state.winningNumber)
+        val updatedReward = state.winningResult.toMutableMap()
 
-        _state.pickedLotto.map {
-            val matches = lotto.getMatches(it, _state.bonusNumber)
-            modifyWinningByMatches(matches, updatedWinningResult)
+        state.pickedLotto.map {
+            val matches = lotto.getMatches(it, state.bonusNumber)
+            modifyRewardByMatches(matches, updatedReward)
         }
-        val message = updatedWinningResult.map { (rank, winningCount) ->
-            rank.getFormattedRankResult(winningCount)
-        }
-        _state = _state.copy(
-            winningResult = updatedWinningResult,
-            message = message.joinToString("\n")
-        )
+
+        state = state.copy(winningResult = updatedReward)
+        getRateOfReturn()
     }
 
-    fun getRateOfReturn() {
-        val winningMoney = calculator.calculateWinningMoney(_state.winningResult)
+    private fun getRateOfReturn() {
+        val winningMoney = calculator.calculateWinningMoney(state.winningResult)
 
         if (winningMoney != 0L) {
-            val purchaseAmount = _state.purchaseLottoCount
+            val purchaseAmount = state.purchaseLottoCount
             val rateOfReturn = calculator.calculateRateOfReturn(winningMoney, purchaseAmount)
-            _state = _state.copy(message = totalRateOfReturnFormat(rateOfReturn))
+            state = state.copy(rateOfReturn = rateOfReturn)
         }
     }
 
-    private fun modifyWinningByMatches(matches: Rank, currentWinning: MutableMap<Rank, Int>) {
+    private fun modifyRewardByMatches(matches: Rank, updatedReward: MutableMap<Rank, Int>) {
         if (matches != Rank.NONE) {
-            currentWinning[matches] = currentWinning.getOrDefault(matches, 0) + 1
+            updatedReward[matches] = updatedReward.getOrDefault(matches, 0) + 1
         }
     }
 }

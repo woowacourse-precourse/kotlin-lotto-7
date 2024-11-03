@@ -16,6 +16,7 @@ import domain.enums.LottoSetting.LOTTO_MAX
 import domain.enums.LottoSetting.LOTTO_MIN
 import domain.validator.InputValidate
 import domain.printer.Printer
+import presentation.view.OutputView
 import java.util.TreeSet
 
 class DependencyInjector {
@@ -50,7 +51,7 @@ class DependencyInjector {
     }
 
     private fun injectCalculator(): Calculate = Calculator()
-    private fun injectOutPutView(): Printer = Printer()
+    private fun injectOutPutView(): OutputView = OutputView()
     private fun injectCommonErrorDelegate(): CommonErrorDelegate = CommonErrorDelegator()
     private fun injectInputErrorDelegate(): InputErrorDelegate = InputErrorDelegator()
 }

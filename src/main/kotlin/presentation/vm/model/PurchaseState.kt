@@ -15,5 +15,5 @@ data class PurchaseState(
         Rank.SECOND to 0,
         Rank.FIRST to 0,
     ),
-    val message: String = ""
+    val rateOfReturn: String = "0.0"
 )
