@@ -13,6 +13,6 @@ object OutputMessages {
     const val DECIMAL_PATTERN_OUTPUT_MESSAGE = "#,###"
 
     const val TOTAL_RETURN_OUTPUT_MESSAGE = "총 수익률은 "
-    const val EARNING_END_OUTPUT_MESSAGE = "입니다."
+    const val EARNING_END_OUTPUT_MESSAGE = "%입니다."
 
 }
