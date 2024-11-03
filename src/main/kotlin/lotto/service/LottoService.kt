@@ -20,6 +20,14 @@ class LottoService {
         return lottos
     }
 
+    fun getResultMoney(): Int {
+        var result = 0
+        for (lotto in WinningLotto.entries) {
+            result += lotto.rewardPrice * lotto.amount
+        }
+        return result
+    }
+
     fun getProfitRate(originalMoney: Int, resultMoney: Int): String {
         val profit = resultMoney.toDouble() / originalMoney.toDouble()
         return String.format("%.2f", profit)
