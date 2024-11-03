@@ -19,7 +19,7 @@ class User(
     }
 
     fun getLottoTickets(): List<Lotto> {
-        return checkNotNull(lottoTickets) { println(LOTTO_NOT_INITIALIZED_ERROR_MESSAGE) }
+        return checkNotNull(lottoTickets?.toList()) { println(LOTTO_NOT_INITIALIZED_ERROR_MESSAGE) }
     }
 
     companion object {

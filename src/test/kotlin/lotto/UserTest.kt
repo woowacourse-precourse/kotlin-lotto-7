@@ -1,5 +1,6 @@
 package lotto
 
+import lotto.domain.entity.Lotto
 import lotto.domain.entity.User
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.BeforeEach
@@ -15,10 +16,16 @@ class UserTest {
     }
 
     @Test
-    fun `1000원에 나누어 떨어지도록 로또를 구매하는 기능 테스트`() {
-        val result = user.getLottoTickets().size
-        val expect = 3
-        assertEquals(expect, result)
+    fun `로또 구매하는 기능 테스트`() {
+        val lottoTickets = listOf(Lotto(listOf(1, 2, 3, 4, 5, 6)), Lotto(listOf(1, 2, 3, 4, 5, 7)))
+        user.buyLottoTickets { lottoTickets }
+        val result = user.getLottoTickets()
+        assertEquals(lottoTickets, result)
+    }
+
+    @Test
+    fun `로또를 구매하지 않고 로또 티켓들을 호출할때 State 예외 발생 테스트`() {
+        assertThrows<IllegalStateException> { user.getLottoTickets() }
     }
 
     @Test
