@@ -15,6 +15,7 @@ class LottoJudge {
 
     fun setLottoBonusNumber(number: Int) {
         exceptBonusNumberRange(number)
+        require(!winnerNumbers.contains(number)) { ErrorMessage.INPUT_WINNER_NUMBER_NO_DUPLICATE.getMessage() }
         bonusNumber = number
     }
 
