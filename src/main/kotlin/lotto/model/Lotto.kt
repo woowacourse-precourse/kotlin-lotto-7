@@ -14,7 +14,6 @@ class Lotto(val numbers: List<Int>) {
         validateLottoNumber()
     }
 
-
     private fun validateLottoSize() {
         require(numbers.size == LOTTO_SIZE) { getErrorMessage(INVALID_LOTTO_SIZE) }
     }
@@ -25,8 +24,13 @@ class Lotto(val numbers: List<Int>) {
         }
     }
 
+    private fun validateDuplicatedNumber(){
+         require(numbers.size == numbers.distinct().size) { getErrorMessage(DUPLICATE_LOTTO_NUMBER_ERROR) }
+    }
+
     companion object {
         private const val INVALID_LOTTO_SIZE = "로또 번호는 ${LOTTO_SIZE}개여야 합니다."
+        private const val DUPLICATE_LOTTO_NUMBER_ERROR = "로또 번호에 중복된 숫자가 존재합니다."
         private const val INVALID_LOTTO_NUMBER =
             "로또 번호는 $MIN_LOTTO_NUMBER 이상 ${MIN_LOTTO_NUMBER}이하여야 합니다."
     }
