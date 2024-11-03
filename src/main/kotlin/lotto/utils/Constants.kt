@@ -21,6 +21,19 @@ object Constants {
     const val LOTTO_NUMBER_MIN = 1
     const val LOTTO_NUMBER_MAX = 45
 
+    const val ZERO = 0
+    const val THREE = 3
+    const val FOUR = 4
+    const val FIVE = 5
+    const val SIX = 6
+
+    const val FIRST_PRIZE = 2_000_000_000
+    const val SECOND_PRIZE = 30_000_000
+    const val THIRD_PRIZE = 1_500_000
+    const val FOURTH_PRIZE = 50_000
+    const val FIFTH_PRIZE = 5_000
+    const val NO_PRIZE = 0
+
     const val ERROR_AMOUNT_NOT_NUMBER = "[ERROR] 구입 금액은 정수여야 합니다."
     const val ERROR_AMOUNT_UNDER_1000 = "[ERROR] 구입 금액은 1000원 이상이어야 합니다."
     const val ERROR_AMOUNT_NOT_DIVIDE_BY_1000 = "[ERROR] 구입 금액은 1000으로 나누어 떨어져야 합니다."
