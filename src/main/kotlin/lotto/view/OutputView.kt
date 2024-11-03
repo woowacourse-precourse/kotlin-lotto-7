@@ -11,7 +11,9 @@ class OutputView {
         println("${quantity}개를 구매했습니다.")
     }
 
-    fun printPurchaseLotto(lottos: List<Lotto>) {
+    fun printPurchaseLotto(lottos: List<Lotto>, quantity: Int) {
+        println("")
+        printPurchaseQuantity(quantity)
         lottos.forEach {
             println(it.getLotto())
         }
