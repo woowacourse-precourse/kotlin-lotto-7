@@ -5,24 +5,24 @@ import lotto.Model.LottoRank
 import lotto.Model.WinningLottoResult
 import kotlin.math.round
 
-class OutputView {
-    fun printLottos(lottos: List<Lotto>) {
-        println("${lottos.size}개를 구매했습니다.")
-        lottos.forEach { lotto ->
+class OutputView(private val releasedLottos: List<Lotto>) {
+    fun printLottos() {
+        println("${releasedLottos.size}개를 구매했습니다.")
+        releasedLottos.forEach { lotto ->
             println(lotto.getNumbers())
         }
         println()
     }
 
-    fun printLottoResult(lottos: List<Lotto>, winningLottoResult: WinningLottoResult) {
+    fun printLottoResult(winningLottoResult: WinningLottoResult) {
         println("당첨 통계")
-        val releasedLottoRanks = getReleasedLottoRanks(lottos, winningLottoResult)
+        val releasedLottoRanks = getReleasedLottoRanks(winningLottoResult)
         printStatics(releasedLottoRanks)
     }
 
-    private fun getReleasedLottoRanks(lottos: List<Lotto>, winningLottoResult: WinningLottoResult): List<LottoRank> {
+    private fun getReleasedLottoRanks(winningLottoResult: WinningLottoResult): List<LottoRank> {
         val releasedLottoRanks = mutableListOf<LottoRank>()
-        lottos.forEach { lotto: Lotto ->
+        releasedLottos.forEach { lotto: Lotto ->
             releasedLottoRanks.add(lotto.getLottoResult(winningLottoResult))
         }
         return releasedLottoRanks
