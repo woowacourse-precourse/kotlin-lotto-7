@@ -14,16 +14,16 @@ import lotto.domain.calculator.Calculator
 import lotto.domain.enums.LottoSetting.LOTTO_SIZE
 import lotto.domain.enums.LottoSetting.LOTTO_MAX
 import lotto.domain.enums.LottoSetting.LOTTO_MIN
+import lotto.domain.printer.Printer
 import lotto.domain.validator.InputValidate
-import lotto.presentation.view.OutputView
 import java.util.TreeSet
 
 class DependencyInjector {
 
     fun injectView() {
         val viewModel = injectLottoViewModel()
-        val outputView = injectOutPutView()
-        View(outputView, viewModel)
+        val printer = injectPrinter()
+        View(printer, viewModel)
     }
 
     private fun injectInputValidator(): InputValidate {
@@ -50,7 +50,7 @@ class DependencyInjector {
     }
 
     private fun injectCalculator(): Calculate = Calculator()
-    private fun injectOutPutView(): OutputView = OutputView()
+    private fun injectPrinter(): Printer = Printer()
     private fun injectCommonErrorDelegate(): CommonErrorDelegate = CommonErrorDelegator()
     private fun injectInputErrorDelegate(): InputErrorDelegate = InputErrorDelegator()
 }

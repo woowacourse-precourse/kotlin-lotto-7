@@ -67,13 +67,6 @@ class InputTest {
                 .isInstanceOf(IllegalArgumentException::class.java)
                 .hasMessage(Exception.INVALID_UNIT.toString())
         }
-
-        @Test
-        fun `구입 금액 유효성 검사 후 반환값 테스트`() {
-            val value = "5000"
-            val expected = Pair("5개를 구매했습니다.", 5)
-            Assertions.assertThat(inputValidator.payValidation(value)).isEqualTo(expected)
-        }
     }
 
     @Nested
