@@ -1,5 +1,6 @@
 package lotto.domain
 
+import lotto.constants.LottoConstants.HUNDRED_PERCENT
 import lotto.constants.OutputConstants.TWO_DECIMAL_FORMAT
 
 class WinningResult(private val lottos: List<Lotto>, private val inputNumbers: InputNumbers) {
@@ -28,7 +29,7 @@ class WinningResult(private val lottos: List<Lotto>, private val inputNumbers: I
         val totalPrize = Ranking.entries
             .mapIndexed { index, ranking -> countByMatchCount[index] * ranking.prize }
             .sum()
-        val rate = totalPrize / purchasedPrice.toFloat() * 100
+        val rate = totalPrize / purchasedPrice.toFloat() * HUNDRED_PERCENT
         val formatedRate = String.format(TWO_DECIMAL_FORMAT, rate).toFloat()
 
         return formatedRate
