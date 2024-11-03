@@ -1,6 +1,5 @@
 package lotto
 
-import lotto.domain.Lotto
 import lotto.view.InputView
 import lotto.view.OutputView
 
@@ -16,8 +15,14 @@ class LottoMachine(
         outputView.printPurchaseAmount(quantity)
 
         // 2. 로또 발행 기능
-        val lottos = lottoService.generateLotto(quantity)
+        val lottos = lottoService.generateLottos(quantity)
         outputView.printLottoStatus(lottos)
+
+        // 3. 당첨 확인 기능
+        val winningNumber = inputView.readWinningNumbers()
+        val bonusNumber = inputView.readBonusNumber(winningNumber)
+        val result = lottoService.checkWinning(lottos, winningNumber, bonusNumber)
+        outputView.printStatistics(result)
 
     }
 
