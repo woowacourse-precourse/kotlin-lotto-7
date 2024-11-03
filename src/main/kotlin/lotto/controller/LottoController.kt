@@ -7,13 +7,13 @@ import lotto.view.InputView
 import lotto.view.OutputView
 
 class LottoController(private val inputView: InputView, private val outputView: OutputView, private val service: LottoService) {
-    private var price: Int = 0
+    private var purchasePrice: Int = 0
     private lateinit var winLotto: Lotto
     private var bonusNumber: Int = 0
 
     fun run() {
-        price = getValidPurchasePrice(inputView.getPurchasePrice())
-        val lottos = service.purchaseLottos(price)
+        purchasePrice = getValidPurchasePrice(inputView.getPurchasePrice())
+        val lottos = service.purchaseLottos(purchasePrice)
         outputView.showRandomLottos(lottos)
 
         winLotto = getValidWinningLotto(inputView.getWinningNumbers())
