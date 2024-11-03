@@ -45,7 +45,7 @@ class View(
 
     private fun printPickedLotto() {
         viewModel.pickLotto()
-        printer.printWithLineBreak(viewModel.state.message)
+        printer.printMessage(viewModel.state.message)
     }
 
     private fun validateWinningNumber(winningNumber: String) {
@@ -55,10 +55,6 @@ class View(
 
     private fun validateBonusNumber(bonusNumber: String) {
         viewModel.checkBonusNumberValidation(bonusNumber)
-        printWinningResult()
-    }
-
-    private fun printWinningResult() {
         printer.printWinningMessage()
         printer.printMessage(viewModel.state.message)
     }
