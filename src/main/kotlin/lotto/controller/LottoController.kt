@@ -1,11 +1,11 @@
 package lotto.controller
 
+import lotto.model.Rank
 import lotto.model.lotto.BonusLotto
 import lotto.model.lotto.Lotto
 import lotto.model.lotto.LottoTicket
-import lotto.view.InputView
-import java.lang.IllegalArgumentException
 import lotto.model.message.ErrorMessage
+import lotto.view.InputView
 import lotto.view.OutputView
 
 class LottoController {
@@ -16,7 +16,17 @@ class LottoController {
 
         OutputView.printLottoTickets(tickets)
 
-        getAllLottoNumbers()
+        val winningLotto = getWinningNumbers()
+        val bonusLotto = getAllLottoNumbers(winningLotto)
+
+        val ranks = tickets.map { calculateMatch(it, winningLotto, bonusLotto) }
+        OutputView.printResults(ranks)
+    }
+
+    private fun calculateMatch(ticket: LottoTicket, lotto: Lotto, bonusLotto: BonusLotto): Rank {
+        val matchCount = ticket.getNumbers().count { it in lotto.getNumbers() }
+        val matchBonus = bonusLotto.getBonusNumber() in ticket.getNumbers()
+        return Rank.findRank(matchCount, matchBonus)
     }
 
     private fun generateLottoTickets(purchaseAmount: Int): List<LottoTicket> {
@@ -35,18 +45,15 @@ class LottoController {
     }
 
     private fun getWinningNumbers(): Lotto {
-        val purchasePrice = InputView.askWinningNumbers()
-            .split(",")
-            .map {
-                val trimmed = it.trim()
-                require(trimmed.isNotEmpty()) { ErrorMessage.INPUT_WINNING_EMPTY.message }
-                trimmed.toIntOrNull() ?: throw IllegalArgumentException(ErrorMessage.INPUT_WINNING_ONLY_NUMBERS.message)
-            }
+        val purchasePrice = InputView.askWinningNumbers().split(",").map {
+            val trimmed = it.trim()
+            require(trimmed.isNotEmpty()) { ErrorMessage.INPUT_WINNING_EMPTY.message }
+            trimmed.toIntOrNull() ?: throw IllegalArgumentException(ErrorMessage.INPUT_WINNING_ONLY_NUMBERS.message)
+        }
         return Lotto(purchasePrice)
     }
 
-    private fun getAllLottoNumbers(): BonusLotto {
-        val lotto = getWinningNumbers()
+    private fun getAllLottoNumbers(lotto: Lotto): BonusLotto {
         val bonusNumber = InputView.askForBonusNumber().toIntOrNull()
             ?: throw IllegalArgumentException(ErrorMessage.INVALID_NUMBER_FORMAT.message)
         return BonusLotto(lotto.getNumbers(), bonusNumber)
