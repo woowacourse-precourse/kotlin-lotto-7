@@ -53,4 +53,11 @@ class LottoTest {
         val rank = lotto.checkRank(listOf(1, 2, 3, 4, 5, 6), 8)
         assertThat(rank).isEqualTo(LottoRank.FIFTH)
     }
+
+    @Test
+    fun `당첨 번호와 로또의 번호 중 네개가 다르면 낙첨인지 확인할 수 있어야한다`() {
+        val lotto = Lotto(listOf(1, 2, 12, 11, 10, 7))
+        val rank = lotto.checkRank(listOf(1, 2, 3, 4, 5, 6), 8)
+        assertThat(rank).isEqualTo(LottoRank.LOSE)
+    }
 }
