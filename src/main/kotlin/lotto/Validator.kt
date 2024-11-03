@@ -1,11 +1,21 @@
 package lotto
 
 class Validator {
-    fun validatePurchasePrice(input: String): Int? {
+    fun validatePurchasePrice(inputPrice: String): Int? {
         return runCatching {
-            val price = input.toInt()
+            val price = inputPrice.toInt()
             require(price % 1000 == 0) { ERROR_INCORRECT_UNIT }
             price
+        }.onFailure {
+            println(it.message ?: ERROR_UNVALIDATED_NUMBER)
+        }.getOrNull()
+    }
+
+    fun validateWinningNumbers(inputNumbers: String): List<Int>? {
+        return runCatching {
+            val numbers = inputNumbers.split(",").map { it.trim().toInt() }
+            NumberValidation.validate(numbers)
+            numbers
         }.onFailure {
             println(it.message ?: ERROR_UNVALIDATED_NUMBER)
         }.getOrNull()
