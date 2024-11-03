@@ -1,4 +1,4 @@
 package lotto.domain.model
 
-class BonusNumber(private val bonusNumber: Int) {
+data class BonusNumber(private val bonusNumber: Int) {
 }

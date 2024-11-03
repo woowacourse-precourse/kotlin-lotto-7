@@ -2,7 +2,7 @@ package lotto.domain.model
 
 import lotto.util.validator.purchaseamount.PurchaseAmountErrorType
 
-class PurchaseInfo(private val purchaseAmount: Int) {
+data class PurchaseInfo(private val purchaseAmount: Int) {
     private val numberOfTickets: Int
 
     init {
