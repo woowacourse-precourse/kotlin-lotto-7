@@ -1,8 +1,8 @@
-package lotto
+package lotto.util
 
-import lotto.Lotto.LottoErrorMessages
+import lotto.model.Lotto.LottoErrorMessages
 
-object ExceptionProcess {
+object inputValidator {
     fun validPrice(input: String) {
         try {
             val price = input.toInt()

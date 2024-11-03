@@ -1,7 +1,7 @@
-package lotto
+package lotto.view
 
 import camp.nextstep.edu.missionutils.Console
-import lotto.Lotto.LottoErrorMessages
+import lotto.model.Lotto.LottoErrorMessages
 
 class InputView {
     fun getPrice(): Int {

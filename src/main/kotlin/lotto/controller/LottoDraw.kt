@@ -1,4 +1,9 @@
-package lotto
+package lotto.controller
+
+import lotto.model.Lotto
+import lotto.model.Store
+import lotto.view.InputView
+import lotto.view.OutputView
 
 class LottoDraw {
     fun run(inputView: InputView, outputView: OutputView) {

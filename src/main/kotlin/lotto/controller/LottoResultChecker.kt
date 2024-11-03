@@ -1,4 +1,6 @@
-package lotto
+package lotto.controller
+
+import lotto.model.Lotto
 
 object LottoResultChecker {
     fun checkWinningStatus(lottos: List<Lotto>, myLotto: Lotto, myBonus: Int)
@@ -11,9 +13,9 @@ object LottoResultChecker {
             val matchingCount = sameValueOfLotto.size
             val containsBonus = myBonus in lotto.getNumbers()
 
-            if(matchingCount>=3)
+            if (matchingCount >= 3)
                 winningCounts[matchingCount]++
-            if (matchingCount == 5 && containsBonus){
+            if (matchingCount == 5 && containsBonus) {
                 bonusWin++
                 winningCounts[matchingCount]--
             }
