@@ -51,7 +51,7 @@ class LottoGame(private val winningNumbers: List<Int>, private val bonusNumber: 
     fun printRatioOfProfit() {
         val profitRatio = calculateRatioOfProfit()
         val roundedProfitRatio = (profitRatio * 10).toInt() / 10f
-        println("총 수익률은 ${roundedProfitRatio}입니다.")
+        println("총 수익률은 ${roundedProfitRatio}%입니다.")
     }
 
     private fun calculateRatioOfProfit(): Float {
@@ -64,8 +64,8 @@ class LottoGame(private val winningNumbers: List<Int>, private val bonusNumber: 
 
     private fun calculateTotalPrize(winningCounts: List<Int>): Int {
         var totalPrize = 0
-        winningCounts.forEach {
-            totalPrize += it * LottoRank.values()[it].prize
+        LottoRank.entries.forEach { rank ->
+            totalPrize += winningCounts[rank.ordinal] * rank.prize
         }
         return totalPrize
     }
