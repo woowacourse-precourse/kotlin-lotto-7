@@ -2,11 +2,20 @@ package lotto
 
 class DrawingWinningNumbers {
     fun drawingWinningNumbers(): List<Int> {
-        val input = IOHandler().inputToUser(WINNINGNUMBERINSTRUCTION)
-        val winningNumbers = transferType(input)
+        val inputWinningNumbers = IOHandler().inputToUser(WINNINGNUMBERINSTRUCTION)
+        val winningNumbers = transferType(inputWinningNumbers)
 
         Validation().checkWinningNumbers(winningNumbers)
         return winningNumbers
+    }
+
+    fun drawingBonusNumber(winningNumbers: WinningNumbers): Int {
+        val inputBonusNumber = IOHandler().inputToUser(BONUSNUMBERINSTRUCTION)
+        require(Validation().isDigit(inputBonusNumber)) { EXCEPTIONOFNOTDIGIT }
+        val bonusNumber = inputBonusNumber.toInt()
+
+        Validation().checkBonusNumber(bonusNumber, winningNumbers.winningNumbers)
+        return bonusNumber
     }
 
     fun deleteBlank(input: String): String {
@@ -14,7 +23,7 @@ class DrawingWinningNumbers {
     }
 
     fun transferType(input: String): List<Int> {
-        val tempInput = input.split(",")
+        val tempInput = deleteBlank(input).split(",")
 
         tempInput.forEach {
             if (!Validation().isDigit(it)) {
@@ -26,6 +35,7 @@ class DrawingWinningNumbers {
 
     companion object {
         const val WINNINGNUMBERINSTRUCTION = "당첨 번호를 입력해 주세요."
-        const val EXCEPTIONOFNOTDIGIT = "숫자가 아닌 당첨 번호가 존재합니다."
+        const val BONUSNUMBERINSTRUCTION = "보너스 번호를 입력해 주세요."
+        const val EXCEPTIONOFNOTDIGIT = "[ERROR] 숫자가 아닌 당첨 번호가 존재합니다."
     }
 }

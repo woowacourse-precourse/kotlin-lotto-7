@@ -61,4 +61,18 @@ class LottoTest {
     fun `당첨 번호 타입 숫자로 이루어진 리스트로 변경`() {
         assertThat(DrawingWinningNumbers().transferType("1,2,3,4,5,6")).isEqualTo(listOf(1, 2, 3, 4, 5, 6))
     }
+
+    @Test
+    fun `보너스 당첨 번호가 1~45사이의 숫자가 아닐 경우 예외 발생`() {
+        assertThrows<IllegalArgumentException> {
+            Validation().checkBonusNumber(0, listOf(1, 2, 3, 4, 5, 6))
+        }
+    }
+
+    @Test
+    fun `보너스 당첨 번호가 다른 당첨 번호와 중복될 경우 예외 발생`() {
+        assertThrows<IllegalArgumentException> {
+            Validation().checkBonusNumber(1, listOf(1, 2, 3, 4, 5, 6))
+        }
+    }
 }

@@ -23,6 +23,14 @@ class Validation {
         isNumbersNotDuplicate(winningNumbers)
     }
 
+    fun checkBonusNumber(bonusNumber: Int, winningNumbers: List<Int>) {
+        val checkingNumbers = winningNumbers.toMutableList()
+
+        require(isNumberRange1To45(bonusNumber)) { ERRORNUMBERRANGE }
+        checkingNumbers.add(bonusNumber)
+        isNumbersNotDuplicate(checkingNumbers)
+    }
+
     fun isDigit(input: String): Boolean {
         input.forEach {
             if (!it.isDigit()) {
@@ -51,6 +59,10 @@ class Validation {
         require(validation) { ERRORNUMBERRANGE }
     }
 
+    fun isNumberRange1To45(number: Int): Boolean {
+        return number in 1..45
+    }
+
     fun isNumbersNotDuplicate(numbers: List<Int>) {
         val checkNumbers = numbers.groupingBy { it }.eachCount()
         var validation = true
@@ -61,10 +73,6 @@ class Validation {
             }
         }
         require(validation) { ERRORDUPLICATION }
-    }
-
-    private fun isNumberRange1To45(number: Int): Boolean {
-        return number in 1..45
     }
 
     private fun isPaymentUnder100000(payment: Int): Boolean {
