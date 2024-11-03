@@ -11,7 +11,7 @@ class LottoController {
     private val inputView = InputView()
     private val outputView = OutputView()
     private var releasedLottos = listOf<Lotto>()
-    lateinit var winningLottoResult: WinningLottoResult
+    private lateinit var winningLottoResult: WinningLottoResult
 
     fun execute() {
         getInputsAndReleaseLottos()
