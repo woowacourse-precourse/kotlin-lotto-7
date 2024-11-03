@@ -7,9 +7,9 @@ import lotto.view.InputView
 import lotto.view.OutputView
 
 class LottoController {
-    val inputView = InputView()
-    val outputView = OutputView()
-    val lottoGenerator = LottoGenerator()
+    private val inputView = InputView()
+    private val outputView = OutputView()
+    private val lottoGenerator = LottoGenerator()
 
     fun run() {
         val purchaseAmount = getPurchaseAmount()
@@ -19,7 +19,7 @@ class LottoController {
 
     }
 
-    fun getPurchaseAmount(): PurchaseAmount {
+    private fun getPurchaseAmount(): PurchaseAmount {
         return try {
             outputView.printPurchaseAmountRequest()
             val userInput = inputView.readLine().toInt()
@@ -30,7 +30,7 @@ class LottoController {
         }
     }
 
-    fun getLottoTickets(quantity: Int): List<Lotto> {
+    private fun getLottoTickets(quantity: Int): List<Lotto> {
         val lottos = mutableListOf<Lotto>()
         repeat(quantity) {
             lottos.add(lottoGenerator.createLotto())
