@@ -22,6 +22,9 @@
 ### `Lotto`
 - 6개의 로또 번호
 
+### `LottoMachine`
+- 로또 발행
+
 ### `WinningLotto`
 `object` 로 구현
 - 당첨 번호

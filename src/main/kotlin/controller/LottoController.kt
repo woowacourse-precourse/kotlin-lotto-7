@@ -1,6 +1,9 @@
 package controller
 
+import lotto.Lotto
+import model.LottoMachine
 import view.InputView
+import view.OutputView
 
 /* LottoController 설계
 * 1. 구입 금액 입력
@@ -15,8 +18,18 @@ import view.InputView
 * */
 class LottoController {
 
-    fun playLottoGame(){
+    fun playLottoGame() {
         val money = InputView.getMoney()
+        val lottoCount = money / DECIMAL
+
+        val lottoes = LottoMachine.issueLottoes(lottoCount)
+
+
+    }
+
+
+    companion object {
+        const val DECIMAL = 1000
     }
 
 }
