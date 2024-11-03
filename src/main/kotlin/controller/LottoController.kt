@@ -24,6 +24,7 @@ class LottoController {
 
         val lottoes = LottoMachine.issueLottoes(lottoCount)
 
+        OutputView.printLotto(lottoCount, lottoes)
 
     }
 
