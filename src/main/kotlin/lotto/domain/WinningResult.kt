@@ -1,6 +1,6 @@
 package lotto.domain
 
-import lotto.constants.LottoConstants.HUNDRED_PERCENT
+import lotto.constants.OutputConstants.HUNDRED_PERCENT
 import lotto.constants.OutputConstants.TWO_DECIMAL_FORMAT
 
 class WinningResult(private val lottos: List<Lotto>, private val inputNumbers: InputNumbers) {
