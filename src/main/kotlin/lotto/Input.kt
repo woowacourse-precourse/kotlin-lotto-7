@@ -31,7 +31,6 @@ fun validMoney(input: String) : Int  {
 
 fun calculateTicket(money: Int) : Int {
     val ticketCount = money / 1000
-    println("$ticketCount 개를 구매했습니다.")
     return ticketCount
 }
 
