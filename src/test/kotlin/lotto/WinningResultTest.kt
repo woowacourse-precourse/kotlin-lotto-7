@@ -21,7 +21,7 @@ class WinningResultTest {
         lottoNumbers: List<List<Int>>,
         expectedResult: Map<Rank, Int>
     ) {
-        assertEquals(WinningResult(lottoNumbers, winningNumbers, bonusNumber).details(), expectedResult)
+        assertEquals(WinningResult(lottoNumbers, winningNumbers, bonusNumber).details, expectedResult)
     }
 
     companion object {
@@ -78,5 +78,4 @@ class WinningResultTest {
             )
         )
     }
-
 }
