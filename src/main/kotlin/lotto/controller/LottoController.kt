@@ -36,7 +36,9 @@ class LottoController {
             val inputBonusNumber = getBonusNumber()
             BonusNumberValidator(winningLotto, inputBonusNumber).validateBonusNumber()
             val bonusNumber = makeBonusNumberModel(inputBonusNumber)
+
             closeInput()
+
             val matchResult: List<Prize> = MatchingLottoNumber(winningLotto, bonusNumber, quickPickLottoTickets).getMatchResult()
             val profitRate = LottoPrizeCalculator(matchResult, purchaseInfo).calculateProfitRate()
             showCalculateInfo(matchResult)
