@@ -47,7 +47,7 @@
 - [x] 입력 기능
 - [x] 로또 랜덤 구입 기능
 - [x] 당첨 여부 확인 기능
-- [ ] 당첨 통계 기능
+- [x] 당첨 통계 기능
 - [ ] 출력 기능
 - [ ] 예외 처리
 
@@ -286,3 +286,20 @@ object LottoSystem {
 - 각 로또 번호에 대한 맞춘 개수를 모두 저장한 후 `saveRanks()` 함수를 호출
 - `saveRanks()` 함수에서 각 로또 번호에 대한 맞춘 개수에 맞는 순위를 확인
 - `ranks` 맵에 각 로또 번호에 대한 맞는 순위에 더하여 각 순위별 당첨 개수를 저장
+
+### 당첨 통계 기능
+
+#### LottoSystem
+
+```kotlin
+object LottoSystem {
+    ...
+    private fun saveRateOfReturn(){
+        ranks.entries.forEach { if(it.value > 0) rateOfReturn += it.key.price.toLong()*it.value }
+        rateOfReturn = (rateOfReturn/purchaseAmount.toDouble())*100.0
+    }
+    ...
+}
+```
+- 순위별 당첨 개수가 저장된 `ranks` 맵을 통해 당첨된 모든 금액을 더함
+- 더한 모든 당첨 금액을 구입금액으로 나눈후 100을 곱해 수익률을 계산

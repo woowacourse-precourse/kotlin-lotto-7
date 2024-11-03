@@ -4,13 +4,13 @@ import camp.nextstep.edu.missionutils.Randoms
 
 object LottoSystem {
     private lateinit var winningNumber: List<Int>
-    private var bonusNumber: Int = 0
-    private var purchaseAmount: Int = 0
-    private var numberOfPurchases: Int = 0
+    private var bonusNumber : Int = 0
+    private var purchaseAmount : Int = 0
+    private var numberOfPurchases : Int = 0
     private var randomNumbers = mutableListOf<MutableList<Int>?>()
     private var matchCounts = mutableListOf<MutableList<Int>>()
     private var ranks = mutableMapOf<LottoRank,Int>()
-
+    private var rateOfReturn = 0.0
 
     init {
         Input
@@ -30,11 +30,20 @@ object LottoSystem {
         saveNumberOfPurchases()
     }
 
+    private fun saveRateOfReturn(){
+        ranks.entries.forEach { if(it.value > 0) rateOfReturn += it.key.price.toLong()*it.value }
+        rateOfReturn = (rateOfReturn/purchaseAmount.toDouble())*100.0
+    }
+
+    fun getRateOfReturn(): Double = rateOfReturn
+
+    fun getRandomNumbers(): MutableList<MutableList<Int>?> = randomNumbers
+
     fun getWinningNumber(): List<Int> = winningNumber
 
     fun getBonusNumber(): Int = bonusNumber
 
-    fun getRandomNumbers(): MutableList<MutableList<Int>?> = randomNumbers
+    fun getRanks(): MutableMap<LottoRank, Int> = ranks
 
     private fun setRanks(){
         ranks[LottoRank.FIVE] = 0
@@ -68,16 +77,17 @@ object LottoSystem {
                 ranks[LottoRank.FIVE] = ranks[LottoRank.FIVE]!! + 1
             }
         }
+        saveRateOfReturn()
     }
 
-    private fun saveNumberOfPurchases() {
-        numberOfPurchases = purchaseAmount / 1000
+    private fun saveNumberOfPurchases(){
+        numberOfPurchases = purchaseAmount/1000
         PrintResult.numberOfPurchasesInstructions(numberOfPurchases)
         saveRandomNumbers(numberOfPurchases)
     }
 
     private fun saveRandomNumbers(numberOfPurchases: Int) {
-        repeat(numberOfPurchases) {
+        repeat(numberOfPurchases){
             val randomNumber = pickRandomNumbers()
             randomNumbers.add(randomNumber!!.sorted().toMutableList())
         }
