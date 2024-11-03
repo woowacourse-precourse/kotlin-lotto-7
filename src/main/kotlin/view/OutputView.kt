@@ -5,6 +5,7 @@ import domain.enums.Output.Companion.matchCountFormat
 import domain.enums.Output.Companion.matchingNumberFormat
 import domain.enums.Output.Companion.totalRateOfReturnFormat
 import domain.enums.Rank
+import domain.enums.Rank.Companion.getRank
 import domain.util.convertWithDigitComma
 import domain.util.ext.joinToStringWithSquareBracket
 import java.util.TreeSet
@@ -31,26 +32,29 @@ class OutputView {
         println(Output.THREE_HYPHEN)
     }
 
-    fun printRankResult(result: Map<Rank, Int>) {
-        result.map { (key, value) ->
-            val reword = key.getReword()
-            when (reword) {
-                Rank.SECOND.getReword() -> printSecondRankResult(key, value)
-                else -> printOtherRankResult(key, value)
-            }
+    fun printResult(result: Map<Rank, Int>) {
+        result.map { (rank, matchCount) ->
+            val reword = rank.getReword().convertWithDigitComma()
+            val matchCountFormat = matchCountFormat(rank.getMatchingCount())
+            val matchNumberFormat = matchingNumberFormat(reword, matchCount)
+
+            printRankResult(rank, matchCountFormat, matchNumberFormat)
         }
     }
 
-    private fun printSecondRankResult(key: Rank, value: Int) {
-        val matchCountFormat = matchCountFormat(key.getMatchingCount())
+    private fun printRankResult(rank: Rank, matchCountFormat: String, matchNumberFormat: String) {
+        when (rank) {
+            Rank.SECOND -> printSecondRankResult(matchCountFormat, matchNumberFormat)
+            else -> printOtherRankResult(matchCountFormat, matchNumberFormat)
+        }
+    }
+
+    private fun printSecondRankResult(matchCountFormat: String, matchNumberFormat: String) {
         val bonusMatchCount = Output.BONUS_MATCH_COUNT.toString()
-        val matchNumberFormat = matchingNumberFormat(key.getReword().convertWithDigitComma(), value)
         println("$matchCountFormat$bonusMatchCount $matchNumberFormat")
     }
 
-    private fun printOtherRankResult(key: Rank, value: Int) {
-        val matchCountFormat = matchCountFormat(key.getMatchingCount())
-        val matchNumberFormat = matchingNumberFormat(key.getReword().convertWithDigitComma(), value)
+    private fun printOtherRankResult(matchCountFormat: String, matchNumberFormat: String) {
         println("$matchCountFormat $matchNumberFormat")
     }
 

@@ -51,6 +51,6 @@ class MainView(
     private fun setWinningStatics() {
         outputView.printWinningStatics()
         val result = viewModel.state.winning
-        outputView.printRankResult(result)
+        outputView.printResult(result)
     }
 }
