@@ -4,6 +4,7 @@ import camp.nextstep.edu.missionutils.test.Assertions.assertRandomUniqueNumbersI
 import camp.nextstep.edu.missionutils.test.Assertions.assertSimpleTest
 import camp.nextstep.edu.missionutils.test.NsTest
 import org.assertj.core.api.Assertions.assertThat
+import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
 
 class ApplicationTest : NsTest() {
@@ -42,10 +43,91 @@ class ApplicationTest : NsTest() {
     }
 
     @Test
-    fun `예외 테스트`() {
+    fun `지수형 표현 테스트`() {
+        assertRandomUniqueNumbersInRangeTest(
+            {
+                run("10000", "1,2,3,4,5,6", "7")
+                assertThat(output()).contains(
+                    "10개를 구매했습니다.",
+                    "[1, 2, 3, 4, 5, 6]",
+                    "[1, 2, 3, 4, 5, 6]",
+                    "[1, 2, 3, 4, 5, 6]",
+                    "[1, 2, 3, 4, 5, 6]",
+                    "[1, 2, 3, 4, 5, 6]",
+                    "[1, 2, 3, 4, 5, 6]",
+                    "[1, 2, 3, 4, 5, 6]",
+                    "[1, 2, 3, 4, 5, 6]",
+                    "[1, 2, 3, 4, 5, 6]",
+                    "[1, 2, 3, 4, 5, 6]",
+                    "3개 일치 (5,000원) - 0개",
+                    "4개 일치 (50,000원) - 0개",
+                    "5개 일치 (1,500,000원) - 0개",
+                    "5개 일치, 보너스 볼 일치 (30,000,000원) - 0개",
+                    "6개 일치 (2,000,000,000원) - 10개",
+                    "총 수익률은 200000000.0%입니다."
+                )
+            },
+            listOf(1,2,3,4,5,6),
+            listOf(1,2,3,4,5,6),
+            listOf(1,2,3,4,5,6),
+            listOf(1,2,3,4,5,6),
+            listOf(1,2,3,4,5,6),
+            listOf(1,2,3,4,5,6),
+            listOf(1,2,3,4,5,6),
+            listOf(1,2,3,4,5,6),
+            listOf(1,2,3,4,5,6),
+            listOf(1,2,3,4,5,6),
+        )
+    }
+
+    @Test
+    fun `숫자 형식 예외 테스트`() {
         assertSimpleTest {
             runException("1000j")
             assertThat(output()).contains(ERROR_MESSAGE)
+        }
+
+        assertSimpleTest {
+            runException("-1000")
+            assertThat(output()).contains(ERROR_MESSAGE)
+        }
+
+        assertSimpleTest {
+            runException(null)
+            assertThat(output()).contains(ERROR_MESSAGE)
+        }
+
+        assertSimpleTest {
+            runException("")
+            assertThat(output()).contains(ERROR_MESSAGE)
+        }
+
+        assertSimpleTest {
+            runException("\n")
+            assertThat(output()).contains(ERROR_MESSAGE)
+        }
+    }
+
+    @Test
+    @DisplayName("중복 예외 테스트")
+    fun `중복 예외 테스트`() {
+        assertSimpleTest {
+            runException("1000", "1,1,1,1,1,1")
+            assertThat(output()).contains(ERROR_MESSAGE)
+        }
+
+        assertSimpleTest {
+            runException("1000", "1,2,3,4,5,6", "1")
+            assertThat(output()).contains(ERROR_MESSAGE)
+        }
+    }
+
+    @Test
+    @DisplayName("반올림 기능 테스트")
+    fun `반올림 기능 테스트`() {
+        assertSimpleTest {
+            assert(totalWinningRate(0.3355) == "33.6")
+            assert(totalWinningRate(0.3354) == "33.5")
         }
     }
 
