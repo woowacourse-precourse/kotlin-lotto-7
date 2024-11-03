@@ -4,7 +4,7 @@ import camp.nextstep.edu.missionutils.test.NsTest
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 
-class IOSTest : NsTest() {
+class InputViewTest : NsTest() {
     @Test
     fun `입력 테스트`() {
         run("5000")

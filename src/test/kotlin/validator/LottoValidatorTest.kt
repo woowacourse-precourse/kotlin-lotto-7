@@ -18,6 +18,12 @@ class LottoValidatorTest : NsTest() {
         assertThat(output()).contains(ErrorMessage.LOTTO_OUT_OF_BOUND.getMessage())
     }
 
+    @Test
+    fun `로또 번호가 중복이면 예외가 발생한다`() {
+        LottoValidator().lottoCheck(listOf(1,2,3,4,5,1))
+        assertThat(output()).contains(ErrorMessage.LOTTO_DUPLICATE.getMessage())
+    }
+
     override fun runMain() {
         main()
     }

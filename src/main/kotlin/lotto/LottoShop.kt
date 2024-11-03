@@ -3,7 +3,7 @@ package lotto
 import camp.nextstep.edu.missionutils.Randoms
 import kotlin.math.roundToInt
 
-class LottoShop() {
+class LottoShop {
     private val soldLottoNumber = ArrayList<List<Int>>()
     private val lottos = ArrayList<Lotto>()
     private var winNumber = listOf(0)

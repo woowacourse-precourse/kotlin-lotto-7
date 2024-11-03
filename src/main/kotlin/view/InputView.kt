@@ -33,19 +33,19 @@ class InputView {
 
     private fun getBills(): String {
         println(BILL_REQUIREMENT)
-        val bill = Console.readLine()
+        val bill = Console.readLine().trim()
         return bill
     }
 
     private fun getWinNumber(): String {
         println(WIN_NUMBER_REQUIREMENT)
-        val winNumber = Console.readLine()
+        val winNumber = Console.readLine().trim()
         return winNumber
     }
 
     private fun getBonusNumber(): String {
         println(BONUS_NUMBER_REQUIREMENT)
-        val bonusNumber = Console.readLine()
+        val bonusNumber = Console.readLine().trim()
         return bonusNumber
     }
 
