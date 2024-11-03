@@ -6,7 +6,7 @@ import lotto.util.ErrorMessages.ERROR_NOT_A_NUMBER
 import lotto.util.ErrorMessages.ERROR_NUMBER_RANGE
 import lotto.util.ErrorMessages.ERROR_UNVALIDATED_NUMBER
 
-class Validator {
+class InputValidator {
     fun validatePurchasePrice(inputPrice: String): Int? {
         return runCatching {
             val sanitizedInput = inputPrice.replace(",", "")

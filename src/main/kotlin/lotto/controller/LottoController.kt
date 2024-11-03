@@ -3,7 +3,7 @@ package lotto.controller
 import lotto.model.LottoCalculator
 import lotto.model.LottoMachine
 import lotto.model.LottoResult
-import lotto.util.Validator
+import lotto.util.InputValidator
 import lotto.view.LottoInput
 import lotto.view.LottoOutput
 
@@ -11,7 +11,7 @@ class LottoController {
     private val lottoInput = LottoInput()
     private val lottoOutput = LottoOutput()
     private val lottoMachine = LottoMachine()
-    private val validator = Validator()
+    private val validator = InputValidator()
     private val lottoResult = LottoResult()
     private val lottoCalculator = LottoCalculator()
 
