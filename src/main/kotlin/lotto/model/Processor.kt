@@ -8,11 +8,13 @@ object Processor {
     }
 
     fun winningNumSplit(num: String): List<Int> {
+        //val num = numStr.replace(" ", "")
         if (containsInvalidCharacters(num)) throw IllegalArgumentException("[ERROR] 숫자와 쉼표(,) 외에 다른 문자를 입력했습니다.")
         val numList = num.split(",").map { it.toInt() }
         numList.forEach {
             if (it < 1 || it > 45) throw IllegalArgumentException("[ERROR] 1부터 45 사이의 숫자를 입력하세요.")
         }
+        if (numList.distinct().count() != numList.count()) throw IllegalArgumentException("[ERROR] 중복된 숫자를 입력했습니다.")
         return numList
     }
 

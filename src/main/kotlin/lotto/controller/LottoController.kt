@@ -33,6 +33,7 @@ class LottoController {
     }
 
     private fun getWinningNNum(): List<Int> {
+
         while (true) {
             try {
                 val winningNum = Processor.winningNumSplit(InputView.getWinningNumber())

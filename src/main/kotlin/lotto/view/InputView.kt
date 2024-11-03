@@ -4,18 +4,18 @@ import camp.nextstep.edu.missionutils.Console
 
 object InputView {
     fun getMoney(): String {
-        println("구입금액을 입력해 주세요.")
+        println(message.MONEY)
         return Console.readLine()
     }
 
     fun getWinningNumber(): String {
-        println("당첨 번호를 입력해 주세요.")
-        return Console.readLine()
+        println(message.WINNING)
+        return Console.readLine().replace(" ", "")
     }
 
     fun getBonusNumber(): String {
         println()
-        println("보너스 번호를 입력해 주세요.")
+        println(message.BONUS)
         return Console.readLine()
     }
 }

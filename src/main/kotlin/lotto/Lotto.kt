@@ -6,7 +6,8 @@ import kotlin.math.round
 
 class Lotto(private val numbers: List<Int>) {
     init {
-        require(numbers.size == 6) { "[ERROR] 로또 번호는 6개여야 합니다." }
+        require(numbers.size == 6 ) { "[ERROR] 로또 번호는 6개여야 합니다." }
+        require(numbers.size == numbers.distinct().size) { "[ERROR] 로또 번호에는 중복된 숫자가 있을 수 없습니다." }
     }
 
     fun compare(lotto: List<Int>): Int{
