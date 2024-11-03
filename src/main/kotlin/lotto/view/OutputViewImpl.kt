@@ -16,8 +16,7 @@ class OutputViewImpl : OutputView {
     }
 
     override fun printWinningStatistics(winningStatistics: Map<LottoWinning, Int>) {
-        println("당첨 통계\n" +
-                "---")
+        println(WINNING_STATISTICS_HEADER)
         LottoWinning.entries.reversed().forEach {
             when (it) {
                 LottoWinning.NONE -> return@forEach
@@ -40,6 +39,7 @@ class OutputViewImpl : OutputView {
 
     companion object {
         private const val PURCHASE_SUMMARY_MESSAGE = "%,d개를 구매했습니다."
+        private const val WINNING_STATISTICS_HEADER = "당첨 통계\n---"
         private const val WINNING_STATISTICS_MESSAGE = "%d개 일치 (%,d원) - %,d개"
         private const val WINNING_STATISTICS_WITH_BONUS_MESSAGE = "%d개 일치, 보너스 볼 일치 (%,d원) - %,d개"
         private const val PROFIT_RATE_MESSAGE = "총 수익률은 %.1f%%입니다."
