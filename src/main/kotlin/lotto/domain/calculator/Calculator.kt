@@ -4,6 +4,10 @@ import lotto.domain.enums.Rank
 import lotto.domain.util.convertRoundAtTwoDecimal
 
 class Calculator : Calculate {
+    override fun calculatePurchaseLottoCount(pay: Int): Int {
+        return pay / 1000
+    }
+
     override fun calculateWinningMoney(winning: Map<Rank, Int>): Long {
         return winning.entries.sumOf { (rank, count) ->
             rank.getReword() * count
