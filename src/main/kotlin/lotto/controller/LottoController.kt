@@ -6,7 +6,11 @@ import lotto.service.LottoService
 import lotto.view.InputView
 import lotto.view.OutputView
 
-class LottoController(private val inputView: InputView, private val outputView: OutputView, private val service: LottoService) {
+class LottoController(
+    private val inputView: InputView,
+    private val outputView: OutputView,
+    private val service: LottoService,
+) {
     private var purchasePrice: Int = 0
     private lateinit var winLotto: Lotto
     private var bonusNumber: Int = 0
@@ -41,10 +45,10 @@ class LottoController(private val inputView: InputView, private val outputView: 
     }
 
     private fun getValidWinningLotto(input: String): Lotto {
-        // TODO 6개 중 중복된 숫자 들어오면 예외 발생
         while (true) {
             try {
                 require(input.isValidNumbers()) { INVALID_NUMBERS_EXCEPTION_MSG }
+                require(input.isNoDuplicateNumbers()) { HAS_DUPLICATE_NUMBER_EXCEPTION_MSG }
                 val inputNumbers = input.split(DELIMITER).map { it.toInt() }
                 return inputNumbers.toLottoNumbers()
             } catch (e: IllegalArgumentException) {
@@ -79,6 +83,12 @@ class LottoController(private val inputView: InputView, private val outputView: 
                 false
             }
 
+        private fun String.isNoDuplicateNumbers(): Boolean {
+            val numbers = this.split(',').map { it.toInt() }
+            numbers.toSet()
+            return numbers.size == 6
+        }
+
         private const val DELIMITER = ','
         private const val MIN_LOTTO_NUMBER = 1
         private const val MAX_LOTTO_NUMBER = 45
@@ -88,5 +98,6 @@ class LottoController(private val inputView: InputView, private val outputView: 
         private const val INVALID_NUMBERS_EXCEPTION_MSG = "[ERROR] 유효하지 않은 당첨 번호 리스트입니다."
         private const val OVER_RANGE_EXCEPTION_MSG = "[ERROR] 로또 번호는 1부터 45 사이의 숫자여야 합니다."
         private const val INVALID_PRICE_RANGE_EXCEPTION_MSG = "[ERROR] 구입 금액은 1000원 이상의 1000으로 나누어지는 금액이어야 합니다."
+        private const val HAS_DUPLICATE_NUMBER_EXCEPTION_MSG = "[ERROR] 중복된 로또 번호가 없어야 합니다."
     }
 }
