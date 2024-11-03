@@ -81,7 +81,7 @@ object Instructions {
 ```kotlin
 object Input {
 
-    init {
+    fun start() {
         inputPurchaseAmount()
         inputWinningNumber()
         inputBonusNumber()
@@ -110,7 +110,7 @@ object Input {
 - 사용자에게 입력을 받는 클래스
 - 구입 금액, 당첨 번호, 보너스 번호를 입력 받음
 - 싱글톤 객체로 작성
-- 객체 생성시 Instructions 객체를 통해 안내 문구를 출력 후 `readln()`, `readLine()`함수로 입력을 받음
+- `start()` 함수 실행 시 Instructions 객체를 통해 안내 문구를 출력 후 `readln()`, `readLine()`함수로 입력을 받음
 - 입력받은 값은 LottoSystem 객체에 저장
 
 ### 로또 랜덤 구입 기능
@@ -125,14 +125,14 @@ object LottoSystem {
     private var numberOfPurchases: Int = 0
     private var randomNumbers = mutableListOf<MutableList<Int>?>()
 
-    init {
+    fun start() {
         Input
     }
     ...
 }
 ```
 - 로또의 전반적인 시스템을 관리하는 싱글톤 객체
-- `LottoSystem` 객체 생성시 즉, 시스템 실행 시 `Input` 객체를 생성해 사용자로부터 입력을 받음
+- `LottoSystem` 객체 생성후 `start()` 함수 실행 시 즉, 시스템 실행 시 `Input` 객체를 생성해 사용자로부터 입력을 받음
 
 ##### 구입 개수 저장
 

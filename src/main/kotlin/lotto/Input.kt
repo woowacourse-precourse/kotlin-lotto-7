@@ -2,7 +2,7 @@ package lotto
 
 object Input {
 
-    init {
+    fun start() {
         inputPurchaseAmount()
         inputWinningNumber()
         inputBonusNumber()

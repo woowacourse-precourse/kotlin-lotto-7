@@ -12,8 +12,8 @@ object LottoSystem {
     private var ranks = mutableMapOf<LottoRank,Int>()
     private var rateOfReturn = 0.0
 
-    init {
-        Input
+    fun start() {
+        Input.start()
         checkWinning()
         PrintResult.printWinningStatistics()
     }
