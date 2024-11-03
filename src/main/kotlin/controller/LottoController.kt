@@ -1,6 +1,8 @@
 package controller
 
+import model.Lotto
 import model.LottoMachine
+import model.WinningLotto
 import view.InputView
 import view.OutputView
 
@@ -25,6 +27,17 @@ class LottoController {
 
         OutputView.printLotto(lottoCount, lottoes)
 
+        val winningLotto = getWinningLotto()
+
+    }
+
+    private fun getWinningLotto(): WinningLotto {
+        val winningNumbers = InputView.getWinningNumbers()
+
+        val bonusNumber = InputView.getBonusNumber(winningNumbers)
+
+        return WinningLotto(
+            Lotto(winningNumbers), bonusNumber)
     }
 
 
