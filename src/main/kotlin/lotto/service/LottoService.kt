@@ -2,33 +2,34 @@ package lotto.service
 
 import lotto.model.Lotto
 import camp.nextstep.edu.missionutils.Randoms
+import lotto.Constants
 
 class LottoService {
     fun purchaseLottos(amount: Int): List<Lotto> {
-        val numberOfLottos = amount / 1000
-        return List(numberOfLottos) { Lotto(Randoms.pickUniqueNumbersInRange(1, 45, 6)) }
+        val lottoCount = amount / Constants.LOTTO_PRICE
+        return List(lottoCount) { Lotto(Randoms.pickUniqueNumbersInRange(Constants.MIN_LOTTO_NUMBER, Constants.MAX_LOTTO_NUMBER, Constants.WINNING_NUMBER_COUNT)) }
     }
 
     fun calculateStatistics(lottos: List<Lotto>, winningNumbers: Set<Int>, bonusNumber: Int): Map<String, Int> {
         val statistics = mutableMapOf(
-            "3개 일치 (5,000원)" to 0,
-            "4개 일치 (50,000원)" to 0,
-            "5개 일치 (1,500,000원)" to 0,
-            "5개 일치, 보너스 볼 일치 (30,000,000원)" to 0,
-            "6개 일치 (2,000,000,000원)" to 0
+            Constants.MATCH_3_DESCRIPTION to 0,
+            Constants.MATCH_4_DESCRIPTION to 0,
+            Constants.MATCH_5_DESCRIPTION to 0,
+            Constants.MATCH_5_BONUS_DESCRIPTION to 0,
+            Constants.MATCH_6_DESCRIPTION to 0
         )
 
         lottos.forEach { lotto ->
             val matchCount = lotto.getNumbers().count { winningNumbers.contains(it) }
             when (matchCount) {
-                6 -> statistics["6개 일치 (2,000,000,000원)"] = statistics.getValue("6개 일치 (2,000,000,000원)") + 1
+                6 -> statistics[Constants.MATCH_6_DESCRIPTION] = statistics.getValue(Constants.MATCH_6_DESCRIPTION) + 1
                 5 -> if (lotto.getNumbers().contains(bonusNumber)) {
-                    statistics["5개 일치, 보너스 볼 일치 (30,000,000원)"] = statistics.getValue("5개 일치, 보너스 볼 일치 (30,000,000원)") + 1
+                    statistics[Constants.MATCH_5_BONUS_DESCRIPTION] = statistics.getValue(Constants.MATCH_5_BONUS_DESCRIPTION) + 1
                 } else {
-                    statistics["5개 일치 (1,500,000원)"] = statistics.getValue("5개 일치 (1,500,000원)") + 1
+                    statistics[Constants.MATCH_5_DESCRIPTION] = statistics.getValue(Constants.MATCH_5_DESCRIPTION) + 1
                 }
-                4 -> statistics["4개 일치 (50,000원)"] = statistics.getValue("4개 일치 (50,000원)") + 1
-                3 -> statistics["3개 일치 (5,000원)"] = statistics.getValue("3개 일치 (5,000원)") + 1
+                4 -> statistics[Constants.MATCH_4_DESCRIPTION] = statistics.getValue(Constants.MATCH_4_DESCRIPTION) + 1
+                3 -> statistics[Constants.MATCH_3_DESCRIPTION] = statistics.getValue(Constants.MATCH_3_DESCRIPTION) + 1
             }
         }
         return statistics
@@ -37,11 +38,11 @@ class LottoService {
     fun calculateRateOfReturn(statistics: Map<String, Int>): Int {
         return statistics.entries.sumOf { (key, count) ->
             val prize = when (key) {
-                "3개 일치 (5,000원)" -> 5000
-                "4개 일치 (50,000원)" -> 50000
-                "5개 일치 (1,500,000원)" -> 1_500_000
-                "5개 일치, 보너스 볼 일치 (30,000,000원)" -> 30_000_000
-                "6개 일치 (2,000,000,000원)" -> 2_000_000_000
+                Constants.MATCH_3_DESCRIPTION -> Constants.MATCH_3_PRIZE
+                Constants.MATCH_4_DESCRIPTION -> Constants.MATCH_4_PRIZE
+                Constants.MATCH_5_DESCRIPTION -> Constants.MATCH_5_PRIZE
+                Constants.MATCH_5_BONUS_DESCRIPTION -> Constants.MATCH_5_BONUS_PRIZE
+                Constants.MATCH_6_DESCRIPTION -> Constants.MATCH_6_PRIZE
                 else -> 0
             }
             prize * count

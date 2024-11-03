@@ -13,7 +13,7 @@ class OutputView {
         println("당첨 통계\n---")
         statistics.forEach { (key, value) -> println("$key - ${value}개") }
         val totalPrize = LottoService().calculateRateOfReturn(statistics)
-        val profitRate = (totalPrize / purchaseAmount.toDouble()) * 100
+        val profitRate = String.format("%.2f", (totalPrize / purchaseAmount.toDouble()) * 100).toDouble()
         println("총 수익률은 ${"%.1f".format(profitRate)}%입니다.")
     }
 }

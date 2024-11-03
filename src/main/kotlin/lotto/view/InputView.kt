@@ -1,6 +1,7 @@
 package lotto.view
 
 import camp.nextstep.edu.missionutils.Console
+import lotto.Constants
 
 class InputView {
     fun getPurchaseAmount(): Int {
@@ -11,7 +12,7 @@ class InputView {
             validatePurchaseAmount(amount)
             amount
         } catch (e: Exception) {
-            println("[ERROR] 구입 금액은 1,000원 단위의 숫자로 입력해야 합니다.")
+            println("[ERROR] 구입 금액은 ${Constants.LOTTO_PRICE}원 단위이며, ${Constants.MIN_PURCHASE_AMOUNT}원 이상, ${Constants.MAX_PURCHASE_AMOUNT}원 이하여야 합니다.")
             getPurchaseAmount()
         }
     }
@@ -28,7 +29,7 @@ class InputView {
             validateWinningNumbers(numbers)
             numbers
         } catch (e: Exception) {
-            println("[ERROR] 당첨 번호는 1~45 사이의 숫자 6개를 중복 없이 입력해야 합니다.")
+            println("[ERROR] 당첨 번호는 중복되지 않는 ${Constants.MIN_LOTTO_NUMBER}~${Constants.MAX_LOTTO_NUMBER} 사이의 숫자 ${Constants.WINNING_NUMBER_COUNT}개로 입력해야 합니다.\n숫자 외에는 구분자인 쉼표(,)만 입력할 수 있습니다.")
             getWinningNumbers()
         }
     }
@@ -41,26 +42,26 @@ class InputView {
             validateBonusNumber(bonusNumber, winningNumbers)
             bonusNumber
         } catch (e: Exception) {
-            println("[ERROR] 보너스 번호는 당첨 번호와 중복되지 않는 1~45 사이의 숫자여야 합니다.")
+            println("[ERROR] 보너스 번호는 당첨 번호와 중복되지 않는 ${Constants.MIN_LOTTO_NUMBER}~${Constants.MAX_LOTTO_NUMBER} 사이의 숫자로 입력해야 합니다.")
             getBonusNumber(winningNumbers)
         }
     }
 
     private fun validatePurchaseAmount(amount: Int) {
-        if (amount % 1000 != 0 || amount < 1000 || amount > 1_000_000) {
-            throw IllegalArgumentException("[ERROR] 구입 금액은 1,000원 단위로 1,000,000원 이하이어야 합니다.")
+        if (amount % Constants.LOTTO_PRICE != 0 || amount < Constants.MIN_PURCHASE_AMOUNT || amount > Constants.MAX_PURCHASE_AMOUNT) {
+            throw IllegalArgumentException()
         }
     }
 
     private fun validateWinningNumbers(numbers: Set<Int>) {
-        if (numbers.size != 6 || numbers.any { it !in 1..45 }) {
-            throw IllegalArgumentException("[ERROR] 당첨 번호는 1~45 사이의 숫자 6개여야 합니다.")
+        if (numbers.size != Constants.WINNING_NUMBER_COUNT || numbers.any { it !in Constants.MIN_LOTTO_NUMBER..Constants.MAX_LOTTO_NUMBER }) {
+            throw IllegalArgumentException()
         }
     }
 
     private fun validateBonusNumber(bonusNumber: Int, winningNumbers: Set<Int>) {
-        if (bonusNumber !in 1..45 || winningNumbers.contains(bonusNumber)) {
-            throw IllegalArgumentException("[ERROR] 보너스 번호는 당첨 번호와 중복되지 않는 1~45 사이의 숫자여야 합니다.")
+        if (bonusNumber !in Constants.MIN_LOTTO_NUMBER..Constants.MAX_LOTTO_NUMBER || winningNumbers.contains(bonusNumber)) {
+            throw IllegalArgumentException()
         }
     }
 }
