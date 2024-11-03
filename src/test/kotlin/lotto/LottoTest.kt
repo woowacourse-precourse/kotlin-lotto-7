@@ -41,4 +41,14 @@ class LottoTest {
         assertEquals(true, isMatchBonus)
     }
 
+    @Test
+    fun `로또 2등 당첨 여부를 반환한다`() {
+        val lotto = Lotto(listOf(1, 2, 3, 4, 5, 6))
+        val winningLotto = WinningLotto(Lotto(listOf(1, 2, 3, 4, 5, 7)), 6)
+        val isMatchBonus = lotto.isMatchBonus(winningLotto)
+
+        LottoController().updatePrize(5, isMatchBonus)
+
+        assertEquals(1, Prize.SECOND.winningCount)
+    }
 }
