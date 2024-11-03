@@ -19,10 +19,15 @@ object InputView {
     }
 
     fun getWinningNumbers(): List<Int> {
-        println(WINNING_NUMBERS_INPUT_MESSAGE)
-        val inputWinningNumbers = Console.readLine()
+        var winningNumbers: List<Int>
+        do {
+            println(WINNING_NUMBERS_INPUT_MESSAGE)
+            val inputWinningNumbers = Console.readLine()
 
-        return Validator.validateWinningNumbers(inputWinningNumbers)
+            winningNumbers = Validator.validateWinningNumbers(inputWinningNumbers)
+        }while (winningNumbers.isEmpty())
+
+        return winningNumbers
     }
 
     fun getBonusNumber(winningNumbers: List<Int>): Int {

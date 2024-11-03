@@ -20,15 +20,20 @@ object Validator {
     }
 
     fun validateWinningNumbers(inputWinningNumbers: String): List<Int> {
-        val winningNumbers = inputWinningNumbers.split(",")
+        val winningNumbers: List<String> = inputWinningNumbers.split(",")
+        try {
 
-        WinningNumbersValidator.SHOULD_BE_SIX_COUNT.validate(winningNumbers)
+            WinningNumbersValidator.SHOULD_BE_SIX_COUNT.validate(winningNumbers)
 
-        WinningNumbersValidator.SHOULD_BE_NUMBER.validate(winningNumbers)
+            WinningNumbersValidator.SHOULD_BE_NUMBER.validate(winningNumbers)
 
-        WinningNumbersValidator.SHOULD_BE_1_TO_45_NUMBER.validate(winningNumbers)
+            WinningNumbersValidator.SHOULD_BE_1_TO_45_NUMBER.validate(winningNumbers)
 
-        WinningNumbersValidator.SHOULD_NOT_BE_DUPLICATE.validate(winningNumbers)
+            WinningNumbersValidator.SHOULD_NOT_BE_DUPLICATE.validate(winningNumbers)
+        } catch (e: IllegalArgumentException) {
+            println(e.message)
+            return emptyList()
+        }
 
         return winningNumbers.map { it.toInt() }
 
