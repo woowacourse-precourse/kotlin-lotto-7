@@ -53,19 +53,19 @@ class Lotto(private val numbers: List<Int>) {
         fun getLottoInformation() {
             println("구입 금액을 입력해 주세요.")
             val lottoAmount = Console.readLine()
-            val lottoCount = checkLottoAmount(lottoAmount)
+            val validLottoAmount = checkLottoAmount(lottoAmount)
 
             println("당첨 번호를 입력해 주세요.")
-            val winningNumber = Console.readLine()
-            val winningNumbers = checkWinningNumber(winningNumber)
+            val winningNumbers = Console.readLine()
+            val validWinningNumber = checkWinningNumber(winningNumbers)
 
             println("보너스 번호를 입력해 주세요.")
             val bonusNumber = Console.readLine()
-            checkBonusNumber(bonusNumber, winningNumbers)
+            val validBonusNUmber = checkBonusNumber(bonusNumber, validWinningNumber)
 
-            println("구매 가능한 로또 개수: $lottoCount")
+            println("구매 가능한 로또 개수: $validLottoAmount")
             println("당첨 번호: $winningNumbers")
-            println("보너스 번호: ${bonusNumber.toInt()}")
+            println("보너스 번호: ${validBonusNUmber}")
         }
     }
 }
