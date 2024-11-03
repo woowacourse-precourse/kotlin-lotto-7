@@ -45,8 +45,10 @@ class LottoJudge {
 
     fun printWinningStatistics(lottos: List<Lotto>) {
         println("\n당첨 통계\n---")
-        val ranksCount = getRanksCount(lottos.map { it.checkRank(winnerNumbers, bonusNumber) })
+        val ranks = lottos.map { it.checkRank(winnerNumbers, bonusNumber) }
+        val ranksCount = getRanksCount(ranks)
         printRanks(ranksCount)
+        printProfitRatio(ranks, lottos.size)
     }
 
     private fun printRanks(ranksCount: List<Int>) {
@@ -65,5 +67,11 @@ class LottoJudge {
             ranks.filter { it == LottoRank.FOURTH }.size,
             ranks.filter { it == LottoRank.FIFTH }.size
         )
+    }
+
+    private fun printProfitRatio(ranks: List<LottoRank>, lottoCount: Int) {
+        val totalPrizeMoney = ranks.fold(0) { accumulatedValue, rank -> accumulatedValue + rank.prizeMoney }
+        val profitRatio = totalPrizeMoney / (lottoCount * 1000.0) * 100
+        println("총 수익률은 %.1f%%입니다.".format(profitRatio))
     }
 }
