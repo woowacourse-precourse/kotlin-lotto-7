@@ -3,12 +3,20 @@ package lotto
 import camp.nextstep.edu.missionutils.Console
 
 class PurchaseView {
+    // 구매할 로또의 개수 반환
     fun getPurchaseLottoCount(): Int {
-        println(PROMPT_MESSAGE)
-        val input = Console.readLine()
-        val purchasedLottoCount = input?.toInt()?.div(1000) ?: 0 // 구매하는 로또의 개수
-        println("\n${purchasedLottoCount}$PURCHASE_MESSAGE")
-        return purchasedLottoCount
+        while (true) {
+            try {
+                println(PROMPT_MESSAGE)
+                val input = Console.readLine()
+                val amount = Validator.validatePurchaseInput(input) // 유효성 검사
+                val purchasedLottoCount = amount / 1000 // 구매할 로또 개수
+                println("\n${purchasedLottoCount}$PURCHASE_MESSAGE")
+                return purchasedLottoCount
+            } catch (e: IllegalArgumentException) {
+                println(e.message) // [ERROR]로 시작하는 에러 메시지 출력
+            }
+        }
     }
 
     companion object {
