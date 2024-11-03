@@ -39,7 +39,6 @@ class LottoController(
 
     private fun getValidWinningLotto(input: String): Lotto {
         require(input.isValidNumbers()) { INVALID_NUMBERS_EXCEPTION_MSG }
-        require(input.isNoDuplicateNumbers()) { HAS_DUPLICATE_NUMBER_EXCEPTION_MSG }
         val inputNumbers = input.split(DELIMITER).map { it.toInt() }
         return inputNumbers.toLottoNumbers()
     }
@@ -88,7 +87,6 @@ class LottoController(
         private const val INVALID_NUMBERS_EXCEPTION_MSG = "[ERROR] 유효하지 않은 당첨 번호 리스트입니다."
         private const val OVER_RANGE_EXCEPTION_MSG = "[ERROR] 로또 번호는 1부터 45 사이의 숫자여야 합니다."
         private const val INVALID_PRICE_RANGE_EXCEPTION_MSG = "[ERROR] 구입 금액은 1000원 이상의 1000으로 나누어지는 금액이어야 합니다."
-        private const val HAS_DUPLICATE_NUMBER_EXCEPTION_MSG = "[ERROR] 중복된 로또 번호가 없어야 합니다."
         private const val DUPLICATE_BONUS_NUMBER_EXCEPTION_MSG = "[ERROR] 보너스 번호가 당첨 번호에 있습니다."
     }
 }
