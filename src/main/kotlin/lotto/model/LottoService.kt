@@ -31,11 +31,11 @@ class LottoService {
 
     private fun determineRank(matchCount: Int, hasBonus: Boolean): LottoRank {
         return when {
-            matchCount == 6 -> LottoRank.FIRST
-            matchCount == 5 && hasBonus -> LottoRank.SECOND
-            matchCount == 5 -> LottoRank.THIRD
-            matchCount == 4 -> LottoRank.FOURTH
-            matchCount == 3 -> LottoRank.FIFTH
+            matchCount == Constants.SIX -> LottoRank.FIRST
+            matchCount == Constants.FIVE && hasBonus -> LottoRank.SECOND
+            matchCount == Constants.FIVE -> LottoRank.THIRD
+            matchCount == Constants.FOUR -> LottoRank.FOURTH
+            matchCount == Constants.THREE -> LottoRank.FIFTH
             else -> LottoRank.NONE
         }
     }
