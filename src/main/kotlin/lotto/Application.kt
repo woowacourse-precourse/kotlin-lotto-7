@@ -7,8 +7,7 @@ fun main() {
     purchaseView.displayLottos(user) // user의 구매한 로또 개수, 로또 번호 출력
 
     val resultView = ResultView()
-    val winningNumbers = resultView.getWinningNumbers()
-    val bonusNumber = resultView.getBonusNumber()
-    LotteryMachine.setWinningLotto(winningNumbers, bonusNumber)
-
+    val winningNumbers = resultView.getWinningNumbers() // 당첨 번호
+    val bonusNumber = resultView.getBonusNumber(winningNumbers) // 보너스 번호
+    LotteryMachine.setWinningLotto(winningNumbers, bonusNumber) // LotteryMachine의 당첨 번호와 보너스 번호 설정
 }

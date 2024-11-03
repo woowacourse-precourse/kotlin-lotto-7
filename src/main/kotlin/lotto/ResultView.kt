@@ -4,20 +4,32 @@ import camp.nextstep.edu.missionutils.Console
 
 class ResultView {
     fun getWinningNumbers(): List<Int> {
-        println(WINNINGNUMBER_PROMPT_MESSAGE)
-        return try {
-            Console.readLine().split(",").map { it.trim().toInt() }
-        } catch (e: NumberFormatException) {
-            throw IllegalArgumentException(ERROR_MESSAGE)
+        while (true) {
+            println(WINNINGNUMBER_PROMPT_MESSAGE)
+            try {
+                val winningNumbers = Console.readLine().split(",").map { it.trim().toInt() }
+                Validator.validateWinningNumbers(winningNumbers) // 유효성 검사
+                return winningNumbers
+            } catch (e: NumberFormatException) {
+                println(ERROR_MESSAGE)
+            } catch (e: IllegalArgumentException) {
+                println(e.message)
+            }
         }
     }
 
-    fun getBonusNumber(): Int {
-        println(BONUSNUMBER_PROMPT_MESSAGE)
-        return try {
-            Console.readLine().toInt()
-        } catch (e: NumberFormatException) {
-            throw IllegalArgumentException(ERROR_MESSAGE)
+    fun getBonusNumber(winningNumbers: List<Int>): Int {
+        while (true) {
+            println(BONUSNUMBER_PROMPT_MESSAGE)
+            try {
+                val bonusNumber = Console.readLine().toInt()
+                Validator.validateBonusNumber(bonusNumber, winningNumbers) // 유효성 검사
+                return bonusNumber
+            } catch (e: NumberFormatException) {
+                println(ERROR_MESSAGE)
+            } catch (e: IllegalArgumentException) {
+                println(e.message)
+            }
         }
     }
 
