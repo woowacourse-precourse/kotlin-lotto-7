@@ -1,5 +1,6 @@
 package lotto.controller
 
+import lotto.controller.dto.PurchasedLottoNumbersDto
 import lotto.controller.dto.PurchasedLottoTicketsDto
 import lotto.service.LottoGameService
 import lotto.view.LottoGameView
@@ -12,5 +13,7 @@ class LottoGameController(
         val purchaseAmount: Int = lottoGameView.getPurchaseAmount()
         val purchasedLottoTickets: PurchasedLottoTicketsDto = lottoGameService.issueLottoTickets(purchaseAmount)
         lottoGameView.displayPurchasedLottoTickets(purchaseAmount, purchasedLottoTickets)
+
+        val purchasedLottoNumbers: PurchasedLottoNumbersDto = lottoGameView.getPurchasedLottoNumbers()
     }
 }

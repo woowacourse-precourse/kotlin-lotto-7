@@ -1,9 +1,13 @@
 package lotto.view
 
 import camp.nextstep.edu.missionutils.Console
+import lotto.controller.dto.PurchasedLottoNumbersDto
 import lotto.controller.dto.PurchasedLottoTicketsDto
 
 const val LOTTO_PRICE = 1000
+const val WINNING_NUMBERS_SIZE = 6
+const val LOTTO_NUMBER_MIN_VALUE = 1
+const val LOTTO_NUMBER_MAX_VALUE = 45
 
 class LottoGameView {
     fun getPurchaseAmount(): Int {
@@ -25,6 +29,33 @@ class LottoGameView {
                 )
             )
             purchasedLottoTickets.lottoTickets.forEach { ticket -> println(ticket) }
+        }
+    }
+
+    fun getPurchasedLottoNumbers(): PurchasedLottoNumbersDto {
+        val winningNumbers = getWinningNumbers()
+        val bonusNumber = getBonusNumber(winningNumbers)
+
+        return PurchasedLottoNumbersDto(winningNumbers, bonusNumber)
+    }
+
+    private fun getWinningNumbers(): List<Int> {
+        println(LottoGameViewMessage.PROMPT_WINNING_NUMBERS.getMessage())
+        return readInput { input ->
+            validateWinningNumbersInput(input)
+            val numbers = input.split(",").map { it.trim().toInt() }
+            validateWinningNumbers(numbers)
+            numbers
+        }
+    }
+
+    private fun getBonusNumber(winningNumbers: List<Int>): Int {
+        println(LottoGameViewMessage.PROMPT_BONUS_NUMBER.getMessage())
+        return readInput { input ->
+            validateEmptyInput(input)
+            val number = input.toInt()
+            validateBonusNumber(number, winningNumbers)
+            number
         }
     }
 
@@ -55,6 +86,39 @@ class LottoGameView {
     private fun validatePurchaseAmount(amount: Int) {
         require(amount % LOTTO_PRICE == 0) {
             throw IllegalArgumentException(LottoGameViewMessage.ERROR_PURCHASE_AMOUNT_UNIT.getErrorMessage())
+        }
+    }
+
+    private fun validateWinningNumbersInput(input: String) {
+        validateEmptyInput(input)
+
+        require(!input.any { !it.isDigit() && it != ',' && !it.isWhitespace() }) {
+            throw IllegalArgumentException(LottoGameViewMessage.ERROR_INVALID_CHARACTERS.getErrorMessage())
+        }
+
+        require(!input.endsWith(",") && !input.endsWith(" ")) {
+            throw IllegalArgumentException(LottoGameViewMessage.ERROR_TRAILING_COMMA.getErrorMessage())
+        }
+    }
+
+    private fun validateWinningNumbers(numbers: List<Int>) {
+        require(numbers.size == WINNING_NUMBERS_SIZE) {
+            throw IllegalArgumentException(LottoGameViewMessage.ERROR_WINNING_NUMBERS_SIZE.getErrorMessage())
+        }
+        require(numbers.all { it in LOTTO_NUMBER_MIN_VALUE..LOTTO_NUMBER_MAX_VALUE }) {
+            throw IllegalArgumentException(LottoGameViewMessage.ERROR_WINNING_NUMBERS_RANGE.getErrorMessage())
+        }
+        require(numbers.distinct().size == numbers.size) {
+            throw IllegalArgumentException(LottoGameViewMessage.ERROR_DUPLICATED_WINNING_NUMBERS.getErrorMessage())
+        }
+    }
+
+    private fun validateBonusNumber(bonusNumber: Int, winningNumbers: List<Int>) {
+        require(bonusNumber in LOTTO_NUMBER_MIN_VALUE..LOTTO_NUMBER_MAX_VALUE) {
+            throw IllegalArgumentException(LottoGameViewMessage.ERROR_BONUS_NUMBER_RANGE.getErrorMessage())
+        }
+        require(bonusNumber !in winningNumbers) {
+            throw IllegalArgumentException(LottoGameViewMessage.ERROR_DUPLICATED_LOTTO_NUMBER.getErrorMessage())
         }
     }
 
