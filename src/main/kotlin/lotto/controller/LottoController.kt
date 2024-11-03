@@ -22,5 +22,6 @@ class LottoController {
         val bonusNumber = inputView.readBonusNumber()
 
         lottos.forEach { it.countMatches(winningNumbers) }
+        lottos.forEach { it.hasBonus(bonusNumber) }
     }
 }

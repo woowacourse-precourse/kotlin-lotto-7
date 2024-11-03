@@ -12,6 +12,10 @@ class Lotto(private val numbers: List<Int>) {
         return numbers.intersect(winningNumbers).size
     }
 
+    fun hasBonus(bonusNumber: Int): Boolean {
+        return bonusNumber in numbers
+    }
+
     override fun equals(other: Any?): Boolean {
         return other is Lotto && this.numbers == other.numbers
     }
