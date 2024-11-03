@@ -27,18 +27,22 @@ class Input {
     private fun inputMoney() {
         while (true) {
             try {
-                output.outPutMoney()
-                val input = input()
-                confirmNullOrBlank(input)
-                val money = confirmInteger(input)
-                confirmNegativeOrZero(money)
-                ticket = confirmDivider(money)
+                confirmMoney()
                 return
             } catch (e: CustomErrorHandler) {
                 output.output("\n" + e.message + "\n")
                 continue
             }
         }
+    }
+
+    private fun confirmMoney(){
+        output.outPutMoney()
+        val input = input()
+        confirmNullOrBlank(input)
+        val money = confirmInteger(input)
+        confirmNegativeOrZero(money)
+        ticket = confirmDivider(money)
     }
 
     // 숫자가 아닌 경우
@@ -101,32 +105,31 @@ class Input {
     private fun correctLottoNumber() {
         while (true) {
             try {
-                output.printLotto(LottoType.LOTTO)
-                val resultLotto = input()
-                correctLotto = resultLotto.split(",")
-                confirmLottoCount(correctLotto)
-                correctLotto.forEach { lottoCheck(it) }
-                correctIntLotto = correctLotto.map { it.toInt() }
-                checkLottoDuplicate(correctIntLotto)  // 중복 체크 추가
-                lotto = Lotto(correctIntLotto)
+                confirmLotto()
                 break
             } catch (e: CustomErrorHandler) {
                 output.output("\n" + e.message)
                 continue
             }
         }
+    }
+
+    private fun confirmLotto(){
+        output.printLotto(LottoType.LOTTO)
+        val resultLotto = input()
+        correctLotto = resultLotto.split(",")
+        confirmLottoCount(correctLotto)
+        correctLotto.forEach { lottoCheck(it) }
+        correctIntLotto = correctLotto.map { it.toInt() }
+        checkLottoDuplicate(correctIntLotto)  // 중복 체크 추가
+        lotto = Lotto(correctIntLotto)
     }
 
     //보너스 넘버 검증 함수
     private fun inputBonusNumber() {
         while (true) {
             try {
-                output.printLotto(LottoType.BONUS)
-                val bonusNumber = input()
-                lottoCheck(bonusNumber)
-                val bonusInt = bonusNumber.toInt()
-                checkBonusDuplicate(bonusInt)
-                lotto.compareLotto(lottos, bonusInt)
+                confirmBonus()
                 break
             } catch (e: CustomErrorHandler) {
                 output.output("\n" + e.message)
@@ -135,7 +138,17 @@ class Input {
         }
     }
 
-    //1-45 체크
+    private fun confirmBonus(){
+        output.printLotto(LottoType.BONUS)
+        val bonusNumber = input()
+        lottoCheck(bonusNumber)
+        val bonusInt = bonusNumber.toInt()
+        checkBonusDuplicate(bonusInt)
+        lotto.compareLotto(lottos, bonusInt)
+    }
+
+
+        //1-45 체크
     private fun middleNumberCheck(inputNumber: Int) {
         if (inputNumber !in 1..45) {
             throw CustomErrorHandler("[ERROR] 로또 번호는 1이상 45이하의 정수여야 합니다.", CustomException.BOUNDARY)
