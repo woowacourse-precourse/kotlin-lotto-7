@@ -11,4 +11,10 @@ class View {
 
         return Payment(input)
     }
+
+    fun inputWinningNumber(): WinningNumber {
+        broadcast.printWinningNumberMessage()
+        val input = Console.readLine()
+        return WinningNumber(input)
+    }
 }
