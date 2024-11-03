@@ -20,4 +20,25 @@ class LottoTest {
     }
 
     // TODO: 추가 기능 구현에 따른 테스트 코드 작성
+
+    @Test
+    fun `숫자 개수가 안 맞으면 오류가 발생한다`() {
+        assertThrows<IllegalArgumentException> {
+            Lotto(listOf(1, 2, 3, 4, 5))
+        }
+    }
+
+    @Test
+    fun `보너스 숫자가 중복이거나 올바르지 않으면 예외가 발생한다`() {
+        assertThrows<IllegalArgumentException> {
+            Lotto(listOf(1, 2, 3, 4, 5, 6)).checkBonusNum(5)
+        }
+    }
+
+    @Test
+    fun `범위를 벗어난 숫자가 있으면 예외가 발생한다`() {
+        assertThrows<IllegalArgumentException> {
+            Lotto(listOf(1, 2, 3, 4, 5, 95))
+        }
+    }
 }
