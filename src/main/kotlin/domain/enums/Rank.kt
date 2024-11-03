@@ -1,8 +1,12 @@
 package domain.enums
 
+import domain.enums.Output.Companion.matchCountFormat
+import domain.enums.Output.Companion.matchingNumberFormat
+import domain.util.convertWithDigitComma
+
 enum class Rank(
-    private val reword: Int,
-    private val matchingCount: Int,
+    private val reward: Int,
+    private val matchCount: Int,
 ) {
     FIRST(2000000000, 6),
     SECOND(30000000, 5),
@@ -12,8 +16,8 @@ enum class Rank(
     NONE(0, 0);
 
     companion object {
-        fun getRank(matchingCount: Int, bonusMatched: Boolean): Rank {
-            return when (matchingCount) {
+        fun getRank(matchCount: Int, bonusMatched: Boolean): Rank {
+            return when (matchCount) {
                 6 -> FIRST
                 5 -> getRankByBonusMatched(bonusMatched)
                 4 -> FOURTH
@@ -28,6 +32,19 @@ enum class Rank(
         }
     }
 
-    fun getReword(): Int = reword
-    fun getMatchingCount(): Int = matchingCount
+    fun getFormattedRankResult(winningCount: Int): String {
+        val matchCount = this.matchCount
+        val reward = this.reward.convertWithDigitComma()
+
+        val matchCountFormat = matchCountFormat(matchCount)
+        val matchingNumberFormat = matchingNumberFormat(reward, winningCount)
+
+        if (this == SECOND) {
+            return "$matchCountFormat${Output.BONUS_MATCH_COUNT} $matchingNumberFormat"
+        }
+
+        return "$matchCountFormat $matchingNumberFormat"
+    }
+
+    fun getReword(): Int = reward
 }
