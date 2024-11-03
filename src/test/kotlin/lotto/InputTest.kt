@@ -11,6 +11,7 @@ import lotto.util.InputValidator.validateMoneyIsNotNegative
 import lotto.util.InputValidator.validateMoneyIsEnough
 import lotto.util.InputValidator.validateMoneyIsDivisible
 import lotto.util.InputValidator.validateWinningNumbersCount
+import lotto.util.InputValidator.validateWinningNumbersDistinctness
 
 class InputTest {
     @ParameterizedTest
@@ -46,5 +47,11 @@ class InputTest {
     fun `당첨 번호가 6개가 아닐 경우 예외가 발생한다`(input: String) {
         val numbers = parseWinningNumbers(input)
         assertThrows<IllegalArgumentException> { validateWinningNumbersCount(numbers) }
+    }
+
+    @Test
+    fun `당첨 번호 중 중복되는 것이 있을 경우 예외가 발생한다`() {
+        val numbers = parseWinningNumbers("1,1,1,1,1,1")
+        assertThrows<IllegalArgumentException> { validateWinningNumbersDistinctness(numbers) }
     }
 }
