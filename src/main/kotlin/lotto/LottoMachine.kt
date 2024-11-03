@@ -6,7 +6,7 @@ import kotlin.properties.Delegates
 class LottoMachine {
     var payment by Delegates.notNull<Int>()
     var purchasedLotto = PurchasedLotto()
-    val ioHandler = IOHandler()
+    private val ioHandler = IOHandler()
 
     init {
         val input = ioHandler.inputToUser(PAYMENRFIRSTINSTRUCTION)

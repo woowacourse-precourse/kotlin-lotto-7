@@ -1,11 +1,29 @@
 package lotto
 
-import kotlin.properties.Delegates
-
 class Lotto(private val numbers: List<Int>) {
-    init {
-        require(numbers.size == 6) { "[ERROR] 로또 번호는 6개여야 합니다." }
+    fun checkRank(winningNumbers: WinningNumbers, bonusNumber: BonusNumber): Int {
+        val countedSameNumber = checkNumbers(winningNumbers, bonusNumber)
+
+        if (countedSameNumber["sameWithWinningNumbers"] == 5 && countedSameNumber["sameWithBonusNumber"] == 1) {
+            return 2
+        }
+        return when(countedSameNumber["sameWithWinningNumbers"]) {
+            6 -> 1
+            5 -> 3
+            4 -> 4
+            3 -> 5
+            else -> 0
+        }
     }
 
-    // TODO: 추가 기능 구현
+    fun checkNumbers(winningNumbers: WinningNumbers, bonusNumber: BonusNumber): Map<String, Int>  {
+        val countedSameNumber = mutableMapOf("sameWithWinningNumbers" to 0, "sameWithBonusNumber" to 0)
+        val countWinningNumber = numbers.filter { winningNumbers.winningNumbers.contains(it) }
+
+        countedSameNumber["sameWithWinningNumbers"] = countWinningNumber.size
+        if (numbers.contains(bonusNumber.bonusNumber)) {
+            countedSameNumber["sameWithBonusNumber"] = 1
+        }
+        return countedSameNumber
+    }
 }

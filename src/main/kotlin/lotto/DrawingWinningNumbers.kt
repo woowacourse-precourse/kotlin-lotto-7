@@ -34,8 +34,8 @@ class DrawingWinningNumbers {
     }
 
     companion object {
-        const val WINNINGNUMBERINSTRUCTION = "당첨 번호를 입력해 주세요."
-        const val BONUSNUMBERINSTRUCTION = "보너스 번호를 입력해 주세요."
+        const val WINNINGNUMBERINSTRUCTION = "\n당첨 번호를 입력해 주세요."
+        const val BONUSNUMBERINSTRUCTION = "\n보너스 번호를 입력해 주세요."
         const val EXCEPTIONOFNOTDIGIT = "[ERROR] 숫자가 아닌 당첨 번호가 존재합니다."
     }
 }
