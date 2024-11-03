@@ -3,18 +3,16 @@ package lotto
 import camp.nextstep.edu.missionutils.Console
 
 class LottoInput {
-    fun retryPurchaseAmount(): Int = retry { purchaseAmount() }
+    fun retryPurchaseAmount(): Int = retry(::purchaseAmount)
     private fun purchaseAmount(): Int {
         println("구입금액을 입력해 주세요.")
         val input = Console.readLine()
-        require(
-            (input.toIntOrNull()
-                ?: 0).let { it > 0 && it % Lotto.PRICE == 0 }) { "[ERROR] 로또 구입 금액은 ${Lotto.PRICE}의 배수여야 합니다." }
+        require((input.toIntOrNull()?: 0).let { it > 0 && it % Lotto.PRICE == 0 }) { "[ERROR] 로또 구입 금액은 ${Lotto.PRICE}의 배수여야 합니다." }
         println()
         return input.toInt()
     }
 
-    fun retryNumbers(): List<Int> = retry { numbers() }
+    fun retryNumbers(): List<Int> = retry(::numbers)
 
     private fun numbers(): List<Int> {
         println("당첨 번호를 입력해 주세요.")
@@ -26,7 +24,7 @@ class LottoInput {
         return input.map(String::toInt)
     }
 
-    fun retryBonusNumber(): Int = retry { bonusNumber() }
+    fun retryBonusNumber(): Int = retry(::bonusNumber)
     private fun bonusNumber(): Int {
         println("보너스 번호를 입력해 주세요.")
         val input = Console.readLine()
