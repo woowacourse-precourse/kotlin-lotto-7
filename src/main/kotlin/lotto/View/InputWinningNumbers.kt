@@ -30,4 +30,5 @@ private fun readNumbers(): List<Int> {
 private fun validateNumbers(numbers: List<Int>) {
     require(numbers.size == 6) { "[ERROR] 당첨 번호는 6개여야 합니다." }
     require(numbers.all { num -> num in 1..45 }) { "[ERROR] 번호는 1에서 45 사이 정수여야 합니다." }
+    require(numbers.distinct().size == numbers.size) { "[ERROR] 숫자는 중복될 수 없습니다." }
 }
