@@ -1,6 +1,7 @@
 package lotto.view
 
 import camp.nextstep.edu.missionutils.Console
+import lotto.controller.dto.PurchasedLottoTicketsDto
 
 const val LOTTO_PRICE = 1000
 
@@ -12,6 +13,18 @@ class LottoGameView {
             val amount = input.toInt()
             validatePurchaseAmount(amount)
             amount
+        }
+    }
+
+    fun displayPurchasedLottoTickets(purchaseAmount: Int, purchasedLottoTickets: PurchasedLottoTicketsDto) {
+        printWithBlankLines {
+            println(
+                String.format(
+                    LottoGameViewMessage.PRINT_PURCHASE_AMOUNT.getMessage(),
+                    purchaseAmount / LOTTO_PRICE
+                )
+            )
+            purchasedLottoTickets.lottoTickets.forEach { ticket -> println(ticket) }
         }
     }
 
@@ -43,5 +56,11 @@ class LottoGameView {
         require(amount % LOTTO_PRICE == 0) {
             throw IllegalArgumentException(LottoGameViewMessage.ERROR_PURCHASE_AMOUNT_UNIT.getErrorMessage())
         }
+    }
+
+    private fun printWithBlankLines(action: () -> Unit) {
+        println()
+        action()
+        println()
     }
 }

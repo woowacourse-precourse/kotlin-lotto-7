@@ -11,5 +11,6 @@ class LottoGameController(
     fun start() {
         val purchaseAmount: Int = lottoGameView.getPurchaseAmount()
         val purchasedLottoTickets: PurchasedLottoTicketsDto = lottoGameService.issueLottoTickets(purchaseAmount)
+        lottoGameView.displayPurchasedLottoTickets(purchaseAmount, purchasedLottoTickets)
     }
 }
