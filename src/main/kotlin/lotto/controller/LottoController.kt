@@ -10,6 +10,7 @@ import lotto.view.InputView.getBonusNumberInput
 import lotto.view.OutputView.printLottoCount
 import lotto.view.OutputView.printLottoNumber
 import lotto.view.OutputView.printWinningResult
+import lotto.view.OutputView.printYieldRate
 
 
 class LottoController {
@@ -27,6 +28,7 @@ class LottoController {
 
         val winningResult = getWinningResult(lottos, winningLotto)
         printWinningResult(winningResult)
+        printYieldRate(purchaseMoney, winningResult)
     }
 
     private fun getPurchaseMoney(): PurchaseMoney {
@@ -62,4 +64,5 @@ class LottoController {
         val lottoRanks = lottos.map { winningLotto.getRank(it) }
         return WinningResult.convertToResult(lottoRanks)
     }
+
 }
