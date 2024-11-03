@@ -17,7 +17,7 @@ class BonusTest {
     @ParameterizedTest
     @MethodSource("emptySource")
     fun numberIsEmpty(winning: Winning, input: String, message: String) {
-        val result = assertThrows<IllegalArgumentException> { Bonus(input, winning) }
+        val result = assertThrows<IllegalArgumentException> { Bonus(input, winning.numbers) }
         assertEquals(result.message, message)
     }
 
@@ -25,7 +25,7 @@ class BonusTest {
     @ParameterizedTest
     @MethodSource("notNumberSource")
     fun isNotNumber(winning: Winning, input: String, message: String) {
-        val result = assertThrows<IllegalArgumentException> { Bonus(input, winning) }
+        val result = assertThrows<IllegalArgumentException> { Bonus(input, winning.numbers) }
         assertEquals(result.message, message)
     }
 
@@ -33,7 +33,7 @@ class BonusTest {
     @ParameterizedTest
     @MethodSource("startZeroSource")
     fun numberStartIsZero(winning: Winning, input: String, message: String) {
-        val result = assertThrows<IllegalArgumentException> { Bonus(input, winning) }
+        val result = assertThrows<IllegalArgumentException> { Bonus(input, winning.numbers) }
         assertEquals(result.message, message)
     }
 
@@ -41,7 +41,7 @@ class BonusTest {
     @ParameterizedTest
     @MethodSource("winningDuplicationSource")
     fun numberInWinningNumber(winning: Winning, input: String, message: String) {
-        val result = assertThrows<IllegalArgumentException> { Bonus(input, winning) }
+        val result = assertThrows<IllegalArgumentException> { Bonus(input, winning.numbers) }
         assertEquals(result.message, message)
     }
 
@@ -49,7 +49,7 @@ class BonusTest {
     @ParameterizedTest
     @MethodSource("outOfRangeSource")
     fun numberOutOfRange(winning: Winning, input: String, message: String) {
-        val result = assertThrows<IllegalArgumentException> { Bonus(input, winning) }
+        val result = assertThrows<IllegalArgumentException> { Bonus(input, winning.numbers) }
         assertEquals(result.message, message)
     }
 

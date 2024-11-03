@@ -2,7 +2,7 @@ package lotto.data
 
 class Bonus(
     private val input: String,
-    private val winning: Winning
+    private val winningNumbers: List<Int>
 ) {
     val number: Int
 
@@ -13,7 +13,7 @@ class Bonus(
         require(input.toIntOrNull() != null) { NUMBER_IS_OUT_OF_RANGE_ERROR_MESSAGE }
         number = input.toInt()
         require(number in BONUS_MIN_NUMBER..BONUS_MAX_NUMBER) { NUMBER_IS_OUT_OF_RANGE_ERROR_MESSAGE }
-        require(!winning.numbers.contains(number)) { BONUS_NUMBER_IN_WINNING_NUMBER_ERROR_MESSAGE }
+        require(!winningNumbers.contains(number)) { BONUS_NUMBER_IN_WINNING_NUMBER_ERROR_MESSAGE }
     }
 
     companion object {

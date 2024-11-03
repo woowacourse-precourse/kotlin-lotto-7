@@ -52,7 +52,7 @@ class LottoMachine(
     private fun buildBonus(winning: Winning): Bonus {
         return try {
             outputView.printNewLine()
-            Bonus(inputView.readBonusNumber(), winning)
+            Bonus(inputView.readBonusNumber(), winning.numbers)
         } catch (e: IllegalArgumentException) {
             printErrorCauseMessage(e.message)
             buildBonus(winning)
