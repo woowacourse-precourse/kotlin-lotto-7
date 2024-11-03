@@ -2,8 +2,7 @@ package lotto
 
 class LottoOutput {
     fun printTicketCount(ticketCount: Int) {
-        println()
-        println("$ticketCount $TICKET_COUNT_MESSAGE" )
+        println("\n$ticketCount $TICKET_COUNT_MESSAGE" )
     }
 
     fun printLottoTickets(lottoTickets: List<Lotto>) {
