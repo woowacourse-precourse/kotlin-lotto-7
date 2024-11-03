@@ -1,11 +1,23 @@
 package lotto.view
 
 import lotto.util.Constants
+import lotto.util.Prize
+import java.text.DecimalFormat
 import kotlin.math.round
 
 class Output {
-    fun printWinningDetails() {
-
+    fun printWinningDetails(winningDetails:List<Int>) {
+        println(Constants.WINNING_DETAIL)
+        println(Constants.DASH)
+        val prize = Prize.entries
+        val dec = DecimalFormat("#,###")
+        for ((index,count) in winningDetails.reversed().withIndex()){
+            val foundPrize = prize.find { it.rank == index+1 }!!
+            when (foundPrize.bonus){
+                true -> println("${foundPrize.hit}개 일치, 보너스 볼 일치 (${dec.format(foundPrize.prize)}원) - ${count}개")
+                false -> println("${foundPrize.hit}개 일치 (${dec.format(foundPrize.prize)}원) - ${count}개")
+            }
+        }
     }
 
     fun printReturnRate(rate: Double) {
