@@ -46,7 +46,7 @@
 
 - [x] 입력 기능
 - [x] 로또 랜덤 구입 기능
-- [ ] 당첨 여부 확인 기능
+- [x] 당첨 여부 확인 기능
 - [ ] 당첨 통계 기능
 - [ ] 출력 기능
 - [ ] 예외 처리
@@ -196,3 +196,53 @@ object PrintResult {
 ```
 - 결과를 출력하는 싱글톤 객체
 - 구입한 로또 개수, 생성된 로또 번호 등을 출력
+
+### 당첨 여부 확인 기능
+
+#### LottoRank
+
+```kotlin
+enum class LottoRank(val priceONE:String,val price:Int,val matchCount:Int,val bonusMatch:Boolean) {
+    ONE("2,000,000,000원",2000000000,6,false),
+    TWO("30,000,000원",30000000,5,true),
+    THREE("1,500,000원",1500000,5,false),
+    FOUR("50,000원",50000,4,false),
+    FIVE("5,000원",5000,3,false),
+    LOSE("0원",0,0,false)
+}
+```
+- 로또의 순위를 나타내는 enum 클래스
+- 해당 순위에 맞는 당첨금액, 맞춘 숫자 개수를 포함
+
+#### Lotto
+
+```kotlin
+class Lotto(private val numbers: List<Int>) {
+    init {
+        require(numbers.size == 6) { "[ERROR] 로또 번호는 6개여야 합니다." }
+    }
+
+    fun getMatchCount(): MutableList<Int> {
+        val winningNumber = LottoSystem.getWinningNumber()
+        val bonusNumber = LottoSystem.getBonusNumber()
+        val matchCountAndBonus = mutableListOf<Int>()
+        var count = 0
+
+        numbers.forEach {
+            if(winningNumber.contains(it))count++
+        }
+        matchCountAndBonus.add(count)
+
+        if(numbers.contains(bonusNumber)){
+            matchCountAndBonus.add(1)
+        }else{
+            matchCountAndBonus.add(0)
+        }
+        return matchCountAndBonus
+    }
+    
+}
+```
+- 매개 변수로 로또 번호 6개를 입력 받음
+- `LottoSystem` 객체로부터 당첨 번호와 보너스 번호를 받음
+- `getMatchCount()` 함수에서 매개변수로 전달받은 로또 번호와 당첨 번호를 대조후 맞는 숫자의 개수와 보너스 번호 일치 여부를 포함하는 리스트를 리턴
