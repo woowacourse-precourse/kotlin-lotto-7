@@ -1,6 +1,5 @@
-package lotto
+package lotto.util
 
-import lotto.util.InputValidator
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 
