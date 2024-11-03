@@ -14,6 +14,10 @@ class Payment(private val payment: String) {
 
     private fun isNumber() = payment.toIntOrNull() != null
 
+    fun getPayment(): String {
+        return payment
+    }
+
     companion object {
         const val NEGATIVE_AND_ZERO = 0
         const val LOTTO_CHANGE = 0
