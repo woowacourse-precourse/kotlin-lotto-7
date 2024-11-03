@@ -16,6 +16,10 @@ class Lotto(private val numbers: List<Int>) {
 
     private fun isSorted() = numbers == numbers.sorted()
 
+    fun getLottoNumbers(): List<Int> {
+        return numbers
+    }
+
     companion object {
         const val LOTTO_SIZE = 6
         const val MIN_NUM = 1

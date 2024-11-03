@@ -1,12 +1,19 @@
 package lotto
 
 class Broadcast {
-    fun printLottoQuantity(count: Int) {
-        println("\n$count$PURCHASE_LOTTO_COUNT_MESSAGE")
-    }
-
     fun printInputPaymentMassage() {
         println(PURCHASE_PAYMENT_MESSAGE)
+    }
+
+    fun printLottoNumbers(purchaseLotto: List<Lotto>) {
+        printLottoQuantity(purchaseLotto.size)
+        purchaseLotto.forEach {
+            println(it.getLottoNumbers())
+        }
+    }
+
+    private fun printLottoQuantity(count: Int) {
+        println("\n$count$PURCHASE_LOTTO_COUNT_MESSAGE")
     }
 
     companion object {
