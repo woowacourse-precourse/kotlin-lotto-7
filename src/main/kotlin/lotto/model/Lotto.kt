@@ -18,6 +18,8 @@ class Lotto(private val numbers: List<Int>) {
         return "$numbers"
     }
 
+    fun getNumbers(): List<Int> = numbers
+
     fun getMatchCount(winLotto: Lotto): Int {
         var count = 0
         for (i in numbers) {

@@ -30,11 +30,27 @@ class LottoController {
         }
     }
 
-    fun setLotteryNumber() {
-        val winLotteryNumberList = inputView.printInputWinLotteryNumber()
-        winLotteryNumber = Lotto(winLotteryNumberList)
-        bonusLotteryNumber = inputView.printInputBonusLotteryNumber(winLotteryNumberList)
+    fun setWinLotteryNumber() {
+        try {
+            val winLotteryNumberList = inputView.printInputWinLotteryNumber()
+            winLotteryNumber = Lotto(winLotteryNumberList)
+        } catch (e: IllegalArgumentException) {
+            e.printStackTrace()
+            println(e.message)
+            println()
+            setWinLotteryNumber()
+        }
+    }
 
+    fun setBonusLotteryNumber() {
+        try {
+            bonusLotteryNumber = inputView.printInputBonusLotteryNumber(winLotteryNumber!!.getNumbers())
+        } catch (e: IllegalArgumentException) {
+            e.printStackTrace()
+            println(e.message)
+            println()
+            setBonusLotteryNumber()
+        }
     }
 
     fun resultLotto() {

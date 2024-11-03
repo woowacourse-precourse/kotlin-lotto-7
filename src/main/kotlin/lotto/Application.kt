@@ -8,7 +8,8 @@ fun main() {
     val lottoController = LottoController()
 
     lottoController.purchaseLotto()
-    lottoController.setLotteryNumber()
+    lottoController.setWinLotteryNumber()
+    lottoController.setBonusLotteryNumber()
     lottoController.resultLotto()
 
 }
