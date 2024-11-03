@@ -3,23 +3,22 @@ package lotto
 import camp.nextstep.edu.missionutils.Console
 
 class InputView {
-
     fun getPurchaseAmount(): String {
         informPurchaseAmount()
-        val purchaseAmount = getInput()
-        return purchaseAmount
+        val inputPurchaseAmount = getInput()
+        return inputPurchaseAmount
     }
 
-    fun getLuckNumbers(): String {
+    fun getWinningNumbers(): String {
         informLuckNumbers()
-        val luckNumbers = getInput()
-        return luckNumbers
+        val inputWinningNumbers = getInput()
+        return inputWinningNumbers
     }
 
     fun getBonusNumber(): String {
         informBonusNumber()
-        val bonusNumber = getInput()
-        return bonusNumber
+        val inputBonusNumber = getInput()
+        return inputBonusNumber
     }
 
     private fun getInput(): String {
