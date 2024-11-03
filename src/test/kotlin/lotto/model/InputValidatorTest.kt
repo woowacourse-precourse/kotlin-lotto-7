@@ -62,7 +62,7 @@ class InputValidatorTest {
 
         @Test
         fun `보너스 번호가 당첨 번호와 일치하면 오류가 발생한다`() {
-
+            assertThrows<IllegalArgumentException> {  }
         }
 
         @Test

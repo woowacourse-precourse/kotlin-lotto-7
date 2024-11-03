@@ -29,8 +29,8 @@ class LottoController {
         rankCounts.putAll(lotto.calculateLottoResults(purchaseLottoTickets, bonusNumber))
         outputView.showLottoResult(rankCounts)
 
-        // 수익률 출력
-        //outputView.showTotalReturnRate()
+        val totalReturnRate = lotto.calculateTotalReturnRate(rankCounts, purchaseAmount)
+        outputView.showTotalReturnRate(totalReturnRate)
     }
 
     private fun getVaildPurchaseAmount(): Int {

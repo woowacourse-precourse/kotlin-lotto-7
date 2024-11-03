@@ -14,11 +14,13 @@ class OutputView {
     fun showLottoResult(rankCounts: Map<LottoRank, Int>) {
         println(WINNING_STATISTICS)
         rankCounts.forEach { (rank, count) ->
-            if (rank != LottoRank.NONE) {
-                println("${rank.matchCount}개 일치 (${rank.reward}원) - ${count}개")
+            when {
+                rank == LottoRank.NONE -> return
+                rank != LottoRank.SECOND -> println("${rank.matchCount}개 일치 (${String.format("%,d", rank.reward)}원) - ${count}개")
+                rank == LottoRank.SECOND -> println("${rank.matchCount}개 일치, 보너스 볼 일치 (${String.format("%,d", rank.reward)}원) - ${count}개")
             }
         }
     }
 
-    fun showTotalReturnRate(totalReturnRate: Float) = println("총 수익률은 $totalReturnRate%입니다.")
+    fun showTotalReturnRate(totalReturnRate: Double) = println("\n총 수익률은 $totalReturnRate%입니다.")
 }

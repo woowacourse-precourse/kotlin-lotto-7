@@ -4,13 +4,9 @@ import camp.nextstep.edu.missionutils.Randoms
 import lotto.utils.Constants.MAX_NUMBER
 import lotto.utils.Constants.MIN_NUMBER
 import lotto.utils.Constants.LOTTO_NUMBER_COUNT
+import lotto.utils.Constants.ZERO
 import lotto.utils.ErrorConstants
 import javax.swing.UIManager.put
-
-/**
- * 모델은 컨트롤러나 뷰에 의존하면 안된다.
- * 컨트롤러나 뷰의 코드가 있으면 안된다
- */
 
 class Lotto(private val numbers: List<Int>) {
     init {
@@ -34,6 +30,15 @@ class Lotto(private val numbers: List<Int>) {
     }
 
 
-    //fun calculateTotalReturnRate() {}
+    fun calculateTotalReturnRate(rankCounts: Map<LottoRank, Int>, pruchaseAmount: Int): Double {
+        var totalReturnRate: Double = 0.0
 
+        rankCounts.forEach{ rank, count ->
+            totalReturnRate += (rank.reward * count)
+        }
+
+        val result = totalReturnRate / pruchaseAmount * 100
+
+        return String.format("%.2f", result).toDouble()
+    }
 }
