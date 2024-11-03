@@ -10,4 +10,6 @@ object OutputMessages {
     const val MONEY_OUTPUT_MESSAGE = "원) - "
     const val WINNING_COUNT_OUTPUT_MESSAGE = "개"
 
+    const val DECIMAL_PATTERN_OUTPUT_MESSAGE = "#,###"
+
 }

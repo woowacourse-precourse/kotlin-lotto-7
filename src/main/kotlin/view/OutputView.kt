@@ -6,9 +6,15 @@ import utils.OutputMessages.BONUS_BALL_MATCH_OUTPUT_MESSAGE
 import utils.OutputMessages.BUYING_OUTPUT_MESSAGE
 import utils.OutputMessages.COUNT_MATCH_OUTPUT_MESSAGE
 import utils.OutputMessages.DASH_OUTPUT_MESSAGE
+import utils.OutputMessages.DECIMAL_PATTERN
+import utils.OutputMessages.DECIMAL_PATTERN_OUTPUT_MESSAGE
+import utils.OutputMessages.EARNING_END_OUTPUT_MESSAGE
 import utils.OutputMessages.MONEY_OUTPUT_MESSAGE
+import utils.OutputMessages.TOTAL_RETURN
+import utils.OutputMessages.TOTAL_RETURN_OUTPUT_MESSAGE
 import utils.OutputMessages.WINNING_COUNT_OUTPUT_MESSAGE
 import utils.OutputMessages.WINNING_STATISTICS_OUTPUT_MESSAGE
+import java.text.DecimalFormat
 
 object OutputView {
     fun printLotto(count: Int, lottoes: List<Lotto>) {
@@ -24,7 +30,7 @@ object OutputView {
         Prize.entries.forEach {
             println(
                 it.matchCount.toString() + matchOutputMessage(it)
-                        + it.prize.toBigDecimal().toString() + MONEY_OUTPUT_MESSAGE +
+                        + it.prize.toDecimalString() + MONEY_OUTPUT_MESSAGE +
                         it.winningCount.toString() + WINNING_COUNT_OUTPUT_MESSAGE
             )
 
@@ -40,5 +46,11 @@ object OutputView {
 
         }
     }
+
+    private fun Int.toDecimalString(): String {
+        val decimalFormat = DecimalFormat(DECIMAL_PATTERN_OUTPUT_MESSAGE)
+        return decimalFormat.format(this)
+    }
+
 }
 
