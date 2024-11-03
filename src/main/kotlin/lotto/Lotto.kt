@@ -8,23 +8,7 @@ class Lotto(private val numbers: List<Int>) {
 
     fun checkRank(winnerNumbers: List<Int>, bonusNumber: Int): LottoRank {
         val winNumbersCount = countCommonNumbers(winnerNumbers, numbers)
-        if (winNumbersCount == 6) {
-            return LottoRank.FIRST
-        }
-        if (winNumbersCount == 5) {
-            if (numbers.contains(bonusNumber)) {
-                return LottoRank.SECOND
-            }
-            return LottoRank.THIRD
-        }
-        if (winNumbersCount == 4) {
-            return LottoRank.FOURTH
-        }
-        if (winNumbersCount == 3) {
-            return LottoRank.FIFTH
-        }
-
-        return LottoRank.LOSE
+        return LottoRank.getRank(winNumbersCount, numbers.contains(bonusNumber))
     }
 
     private fun countCommonNumbers(list1: List<Int>, list2: List<Int>): Int {
