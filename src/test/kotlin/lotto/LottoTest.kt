@@ -118,4 +118,21 @@ class LottoTest {
         assertEquals(60000, earningMoney)
 
     }
+
+    @Test
+    fun `총 수익률을 계산한다`(){
+        val lottoes = listOf(
+//            Lotto(listOf(1, 2, 3, 4, 5, 8)), // 3등
+            Lotto(listOf(1, 2, 3, 41, 45, 36)), // 5등
+            Lotto(listOf(1, 2, 3, 14, 35, 46)), // 5등
+            Lotto(listOf(1, 2, 3, 4, 15, 36)), // 4등
+        )
+
+        val winningLotto = WinningLotto(Lotto(listOf(1, 2, 3, 4, 5, 6)), 7)
+        LottoController().calculatePrize(lottoes, winningLotto)
+        val earningMoney = LottoController().calculateEarningMoney()
+        val earningRate = LottoController().getEarningRate(earningMoney, 3000)
+
+        assertEquals(2000.0, earningRate)
+    }
 }
