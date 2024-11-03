@@ -12,6 +12,7 @@ object OutputView {
     private const val WINNING_DETAIL_PRIZE_FORMAT = " (#,###원)"
     private const val WINNING_DETAIL_DIVIDER = " - "
     private const val WINNING_DETAIL_COUNT_FORMAT = "#,###개"
+    private const val WINNING_PROFIT_RATE_FORMAT = "총 수익률은 %s입니다."
 
     fun printErrorCauseMessage(message: String) = println(message)
 
@@ -39,5 +40,9 @@ object OutputView {
     fun printWinningCount(count: Int) {
         val decimalFormat = DecimalFormat(WINNING_DETAIL_COUNT_FORMAT)
         println(decimalFormat.format(count))
+    }
+
+    fun printProfitRate(profitRate: Double) {
+        print(WINNING_PROFIT_RATE_FORMAT.format(String.format("%,.1f%%", profitRate)))
     }
 }

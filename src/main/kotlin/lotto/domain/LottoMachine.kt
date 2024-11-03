@@ -17,6 +17,7 @@ class LottoMachine(
         val winningResult = WinningResult(client.lottoNumbers, winning.numbers, bonus.number)
         val sortWinningDetails = winningDetailsSort(winningResult.details)
         printWinningDetails(sortWinningDetails)
+        printProfitRate(winningResult.profitRate)
     }
 
     private fun buildClient(): Client {
@@ -81,6 +82,8 @@ class LottoMachine(
         val winningCount = detail.value
         outputView.printWinningCount(winningCount)
     }
+
+    private fun printProfitRate(profitRate: Double) = outputView.printProfitRate(profitRate)
 
     private fun printErrorCauseMessage(message: String?) {
         message?.let { outputView.printErrorCauseMessage(it) }
