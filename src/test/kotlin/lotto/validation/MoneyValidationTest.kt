@@ -17,7 +17,7 @@ class MoneyValidationTest {
     @Test
     fun `구입 금액은 양수이어야 한다`() {
         assertThrows<IllegalArgumentException> {
-            MoneyValidator.SHOULD_BE_NUMBER.validate("-1000")
+            MoneyValidator.SHOULD_BE_POSITIVE.validate("-1000")
         }
     }
 
