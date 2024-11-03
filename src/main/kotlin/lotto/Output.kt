@@ -61,11 +61,11 @@ class Output {
         }
 
     fun printRate(money: Int, ticket: Int) {
-        if (money <= 0) {
-            println("총 수익률은 ${-rateCalc(money,ticket)}% 입니다.")
+        if (money < 0) {
+            println("총 수익률은 ${-rateCalc(money, ticket)}% 입니다.")
             return
         }
-        println("총 수익률은 ${rateCalc(money,ticket)}% 입니다.")
+        println("총 수익률은 ${rateCalc(money, ticket)}% 입니다.")
     }
 
 
@@ -76,6 +76,7 @@ class Output {
         val roundedPercentage = Math.round(percentage * 100) / 100.0  // 소수 둘째 자리 반올림
         return roundedPercentage
     }
+
     fun converterCorrectType(correctCount: Int): CorrectType {
         return when (correctCount) {
             7 -> CorrectType.SIX
