@@ -12,7 +12,7 @@ class LottoGameTest {
     fun `buyTickets()가 지불한 금액에 따라 올바른 수의 티켓을 생성한다`() {
 
         val payment = 5000
-        val lottoGame = LottoGame(winningNumbers, bonusNumber)
+        val lottoGame = LottoGame()
         lottoGame.buyTickets(payment)
 
         // 5개의 티켓이 생성되는지 확인
@@ -21,7 +21,7 @@ class LottoGameTest {
 
     @Test
     fun `generateTicketRandomly()가 중복되지 않은 6개의 번호를 생성한다`() {
-        val lottoGame = LottoGame(winningNumbers, bonusNumber)
+        val lottoGame = LottoGame()
         lottoGame.buyTickets(1000)
         val numberList = lottoGame.ticketList.first().getNumbers()
 

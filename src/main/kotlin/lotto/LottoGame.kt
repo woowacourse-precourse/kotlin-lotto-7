@@ -1,14 +1,20 @@
 package lotto
 
 import camp.nextstep.edu.missionutils.Randoms
-import lotto.input.InputManager
 
 const val TICKET_COST = 1000
 
-class LottoGame(private val winningNumbers: List<Int>, private val bonusNumber: Int) {
+class LottoGame {
     var ticketList = mutableListOf<Lotto>()
         private set
 
+    private lateinit var winningNumbers: List<Int>
+    private var bonusNumber: Int = 0
+
+    fun initialize(winningNumbers: List<Int>, bonusNumber: Int) {
+        this.winningNumbers = winningNumbers
+        this.bonusNumber = bonusNumber
+    }
 
     fun buyTickets(payment: Int) {
         val ticketCount = payment / TICKET_COST
@@ -25,7 +31,7 @@ class LottoGame(private val winningNumbers: List<Int>, private val bonusNumber: 
     }
 
     fun printTicketList() {
-        println("${ticketList.size}개를 구매했습니다.")
+        println("\n${ticketList.size}개를 구매했습니다.")
         ticketList.forEach { println(it.getNumbers().toString()) }
     }
 
