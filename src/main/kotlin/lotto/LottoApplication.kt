@@ -1,6 +1,5 @@
 package lotto
 
-import lotto.model.LottoResultCalculator
 import lotto.presenter.InputPresenter
 import lotto.presenter.LottoPresenter
 import lotto.view.InputViewImpl
@@ -14,14 +13,11 @@ class LottoApplication {
         val inputPresenter = InputPresenter(inputView, outputView)
         val lottoPresenter = LottoPresenter(inputPresenter, outputView)
 
-        val lottoBundle =lottoPresenter.purchaseLotto()
+        val lottoBundle = lottoPresenter.purchaseLotto()
         val winningTicket = lottoPresenter.getWinningTicket()
 
-        val lottoResultCalculator = LottoResultCalculator(winningTicket)
-        val result = lottoResultCalculator.countMatchingNumber(lottoBundle)
-        val totalReward = lottoResultCalculator.calculateTotalReward()
-        val profitRate = lottoResultCalculator.calculateProfitRate(lottoBundle.size, totalReward)
+        val lottoResult = lottoPresenter.calculateLottoResult(lottoBundle, winningTicket)
 
-        lottoPresenter.displayResults(result, profitRate)
+        lottoPresenter.displayResults(lottoResult)
     }
 }
