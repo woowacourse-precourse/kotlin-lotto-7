@@ -9,9 +9,16 @@ fun main() {
     val bonusNum = inputBonusNumber(lottoNum)
 
     repeat(tickets) {
-        val generateLotto = Lotto.generateLotto()
-        println(generateLotto)
+        generateLotto(tickets)
     }
 
 }
 
+
+fun calculateTicket(money: Int): Int {
+    return money / 1000
+}
+
+fun generateLotto(ticketsCount : Int) : List<Lotto> {
+    return List(ticketsCount) { Lotto(Lotto.generateLotto()) }
+}

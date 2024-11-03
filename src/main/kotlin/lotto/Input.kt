@@ -29,10 +29,7 @@ fun validMoney(input: String) : Int  {
     return money
 }
 
-fun calculateTicket(money: Int) : Int {
-    val ticketCount = money / 1000
-    return ticketCount
-}
+
 
 fun inputLottoNumbers() : List<Int> {
     while (true) {

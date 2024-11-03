@@ -15,4 +15,13 @@ class Lotto(private val numbers: List<Int>) {
             return Randoms.pickUniqueNumbersInRange(1, 45, 6).sorted()
         }
     }
+
+    fun lottoMatches(winNumbers : List<Int>) : Int {
+        return numbers.count{ it in winNumbers}
+    }
+
+    fun isBonusMatches(bonusNum : Int) : Boolean {
+        return bonusNum in numbers
+    }
+
 }
