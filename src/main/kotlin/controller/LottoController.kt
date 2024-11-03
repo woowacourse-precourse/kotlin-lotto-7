@@ -31,6 +31,8 @@ class LottoController {
         val winningLotto = getWinningLotto()
         calculatePrize(lottoes, winningLotto)
 
+        OutputView.printWinningStatistics()
+
     }
 
     private fun getWinningLotto(): WinningLotto {
@@ -52,7 +54,7 @@ class LottoController {
         }
     }
 
-    private fun updatePrize(matchCount: Int, matchBonus: Boolean) {
+    fun updatePrize(matchCount: Int, matchBonus: Boolean) {
         when (matchCount) {
             6 -> Prize.FIRST.plusCount()
             5 -> {
