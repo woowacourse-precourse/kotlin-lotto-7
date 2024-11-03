@@ -2,6 +2,7 @@ package lotto.controller
 
 import lotto.model.LottoCalculator
 import lotto.model.LottoMachine
+import lotto.model.LottoResult
 import lotto.util.Validator
 import lotto.view.LottoInput
 import lotto.view.LottoOutput
@@ -11,6 +12,7 @@ class LottoController {
     private val lottoOutput = LottoOutput()
     private val lottoMachine = LottoMachine()
     private val validator = Validator()
+    private val lottoResult = LottoResult()
     private val lottoCalculator = LottoCalculator()
 
     fun startLotto() {
@@ -25,7 +27,7 @@ class LottoController {
         val winningNumbers = getValidatedWinningNumbers()
         val bonusNumber = getValidatedBonusNumber(winningNumbers)
 
-        val results = lottoCalculator.getLottoResults(lottoTickets, winningNumbers, bonusNumber)
+        val results = lottoResult.getRankedTickets(lottoTickets, winningNumbers, bonusNumber)
         lottoOutput.printResult(results)
 
         val profitRate = lottoCalculator.calculateProfitRate(results, purchasePrice)
