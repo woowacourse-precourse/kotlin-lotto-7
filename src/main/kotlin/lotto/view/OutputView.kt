@@ -1,4 +1,4 @@
-package lotto
+package lotto.view
 
 import lotto.domain.model.Lotto
 import lotto.domain.model.Prize
