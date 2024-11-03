@@ -2,9 +2,9 @@ package lotto.model
 
 class LottoGenerator {
     private val lottoes =  mutableListOf <Lotto>()
-    fun makeLotto(count :Int){
+    fun makeLotto(money :Int){
         val random = Random()
-        repeat(count){
+        repeat(money/1000){
             lottoes.add(Lotto(random.generate()))
         }
     }

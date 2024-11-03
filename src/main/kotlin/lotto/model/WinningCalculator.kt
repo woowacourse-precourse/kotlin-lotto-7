@@ -38,7 +38,7 @@ class WinningCalculator {
         return calculatePrize(winningDetails).toDouble() / money.toDouble() * 100
     }
 
-    fun calculatePrize(winningDetails: MutableList<Int>):Int{
+    private fun calculatePrize(winningDetails: MutableList<Int>):Int{
         var total = 0
         val prize = Prize.entries
         for ((index,count) in winningDetails.withIndex()){
