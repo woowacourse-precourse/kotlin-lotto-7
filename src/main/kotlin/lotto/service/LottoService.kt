@@ -29,8 +29,8 @@ class LottoService {
     }
 
     fun getProfitRate(originalMoney: Int, resultMoney: Int): String {
-        val profit = resultMoney.toDouble() / originalMoney.toDouble()
-        return String.format("%.2f", profit)
+        val profit = resultMoney.toDouble() / originalMoney.toDouble() * 100
+        return String.format("%.1f", profit)
     }
 
     private fun createRandomLotto() = Lotto(Randoms.pickUniqueNumbersInRange(1, 45, 6).sorted())
