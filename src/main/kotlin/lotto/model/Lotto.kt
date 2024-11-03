@@ -1,4 +1,6 @@
-package lotto
+package lotto.model
+
+import lotto.util.NumberValidation
 
 class Lotto(private val numbers: List<Int>) {
     init {

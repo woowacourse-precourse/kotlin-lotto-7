@@ -1,4 +1,4 @@
-package lotto
+package lotto.model
 
 data class LottoResult(val rankCounts: MutableMap<Rank, Int> = mutableMapOf()) {
     fun addResult(rank: Rank) {
