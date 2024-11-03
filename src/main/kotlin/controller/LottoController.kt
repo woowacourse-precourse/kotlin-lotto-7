@@ -63,10 +63,7 @@ class LottoController {
 
     fun updatePrize(matchCount: Int, matchBonus: Boolean) {
         when (matchCount) {
-            6 -> {
-                Prize.FIRST.plusCount()
-            }
-
+            6 -> Prize.FIRST.plusCount()
             5 -> {
                 if (matchBonus) {
                     Prize.SECOND.plusCount()
@@ -74,14 +71,8 @@ class LottoController {
                 }
                 Prize.THIRD.plusCount()
             }
-
-            4 -> {
-                Prize.FOURTH.plusCount()
-            }
-
-            3 -> {
-                Prize.FIFTH.plusCount()
-            }
+            4 -> Prize.FOURTH.plusCount()
+            3 -> Prize.FIFTH.plusCount()
         }
     }
 
