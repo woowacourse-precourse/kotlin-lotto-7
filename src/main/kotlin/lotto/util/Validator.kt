@@ -1,9 +1,18 @@
-package lotto
+package lotto.util
+
+import lotto.util.ErrorMessages.ERROR_BONUS_DUPLICATE
+import lotto.util.ErrorMessages.ERROR_INCORRECT_UNIT
+import lotto.util.ErrorMessages.ERROR_NOT_A_NUMBER
+import lotto.util.ErrorMessages.ERROR_NUMBER_RANGE
+import lotto.util.ErrorMessages.ERROR_UNVALIDATED_NUMBER
 
 class Validator {
     fun validatePurchasePrice(inputPrice: String): Int? {
         return runCatching {
-            val price = inputPrice.toInt()
+            val sanitizedInput = inputPrice.replace(",", "")
+            require(sanitizedInput.all { it.isDigit() }) { ERROR_NOT_A_NUMBER }
+
+            val price = sanitizedInput.toInt()
             require(price % 1000 == 0) { ERROR_INCORRECT_UNIT }
             price
         }.onFailure {
@@ -13,7 +22,9 @@ class Validator {
 
     fun validateWinningNumbers(inputNumbers: String): List<Int>? {
         return runCatching {
-            val numbers = inputNumbers.split(",").map { it.trim().toInt() }
+            val numbers = inputNumbers.split(",")
+                .map { it.trim().toInt() }
+
             NumberValidation.validate(numbers)
             numbers
         }.onFailure {
@@ -24,17 +35,11 @@ class Validator {
     fun validateBonusNumber(input: String, winningNumbers: List<Int>): Int? {
         return runCatching {
             val bonusNumber = input.trim().toInt()
-            require(NumberValidation.RANGE.isValid(listOf(bonusNumber))){NumberValidation.RANGE.errorMessage}
+            require(NumberValidation.RANGE.isValid(listOf(bonusNumber))) { ERROR_NUMBER_RANGE }
             require(bonusNumber !in winningNumbers) { ERROR_BONUS_DUPLICATE }
             bonusNumber
         }.onFailure {
             println(it.message ?: ERROR_UNVALIDATED_NUMBER)
         }.getOrNull()
-    }
-
-    companion object {
-        private const val ERROR_INCORRECT_UNIT = "[ERROR] 구입 금액은 1,000원 단위여야 합니다."
-        private const val ERROR_UNVALIDATED_NUMBER = "[ERROR] 숫자를 올바르게 입력해 주세요."
-        private const val ERROR_BONUS_DUPLICATE = "[ERROR] 보너스 번호는 당첨 번호와 중복될 수 없습니다."
     }
 }

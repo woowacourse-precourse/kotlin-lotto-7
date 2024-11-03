@@ -19,6 +19,7 @@ object OutputMessages {
 object ErrorMessages {
     const val ERROR_INCORRECT_UNIT = "[ERROR] 구입 금액은 1,000원 단위여야 합니다."
     const val ERROR_UNVALIDATED_NUMBER = "[ERROR] 숫자를 올바르게 입력해 주세요."
+    const val ERROR_NOT_A_NUMBER = "[ERROR] 입력 값은 숫자여야 합니다."
     const val ERROR_NUMBER_SIZE = "[ERROR] 입력된 숫자는 6개여야 합니다."
     const val ERROR_NUMBER_RANGE = "[ERROR] 입력된 숫자는 1부터 45 사이여야 합니다."
     const val ERROR_NUMBER_DUPLICATE = "[ERROR] 입력된 숫자는 중복되지 않아야 합니다."
