@@ -10,6 +10,7 @@ import lotto.util.InputParser.parseWinningNumbers
 import lotto.util.InputValidator.validateMoneyIsNotNegative
 import lotto.util.InputValidator.validateMoneyIsEnough
 import lotto.util.InputValidator.validateMoneyIsDivisible
+import lotto.util.InputValidator.validateWinningNumbersCount
 
 class InputTest {
     @ParameterizedTest
@@ -38,5 +39,12 @@ class InputTest {
     @Test
     fun `구매 금액이 로또의 가격으로 나누어 떨어지지 않을 경우 예외가 발생한다`() {
         assertThrows<IllegalArgumentException> { validateMoneyIsDivisible(1001) }
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = ["1,2,3,4,5", "1,2,3,4,5,6,7"])
+    fun `당첨 번호가 6개가 아닐 경우 예외가 발생한다`(input: String) {
+        val numbers = parseWinningNumbers(input)
+        assertThrows<IllegalArgumentException> { validateWinningNumbersCount(numbers) }
     }
 }
