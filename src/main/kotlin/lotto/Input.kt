@@ -70,7 +70,7 @@ class Input {
 
 
     //티켓이 1000원 단위로 나누어 떨어 지지 않는 경우
-    private fun confirmDivider(ticket: Int): Int {
+    fun confirmDivider(ticket: Int): Int {
         if (ticket % 1000 != 0) {
             throw CustomErrorHandler("[ERROR] 티켓은 1000원 단위로만 입력할 수 있습니다.", CustomException.DIVIDE)
         }
@@ -126,7 +126,7 @@ class Input {
     }
 
     //보너스 넘버 검증 함수
-    private fun inputBonusNumber() {
+    fun inputBonusNumber() {
         while (true) {
             try {
                 confirmBonus()
@@ -156,18 +156,18 @@ class Input {
     }
 
     //중복 체크
-    private fun checkLottoDuplicate(numbers: List<Int>) {
+    fun checkLottoDuplicate(numbers: List<Int>) {
         if (numbers.distinct().size != 6) {
             throw CustomErrorHandler("[ERROR] 로또 번호에 중복된 숫자가 있습니다.", CustomException.DUPLICATE)
         }
     }
-    private fun checkBonusDuplicate(numbers: Int) {
+    fun checkBonusDuplicate(numbers: Int) {
         if (correctIntLotto.contains(numbers)) {
             throw CustomErrorHandler("[ERROR] 로또 번호에 중복된 숫자가 있습니다.", CustomException.DUPLICATE)
         }
     }
 
-    private fun checkList() {
+    fun checkList() {
         output.outPutPostCorrectList(lotto.checkList)
     }
 

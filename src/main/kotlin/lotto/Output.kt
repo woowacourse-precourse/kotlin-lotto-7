@@ -69,7 +69,7 @@ class Output {
         }
     }
 
-    private fun rateCalc(money: Long, ticket: Int): Double {
+    fun rateCalc(money: Long, ticket: Int): Double {
         val dMoney = money.toDouble()
         val dTicket = ticket.toDouble()
         val percentage = (dMoney / dTicket) * 100
