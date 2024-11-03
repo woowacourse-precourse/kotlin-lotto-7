@@ -4,7 +4,7 @@ import lotto.util.Prize
 
 
 class WinningCalculator {
-    fun calculateDetails(winningLotto: Lotto, bonus: Int, lottoes: List<Lotto>): List<Int> {
+    fun calculateDetails(winningLotto: Lotto, bonus: Int, lottoes: List<Lotto>): MutableList<Int> {
         var winningDetails = mutableListOf(0, 0, 0, 0, 0)
         for (purchasedLotto in lottoes) {
             winningDetails = calculateDetail(purchasedLotto, winningLotto, bonus, winningDetails)
@@ -34,15 +34,15 @@ class WinningCalculator {
         return winningDetails
     }
 
-    fun calculateReturnRate(money:Int,winningDetails: MutableList<Int>) : Double {
+    fun calculateReturnRate(money: Int, winningDetails: MutableList<Int>): Double {
         return calculatePrize(winningDetails).toDouble() / money.toDouble() * 100
     }
 
-    private fun calculatePrize(winningDetails: MutableList<Int>):Int{
+    private fun calculatePrize(winningDetails: MutableList<Int>): Int {
         var total = 0
         val prize = Prize.entries
-        for ((index,count) in winningDetails.withIndex()){
-            total += prize.find { it.rank == index+1 }!!.prize * count
+        for ((index, count) in winningDetails.withIndex()) {
+            total += prize.find { it.rank == index + 1 }!!.prize * count
         }
         return total
     }

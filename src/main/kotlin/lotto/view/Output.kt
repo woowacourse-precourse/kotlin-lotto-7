@@ -21,8 +21,8 @@ object Output {
         }
     }
 
-    fun printWinningDetails(lottoes:List<Lotto>) {
-        for (lotto in lottoes) println(lotto.getNumbers())
+    fun printLottoDetails(lottoes:List<Lotto>) {
+        for (lotto in lottoes) println(lotto.getNumbers().sorted())
     }
 
     fun printReturnRate(rate: Double) {
