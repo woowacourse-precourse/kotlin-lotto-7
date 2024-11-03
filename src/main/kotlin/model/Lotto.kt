@@ -1,8 +1,15 @@
 package model
 
+import utils.validator.Validator
+import utils.validator.WinningNumbersValidator
+
 class Lotto(private val numbers: List<Int>) {
     init {
         require(numbers.size == 6) { "[ERROR] 로또 번호는 6개여야 합니다." }
+        WinningNumbersValidator.SHOULD_NOT_BE_DUPLICATE.validate(
+            numbers.map { it.toString() }.toList()
+        )
+
     }
 
     fun matchCount(winningLotto: WinningLotto): Int {
