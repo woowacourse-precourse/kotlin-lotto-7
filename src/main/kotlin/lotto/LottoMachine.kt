@@ -43,10 +43,31 @@ class LottoMachine(private val payment: String) {
         return rank
     }
 
+    fun getWinningMessage(rank: Map<Rank, Int>): Any {
+        val winningMessage = mutableListOf<String>()
+        val prize = Prize()
+        rank.forEach { (rank, count) ->
+            prize.countPrize(rank)
+        }
+        winningMessage.add(FIFTH_PRIZE_RESULT.format(prize.fifth))
+        winningMessage.add(FORTH_PRIZE_RESULT.format(prize.forth))
+        winningMessage.add(THIRD_PRIZE_RESULT.format(prize.third))
+        winningMessage.add(SECOND_PRIZE_RESULT.format(prize.second))
+        winningMessage.add(FIRST_PRIZE_RESULT.format(prize.first))
+
+        return winningMessage
+    }
+
     companion object {
         const val LOTTO_PRICE = 1000
         const val LOTTO_MIN_NUM = 1
         const val LOTTO_MAX_NUM = 45
         const val LOTTO_COUNT = 6
+
+        const val FIFTH_PRIZE_RESULT = "3개 일치 (5,000원) - %d개"
+        const val FORTH_PRIZE_RESULT = "4개 일치 (50,000원) - %d개"
+        const val THIRD_PRIZE_RESULT = "5개 일치 (1,500,000원) - %d개"
+        const val SECOND_PRIZE_RESULT = "5개 일치, 보너스 볼 일치 (30,000,000원) - %d개"
+        const val FIRST_PRIZE_RESULT = "6개 일치 (2,000,000,000원) - %d개"
     }
 }
