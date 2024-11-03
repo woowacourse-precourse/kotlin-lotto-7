@@ -6,19 +6,26 @@ import lotto.domain.entity.WinningLotto
 import lotto.domain.entity.increase
 
 class LottoService {
+    fun matchAllLotto(winLotto: Lotto, comparingLottos: List<Lotto>, bonusNumber: Int) {
+        comparingLottos.forEach {
+            val (matchAmount, hasBonus) = matchLotto(winLotto, it, bonusNumber)
+            winStatusUpdate(matchAmount, hasBonus)
+        }
+    }
+
+    fun purchaseLottos(money: Int): List<Lotto> {
+        val amount = money / LOTTO_PRICE
+        val lottos = mutableListOf<Lotto>()
+        repeat(amount) { lottos += createRandomLotto() }
+        return lottos
+    }
+
     private fun createRandomLotto() = Lotto(Randoms.pickUniqueNumbersInRange(1, 45, 6).sorted())
 
     private fun matchLotto(winLotto: Lotto, comparingLotto: Lotto, bonusNumber: Int): Pair<Int, Boolean> {
         val matchAmount = winLotto.nums.intersect(comparingLotto.nums.toSet()).size
         val hasBonus = comparingLotto.nums.contains(bonusNumber)
         return matchAmount to hasBonus
-    }
-
-    fun matchAllLotto(winLotto: Lotto, comparingLottos: List<Lotto>, bonusNumber: Int) {
-        comparingLottos.forEach {
-            val (matchAmount, hasBonus) = matchLotto(winLotto, it, bonusNumber)
-            winStatusUpdate(matchAmount, hasBonus)
-        }
     }
 
     private fun winStatusUpdate(matchAmount: Int, hasBonus: Boolean) {
@@ -32,13 +39,6 @@ class LottoService {
             5 -> WinningLotto.Five.increase()
             6 -> WinningLotto.Six.increase()
         }
-    }
-
-    fun purchaseLottos(money: Int): List<Lotto> {
-        val amount = money / LOTTO_PRICE
-        val lottos = mutableListOf<Lotto>()
-        repeat(amount) { lottos += createRandomLotto() }
-        return lottos
     }
 
     companion object {
