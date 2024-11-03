@@ -29,12 +29,12 @@ object InputManager {
         }
     }
 
-    fun requestBonusNumber(): Int {
+    fun requestBonusNumber(winningNumbers: List<Int>): Int {
         while (true) {
             try {
                 println("\n보너스 번호를 입력해 주세요.")
                 val input = getInput()
-                InputValidator.validateBonusNumberInput(input)
+                InputValidator.validateBonusNumberInput(input, winningNumbers)
                 return InputParser.parseBonusNumberInput(input)
             } catch (e: IllegalArgumentException) {
                 println(e.message)
@@ -42,8 +42,8 @@ object InputManager {
         }
     }
 
-    private fun getInput(inputProvider: (() -> String)? = null): String {
-        return inputProvider?.invoke() ?: readLine()
+    private fun getInput(): String {
+        return readLine()
     }
 
 }

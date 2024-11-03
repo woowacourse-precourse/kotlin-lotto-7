@@ -1,7 +1,6 @@
 package lotto
 
 import camp.nextstep.edu.missionutils.Randoms
-import lotto.input.InputValidator.checkIfBonusNumberDuplicated
 
 const val TICKET_COST = 1000
 
@@ -15,7 +14,6 @@ class LottoGame {
     fun initialize(winningNumbers: List<Int>, bonusNumber: Int) {
         this.winningNumbers = winningNumbers
         this.bonusNumber = bonusNumber
-        checkIfBonusNumberDuplicated(bonusNumber, winningNumbers)
     }
 
     fun buyTickets(payment: Int) {
