@@ -8,7 +8,7 @@ import utils.validator.Validator
 
 object InputView {
     fun getMoney(): Int {
-        var money = 0
+        var money: Int
         do {
             println(MONEY_INPUT_MESSAGE)
             val inputMoney = Console.readLine()
@@ -31,7 +31,7 @@ object InputView {
     }
 
     fun getBonusNumber(winningNumbers: List<Int>): Int {
-        var bonusNumber = 0
+        var bonusNumber: Int
         do {
             println(BONUS_NUMBER_INPUT_MESSAGE)
             val inputBonusNumber = Console.readLine()
