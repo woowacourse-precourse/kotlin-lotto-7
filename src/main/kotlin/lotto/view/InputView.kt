@@ -7,6 +7,7 @@ import lotto.util.InputValidator.validateMoneyIsNotNegative
 import lotto.util.InputValidator.validateMoneyIsEnough
 import lotto.util.InputValidator.validateMoneyIsDivisible
 import lotto.util.InputValidator.validateWinningNumbersCount
+import lotto.util.InputValidator.validateWinningNumbersDistinctness
 
 class InputView {
     fun readLottoMoney(): Int {
@@ -22,6 +23,7 @@ class InputView {
         println(PROMPT_WINNING_NUMBERS)
         val numbers = parseWinningNumbers(Console.readLine())
         validateWinningNumbersCount(numbers)
+        validateWinningNumbersDistinctness(numbers)
         return numbers
     }
 

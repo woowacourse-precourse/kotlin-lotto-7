@@ -16,4 +16,8 @@ object InputValidator {
     fun validateWinningNumbersCount(numbers: List<Int>) {
         if (numbers.size != Constant.LOTTO_NUMBER_COUNT) throw IllegalArgumentException(ErrorMessage.LOTTO_NUMBER_COUNT_MISMATCH)
     }
+
+    fun validateWinningNumbersDistinctness(numbers: List<Int>) {
+        if (numbers.size != numbers.toSet().size) throw IllegalArgumentException(ErrorMessage.LOTTO_NUMBERS_NOT_DISTINCT)
+    }
 }
