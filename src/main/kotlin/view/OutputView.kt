@@ -1,6 +1,6 @@
 package view
 
-import lotto.Lotto
+import model.Lotto
 import model.Prize
 import utils.OutputMessages.BONUS_BALL_MATCH_OUTPUT_MESSAGE
 import utils.OutputMessages.BUYING_OUTPUT_MESSAGE
