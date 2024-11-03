@@ -10,8 +10,14 @@ enum class LottoRank(val matchCount: Int, val reward: Int, val bonusNumber: Bool
 
     companion object {
         fun getRank(matchCount: Int, bonusNumber: Boolean): LottoRank {
-            return LottoRank.entries
-            .find { it.matchCount == matchCount || (it.matchCount == matchCount && it.bonusNumber == bonusNumber) } ?: NONE
+            return when {
+                matchCount == 6 -> FIRST
+                matchCount == 5 && bonusNumber -> SECOND
+                matchCount == 5 -> THIRD
+                matchCount == 4 -> FOURTH
+                matchCount == 3 -> FIFTH
+                else -> NONE
+            }
         }
     }
 }
