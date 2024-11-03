@@ -6,6 +6,8 @@ class BonusLotto(numbers: List<Int>, private val bonusNumber: Int) : Lotto(numbe
 
     init {
         require(bonusNumber in 1..45) { ErrorMessage.INPUT_1_TO_45.message }
-        require(bonusNumber !in numbers) { ErrorMessage.INPUT_DUPLICATION_Bouns.message }
+        require(bonusNumber !in numbers) { ErrorMessage.INPUT_DUPLICATION_BONUS.message }
     }
+
+    fun getBonusNumber(): Int = bonusNumber
 }
