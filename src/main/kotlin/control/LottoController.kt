@@ -1,54 +1,19 @@
 package control
 
-import lotto.*
-import view.Output
+import data.Bonus
+import data.Lotto
+import data.RandomLotto
 
 class LottoController {
-
-    private var amount = 0
-    private lateinit var winningNumber: List<Int>
-    private var bonusNumber = 0
-    private lateinit var randomLottoNumber: List<List<Int>>
-
     fun play() {
-        input(true)
-        control(true)
-        output(true)
-        input(false)
-        control(false)
-        output(false)
-    }
+        val randomLotto = RandomLotto(PurchaseAmountValidater().validate())
+        val winningNumber = Lotto(WinningNumberValidater().validate())
+        val bonusNumber = Bonus(BonusNumberValidater().validate(winningNumber))
 
-    private fun input(boolean: Boolean) {
-        if (boolean) {
-            amount = PurchaseAmountValidator().validate()
-        }
-        if (!boolean) {
-            winningNumber = WinningNumberValidator().validate()
-            bonusNumber = BonusNumberValidator().validate(this.winningNumber)
-        }
-    }
-
-    private fun control(boolean: Boolean) {
-        if (boolean) {
-            randomLottoNumber = RandomLottoGenerator().lottoPurchase(this.amount)
-        }
-        if (!boolean) {
-            LottoStatistic().confirmWinning(
-                this.randomLottoNumber,
-                this.winningNumber,
-                this.bonusNumber
-            )
-        }
-    }
-
-    private fun output(boolean: Boolean) {
-        if (boolean) {
-            Output().lottoPurchase(this.amount)
-            Output().randomLottoList(this.randomLottoNumber)
-        }
-        if (!boolean) {
-            Output().winningStatistics(this.amount)
-        }
+        LottoAnalyzer().analyze(
+            randomLotto.read,
+            winningNumber.read,
+            bonusNumber.read
+        )
     }
 }

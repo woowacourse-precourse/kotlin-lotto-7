@@ -1,22 +1,25 @@
-package lotto
+package control
 
 import camp.nextstep.edu.missionutils.Randoms
 import util.SettingValue
+import view.Output
 
 
-class RandomLottoGenerator {
+class RandomLottoGenerator() {
 
-    fun lottoPurchase(amount: Int): MutableList<List<Int>> {
-        val lottoCount = (amount / SettingValue.LOTTO_PRICE)
-        return repeatGenerator(lottoCount)
+    fun purchase(amount: Int): MutableList<List<Int>> {
+        val lottoCount = (amount.toString().toInt() / SettingValue.LOTTO_PRICE)
+        Output().lottoPurchase(lottoCount)
+        return repeat(lottoCount)
     }
 
-    private fun repeatGenerator(lottoCount: Int): MutableList<List<Int>> {
+    private fun repeat(lottoCount: Int): MutableList<List<Int>> {
         val randomLottoList = mutableListOf<List<Int>>()
         repeat(lottoCount) {
             val randomLottoNumber = randomLottoGenerate()
             randomLottoList.add(randomLottoNumber)
         }
+        Output().randomLottoList(randomLottoList)
         return randomLottoList
     }
 

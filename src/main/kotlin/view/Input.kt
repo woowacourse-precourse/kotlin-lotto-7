@@ -7,12 +7,12 @@ class Input {
     fun purchaseAmountInput(): String {
         println(ENTER_PURCHASE_AMOUNT)
         return Console.readLine()
+
     }
 
     fun winningNumberInput(): List<String> {
         println("\n" + ENTER_WINNING_NUMBER)
-        return Console.readLine()
-            .split(NUMBER_DELIMITER)
+        return Console.readLine().split(NUMBER_DELIMITER)
             .filter { it.isNotEmpty() }
     }
 

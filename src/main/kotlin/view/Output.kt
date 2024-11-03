@@ -1,17 +1,16 @@
 package view
 
-import lotto.LottoMatchingCount
-import lotto.LottoStatistic
-import util.SettingValue
+import control.LottoAnalyzer
+import data.LottoMatchingCount
 
 class Output {
 
     fun lottoPurchase(amount: Int) {
-        println("\n" + amount / SettingValue.LOTTO_PRICE + NUMBER_OF_LOTTO)
+        println("\n" + amount + NUMBER_OF_LOTTO)
     }
 
     fun randomLottoList(randomLottoNumber: List<List<Int>>) {
-        Lotto(randomLottoNumber)
+        "\n" + randomLottoNumber.forEach { list -> println(list.sorted()) }
     }
 
     fun winningStatistics(amount: Int) {
@@ -22,7 +21,7 @@ class Output {
         }
         println(
             TOTAL_RETURN_INTRO
-                    + "%,.1f".format(LottoStatistic().calculateRateOfReturn(amount))
+                    + "%,.1f".format(LottoAnalyzer().calculateRateOfReturn(amount))
                     + TOTAL_RETURN_OUTRO
         )
     }
