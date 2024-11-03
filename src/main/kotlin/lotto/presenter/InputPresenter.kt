@@ -33,4 +33,17 @@ class InputPresenter(
             }
         }
     }
+
+    fun onBonusNumberInput(): Int {
+        while (true) {
+            try {
+                val bonusNumber = inputView.readBonusNumber()
+                outputView.printNewLine()
+                // TODO 검증예외처리
+                return bonusNumber.toInt()
+            } catch (e: IllegalArgumentException) {
+                println(e.message)
+            }
+        }
+    }
 }

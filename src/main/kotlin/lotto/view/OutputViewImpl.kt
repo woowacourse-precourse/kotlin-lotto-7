@@ -11,5 +11,6 @@ class OutputViewImpl : OutputView {
         for (lotto in lottoBundle) {
             println(lotto.getNumbers().joinToString(", ", "[", "]"))
         }
+        printNewLine()
     }
 }
