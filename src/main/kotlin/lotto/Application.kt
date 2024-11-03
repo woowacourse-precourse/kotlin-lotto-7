@@ -17,7 +17,54 @@ fun main() {
     val winningNumbers = readAndValidateWinningNumbers() ?: return
     val bonusNumber = readAndValidateBonusNumber(winningNumbers) ?: return
 
+    val results = lottos.map { lotto ->
+        val matchCount = lotto.countMatchingNumbers(winningNumbers)
+        val bonusMatch = lotto.containsBonusNumber(bonusNumber)
+        when (matchCount) {
+            6 -> "1등"
+            5 -> if (bonusMatch) "2등" else "3등"
+            4 -> "4등"
+            3 -> "5등"
+            else -> "꽝"
+        }
+    }
+    val prizeStatistic = getPrizeStatistic(lottos, winningNumbers, bonusNumber)
 
+    println("당첨 통계\n---")
+    println("3개 일치 (5,000원) - ${prizeStatistic.getOrDefault("5등", 0)}개")
+    println("4개 일치 (50,000원) - ${prizeStatistic.getOrDefault("4등", 0)}개")
+    println("5개 일치 (1,500,000원) - ${prizeStatistic.getOrDefault("3등", 0)}개")
+    println("5개 일치, 보너스 볼 일치 (30,000,000원) - ${prizeStatistic.getOrDefault("2등", 0)}개")
+    println("6개 일치 (2,000,000,000원) - ${prizeStatistic.getOrDefault("1등", 0)}개")
+
+
+    val profitRate = calculateProfitRate(prizeStatistic, purchaseAmount)
+    println("총 수익률은 ${"%.1f".format(profitRate)}%입니다.")
+}
+
+fun getPrizeStatistic(lottos: List<Lotto>, winningNumbers: List<Int>, bonusNumber: Int): Map<String, Int> {
+    val results = lottos.map { lotto ->
+        val matchCount = lotto.countMatchingNumbers(winningNumbers)
+        val bonusMatch = lotto.containsBonusNumber(bonusNumber)
+        when (matchCount) {
+            6 -> "1등"
+            5 -> if (bonusMatch) "2등" else "3등"
+            4 -> "4등"
+            3 -> "5등"
+            else -> "꽝"
+        }
+    }
+    return results.groupingBy { it }.eachCount()
+}
+
+fun calculateProfitRate(prizeStatistic: Map<String, Int>, purchaseAmount: Int): Double {
+    val totalPrize = prizeStatistic.getOrDefault("1등", 0) * 2_000_000_000 +
+            prizeStatistic.getOrDefault("2등", 0) * 30_000_000 +
+            prizeStatistic.getOrDefault("3등", 0) * 1_500_000 +
+            prizeStatistic.getOrDefault("4등", 0) * 50_000 +
+            prizeStatistic.getOrDefault("5등", 0) * 5_000
+
+    return (totalPrize.toDouble() / purchaseAmount) * 100
 }
 
 fun readAndValidatePurchaseAmount(): Int? {
