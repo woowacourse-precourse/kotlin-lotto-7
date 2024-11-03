@@ -13,7 +13,9 @@ class LottoResultCalculatorTest {
         val winningLotto = Lotto(listOf(1, 2, 3, 7, 8, 9))
         val bonusNumber = 10
 
-        val lottoResultCalculator = LottoResultCalculator(winningLotto, bonusNumber)
+        val winningTicket = WinningTicket(winningLotto, bonusNumber)
+
+        val lottoResultCalculator = LottoResultCalculator(winningTicket)
         val result = lottoResultCalculator.countMatchingNumber(lottoBundle)
 
         assertEquals(0, result[LottoWinning.FIRST])
@@ -31,8 +33,9 @@ class LottoResultCalculatorTest {
         val lottoBundle = listOf(lotto1, lotto2)
         val winningLotto = Lotto(listOf(1, 2, 3, 4, 5, 9))
         val bonusNumber = 6
+        val winningTicket = WinningTicket(winningLotto, bonusNumber)
 
-        val lottoResultCalculator = LottoResultCalculator(winningLotto, bonusNumber)
+        val lottoResultCalculator = LottoResultCalculator(winningTicket)
         val result = lottoResultCalculator.countMatchingNumber(lottoBundle)
 
         assertEquals(0, result[LottoWinning.FIRST])
@@ -50,8 +53,9 @@ class LottoResultCalculatorTest {
         val lottoBundle = listOf(lotto1, lotto2)
         val winningLotto = Lotto(listOf(1, 2, 3, 7, 8, 9))
         val bonusNumber = 10
+        val winningTicket = WinningTicket(winningLotto, bonusNumber)
 
-        val lottoResultCalculator = LottoResultCalculator(winningLotto, bonusNumber)
+        val lottoResultCalculator = LottoResultCalculator(winningTicket)
         lottoResultCalculator.countMatchingNumber(lottoBundle)
         val totalReward = lottoResultCalculator.calculateTotalReward()
         assertEquals(1_505_000, totalReward)
@@ -65,8 +69,9 @@ class LottoResultCalculatorTest {
         val lottoCount = 8
         val winningLotto = Lotto(listOf(1, 2, 3, 7, 8, 9))
         val bonusNumber = 10
+        val winningTicket = WinningTicket(winningLotto, bonusNumber)
 
-        val lottoResultCalculator = LottoResultCalculator(winningLotto, bonusNumber)
+        val lottoResultCalculator = LottoResultCalculator(winningTicket)
         lottoResultCalculator.countMatchingNumber(lottoBundle)
         val totalReward = lottoResultCalculator.calculateTotalReward()
         val profitRate = lottoResultCalculator.calculateProfitRate(lottoCount, totalReward)
