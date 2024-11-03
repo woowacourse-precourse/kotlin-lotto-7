@@ -329,3 +329,6 @@ object PrintResult {
 - `LottoSystem` 객체를 통해 각 순위별 당첨 개수를 저장한 맵 `ranks`를 얻음
 - `ranks` 맵을 통해 당첨 결과를 출력
 - `LottoSystem` 객체를 통해 총 수익률 값을 얻고 출력
+
+## 실행 결과 
+<img width="333" alt="image" src="https://github.com/user-attachments/assets/efe89d74-590c-4d94-b112-8c957fb59830">
