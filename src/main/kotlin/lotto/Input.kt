@@ -11,22 +11,31 @@ class Input {
     lateinit var correctIntLotto: List<Int>
     lateinit var lotto: Lotto
 
-    fun input(): String {
+    fun start() {
+        inputMoney()
+        buyTicket()
+        correctLottoNumber()
+        inputBonusNumber()
+        checkList()
+        rate()
+    }
+
+    private fun input(): String {
         return Console.readLine()
     }
 
-
-    fun inputMoney(input: String) {
+    private fun inputMoney() {
         while (true) {
             try {
-                val money = confirmInteger(input)
+                output.outPutMoney()
+                val input = input()
                 confirmNullOrBlank(input)
+                val money = confirmInteger(input)
                 confirmNegativeOrZero(money)
                 ticket = confirmDivider(money)
                 return
             } catch (e: CustomErrorHandler) {
                 output.output("\n" + e.message + "\n")
-                output.outPutMoney()
                 continue
             }
         }
@@ -66,15 +75,24 @@ class Input {
     }
 
     //구입한 만큼 로또 번호생성
-    fun buyTicket() {
+    private fun buyTicket() {
         lottos = mutableListOf()
         for (i in 0 until ticket) {
             lottos.add(Randoms.pickUniqueNumbersInRange(1, 45, 6))
+            lottos[i].sort()
         }
         output.outPutTicket(ticket, lottos)
     }
 
-
+    //로또 넘버 검증 함수
+    private fun correctLottoNumber() {
+        output.printLotto(LottoType.LOTTO)
+        val resultLotto = input()
+        correctLotto = resultLotto.split(",")
+        correctLotto.map { lottoCheck(it, LottoType.LOTTO) }
+        correctIntLotto = correctLotto.map { it.toInt() }
+        lotto = Lotto(correctIntLotto)
+    }
 
 
 }
