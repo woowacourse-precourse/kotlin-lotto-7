@@ -18,7 +18,7 @@ enum class OutputMessage(val message: String) {
         println(message)
     }
 
-    fun display(ratio: Float) {
+    fun display(ratio: Double) {
         println(message.format(ratio))
     }
 }

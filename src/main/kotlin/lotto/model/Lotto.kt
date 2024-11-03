@@ -38,6 +38,6 @@ class Lotto(private val numbers: List<Int>) {
                 (LottoResult.fourth * WinningPrize.FOURTH.prize) +
                 (LottoResult.fifth * WinningPrize.FIFTH.prize)
 
-        LottoResult.priceRatio = (total / money * 100f)
+        LottoResult.priceRatio = (total / money * 100.0)
     }
 }
