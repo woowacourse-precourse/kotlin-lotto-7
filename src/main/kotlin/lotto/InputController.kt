@@ -27,11 +27,11 @@ class InputController(
         }
     }
 
-    fun getValidBonusNumber(): Int {
+    fun getValidBonusNumber(winningNumbers: List<Int>): Int {
         while (true) {
             try {
                 val input = inputView.getBonusNumber()
-                return inputValidator.validateBonusNumber(input)
+                return inputValidator.validateBonusNumber(input, winningNumbers)
             } catch (e: IllegalArgumentException) {
                 println(e.message)
             }
