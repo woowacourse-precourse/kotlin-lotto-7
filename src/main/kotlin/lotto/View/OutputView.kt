@@ -35,10 +35,19 @@ class OutputView {
             printLottoRankResult(releasedLottoRanks, currentOrder)
             totalWinningPrize += printRateOfReturn(releasedLottoRanks, currentOrder)
         }
-        val rawTotalRateOfReturn =
-            totalWinningPrize.toDouble() / (releasedLottoRanks.size * Lotto.COST).toDouble() * 100
+        val totalRateOfReturn = getTotalRateOfReturn(totalWinningPrize, releasedLottoRanks.size)
+        val formattedTotalRateOfReturn = formatWithCommas(totalRateOfReturn)
+        println("총 수익률은 ${formattedTotalRateOfReturn}%입니다.")
+    }
+
+    private fun getTotalRateOfReturn(totalWinningPrize: Long, lottoAmount: Int): Double {
+        val rawTotalRateOfReturn = totalWinningPrize.toDouble() / (lottoAmount * Lotto.COST).toDouble() * 100
         val totalRateOfReturn = round(rawTotalRateOfReturn * 10) / 10
-        println("총 수익률은 ${totalRateOfReturn}%입니다.")
+        return totalRateOfReturn
+    }
+
+    private fun formatWithCommas(totalRateOfReturn: Double): String {
+        return "%,.1f".format(totalRateOfReturn)
     }
 
     private fun printLottoRankResult(lottoRanks: List<LottoRank>, lottoRank: LottoRank) {
