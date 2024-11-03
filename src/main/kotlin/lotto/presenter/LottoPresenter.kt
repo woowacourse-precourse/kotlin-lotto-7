@@ -2,6 +2,7 @@ package lotto.presenter
 
 import lotto.model.Lotto
 import lotto.model.LottoSeller
+import lotto.model.LottoWinning
 import lotto.model.WinningTicket
 import lotto.view.OutputView
 
@@ -23,5 +24,10 @@ class LottoPresenter(
         val winningLotto = Lotto(winningNumbers)
         val bonusNumber = inputPresenter.onBonusNumberInput()
         return WinningTicket(winningLotto, bonusNumber)
+    }
+
+    fun displayResults(result: Map<LottoWinning, Int>, profitRate: Double) {
+        outputView.printWinningStatistics(result)
+        outputView.printProfitRate(profitRate)
     }
 }
