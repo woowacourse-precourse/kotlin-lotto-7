@@ -20,13 +20,18 @@ enum class Prize(
     companion object {
         fun getPrize(matchingNumberCount: Int, matchingBonusNumber: Boolean): Prize {
             return when {
-                matchingNumberCount == 6 -> FIRST
-                matchingNumberCount == 5 && matchingBonusNumber -> SECOND
-                matchingNumberCount == 5 -> THIRD
-                matchingNumberCount == 4 -> FOURTH
-                matchingNumberCount == 3 -> FIFTH
+                matchingNumberCount == FIRST_COUNT -> FIRST
+                matchingNumberCount == SECOND_COUNT && matchingBonusNumber -> SECOND
+                matchingNumberCount == THIRD_COUNT -> THIRD
+                matchingNumberCount == FOURTH_COUNT -> FOURTH
+                matchingNumberCount == FIFTH_COUNT -> FIFTH
                 else -> NONE
             }
         }
+        private const val FIRST_COUNT = 6
+        private const val SECOND_COUNT = 5
+        private const val THIRD_COUNT = 5
+        private const val FOURTH_COUNT = 4
+        private const val FIFTH_COUNT = 3
     }
 }
