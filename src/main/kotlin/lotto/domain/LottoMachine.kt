@@ -1,9 +1,6 @@
 package lotto.domain
 
-import lotto.data.Bonus
-import lotto.data.Client
-import lotto.data.Lotto
-import lotto.data.Winning
+import lotto.data.*
 import lotto.ui.InputView
 import lotto.ui.OutputView
 
@@ -17,6 +14,9 @@ class LottoMachine(
         printLottoNumbers(client.lottoNumbers)
         val winning = buildWinning()
         val bonus = buildBonus(winning)
+        val winningResult = WinningResult(client.lottoNumbers, winning.numbers, bonus.number)
+        val sortWinningDetails = winningDetailsSort(winningResult.details)
+        printWinningDetails(sortWinningDetails)
     }
 
     private fun buildClient(): Client {
@@ -57,6 +57,29 @@ class LottoMachine(
             printErrorCauseMessage(e.message)
             buildBonus(winning)
         }
+    }
+
+    private fun winningDetailsSort(details: Map<Rank, Int>): Map<Rank, Int> {
+        return details.toSortedMap { o1, o2 -> o1.winningPrize.compareTo(o2.winningPrize) }
+    }
+
+    private fun printWinningDetails(details: Map<Rank, Int>) {
+        outputView.printNewLine()
+        outputView.printWinningDetailHead()
+        details.forEach { detail ->
+            printWinningDetail(detail)
+        }
+    }
+
+    private fun printWinningDetail(detail: Map.Entry<Rank, Int>) {
+        val countOfMatch = detail.key.countOfMatch
+        outputView.printMatchesNumbers(countOfMatch)
+        if (detail.key == Rank.SECOND) outputView.printWinningBonusMatch()
+        val winningPrize = detail.key.winningPrize
+        outputView.printWinningPrize(winningPrize)
+        outputView.printWinningDivider()
+        val winningCount = detail.value
+        outputView.printWinningCount(winningCount)
     }
 
     private fun printErrorCauseMessage(message: String?) {
