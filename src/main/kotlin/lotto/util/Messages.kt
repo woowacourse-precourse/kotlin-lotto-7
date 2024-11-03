@@ -2,7 +2,7 @@ package lotto.util
 
 object ErrorMessages {
     // 로또 구입 금액 입력 에러 메시지
-    const val INVALID_PURCHASE_AMOUNT_FORMAT = "[ERROR] 구입 금액은 정수 형태여야 합니다.\n"
+    const val INVALID_PURCHASE_AMOUNT_FORMAT = "[ERROR] 구입 금액은 유효한 정수 형태여야 합니다.\n"
     const val INVALID_PURCHASE_AMOUNT_UNIT = "[ERROR] 구입 금액은 1,000원 단위로 입력해야 합니다.\n"
 
     // 로또 번호 에러 메시지
