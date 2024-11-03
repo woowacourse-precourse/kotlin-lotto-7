@@ -25,18 +25,14 @@ class LottoController {
         val lottoCount = money / DECIMAL
 
         val lottoes = LottoMachine.issueLottoes(lottoCount)
-
         OutputView.printLotto(lottoCount, lottoes)
 
         val winningLotto = getWinningLotto()
         calculatePrize(lottoes, winningLotto)
-
         OutputView.printWinningStatistics()
 
         val earningMoney = calculateEarningMoney()
-
         val earningRate = getEarningRate(earningMoney, money)
-
         OutputView.printEarningRate(earningRate)
 
     }
