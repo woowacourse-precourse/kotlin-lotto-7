@@ -4,7 +4,7 @@ import lotto.domain.Lotto
 
 class OutputView {
     fun printPurchaseAmount(amount: Int) {
-        println("${amount}개를 구매했습니다.")
+        println("\n${amount}개를 구매했습니다.")
     }
 
     fun printLottoStatus(lottos: List<Lotto>) {
