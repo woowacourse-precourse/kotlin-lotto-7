@@ -142,7 +142,7 @@ class LottoTest {
         val earningMoney = LottoController().calculateEarningMoney()
         val earningRate = LottoController().getEarningRate(earningMoney, 3000)
 
-        assertEquals("2000.0%", earningRate)
+        assertEquals(2000.0, earningRate)
     }
 
     companion object {
