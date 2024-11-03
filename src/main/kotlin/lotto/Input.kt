@@ -91,11 +91,13 @@ class Input {
                 output.printLotto(LottoType.LOTTO)
                 val resultLotto = input()
                 correctLotto = resultLotto.split(",")
-                correctLotto.forEach { lottoCheck(it, LottoType.LOTTO) }
+                correctLotto.forEach { lottoCheck(it) }
                 correctIntLotto = correctLotto.map { it.toInt() }
+                checkLottoDuplicate(correctIntLotto)  // 중복 체크 추가
                 lotto = Lotto(correctIntLotto)
                 break
             } catch (e: CustomErrorHandler) {
+                output.output("\n" + e.message)
                 continue
             }
         }
@@ -103,16 +105,38 @@ class Input {
 
     //보너스 넘버 검증 함수
     private fun inputBonusNumber() {
-        output.printLotto(LottoType.BONUS)
-        val bonusNumber = input()
-        lottoCheck(bonusNumber, LottoType.BONUS)
-        val bonusInt = bonusNumber.toInt()
-        lotto.compareLotto(lottos, bonusInt)
+        while (true) {
+            try {
+                output.printLotto(LottoType.BONUS)
+                val bonusNumber = input()
+                lottoCheck(bonusNumber)
+                val bonusInt = bonusNumber.toInt()
+                checkBonusDuplicate(bonusInt)
+                lotto.compareLotto(lottos, bonusInt)
+                break
+            } catch (e: CustomErrorHandler) {
+                output.output("\n" + e.message)
+                continue
+            }
+        }
     }
 
+    //1-45 체크
     private fun middleNumberCheck(inputNumber: Int) {
         if (inputNumber !in 1..45) {
             throw CustomErrorHandler("[ERROR] 로또 번호는 1이상 45이하의 정수여야 합니다.", CustomException.BOUNDARY)
+        }
+    }
+
+    //중복 체크
+    private fun checkLottoDuplicate(numbers: List<Int>) {
+        if (numbers.distinct().size != 6) {
+            throw CustomErrorHandler("[ERROR] 중복되지 않는 숫자를 입력해야 합니다.", CustomException.DUPLICATE)
+        }
+    }
+    private fun checkBonusDuplicate(numbers: Int) {
+        if (correctIntLotto.contains(numbers)) {
+            throw CustomErrorHandler("[ERROR] 중복되지 않는 숫자를 입력해야 합니다.", CustomException.DUPLICATE)
         }
     }
 
@@ -120,7 +144,7 @@ class Input {
         output.outPutPostCorrectList(lotto.checkList)
     }
 
-    private fun lottoCheck(input: String, lottoType: LottoType) {
+    private fun lottoCheck(input: String) {
         try {
             confirmNullOrBlank(input)
             val number = confirmInteger(input)
