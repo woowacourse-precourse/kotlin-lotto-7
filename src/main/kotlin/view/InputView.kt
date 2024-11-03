@@ -3,6 +3,7 @@ package view
 import camp.nextstep.edu.missionutils.Console
 import lotto.model.lotto.Lotto
 import lotto.model.lotto.Money
+import lotto.model.lotto.WinningNumbers
 
 class InputView {
 
@@ -38,6 +39,22 @@ class InputView {
             } catch (e: IllegalArgumentException) {
                 println(e.message)
             } catch (e: NumberFormatException) {
+                println(e.message)
+            }
+        }
+    }
+
+    fun getBonusNumber(winningNumbers : List<Int>): Int {
+        while (true){
+            try {
+                println()
+                println("보너스 번호를 입력해 주세요.")
+                val bonusNumber = readLine()!!.toIntOrNull() ?: throw IllegalArgumentException("[ERROR] 숫자가 아닙니다. 다시 입력해주세요")
+
+                WinningNumbers(winningNumbers, bonusNumber)
+
+                return bonusNumber
+            }catch (e: IllegalArgumentException){
                 println(e.message)
             }
         }
