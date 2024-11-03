@@ -39,4 +39,18 @@ class LottoTest {
         val rank = lotto.checkRank(listOf(1, 2, 3, 4, 5, 6), 8)
         assertThat(rank).isEqualTo(LottoRank.THIRD)
     }
+
+    @Test
+    fun `당첨 번호와 로또의 번호 중 두개 다르면 4등인지 확인할 수 있어야한다`() {
+        val lotto = Lotto(listOf(1, 2, 3, 4, 9, 7))
+        val rank = lotto.checkRank(listOf(1, 2, 3, 4, 5, 6), 8)
+        assertThat(rank).isEqualTo(LottoRank.FOURTH)
+    }
+
+    @Test
+    fun `당첨 번호와 로또의 번호 중 세개가 다르면 5등인지 확인할 수 있어야한다`() {
+        val lotto = Lotto(listOf(1, 2, 3, 11, 10, 7))
+        val rank = lotto.checkRank(listOf(1, 2, 3, 4, 5, 6), 8)
+        assertThat(rank).isEqualTo(LottoRank.FIFTH)
+    }
 }
