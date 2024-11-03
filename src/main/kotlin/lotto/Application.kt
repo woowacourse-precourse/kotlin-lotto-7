@@ -4,10 +4,39 @@ import camp.nextstep.edu.missionutils.Console
 import camp.nextstep.edu.missionutils.Randoms
 import kotlin.NumberFormatException
 
+const val LOTTO_PRICE = 1000
+const val FIRST_PRIZE = 2_000_000_000
+const val SECOND_PRIZE = 30_000_000
+const val THIRD_PRIZE = 1_500_000
+const val FOURTH_PRIZE = 50_000
+const val FIFTH_PRIZE = 5_000
+const val DEFAULT_PRIZE = 0
+
+enum class Rank(val matchCount: Int, val prize: Int) {
+    FIRST(6, FIRST_PRIZE),
+    SECOND(5, SECOND_PRIZE),
+    THIRD(5, THIRD_PRIZE),
+    FOURTH(4, FOURTH_PRIZE),
+    FIFTH(3, FIFTH_PRIZE),
+    NONE(0, DEFAULT_PRIZE);
+
+    companion object {
+        fun of(matchCount: Int, bonusMatch: Boolean): Rank {
+            return when {
+                matchCount == 6 -> FIRST
+                matchCount == 5 && bonusMatch -> SECOND
+                matchCount == 5 -> THIRD
+                matchCount == 4 -> FOURTH
+                matchCount == 3 -> FIFTH
+                else -> NONE
+            }
+        }
+    }
+}
+
 fun main() {
     val purchaseAmount = readAndValidatePurchaseAmount() ?: return
-
-    val numberOfLottos = purchaseAmount / 1000
+    val numberOfLottos = purchaseAmount / LOTTO_PRICE
     val lottos = List(numberOfLottos) {
         Lotto(Randoms.pickUniqueNumbersInRange(1, 45, 6).sorted())
     }
@@ -17,53 +46,23 @@ fun main() {
     val winningNumbers = readAndValidateWinningNumbers() ?: return
     val bonusNumber = readAndValidateBonusNumber(winningNumbers) ?: return
 
-    val results = lottos.map { lotto ->
-        val matchCount = lotto.countMatchingNumbers(winningNumbers)
-        val bonusMatch = lotto.containsBonusNumber(bonusNumber)
-        when (matchCount) {
-            6 -> "1등"
-            5 -> if (bonusMatch) "2등" else "3등"
-            4 -> "4등"
-            3 -> "5등"
-            else -> "꽝"
-        }
-    }
-    val prizeStatistic = getPrizeStatistic(lottos, winningNumbers, bonusNumber)
+    val prizeStatistic = lottos.groupingBy { lotto ->
+        Rank.of(lotto.countMatchingNumbers(winningNumbers), lotto.containsBonusNumber(bonusNumber))
+    }.eachCount()
 
     println("당첨 통계\n---")
-    println("3개 일치 (5,000원) - ${prizeStatistic.getOrDefault("5등", 0)}개")
-    println("4개 일치 (50,000원) - ${prizeStatistic.getOrDefault("4등", 0)}개")
-    println("5개 일치 (1,500,000원) - ${prizeStatistic.getOrDefault("3등", 0)}개")
-    println("5개 일치, 보너스 볼 일치 (30,000,000원) - ${prizeStatistic.getOrDefault("2등", 0)}개")
-    println("6개 일치 (2,000,000,000원) - ${prizeStatistic.getOrDefault("1등", 0)}개")
-
+    println("3개 일치 (5,000원) - ${prizeStatistic.getOrDefault(Rank.FIFTH, 0)}개")
+    println("4개 일치 (50,000원) - ${prizeStatistic.getOrDefault(Rank.FOURTH, 0)}개")
+    println("5개 일치 (1,500,000원) - ${prizeStatistic.getOrDefault(Rank.THIRD, 0)}개")
+    println("5개 일치, 보너스 볼 일치 (30,000,000원) - ${prizeStatistic.getOrDefault(Rank.SECOND, 0)}개")
+    println("6개 일치 (2,000,000,000원) - ${prizeStatistic.getOrDefault(Rank.FIRST, 0)}개")
 
     val profitRate = calculateProfitRate(prizeStatistic, purchaseAmount)
     println("총 수익률은 ${"%.1f".format(profitRate)}%입니다.")
 }
 
-fun getPrizeStatistic(lottos: List<Lotto>, winningNumbers: List<Int>, bonusNumber: Int): Map<String, Int> {
-    val results = lottos.map { lotto ->
-        val matchCount = lotto.countMatchingNumbers(winningNumbers)
-        val bonusMatch = lotto.containsBonusNumber(bonusNumber)
-        when (matchCount) {
-            6 -> "1등"
-            5 -> if (bonusMatch) "2등" else "3등"
-            4 -> "4등"
-            3 -> "5등"
-            else -> "꽝"
-        }
-    }
-    return results.groupingBy { it }.eachCount()
-}
-
-fun calculateProfitRate(prizeStatistic: Map<String, Int>, purchaseAmount: Int): Double {
-    val totalPrize = prizeStatistic.getOrDefault("1등", 0) * 2_000_000_000 +
-            prizeStatistic.getOrDefault("2등", 0) * 30_000_000 +
-            prizeStatistic.getOrDefault("3등", 0) * 1_500_000 +
-            prizeStatistic.getOrDefault("4등", 0) * 50_000 +
-            prizeStatistic.getOrDefault("5등", 0) * 5_000
-
+fun calculateProfitRate(prizeStatistic: Map<Rank, Int>, purchaseAmount: Int): Double {
+    val totalPrize = prizeStatistic.entries.sumOf { (rank, count) -> rank.prize * count }
     return (totalPrize.toDouble() / purchaseAmount) * 100
 }
 
@@ -71,7 +70,7 @@ fun readAndValidatePurchaseAmount(): Int? {
     return try {
         println("구입금액을 입력해 주세요.")
         val amount = Console.readLine().toInt()
-        require(amount % 1000 == 0) { "[ERROR] 로또는 1,000원 단위로만 구매할 수 있습니다." }
+        require(amount % LOTTO_PRICE == 0) { "[ERROR] 로또는 ${LOTTO_PRICE}원 단위로만 구매할 수 있습니다." }
         amount
     } catch (e: NumberFormatException) {
         println("[ERROR] 유효한 숫자를 입력해 주세요.")
