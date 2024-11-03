@@ -8,6 +8,10 @@ class Lotto(private val numbers: List<Int>) {
         require(numbers == numbers.sorted()) { LottoErrorMessages.NOT_SORTED }
     }
 
+    fun getNumbers(): List<Int> {
+        return numbers
+    }
+
     object LottoErrorMessages {
         const val INVALID_SIZE = "[ERROR] 로또 번호는 6개여야 합니다."
         const val DUPLICATE_NUMBERS = "[ERROR] 로또 번호는 중복되지 않아야 합니다."
