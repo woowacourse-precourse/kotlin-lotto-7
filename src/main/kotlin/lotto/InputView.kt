@@ -2,7 +2,7 @@ package lotto
 
 import camp.nextstep.edu.missionutils.Console
 
-class InputView {
+object InputView {
     fun getPurchaseAmount(): String {
         informPurchaseAmount()
         val inputPurchaseAmount = getInput()
