@@ -3,6 +3,7 @@ package lotto.controller
 import lotto.adapter.BonusNumberAdapter.makeBonusNumberModel
 import lotto.adapter.LottoAdapter.makeLottoModel
 import lotto.adapter.PurchaseInfoAdapter
+import lotto.domain.model.BonusNumber
 import lotto.domain.model.Lotto
 import lotto.domain.model.Prize
 import lotto.domain.model.PurchaseInfo
@@ -23,29 +24,45 @@ import lotto.view.OutputView.showPurchaseInfo
 class LottoController {
     fun run() {
         try {
-            val inputPurchaseAmount: String = getPurchaseAmount()
-            PurchaseAmountValidator(inputPurchaseAmount).validatePurchaseAmount()
-            val purchaseInfo: PurchaseInfo = PurchaseInfoAdapter.makePurchaseInfoModel(inputPurchaseAmount)
-            val quickPickLottoTickets: List<Lotto> = QuickPickLottoTickets(purchaseInfo).quickPickLottoTickets()
+            val purchaseInfo = handlePurchaseInfo()
+            val quickPickLottoTickets = handleQuickPickLottoTickets(purchaseInfo)
             showPurchaseInfo(purchaseInfo, quickPickLottoTickets)
 
-            val inputWinningNumbers: String = getWinningNumbers()
-            WinningNumbersValidator(inputWinningNumbers).validateLuckyNumbers()
-            val winningLotto: Lotto = makeLottoModel(inputWinningNumbers)
-
-            val inputBonusNumber = getBonusNumber()
-            BonusNumberValidator(winningLotto, inputBonusNumber).validateBonusNumber()
-            val bonusNumber = makeBonusNumberModel(inputBonusNumber)
+            val winningLotto = handleWinningNumbers()
+            val bonusNumber = handleBonusNumber(winningLotto)
 
             closeInput()
 
-            val matchResult: List<Prize> = MatchingLottoNumber(winningLotto, bonusNumber, quickPickLottoTickets).getMatchResult()
+            val matchResult = MatchingLottoNumber(winningLotto, bonusNumber, quickPickLottoTickets).getMatchResult()
             val profitRate = LottoPrizeCalculator(matchResult, purchaseInfo).calculateProfitRate()
+
             showCalculateInfo(matchResult)
             showProfit(profitRate)
-
         } catch (e: IllegalArgumentException) {
             println(e.message)
         }
     }
+
+    private fun handlePurchaseInfo(): PurchaseInfo {
+        val inputPurchaseAmount: String = getPurchaseAmount()
+        PurchaseAmountValidator(inputPurchaseAmount).validatePurchaseAmount()
+        return PurchaseInfoAdapter.makePurchaseInfoModel(inputPurchaseAmount)
+    }
+
+    private fun handleQuickPickLottoTickets(purchaseInfo: PurchaseInfo): List<Lotto> {
+        return QuickPickLottoTickets(purchaseInfo).quickPickLottoTickets()
+    }
+
+    private fun handleWinningNumbers(): Lotto {
+        val inputWinningNumbers: String = getWinningNumbers()
+        WinningNumbersValidator(inputWinningNumbers).validateLuckyNumbers()
+        return makeLottoModel(inputWinningNumbers)
+    }
+
+    private fun handleBonusNumber(winningLotto: Lotto): BonusNumber {
+        val inputBonusNumber = getBonusNumber()
+        BonusNumberValidator(winningLotto, inputBonusNumber).validateBonusNumber()
+        return makeBonusNumberModel(inputBonusNumber)
+    }
+
 }
