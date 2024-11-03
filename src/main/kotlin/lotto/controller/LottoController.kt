@@ -22,12 +22,14 @@ class LottoController {
         val winningNumbers = inputView.readWinningNumbers()
         val bonusNumber = inputView.readBonusNumber()
 
-        val results = mutableMapOf<LottoRank, Int>().withDefault { 0 }
+        val winCounts = mutableMapOf<LottoRank, Int>().withDefault { 0 }
         lottos.forEach {
             val matchCount = it.countMatches(winningNumbers)
             val hasBonus = it.hasBonus(bonusNumber)
             val rank = LottoRank.getRank(matchCount, hasBonus)
-            results[rank] = results.getValue(rank) + 1
+            winCounts[rank] = winCounts.getValue(rank) + 1
         }
+
+        outputView.printWinCounts(winCounts)
     }
 }
