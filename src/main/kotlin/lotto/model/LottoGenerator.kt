@@ -1,6 +1,10 @@
 package lotto.model
 
 import camp.nextstep.edu.missionutils.*
+import lotto.constant.AMOUNT_UNIT
+import lotto.constant.LOTTO_SIZE
+import lotto.constant.MAX_LOTTO_NUM
+import lotto.constant.MIN_LOTTO_NUM
 
 class LottoGenerator {
 
@@ -15,10 +19,10 @@ class LottoGenerator {
     }
 
     fun getNumberOfLotto(money: Int): Int {
-        return money / 1000
+        return money / AMOUNT_UNIT
     }
 
     private fun getRandomNumbers(): List<Int> {
-        return Randoms.pickUniqueNumbersInRange(1, 45, 6)
+        return Randoms.pickUniqueNumbersInRange(MIN_LOTTO_NUM, MAX_LOTTO_NUM, LOTTO_SIZE)
     }
 }
