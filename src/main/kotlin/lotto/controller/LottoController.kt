@@ -21,9 +21,7 @@ class LottoController {
         val gameResult = GameResult()
         for (lotto in lottos) {
             val rank = winningNumber.getRank(lotto)
-            if (rank != null) {
-                gameResult.addWinningDetail(rank)
-            }
+            gameResult.addWinningDetail(rank)
         }
         OutputView.printGameResult(gameResult)
     }
