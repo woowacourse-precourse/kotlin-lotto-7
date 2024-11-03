@@ -53,12 +53,18 @@ class LottoController {
     }
 
     private fun <T> repeatLogic(logic: () -> T): T {
-        do {
-            try {
-                return logic()
-            } catch (e: IllegalArgumentException) {
-                println(e.message)
-            }
-        } while (true)
+        while (true) {
+            val result = tryLogic(logic)
+            if (result != null) return result
+        }
+    }
+
+    private fun <T> tryLogic(logic: () -> T): T? {
+        return try {
+            logic()
+        } catch (e: IllegalArgumentException) {
+            outputView.printErrorMessage(e.message)
+            null
+        }
     }
 }
