@@ -14,7 +14,7 @@ object Validator {
     fun getWinningNumber(inputWinningNumber: String): Set<Int> {
         val winningNumber = inputWinningNumber.split(Constants.DELIMITER).mapNotNull { it.trim().toIntOrNull() }
         require(checkSize(winningNumber)) { ErrorMessage.LOTTO_COUNT_ERROR }
-        require(isDuplicatedNumbers(winningNumber)) { ErrorMessage.DUPLICATED_NUMBER }
+        require(isUniqueNumbers(winningNumber)) { ErrorMessage.DUPLICATED_NUMBER }
         require(isValidRange(*winningNumber.toIntArray())) { ErrorMessage.RANGE_ERROR }
         return winningNumber.toSet()
     }
@@ -27,7 +27,7 @@ object Validator {
         return bonusNumber
     }
 
-    fun isDuplicatedNumbers(winningNumber: List<Int>) = winningNumber.size != winningNumber.distinct().size
+    fun isUniqueNumbers(winningNumber: List<Int>) = winningNumber.size == winningNumber.distinct().size
 
     private fun isValidRange(vararg numbers: Int): Boolean =
         numbers.map { it in Constants.LOTTO_RANGE_START..Constants.LOTTO_RANGE_END }.all { it }
