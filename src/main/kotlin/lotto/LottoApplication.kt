@@ -8,11 +8,12 @@ import lotto.view.OutputViewImpl
 class LottoApplication {
 
     fun run() {
-        val input = InputViewImpl()
+        val inputView = InputViewImpl()
         val outputView = OutputViewImpl()
-        val inputPresenter = InputPresenter(input)
+        val inputPresenter = InputPresenter(inputView, outputView)
         val amount = inputPresenter.onPurchaseAmountInput()
         val lottoSeller = LottoSeller(amount)
         val lottoBundle = lottoSeller.sell()
+        outputView.printPurchaseSummary(lottoBundle)
     }
 }
