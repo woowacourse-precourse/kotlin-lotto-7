@@ -1,7 +1,5 @@
 # kotlin-lotto-precourse
 
-# kotlin-lotto-precourse
-
 # 💰 로또 추첨기
 
 ## 프로젝트 개요
@@ -65,6 +63,16 @@
 
     - 당첨 번호는 반드시 6개의 숫자여야 하며, 숫자가 부족하거나 초과한 경우 `IllegalArgumentException`을 발생시킵니다.
     - 예: `"1, 2, 3, 4, 5"`, `"1, 2, 3, 4, 5, 6, 7"` → IllegalArgumentException
+
+### 5. 빈 문자열이 입력된 경우
+
+    - 입력값이 빈 문자열 `""`이면 `IllegalArgumentException`을 발생시킵니다.
+    - 예: `""` → IllegalArgumentException
+
+### 6. 잘못된 형식이 포함된 경우
+
+    - 입력값에 숫자와 쉼표 이외의 특수문자가 포함되어 있으면 `IllegalArgumentException`을 발생시킵니다. 
+    - 예: `"1,2,3,4,5,abc"`, `"1,2,3,4,$,6"`, `"10,20,30,40,50,60"` → IllegalArgumentException
 
 ## ▶️ 프로그램 실행 예시
 
