@@ -1,6 +1,5 @@
 package controller
 
-import lotto.Lotto
 import model.LottoMachine
 import view.InputView
 import view.OutputView
