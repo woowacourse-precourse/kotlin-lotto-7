@@ -9,8 +9,10 @@ class LottoGame {
     fun start() {
         inputPayment = view.inputPayment()
         val lottoMachine = LottoMachine(inputPayment.getPayment())
-        val lottoCount = lottoMachine.calculateTotalLottoCount()
-        val lottoList = lottoMachine.makeLotto(lottoCount)
-        broadcast.printLottoNumbers(lottoList)
+        broadcast.printLottoNumbers(lottoMachine.lottoList)
+
+        val winningNumber = view.inputWinningNumber()
+        val bonusNumber = view.inputBonusNumber(winningNumber)
+
     }
 }

@@ -4,22 +4,19 @@ import camp.nextstep.edu.missionutils.Randoms
 
 class LottoMachine(private val payment: String) {
 
-    fun calculateTotalLottoCount(): Int {
+    private val lottoGenerator = LottoGenerator()
+    private val lottoCount = calculateTotalLottoCount()
+    
+    val lottoList = makeLotto()
+
+    private fun calculateTotalLottoCount(): Int {
         return payment.toInt() / LOTTO_PRICE
     }
 
-    fun generateLotto(): Lotto {
-        val number = lottoGenerator()
-        return Lotto(number.sorted())
-    }
-
-    private fun lottoGenerator(): List<Int> =
-        Randoms.pickUniqueNumbersInRange(LOTTO_MIN_NUM, LOTTO_MAX_NUM, LOTTO_COUNT)
-
-    fun makeLotto(lottoCount: Int): List<Lotto> {
+    private fun makeLotto(): List<Lotto> {
         val lottoList = mutableListOf<Lotto>()
         repeat(lottoCount) {
-            lottoList.add(generateLotto())
+            lottoList.add(lottoGenerator.generateLotto())
         }
         return lottoList.toList()
     }
