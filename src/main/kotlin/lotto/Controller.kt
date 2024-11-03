@@ -2,6 +2,7 @@ package lotto
 
 import lotto.model.Lotto
 import lotto.model.LottoGenerator
+import lotto.model.LottoResult
 import lotto.view.InputView
 import lotto.validator.*
 import lotto.view.OutputView
@@ -27,6 +28,7 @@ class Controller {
         winningNum.getResult(money, bonusNum, randomLotto)
         output.displayResult()
 
+        LottoResult.reset()
     }
 
     fun getMoney(): Int {
