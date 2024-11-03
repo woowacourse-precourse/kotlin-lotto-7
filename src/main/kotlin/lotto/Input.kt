@@ -86,12 +86,19 @@ class Input {
 
     //로또 넘버 검증 함수
     private fun correctLottoNumber() {
-        output.printLotto(LottoType.LOTTO)
-        val resultLotto = input()
-        correctLotto = resultLotto.split(",")
-        correctLotto.map { lottoCheck(it, LottoType.LOTTO) }
-        correctIntLotto = correctLotto.map { it.toInt() }
-        lotto = Lotto(correctIntLotto)
+        while (true) {
+            try {
+                output.printLotto(LottoType.LOTTO)
+                val resultLotto = input()
+                correctLotto = resultLotto.split(",")
+                correctLotto.forEach { lottoCheck(it, LottoType.LOTTO) }
+                correctIntLotto = correctLotto.map { it.toInt() }
+                lotto = Lotto(correctIntLotto)
+                break
+            } catch (e: CustomErrorHandler) {
+                continue
+            }
+        }
     }
 
     //보너스 넘버 검증 함수
@@ -114,26 +121,17 @@ class Input {
     }
 
     private fun lottoCheck(input: String, lottoType: LottoType) {
-        while (true) {
-            try {
-                confirmNullOrBlank(input)
-                val number = confirmInteger(input)
-                confirmNegativeOrZero(number)
-                middleNumberCheck(number)
-                return
-            } catch (e: CustomErrorHandler) {
-                output.output("\n" + e.message)
-                typeCheck(lottoType)
-            }
+        try {
+            confirmNullOrBlank(input)
+            val number = confirmInteger(input)
+            confirmNegativeOrZero(number)
+            middleNumberCheck(number)
+        } catch (e: CustomErrorHandler) {
+            output.output("\n" + e.message)
+            throw e
         }
     }
 
-    private fun typeCheck(lottoType: LottoType){
-        when(lottoType){
-            LottoType.BONUS -> inputBonusNumber()
-            LottoType.LOTTO -> correctLottoNumber()
-        }
-    }
 
     private fun rate(){
         output.printRate(lotto.resultMoney,ticket*1000)
