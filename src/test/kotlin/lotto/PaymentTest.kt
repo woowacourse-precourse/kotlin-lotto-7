@@ -13,4 +13,12 @@ class PaymentTest {
             Payment(payment)
         }
     }
+
+    @ParameterizedTest
+    @ValueSource(strings = ["0", "-5000"])
+    fun `0과 음수를 받았을 때`(payment: String) {
+        assertThrows<IllegalArgumentException> {
+            Payment(payment)
+        }
+    }
 }
