@@ -60,8 +60,9 @@ class Output {
         }
 
     fun printRate(money: Int, ticket: Int) {
-        if (money == 0) {
-            println("총 수익률은 0% 입니다.")
+        if (money <= 0) {
+            println("총 수익률은 ${-rateCalc(money,ticket)}% 입니다.")
+            return
         }
         println("총 수익률은 ${rateCalc(money,ticket)}% 입니다.")
     }
