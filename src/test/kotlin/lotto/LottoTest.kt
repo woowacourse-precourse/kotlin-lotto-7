@@ -25,4 +25,11 @@ class LottoTest {
         val rank = lotto.checkRank(listOf(1, 2, 3, 4, 5, 6), 7)
         assertThat(rank).isEqualTo(LottoRank.FIRST)
     }
+
+    @Test
+    fun `당첨 번호와 로또의 번호 중 하나가 다르면서 보너스가 맞을 경우 2등인지 확인할 수 있어야한다`() {
+        val lotto = Lotto(listOf(1, 2, 3, 4, 5, 7))
+        val rank = lotto.checkRank(listOf(1, 2, 3, 4, 5, 6), 7)
+        assertThat(rank).isEqualTo(LottoRank.SECOND)
+    }
 }
