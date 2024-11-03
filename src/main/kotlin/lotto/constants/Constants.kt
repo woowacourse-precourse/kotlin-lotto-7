@@ -6,4 +6,5 @@ object Constants {
     const val LOTTO_RANGE_START = 1
     const val LOTTO_RANGE_END = 45
     const val DELIMITER = ","
+    const val PERCENT = 100
 }

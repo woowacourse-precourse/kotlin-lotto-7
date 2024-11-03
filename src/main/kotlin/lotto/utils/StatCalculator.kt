@@ -1,5 +1,6 @@
 package lotto.utils
 
+import lotto.constants.Constants
 import lotto.model.Rank
 import lotto.model.Stat
 
@@ -11,7 +12,7 @@ object StatCalculator {
             val count = stat.getCount()
             profit += rank.winningPrice * count
         }
-        return String.format("%.1f", profit / price.toDouble() * 100)
+        return String.format("%.1f", profit / price.toDouble() * Constants.PERCENT)
     }
 
     fun getRank(numbers: List<Int>, winningNumber: Set<Int>, bonusNumber: Int): Rank {
