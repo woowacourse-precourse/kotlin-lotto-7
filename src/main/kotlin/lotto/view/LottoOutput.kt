@@ -1,11 +1,18 @@
 package lotto.view
 
-import lotto.Lotto
-import lotto.Rank
+import lotto.model.Lotto
+import lotto.model.Rank
+import lotto.util.OutputMessages.BONUS_MATCH_MESSAGE
+import lotto.util.OutputMessages.DIVIDER
+import lotto.util.OutputMessages.FORMAT_MATCH_DESCRIPTION
+import lotto.util.OutputMessages.FORMAT_RESULT
+import lotto.util.OutputMessages.PROFIT_RATE_MESSAGE
+import lotto.util.OutputMessages.RESULT_HEADER
+import lotto.util.OutputMessages.TICKET_COUNT_MESSAGE
 
 class LottoOutput {
     fun printTicketCount(ticketCount: Int) {
-        println("\n$ticketCount $TICKET_COUNT_MESSAGE")
+        println("\n$ticketCount$TICKET_COUNT_MESSAGE")
     }
 
     fun printLottoTickets(lottoTickets: List<Lotto>) {
@@ -21,6 +28,9 @@ class LottoOutput {
             println(formatResult(rank, count))
         }
     }
+
+    fun printProfitRate(profitRate: String) {
+        println(String.format(PROFIT_RATE_MESSAGE, profitRate))    }
 
     private fun printResultHeader() {
         println(RESULT_HEADER)
@@ -43,18 +53,5 @@ class LottoOutput {
 
     private fun formatPrize(prize: Int): String {
         return String.format("%,d", prize)
-    }
-
-    fun printProfitRate(profitRate: String) {
-        println(String.format(PROFIT_RATE_MESSAGE, profitRate))    }
-
-    companion object {
-        private const val TICKET_COUNT_MESSAGE = "개의 로또를 구매했습니다."
-        private const val RESULT_HEADER = "\n당첨 통계"
-        private const val DIVIDER = "---"
-        private const val FORMAT_RESULT = "%s (%s원) - %d개"
-        private const val FORMAT_MATCH_DESCRIPTION = "%d개 일치%s"
-        private const val BONUS_MATCH_MESSAGE = ", 보너스 볼 일치"
-        private const val PROFIT_RATE_MESSAGE = "총 수익률은 %s%%입니다."
     }
 }
