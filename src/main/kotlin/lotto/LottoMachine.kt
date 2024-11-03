@@ -15,6 +15,10 @@ class LottoMachine(
         val quantity = lottoService.calculateQuantity(money)
         outputView.printPurchaseAmount(quantity)
 
+        // 2. 로또 발행 기능
+        val lottos = lottoService.generateLotto(quantity)
+        outputView.printLottoStatus(lottos)
+
     }
 
 }
