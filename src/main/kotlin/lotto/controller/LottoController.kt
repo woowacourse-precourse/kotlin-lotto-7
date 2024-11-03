@@ -12,6 +12,7 @@ import lotto.domain.usecase.QuickPickLottoTickets
 import lotto.util.validator.bonusnumber.BonusNumberValidator
 import lotto.util.validator.purchaseamount.PurchaseAmountValidator
 import lotto.util.validator.winningnumbers.WinningNumbersValidator
+import lotto.view.InputView.closeInput
 import lotto.view.InputView.getBonusNumber
 import lotto.view.InputView.getPurchaseAmount
 import lotto.view.InputView.getWinningNumbers
@@ -35,7 +36,7 @@ class LottoController {
             val inputBonusNumber = getBonusNumber()
             BonusNumberValidator(winningLotto, inputBonusNumber).validateBonusNumber()
             val bonusNumber = makeBonusNumberModel(inputBonusNumber)
-
+            closeInput()
             val matchResult: List<Prize> = MatchingLottoNumber(winningLotto, bonusNumber, quickPickLottoTickets).getMatchResult()
             val profitRate = LottoPrizeCalculator(matchResult, purchaseInfo).calculateProfitRate()
             showCalculateInfo(matchResult)
