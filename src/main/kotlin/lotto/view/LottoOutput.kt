@@ -22,11 +22,12 @@ class LottoOutput {
     fun printResult(results: Map<Rank, Int>) {
         printResultHeader()
 
-        val ranks = listOf(Rank.FIFTH, Rank.FOURTH, Rank.THIRD, Rank.SECOND, Rank.FIRST)
-        ranks.forEach { rank ->
-            val count = results[rank] ?: 0
-            println(formatResult(rank, count))
-        }
+        Rank.values()
+            .filter { it != Rank.NONE }
+            .forEach { rank ->
+                val count = results[rank] ?: 0
+                println(formatResult(rank, count))
+            }
     }
 
     fun printProfitRate(profitRate: String) {
@@ -44,11 +45,10 @@ class LottoOutput {
     }
 
     private fun getMatchDescription(rank: Rank): String {
-        return if (rank.matchBonus) {
-            String.format(FORMAT_MATCH_DESCRIPTION, rank.matchCount, BONUS_MATCH_MESSAGE)
-        } else {
-            String.format(FORMAT_MATCH_DESCRIPTION, rank.matchCount, "")
+        if (rank.matchBonus) {
+            return String.format(FORMAT_MATCH_DESCRIPTION, rank.matchCount, BONUS_MATCH_MESSAGE)
         }
+        return String.format(FORMAT_MATCH_DESCRIPTION, rank.matchCount, "")
     }
 
     private fun formatPrize(prize: Int): String {
