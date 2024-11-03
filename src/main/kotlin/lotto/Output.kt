@@ -37,5 +37,61 @@ class Output {
 
     fun outPutCorrectNumber() = println("\n당첨 번호를 입력해 주세요.")
     fun outPutBonusNumber() = println("\n보너스 번호를 입력해 주세요.")
+    fun outPutPostCorrectList(result: MutableList<Int>) {
+        println("\n당첨 통계\n---")
+        for (i in 0 until result.size - 1) {
+            outPutCorrectList(i, result)
+        }
+    }
 
+    private fun outPutCorrectList(correct: Int, result: MutableList<Int>) {
+        if (correct == BONUSBALL) {
+            println("${BONUSCORRECT}개 일치, 보너스 볼 일치 (${resultScoreBoard(converterCorrectType(correct + PLUSCORRECTNUM))}원) - ${result[correct]}개")
+            println("${BONUSCORRECT + 1}개 일치 (${resultScoreBoard(converterCorrectType(correct + PLUSCORRECTNUM + 1))}원) - ${result[correct + 1]}개")
+            return
+        }
+        println("${correct + PLUSCORRECTNUM}개 일치 (${resultScoreBoard(converterCorrectType(correct + PLUSCORRECTNUM))}원) - ${result[correct]}개")
+    }
+
+
+    private fun rateCalc(money: Int, ticket: Int) : Double{
+        val dMoney = money.toDouble()
+        val dTicket = ticket.toDouble()
+        val percentage =  ((dMoney / dTicket) * 100 - 100)
+        val roundedPercentage =  Math.round(percentage * 100) / 100.0
+        return roundedPercentage
+    }
+    fun converterCorrectType(correctCount: Int): CorrectType {
+        return when (correctCount) {
+            7 -> CorrectType.SIX
+            6 -> CorrectType.BONUS
+            5 -> CorrectType.FIVE
+            4 -> CorrectType.FORE
+            3 -> CorrectType.THREE
+            else -> CorrectType.NO
+        }
+    }
+
+
+    fun resultScore(correctType: CorrectType): Int {
+        return when (correctType) {
+            CorrectType.BONUS -> 30000000
+            CorrectType.THREE -> 5000
+            CorrectType.FORE -> 50000
+            CorrectType.FIVE -> 1500000
+            CorrectType.SIX -> 2000000000
+            CorrectType.NO -> 0
+        }
+    }
+
+    private fun resultScoreBoard(correctType: CorrectType): String {
+        return when (correctType) {
+            CorrectType.BONUS -> "30,000,000"
+            CorrectType.THREE -> "5,000"
+            CorrectType.FORE -> "50,000"
+            CorrectType.FIVE -> "1,500,000"
+            CorrectType.SIX -> "2,000,000,000"
+            CorrectType.NO -> "0"
+        }
+    }
 }
