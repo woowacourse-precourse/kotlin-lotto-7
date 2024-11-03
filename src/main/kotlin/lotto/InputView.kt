@@ -5,6 +5,7 @@ import lotto.Lotto.LottoErrorMessages
 
 class InputView {
     fun getPrice(): Int {
+        println("구입금액을 입력해 주세요.")
         while (true) {
             try {
                 val price = Console.readLine().toInt()
@@ -19,9 +20,9 @@ class InputView {
     }
 
     fun getLottoNumber(): List<Int> {
+        println("당첨 번호를 입력해 주세요.")
         while (true) {
             try {
-                println("당첨 번호를 입력하세요 (예: 1, 2, 3, 4, 5, 6):")
                 val input = Console.readLine().split(",").map { it.trim().toInt() }
 
                 // 입력 검증 로직: 각 조건에 맞는 예외를 던지도록 추가
@@ -40,6 +41,7 @@ class InputView {
     }
 
     fun getBonusNumber(): Int {
+        println("보너스 번호를 입력해 주세요.")
         while (true) {
             try {
                 val bonusNumber = Console.readLine().toInt()

@@ -1,13 +1,20 @@
 package lotto
 
 class LottoDraw {
-    fun run(inputView: InputView) {
+    fun run(inputView: InputView, outputView: OutputView) {
         val price = inputView.getPrice()
+
+        val store = Store()
+        val lottos = store.buyLotto(price)
+
+        outputView.purchasedMessage(store.numberOfLottoPurchased)
+        outputView.lottoList(lottos)
+
         val myLotto = Lotto(inputView.getLottoNumber())
         val myBonus = inputView.getBonusNumber()
 
-        val lottos = Store.buyLotto(price)
-        val(winningCounts, bonusWin) = LottoResultChecker.checkWinningStatus(lottos, myLotto, myBonus)
+        val (winningCounts, bonusWin) = LottoResultChecker.checkWinningStatus(lottos, myLotto, myBonus)
         val profitRatio = LottoResultChecker.calculateProfitRate(price, winningCounts, bonusWin)
+        outputView.resultStatistics(winningCounts, bonusWin, profitRatio)
     }
 }
