@@ -35,6 +35,7 @@ class InputView {
     fun readBonusNumber(): Int {
         println(PROMPT_BONUS_NUMBER)
         val bonusNumber = parseNumericInput(Console.readLine())
+        validateLottoNumberInRange(bonusNumber)
         validateBonusNumberDistinctness(bonusNumber, winningNumbers)
         return bonusNumber
     }
