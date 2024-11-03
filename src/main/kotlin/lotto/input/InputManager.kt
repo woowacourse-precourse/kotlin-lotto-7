@@ -3,20 +3,20 @@ package lotto.input
 import camp.nextstep.edu.missionutils.Console.readLine
 
 object InputManager {
-    internal fun requestPayment(): Int {
+    fun requestPayment(): Int {
         println("구입금액을 입력해 주세요.")
         val input = getInput()
         return parsePaymentInput(input)
     }
 
     fun requestWinningNumbers(): List<Int> {
-        println("당첨번호를 입력해 주세요.")
+        println("\n당첨번호를 입력해 주세요.")
         val input = getInput()
         return parseWinningNumbersInput(input)
     }
 
     fun requestBonusNumber(): Int {
-        println("보너스 번호를 입력해 주세요.")
+        println("\n보너스 번호를 입력해 주세요.")
         val input = getInput()
         return parseBonusNumberInput(input)
     }

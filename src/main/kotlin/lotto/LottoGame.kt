@@ -1,12 +1,14 @@
 package lotto
 
 import camp.nextstep.edu.missionutils.Randoms
+import lotto.input.InputManager
 
 const val TICKET_COST = 1000
 
 class LottoGame(private val winningNumbers: List<Int>, private val bonusNumber: Int) {
     var ticketList = mutableListOf<Lotto>()
         private set
+
 
     fun buyTickets(payment: Int) {
         val ticketCount = payment / TICKET_COST
@@ -30,13 +32,20 @@ class LottoGame(private val winningNumbers: List<Int>, private val bonusNumber: 
     fun printWinningResults() {
         val winningResults = calculateWinningCounts()
 
-        println("당첨 통계")
+        println("\n당첨 통계")
         println("---")
-        println("3개 일치 (${LottoRank.FIFTH.prize}원) - ${winningResults[LottoRank.FIFTH.ordinal]}개")
-        println("4개 일치 (${LottoRank.FOURTH.prize}원) - ${winningResults[LottoRank.FOURTH.ordinal]}개")
-        println("5개 일치 (${LottoRank.THIRD.prize}원) - ${winningResults[LottoRank.THIRD.ordinal]}개")
-        println("5개 일치, 보너스 볼 일치 (${LottoRank.SECOND.prize}원) - ${winningResults[LottoRank.SECOND.ordinal]}개")
-        println("6개 일치 (${LottoRank.FIRST.prize}원) - ${winningResults[LottoRank.FIRST.ordinal]}개")
+        println("3개 일치 (${String.format("%,d", LottoRank.FIFTH.prize)}원) - ${winningResults[LottoRank.FIFTH.ordinal]}개")
+        println("4개 일치 (${String.format("%,d", LottoRank.FOURTH.prize)}원) - ${winningResults[LottoRank.FOURTH.ordinal]}개")
+        println("5개 일치 (${String.format("%,d", LottoRank.THIRD.prize)}원) - ${winningResults[LottoRank.THIRD.ordinal]}개")
+        println(
+            "5개 일치, 보너스 볼 일치 (${
+                String.format(
+                    "%,d",
+                    LottoRank.SECOND.prize
+                )
+            }원) - ${winningResults[LottoRank.SECOND.ordinal]}개"
+        )
+        println("6개 일치 (${String.format("%,d", LottoRank.FIRST.prize)}원) - ${winningResults[LottoRank.FIRST.ordinal]}개")
     }
 
     private fun calculateWinningCounts(): List<Int> {
