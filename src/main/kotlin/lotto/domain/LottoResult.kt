@@ -1,7 +1,7 @@
 package lotto.domain
 
 class LottoResult(private val ranks: Map<Rank, Int>) {
-    fun getRanks(): Map<Rank, Int> = ranks
+    fun getRankCounts(): Map<Rank, Int> = ranks
 
     fun calculateTotalPrize(): Long{
         return ranks.entries.sumOf { it.key.prizeMoney * it.value }

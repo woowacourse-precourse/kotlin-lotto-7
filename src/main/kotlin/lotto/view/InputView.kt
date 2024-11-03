@@ -1,23 +1,29 @@
 package lotto.view
 
 import camp.nextstep.edu.missionutils.Console
+import lotto.util.Constants
 
 object InputView {
-    fun getPurchaseAmount(): Int {
-        println("구입금액을 입력해 주세요.")
+    // 구입 금액 입력
+    fun readPurchaseAmount(): Int {
+        println(Constants.MESSAGE_INPUT_PURCHASE_AMOUNT)
         val input = Console.readLine()
-        return input.toIntOrNull() ?: throw IllegalArgumentException("[ERROR] 구입 금액은 숫자여야 합니다.")
+        return input.toIntOrNull() ?: throw IllegalArgumentException(Constants.ERROR_INVALID_NUMBER_INPUT)
     }
 
-    fun getWinningNumbers(): List<Int> {
-        println("당첨 번호를 입력해 주세요")
+    // 당첨 번호 입력
+    fun readWinningNumbers(): List<Int> {
+        println(Constants.MESSAGE_INPUT_WINNING_NUMBERS)
         val input = Console.readLine()
-        return input.split(",").map { it.trim().toIntOrNull() ?: throw IllegalArgumentException("[ERROR] 당첨 번호는 숫자여야 합니다") }
+        return input.split(",").map {
+            it.trim().toIntOrNull() ?: throw IllegalArgumentException(Constants.ERROR_INVALID_NUMBER_INPUT)
+        }
     }
 
-    fun getBonusNumbers() : Int {
-        println("보너스 번호를 입력해 주세요.")
+    // 보너스 번호 입력
+    fun readBonusNumber(): Int {
+        println(Constants.MESSAGE_INPUT_BONUS_NUMBER)
         val input = Console.readLine()
-        return input.toIntOrNull() ?: throw IllegalArgumentException("[ERROR] 보너스 번호는 숫자여야 합니다.")
+        return input.toIntOrNull() ?: throw IllegalArgumentException(Constants.ERROR_INVALID_NUMBER_INPUT)
     }
 }
