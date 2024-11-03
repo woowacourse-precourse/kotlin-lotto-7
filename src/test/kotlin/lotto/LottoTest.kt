@@ -1,9 +1,7 @@
 package lotto
 
 import org.junit.jupiter.api.Assertions.assertEquals
-import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test
-import org.junit.jupiter.api.assertThrows
 
 class LottoTest {
     private val winningNumbers = listOf(1, 2, 3, 4, 5, 6)
