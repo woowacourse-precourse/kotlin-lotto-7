@@ -9,13 +9,6 @@ import lotto.utils.Constants.SECOND
 import lotto.utils.Constants.THIRD
 import lotto.utils.OutputConstants.WINNING_STATISTICS
 
-/**
- * 뷰는 모델에만 의존해야 하고, 컨트롤러에는 의존하면 안된다.
- * 뷰 내부는 모델 코드만 있을 수 있다.
- * 뷰가 모델로부터 데이터를 받을 때는 사용자마다 다르게 보여주어야 하는데이터에 한해 받는다
- * 모델로부터 데이터를 받을 때는 컨트롤러에서 받아야한다.
- */
-
 class OutputView {
 
     fun showPurchasedLottoCount(count: Int, tikets: List<LottoTicket>) {

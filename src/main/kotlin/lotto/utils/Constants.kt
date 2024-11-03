@@ -13,5 +13,4 @@ object Constants {
     const val FOURTH = 4
     const val FIFTH = 5
     const val DELIMETER = ","
-    const val NEW_LINE = "\n"
 }
