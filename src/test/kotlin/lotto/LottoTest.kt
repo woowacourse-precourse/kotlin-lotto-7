@@ -33,4 +33,12 @@ class LottoTest {
         assertEquals(5, matchCount)
     }
 
+    @Test
+    fun `보너스 번호가 일치하는 지 확인한다`() {
+        val lotto = Lotto(listOf(1, 2, 3, 4, 5, 6))
+        val winningLotto = WinningLotto(Lotto(listOf(1, 2, 3, 4, 5, 7)), 6)
+        val isMatchBonus = lotto.isMatchBonus(winningLotto)
+        assertEquals(true, isMatchBonus)
+    }
+
 }
