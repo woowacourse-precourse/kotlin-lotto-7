@@ -97,6 +97,7 @@
 - 구입 금액이 1000원 이하인 경우: IllegalArgumentException 발생
 - 구입 금액이 1000원으로 나누어 떨어지지 않는 경우: IllegalArgumentException 발생
 - 구입 금액에 공백이 포함되어 있는 경우: 공백 제거 처리
+- 구입 금액이 Int 범위를 초과하는 경우: IllegalArgumentException 발생
 
 ### 2. 구매 개수 계산 기능
 
