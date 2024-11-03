@@ -85,8 +85,7 @@ class LottoController(
 
         private fun String.isNoDuplicateNumbers(): Boolean {
             val numbers = this.split(',').map { it.toInt() }
-            numbers.toSet()
-            return numbers.size == 6
+            return numbers.toSet().size == 6
         }
 
         private const val DELIMITER = ','
