@@ -1,7 +1,6 @@
 package lotto.model
 
-import lotto.LottoWinning
-import lotto.LottoWinning.*
+import lotto.model.LottoWinning.*
 
 class LottoResultCalculator(
     private val winningNumbers: Lotto,
