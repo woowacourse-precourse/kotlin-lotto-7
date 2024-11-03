@@ -11,12 +11,12 @@ object InputView {
     }
 
     fun askWinningNumbers(): String {
-        println("당첨 번호를 입력해 주세요.")
+        println(InputMessage.INPUT_WINNING_NUMBERS.message)
         return Console.readLine()
     }
 
     fun askForBonusNumber(): String {
-        println("보너스 번호를 입력해 주세요.")
+        println(InputMessage.INPUT_BONUS_NUMBERS.message)
         return Console.readLine()
     }
 }
