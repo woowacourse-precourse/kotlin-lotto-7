@@ -15,6 +15,7 @@ object LottoSystem {
     init {
         Input
         checkWinning()
+        PrintResult.printWinningStatistics()
     }
 
     fun saveBonusNumber(bonusNumber: Int) {

@@ -48,7 +48,7 @@
 - [x] 로또 랜덤 구입 기능
 - [x] 당첨 여부 확인 기능
 - [x] 당첨 통계 기능
-- [ ] 출력 기능
+- [x] 출력 기능
 - [ ] 예외 처리
 
 ## 문제 해결 과정
@@ -303,3 +303,29 @@ object LottoSystem {
 ```
 - 순위별 당첨 개수가 저장된 `ranks` 맵을 통해 당첨된 모든 금액을 더함
 - 더한 모든 당첨 금액을 구입금액으로 나눈후 100을 곱해 수익률을 계산
+
+### 결과 출력 기능
+
+#### PrintResult
+
+```kotlin
+object PrintResult {
+...
+    fun printWinningStatistics(){
+        val ranks = LottoSystem.getRanks()
+        println("당첨 통계")
+        println("---")
+        ranks.forEach {
+            if(it.key.bonusMatch&&it.key.matchCount==5)
+                println("${it.key.matchCount}개 일치, 보너스 볼 일치 (${it.key.priceONE}) - ${it.value}개")
+            else println("${it.key.matchCount}개 일치 (${it.key.priceONE}) - ${it.value}개")
+        }
+        val rateOfReturn = round((LottoSystem.getRateOfReturn() * 100)) /100
+        println("총 수익률은 ${rateOfReturn}%입니다.")
+    }
+    
+}
+```
+- `LottoSystem` 객체를 통해 각 순위별 당첨 개수를 저장한 맵 `ranks`를 얻음
+- `ranks` 맵을 통해 당첨 결과를 출력
+- `LottoSystem` 객체를 통해 총 수익률 값을 얻고 출력
