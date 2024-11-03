@@ -1,6 +1,7 @@
 package view
 
 import camp.nextstep.edu.missionutils.Console
+import lotto.model.lotto.Money
 
 class InputView {
 
@@ -12,17 +13,18 @@ class InputView {
                 val input = Console.readLine().trim()
 
                 money = input.toIntOrNull() ?: throw IllegalArgumentException("[ERROR] 금액은 숫자여야 합니다.")
-                validationMoneyInput(money)
-                break
+                Money(money)
+
+                return money
             } catch (e: IllegalArgumentException) {
                 println(e.message)
             }
         }
-        return money
     }
 
-    private fun validationMoneyInput(money: Int) {
-        require(money > 0) { "[ERROR] 금액은 0보다 커야 합니다." }
-        require(money % 1000 == 0) { "[ERROR] 금액은 1000원 단위로 입력 가능합니다." }
+    fun getWinningNumbers(): List<Int> {
+        println()
+        println("당첨 번호를 입력해 주세요.")
+        return Console.readLine().split(",").map { it.trim().toInt() }
     }
 }

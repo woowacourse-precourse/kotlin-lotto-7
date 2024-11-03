@@ -3,8 +3,8 @@
 **입력**
  - 구매금액을 입력 받는다
    - 구입금액이 1000원 단위가 아니면 IllegalArgumentException 발생
-   - 구입금액의 형식 Double일 경우 Int로 변환시킨다
-   - 공백이 입력되면 IllegalArgumentException 발생
+   - 구입금액의 형식이 Int가 아닐 경우 IllegalArgumentException 발생
+   - 음수가 IllegalArgumentException 발생
  - 당첨번호를 입력 받는다
    - 당첨번호의 숫자가 중복되면 IllegalArgumentException 발생
    - 당첨번호에 공백이 있으면 IllegalArgumentException 발생
