@@ -12,4 +12,8 @@ class Lotto(private val numbers: List<Int>) {
     fun isMatchBonus(winningLotto: WinningLotto): Boolean {
         return numbers.contains(winningLotto.bonusNumber)
     }
+
+    override fun toString(): String {
+        return numbers.sorted().toString()
+    }
 }
