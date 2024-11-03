@@ -11,4 +11,7 @@ class Lotto(private val numbers: List<Int>) {
         return this.numbers.contains(number)
     }
 
+    override fun toString(): String {
+        return numbers.joinToString(separator = ", ", prefix = "[", postfix = "]") { it.toString() }
+    }
 }
