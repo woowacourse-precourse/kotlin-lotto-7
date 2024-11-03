@@ -94,5 +94,48 @@ class Input {
         lotto = Lotto(correctIntLotto)
     }
 
+    //보너스 넘버 검증 함수
+    private fun inputBonusNumber() {
+        output.printLotto(LottoType.BONUS)
+        val bonusNumber = input()
+        lottoCheck(bonusNumber, LottoType.BONUS)
+        val bonusInt = bonusNumber.toInt()
+        lotto.compareLotto(lottos, bonusInt)
+    }
 
+    private fun middleNumberCheck(inputNumber: Int) {
+        if (inputNumber !in 1..45) {
+            throw CustomErrorHandler("[ERROR] 로또 번호는 1이상 45이하의 정수여야 합니다.", CustomException.BOUNDARY)
+        }
+    }
+
+    private fun checkList() {
+        output.outPutPostCorrectList(lotto.checkList)
+    }
+
+    private fun lottoCheck(input: String, lottoType: LottoType) {
+        while (true) {
+            try {
+                confirmNullOrBlank(input)
+                val number = confirmInteger(input)
+                confirmNegativeOrZero(number)
+                middleNumberCheck(number)
+                return
+            } catch (e: CustomErrorHandler) {
+                output.output("\n" + e.message)
+                typeCheck(lottoType)
+            }
+        }
+    }
+
+    private fun typeCheck(lottoType: LottoType){
+        when(lottoType){
+            LottoType.BONUS -> inputBonusNumber()
+            LottoType.LOTTO -> correctLottoNumber()
+        }
+    }
+
+    private fun rate(){
+        output.printRate(lotto.resultMoney,ticket*1000)
+    }
 }
