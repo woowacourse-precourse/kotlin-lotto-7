@@ -2,10 +2,19 @@ package lotto.controller
 
 import lotto.view.InputView
 import lotto.Validator
+import lotto.view.OutputView
 
 class LottoController {
     private val inputView = InputView()
+    private val outputView = OutputView()
     private val validator = Validator()
+
+    fun lottoGame() {
+        val purchaseAmount = getLottoPurchaseAmount()
+        val ticket = countLottoTicket(purchaseAmount)
+        outputView.countTicketsMessage(ticket)
+        outputView.generateTicketsMessage(ticket)
+    }
 
     private fun getLottoPurchaseAmount(): Int {
         return try {
@@ -17,4 +26,7 @@ class LottoController {
         }
     }
 
+    private fun countLottoTicket(purchaseAmount: Int): Int {
+        return purchaseAmount / 1000
+    }
 }

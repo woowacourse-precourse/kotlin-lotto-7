@@ -1,5 +1,6 @@
 package lotto
 
+import lotto.Constants.ERROR_DIVIDE_LOTTO_PURCHASE_MESSAGE
 import lotto.Constants.ERROR_EMPTY_LOTTO_PURCHASE_MESSAGE
 import lotto.Constants.ERROR_INVALID_LOTTO_PURCHASE_MESSAGE
 import lotto.Constants.ERROR_NEGATIVE_LOTTO_PURCHASE_MESSAGE
@@ -14,6 +15,7 @@ class Validator {
     fun checkLottoPurchaseAmount(purchaseAmount: String) {
         checkLottoPurchaseEmpty(purchaseAmount)
         checkNegativeLottoPurchase(purchaseAmount)
+        checkLottoPurchaseDivide(purchaseAmount)
         checkLottoPurchaseNumeric(purchaseAmount)
     }
 
@@ -37,6 +39,10 @@ class Validator {
 
     private fun checkNegativeLottoPurchase(purchaseAmount: String) {
         require(purchaseAmount.toInt() > 0) { ERROR_NEGATIVE_LOTTO_PURCHASE_MESSAGE }
+    }
+
+    private fun checkLottoPurchaseDivide(purchaseAmount: String) {
+        require(purchaseAmount.toInt() % 1000 == 0) { ERROR_DIVIDE_LOTTO_PURCHASE_MESSAGE }
     }
 
     private fun checkLottoPurchaseNumeric(purchaseAmount: String) {
