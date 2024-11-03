@@ -1,18 +1,21 @@
 package lotto
 
 class Lotto(private val numbers: List<Int>) {
-    private var bonusNumber = 0
-    private val CHECKBOUND = 3
-    private val BONUSSCORE = 5
-    private val LOTTOSIZE = 6
-    private val BONUSINDEX = 3
-    private val NOTBONUSINDEX = 2
-    private val BONUS = 6
-    private val NOTBONUS = 5
 
+    companion object {
+        private val CHECKBOUND = 3
+        private val BONUSSCORE = 5
+        private val LOTTOSIZE = 6
+        private val BONUSINDEX = 3
+        private val NOTBONUSINDEX = 2
+        private val BONUS = 6
+        private val NOTBONUS = 5
+    }
+
+    private var bonusNumber = 0
     private val output = Output()
     var checkList = MutableList(5) { 0 }
-    var resultMoney = 0
+    var resultMoney = 0L
 
     init {
         require(numbers.size == 6) { "[ERROR] 로또 번호는 6개여야 합니다." }

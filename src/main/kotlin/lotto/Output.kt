@@ -10,7 +10,6 @@ class Output {
         const val BONUSBALL = 3
         const val PLUSCORRECTNUM = 3
         const val BONUSCORRECT = 5
-
     }
 
     fun output(message: String) = println(message)
@@ -61,7 +60,7 @@ class Output {
             LOTTO -> outPutCorrectNumber()
         }
 
-    fun printRate(money: Int, ticket: Int) {
+    fun printRate(money: Long, ticket: Int) {
         if (money < 0) {
             println("총 수익률은 ${-rateCalc(money, ticket)}% 입니다.")
             return
@@ -70,7 +69,7 @@ class Output {
     }
 
 
-    private fun rateCalc(money: Int, ticket: Int): Double {
+    private fun rateCalc(money: Long, ticket: Int): Double {
         val dMoney = money.toDouble()
         val dTicket = ticket.toDouble()
         val percentage = ((dMoney - dTicket) / dTicket) * 100  // 순수익을 초기 투자 비용으로 나눈 후 100을 곱해 수익률 계산
