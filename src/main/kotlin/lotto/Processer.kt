@@ -1,7 +1,6 @@
 package lotto
 
 class Processer {
-
     fun splitLottoNumber(input: String): List<String> {
         val winNumbers = input.split(",")
         return winNumbers

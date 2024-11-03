@@ -1,7 +1,6 @@
 package view
 
 class OutputView {
-
     fun printLottoNumbers(count: Int, lottos: ArrayList<List<Int>>) {
         println()
         println(AMOUNT_NOTICE.format(count))
