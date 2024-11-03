@@ -12,6 +12,8 @@ object OutputView {
     private const val PROFIT_RATE = "총 수익률은 %.2f%%입니다."
     private const val PROFIT_RATE_SIMPLE = "총 수익률은 %.1f%%입니다."
     private const val ZERO = 0
+    private const val RANK_MESSAGE = "%d개 일치 (%s원) - %d개"
+    private const val SECOND_RANK_MESSAGE = "5개 일치, 보너스 볼 일치 (%s원) - %d개"
 
 
     fun showPurchaseInfo(purchaseInfo: PurchaseInfo, quickPickLottoTickets: List<Lotto>) {
@@ -29,8 +31,8 @@ object OutputView {
         Prize.entries.filter { it != Prize.NONE }.forEach { prize ->
             val count = prizeCount[prize] ?: ZERO
             val result = when (prize) {
-                Prize.SECOND -> "5개 일치, 보너스 볼 일치 (${prize.prizeAmount}원) - ${count}개"
-                else -> "${prize.matchingNumberCount}개 일치 (${prize.prizeAmount}원) - ${count}개"
+                Prize.SECOND -> String.format(SECOND_RANK_MESSAGE, prize.prizeAmount, count)
+                else -> String.format(RANK_MESSAGE,prize.matchingNumberCount, prize.prizeAmount, count)
             }
             println(result)
         }

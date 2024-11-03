@@ -6,7 +6,7 @@ data class Lotto(
     private val numbers: List<Int>
 ) {
     init {
-        require(numbers.size == 6) { "[ERROR] 로또 번호는 6개여야 합니다." }
+        require(numbers.size == 6) { WinningNumbersErrorType.LUCKY_NUMBERS_6 }
         require(numbers.size == numbers.toSet().size) { WinningNumbersErrorType.NO_DUPLICATE_LUCKY_NUMBERS}
     }
 

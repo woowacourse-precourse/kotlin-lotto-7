@@ -11,6 +11,10 @@ class LottoPrizeCalculator(
 
     fun calculateProfitRate(): Double {
         val totalPrize = calculateTotalPrize()
-        return totalPrize.toDouble() / purchaseInfo.purchaseAmount * 100
+        return totalPrize.toDouble() / purchaseInfo.purchaseAmount * PERCENT
+    }
+
+    companion object {
+        private const val PERCENT = 100
     }
 }
