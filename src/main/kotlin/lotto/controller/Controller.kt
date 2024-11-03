@@ -10,7 +10,7 @@ object Controller {
     fun run() {
         while (true) {
             try {
-                validate.validateInputAmount(InputView.inputPurchaseAmount())
+                validate.validateInputAmount(InputView.inputPurchaseAmount().trim())
                 lottoBuyNumber = InputView.inputPurchaseAmount().toInt() / 1000
                 break
             } catch (e: IllegalArgumentException) {
