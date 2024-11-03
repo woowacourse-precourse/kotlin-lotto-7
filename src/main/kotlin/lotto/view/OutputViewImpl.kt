@@ -24,4 +24,8 @@ class OutputViewImpl : OutputView {
             }
         }
     }
+
+    override fun printProfitRate(profitRate: Double) {
+        println("총 수익률은 $profitRate%입니다.")
+    }
 }
