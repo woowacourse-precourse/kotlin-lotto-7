@@ -1,5 +1,6 @@
 package lotto
 
+import camp.nextstep.edu.missionutils.test.NsTest
 import controller.LottoController
 import model.Lotto
 import model.Prize
@@ -27,6 +28,7 @@ class LottoTest {
     // TODO: 추가 기능 구현에 따른 테스트 코드 작성
     @Test
     fun `로또가 우승번호와 일치하는 숫자의 개수를 반환한다`() {
+        initializePrize()
         val lotto = Lotto(listOf(1, 2, 3, 4, 5, 6))
         val winningLotto = WinningLotto(Lotto(listOf(1, 2, 3, 4, 5, 7)), 8)
         val matchCount = lotto.matchCount(winningLotto)
@@ -35,6 +37,7 @@ class LottoTest {
 
     @Test
     fun `보너스 번호가 일치하는 지 확인한다`() {
+        initializePrize()
         val lotto = Lotto(listOf(1, 2, 3, 4, 5, 6))
         val winningLotto = WinningLotto(Lotto(listOf(1, 2, 3, 4, 5, 7)), 6)
         val isMatchBonus = lotto.isMatchBonus(winningLotto)
@@ -43,6 +46,7 @@ class LottoTest {
 
     @Test
     fun `로또 1등 당첨 여부를 반환한다`() {
+        initializePrize()
         val lotto = Lotto(listOf(1, 2, 3, 4, 5, 6))
         val winningLotto = WinningLotto(Lotto(listOf(1, 2, 3, 4, 5, 6)), 7)
         val matchCount = lotto.matchCount(winningLotto)
@@ -55,6 +59,7 @@ class LottoTest {
 
     @Test
     fun `로또 2등 당첨 여부를 반환한다`() {
+        initializePrize()
         val lotto = Lotto(listOf(1, 2, 3, 4, 5, 6))
         val winningLotto = WinningLotto(Lotto(listOf(1, 2, 3, 4, 5, 7)), 6)
         val isMatchBonus = lotto.isMatchBonus(winningLotto)
@@ -66,6 +71,7 @@ class LottoTest {
 
     @Test
     fun `로또 3등 당첨 여부를 반환한다`() {
+        initializePrize()
         val lotto = Lotto(listOf(1, 2, 3, 4, 5, 6))
         val winningLotto = WinningLotto(Lotto(listOf(1, 2, 3, 4, 5, 7)), 8)
         val matchCount = lotto.matchCount(winningLotto)
@@ -78,6 +84,7 @@ class LottoTest {
 
     @Test
     fun `로또 4등 당첨 여부를 반환한다`() {
+        initializePrize()
         val lotto = Lotto(listOf(1, 2, 3, 4, 5, 6))
         val winningLotto = WinningLotto(Lotto(listOf(1, 2, 3, 4, 8, 9)), 8)
         val matchCount = lotto.matchCount(winningLotto)
@@ -90,20 +97,23 @@ class LottoTest {
 
     @Test
     fun `로또 5등 당첨 여부를 반환한다`() {
+        initializePrize()
         val lotto = Lotto(listOf(1, 2, 3, 4, 5, 6))
-        val winningLotto = WinningLotto(Lotto(listOf(1, 2, 3, 8, 9, 11)), 10)
+        val winningLotto = WinningLotto(Lotto(listOf(1, 2, 3, 7, 8, 9)), 10)
         val matchCount = lotto.matchCount(winningLotto)
         val isMatchBonus = lotto.isMatchBonus(winningLotto)
 
         LottoController().updatePrize(matchCount, isMatchBonus)
-
+        Prize.entries.forEach {
+            println(it.name + " " + it.winningCount)
+        }
         assertEquals(1, Prize.FIFTH.winningCount)
     }
 
 
-
     @Test
-    fun `총 수익금액을 계산한다`(){
+    fun `총 수익금액을 계산한다`() {
+        initializePrize()
         val lottoes = listOf(
 //            Lotto(listOf(1, 2, 3, 4, 5, 8)), // 3등
             Lotto(listOf(1, 2, 3, 41, 45, 36)), // 5등
@@ -120,7 +130,8 @@ class LottoTest {
     }
 
     @Test
-    fun `총 수익률을 계산한다`(){
+    fun `총 수익률을 계산한다`() {
+        initializePrize()
         val lottoes = listOf(
 //            Lotto(listOf(1, 2, 3, 4, 5, 8)), // 3등
             Lotto(listOf(1, 2, 3, 41, 45, 36)), // 5등
@@ -133,6 +144,14 @@ class LottoTest {
         val earningMoney = LottoController().calculateEarningMoney()
         val earningRate = LottoController().getEarningRate(earningMoney, 3000)
 
-        assertEquals(2000.0, earningRate)
+        assertEquals("2000.0%", earningRate)
+    }
+
+    companion object {
+        fun initializePrize() {
+            Prize.entries.forEach {
+                it.winningCount = 0
+            }
+        }
     }
 }
