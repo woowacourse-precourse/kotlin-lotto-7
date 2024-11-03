@@ -1,10 +1,12 @@
 package lotto.controller
 
 import lotto.converter.LottoArgumentConverter
+import lotto.domain.lotto.BonusNumber
 import lotto.domain.lotto.Lotto
 import lotto.domain.lotto.LottoFactory
 import lotto.domain.numbergenerator.NumberGenerator
 import lotto.domain.purchase.Purchase
+import lotto.view.bonusNumberView
 import lotto.view.purchaseAmountView
 import lotto.view.purchaseLottoView
 import lotto.view.winningNumberView
@@ -17,7 +19,7 @@ class LottoController(
         val lottoTicket = LottoFactory.buyLottoTicket(purchase, numberGenerator)
         purchaseLottoView(purchase.getNumberOfLotto(), lottoTicket)
         val winningNumber = getWinningNumber()
-
+        val bonusNumber = getBonusNumber(winningNumber)
     }
 
     private fun getPurchaseAmount(): Purchase {
@@ -38,6 +40,17 @@ class LottoController(
             println(exception.message)
         }.getOrElse {
             getWinningNumber()
+        }
+    }
+
+    private fun getBonusNumber(winningNumber: Lotto): BonusNumber {
+        return runCatching {
+            val bonusNumberArgument = LottoArgumentConverter.toBonusNumberArgument(bonusNumberView())
+            LottoFactory.getBonusNumber(bonusNumberArgument, winningNumber)
+        }.onFailure { exception ->
+            println(exception.message)
+        }.getOrElse {
+            getBonusNumber(winningNumber)
         }
     }
 

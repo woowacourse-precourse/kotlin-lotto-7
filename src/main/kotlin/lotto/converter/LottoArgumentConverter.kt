@@ -17,4 +17,8 @@ object LottoArgumentConverter {
             it.toIntOrNull() ?: throw LottoException(ExceptionCode.INVALID_NUMERIC)
         }
     }
+
+    fun toBonusNumberArgument(input: String): Int {
+        return input.toIntOrNull() ?: throw LottoException(ExceptionCode.INVALID_NUMERIC)
+    }
 }
