@@ -41,16 +41,21 @@ class Input {
         }
     }
 
-    //숫자가 아닌 경우
+    // 숫자가 아닌 경우
+    // 숫자가 아닌 경우 및 Int 범위를 벗어나는 경우
     private fun confirmInteger(money: String): Int {
-        val intMoney: Int
+        val longMoney: Long
         try {
-            intMoney = money.toInt()
+            longMoney = money.toLong()
         } catch (e: NumberFormatException) {
             throw CustomErrorHandler("[ERROR] 숫자만 입력할 수 있습니다.", CustomException.NUMBER)
         }
-        return intMoney
+        if (longMoney < Int.MIN_VALUE || longMoney > Int.MAX_VALUE) {
+            throw CustomErrorHandler("[ERROR] 입력한 값이 Int 범위를 벗어났습니다.", CustomException.RANGE)
+        }
+        return longMoney.toInt()
     }
+
 
     //금액이 0이거나 음수인 경우
     private fun confirmNegativeOrZero(money: Int) {
@@ -58,6 +63,7 @@ class Input {
             throw CustomErrorHandler("[ERROR] 티켓은 양의 정수만 입력할 수 있습니다.", CustomException.INTEGER)
         }
     }
+
 
     //티켓이 1000원 단위로 나누어 떨어 지지 않는 경우
     private fun confirmDivider(ticket: Int): Int {

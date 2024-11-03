@@ -33,6 +33,7 @@ class Output {
             BLANK -> throw IllegalArgumentException("[ERROR] 로또 번호가 비어있습니다.")
             BOUNDARY -> throw IllegalArgumentException("[ERROR] 로또 번호는 1이상 45이하의 정수여야 합니다.")
             DUPLICATE -> throw IllegalArgumentException("[ERROR] 로또 번호에 중복된 숫자가 있습니다.")
+            RANGE -> throw IllegalArgumentException("[ERROR] 입력한 값이 Int 범위를 벗어났습니다")
         }
     }
 
