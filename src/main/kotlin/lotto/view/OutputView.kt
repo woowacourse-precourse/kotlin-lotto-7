@@ -12,14 +12,19 @@ class OutputView {
         lottos.forEach { println(it.toString()) }
     }
 
+    private fun formatWinCountsMessage(winCounts: Map<LottoRank, Int>, rank: LottoRank): String {
+        val message = MESSAGE_WIN_COUNTS.format(
+            rank.matchCount,
+            rank.prize,
+            if (rank.hasBonus) MESSAGE_HAS_BONUS else "",
+            winCounts.getOrDefault(rank, 0))
+        return message
+    }
+
     fun printWinCounts(winCounts: Map<LottoRank, Int>) {
         println(MESSAGE_RESULT_HEADER)
         LottoRank.entries.dropLast(1).reversed().forEach {
-            println(MESSAGE_WIN_COUNTS.format(
-                it.matchCount,
-                it.prize,
-                if (it.hasBonus) MESSAGE_HAS_BONUS else "",
-                winCounts.getOrDefault(it, 0)))
+            println(formatWinCountsMessage(winCounts, it))
         }
     }
 
