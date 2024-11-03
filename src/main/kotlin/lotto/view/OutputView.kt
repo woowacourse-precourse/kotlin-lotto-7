@@ -2,16 +2,17 @@ package lotto.view
 
 import lotto.model.Rank
 import lotto.model.lotto.LottoTicket
+import lotto.model.message.OutputMessage
 
 object OutputView {
 
     fun printLottoTickets(lottoTickets: List<LottoTicket>) {
-        println("\n${lottoTickets.size}개를 구매했습니다.")
+        println(OutputMessage.LOTTO_TICKET_COUNT.message.format(lottoTickets.size))
         lottoTickets.forEach { println(it.getSortedNumbers()) }
     }
 
     fun printResults(ranks: List<Rank>) {
-        println("\n당첨 통계\n---")
+        println(OutputMessage.WINNING_STATISTICS_TITLE.message)
         val rankCounts = ranks.groupingBy { it }.eachCount()
 
         Rank.entries.filter { it != Rank.NONE }
@@ -21,10 +22,10 @@ object OutputView {
     private fun printRankResult(rank: Rank, rankCounts: Map<Rank, Int>) {
         val count = rankCounts[rank] ?: 0
         val bonusText = getBonusText(rank)
-        println("${rank.matchCount}개 일치$bonusText (${rank.prize}원) - $count 개")
+        println(OutputMessage.RANK_RESULT.message.format(rank.matchCount, bonusText, rank.prize, count))
     }
 
     private fun getBonusText(rank: Rank): String {
-        return if (rank.requiresBonus) "+ 보너스" else ""
+        return if (rank.requiresBonus) OutputMessage.BONUS_TEXT.message else ""
     }
 }
