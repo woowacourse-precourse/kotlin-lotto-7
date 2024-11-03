@@ -1,4 +1,4 @@
-package lotto
+package lotto.model
 
 class LottoAmount(private val amount: Int) {
     val lottoAmount
