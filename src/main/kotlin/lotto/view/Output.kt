@@ -12,7 +12,7 @@ object Output {
         println(Constants.DASH)
         val prize = Prize.entries
         val dec = DecimalFormat("#,###")
-        for ((index,count) in winningDetails.reversed().withIndex()){
+        for ((index,count) in winningDetails.withIndex()){
             val foundPrize = prize.find { it.rank == index+1 }!!
             when (foundPrize.bonus){
                 true -> println("${foundPrize.hit}개 일치, 보너스 볼 일치 (${dec.format(foundPrize.prize)}원) - ${count}개")
