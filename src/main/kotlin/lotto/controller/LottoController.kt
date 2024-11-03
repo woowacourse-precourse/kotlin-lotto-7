@@ -62,7 +62,7 @@ class LottoController(
             try {
                 require(input.isValidNumber()) { INVALID_INT_NUMBER_EXCEPTION_MSG }
                 require(input.toInt() in MIN_LOTTO_NUMBER..MAX_LOTTO_NUMBER) { OVER_RANGE_EXCEPTION_MSG }
-
+                require(input.toInt() !in winLotto.nums) { DUPLICATE_BONUS_NUMBER_EXCEPTION_MSG }
                 return input.toInt()
             } catch (e: IllegalArgumentException) {
                 println(e.message)
@@ -99,5 +99,6 @@ class LottoController(
         private const val OVER_RANGE_EXCEPTION_MSG = "[ERROR] 로또 번호는 1부터 45 사이의 숫자여야 합니다."
         private const val INVALID_PRICE_RANGE_EXCEPTION_MSG = "[ERROR] 구입 금액은 1000원 이상의 1000으로 나누어지는 금액이어야 합니다."
         private const val HAS_DUPLICATE_NUMBER_EXCEPTION_MSG = "[ERROR] 중복된 로또 번호가 없어야 합니다."
+        private const val DUPLICATE_BONUS_NUMBER_EXCEPTION_MSG = "[ERROR] 보너스 번호가 당첨 번호에 있습니다."
     }
 }
