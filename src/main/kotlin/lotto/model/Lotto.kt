@@ -21,6 +21,7 @@ class Lotto(private val numbers: List<Int>) {
         }
         recordPrice(money)
     }
+
     // 당첨된 로또 개수 계산
     fun recordRank(lotto: List<Int>, bonusNum: Int) {
         //구매한 로또와 당첨 로또의 교집합의 크기(겹치는 번호의 수)
@@ -32,6 +33,7 @@ class Lotto(private val numbers: List<Int>) {
         else if (count == 4) LottoResult.fourth++
         else if (count == 3) LottoResult.fifth++
     }
+
     // 수익률 계산
     fun recordPrice(money: Int) {
 
