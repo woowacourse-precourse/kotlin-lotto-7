@@ -1,5 +1,11 @@
 package lotto
 
+import lotto.Controller.LotteryMachine
+import lotto.Model.User
+import lotto.Util.ResultCalculator
+import lotto.View.PurchaseView
+import lotto.View.ResultView
+
 fun main() {
     // 구매 금액 입력
     val purchaseView = PurchaseView()

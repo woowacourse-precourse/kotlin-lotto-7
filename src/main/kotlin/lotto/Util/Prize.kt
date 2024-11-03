@@ -1,4 +1,4 @@
-package lotto
+package lotto.Util
 
 //당첨 등수 및 상금 정의
 enum class Prize(

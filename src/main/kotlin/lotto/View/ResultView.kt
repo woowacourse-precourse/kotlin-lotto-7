@@ -1,6 +1,8 @@
-package lotto
+package lotto.View
 
 import camp.nextstep.edu.missionutils.Console
+import lotto.Util.Prize
+import lotto.Util.Validator
 
 class ResultView {
     fun getWinningNumbers(): List<Int> {
@@ -36,12 +38,12 @@ class ResultView {
     fun displayResults(results: Map<Prize, Int>, profitRate: Double) {
         println(RESULTS_PROMPT)
         println(RESULTS_START_SEPARATOR)
-        println("${MATCH_THREE} - ${results[Prize.FIFTH] ?: 0}개")
-        println("${MATCH_FOUR} - ${results[Prize.FOURTH] ?: 0}개")
-        println("${MATCH_FIVE} - ${results[Prize.THIRD] ?: 0}개")
-        println("${MATCH_FIVE_BONUS} - ${results[Prize.SECOND] ?: 0}개")
-        println("${MATCH_SIX} - ${results[Prize.FIRST] ?: 0}개")
-        println("${PROFIT_PROMPT_FIRST}${"%.1f".format(profitRate)}${PROFIT_PROMPT_SECOND}")
+        println("$MATCH_THREE - ${results[Prize.FIFTH] ?: 0}개")
+        println("$MATCH_FOUR - ${results[Prize.FOURTH] ?: 0}개")
+        println("$MATCH_FIVE - ${results[Prize.THIRD] ?: 0}개")
+        println("$MATCH_FIVE_BONUS - ${results[Prize.SECOND] ?: 0}개")
+        println("$MATCH_SIX - ${results[Prize.FIRST] ?: 0}개")
+        println("$PROFIT_PROMPT_FIRST${"%.1f".format(profitRate)}$PROFIT_PROMPT_SECOND")
     }
 
     companion object {

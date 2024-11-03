@@ -1,4 +1,4 @@
-package lotto
+package lotto.Util
 
 object Validator {
     private const val ERROR_INVALID_NUMBER = "[ERROR] 유효한 숫자를 입력해 주세요."

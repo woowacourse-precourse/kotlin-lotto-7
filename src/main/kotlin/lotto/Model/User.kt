@@ -1,4 +1,7 @@
-package lotto
+package lotto.Model
+
+import lotto.Controller.LotteryMachine
+import lotto.Model.Lotto
 
 class User(val purchasedLottoCount: Int) {
     val lottoList = mutableListOf<Lotto>() // 구매한 로또 리스트

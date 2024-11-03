@@ -1,6 +1,7 @@
-package lotto
+package lotto.Controller
 
 import camp.nextstep.edu.missionutils.Randoms
+import lotto.Model.Lotto
 
 // 로또 발행, 당첨번호 관리
 object LotteryMachine {

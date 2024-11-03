@@ -1,6 +1,8 @@
-package lotto
+package lotto.View
 
 import camp.nextstep.edu.missionutils.Console
+import lotto.Model.User
+import lotto.Util.Validator
 
 class PurchaseView {
     // 구매할 로또의 개수 반환

@@ -1,4 +1,7 @@
-package lotto
+package lotto.Util
+
+import lotto.Controller.LotteryMachine
+import lotto.Model.User
 
 // 등수별로 당첨된 로또의 개수와 당첨금을 User에게 기록
 class ResultCalculator {
