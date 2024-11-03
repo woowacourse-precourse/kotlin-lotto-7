@@ -31,10 +31,19 @@ class LottoController {
         val winningLotto = getWinningLotto()
         calculatePrize(lottoes, winningLotto)
 
-        val earningMoney = calculateEarningMoney()
-
         OutputView.printWinningStatistics()
 
+        val earningMoney = calculateEarningMoney()
+
+        val earningRate = getEarningRate(earningMoney, money)
+
+        OutputView.printEarningRate(earningRate)
+
+    }
+
+    private fun getEarningRate(earningMoney: Int, money: Int): Double {
+        val netProfit = earningMoney - money
+        return netProfit.toDouble() / money * 100
     }
 
     private fun getWinningLotto(): WinningLotto {
@@ -52,6 +61,8 @@ class LottoController {
         lottoes.map { lotto ->
             val matchCount = lotto.matchCount(winningLotto)
             val isMatchBonus = lotto.isMatchBonus(winningLotto)
+
+            updatePrize(matchCount, isMatchBonus)
         }
     }
 
