@@ -10,7 +10,7 @@ class QuickPickLottoTickets(
     fun quickPickLottoTickets(): List<Lotto> {
         val quickPickLottoTickets: MutableList<Lotto> = mutableListOf()
         repeat(purchaseInfo.numberOfTickets) {
-            quickPickLottoTickets.add(Lotto(RandomLottoNumbers.pick()))
+            quickPickLottoTickets.add(Lotto(RandomLottoNumbers.pick().sorted()))
         }
         return quickPickLottoTickets
     }
