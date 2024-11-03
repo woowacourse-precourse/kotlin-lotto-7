@@ -5,11 +5,11 @@ enum class Rank(
     val money: Double,
     val bonusChance: Boolean = false,
 ) {
-    FIRST_RANK(6, 2_000_000_000.0),
-    SECOND_RANK(5, 30_000_000.0, true),
-    THIRD_RANK(5, 1_500_000.0),
-    FOURTH_RANK(4, 50_000.0),
     FIFTH_RANK(3, 5_000.0),
+    FOURTH_RANK(4, 50_000.0),
+    THIRD_RANK(5, 1_500_000.0),
+    SECOND_RANK(5, 30_000_000.0, true),
+    FIRST_RANK(6, 2_000_000_000.0),
     ;
 
     companion object {
