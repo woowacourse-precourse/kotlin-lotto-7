@@ -20,6 +20,10 @@ class OutputView {
         println("$SIX$SAME_NUM_MSG (${WinningLotto.Six.toPriceString()}$WON) $DELIMIETER ${WinningLotto.Six.amount}$AMOUNT")
     }
 
+    fun showProfitRate(profitRate: String) {
+        println("$PROFIT_RATE_MSG1$profitRate$PROFIT_RATE_MSG2")
+    }
+
     companion object {
         const val LOTTO_PURCHASE_MSG = "개를 구매했습니다."
 
@@ -35,5 +39,8 @@ class OutputView {
         const val FIVE = 5
         const val BONUS_SAME_MSG = ", 보너스 볼 일치"
         const val SIX = 6
+
+        const val PROFIT_RATE_MSG1 = "총 수익률은 "
+        const val PROFIT_RATE_MSG2 = "%입니다."
     }
 }
