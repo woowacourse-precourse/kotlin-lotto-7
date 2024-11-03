@@ -2,7 +2,7 @@ package lotto
 
 import camp.nextstep.edu.missionutils.Console.readLine
 
-object UserInput {
+object InputGetter {
 
     fun requestPayment() {
         println("구입금액을 입력해 주세요.")
