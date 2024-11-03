@@ -5,7 +5,7 @@ import lotto.util.ErrorMessage
 
 class Lotto(private val numbers: List<Int>) {
     init {
-        require(numbers.size == Constant.LOTTO_NUMBER_COUNT) { ErrorMessage.LOTTO_NUMBER_COUNT_MISMATCH }
+        require(numbers.size == Constant.LOTTO_NUMBERS_COUNT) { ErrorMessage.LOTTO_NUMBERS_COUNT_MISMATCH }
     }
 
     override fun equals(other: Any?): Boolean {

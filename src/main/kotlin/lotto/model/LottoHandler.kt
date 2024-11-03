@@ -13,7 +13,7 @@ class LottoHandler {
     }
 
     private fun generateRandomNumbers(): List<Int> {
-        val numbers = Randoms.pickUniqueNumbersInRange(Constant.LOTTO_NUMBER_MIN, Constant.LOTTO_NUMBER_MAX, Constant.LOTTO_NUMBER_COUNT)
+        val numbers = Randoms.pickUniqueNumbersInRange(Constant.LOTTO_NUMBERS_MIN, Constant.LOTTO_NUMBERS_MAX, Constant.LOTTO_NUMBERS_COUNT)
         return numbers.sorted()
     }
 }
