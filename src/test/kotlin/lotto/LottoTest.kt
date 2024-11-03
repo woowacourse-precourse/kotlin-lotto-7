@@ -32,4 +32,11 @@ class LottoTest {
         val rank = lotto.checkRank(listOf(1, 2, 3, 4, 5, 6), 7)
         assertThat(rank).isEqualTo(LottoRank.SECOND)
     }
+
+    @Test
+    fun `당첨 번호와 로또의 번호 중 하나가 다르면서 보너스가 틀릴 경우 3등인지 확인할 수 있어야한다`() {
+        val lotto = Lotto(listOf(1, 2, 3, 4, 5, 7))
+        val rank = lotto.checkRank(listOf(1, 2, 3, 4, 5, 6), 8)
+        assertThat(rank).isEqualTo(LottoRank.THIRD)
+    }
 }
