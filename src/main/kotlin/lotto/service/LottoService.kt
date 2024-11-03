@@ -14,28 +14,40 @@ class LottoService {
     }
 
     fun calculateStatistics(lottos: List<Lotto>, winningNumbers: Set<Int>, bonusNumber: Int): Map<String, Int> {
-        val statistics = mutableMapOf(
+        val statistics = initializeStatistics()
+
+        lottos.forEach { lotto ->
+            val matchCount = calculateMatchCount(lotto, winningNumbers)
+            updateStatistics(statistics, matchCount, lotto, bonusNumber)
+        }
+        return statistics
+    }
+
+    private fun initializeStatistics(): MutableMap<String, Int> {
+        return mutableMapOf(
             LottoMatchDescription.MATCH_3_DESCRIPTION.description to 0,
             LottoMatchDescription.MATCH_4_DESCRIPTION.description to 0,
             LottoMatchDescription.MATCH_5_DESCRIPTION.description to 0,
             LottoMatchDescription.MATCH_5_BONUS_DESCRIPTION.description to 0,
             LottoMatchDescription.MATCH_6_DESCRIPTION.description to 0
         )
+    }
 
-        lottos.forEach { lotto ->
-            val matchCount = lotto.getNumbers().count { winningNumbers.contains(it) }
-            when (matchCount) {
-                6 -> statistics[LottoMatchDescription.MATCH_6_DESCRIPTION.description] = statistics.getValue(LottoMatchDescription.MATCH_6_DESCRIPTION.description) + 1
-                5 -> if (lotto.getNumbers().contains(bonusNumber)) {
-                    statistics[LottoMatchDescription.MATCH_5_BONUS_DESCRIPTION.description] = statistics.getValue(LottoMatchDescription.MATCH_5_BONUS_DESCRIPTION.description) + 1
-                } else {
-                    statistics[LottoMatchDescription.MATCH_5_DESCRIPTION.description] = statistics.getValue(LottoMatchDescription.MATCH_5_DESCRIPTION.description) + 1
-                }
-                4 -> statistics[LottoMatchDescription.MATCH_4_DESCRIPTION.description] = statistics.getValue(LottoMatchDescription.MATCH_4_DESCRIPTION.description) + 1
-                3 -> statistics[LottoMatchDescription.MATCH_3_DESCRIPTION.description] = statistics.getValue(LottoMatchDescription.MATCH_3_DESCRIPTION.description) + 1
+    private fun calculateMatchCount(lotto: Lotto, winningNumbers: Set<Int>): Int {
+        return lotto.getNumbers().count { winningNumbers.contains(it) }
+    }
+
+    private fun updateStatistics(statistics: MutableMap<String, Int>, matchCount: Int, lotto: Lotto, bonusNumber: Int) {
+        when (matchCount) {
+            6 -> statistics[LottoMatchDescription.MATCH_6_DESCRIPTION.description] = statistics.getValue(LottoMatchDescription.MATCH_6_DESCRIPTION.description) + 1
+            5 -> if (lotto.getNumbers().contains(bonusNumber)) {
+                statistics[LottoMatchDescription.MATCH_5_BONUS_DESCRIPTION.description] = statistics.getValue(LottoMatchDescription.MATCH_5_BONUS_DESCRIPTION.description) + 1
+            } else {
+                statistics[LottoMatchDescription.MATCH_5_DESCRIPTION.description] = statistics.getValue(LottoMatchDescription.MATCH_5_DESCRIPTION.description) + 1
             }
+            4 -> statistics[LottoMatchDescription.MATCH_4_DESCRIPTION.description] = statistics.getValue(LottoMatchDescription.MATCH_4_DESCRIPTION.description) + 1
+            3 -> statistics[LottoMatchDescription.MATCH_3_DESCRIPTION.description] = statistics.getValue(LottoMatchDescription.MATCH_3_DESCRIPTION.description) + 1
         }
-        return statistics
     }
 
     fun calculateRateOfReturn(statistics: Map<String, Int>): Int {
