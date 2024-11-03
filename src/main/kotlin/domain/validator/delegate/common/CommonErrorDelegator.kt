@@ -6,7 +6,7 @@ import domain.util.ext.isNumeric
 
 class CommonErrorDelegator : CommonErrorDelegate {
     override fun isEmpty(input: String) {
-        require(input.isNotEmpty()) { Exception.EMPTY_INPUT }
+        require(input.trim().isNotEmpty()) { Exception.EMPTY_INPUT }
     }
 
     override fun isOverIntMaxValue(input: String) {
