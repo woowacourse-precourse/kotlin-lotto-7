@@ -1,22 +1,23 @@
 package lotto.view
 
+import lotto.constant.OutputMessage
 import lotto.model.LottoResult
 
 class OutputView {
     fun displayLotto(lotto : List<List<Int>>){
-        println("${lotto.size}개를 구매했습니다.")
+        OutputMessage.PURCHASE_LOTTO_COUNT.display(lotto.size)
         lotto.forEach{
             println(it)
         }
+        println()
     }
     fun displayResult(){
-        println("3개 일치 - ${LottoResult.fifth}개")
-        println("4개 일치 - ${LottoResult.fourth}개")
-        println("5개 일치 - ${LottoResult.third}개")
-        println("5개 일치 - ${LottoResult.second}개")
-        println("6개 일치 - ${LottoResult.first}개")
-        println("총 수익률은 ${"%.1f".format(LottoResult.priceRatio)}")
-        println(LottoResult.priceRatio)
-
+        OutputMessage.RESULT_TITLE.display()
+        OutputMessage.FIFTH.display(LottoResult.fifth)
+        OutputMessage.FOURTH.display(LottoResult.fourth)
+        OutputMessage.THIRD.display(LottoResult.third)
+        OutputMessage.SECOND.display(LottoResult.second)
+        OutputMessage.FIRST.display(LottoResult.first)
+        OutputMessage.PRICE_RATIO.display(LottoResult.priceRatio)
     }
 }

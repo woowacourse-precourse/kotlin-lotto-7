@@ -1,5 +1,7 @@
 package lotto.model
 
+import lotto.constant.WinningPrize
+
 
 class Lotto(private val numbers: List<Int>) {
     init {
@@ -20,19 +22,23 @@ class Lotto(private val numbers: List<Int>) {
 
     fun recordRank(lotto: List<Int>, bonusNum: Int) {
         val count = lotto.intersect(numbers).size
-        println(count)
-        if (count == 6) LottoResult.first += 1
-        else if (count == 5 && lotto.contains(bonusNum)) LottoResult.second += 1
-        else if (count == 5) LottoResult.third += 1
-        else if (count == 4) LottoResult.fourth += 1
-        else if (count == 3) LottoResult.fifth += 1
+        if (count == 6) LottoResult.first++
+        else if (count == 5 && lotto.contains(bonusNum)) LottoResult.second++
+        else if (count == 5) LottoResult.third++
+        else if (count == 4) LottoResult.fourth++
+        else if (count == 3) LottoResult.fifth++
 
     }
 
     fun recordPrice(money: Int) {
-        var total = 0f
-        total = LottoResult.first * 2000000000f + LottoResult.second * 30000000f + LottoResult.third*1500000f+LottoResult.fourth*50000f+LottoResult.fifth*5000f
-        LottoResult.priceRatio = (total/money*100f)
+
+        val total = (LottoResult.first * WinningPrize.FIRST.prize) +
+                (LottoResult.second * WinningPrize.SECOND.prize) +
+                (LottoResult.third * WinningPrize.THIRD.prize) +
+                (LottoResult.fourth * WinningPrize.FOURTH.prize) +
+                (LottoResult.fifth * WinningPrize.FIFTH.prize)
+
+        LottoResult.priceRatio = (total / money * 100f)
     }
 }
 
