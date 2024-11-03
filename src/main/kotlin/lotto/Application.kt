@@ -50,15 +50,18 @@ fun main() {
         Rank.of(lotto.countMatchingNumbers(winningNumbers), lotto.containsBonusNumber(bonusNumber))
     }.eachCount()
 
+    displayPrizeStatistics(prizeStatistic)
+    val profitRate = calculateProfitRate(prizeStatistic, purchaseAmount)
+    println("총 수익률은 ${"%.1f".format(profitRate)}%입니다.")
+}
+
+fun displayPrizeStatistics(prizeStatistic: Map<Rank, Int>) {
     println("당첨 통계\n---")
     println("3개 일치 (5,000원) - ${prizeStatistic.getOrDefault(Rank.FIFTH, 0)}개")
     println("4개 일치 (50,000원) - ${prizeStatistic.getOrDefault(Rank.FOURTH, 0)}개")
     println("5개 일치 (1,500,000원) - ${prizeStatistic.getOrDefault(Rank.THIRD, 0)}개")
     println("5개 일치, 보너스 볼 일치 (30,000,000원) - ${prizeStatistic.getOrDefault(Rank.SECOND, 0)}개")
     println("6개 일치 (2,000,000,000원) - ${prizeStatistic.getOrDefault(Rank.FIRST, 0)}개")
-
-    val profitRate = calculateProfitRate(prizeStatistic, purchaseAmount)
-    println("총 수익률은 ${"%.1f".format(profitRate)}%입니다.")
 }
 
 fun calculateProfitRate(prizeStatistic: Map<Rank, Int>, purchaseAmount: Int): Double {
