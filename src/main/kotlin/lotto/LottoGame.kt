@@ -74,7 +74,7 @@ class LottoGame {
         val totalPrize = calculateTotalPrize(winningCounts)
         val totalCost = calculateTotalCost()
 
-        return totalPrize.toFloat() / totalCost.toFloat()
+        return (totalPrize.toFloat() / totalCost.toFloat()) * 100
     }
 
     private fun calculateTotalPrize(winningCounts: List<Int>): Int {
