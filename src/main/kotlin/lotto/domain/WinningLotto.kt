@@ -1,14 +1,37 @@
 package lotto.domain
 
-class WinningLotto (private val winningNumbers: List<Int>, private val bonusNumber: Int) {
+import lotto.exception.InvalidInputException
+import lotto.util.Constants
+
+// 당첨 번호와 보너스 번호 관리
+class WinningLotto(private val winningNumbers: List<Int>, private val bonusNumber: Int) {
     init {
-        require(winningNumbers.size == 6) { "[ERROR] 당첨 번호는 6개여야 합니다." }
-        require(winningNumbers.all { it in 1..45 }) { "[ERROR] 당첨 번호는 1부터 45 사이의 숫자여야 합니다." }
-        require(winningNumbers.distinct().size == 6) { "[ERROR] 당첨 번호는 중복될 수 없습니다." }
-        require(bonusNumber in 1..45) { "[ERROR] 보너스 번호는 1부터 45 사이의 숫자여야 합니다." }
-        require(!winningNumbers.contains(bonusNumber)) { "[ERROR] 당첨 번호와 보너스 번호는 같을 수 없습니다." }
+        validateWinningNumbers()
+        validateBonusNumber()
     }
 
+    // 당첨 번호 유효성 검증
+    private fun validateWinningNumbers() {
+        if (winningNumbers.size != Constants.LOTTO_NUMBER_COUNT) {
+            throw InvalidInputException(Constants.ERROR_INVALID_WINNING_NUMBERS_SIZE)
+        }
+        if (winningNumbers.distinct().size != Constants.LOTTO_NUMBER_COUNT) {
+            throw InvalidInputException(Constants.ERROR_DUPLICATE_NUMBER)
+        }
+        if (!winningNumbers.all { it in Constants.LOTTO_NUMBER_MIN..Constants.LOTTO_NUMBER_MAX }) {
+            throw InvalidInputException(Constants.ERROR_NUMBER_OUT_OF_RANGE)
+        }
+    }
+
+    // 보너스 번호 유효성 검증
+    private fun validateBonusNumber() {
+        if (bonusNumber !in Constants.LOTTO_NUMBER_MIN..Constants.LOTTO_NUMBER_MAX) {
+            throw InvalidInputException(Constants.ERROR_NUMBER_OUT_OF_RANGE)
+        }
+        if (winningNumbers.contains(bonusNumber)) {
+            throw InvalidInputException(Constants.ERROR_BONUS_NUMBER_DUPLICATE)
+        }
+    }
 
     fun getWinningNumbers(): List<Int> = winningNumbers
 
