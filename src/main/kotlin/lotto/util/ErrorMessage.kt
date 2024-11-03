@@ -10,4 +10,5 @@ object ErrorMessage {
 
     const val LOTTO_NUMBERS_COUNT_MISMATCH = "${ERROR_MESSAGE_HEADER}로또 번호는 ${Constant.LOTTO_NUMBERS_COUNT}개여야 합니다."
     const val LOTTO_NUMBERS_NOT_DISTINCT = "${ERROR_MESSAGE_HEADER}중복되는 로또 번호가 없어야 합니다."
+    const val LOTTO_NUMBER_NOT_IN_RANGE = "${ERROR_MESSAGE_HEADER}로또 번호는 ${Constant.LOTTO_NUMBERS_MIN} 이상 ${Constant.LOTTO_NUMBERS_MAX} 이하여야 합니다."
 }

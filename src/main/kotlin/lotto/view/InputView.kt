@@ -3,6 +3,7 @@ package lotto.view
 import camp.nextstep.edu.missionutils.Console
 import lotto.util.InputParser.parseNumericInput
 import lotto.util.InputParser.parseWinningNumbers
+import lotto.util.InputValidator.validateLottoNumberInRange
 import lotto.util.InputValidator.validateMoneyIsNotNegative
 import lotto.util.InputValidator.validateMoneyIsEnough
 import lotto.util.InputValidator.validateMoneyIsDivisible
@@ -24,6 +25,7 @@ class InputView {
         val numbers = parseWinningNumbers(Console.readLine())
         validateWinningNumbersCount(numbers)
         validateWinningNumbersDistinctness(numbers)
+        numbers.forEach { validateLottoNumberInRange(it) }
         return numbers
     }
 
