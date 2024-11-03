@@ -23,10 +23,8 @@ fun main() {
     val winningNumber = Input.setWinningNumber()
     val bonusNumber = Input.setBonusNumber()
 
-    // [4] 당첨 통계화 및 시각화
-
-
-    // [5] 수익률 계산
+    // [4] 당첨 결과 및 통계 시각화
+    lottoManager.compareResults(winningNumber, bonusNumber)
 
 }
 
@@ -55,7 +53,7 @@ object Input {
 
     // [*] 보너스 번호 입력 기능
     fun setBonusNumber() : Int{
-        println("보너스 번호를 입력해 주세요.")
+        println("\n보너스 번호를 입력해 주세요.")
         val input = Console.readLine()
             ?.takeIf { it.isNotBlank() }
             ?: throw IllegalArgumentException("[ERROR] 입력 값을 다시 확인해주세요.")
