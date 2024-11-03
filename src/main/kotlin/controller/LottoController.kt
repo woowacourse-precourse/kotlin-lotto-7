@@ -28,6 +28,7 @@ class LottoController {
         OutputView.printLotto(lottoCount, lottoes)
 
         val winningLotto = getWinningLotto()
+        calculatePrize(lottoes, winningLotto)
 
     }
 
@@ -38,6 +39,15 @@ class LottoController {
 
         return WinningLotto(
             Lotto(winningNumbers), bonusNumber)
+    }
+
+    private fun calculatePrize(lottoes: List<Lotto>, winningLotto: WinningLotto) {
+        lottoes.map { lotto ->
+            val matchCount = lotto.matchCount(winningLotto)
+            val isMatchBonus = lotto.isMatchBonus(winningLotto)
+
+            updatePrize(matchCount, isMatchBonus)
+        }
     }
 
 
