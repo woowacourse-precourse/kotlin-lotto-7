@@ -14,19 +14,26 @@ class LottoController(
     private lateinit var amount: LottoAmount
 
     fun start() {
-        println("구입금액을 입력해 주세요.")
-        val inputAmount = readLine()
-        require(inputAmount.isNotBlank()) { "[ERROR] 공백은 입력할 수 없습니다." }
-        amount =
-            LottoAmount(
-                inputAmount.toIntOrNull()
-                    ?: throw IllegalArgumentException("[ERROR] 정수만 입력할 수 있습니다.")
-            )
+        while (true) {
+            try {
+                println("구입금액을 입력해 주세요.")
+                val inputAmount = readLine()
+                require(!inputAmount.isNullOrBlank()) { "[ERROR] 공백은 입력할 수 없습니다." }
 
-        printLottos(amount)
+                amount = LottoAmount(
+                    inputAmount.toIntOrNull()
+                        ?: throw IllegalArgumentException("[ERROR] 정수만 입력할 수 있습니다.")
+                )
+                break
+            } catch (e: IllegalArgumentException) {
+                println(e.message)
+            }
+        }
+
+        printLottos()
     }
 
-    private fun printLottos(amount: LottoAmount) {
+    private fun printLottos() {
         val lottosCount = cashier.calculateLottoCount(amount)
 
         println()
@@ -42,12 +49,32 @@ class LottoController(
     }
 
     private fun inputWinningLottery() {
-        println("당첨 번호를 입력해 주세요.")
-        val winningLottoNumber = Lotto(readLine().split(",").map { it.toInt() })
-        println("보너스 번호를 입력해 주세요.")
-        val winningBonusNumber = readLine().toInt()
+        lateinit var winningLottoNumber: Lotto
+        var winningBonusNumber: Int
+        var winningLotto: WinningLotto
 
-        val winningLotto = WinningLotto(winningLottoNumber, winningBonusNumber)
+        println()
+        while (true) {
+            try {
+                println("당첨 번호를 입력해 주세요.")
+                winningLottoNumber = Lotto(readLine().split(",").map { it.toInt() })
+                break
+            } catch (e: Exception) {
+                println(e.message)
+            }
+        }
+
+        println()
+        while (true) {
+            try {
+                println("보너스 번호를 입력해 주세요.")
+                winningBonusNumber = readLine().toInt()
+                winningLotto = WinningLotto(winningLottoNumber, winningBonusNumber)
+                break
+            } catch (e: Exception) {
+                println(e.message)
+            }
+        }
 
         printWinningStatistics(winningLotto)
     }
