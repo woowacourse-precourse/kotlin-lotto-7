@@ -2,6 +2,7 @@ package lotto.controller
 
 import lotto.controller.dto.PurchasedLottoNumbersDto
 import lotto.controller.dto.PurchasedLottoTicketsDto
+import lotto.controller.dto.WinningProfitRateDto
 import lotto.controller.dto.WinningStatisticsDto
 import lotto.service.LottoGameService
 import lotto.view.LottoGameView
@@ -18,6 +19,6 @@ class LottoGameController(
         val purchasedLottoNumbers: PurchasedLottoNumbersDto = lottoGameView.getPurchasedLottoNumbers()
         val results: WinningStatisticsDto =
             lottoGameService.calculateResults(purchasedLottoTickets, purchasedLottoNumbers)
-
+        val profitRate: WinningProfitRateDto = lottoGameService.calculateProfitRate(results, purchaseAmount)
     }
 }
