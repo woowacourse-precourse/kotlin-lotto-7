@@ -33,7 +33,7 @@ class MainController {
         while (!isValid) {
             try {
                 outputView.printPurchaseAmountPrompt()
-                val purchaseAmountInput = inputView.inputPurchaseAmount()
+                val purchaseAmountInput = inputView.inputPurchaseAmount().trim()
                 inputValidator.validatePurchaseAmount(purchaseAmountInput)
                 purchaseAmount = purchaseAmountInput.toInt()
                 isValid = true
@@ -75,7 +75,7 @@ class MainController {
         while (!isValid) {
             try {
                 outputView.printBonusNumberPrompt()
-                val bonusNumberInput = inputView.inputBonusNumber()
+                val bonusNumberInput = inputView.inputBonusNumber().trim()
                 inputValidator.validateBonusNumber(bonusNumberInput, winningNumbers)
                 bonusNumber = bonusNumberInput.toInt()
                 isValid = true
