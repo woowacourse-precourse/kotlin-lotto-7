@@ -7,8 +7,6 @@ class WinningResult(val result: HashMap<LottoRank, Int>) {
         return getTotalPrizeMoney() / purchaseMoney.money.toDouble() * 100
     }
 
-
-
     private fun getTotalPrizeMoney(): Long =
         result.entries.sumOf { (rank, count) -> rank.prizeMoney.toLong() * count}
 

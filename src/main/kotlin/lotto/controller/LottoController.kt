@@ -1,5 +1,9 @@
 package lotto.controller
 
+import camp.nextstep.edu.missionutils.Randoms
+import lotto.constant.LOTTO_SIZE
+import lotto.constant.MAX_LOTTO_NUMBER
+import lotto.constant.MIN_LOTTO_NUMBER
 import lotto.model.Lotto
 import lotto.model.PurchaseMoney
 import lotto.model.WinningLotto
@@ -36,12 +40,18 @@ class LottoController {
         return PurchaseMoney(moneyinput)
     }
 
+
+
     private fun getLottoCount(purchaseMoney: Int, unitPrice: Int): Int {
         return purchaseMoney / unitPrice
     }
 
+    private fun makeLottoNumbers(): List<Int> {
+        return Randoms.pickUniqueNumbersInRange(MIN_LOTTO_NUMBER, MAX_LOTTO_NUMBER, LOTTO_SIZE).sorted()
+    }
+
     private fun getLottos(lottoCount: Int): MutableList<Lotto> {
-        return MutableList(lottoCount) { Lotto() }
+        return MutableList(lottoCount) { Lotto(makeLottoNumbers()) }
     }
 
     private fun printLottoNubmers(lottos: MutableList<Lotto>) {

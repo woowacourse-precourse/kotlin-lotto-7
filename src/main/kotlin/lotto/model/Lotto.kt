@@ -7,18 +7,13 @@ import lotto.constant.MAX_LOTTO_NUMBER
 import lotto.constant.MIN_LOTTO_NUMBER
 
 
-class Lotto() {
-    val numbers: Set<Int>
+class Lotto(val numbers: List<Int>) {
 
     init {
-        numbers = makeLotto()
         validateLottoSize()
         validateLottoNumber()
     }
 
-    private fun makeLotto(): Set<Int> {
-        return Randoms.pickUniqueNumbersInRange(MIN_LOTTO_NUMBER, MAX_LOTTO_NUMBER, LOTTO_SIZE).toSortedSet()
-    }
 
     private fun validateLottoSize() {
         require(numbers.size == LOTTO_SIZE) { getErrorMessage(INVALID_LOTTO_SIZE) }
@@ -32,6 +27,7 @@ class Lotto() {
 
     companion object {
         private const val INVALID_LOTTO_SIZE = "로또 번호는 ${LOTTO_SIZE}개여야 합니다."
-        private const val INVALID_LOTTO_NUMBER = "로또 번호는 $MIN_LOTTO_NUMBER 이상 ${MIN_LOTTO_NUMBER}이하여야 합니다."
+        private const val INVALID_LOTTO_NUMBER =
+            "로또 번호는 $MIN_LOTTO_NUMBER 이상 ${MIN_LOTTO_NUMBER}이하여야 합니다."
     }
 }
