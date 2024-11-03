@@ -11,16 +11,18 @@ class LottoController {
     val inputView = InputView()
     val outputView = OutputView()
 
+    lateinit var lotto: Lotto
+
     fun start() {
         val purchaseAmount = getVaildPurchaseAmount()
         val purchaseCount = purchaseAmount / LOTTO_PRICE
-        val purchaseLottoTickets = List(purchaseCount) { LottoTicket(Lotto.generate()) }
+        val purchaseLottoTickets =  List(purchaseCount) { LottoTicket.generate() }
 
         outputView.showPurchasedLottoCount(purchaseCount, purchaseLottoTickets)
 
         val winningNumbers = getVaildWinningNumbers()
         val bonusNumber = getValidBonusNumber(winningNumbers)
-
+        val matchCount = lotto.comparisonOfWinningNumbers(purchaseLottoTickets)
         // 당첨 등급 출력
         //outputView.showWinningStatistics()
 
@@ -44,7 +46,7 @@ class LottoController {
         while (true) {
             try {
                 val winningNumbers = inputView.getWinningNumbers()
-                Lotto(winningNumbers)
+                lotto = Lotto(winningNumbers)
                 return winningNumbers
             } catch (e: IllegalArgumentException) {
                 println(e.message)

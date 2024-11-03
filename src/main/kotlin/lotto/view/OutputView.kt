@@ -22,7 +22,7 @@ class OutputView {
         println("${LottoRank.FIFTH.matchCount}개 일치 (${LottoRank.FIFTH.reward}) - ${matchCount[FIFTH]}개")
         println("${LottoRank.FOURTH.matchCount}개 일치 (${LottoRank.FOURTH.reward}) - ${matchCount[FOURTH]}개")
         println("${LottoRank.THIRD.matchCount}개 일치 (${LottoRank.THIRD.reward}) - ${matchCount[THIRD]}개")
-        println("${LottoRank.SECOND.matchCount}개 일치 (${LottoRank.SECOND.reward}) - ${matchCount[SECOND]}개")
+        println("${LottoRank.SECOND.matchCount}개 일치, 보너스 볼 일치 (${LottoRank.SECOND.reward}) - ${matchCount[SECOND]}개")
         println("${LottoRank.FIRST.matchCount}개 일치 (${LottoRank.FIRST.reward}) - ${matchCount[FIRST]}개")
     }
 

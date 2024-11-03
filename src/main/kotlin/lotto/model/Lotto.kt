@@ -4,7 +4,6 @@ import camp.nextstep.edu.missionutils.Randoms
 import lotto.utils.Constants.MAX_NUMBER
 import lotto.utils.Constants.MIN_NUMBER
 import lotto.utils.Constants.LOTTO_NUMBER_COUNT
-import lotto.utils.Constants.ZERO
 import lotto.utils.ErrorConstants
 
 /**
@@ -19,20 +18,16 @@ class Lotto(private val numbers: List<Int>) {
         require(numbers.distinct().size == LOTTO_NUMBER_COUNT) { ErrorConstants.LOTTO_NUMBER_DUPLICATE }
     }
 
-    // TODO: 새로운 모델을 만들어서 할까
-    fun ComparisonOfWinningNumbers(lotto: List<LottoTicket>) {
-        for (index in ZERO..lotto.size) {
-
-        }
+    fun comparisonOfWinningNumbers(lotto: List<LottoTicket>) {
+        //return lotto.forEach { it in numbers }
+        //numbers.count { it in lotto.forEach { it.number } }
     }
 
-    fun ComparisonOfBonusNumber(bonusNumber: Int) {
-
+    fun comparisonOfBonusNumber(bonusNumber: Int): Boolean {
+        return bonusNumber in numbers
     }
 
-    companion object {
-        fun generate(): List<Int> = Randoms.pickUniqueNumbersInRange(MIN_NUMBER, MAX_NUMBER, LOTTO_NUMBER_COUNT).sorted()
-    }
+    fun calculateTotalReturnRate() {}
 
     // 여기서 예외 처리를 하고, 당첨 번호와 맞는지 판단 해야할 듯?
     /**
