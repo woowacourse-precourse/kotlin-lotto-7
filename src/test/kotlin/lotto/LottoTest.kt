@@ -1,5 +1,6 @@
 package lotto
 
+import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 
@@ -11,7 +12,6 @@ class LottoTest {
         }
     }
 
-    // TODO: 테스트가 통과하도록 프로덕션 코드 구현
     @Test
     fun `로또 번호에 중복된 숫자가 있으면 예외가 발생한다`() {
         assertThrows<IllegalArgumentException> {
@@ -19,5 +19,10 @@ class LottoTest {
         }
     }
 
-    // TODO: 추가 기능 구현에 따른 테스트 코드 작성
+    @Test
+    fun `당첨 번호와 보너스 번호를 가지고 몇 등인지 확인할 수 있어야한다`() {
+        val lotto = Lotto(listOf(1, 2, 3, 4, 5, 6))
+        val rank = lotto.checkRank(listOf(1, 2, 3, 4, 5, 6), 7)
+        assertThat(rank).isEqualTo(LottoRank.FIRST)
+    }
 }

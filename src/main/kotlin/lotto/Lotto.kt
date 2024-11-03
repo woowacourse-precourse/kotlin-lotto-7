@@ -6,5 +6,7 @@ class Lotto(private val numbers: List<Int>) {
         require(numbers.toSet().size == numbers.size) { ErrorMessage.LOTTO_NUMBER_NO_DUPLICATE }
     }
 
-    // TODO: 추가 기능 구현
+    fun checkRank(numbers: List<Int>, bonus: Int): LottoRank {
+        return LottoRank.FOURTH
+    }
 }
