@@ -5,16 +5,18 @@ import lotto.domain.model.Lotto
 import lotto.domain.model.Prize
 
 class MatchingLottoNumber(
-    val luckyNumbers: Lotto,
-    val bonusNumber: BonusNumber,
-    val lottoTickets: List<Lotto>,
+    private val winningLotto: Lotto,
+    private val bonusNumber: BonusNumber,
+    private val quickPickLottoTickets: List<Lotto>,
 ) {
     fun getMatchResult(): List<Prize> {
-        return lottoTickets.map { lotto ->
-            val matchedNumbers: Int = lotto.luckyNumbers.intersect(luckyNumbers.luckyNumbers).size
-            val hasBonusNumber: Boolean = lotto.luckyNumbers.contains(bonusNumber.bonusNumber)
-
-            Prize.getPrize(matchedNumbers, hasBonusNumber)
+        val prizes: MutableList<Prize> = mutableListOf()
+        quickPickLottoTickets.forEach { quickPicklotto ->
+            val matchedNumbers: Int = quickPicklotto.lottoNumbers.intersect(winningLotto.lottoNumbers).size
+            val hasBonusNumber: Boolean = quickPicklotto.lottoNumbers.contains(bonusNumber.bonusNumber)
+            val prize = Prize.getPrize(matchedNumbers, hasBonusNumber)
+            prizes.add(prize)
         }
+        return prizes
     }
 }
