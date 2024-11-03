@@ -36,6 +36,20 @@ class WinningResultTest {
         assertEquals(WinningResult(lottoNumbers, winningNumbers, bonusNumber).details, expectedResult)
     }
 
+    @DisplayName("로또 수익률 계산이 틀릴 경우")
+    @ParameterizedTest
+    @MethodSource("profitRateSource")
+    fun profitRateIsFailed(
+        winningNumbers: List<Int>,
+        bonusNumber: Int,
+        lottoNumbers: List<List<Int>>,
+        expectedResult: String
+    ) {
+        val winningResult = WinningResult(lottoNumbers, winningNumbers, bonusNumber)
+        val profitRate = String.format("%,.1f%%", winningResult.profitRate)
+        assertEquals(profitRate, expectedResult)
+    }
+
     companion object {
         @JvmStatic
         fun rankSource(): Stream<Arguments> = Stream.of(
@@ -104,6 +118,52 @@ class WinningResultTest {
                     Rank.FOURTH to 0,
                     Rank.FIFTH to 0,
                 )
+            )
+        )
+
+        @JvmStatic
+        fun profitRateSource(): Stream<Arguments> = Stream.of(
+            arguments(
+                listOf(1, 2, 3, 4, 5, 6), 7,
+                listOf(
+                    listOf(1, 2, 3, 4, 5, 6),
+                    listOf(1, 2, 3, 4, 5, 7),
+                    listOf(1, 2, 3, 8, 9, 10)
+                ),
+                String.format("%,.1f%%", 67_666_833.3333)
+            ),
+            arguments(
+                listOf(1, 2, 3, 4, 5, 6), 7,
+                listOf(
+                    listOf(1, 2, 3, 7, 8, 9),
+                    listOf(1, 2, 3, 4, 7, 9),
+                    listOf(1, 2, 3, 4, 5, 7),
+                    listOf(11, 12, 13, 14, 15, 16)
+                ),
+                String.format("%,.1f%%", 751375.0)
+            ),
+            arguments(
+                listOf(1, 2, 3, 4, 5, 6), 7,
+                listOf(
+                    listOf(11, 12, 13, 14, 15, 16),
+                    listOf(12, 22, 32, 42, 43, 44),
+                    listOf(21, 22, 23, 24, 25, 26)
+                ),
+                String.format("%,.1f%%", 0.00000000)
+            ),
+            arguments(
+                listOf(1, 2, 3, 4, 5, 6), 7,
+                listOf(
+                    listOf(8, 21, 23, 41, 42, 43),
+                    listOf(3, 5, 11, 16, 32, 38),
+                    listOf(7, 11, 16, 35, 36, 44),
+                    listOf(1, 8, 11, 31, 41, 42),
+                    listOf(13, 14, 16, 38, 42, 45),
+                    listOf(7, 11, 30, 40, 42, 43),
+                    listOf(2, 13, 22, 32, 38, 45),
+                    listOf(1, 3, 5, 14, 22, 45)
+                ),
+                String.format("%,.1f%%", 62.5)
             )
         )
     }
