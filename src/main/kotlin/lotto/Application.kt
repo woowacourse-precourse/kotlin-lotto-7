@@ -1,6 +1,8 @@
 package lotto
 
+import lotto.config.ApplicationFactory
+
 fun main() {
-    val lottoApplication = LottoApplication()
+    val lottoApplication = ApplicationFactory.createLottoApplication()
     lottoApplication.run()
 }
