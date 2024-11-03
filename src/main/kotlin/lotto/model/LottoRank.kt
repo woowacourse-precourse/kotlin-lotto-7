@@ -6,5 +6,11 @@ enum class LottoRank(val matchCount: Int, val hasBonus: Boolean, val prize: Int)
     THIRD(5, false, 1_00_000),
     FOURTH(4, false, 50_000),
     FIFTH(3, false, 5_000),
-    FAIL(0, false, 0)
+    FAIL(0, false, 0);
+
+    companion object {
+        fun getRank(matchCount: Int, hasBonus: Boolean): LottoRank {
+            return entries.find { it.matchCount == matchCount && it.hasBonus == hasBonus } ?: FAIL
+        }
+    }
 }
