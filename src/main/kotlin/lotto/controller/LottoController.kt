@@ -46,7 +46,7 @@ class LottoController(
     private fun getValidBonusNumber(input: String): Int {
         require(input.isValidNumber()) { INVALID_INT_NUMBER_EXCEPTION_MSG }
         require(input.toInt() in MIN_LOTTO_NUMBER..MAX_LOTTO_NUMBER) { OVER_RANGE_EXCEPTION_MSG }
-        require(input.toInt() !in winLotto.nums) { DUPLICATE_BONUS_NUMBER_EXCEPTION_MSG }
+        require(input.toInt() !in winLotto.getNumbers()) { DUPLICATE_BONUS_NUMBER_EXCEPTION_MSG }
         return input.toInt()
     }
 
