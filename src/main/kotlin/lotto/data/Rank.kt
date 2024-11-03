@@ -11,4 +11,11 @@ enum class Rank(
     FOURTH(4, 50_000),
     FIFTH(3, 5_000),
     MISS(0, 0);
+
+    companion object {
+        fun match(matchCount: Int, matchBonus: Boolean): Rank {
+            if (matchCount == SECOND.countOfMatch) return entries.first { it.bonusMatch == matchBonus && it.countOfMatch == matchCount }
+            return entries.firstOrNull { it.countOfMatch == matchCount } ?: MISS
+        }
+    }
 }
