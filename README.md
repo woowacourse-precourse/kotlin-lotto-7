@@ -96,6 +96,7 @@
 - 구입 금액이 유효한 정수가 아닌 경우: IllegalArgumentException 발생
 - 구입 금액이 1000원 이하인 경우: IllegalArgumentException 발생
 - 구입 금액이 1000원으로 나누어 떨어지지 않는 경우: IllegalArgumentException 발생
+- 구입 금액에 공백이 포함되어 있는 경우: 공백 제거 처리
 
 ### 2. 구매 개수 계산 기능
 
@@ -125,6 +126,7 @@
 - 보너스 번호가 정수가 아닌 경우: IllegalArgumentException 발생
 - 보너스 번호의 범위가 1 ~ 45가 아닌 경우: IllegalArgumentException 발생
 - 보너스 번호가 당첨 번호에 포함되는 경우: IllegalArgumentException 발생
+- 보너스 번호에 공백이 포함되어 있는 경우: 공백 제거 처리
 
 ### 6. 당첨 내역 확인 기능
 
