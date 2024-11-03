@@ -49,6 +49,54 @@ class ApplicationTest : NsTest() {
         }
     }
 
+    @Test
+    fun `구입 금액이 1,000원 단위가 아니면 예외가 발생한다`() {
+        assertSimpleTest {
+            runException("1500")
+            assertThat(output()).contains(ERROR_MESSAGE)
+        }
+    }
+
+    @Test
+    fun `당첨 번호가 숫자가 아닐 경우 예외가 발생한다`() {
+        assertSimpleTest {
+            runException("8000", "1,2,3,4,5,6ab")
+            assertThat(output()).contains(ERROR_MESSAGE)
+        }
+    }
+
+    @Test
+    fun `당첨 번호 숫자가 6개가 아닐 경우 예외가 발생한다`() {
+        assertSimpleTest {
+            runException("8000", "1,2,3,4,5,6,7")
+            assertThat(output()).contains(ERROR_MESSAGE)
+        }
+    }
+
+    @Test
+    fun `당첨 번호 숫자는 1~45 사이의 숫자여야 한다`() {
+        assertSimpleTest {
+            runException("8000", "1,2,3,4,5,46")
+            assertThat(output()).contains(ERROR_MESSAGE)
+        }
+    }
+
+    @Test
+    fun `보너스 번호는 당첨 번호와 중복되지 않아야 한다`() {
+        assertSimpleTest {
+            runException("8000", "1,2,3,4,5,6", "3")
+            assertThat(output()).contains(ERROR_MESSAGE)
+        }
+    }
+
+    @Test
+    fun `보너스 번호는 한 개의 숫자여야 한다`() {
+        assertSimpleTest {
+            runException("8000", "1,2,3,4,5,6", "ab")
+            assertThat(output()).contains(ERROR_MESSAGE)
+        }
+    }
+
     override fun runMain() {
         main()
     }
