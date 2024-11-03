@@ -10,12 +10,21 @@ class LottoWinningResultCalculator {
         val results = mutableMapOf<LottoMatchType, Int>()
 
         purchasedLottos.forEach { lotto ->
-            val matchType = getMatchTypeForLotto(lotto, winningNumbers, bonusNumber)
-            if (matchType != null) {
-                results[matchType] = results.getOrDefault(matchType, 0) + 1
-            }
+            processLottoResult(lotto, winningNumbers, bonusNumber, results)
         }
         return results
+    }
+
+    fun processLottoResult(
+        lotto: Lotto,
+        winningNumbers: List<Int>,
+        bonusNumber: Int,
+        results: MutableMap<LottoMatchType, Int>
+    ) {
+        val matchType = getMatchTypeForLotto(lotto, winningNumbers, bonusNumber)
+        if (matchType != null) {
+            results[matchType] = results.getOrDefault(matchType, 0) + 1
+        }
     }
 
     private fun getMatchTypeForLotto(lotto: Lotto, winningNumbers: List<Int>, bonusNumber: Int): LottoMatchType? {
