@@ -19,4 +19,9 @@ class InputView {
             .map { it.trim().toInt() }
             .toList()
     }
+
+    fun getBonusNumber(): String {
+        print("\n" + INPUT_BONUS_NUMBER_MESSAGE)
+        return Console.readLine()
+    }
 }

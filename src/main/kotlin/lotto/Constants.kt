@@ -8,6 +8,7 @@ object Constants {
     const val ERROR_NEGATIVE_LOTTO_PURCHASE_MESSAGE = "[ERROR] 구입 금액은 0보다 커야 합니다."
     const val ERROR_INVALID_LOTTO_PURCHASE_MESSAGE = "[ERROR] 숫자만 입력할 수 있습니다."
     const val ERROR_DIVIDE_LOTTO_PURCHASE_MESSAGE = "[ERROR] 구입 금액은 1,000원으로 나누어 떨어져야 합니다."
+    const val ERROR_DUPLICATED_BONUS_NUMBER_MESSAGE = "[ERROR] 보너스 번호는 당첨 번호와 중복될 수 없습니다."
 
     const val INPUT_LOTTO_PURCHASE_MESSAGE = "구입금액을 입력해 주세요."
     const val INPUT_WIN_LOTTO_NUMBERS_MESSAGE = "당첨 번호를 입력해 주세요."

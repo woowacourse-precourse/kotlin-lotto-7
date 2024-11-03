@@ -3,6 +3,7 @@ package lotto.controller
 import lotto.view.InputView
 import lotto.view.OutputView
 import lotto.Validator
+import lotto.model.BonusNumber
 import lotto.model.Lotto
 
 class LottoController {
@@ -15,7 +16,10 @@ class LottoController {
         val ticket = countLottoTicket(purchaseAmount)
         outputView.countTicketsMessage(ticket)
         outputView.generateTicketsMessage(ticket)
-        val winLottoNumbers = Lotto(inputView.getWinLottoNumbers())
+        val winningNumbersInput = inputView.getWinLottoNumbers()
+        val winLottoNumbers = Lotto(winningNumbersInput)
+        val bonusNumberInput = inputView.getBonusNumber()
+        val bonusNumber = BonusNumber(bonusNumberInput, winLottoNumbers.getWinningNumbers())
     }
 
     private fun getLottoPurchaseAmount(): Int {

@@ -1,8 +1,12 @@
 package lotto
 
 import lotto.Constants.ERROR_DIVIDE_LOTTO_PURCHASE_MESSAGE
+import lotto.Constants.ERROR_DUPLICATED_BONUS_NUMBER_MESSAGE
+import lotto.Constants.ERROR_DUPLICATED_NUMBER_MESSAGE
 import lotto.Constants.ERROR_EMPTY_LOTTO_PURCHASE_MESSAGE
 import lotto.Constants.ERROR_INVALID_LOTTO_PURCHASE_MESSAGE
+import lotto.Constants.ERROR_INVALID_NUMBER_COUNT_MESSAGE
+import lotto.Constants.ERROR_INVALID_NUMBER_RANGE_MESSAGE
 import lotto.Constants.ERROR_NEGATIVE_LOTTO_PURCHASE_MESSAGE
 
 class Validator {
@@ -19,18 +23,24 @@ class Validator {
         checkLottoPurchaseNumeric(purchaseAmount)
     }
 
+    fun checkBonusNumber(bonusNumber: String, winningNumbers: List<Int>) {
+        checkBonusNumberNumeric(bonusNumber)
+        checkBonusNumberRange(bonusNumber)
+        checkDuplicatedBonusNumber(bonusNumber, winningNumbers)
+    }
+
     private fun checkLottoNumberCount(numbers: List<Int>) {
-        require(numbers.size == 6) { Constants.ERROR_INVALID_NUMBER_COUNT_MESSAGE }
+        require(numbers.size == 6) { ERROR_INVALID_NUMBER_COUNT_MESSAGE }
     }
 
     private fun checkLottoNumberRange(numbers: List<Int>) {
         numbers.forEach { number ->
-            require(number in 1..45) { Constants.ERROR_INVALID_NUMBER_RANGE_MESSAGE }
+            require(number in 1..45) { ERROR_INVALID_NUMBER_RANGE_MESSAGE }
         }
     }
 
     private fun checkDuplicatedLottoNumber(numbers: List<Int>) {
-        require(numbers.toSet().size == numbers.size) { Constants.ERROR_DUPLICATED_NUMBER_MESSAGE }
+        require(numbers.toSet().size == numbers.size) { ERROR_DUPLICATED_NUMBER_MESSAGE }
     }
 
     private fun checkLottoPurchaseEmpty(purchaseAmount: String) {
@@ -47,6 +57,18 @@ class Validator {
 
     private fun checkLottoPurchaseNumeric(purchaseAmount: String) {
         require(!isNumeric(purchaseAmount)) { ERROR_INVALID_LOTTO_PURCHASE_MESSAGE }
+    }
+
+    private fun checkBonusNumberNumeric(bonusNumber: String) {
+        require(!isNumeric(bonusNumber)) { ERROR_INVALID_LOTTO_PURCHASE_MESSAGE }
+    }
+
+    private fun checkBonusNumberRange(bonusNumber: String) {
+        require(bonusNumber.toInt() in 1..45) { ERROR_INVALID_NUMBER_RANGE_MESSAGE }
+    }
+
+    private fun checkDuplicatedBonusNumber(bonusNumber: String, winningNumbers: List<Int>) {
+        require(!winningNumbers.contains(bonusNumber.toInt())) { ERROR_DUPLICATED_BONUS_NUMBER_MESSAGE }
     }
 
     private fun isNumeric(number: String): Boolean {
