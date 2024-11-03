@@ -38,4 +38,16 @@ class LottoResultCalculator(
             else -> results[NONE] = results[NONE]!! + 1
         }
     }
+
+    fun calculateTotalReward(): Int {
+        var totalReward = 0
+        results.keys.forEach { key ->
+            totalReward += key.prize * results[key]!!
+        }
+        return totalReward
+    }
+
+    fun calculateProfitRate(lottoCount: Int, totalReward: Int): Double {
+        return totalReward.toDouble() / (lottoCount * 1000) * 100
+    }
 }
