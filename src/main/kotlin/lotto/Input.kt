@@ -34,7 +34,6 @@ fun validMoney(input: String) : Int  {
 fun inputLottoNumbers() : List<Int> {
     while (true) {
         println("당첨 번호를 입력해 주세요 (쉼표로 구분)")
-
         val inputNum = Console.readLine()
         try {
             val lottoNumbers = validLottoNum(inputNum)

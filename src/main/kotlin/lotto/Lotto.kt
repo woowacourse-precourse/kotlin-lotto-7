@@ -16,6 +16,8 @@ class Lotto(private val numbers: List<Int>) {
         }
     }
 
+    fun getNumbers() : List<Int> = numbers
+
     fun lottoMatches(winNumbers : List<Int>) : Int {
         return numbers.count{ it in winNumbers}
     }
