@@ -14,6 +14,10 @@ enum class LottoRank(val matchCount: Int, val bonusResult: BonusResult, val priz
     FIFTH(3, ANY, 5_000);
 
     companion object {
-
+        fun convertToRank(matchCount: Int, bonusResult: BonusResult): LottoRank {
+            return LottoRank.entries
+                .find { rank -> rank.matchCount == matchCount && (rank.bonusResult == bonusResult && rank.bonusResult == ANY) }
+                ?: MISS
+        }
     }
 }

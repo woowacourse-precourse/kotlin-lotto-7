@@ -25,7 +25,6 @@ class LottoController {
         getBonusNumber(winningLotto)
 
         printWinningResult()
-
     }
 
     private fun getPurchaseMoney(): PurchaseMoney {
@@ -55,6 +54,10 @@ class LottoController {
     private fun getBonusNumber(winningLotto: WinningLotto) {
         val bonusNumberInput = getBonusNumberInput()
         winningLotto.setBonusNumber(bonusNumberInput)
+    }
+
+    private fun getWinningResult(lottos: List<Lotto>, winningLotto: WinningLotto) {
+
     }
 
 }

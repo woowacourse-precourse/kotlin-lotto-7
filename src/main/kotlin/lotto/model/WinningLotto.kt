@@ -1,7 +1,9 @@
 package lotto.model
 
+import lotto.constant.BonusResult
 import lotto.utils.ErrorFormatter.getErrorMessage
 import lotto.constant.LOTTO_SIZE
+import lotto.constant.LottoRank
 import lotto.constant.MAX_LOTTO_NUMBER
 import lotto.constant.MIN_LOTTO_NUMBER
 
@@ -12,6 +14,17 @@ class WinningLotto(winningLottoInput: String) {
     init {
         winningNumbers = validateWinningLotto(winningLottoInput)
     }
+
+    fun countMatchCount(lotto: Lotto): Int =
+        winningNumbers.count { winningNumber -> lotto.numbers.contains(winningNumber) }
+
+    fun checkMatchedBonusNumber(lotto: Lotto): BonusResult {
+        if (lotto.numbers.contains(bonusNumber)) return BonusResult.BONUS_MATCH
+        return BonusResult.BONUS_MISMATCH
+    }
+
+    fun getRank(lotto: Lotto): LottoRank = LottoRank.convertToRank(countMatchCount(lotto), checkMatchedBonusNumber(lotto))
+
 
     private fun validateWinningLotto(input: String): Set<Int> {
         val numbers = input.split(",").map { it.trim() }
@@ -59,7 +72,7 @@ class WinningLotto(winningLottoInput: String) {
         return bonusNumber
     }
 
-    private fun validateNoDuplicateNumber(bonusNumber : Int) {
+    private fun validateNoDuplicateNumber(bonusNumber: Int) {
         require(!winningNumbers.contains(bonusNumber)) {
             getErrorMessage(INVALID_BONUS_NUMBER_DUPLICATE)
         }
