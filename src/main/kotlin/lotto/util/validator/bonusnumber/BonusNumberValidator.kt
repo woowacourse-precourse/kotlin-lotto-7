@@ -40,8 +40,8 @@ class BonusNumberValidator(
     }
 
     private fun checkDuplicateWithLuckyNumbers() {
-        parsedInteger?.let {
-            if (it in lotto.luckyNumbers) throw IllegalArgumentException(NO_DUPLICATE_LUCKY_NUMBERS.errorMessage)
+        if (parsedInteger != null && parsedInteger in lotto.lottoNumbers) {
+            throw IllegalArgumentException(NO_DUPLICATE_LUCKY_NUMBERS.errorMessage)
         }
     }
 
