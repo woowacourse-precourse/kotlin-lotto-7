@@ -12,4 +12,8 @@ object InputValidator {
     fun validateMoneyIsDivisible(money: Int) {
         if (money % Constant.LOTTO_PRICE != 0) throw IllegalArgumentException(ErrorMessage.MONEY_NOT_DIVISIBLE)
     }
+
+    fun validateWinningNumbersCount(numbers: List<Int>) {
+        if (numbers.size != Constant.LOTTO_NUMBER_COUNT) throw IllegalArgumentException(ErrorMessage.LOTTO_NUMBER_COUNT_MISMATCH)
+    }
 }
