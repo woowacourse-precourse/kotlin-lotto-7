@@ -24,7 +24,7 @@ class Lotto(private val numbers: List<Int>) {
             return LottoRank.FIFTH
         }
 
-        return LottoRank.FOURTH
+        return LottoRank.LOSE
     }
 
     private fun countCommonNumbers(list1: List<Int>, list2: List<Int>): Int {
