@@ -22,7 +22,7 @@ object Constants {
     const val LOTTO_NUMBER_MAX = 45
 
     const val ERROR_AMOUNT_NOT_NUMBER = "[ERROR] 구입 금액은 정수여야 합니다."
-    const val ERROR_AMOUNT_NOT_POSITIVE = "[ERROR] 구입 금액은 0보다 커야 합니다."
+    const val ERROR_AMOUNT_UNDER_1000 = "[ERROR] 구입 금액은 1000원 이상이어야 합니다."
     const val ERROR_AMOUNT_NOT_DIVIDE_BY_1000 = "[ERROR] 구입 금액은 1000으로 나누어 떨어져야 합니다."
 
     const val ERROR_LOTTO_NUMBERS_INCORRECT_SIZE = "[ERROR] 로또 번호는 6개여야 합니다."
