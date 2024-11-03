@@ -31,6 +31,7 @@ class LottoController(
         }.onFailure { exception ->
             println(exception.message)
         }.getOrElse {
+            consumeResource()
             getPurchaseAmount()
         }
     }
@@ -42,6 +43,7 @@ class LottoController(
         }.onFailure { exception ->
             println(exception.message)
         }.getOrElse {
+            consumeResource()
             getWinningNumber()
         }
     }
@@ -53,6 +55,7 @@ class LottoController(
         }.onFailure { exception ->
             println(exception.message)
         }.getOrElse {
+            consumeResource()
             getBonusNumber(winningNumber)
         }
     }

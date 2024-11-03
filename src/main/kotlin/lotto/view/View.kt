@@ -37,3 +37,7 @@ fun printWinningStatistics(winningStatistics: WinningStatistics) {
 fun printProfitRate(rate: Double) {
     println("총 수익률은 ${String.format("%.1f", rate)}%입니다.")
 }
+
+fun consumeResource() {
+    Console.readLine()
+}
