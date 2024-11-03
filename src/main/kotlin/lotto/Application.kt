@@ -12,4 +12,8 @@ fun main() {
     val inputWinnerNumbers = readLine().split(",").map { it.toInt() }
     val lottoJudge = LottoJudge()
     lottoJudge.setLottoWinnerNumbers(inputWinnerNumbers)
+    println("\n보너스 번호를 입력해 주세요.")
+    val inputBonusNumbers = readLine().toInt()
+    lottoJudge.setLottoBonusNumber(inputBonusNumbers)
+
 }
