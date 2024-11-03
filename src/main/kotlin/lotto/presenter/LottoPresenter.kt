@@ -1,5 +1,8 @@
 package lotto.presenter
 
+import lotto.dto.LottoResult
+import lotto.model.LottoResultCalculator
+import lotto.dto.WinningTicket
 import lotto.model.*
 import lotto.view.OutputView
 

@@ -1,4 +1,6 @@
-package lotto.model
+package lotto.dto
+
+import lotto.model.LottoWinning
 
 data class LottoResult(
     val result: Map<LottoWinning, Int>,

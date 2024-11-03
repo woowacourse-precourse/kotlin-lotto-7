@@ -1,5 +1,6 @@
 package lotto.model
 
+import lotto.dto.WinningTicket
 import lotto.model.LottoWinning.*
 
 class LottoResultCalculator(
