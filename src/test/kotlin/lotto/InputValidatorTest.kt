@@ -1,10 +1,7 @@
-package lotto.model
+package lotto
 
-import lotto.utils.ErrorConstants
-import lotto.view.InputView
-import org.assertj.core.api.Assertions.assertThat
+import lotto.model.InputValidator
 import org.assertj.core.api.Assertions.assertThatThrownBy
-import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertDoesNotThrow
@@ -33,7 +30,6 @@ class InputValidatorTest {
             }
         }
 
-        @Disabled
         @Test
         fun `값이 null(문자, 공백, 소수 등)이면 오류가 발생한다`() {
             assertThatThrownBy { InputValidator.validatePurchaseAmount(null) }
@@ -60,19 +56,29 @@ class InputValidatorTest {
     @Nested
     inner class `보너스 번호 테스트` {
 
-        @Test
-        fun `보너스 번호가 당첨 번호와 일치하면 오류가 발생한다`() {
-            assertThrows<IllegalArgumentException> {  }
+        private val winningNumber = listOf(1,2,3,4,5,6)
+
+        @ParameterizedTest
+        @CsvSource("1", "2", "3", "4", "5", "6")
+        fun `보너스 번호가 당첨 번호와 일치하면 오류가 발생한다`(input: String) {
+            assertThrows<IllegalArgumentException> {
+                InputValidator.validateBonusNumber(input.toInt(), winningNumber)
+            }
         }
 
-        @Test
-        fun `값이 1에서 45 범위를 벗어나면 오류가 발생한다`() {
-
+        @ParameterizedTest
+        @CsvSource("0", "46")
+        fun `값이 1에서 45 범위를 벗어나면 오류가 발생한다`(input: String) {
+            assertThrows<IllegalArgumentException> {
+                InputValidator.validateBonusNumber(input.toInt(), winningNumber)
+            }
         }
 
         @Test
         fun `값이 null(문자, 공백, 소수 등)이면 오류가 발생한다`() {
-
+            assertThrows<IllegalArgumentException> {
+                InputValidator.validateBonusNumber(null, winningNumber)
+            }
         }
     }
 }

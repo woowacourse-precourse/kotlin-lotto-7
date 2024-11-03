@@ -11,7 +11,7 @@ enum class LottoRank(val matchCount: Int, val reward: Int, val bonusNumber: Bool
     companion object {
         fun getRank(matchCount: Int, bonusNumber: Boolean): LottoRank {
             return LottoRank.entries
-            .find { it.matchCount == matchCount && (!it.bonusNumber || it.bonusNumber == bonusNumber) } ?: NONE
+            .find { it.matchCount == matchCount || (it.matchCount == matchCount && it.bonusNumber == bonusNumber) } ?: NONE
         }
     }
 }
