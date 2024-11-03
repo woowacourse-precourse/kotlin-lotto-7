@@ -20,6 +20,7 @@ class InputView {
         validateMoneyIsNotNegative(money)
         validateMoneyIsEnough(money)
         validateMoneyIsDivisible(money)
+        println()
         return money
     }
 
@@ -29,6 +30,7 @@ class InputView {
         validateWinningNumbersCount(winningNumbers)
         validateWinningNumbersDistinctness(winningNumbers)
         winningNumbers.forEach { validateLottoNumberInRange(it) }
+        println()
         return winningNumbers
     }
 
@@ -37,6 +39,7 @@ class InputView {
         val bonusNumber = parseNumericInput(Console.readLine())
         validateLottoNumberInRange(bonusNumber)
         validateBonusNumberDistinctness(bonusNumber, winningNumbers)
+        println()
         return bonusNumber
     }
 
