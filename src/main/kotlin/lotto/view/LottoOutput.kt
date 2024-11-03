@@ -1,4 +1,6 @@
-package lotto
+package lotto.view
+
+import lotto.Lotto
 
 class LottoOutput {
     fun printTicketCount(ticketCount: Int) {
