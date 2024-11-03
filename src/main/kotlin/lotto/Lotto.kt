@@ -16,6 +16,7 @@ class Lotto(private val numbers: List<Int>) {
 
     init {
         require(numbers.size == 6) { "[ERROR] 로또 번호는 6개여야 합니다." }
+        require(numbers.distinct().size == 6) { "[ERROR] 로또 번호에 중복된 숫자가 있습니다." }
     }
 
     //나의 로또 번호와 보너스 번호를 받아 비교

@@ -32,7 +32,7 @@ class Output {
             INTEGER -> throw IllegalArgumentException("[ERROR] 티켓은 1000원 단위로만 입력할 수 있습니다.")
             BLANK -> throw IllegalArgumentException("[ERROR] 로또 번호가 비어있습니다.")
             BOUNDARY -> throw IllegalArgumentException("[ERROR] 로또 번호는 1이상 45이하의 정수여야 합니다.")
-            DUPLICATE -> throw IllegalArgumentException("[ERROR] 중복되지 않는 숫자를 입력해야 합니다.")
+            DUPLICATE -> throw IllegalArgumentException("[ERROR] 로또 번호에 중복된 숫자가 있습니다.")
         }
     }
 

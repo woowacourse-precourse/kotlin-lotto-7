@@ -136,7 +136,7 @@ class Input {
     }
     private fun checkBonusDuplicate(numbers: Int) {
         if (correctIntLotto.contains(numbers)) {
-            throw CustomErrorHandler("[ERROR] 중복되지 않는 숫자를 입력해야 합니다.", CustomException.DUPLICATE)
+            throw CustomErrorHandler("[ERROR] 로또 번호에 중복된 숫자가 있습니다.", CustomException.DUPLICATE)
         }
     }
 
