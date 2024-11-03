@@ -40,14 +40,14 @@ class PurchaseAmountValidator(
     }
 
     private fun checkUnder1000() {
-        parsedInteger?.let {
-            if (it < PRICE_PER_ROW) throw IllegalArgumentException(LESS_THAN_1000.errorMessage)
+        if (parsedInteger != null && parsedInteger < PRICE_PER_ROW) {
+            throw IllegalArgumentException(LESS_THAN_1000.errorMessage)
         }
     }
 
     private fun checkUnits1000() {
-        parsedInteger?.let {
-            if (it % PRICE_PER_ROW != ZERO) throw IllegalArgumentException(NOT_UNITS_OF_1000.errorMessage)
+        if (parsedInteger != null && parsedInteger % PRICE_PER_ROW != ZERO) {
+            throw IllegalArgumentException(NOT_UNITS_OF_1000.errorMessage)
         }
     }
 
