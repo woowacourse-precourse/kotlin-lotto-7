@@ -4,6 +4,7 @@ import camp.nextstep.edu.missionutils.Randoms
 import lotto.utils.Constants.MAX_NUMBER
 import lotto.utils.Constants.MIN_NUMBER
 import lotto.utils.Constants.LOTTO_NUMBER_COUNT
+import lotto.utils.Constants.ZERO
 import lotto.utils.ErrorConstants
 
 /**
@@ -19,8 +20,8 @@ class Lotto(private val numbers: List<Int>) {
     }
 
     // TODO: 새로운 모델을 만들어서 할까
-    fun ComparisonOfWinningNumbers(lotto: List<List<Int>>) {
-        for (index in 0..lotto.size) {
+    fun ComparisonOfWinningNumbers(lotto: List<LottoTicket>) {
+        for (index in ZERO..lotto.size) {
 
         }
     }

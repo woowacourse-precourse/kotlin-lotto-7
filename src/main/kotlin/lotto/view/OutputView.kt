@@ -1,6 +1,7 @@
 package lotto.view
 
 import lotto.model.LottoRank
+import lotto.model.LottoTicket
 import lotto.utils.Constants.FIFTH
 import lotto.utils.Constants.FIRST
 import lotto.utils.Constants.FOURTH
@@ -17,10 +18,10 @@ import lotto.utils.OutputConstants.WINNING_STATISTICS
 
 class OutputView {
 
-    fun showPurchasedLottoCount(count: Int) = println("\n${count}개를 구매했습니다.")
-
-    // 컨트롤러 -> 모델(LottoGenerator) -> 매개변수 받기 -> 컨트롤러에서 수행
-    fun showPurchasedLottoList(count: Int) = println()
+    fun showPurchasedLottoCount(count: Int, tikets: List<LottoTicket>) {
+        println("\n${count}개를 구매했습니다.")
+        tikets.forEach { println(it.number) }
+    }
 
     // TODO: 반복해서 코드를 줄일 수 있는 방법이 있지 않을까
     fun showWinningStatistics(matchCount: List<Int>) {

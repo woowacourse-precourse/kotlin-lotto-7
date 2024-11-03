@@ -2,8 +2,8 @@ package lotto.controller
 
 import lotto.model.InputValidator
 import lotto.model.Lotto
+import lotto.model.LottoTicket
 import lotto.utils.Constants.LOTTO_PRICE
-import lotto.utils.Constants.NEW_LINE
 import lotto.view.InputView
 import lotto.view.OutputView
 
@@ -18,16 +18,12 @@ class LottoController {
 
     fun start() {
         val purchaseAmount = getVaildPurchaseAmount()
-
         val purchaseCount = purchaseAmount / LOTTO_PRICE
-        outputView.showPurchasedLottoCount(purchaseCount)
+        val purchaseLottoTickets = List(purchaseCount) { LottoTicket(Lotto.generate()) }
 
-        val purchaseLottoList = mutableListOf<List<Int>>()
-        repeat(purchaseCount){ purchaseLottoList.add(Lotto.generate()) }
-        println(purchaseLottoList.joinToString(NEW_LINE)) // 뷰로 옮기기
+        outputView.showPurchasedLottoCount(purchaseCount, purchaseLottoTickets)
 
         val winningNumbers = getVaildWinningNumbers()
-
         val bonusNumber = inputView.getBonusNumber()
         // TODO: 보너스 번호에 대한 예외 처리(당첨 번호 오류 + 당첨번호와 중복인지)
 
@@ -36,6 +32,18 @@ class LottoController {
 
         // 수익률 출력
         //outputView.showTotalReturnRate()
+    }
+
+    private fun getVaildPurchaseAmount(): Int {
+        while (true) {
+            try {
+                val purchaseAmount = inputView.getPurchaseAmount()
+                InputValidator.validatePurchaseAmount(purchaseAmount)
+                return purchaseAmount!!
+            } catch (e: IllegalArgumentException) {
+                println(e.message)
+            }
+        }
     }
 
     private fun getVaildWinningNumbers(): List<Int> {
@@ -50,14 +58,12 @@ class LottoController {
         }
     }
 
-    private fun getVaildPurchaseAmount(): Int {
+    private fun getValidBonusNumber(): Int {
         while (true) {
             try {
-                val purchaseAmount = inputView.getPurchaseAmount()
-                InputValidator.validatePurchaseAmount(purchaseAmount)
-                return purchaseAmount!!
+
             } catch (e: IllegalArgumentException) {
-                println(e.message)
+
             }
         }
     }
