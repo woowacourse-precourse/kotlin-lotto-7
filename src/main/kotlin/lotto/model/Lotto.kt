@@ -5,6 +5,7 @@ import lotto.utils.Constants.MAX_NUMBER
 import lotto.utils.Constants.MIN_NUMBER
 import lotto.utils.Constants.LOTTO_NUMBER_COUNT
 import lotto.utils.ErrorConstants
+import javax.swing.UIManager.put
 
 /**
  * 모델은 컨트롤러나 뷰에 의존하면 안된다.
@@ -18,23 +19,21 @@ class Lotto(private val numbers: List<Int>) {
         require(numbers.distinct().size == LOTTO_NUMBER_COUNT) { ErrorConstants.LOTTO_NUMBER_DUPLICATE }
     }
 
-    fun comparisonOfWinningNumbers(lotto: List<LottoTicket>) {
-        //return lotto.forEach { it in numbers }
-        //numbers.count { it in lotto.forEach { it.number } }
+    fun calculateLottoResults(lottoTickets: List<LottoTicket>, bonusNumber: Int): Map<LottoRank, Int> {
+
+        val rankCounts = mutableMapOf<LottoRank, Int>()
+        LottoRank.entries.forEach { rank -> rankCounts[rank] = 0 }
+
+        lottoTickets.forEach{ ticket ->
+            val matchCount = ticket.numbers.count { it in numbers }
+            val matchBonus = bonusNumber in ticket.numbers
+            val rank = LottoRank.getRank(matchCount, matchBonus)
+            rankCounts[rank] = rankCounts.getOrDefault(rank, 0) + 1
+        }
+        return rankCounts
     }
 
-    fun comparisonOfBonusNumber(bonusNumber: Int): Boolean {
-        return bonusNumber in numbers
-    }
 
-    fun calculateTotalReturnRate() {}
+    //fun calculateTotalReturnRate() {}
 
-    // 여기서 예외 처리를 하고, 당첨 번호와 맞는지 판단 해야할 듯?
-    /**
-     * 모델이 수행할 기능 목록
-     *
-     * 로또 번호와 당첨 번호 비교 -> 여기서 번호가 유효하면
-     * enum 클래스와 비교해서 일치한 정보 전달 -> 위와 같이
-     * 총 수익률 계산
-     */
 }

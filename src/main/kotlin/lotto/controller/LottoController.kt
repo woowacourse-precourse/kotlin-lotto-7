@@ -2,6 +2,7 @@ package lotto.controller
 
 import lotto.model.InputValidator
 import lotto.model.Lotto
+import lotto.model.LottoRank
 import lotto.model.LottoTicket
 import lotto.utils.Constants.LOTTO_PRICE
 import lotto.view.InputView
@@ -13,6 +14,8 @@ class LottoController {
 
     lateinit var lotto: Lotto
 
+    private val rankCounts = mutableMapOf<LottoRank, Int>()
+
     fun start() {
         val purchaseAmount = getVaildPurchaseAmount()
         val purchaseCount = purchaseAmount / LOTTO_PRICE
@@ -22,9 +25,9 @@ class LottoController {
 
         val winningNumbers = getVaildWinningNumbers()
         val bonusNumber = getValidBonusNumber(winningNumbers)
-        val matchCount = lotto.comparisonOfWinningNumbers(purchaseLottoTickets)
-        // 당첨 등급 출력
-        //outputView.showWinningStatistics()
+
+        rankCounts.putAll(lotto.calculateLottoResults(purchaseLottoTickets, bonusNumber))
+        outputView.showLottoResult(rankCounts)
 
         // 수익률 출력
         //outputView.showTotalReturnRate()
