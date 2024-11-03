@@ -20,14 +20,13 @@ class LottoAmountTest {
         val purchaseCount = 2
         val lottos = lottoAmount.lottos
 
-        assertEquals(purchaseCount,lottos.size)
+        assertEquals(purchaseCount, lottos.size)
     }
 
     @Test
     fun `구매금액이 1000원 단위가 아니면 예외를 발생시킨다`() {
-        assertThrows<IllegalArgumentException>{
+        assertThrows<IllegalArgumentException> {
             LottoAmount("2001")
         }
-
     }
 }

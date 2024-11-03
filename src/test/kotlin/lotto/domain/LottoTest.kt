@@ -21,6 +21,7 @@ class LottoTest {
             Lotto(listOf(1, 2, 3, 4, 5, 5))
         }
     }
+
     @Test
     fun `로또 번호의 범위가 1-45가 아닐 때 발생한다`() {
         assertThrows<IllegalArgumentException> {
