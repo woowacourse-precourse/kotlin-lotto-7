@@ -53,28 +53,30 @@ class LottoViewModel(
 
     private fun getLottoResult() {
         val lotto = Lotto(state.winningNumber)
-        val updatedReward = state.reward.copy()
+        val updatedReward = state.winning.toMutableMap()
 
         state.pickedLotto.map {
             val matches = lotto.getMatches(it, state.bonusNumber)
-            if (matches != Rank.NONE) {
-                updatedReward.winning[matches] = updatedReward
-                    .winning
-                    .getOrDefault(matches, 0) + 1
-            }
+            modifyRewardByMatches(matches, updatedReward)
         }
 
-        state = state.copy(reward = updatedReward)
+        state = state.copy(winning = updatedReward)
         getRateOfReturn()
     }
 
     private fun getRateOfReturn() {
-        val winningMoney = calculator.calculateWinningMoney(state.reward.winning)
+        val winningMoney = calculator.calculateWinningMoney(state.winning)
 
         if (winningMoney != 0L) {
             val purchaseAmount = state.purchaseLottoCount
             val rateOfReturn = calculator.calculateRateOfReturn(winningMoney, purchaseAmount)
             state = state.copy(rateOfReturn = rateOfReturn)
+        }
+    }
+
+    private fun modifyRewardByMatches(matches: Rank, updatedReward: MutableMap<Rank, Int>) {
+        if (matches != Rank.NONE) {
+            updatedReward[matches] = updatedReward.getOrDefault(matches, 0) + 1
         }
     }
 }
