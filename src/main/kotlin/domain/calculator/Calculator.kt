@@ -13,9 +13,6 @@ class Calculator : Calculate {
     override fun calculateRateOfReturn(winningMoney: Long, purchaseLottoCount: Int): String {
         val totalPurchaseAmount = (purchaseLottoCount * 1000).toDouble()
         val rateOfReturn = (winningMoney / totalPurchaseAmount) * 100
-        println("총 구매 금액: $totalPurchaseAmount")
-        println("총 수익률은 $rateOfReturn%입니다.")
-        println("${rateOfReturn.convertRoundAtTwoDecimal()}")
         return rateOfReturn.convertRoundAtTwoDecimal()
     }
 }
