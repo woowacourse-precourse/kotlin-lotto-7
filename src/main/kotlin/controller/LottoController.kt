@@ -1,5 +1,7 @@
 package controller
 
+import view.InputView
+
 /* LottoController 설계
 * 1. 구입 금액 입력
 * 2. 구매 개수 출력
@@ -14,7 +16,7 @@ package controller
 class LottoController {
 
     fun playLottoGame(){
-
+        val money = InputView.getMoney()
     }
 
 }
