@@ -35,31 +35,26 @@ class Input {
                 ticket = confirmDivider(money)
                 return
             } catch (e: CustomErrorHandler) {
-                output.output("\n" + e.message + "\n")
+                output.output(e.message + "\n")
                 continue
             }
         }
     }
 
-    //숫자가 아닌 경우
     private fun confirmInteger(money: String): Int {
-        val intMoney: Int
-        try {
-            intMoney = money.toInt()
+        return try {
+            money.toInt()
         } catch (e: NumberFormatException) {
             throw CustomErrorHandler("[ERROR] 숫자만 입력할 수 있습니다.", CustomException.NUMBER)
         }
-        return intMoney
     }
 
-    //금액이 0이거나 음수인 경우
     private fun confirmNegativeOrZero(money: Int) {
         if (money <= 0) {
             throw CustomErrorHandler("[ERROR] 티켓은 양의 정수만 입력할 수 있습니다.", CustomException.INTEGER)
         }
     }
 
-    //티켓이 1000원 단위로 나누어 떨어 지지 않는 경우
     private fun confirmDivider(ticket: Int): Int {
         if (ticket % 1000 != 0) {
             throw CustomErrorHandler("[ERROR] 티켓은 1000원 단위로만 입력할 수 있습니다.", CustomException.DIVIDE)
@@ -67,21 +62,12 @@ class Input {
         return ticket / 1000
     }
 
-    //빈 값
-    private fun confirmLottoCount(lottos: List<String>) {
-        if (lottos.size != 6) {
-            throw CustomErrorHandler("[ERROR] 로또 번호는 6개여야 합니다.", CustomException.BLANK)
-        }
-    }
-
-    //6글자
     private fun confirmNullOrBlank(inputNumber: String) {
         if (inputNumber.isBlank()) {
             throw CustomErrorHandler("[ERROR] 로또 번호가 비어있습니다.", CustomException.BLANK)
         }
     }
 
-    //구입한 만큼 로또 번호생성
     private fun buyTicket() {
         lottos = mutableListOf()
         for (i in 0 until ticket) {
@@ -91,59 +77,89 @@ class Input {
         output.outPutTicket(ticket, lottos)
     }
 
-    //로또 넘버 검증 함수
     private fun correctLottoNumber() {
         while (true) {
             try {
                 output.printLotto(LottoType.LOTTO)
                 val resultLotto = input()
                 correctLotto = resultLotto.split(",")
+
+                // 6개의 숫자인지 먼저 확인
                 confirmLottoCount(correctLotto)
-                correctLotto.forEach { lottoCheck(it) }
-                correctIntLotto = correctLotto.map { it.toInt() }
-                checkLottoDuplicate(correctIntLotto)  // 중복 체크 추가
+
+                // 각 숫자의 유효성을 한번에 검사하고 변환
+                correctIntLotto = correctLotto.map { number ->
+                    validateAndConvertNumber(number)
+                }
+
+                // 중복 검사
+                checkLottoDuplicate(correctIntLotto)
+
                 lotto = Lotto(correctIntLotto)
                 break
             } catch (e: CustomErrorHandler) {
-                output.output("\n" + e.message)
+                output.output(e.message + "\n")
                 continue
             }
         }
     }
 
-    //보너스 넘버 검증 함수
     private fun inputBonusNumber() {
         while (true) {
             try {
                 output.printLotto(LottoType.BONUS)
                 val bonusNumber = input()
-                lottoCheck(bonusNumber)
-                val bonusInt = bonusNumber.toInt()
+                val bonusInt = validateAndConvertNumber(bonusNumber)
                 checkBonusDuplicate(bonusInt)
                 lotto.compareLotto(lottos, bonusInt)
                 break
             } catch (e: CustomErrorHandler) {
-                output.output("\n" + e.message)
+                output.output(e.message + "\n")
                 continue
             }
         }
     }
 
-    //1-45 체크
-    private fun middleNumberCheck(inputNumber: Int) {
-        if (inputNumber !in 1..45) {
+    private fun validateAndConvertNumber(input: String): Int {
+        // 빈 값 체크
+        if (input.isBlank()) {
+            throw CustomErrorHandler("[ERROR] 로또 번호가 비어있습니다.", CustomException.BLANK)
+        }
+
+        // 숫자 변환
+        val number = try {
+            input.toInt()
+        } catch (e: NumberFormatException) {
+            throw CustomErrorHandler("[ERROR] 숫자만 입력할 수 있습니다.", CustomException.NUMBER)
+        }
+
+        // 음수나 0 체크
+        if (number <= 0) {
+            throw CustomErrorHandler("[ERROR] 로또 번호는 1이상 45이하의 정수여야 합니다.", CustomException.INTEGER)
+        }
+
+        // 범위 체크
+        if (number > 45) {
             throw CustomErrorHandler("[ERROR] 로또 번호는 1이상 45이하의 정수여야 합니다.", CustomException.BOUNDARY)
+        }
+
+        return number
+    }
+
+    private fun confirmLottoCount(lottos: List<String>) {
+        if (lottos.size != 6) {
+            throw CustomErrorHandler("[ERROR] 로또 번호는 6개여야 합니다.", CustomException.BLANK)
         }
     }
 
-    //중복 체크
     private fun checkLottoDuplicate(numbers: List<Int>) {
         if (numbers.distinct().size != 6) {
             throw CustomErrorHandler("[ERROR] 로또 번호에 중복된 숫자가 있습니다.", CustomException.DUPLICATE)
         }
     }
-    private fun checkBonusDuplicate(numbers: Int) {
-        if (correctIntLotto.contains(numbers)) {
+
+    private fun checkBonusDuplicate(number: Int) {
+        if (correctIntLotto.contains(number)) {
             throw CustomErrorHandler("[ERROR] 로또 번호에 중복된 숫자가 있습니다.", CustomException.DUPLICATE)
         }
     }
@@ -152,20 +168,7 @@ class Input {
         output.outPutPostCorrectList(lotto.checkList)
     }
 
-    private fun lottoCheck(input: String) {
-        try {
-            confirmNullOrBlank(input)
-            val number = confirmInteger(input)
-            confirmNegativeOrZero(number)
-            middleNumberCheck(number)
-        } catch (e: CustomErrorHandler) {
-            output.output("\n" + e.message)
-            throw e
-        }
-    }
-
-
-    private fun rate(){
-        output.printRate(lotto.resultMoney,ticket*1000)
+    private fun rate() {
+        output.printRate(lotto.resultMoney, ticket * 1000)
     }
 }
