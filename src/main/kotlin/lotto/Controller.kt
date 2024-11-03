@@ -15,7 +15,7 @@ class Controller {
     val lottoGenerator = LottoGenerator()
 
     fun start() {
-
+        LottoResult.reset()
         val money = getMoney()
 
         val randomLotto = getRandomLotto(money)
@@ -27,8 +27,6 @@ class Controller {
 
         winningNum.getResult(money, bonusNum, randomLotto)
         output.displayResult()
-
-        LottoResult.reset()
     }
 
     fun getMoney(): Int {
