@@ -1,7 +1,7 @@
 package lotto
 
+import lotto.WinCondition.NONE
 import lotto.WinCondition.entries
-import java.util.*
 
 enum class WinCondition(
     val matches: Int,
@@ -41,9 +41,11 @@ enum class WinCondition(
 }
 
 fun findCondition(matchCount: Int, bonusCondition: Boolean): WinCondition {
-    return Arrays.stream(entries.toTypedArray())
+    val win = entries
         .filter { v -> v.matches == matchCount }
-        .filter { b -> b.bonusMatch == bonusCondition }
-        .findAny()
-        .orElseThrow { IllegalArgumentException(String.format("%s 일치 조건이 존재하지 않습니다.", matchCount)) }
+        .find { b -> b.bonusMatch == bonusCondition }
+    if (win == null) {
+        return NONE
+    }
+    return win
 }
