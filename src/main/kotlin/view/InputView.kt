@@ -8,10 +8,14 @@ import utils.validator.Validator
 
 object InputView {
     fun getMoney(): Int {
-        println(MONEY_INPUT_MESSAGE)
-        val inputMoney = Console.readLine()
+        var money = 0
+        do {
+            println(MONEY_INPUT_MESSAGE)
+            val inputMoney = Console.readLine()
 
-        return Validator.validateMoney(inputMoney)
+            money = Validator.validateMoney(inputMoney)
+        } while (money == 0)
+        return money
     }
 
     fun getWinningNumbers(): List<Int> {

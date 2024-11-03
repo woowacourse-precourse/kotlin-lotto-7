@@ -3,15 +3,19 @@ package utils.validator
 object Validator {
 
     fun validateMoney(inputMoney: String): Int {
+        try {
+            MoneyValidator.SHOULD_BE_NUMBER.validate(inputMoney)
 
-        MoneyValidator.SHOULD_BE_NUMBER.validate(inputMoney)
+            MoneyValidator.SHOULD_BE_POSITIVE.validate(inputMoney)
 
-        MoneyValidator.SHOULD_BE_POSITIVE.validate(inputMoney)
+            MoneyValidator.SHOULD_BE_1000_UNIT.validate(inputMoney)
 
-        MoneyValidator.SHOULD_BE_1000_UNIT.validate(inputMoney)
+            MoneyValidator.SHOULD_BE_UNDER_MAX.validate(inputMoney)
 
-        MoneyValidator.SHOULD_BE_UNDER_MAX.validate(inputMoney)
-
+        } catch (e: IllegalArgumentException) {
+            println(e.message)
+            return 0
+        }
         return inputMoney.toInt()
     }
 
