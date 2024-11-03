@@ -1,56 +1,74 @@
 package lotto.presentation.view
 
+import camp.nextstep.edu.missionutils.Console.close
+import camp.nextstep.edu.missionutils.Console.readLine
 import lotto.domain.enums.Input
+import lotto.domain.printer.Printer
 import lotto.domain.util.retryWhenNoException
 import lotto.presentation.vm.LottoViewModel
-import camp.nextstep.edu.missionutils.Console.readLine
 
 class View(
-    private val outputView: OutputView,
+    private val printer: Printer,
     private val viewModel: LottoViewModel
 ) {
+
     init {
         getPayment()
         getWinningNumber()
         getBonusNumber()
-        outputView.printRateOfReturn(viewModel.state.rateOfReturn)
+        printResult()
     }
 
     private fun getPayment() = retryWhenNoException {
-        outputView.printGuideMessage(Input.INPUT_PAY.toString())
+        printer.printMessage(Input.INPUT_PAY.toString())
         val pay = readLine()
-        val validPayment = viewModel.checkPaymentValidation(pay)
-        setPurchaseAmount(validPayment.first, validPayment.second)
+        validatePayment(pay)
     }
 
     private fun getWinningNumber() = retryWhenNoException {
-        outputView.printWithLineBreak(Input.INPUT_WINNING_NUMBER.toString())
+        printer.printWithLineBreak(Input.INPUT_WINNING_NUMBER.toString())
         val winningNumber = readLine()
-        val validWinningNumber = viewModel.checkWinningNumberValidation(winningNumber)
-        setWinningNumber(validWinningNumber)
+        validateWinningNumber(winningNumber)
     }
 
     private fun getBonusNumber() = retryWhenNoException {
-        outputView.printGuideMessage(Input.INPUT_BONUS_NUMBER.toString())
+        printer.printMessage(Input.INPUT_BONUS_NUMBER.toString())
         val bonusNumber = readLine()
+        validateBonusNumber(bonusNumber)
+    }
+
+    private fun validatePayment(pay: String) {
+        viewModel.checkPaymentValidation(pay)
+        printPurchasedLottoCount()
+    }
+
+    private fun printPurchasedLottoCount() {
+        val msg = viewModel.state.purchaseInfo.guideMessage
+        printer.printWithLineBreak(msg)
+        printPickedLotto()
+    }
+
+    private fun printPickedLotto() {
+        viewModel.pickLotto()
+        val msg = viewModel.state.lotto.guideMessage
+        printer.printMessage(msg)
+    }
+
+    private fun validateWinningNumber(winningNumber: String) {
+        viewModel.checkWinningNumberValidation(winningNumber)
+        printer.lineBreak()
+    }
+
+    private fun validateBonusNumber(bonusNumber: String) {
         viewModel.checkBonusNumberValidation(bonusNumber)
-        setWinningStatics()
+        printer.printWinningMessage()
+        printer.printWithLineBreak(viewModel.state.winningResult.guideMessage)
     }
 
-    private fun setPurchaseAmount(msg: String, purchase: Int) {
-        outputView.printWithLineBreak(msg)
-        viewModel.onCompleteInputPayment(purchase)
-        outputView.printPurchaseLotto(viewModel.state.pickedLotto)
-    }
-
-    private fun setWinningNumber(winningNumber: List<Int>) {
-        outputView.lineBreak()
-        viewModel.onCompleteInputWinningNumber(winningNumber)
-    }
-
-    private fun setWinningStatics() {
-        outputView.printWinningStatics()
-        val result = viewModel.state.winningResult
-        outputView.printResult(result)
+    private fun printResult() {
+        viewModel.getRateOfReturn()
+        val rateOfReturn = viewModel.state.rateOfReturn
+        printer.printMessage(rateOfReturn)
+        close()
     }
 }

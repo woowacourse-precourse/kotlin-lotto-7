@@ -1,7 +1,5 @@
 package lotto.domain.enums
 
-import lotto.domain.util.ext.toThousandUnit
-
 enum class Output(private val msg: String) {
     PURCHASE("%d개를 구매했습니다."),
     WINNING_STATISTICS("당첨 통계"),
@@ -14,9 +12,8 @@ enum class Output(private val msg: String) {
     override fun toString(): String = msg
 
     companion object {
-        fun purchaseFormat(pay: String): Pair<String, Int> {
-            val purchaseLottoCount = pay.toThousandUnit()
-            return Pair(PURCHASE.toString().format(purchaseLottoCount), purchaseLottoCount)
+        fun purchaseFormat(pay: Int): String {
+            return PURCHASE.toString().format(pay)
         }
 
         fun matchCountFormat(count: Int): String {

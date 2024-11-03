@@ -1,5 +1,7 @@
 package lotto.presentation.vm
 
+import lotto.domain.enums.Output.Companion.purchaseFormat
+import lotto.domain.enums.Output.Companion.totalRateOfReturnFormat
 import lotto.data.LottoDataSource
 import lotto.domain.calculator.Calculate
 import lotto.domain.enums.Rank
@@ -14,69 +16,84 @@ class LottoViewModel(
     private val lottoDataSource: LottoDataSource
 ) {
 
-    var state = PurchaseState()
-        private set
+    private var _state = PurchaseState()
+    val state: PurchaseState get() = _state
 
-    fun checkPaymentValidation(pay: String): Pair<String, Int> =
+    fun checkPaymentValidation(pay: String) {
         validator.payValidation(pay)
+        calculateLottoCount(pay.toInt())
+    }
 
-    fun checkWinningNumberValidation(winningNumber: String): List<Int> =
-        validator.winningNumberValidation(winningNumber)
+    fun checkWinningNumberValidation(winningNumber: String) {
+        val validWinningNumber = validator.winningNumberValidation(winningNumber)
+        _state = _state.copy(winningNumber = validWinningNumber)
+    }
 
     fun checkBonusNumberValidation(bonusNumber: String) {
         val validBonusNumber = validator.bonusNumberValidation(bonusNumber)
-        onCompleteInputBonusNumber(validBonusNumber)
-    }
-
-    fun onCompleteInputPayment(pay: Int) {
-        state = state.copy(purchaseLottoCount = pay)
-        pickLotto()
-    }
-
-    fun onCompleteInputWinningNumber(winningNumber: List<Int>) {
-        state = state.copy(winningNumber = winningNumber)
-    }
-
-    private fun onCompleteInputBonusNumber(bonusNumber: Int) {
-        state = state.copy(bonusNumber = bonusNumber)
+        _state = _state.copy(bonusNumber = validBonusNumber)
         getLottoResult()
     }
 
-    private fun pickLotto() {
-        val purchaseLottoAmount = state.purchaseLottoCount
+    fun pickLotto() {
+        val purchaseLottoAmount = _state.purchaseInfo.purchaseLottoCount
         val pickedLotto = mutableListOf<TreeSet<Int>>()
         repeat(purchaseLottoAmount) {
             pickedLotto.add(lottoDataSource())
         }
-        state = state.copy(pickedLotto = pickedLotto)
+        setPickedLotto(pickedLotto)
     }
 
     private fun getLottoResult() {
-        val lotto = Lotto(state.winningNumber)
-        val updatedReward = state.winningResult.toMutableMap()
+        val lotto = Lotto(_state.winningNumber)
+        val updatedWinningResult = _state.winningResult.winning.toMutableMap()
 
-        state.pickedLotto.map {
-            val matches = lotto.getMatches(it, state.bonusNumber)
-            modifyRewardByMatches(matches, updatedReward)
+        _state.lotto.pickedLotto.map {
+            val matches = lotto.getMatches(it, _state.bonusNumber)
+            modifyWinningByMatches(matches, updatedWinningResult)
         }
 
-        state = state.copy(winningResult = updatedReward)
-        getRateOfReturn()
+        setLottoResult(updatedWinningResult)
     }
 
-    private fun getRateOfReturn() {
-        val winningMoney = calculator.calculateWinningMoney(state.winningResult)
+    fun getRateOfReturn() {
+        val winningMoney = calculator.calculateWinningMoney(_state.winningResult.winning)
 
         if (winningMoney != 0L) {
-            val purchaseAmount = state.purchaseLottoCount
+            val purchaseAmount = _state.purchaseInfo.purchaseLottoCount
             val rateOfReturn = calculator.calculateRateOfReturn(winningMoney, purchaseAmount)
-            state = state.copy(rateOfReturn = rateOfReturn)
+            _state = _state.copy(rateOfReturn = totalRateOfReturnFormat(rateOfReturn))
         }
     }
 
-    private fun modifyRewardByMatches(matches: Rank, updatedReward: MutableMap<Rank, Int>) {
+    private fun modifyWinningByMatches(matches: Rank, currentWinning: MutableMap<Rank, Int>) {
         if (matches != Rank.NONE) {
-            updatedReward[matches] = updatedReward.getOrDefault(matches, 0) + 1
+            currentWinning[matches] = currentWinning.getOrDefault(matches, 0) + 1
         }
+    }
+
+    private fun calculateLottoCount(pay: Int) {
+        val purchaseLottoCount = calculator.calculatePurchaseLottoCount(pay)
+        _state = _state.copy(
+            purchaseInfo = _state.purchaseInfo.copy(
+                purchaseLottoCount = purchaseLottoCount,
+            )
+        )
+    }
+
+    private fun setPickedLotto(lotto: List<TreeSet<Int>>) {
+        _state = _state.copy(
+            lotto = _state.lotto.copy(
+                pickedLotto = lotto
+            )
+        )
+    }
+
+    private fun setLottoResult(result: Map<Rank, Int>) {
+        _state = _state.copy(
+            winningResult = _state.winningResult.copy(
+                winning = result
+            )
+        )
     }
 }
