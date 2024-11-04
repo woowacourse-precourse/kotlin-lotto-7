@@ -16,13 +16,9 @@ class MainController {
         lottoGenerator.makeLotto(money)
         Output.printLottoDetails(lottoGenerator.getLotteries())
         Output.printWinningNumberToInput()
-        val beforeValidationWinningNumber = Input.read()
-
-        val winningNumber = Transformer().stringToLotto(beforeValidationWinningNumber)
+        val winningNumber = Transformer().stringToLotto(readAndValidateWinningNumber())
         Output.printBonusNumberToInput()
-        val beforeValidationBonusNumber = Input.read()
-
-        val bonusNumber = beforeValidationBonusNumber.toInt()
+        val bonusNumber = readAndValidateBonusNumber().toInt()
         val calculator = WinningCalculator()
         val result = calculator.calculateDetails(winningNumber,bonusNumber,lottoGenerator.getLotteries())
         Output.printWinningDetails(result)
@@ -31,11 +27,31 @@ class MainController {
 
     private fun readAndValidateMoney() : String{
         return try {
-            val beforeValidationMoney = Input.read()
-            Validator().validateMoneyInput(beforeValidationMoney)
-            beforeValidationMoney
+            val money = Input.read()
+            Validator().validateMoneyInput(money)
+            money
         } catch (e: IllegalArgumentException) {
             readAndValidateMoney()
+        }
+    }
+
+    private fun readAndValidateWinningNumber() : String{
+        return try {
+            val winningNumber = Input.read()
+            Validator().validateWinningNumberInput(winningNumber)
+            winningNumber
+        } catch (e: IllegalArgumentException) {
+            readAndValidateWinningNumber()
+        }
+    }
+
+    private fun readAndValidateBonusNumber() : String{
+        return try {
+            val bonusNumber = Input.read()
+            Validator().validateBonusNumberInput(bonusNumber)
+            bonusNumber
+        } catch (e: IllegalArgumentException) {
+            readAndValidateBonusNumber()
         }
     }
 }

@@ -33,4 +33,20 @@ class Validator {
             throw IllegalArgumentException("[ERROR] 돈은 천 단위 숫자여야 합니다.")
         }
     }
+
+    fun validateWinningNumberInput(winningNumber: String){
+        validateLottoFormat(winningNumber)
+    }
+
+    private fun validateLottoFormat(winningNumber: String){
+        val reg = Regex("[1-9]+,[1-9]+,[1-9]+,[1-9]+,[1-9]+,[1-9]+")
+        if (!reg.matches(winningNumber)){
+            println("[ERROR] 로또 입력 형식이 맞지 않습니다.")
+            throw IllegalArgumentException("[ERROR] 로또 입력 형식이 맞지 않습니다.")
+        }
+    }
+
+    fun validateBonusNumberInput(winningNumber: String){
+
+    }
 }
