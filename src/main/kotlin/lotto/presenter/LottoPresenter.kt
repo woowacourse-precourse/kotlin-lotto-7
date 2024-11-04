@@ -3,7 +3,6 @@ package lotto.presenter
 import lotto.model.LottoRank
 import lotto.model.LottoTicket
 import lotto.util.ConstantsUtil.TICKET_PRICE
-import lotto.util.ValidatorUtil.validateBonusNumber
 import lotto.util.ValidatorUtil.validateBonusNumberNotInWinningNumbers
 import lotto.util.ValidatorUtil.validateBonusNumbersRange
 import lotto.util.ValidatorUtil.validateTicketsPrice
