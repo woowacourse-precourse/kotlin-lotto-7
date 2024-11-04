@@ -17,4 +17,11 @@ data class Prize(
         }
     }
 
+    fun getPrizeMoney(): Double {
+        return (Rank.FIRST_RANK.money * first
+                + Rank.SECOND_RANK.money * second
+                + Rank.THIRD_RANK.money * third
+                + Rank.FOURTH_RANK.money * fourth
+                + Rank.FIFTH_RANK.money * fifth)
+    }
 }
