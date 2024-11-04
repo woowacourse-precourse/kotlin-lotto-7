@@ -65,15 +65,20 @@ fun main() {
 }
 
 fun getAmount(): Int {
-    val amount = Console.readLine().toInt()
+    val amount = Console.readLine()
     return checkAmount(amount)
 }
 
-fun checkAmount(amount: Int): Int {
-    if (amount % 1000 != 0) {
-        throw IllegalArgumentException("[ERROR] 1,000원 단위로만 구매 가능합니다. 구입 금액을 다시 입력해주세요.")
+fun checkAmount(amount: String): Int {
+    try {
+        val checkedAmount = amount.toInt()
+        if (checkedAmount % 1000 != 0) {
+            throw IllegalArgumentException("[ERROR] 1,000원 단위로만 구매 가능합니다. 구입 금액을 다시 입력해주세요.")
+        }
+        return checkedAmount / 1000
+    } catch (e: NumberFormatException) {
+        throw IllegalArgumentException("[ERROR] 구입 금액은 정수로만 입력되어야 합니다. 구입 금액을 다시 입력해주세요.")
     }
-    return amount / 1000
 }
 
 fun createLottos(number: Int): ArrayList<Lotto> {
@@ -100,7 +105,7 @@ fun checkNumber(lottoNumbers: List<String>): List<Int> {
     try {
         val mappedLottoNumbers = lottoNumbers.map { it.toInt() }
         mappedLottoNumbers.forEach {
-            require(it in 1..45) {"[ERROR] 로또 번호는 1부터 45 사이의 숫자여야 합니다. 로또 번호를 다시 입력해주세요."}
+            require(it in 1..45) {"[ERROR] 로또 번호는 1부터 45 사이의 정수여야 합니다. 로또 번호를 다시 입력해주세요."}
         }
         return mappedLottoNumbers
     } catch (e: NumberFormatException) {
@@ -109,13 +114,18 @@ fun checkNumber(lottoNumbers: List<String>): List<Int> {
 }
 
 fun getBonusNumber(): Int {
-    val bonusNumber = Console.readLine().toInt()
+    val bonusNumber = Console.readLine()
     return checkNumber(bonusNumber)
 }
 
-fun checkNumber(lottoNumber: Int): Int {
-    require(lottoNumber in 1 .. 45) {"[ERROR] 로또 번호는 1부터 45 사이의 숫자여야 합니다. 보너스 번호를 다시 입력해주세요."}
-    return lottoNumber
+fun checkNumber(lottoNumber: String): Int {
+    try {
+        val checkedLottoNumber = lottoNumber.toInt()
+        require(checkedLottoNumber in 1 .. 45) {"[ERROR] 로또 번호는 1부터 45 사이의 정수여야 합니다. 보너스 번호를 다시 입력해주세요."}
+        return checkedLottoNumber
+    } catch (e: NumberFormatException) {
+        throw IllegalArgumentException("[ERROR] 로또 번호는 1부터 45 사이의 정수여야 합니다. 보너스 번호를 다시 입력해주세요.")
+    }
 }
 
 fun checkWinner(count: Int, isBonusEqual: Boolean): PrizeWinner {
