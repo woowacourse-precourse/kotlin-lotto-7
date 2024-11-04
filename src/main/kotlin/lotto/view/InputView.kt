@@ -11,7 +11,7 @@ object InputView {
                 validateCost(cost)
                 return cost
             } catch (e: IllegalArgumentException) {
-                println(e.message)  // Print specific error message for invalid cost
+                println(e.message)
             } catch (e: IllegalStateException) {
                 println("[ERROR] 시스템 오류가 발생했습니다. 다시 시도해 주세요.")
             }
@@ -45,16 +45,22 @@ object InputView {
         return Console.readLine().split(",").map { it.toInt()}
     }
 
-    fun getBonusNum(previousLottoNumbers: List<List<Int>>): Int {
+    fun getBonusNum(winNumbers: Set<Int>): Int {
         while (true) {
             try {
                 println("보너스 번호를 입력해 주세요.")
                 val bonusNum = Console.readLine().toInt()
-                // Check for duplicates with previously generated lotto numbers
-                val allLottoNumbers = previousLottoNumbers.flatten().toSet()
-                if (bonusNum in allLottoNumbers) {
-                    throw IllegalArgumentException("[ERROR] 보너스 번호는 이미 구입한 번호와 중복될 수 없습니다.")
+
+                // Check if the bonus number is within the valid range
+                if (bonusNum !in 1..45) {
+                    throw IllegalArgumentException("[ERROR] 보너스 번호는 1과 45 사이의 숫자여야 합니다.")
                 }
+
+                // Check for duplicates with the winning numbers
+                if (winNumbers.contains(bonusNum)) {
+                    throw IllegalArgumentException("[ERROR] 보너스 번호는 당첨 번호와 중복될 수 없습니다.")
+                }
+
                 return bonusNum
             } catch (e: NumberFormatException) {
                 println("[ERROR] 잘못된 입력입니다. 숫자를 입력해주세요.")

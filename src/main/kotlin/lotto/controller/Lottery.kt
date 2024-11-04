@@ -17,7 +17,7 @@ fun playLotto() {
     printLottoNumbers(lottoTickets.map { it.getNumbers() })
 
     val winNumber = getWinNum().toSet()
-    val bonus = getBonusNum(lottoTickets.map { it.getNumbers() })
+    val bonus = getBonusNum(winNumber)
 
     val results = calculateResults(lottoTickets, winNumber, bonus)
     val totalPrize = calculateTotalPrize(results)
