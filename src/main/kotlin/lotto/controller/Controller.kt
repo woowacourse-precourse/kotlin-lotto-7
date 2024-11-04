@@ -29,7 +29,7 @@ class Controller {
             }
         } while (message is String)
         lottoGame.buy(moneyInput.toInt())
-        outputView.showPrompt("\n" + "${lottoGame.lottoOrder.ticketAmount}" + CONFIRM_COUNT_MESSAGE)
+        outputView.showPrompt("\n" + lottoGame.lottoOrder.ticketAmount + CONFIRM_COUNT_MESSAGE)
         lottoGame.generateLottoTickets(lottoGame.lottoOrder.ticketAmount)
     }
 
@@ -44,7 +44,6 @@ class Controller {
                 outputView.showPrompt(message)
             }
         } while (message is String)
-        lottoGame.lottoWinning.numbers = winningInput.split(SEPARATOR).map { it.toInt() }
     }
 
     private fun inputBonusBall() {
@@ -58,8 +57,7 @@ class Controller {
                 outputView.showPrompt(message)
             }
         } while (message is String)
-        lottoGame.lottoWinning.bonus = bonusInput.toInt()
-        lottoGame.setWinnings()
+        lottoGame.play()
     }
 
     private fun showResult() {
@@ -86,11 +84,7 @@ class Controller {
         const val REQUEST_WINNING_NUMBER_MESSAGE = "\n당첨 번호를 입력해 주세요."
         const val REQUEST_BONUS_NUMBER_MESSAGE = "\n보너스 번호를 입력해 주세요."
         const val TOTAL_WINNING_MESSAGE = "\n당첨 통계\n---"
-        const val FIRST_MESSAGE = "개 일치"
-        const val SECOND_MESSAGE = " ("
-        const val THIRD_MESSAGE = "원) - "
-        const val LAST_MESSAGE = "개"
-        const val BONUS_BALL_MESSAGE = ", 보너스 볼 일치"
+
         const val PREFIX_RETURN_MESSAGE = "총 수익률은 "
         const val SUFFIX_RETURN_MESSAGE = "%입니다."
     }

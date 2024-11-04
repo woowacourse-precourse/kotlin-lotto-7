@@ -1,12 +1,7 @@
 package lotto.model
 
 import camp.nextstep.edu.missionutils.Randoms.pickUniqueNumbersInRange
-import lotto.controller.Controller.Companion.BONUS_BALL_MESSAGE
-import lotto.controller.Controller.Companion.FIRST_MESSAGE
-import lotto.controller.Controller.Companion.LAST_MESSAGE
-import lotto.controller.Controller.Companion.SECOND_MESSAGE
 import lotto.controller.Controller.Companion.SEPARATOR
-import lotto.controller.Controller.Companion.THIRD_MESSAGE
 
 class LottoGame {
     val lottoOrder = LottoOrder()
@@ -21,29 +16,29 @@ class LottoGame {
     )
 
     fun validateMoney(money: String): String? {
-        require(money.toIntOrNull() != null) { return ERROR_INPUT_MONEY_NUMBER_MESSAGE }
-        require(money.toInt() % LOTTO_TICKET_PRICE == 0) { return ERROR_REQUIRE_MINIMUM_THOUSAND_MESSAGE }
-        require(money.toInt() < LOTTO_MAXIMUM_MONEY) { return ERROR_REQUIRE_MAXIMUM_HUNDRED_THOUSAND_MESSAGE }
-        lottoOrder.money = money.toInt()
+        require(money.trim().toIntOrNull() != null) { return ERROR_INPUT_MONEY_NUMBER_MESSAGE }
+        require(money.trim().toInt() % LOTTO_TICKET_PRICE == 0) { return ERROR_REQUIRE_MINIMUM_THOUSAND_MESSAGE }
+        require(money.trim().toInt() < LOTTO_MAXIMUM_MONEY) { return ERROR_REQUIRE_MAXIMUM_HUNDRED_THOUSAND_MESSAGE }
+        lottoOrder.money = money.trim().toInt()
         return null
     }
 
     fun validateNumbers(winningInput: String): String? {
         val winningNumber = winningInput.split(SEPARATOR)
-        require(winningNumber.all { it.toIntOrNull() is Int }) { return ERROR_REQUIRE_LOTTO_NUMBER_MESSAGE }
-        require(winningNumber.all { it.toInt() in MIN_BALL_NUMBER..MAX_BALL_NUMBER }) { return ERROR_REQUIRE_LOTTO_NUMBER_RANGE_MESSAGE }
+        require(winningNumber.all { it.trim().toIntOrNull() is Int }) { return ERROR_REQUIRE_LOTTO_NUMBER_MESSAGE }
+        require(winningNumber.all { it.trim().toInt() in MIN_BALL_NUMBER..MAX_BALL_NUMBER }) { return ERROR_REQUIRE_LOTTO_NUMBER_RANGE_MESSAGE }
         require(winningNumber.size == WINNING_BALL_COUNT) { return ERROR_REQUIRE_LOTTO_SIZE_MESSAGE }
         require(winningNumber.size == winningNumber.distinct().size) { return ERROR_REQUIRE_UNIQUE_NUMBER_MESSAGE }
-        lottoWinning.numbers = winningNumber.map { it.toInt() }
+        lottoWinning.numbers = winningNumber.map { it.trim().toInt() }
         return null
     }
 
     fun validateBonus(bonusInput: String): String? {
-        require(bonusInput.toIntOrNull() != null) { return ERROR_REQUIRE_BONUS_NUMBER_MESSAGE }
-        val bonus = bonusInput.toInt()
+        require(bonusInput.trim().toIntOrNull() != null) { return ERROR_REQUIRE_BONUS_NUMBER_MESSAGE }
+        val bonus = bonusInput.trim().toInt()
         require(bonus in MIN_BALL_NUMBER..MAX_BALL_NUMBER) { return ERROR_REQUIRE_BONUS_NUMBER_RANGE_MESSAGE }
         require(!lottoWinning.numbers.contains(bonus)) { return ERROR_MUST_UNIQUE_WITH_LOTTO_MESSAGE }
-        lottoWinning.bonus = bonusInput.toInt()
+        lottoWinning.bonus = bonusInput.trim().toInt()
         return null
     }
 
@@ -76,7 +71,7 @@ class LottoGame {
         return lotto.contains(lottoWinning.bonus)
     }
 
-    fun setWinnings() {
+    fun play() {
         for (lotto in lottoOrder.totalTickets) {
             val win = checkScore(lotto)
             val bonus = checkBonus(lotto)
@@ -131,8 +126,14 @@ class LottoGame {
         const val ERROR_REQUIRE_LOTTO_SIZE_MESSAGE = "[ERROR] 로또 번호는 6개여야 합니다."
         const val ERROR_REQUIRE_UNIQUE_NUMBER_MESSAGE = "[ERROR] 로또 번호는 중복되지 않아야 합니다."
 
-        const val ERROR_REQUIRE_BONUS_NUMBER_MESSAGE = "[ERROR] 보너스 번호는 숫자여야 합니다."
+        const val ERROR_REQUIRE_BONUS_NUMBER_MESSAGE = "[ERROR] 보너스 번호는 하나의 숫자여야 합니다."
         const val ERROR_REQUIRE_BONUS_NUMBER_RANGE_MESSAGE = "[ERROR] 보너스 번호는 1부터 45 사이의 숫자여야 합니다."
         const val ERROR_MUST_UNIQUE_WITH_LOTTO_MESSAGE = "[ERROR] 보너스 번호와 로또 번호는 같을 수 없습니다."
+
+        const val FIRST_MESSAGE = "개 일치"
+        const val SECOND_MESSAGE = " ("
+        const val THIRD_MESSAGE = "원) - "
+        const val LAST_MESSAGE = "개"
+        const val BONUS_BALL_MESSAGE = ", 보너스 볼 일치"
     }
 }
