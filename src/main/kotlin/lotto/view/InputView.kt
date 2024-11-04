@@ -1,6 +1,7 @@
 package lotto.view
 
 import camp.nextstep.edu.missionutils.Console
+import lotto.model.Lotto
 import lotto.util.ErrorMessages
 
 class InputView {
@@ -43,7 +44,7 @@ class InputView {
         }
     }
 
-    fun getBonusNumber(): Int {
+    fun getBonusNumber(myLotto: Lotto): Int {
         println("보너스 번호를 입력해 주세요.")
         while (true) {
             try {
@@ -53,9 +54,11 @@ class InputView {
                 require(input != "") { ErrorMessages.NULL_BONUS_NUMBER }
                 require(bonusNumber != null) { ErrorMessages.NOT_INT }
                 require(bonusNumber in 1..45) { ErrorMessages.OUT_OF_RANGE }
+                require(bonusNumber !in myLotto.getNumbers()) { ErrorMessages.DUPLICATED_BONUS }
+
                 return bonusNumber
             } catch (e: IllegalArgumentException) {
-                throw IllegalArgumentException(e.message)
+                println(e.message)
             }
         }
     }

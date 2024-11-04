@@ -2,6 +2,7 @@ package lotto.controller
 
 import lotto.model.Lotto
 import lotto.model.Store
+import lotto.util.ErrorMessages
 import lotto.view.InputView
 import lotto.view.OutputView
 
@@ -13,7 +14,7 @@ class LottoDraw {
         val lottos = store.buyLotto(price)
 
         val myLotto = Lotto(inputView.getLottoNumber())
-        val myBonus = inputView.getBonusNumber()
+        val myBonus = inputView.getBonusNumber(myLotto)
 
         outputView.purchasedMessage(store.numberOfLottoPurchased)
         outputView.lottoList(lottos)
