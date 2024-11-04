@@ -8,6 +8,7 @@ class LottoNumbersValidator : LottoNumberValidator() {
         validateNumbersSize(numbers)
         validateNumbersRange(numbers)
         validateNumbersDuplicate(numbers)
+        validateIsAscending(numbers)
     }
 
     private fun validateNumbersSize(numbers: List<Int>) {
@@ -22,8 +23,13 @@ class LottoNumbersValidator : LottoNumberValidator() {
         numbers.forEach { validateNumberRange(it) }
     }
 
+    private fun validateIsAscending(numbers: List<Int>) {
+        require(numbers.sorted() == numbers) { ERROR_IS_ASCENDING }
+    }
+
     companion object {
         private const val ERROR_LOTTO_SIZE = "[ERROR] 로또 번호는 6개여야 합니다."
         private const val ERROR_DUPLICATE_LOTTO = "[ERROR] 로또 번호는 중복되면 안됩니다."
+        private const val ERROR_IS_ASCENDING = "[ERROR] 로또 번호는 오름차순 입니다."
     }
 }
