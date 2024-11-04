@@ -37,7 +37,7 @@ class LottoResultView {
         private const val WON_FORMAT_PATTERN = "#,###원"
         private const val TOTAL_PROFIT_RATE_MASSAGE = "총 수익률은 "
         private const val TOTAL_PROFIT_ENDING_MESSAGE = "입니다."
-        private const val BONUS_MATCH_MESSAGE = "%d개 일치, 보너스 볼 일치 (%d원) - %d개"
-        private const val MATCH_MESSAGE = "%d개 일치 (%d원) - %d개"
+        private const val BONUS_MATCH_MESSAGE = "%d개 일치, 보너스 볼 일치 (%s) - %d개"
+        private const val MATCH_MESSAGE = "%d개 일치 (%s) - %d개"
     }
 }
