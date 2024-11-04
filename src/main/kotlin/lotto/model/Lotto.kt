@@ -32,11 +32,8 @@ class Lotto(private val numbers: List<Int>) {
         }
 
         fun fromList(numbers: List<Int>): Lotto {
-            return Lotto(numbers
-                .validateCount(LottoStore.LOTTO_NUMBER_COUNT)
-                .findDuplicates()
-                .validateRange(LottoStore.LOTTO_MIN_NUMBER, LottoStore.LOTTO_MAX_NUMBER)
-            )
+            return Lotto(numbers)  // 기본 생성자를 호출하여 유효성 검증을 수행
         }
     }
 }
+
