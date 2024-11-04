@@ -9,7 +9,6 @@ fun main() {
     val bonus_number = bonusNumberInput(winner_number)
 
     resultoutput(purchase_money, lotto_number, winner_number, bonus_number)
-    return
 }
 
 
