@@ -62,13 +62,23 @@ class LottoGameTest {
     }
 
     @Test
-    fun `보너스 번호가 유효하지 않으면 예외가 발생한다`() {
+    fun `보너스 번호가 숫자 형식이 아니면 예외가 발생한다`() {
         val game = LottoGame(readLine = { "" })
 
         val exception = assertThrows<IllegalArgumentException> {
             game.parseBonusNumber("abc")
         }
         assertThat(exception.message).contains("[ERROR] 보너스 번호는 숫자로 입력해야 합니다.")
+    }
+
+    @Test
+    fun `보너스 번호가 1~45 사이의 숫자가 아니면 예외가 발생한다`() {
+        val game = LottoGame(readLine = { "" })
+
+        val exception = assertThrows<IllegalArgumentException> {
+            game.parseBonusNumber("-3")
+        }
+        assertThat(exception.message).contains("[ERROR] 보너스 번호는 1부터 45 사이여야 합니다.")
     }
 
 
