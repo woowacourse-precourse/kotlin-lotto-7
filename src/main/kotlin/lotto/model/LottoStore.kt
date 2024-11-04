@@ -2,7 +2,7 @@ package lotto.model
 
 import camp.nextstep.edu.missionutils.Randoms
 class LottoStore: Store {
-    override fun buy(): List<Int> {
+    override fun sell(): List<Int> {
         return Randoms.pickUniqueNumbersInRange(LOTTO_MIN_NUMBER ,LOTTO_MAX_NUMBER,LOTTO_NUMBER_COUNT)
     }
 
