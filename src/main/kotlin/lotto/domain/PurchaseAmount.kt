@@ -1,7 +1,9 @@
 package lotto.domain
 
 class PurchaseAmount(private val money: Int) {
-    init {}
+    init {
+        require(money > 0) { ERROR_NEGATIVE_NUMBER_MESSAGE }
+    }
 
     fun getMoney(): Int = money
 
@@ -9,5 +11,7 @@ class PurchaseAmount(private val money: Int) {
 
     companion object {
         private const val LOTTO_PRICE = 1000
+
+        private const val ERROR_NEGATIVE_NUMBER_MESSAGE = "[ERROR] 0보다 큰 값을 입력해야 합니다."
     }
 }
