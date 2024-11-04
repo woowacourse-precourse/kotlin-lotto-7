@@ -1,9 +1,6 @@
 package lotto.controller
 
-import lotto.model.Amount
-import lotto.model.Bonus
-import lotto.model.CreateLotto
-import lotto.model.Lotto
+import lotto.model.*
 import lotto.validator.Validator
 import lotto.view.GuideOutput
 import lotto.view.Input
@@ -21,8 +18,8 @@ class LottoController {
 
         val winNumber = Validator.retryOnFailure { Lotto(numberInterface()) }
         val bonusNumber = Validator.retryOnFailure { Bonus(bonusInterface()) }
-
-
+        val resultNumber = ResultNumber()
+        val resultNumbers = resultNumber.check(numbers, winNumber.returnNumbers(), bonusNumber.returnBonus())
     }
 
     fun amountInterface(): String {
