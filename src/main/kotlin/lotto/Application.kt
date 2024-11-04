@@ -53,7 +53,7 @@ fun main() {
     printResult(lottoMoney, matchCounts)
     val totalMoney = calculateTotalMoney(lottoMoney, matchCounts)
     val profitRate = calculateProfitRate(totalMoney, lottoBudget)
-    print(profitRate)
+    printProfitRate(profitRate)
 }
 
 fun getLottoBudget(): Int {
@@ -153,4 +153,8 @@ fun calculateTotalMoney(lottoMoney: MutableMap<String, Int>, matchCounts: Mutabl
 fun calculateProfitRate(totalMoney: Int, lottoBudget: Int): Double {
     if (lottoBudget == 0) return 0.0
     return (totalMoney.toDouble() / lottoBudget) * 100
+}
+
+fun printProfitRate(profitRate: Double) {
+    println("총 수익률은 ${profitRate}%입니다.")
 }
