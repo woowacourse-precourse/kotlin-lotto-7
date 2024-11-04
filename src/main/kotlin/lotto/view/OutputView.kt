@@ -44,12 +44,13 @@ object OutputView {
     }
 
     private fun printEarningRate(earningRate: Double) {
-        println(OUTPUT_EARNING_RATE_MESSAGE.format(earningRate * 100))
+        val earningRateFormat = DecimalFormat("#,##0.0").format(earningRate * 100) + "%"
+        println(OUTPUT_EARNING_RATE_MESSAGE.format(earningRateFormat))
     }
 
     private const val OUTPUT_PURCHASE_AMOUNT_MESSAGE = "개를 구매했습니다."
     private const val OUTPUT_WINNING_STATISTICS_MESSAGE = "당첨 통계\n---"
     private const val OUTPUT_RANK_MESSAGE = "%d개 일치 (%s원) - %d개"
     private const val OUTPUT_RANK_BONUS_MESSAGE = "%d개 일치, 보너스 볼 일치 (%s원) - %d개"
-    private const val OUTPUT_EARNING_RATE_MESSAGE = "총 수익률은 %.1f%%입니다."
+    private const val OUTPUT_EARNING_RATE_MESSAGE = "총 수익률은 %s입니다."
 }
