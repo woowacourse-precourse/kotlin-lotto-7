@@ -12,6 +12,31 @@
 7. 번호가 몇 개 일치 했는가에 따라 당첨 내역을 출력한다.
 8. 당첨 금액과 로또 구매 금액의 비율로 수익률을 구하고 출력한다.
 
+## 프로젝트 구조
+```
+lotto
+├── controller
+│   └── LottoController.kt
+├── model
+│   ├── Lotto.kt
+│   ├── LottoFactory.kt
+│   ├── LottoRank.kt
+│   └── LottoResultCalculator.kt 
+├── view
+│   ├── InputView.kt
+│   └── OutputView.kt
+└── util
+        ├── constant
+        │   ├── ErrorMessages.kt
+        │   ├── InputConstants.kt
+        │   ├── OutputConstants.kt
+        │   └── LottoRules.kt
+        └── validator
+            ├── BonusNumberValidator.kt
+            ├── LottoNumberValidator.kt
+            └── PurchaseAmountValidator.kt
+```
+
 ## 기능 요구 사항
 ### 입력
 - 로또 구입 금액
