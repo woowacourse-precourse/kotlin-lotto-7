@@ -15,7 +15,7 @@ class Printer {
     fun printWinningMessage() {
         lineBreak()
         println(Output.WINNING_STATISTICS)
-        println(Output.THREE_HYPHEN)
+        print(Output.THREE_HYPHEN)
     }
 
     fun lineBreak() = println()

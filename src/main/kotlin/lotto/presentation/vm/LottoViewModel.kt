@@ -59,13 +59,16 @@ class LottoViewModel(
 
     fun getRateOfReturn() {
         val winningMoney = calculator.calculateWinningMoney(_state.winningResult.winning)
+        val purchaseAmount = _state.purchaseInfo.purchaseLottoCount
 
-        if (winningMoney != 0L) {
-            val purchaseAmount = _state.purchaseInfo.purchaseLottoCount
-            val rateOfReturn = calculator.calculateRateOfReturn(winningMoney, purchaseAmount)
-            _state = _state.copy(rateOfReturn = totalRateOfReturnFormat(rateOfReturn))
+        val rateOfReturn = if (winningMoney != 0L) {
+            calculator.calculateRateOfReturn(winningMoney, purchaseAmount)
+        } else {
+            "0"
         }
+        _state = _state.copy(rateOfReturn = totalRateOfReturnFormat(rateOfReturn))
     }
+
 
     private fun modifyWinningByMatches(matches: Rank, currentWinning: MutableMap<Rank, Int>) {
         if (matches != Rank.NONE) {
