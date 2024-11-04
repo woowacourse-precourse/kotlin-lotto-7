@@ -4,11 +4,13 @@ import camp.nextstep.edu.missionutils.Console
 import lotto.model.Lotto
 import lotto.model.LottoRank
 import lotto.util.ConstantsUtil.DELIMITER_COMMA
+import lotto.util.ConstantsUtil.MESSAGE_BONUS_NUMBER
 import lotto.util.ConstantsUtil.MESSAGE_CALCULATED_TICKETS
 import lotto.util.ConstantsUtil.MESSAGE_SHOW_CALCULATED_TICKETS
 import lotto.util.ConstantsUtil.MESSAGE_TICKETS_COUNT
 import lotto.util.ConstantsUtil.MESSAGE_TICKETS_PRICE
 import lotto.util.ConstantsUtil.MESSAGE_WINNING_NUMBERS
+import lotto.util.ValidatorUtil.validateBonusNumber
 import lotto.util.ValidatorUtil.validateTicketsPrice
 import lotto.util.ValidatorUtil.validateWinningNumbers
 import java.text.NumberFormat
@@ -41,6 +43,14 @@ class LottoViewImpl: LottoView {
         validateWinningNumbers(inputWinningNumbers)
         return inputWinningNumbers.filterNotNull()
     }
+
+    override fun getBonusNumber(): Int {
+        println(MESSAGE_BONUS_NUMBER)
+        val input = Console.readLine()
+        validateBonusNumber(input)
+        return input.toInt()
+    }
+
     private fun formatShowTickets(ticketsSize: Int): String{
         return MESSAGE_TICKETS_COUNT.format(ticketsSize)
     }
