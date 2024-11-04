@@ -1,5 +1,6 @@
 package lotto
 
+// 입력 받는 로또에 대한 기능
 class Lotto(private val numbers: List<Int>) {
     init {
         require(numbers.size == 6) { "[ERROR] 로또 번호는 6개여야 합니다." }

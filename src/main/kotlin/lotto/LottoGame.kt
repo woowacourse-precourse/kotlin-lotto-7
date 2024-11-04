@@ -5,6 +5,7 @@ import camp.nextstep.edu.missionutils.Console
 class LottoGame(
     private val readLine: () -> String = { Console.readLine() }
 ) {
+    // 로또 게임의 전과정 메서드 호출 후 결과 출력
     fun start(): LottoResult {
         val cost = inputCost()
         val winningLotto = inputWinningLotto()
@@ -42,7 +43,7 @@ class LottoGame(
         println("당첨 번호를 입력해 주세요.")
         return retryOnError { parseWinningLotto(readLine()) }
     }
-
+    // 당첨 번호 예외 발생
     internal fun parseWinningLotto(input: String): Lotto {
         val winningLotto = input.split(',')
             .map { it.trim().toIntOrNull() ?: throw IllegalArgumentException("[ERROR] 당첨번호는 숫자로 입력해야 합니다.") }
