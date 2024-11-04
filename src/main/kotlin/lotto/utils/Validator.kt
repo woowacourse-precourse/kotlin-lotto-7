@@ -20,15 +20,13 @@ class Validator {
         require(input.isNotEmpty()) { INPUT_EMPTY.message }
         require(input.length > 3) { MIN_SIX.message }
         require(input.contains(",")) { ONLY_COMMA.message }
-        val nums = input.split(",")
-            .map { it.trim() }
-            .map {
-                try {
-                    it.toInt()
-                } catch (e: IllegalArgumentException) {
-                    throw IllegalArgumentException(ONLY_NUMBER.message)
-                }
+        val nums = input.split(",").map { it.trim() }.map {
+            try {
+                it.toInt()
+            } catch (e: IllegalArgumentException) {
+                throw IllegalArgumentException(ONLY_NUMBER.message)
             }
+        }
         require(nums.size == 6) { MIN_SIX.message }
         require(nums.all { it in 1..45 }) { NOT_1_BETWEEN_45.message }
     }
