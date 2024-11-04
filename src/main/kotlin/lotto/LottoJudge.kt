@@ -51,7 +51,9 @@ class LottoJudge {
 
     fun setLottoBonusNumber(number: Int) {
         exceptBonusNumberRange(number)
-        require(!winningNumbers.contains(number)) { ErrorMessage.INPUT_WINNING_NUMBER_NO_DUPLICATE.getMessage() }
+        require(!winningNumbers.contains(number)) {
+            ErrorMessage.INPUT_BONUS_NUMBER_NOT_CONTAIN_WINNING_NUMBERS.getMessage()
+        }
         bonusNumber = number
     }
 
@@ -69,7 +71,7 @@ class LottoJudge {
 
     private fun exceptBonusNumberRange(number: Int) {
         if (number < LottoMaker.FIRST_NUMBER || number > LottoMaker.LAST_NUMBER ) {
-            throw IllegalArgumentException(INPUT_WINNING_NUMBER_OUT_OF_RANGE_ERROR.getMessage())
+            throw IllegalArgumentException(INPUT_BONUS_NUMBER_OUT_OF_RANGE_ERROR.getMessage())
         }
     }
 
