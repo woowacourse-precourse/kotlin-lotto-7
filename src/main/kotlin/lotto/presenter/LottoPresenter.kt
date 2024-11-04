@@ -12,14 +12,14 @@ class LottoPresenter(
     private val view: LottoView,
     private val lottoTicket: LottoTicket
 ) {
-    fun onPurchaseAmountEntered(price: Int) {
+    fun processLottoTickets(price: Int) {
         validateTicketsPrice(price)
         val ticketCount = price / TICKET_PRICE
         val tickets = lottoTicket.generateTickets(ticketCount)
         view.showTickets(tickets)
     }
 
-    fun onWinningNumbersEntered(winningNumbers: List<Int>, bonusNumber: Int) {
+    fun processWinningNumbers(winningNumbers: List<Int>, bonusNumber: Int) {
         validateUniqueWinningNumbers(winningNumbers)
         validateWinningNumbersSize(winningNumbers.size)
         validateWinningNumbersRange(winningNumbers)
