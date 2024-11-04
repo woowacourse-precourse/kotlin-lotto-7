@@ -51,10 +51,10 @@ class WinningNumberValidator {
 
     private fun checkBigNumber(number: String) {
         if (
-            number.length > 11
-            || number.toLong() > Int.MAX_VALUE
-            || number.toInt() < SettingValue.LOTTO_NUMBER_MINIMUM
-            || number.toInt() > SettingValue.LOTTO_NUMBER_MAXIMUM
+            number.length > 11 ||
+            number.toLong() > Int.MAX_VALUE ||
+            number.toInt() < SettingValue.LOTTO_NUMBER_MINIMUM ||
+            number.toInt() > SettingValue.LOTTO_NUMBER_MAXIMUM
         ) throw IllegalArgumentException(ErrorMessage.OUT_OF_LOTTO_NUMBER_RANGE)
     }
 

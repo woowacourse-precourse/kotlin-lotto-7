@@ -48,7 +48,9 @@ class BonusNumberValidator {
             number.toLong() > Int.MAX_VALUE ||
             number.toInt() < SettingValue.LOTTO_NUMBER_MINIMUM ||
             number.toInt() > SettingValue.LOTTO_NUMBER_MAXIMUM
-        ) throw IllegalArgumentException(ErrorMessage.OUT_OF_LOTTO_NUMBER_RANGE)
+        ) {
+            throw IllegalArgumentException(ErrorMessage.OUT_OF_LOTTO_NUMBER_RANGE)
+        }
     }
 
     private fun checkDuplicate(bonusNumber: String, winningNumber: Lotto) {

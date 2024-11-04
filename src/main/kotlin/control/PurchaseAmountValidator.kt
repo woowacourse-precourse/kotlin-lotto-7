@@ -55,7 +55,9 @@ class PurchaseAmountValidator {
     }
 
     private fun checkDivide(amount: String) {
-        if (amount.toInt() % SettingValue.LOTTO_PRICE != 0 || amount.toInt() == 0) {
+        if (amount.toInt() % SettingValue.LOTTO_PRICE != 0 ||
+            amount.toInt() == 0
+        ) {
             throw IllegalArgumentException(ErrorMessage.NOT_DIVIDE_THOUSAND)
         }
     }

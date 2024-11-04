@@ -45,10 +45,4 @@ class LottoAnalyzer {
     private fun checkBonus(randomLotto: List<Int>, bonusNumber: Int): Boolean {
         return bonusNumber in randomLotto
     }
-
-
-//    fun confirmRateOfReturn(amount: Int) {
-//
-//        )
-//    }
 }
