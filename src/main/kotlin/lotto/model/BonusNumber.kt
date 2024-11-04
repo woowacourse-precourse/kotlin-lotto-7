@@ -6,4 +6,8 @@ class BonusNumber(private val bonusNumber: String, private val winningNumbers: L
     init {
         Validator().checkBonusNumber(bonusNumber, winningNumbers)
     }
+
+    fun getBonusNumber(): String {
+        return bonusNumber
+    }
 }
