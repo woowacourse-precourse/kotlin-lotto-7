@@ -10,9 +10,9 @@ class LottoMaker {
 
     fun makeLottos(inputAmount : Int): List<Lotto> {
         val lottoCount = getLottoCount(inputAmount)
-        val lottoNumber = randomNumber.randomLottos(lottoCount)
+        val lottoNumbers = randomNumber.randomLottos(lottoCount)
 
-        output.printLottoNumbers(lottoNumber)
-        return lottoNumber.map { Lotto(it) }
+        output.printLottoNumbers(lottoNumbers)
+        return lottoNumbers.map { Lotto(it) }
     }
 }

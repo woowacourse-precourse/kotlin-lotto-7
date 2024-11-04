@@ -1,10 +1,10 @@
 package lotto
 
-fun main() {
-    val input = Input()
-    val output = Output()
-    val lottoMaker = LottoMaker()
+val input = Input()
+val output = Output()
+val lottoMaker = LottoMaker()
 
+fun main() {
     val inputAmount = input.getAmount()
     val lottos = lottoMaker.makeLottos(inputAmount)
 

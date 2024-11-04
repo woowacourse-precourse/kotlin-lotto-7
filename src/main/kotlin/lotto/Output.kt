@@ -5,7 +5,7 @@ import java.text.DecimalFormat
 
 class Output {
 
-    fun printLottoNumbers(numbers: MutableList<MutableList<Int>>) {
+    fun printLottoNumbers(numbers: MutableList<List<Int>>) {
         println(numbers.size.toString() + LOTTO_COUNT_PRINT)
         numbers.forEach { println(it) }
     }
