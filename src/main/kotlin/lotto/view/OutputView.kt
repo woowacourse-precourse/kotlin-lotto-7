@@ -6,6 +6,6 @@ object OutputView {
     }
 
     fun printNumList(numList: List<Int>) {
-        return println(numList)
+        return println(numList.sorted())
     }
 }
