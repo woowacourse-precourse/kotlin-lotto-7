@@ -14,7 +14,6 @@ enum class LottoPrize(
 
     companion object {
         private val NONE_MATCHING_COUNT_RANGE = 0..2
-        private const val ERROR_LOTTO_PRIZE_MATCHING_COUNT_RANGE = "[ERROR] 로또 번호 맞은 개수가 범위 밖입니다."
 
         fun fromMatchingCount(matchingCount: Int, isMatchingBonusNumber: Boolean): LottoPrize {
             if (matchingCount in NONE_MATCHING_COUNT_RANGE) {
@@ -23,11 +22,11 @@ enum class LottoPrize(
 
             if (matchingCount == SECOND_PRIZE.matchingCount) {
                 return entries.find { it.isMatchingBonusNumber == isMatchingBonusNumber }
-                    ?: throw IllegalArgumentException(ERROR_LOTTO_PRIZE_MATCHING_COUNT_RANGE)
+                    ?: throw IllegalArgumentException("[ERROR] 로또 번호 맞은 개수가 예상 범위 밖입니다.")
             }
 
             return entries.find { it.matchingCount == matchingCount }
-                ?: throw IllegalArgumentException(ERROR_LOTTO_PRIZE_MATCHING_COUNT_RANGE)
+                ?: throw IllegalArgumentException("[ERROR] 로또 번호 맞은 개수가 예상 범위 밖입니다.")
         }
     }
 }
