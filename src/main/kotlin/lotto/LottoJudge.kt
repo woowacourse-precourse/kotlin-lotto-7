@@ -73,7 +73,7 @@ class LottoJudge {
         println("3개 일치 (5,000원) - ${ranksCount[4]}개")
         println("4개 일치 (50,000원) - ${ranksCount[3]}개")
         println("5개 일치 (1,500,000원) - ${ranksCount[2]}개")
-        println("5개 일치, 보너스 볼 일 (30,000,000원) - ${ranksCount[1]}개")
+        println("5개 일치, 보너스 볼 일치 (30,000,000원) - ${ranksCount[1]}개")
         println("6개 일치 (2,000,000,000원) - ${ranksCount[0]}개")
     }
 
