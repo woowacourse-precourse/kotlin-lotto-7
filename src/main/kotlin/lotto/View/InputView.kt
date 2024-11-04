@@ -14,6 +14,8 @@ class InputView {
                 val lottoPayment = Console.readLine().toIntOrNull()
                         ?: throw IllegalArgumentException("[ERROR] 구입 금액은 숫자로 입력해야 합니다.")
 
+                val lottoAmount = LottoResult().checkAmount(lottoPayment)
+
                 return lottoAmount
             } catch (e: IllegalArgumentException) {
                 println(e.message)
@@ -29,6 +31,8 @@ class InputView {
             try {
                 val lottoNum = Console.readLine().split(",")
 
+                InputValidation().checkLottoNum(lottoNum)
+
                 return lottoNum
             } catch (e: IllegalArgumentException) {
                 println(e.message)
@@ -42,6 +46,9 @@ class InputView {
             try {
                 val bonusLottoNum = Console.readLine().toIntOrNull()
                     ?: throw IllegalArgumentException("[ERROR] 구입 금액은 숫자로 입력해야 합니다.")
+
+                InputValidation().checkBonusLottoNum(bonusLottoNum)
+                InputValidation().checkDuplicate(lottoNum, bonusLottoNum)
 
                 return bonusLottoNum
             } catch (e: IllegalArgumentException) {
