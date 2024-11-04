@@ -6,4 +6,8 @@ class LottoResult(private val result: Map<Rank, Int>) {
         result.forEach { (rank, count) -> totalAmount += rank.winningAmount * count }
         return purchaseAmount.getProfit(totalAmount)
     }
+
+    fun getCount(rank: Rank): Int {
+        return result.getOrDefault(rank, 0)
+    }
 }
