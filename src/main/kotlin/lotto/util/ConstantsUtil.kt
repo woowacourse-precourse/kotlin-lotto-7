@@ -12,8 +12,10 @@ object ConstantsUtil {
 
     const val MESSAGE_TICKETS_COUNT = "%d개를 구매했습니다."
     const val MESSAGE_SHOW_CALCULATED_TICKETS = "당첨 통계\n---"
-    const val MESSAGE_CALCULATED_TICKETS = "%d개 일치 %s원 - %d개"
-    const val MESSAGE_RETURN_RATE = "총 수익률은 %s%% 입니다."
+    const val MESSAGE_SECOND_WINNING= "5개 일치, 보너스 볼 일치"
+    const val MESSAGE_DEFAULT_WINNING = "%d개 일치"
+    const val MESSAGE_CALCULATED_TICKETS = "%s (%s원) - %d개"
+    const val MESSAGE_RETURN_RATE = "총 수익률은 %s%%입니다."
 
     const val MESSAGE_TICKETS_PRICE = "구입 금액을 입력해주세요."
     const val MESSAGE_WINNING_NUMBERS = "당첨 번호를 입력해 주세요."
