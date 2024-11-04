@@ -6,12 +6,14 @@ import lotto.domain.enums.LottoSetting.LOTTO_MIN
 import lotto.domain.enums.LottoSetting.LOTTO_SIZE
 import java.util.TreeSet
 
-fun generateLotto(): LottoDataSource = LottoDataSource {
-    TreeSet(
-        pickUniqueNumbersInRange(
-            LOTTO_MIN.value(),
-            LOTTO_MAX.value(),
-            LOTTO_SIZE.value()
+class LottoDataSourceImpl : LottoDataSource {
+    override fun invoke(): TreeSet<Int> {
+        return TreeSet(
+            pickUniqueNumbersInRange(
+                LOTTO_MIN.value(),
+                LOTTO_MAX.value(),
+                LOTTO_SIZE.value()
+            )
         )
-    )
+    }
 }

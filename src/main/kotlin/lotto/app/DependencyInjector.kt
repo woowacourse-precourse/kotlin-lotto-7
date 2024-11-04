@@ -1,6 +1,7 @@
 package lotto.app
 
-import lotto.data.datasource.generateLotto
+import lotto.data.datasource.LottoDataSource
+import lotto.data.datasource.LottoDataSourceImpl
 import lotto.data.repository.LottoRepositoryImpl
 import lotto.domain.calculator.Calculate
 import lotto.domain.calculator.Calculator
@@ -36,10 +37,11 @@ class DependencyInjector {
     }
 
     private fun injectLottoRepository(): LottoRepositoryImpl {
-        val lottoDataSource = generateLotto()
+        val lottoDataSource = injectLottoDataSource()
         return LottoRepositoryImpl(lottoDataSource)
     }
 
+    fun injectLottoDataSource(): LottoDataSource = LottoDataSourceImpl()
     private fun injectCalculator(): Calculate = Calculator()
     private fun injectPrinter(): Printer = Printer()
     private fun injectCommonErrorDelegate(): CommonErrorDelegate = CommonErrorDelegator()
