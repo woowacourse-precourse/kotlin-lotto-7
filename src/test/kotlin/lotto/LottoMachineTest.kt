@@ -64,5 +64,7 @@ class LottoMachineTest {
             "5개 일치, 보너스 볼 일치 (30,000,000원) - 1개",
             "6개 일치 (2,000,000,000원) - 0개"
         )
+
+        assertEquals(expectResult, winningMessage)
     }
 }
