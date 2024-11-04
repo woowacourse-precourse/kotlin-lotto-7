@@ -25,10 +25,9 @@ class Lotto(private val numbers: List<Int>) {
         return numbers.all { it in LOTTO_NUMBER_RANGE }
     }
 
-    private fun isSameList(inputLottoNum: List<Int>, randomLottoNum: List<Int>): Boolean {
+    fun isSameList(inputLottoNum: List<Int>, randomLottoNum: List<Int>): Boolean {
         return inputLottoNum.sorted() == randomLottoNum.sorted()
     }
 
-    private fun isLottoContain(number: Int) = numbers.contains(number)
 
 }

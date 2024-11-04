@@ -1,8 +1,10 @@
 package lotto
 
+import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 import validator.*
+import validator.LottoGenerator
 
 class LottoTest {
     @Test
@@ -55,6 +57,14 @@ class LottoTest {
         assertThrows<IllegalArgumentException>("로또 번호는 1 ~ 45 사이여야 합니다") {
             Lotto(listOf(1, 2, 3, 4, 5, 46))
         }
+    }
+
+    @Test
+    fun `로또 번호가 같으면 같은 동일한 로또 티켓이다`() {
+        val randomNum = listOf(1, 2, 3, 4, 5, 6)
+        val inputLottoNum = listOf(1, 2, 3, 4, 5, 6)
+
+        assertThat(Lotto(randomNum).isSameList(inputLottoNum, randomNum)).isTrue()
     }
 
 
