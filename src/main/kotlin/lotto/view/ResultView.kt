@@ -12,4 +12,9 @@ class ResultView {
         }
         println()
     }
+
+    private fun displayTitle() {
+        println("당첨 통계")
+        println("---")
+    }
 }
