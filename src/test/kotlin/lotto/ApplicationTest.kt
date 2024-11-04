@@ -39,7 +39,7 @@ class ApplicationTest : NsTest() {
             listOf(13, 14, 16, 38, 42, 45),
             listOf(7, 11, 30, 40, 42, 43),
             listOf(2, 13, 22, 32, 38, 45),
-            listOf(1, 3, 5, 14, 22, 45)
+            listOf(1, 3, 5, 14, 22, 45),
         )
     }
 
@@ -51,12 +51,6 @@ class ApplicationTest : NsTest() {
         }
     }
 
-//    @Test
-//    fun `구매 금액 문자 입력 예외 처리`() {
-//        assertThrows<IllegalArgumentException> {
-//            Validator.validatePurchaseMoney("잘못된_입력") // 숫자가 아닌 값 입력
-//        }
-//    }
 
     override fun runMain() {
         main()
