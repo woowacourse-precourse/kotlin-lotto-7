@@ -12,7 +12,7 @@ class UserTest {
 
     @BeforeEach
     fun setUp() {
-        user = User(3000)
+        user = User(3_000)
     }
 
     @Test
@@ -31,14 +31,14 @@ class UserTest {
     @Test
     fun `1000원에 나누어 떨어지지 않으면 예외 발생 테스트`() {
         assertThrows<IllegalArgumentException> {
-            User(4001)
+            User(4_001)
         }
     }
 
     @Test
     fun `돈이 마이너스일 경우 예외 발생 테스트`() {
         assertThrows<IllegalArgumentException> {
-            User(-1000)
+            User(-1_000)
         }
     }
 }

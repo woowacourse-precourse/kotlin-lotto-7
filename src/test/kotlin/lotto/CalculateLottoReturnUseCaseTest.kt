@@ -38,7 +38,7 @@ class CalculateLottoReturnUseCaseTest {
     @DisplayName("소수점 두 번째 자리에서 반올림하여 올림되는 경우 (5,000원 당첨, 9,000원 지출 -> 55.555..% -> 55.6%)")
     @Test
     fun `소수점 두번째 반올림으로 올림하는 계산 테스트`() {
-        val result = calculateLottoReturnUseCase.execute(listOf(5000, 0, 0, 0, 0, 0, 0, 0, 0), 9000)
+        val result = calculateLottoReturnUseCase.execute(listOf(5_000, 0, 0, 0, 0, 0, 0, 0, 0), 9_000)
         val expect = "55.6%"
         assertEquals(result, expect)
     }
@@ -46,7 +46,7 @@ class CalculateLottoReturnUseCaseTest {
     @DisplayName("소수점 두 번째 자리에서 반올림하여 내림되는 경우 (5,000원 당첨, 6,000원 지출 -> 83.333..% -> 83.3)")
     @Test
     fun `소수점 두번째 반올림으로 내림하는 계산 테스트`() {
-        val result = calculateLottoReturnUseCase.execute(listOf(5000, 0, 0, 0, 0, 0), 6000)
+        val result = calculateLottoReturnUseCase.execute(listOf(5_000, 0, 0, 0, 0, 0), 6_000)
         val expect = "83.3%"
         assertEquals(result, expect)
     }
