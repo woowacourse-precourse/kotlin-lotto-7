@@ -13,14 +13,6 @@ import lotto.view.OutputView
 import org.assertj.core.api.Assertions.assertThat
 
 class ApplicationTest : NsTest() {
-
-    private val inputView = InputView() // 실제 InputView 사용
-    private val outputView = OutputView() // OutputView는 이전 구현 그대로 사용
-    private val validator = Validator() // Validator는 이전 구현 그대로 사용
-    private val generator = LottoGenerator() // LottoGenerator는 이전 구현 그대로 사용
-    private val profit = Profit() // Profit은 이전 구현 그대로 사용
-    private val lottoController = LottoController()
-
     @Test
     fun `기능 테스트`() {
         assertRandomUniqueNumbersInRangeTest(
