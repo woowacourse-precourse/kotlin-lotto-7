@@ -41,8 +41,8 @@ class LottoController {
         return winCounts
     }
 
-    private fun getRevenue(winCounts: Map<LottoRank, Int>): Int {
-        var revenue = 0
+    private fun getRevenue(winCounts: Map<LottoRank, Int>): Long {
+        var revenue: Long = 0
         winCounts.forEach { revenue += it.value * it.key.prize }
         return revenue
     }

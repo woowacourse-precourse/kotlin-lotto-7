@@ -20,7 +20,7 @@ class OutputView {
         }
     }
 
-    fun printRevenueToCostRatio(revenue: Int, cost: Int) {
+    fun printRevenueToCostRatio(revenue: Long, cost: Int) {
         println(MESSAGE_PROFIT_TO_COST_RATIO.format(revenue / cost.toDouble() * 100))
     }
 
