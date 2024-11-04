@@ -1,5 +1,8 @@
 package lotto
 
+import lotto.model.Lotto
+import lotto.model.LottoPurchaseAmount
+import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 
@@ -20,4 +23,36 @@ class LottoTest {
     }
 
     // TODO: 추가 기능 구현에 따른 테스트 코드 작성
+    @Test
+    fun `로또 번호의 범위가 1 ~ 45에 해당하지 않으면 예외가 발생한다`() {
+        assertThrows<IllegalArgumentException> {
+            Lotto.fromList(listOf(50, 5, 2, 20, 17, 19))
+        }
+    }
+    @Test
+    fun `isContain() 포함된 번호가 맞는지 확인한다`() {
+        val lotto = Lotto.fromList(listOf(1, 2, 3, 4, 5, 6))
+        assertThat(lotto.isContain(1)).isEqualTo(true)
+        assertThat(lotto.isContain(2)).isEqualTo(true)
+        assertThat(lotto.isContain(10)).isEqualTo(false)
+    }
+
+    @Test
+    fun `로또 구입금액이 양수가 아니면 예외가 발생한다`() {
+        assertThrows<IllegalArgumentException> {
+            LottoPurchaseAmount.from("-1000")
+        }
+    }
+    @Test
+    fun `로또 구입금액이 1000원 단위로 나누어지지 않으면 예외가 발생한다`() {
+        assertThrows<IllegalArgumentException> {
+            LottoPurchaseAmount.from("1500")
+        }
+    }
+    @Test
+    fun `로또 구입금액이 정수가 아니면 예외가 발생한다`() {
+        assertThrows<IllegalArgumentException> {
+            LottoPurchaseAmount.from("1000j")
+        }
+    }
 }
