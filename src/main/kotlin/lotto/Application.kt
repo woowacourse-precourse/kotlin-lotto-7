@@ -52,13 +52,13 @@ object Input {
     }
 
     // [*] 보너스 번호 입력 기능
-    fun setBonusNumber() : Int{
+    fun setBonusNumber() : Int {
         println("\n보너스 번호를 입력해 주세요.")
         val input = Console.readLine()
             ?.takeIf { it.isNotBlank() }
             ?: throw IllegalArgumentException("[ERROR] 입력 값을 다시 확인해주세요.")
         val bonusNumber = input.toInt()
-        require( bonusNumber in LOTTO_MIN..LOTTO_MAX) {"[ERROR] 보너스 번호 값을 다시 확인해주세요."}
+        require(bonusNumber in LOTTO_MIN..LOTTO_MAX) { "[ERROR] 보너스 번호 값을 다시 확인해주세요." }
         return bonusNumber
     }
 }
