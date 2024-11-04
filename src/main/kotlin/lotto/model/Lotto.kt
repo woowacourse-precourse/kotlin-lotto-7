@@ -20,9 +20,9 @@ class Lotto(private val numbers: List<Int>) {
     override fun toString(): String = numbers.sorted().toString()
 
     companion object {
-        private const val LOTTO_SIZE = 6
-        private const val MIN_NUMBER = 1
-        private const val MAX_NUMBER = 45
+        const val LOTTO_SIZE = 6
+        const val MIN_NUMBER = 1
+        const val MAX_NUMBER = 45
         val NUMBER_RANGE = MIN_NUMBER..MAX_NUMBER
     }
 }
