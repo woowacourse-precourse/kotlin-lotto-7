@@ -1,7 +1,8 @@
 package lotto.view
 
 import camp.nextstep.edu.missionutils.Console
-import lotto.Lotto
+import lotto.model.Lotto
+import lotto.model.LottoResult
 
 class LottoView {
     fun printError(message: String?) = println(message)
@@ -28,4 +29,7 @@ class LottoView {
 
     fun printLottoRankHeader() = println("\n당첨 통계\n---")
 
+    fun printLottoRank(rank: LottoResult, count: Int) = println(rank.getMessage(count))
+
+    fun printRevenue(revenue: Double) = println("총 수익률은 ${revenue}%입니다.")
 }

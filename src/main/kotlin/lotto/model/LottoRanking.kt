@@ -3,7 +3,7 @@ package lotto.model
 import lotto.model.LottoStore
 import lotto.util.round
 
-class LottoRanking(var countByRanking: MutableMap<LottoResult, Int>, var totalReturn: Double){
+class LottoRanking(var countByRanking: MutableMap<LottoResult, Int>, var totalRevenue: Double){
     companion object {
         fun of(lottoResults: List<LottoResult>): LottoRanking {
             val lottoResultBundle = mutableMapOf<LottoResult, Int>()

@@ -1,9 +1,7 @@
 package lotto.controller
 
-import lotto.Lotto
+import lotto.model.*
 import lotto.view.LottoView
-import lotto.model.LottoPurchaseAmount
-import lotto.model.LottoStore
 import lotto.util.*
 
 class LottoController(private val lottoView: LottoView) {
@@ -12,6 +10,8 @@ class LottoController(private val lottoView: LottoView) {
         val lottos = purchaseLottos(lottoPurchaseAmount.money)
         val lottoResult = processLottoWinningNumbers()
         val bonus = processLottoBonusNumber(lottoResult)
+        val results = checkResults(lottos, lottoResult, bonus)
+        calculateRanks(results)
     }
 
     private fun payMoney(): LottoPurchaseAmount {
@@ -28,7 +28,7 @@ class LottoController(private val lottoView: LottoView) {
         val lottoCount = money / LottoStore.LOTTO_TICKET_PRICE
         val lottos = mutableListOf<Lotto>()
         lottoView.printLottoCount(lottoCount)
-        repeat(lottoCount) { lottos.add(Lotto.fromList(LottoStore().buy())) }
+        repeat(lottoCount) { lottos.add(Lotto.fromList(LottoStore().sell())) }
         lottoView.printLottos(lottos)
         return lottos
     }
@@ -57,6 +57,25 @@ class LottoController(private val lottoView: LottoView) {
             return processLottoBonusNumber(lotto)
         }
     }
+    private fun checkResults(myLotto: List<Lotto>, answer: Lotto, bonus: Int): List<LottoResult> {
+        val ranks = mutableListOf<LottoResult>()
+        for (lotto in myLotto) {
+            val count = lotto.toList().intersect(answer.toList().toSet()).size
+            val hasBonus = lotto.isContain(bonus)
+            ranks.add(LottoResult.of(count, hasBonus))
+        }
+        return ranks
+    }
 
+    private fun calculateRanks(lottoResults: List<LottoResult>) {
+        lottoView.printLottoRankHeader()
+        val ranks = LottoRanking.of(lottoResults)
+
+        for ((rank, count) in ranks.countByRanking) {
+            if (rank == LottoResult.MISS) continue
+            lottoView.printLottoRank(rank, count)
+        }
+        lottoView.printRevenue(ranks.totalRevenue)
+    }
 }
 

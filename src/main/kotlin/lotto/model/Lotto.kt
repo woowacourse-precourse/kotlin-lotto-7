@@ -1,6 +1,5 @@
-package lotto
+package lotto.model
 
-import lotto.model.LottoStore
 import lotto.util.*
 
 class Lotto(private val numbers: List<Int>) {
