@@ -23,6 +23,11 @@ class OutputView {
         println(MSG_OUTPUT_WINNING_STAT)
     }
 
+    fun printLottoEarningRate(earningRate: Double) {
+        val roundedEarningRate = BigDecimal(earningRate).setScale(1, RoundingMode.HALF_UP)
+        printMessageWithNumber(MSG_OUTPUT_EARNING_RATE, roundedEarningRate.formatKoreaNumber(true))
+    }
+
     fun printLottoWinningCount(matchType: MatchType, count: Int) {
         printMessageWinningCount(matchType, count)
     }
