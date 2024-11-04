@@ -4,10 +4,10 @@ import camp.nextstep.edu.missionutils.Console
 
 enum class LottoPrice(val price: Int, val key: Int, val print: String) {
     FIRST(2000000000, 6, "2,000,000,000원"),
-    SECOND(30000000, 5, "30,000,000원"),
-    THIRD(1500000, 7, "1,500,000원"),
-    FORTH(50000, 4, "50000원"),
-    FIFTH(5000, 3, "5000원");
+    SECOND(30000000, 7, "30,000,000원"),
+    THIRD(1500000, 5, "1,500,000원"),
+    FORTH(50000, 4, "50,000원"),
+    FIFTH(5000, 3, "5,000원");
 
     companion object {
         fun findPriceByKey(key: Int): Int? {
@@ -22,14 +22,29 @@ enum class LottoPrice(val price: Int, val key: Int, val print: String) {
 
 
 class Lotto(private val numbers: List<Int>) {
-    private var bonusNumber = 0
-
     init {
-        require(numbers.size == 6) { "[ERROR] 로또 번호는 6개여야 합니다." }
+        val finalNumbers = numbers.distinct()
+        if (finalNumbers.size != 6) {
+            print("[ERROR] 로또 번호는 6개여야 합니다.")
+            throw (IllegalArgumentException("[ERROR] 로또 번호는 6개여야 합니다."))
+        }
     }
 
+    private var bonusNumber = 0
     fun inputBonus() {
-        bonusNumber = Console.readLine().toIntOrNull() ?: throw (IllegalArgumentException("[ERROR] 숫자가 아닙니다. "))
+        try {
+            bonusNumber = Console.readLine().toIntOrNull() ?: run {
+                println("[ERROR] 숫자가 아닙니다.")
+                throw (IllegalArgumentException("[ERROR] 숫자가 아닙니다."))
+            }
+            if (bonusNumber > 45 || bonusNumber < 1) {
+                println("[ERROR]범위 내의 숫자가 아닙니다.")
+                throw (IllegalArgumentException("[ERROR]범위 내의 숫자가 아닙니다."))
+            }
+        } catch (e: IllegalArgumentException) {
+            inputBonus()
+        }
+
     }
 
     fun findNumbers(paperNumber: List<Int>): Int {
