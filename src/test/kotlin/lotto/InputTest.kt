@@ -16,6 +16,7 @@ import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.Test
 import lotto.domain.util.ext.splitByComma
 import lotto.domain.util.ext.toMapByEachCount
+import org.junit.jupiter.api.TestInstance
 
 class InputTest {
     private lateinit var commonErrorDelegate: CommonErrorDelegate
@@ -40,7 +41,7 @@ class InputTest {
         }
 
         @Test
-        fun `사용자의 입력값이 정수로 표현할 수 있는 범위를 넘어갈 때`(){
+        fun `사용자의 입력값이 정수로 표현할 수 있는 범위를 넘어갈 때`() {
             val value = "10000000000000000"
             Assertions.assertThatThrownBy { commonErrorDelegate.isOverIntMaxValue(value) }
                 .isInstanceOf(IllegalArgumentException::class.java)
@@ -90,7 +91,7 @@ class InputTest {
         }
 
         @ParameterizedTest
-        @ValueSource(strings = ["0, 46"])
+        @ValueSource(strings = ["1,2,3,4,5,46", "0,1,2,3,4,5"])
         fun `당첨번호가 로또번호의 범위를 벗어날 때`(value: String) {
             val type = Process.WINNING_NUMBER
             val winningNumber = value.splitByComma()
@@ -114,6 +115,7 @@ class InputTest {
         }
     }
 
+    @TestInstance(TestInstance.Lifecycle.PER_CLASS)
     @Nested
     inner class BonusNumberTest {
 
@@ -127,18 +129,24 @@ class InputTest {
         }
 
         @ParameterizedTest
-        @ValueSource(strings = ["0, 46"])
+        @ValueSource(strings = ["0,1,2,3,4,5, 0,22,33,44,2,46"])
         fun `보너스 번호가 로또번호의 범위를 벗어날 때`(value: String) {
             val type = Process.BONUS_NUMBER
             val winningNumber = value.splitByComma()
             Assertions.assertThatThrownBy {
-                inputErrorDelegate.isExceededRange(
-                    winningNumber,
-                    type
-                )
-            }
-                .isInstanceOf(IllegalArgumentException::class.java)
+                inputErrorDelegate.isExceededRange(winningNumber, type)
+            }.isInstanceOf(IllegalArgumentException::class.java)
                 .hasMessage(Exception.EXCEED_INPUT.toString())
+        }
+
+        @Test
+        fun `보너스 번호가 당첨 번호와 중복될 때`() {
+            val winningNumber = listOf(1, 2, 3, 4, 5, 6)
+            val bonusNumber = 3
+            Assertions.assertThatThrownBy {
+                inputErrorDelegate.isDuplicatedBonusNumber(winningNumber, bonusNumber)
+            }.isInstanceOf(IllegalArgumentException::class.java)
+                .hasMessage(Exception.BONUS_NUMBER_DUPLICATED.toString())
         }
     }
 }
