@@ -43,6 +43,6 @@ class LottoService {
     fun calculateProfit(rankCount: Map<LottoRank, Int>, lottoAmount: Int): Double {
         val totalPrize = rankCount.entries.sumOf { (rank, count) -> rank.prize * count }
         val profit = totalPrize.toDouble() / lottoAmount
-        return round(profit * 10000) / 100
+        return profit * 100
     }
 }
