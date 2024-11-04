@@ -28,21 +28,21 @@ class LottoResultCalculator(private val lotteries: List<Lotto>) {
     }
 
     fun getLottoYield(lottoResults: List<LottoResult>, purchaseAmount: Int): String {
-        val netProfit = calculateNetProfit(lottoResults)
-        val yield = (netProfit / purchaseAmount) * 100F
+        val totalEarnings = calculateTotalEarnings(lottoResults)
+        val yield = (totalEarnings / purchaseAmount) * 100F
         val formattedYield = String.format("%,.1f", yield)
 
         return formattedYield
     }
 
-    private fun calculateNetProfit(lottoResults: List<LottoResult>): Float {
-        var netProfit = 0F
+    private fun calculateTotalEarnings(lottoResults: List<LottoResult>): Float {
+        var totalEarnings = 0F
         lottoResults.forEach { lottoResult ->
             val price = getPrice(lottoResult.rank)
             val count = lottoResult.count
-            netProfit += price * count
+            totalEarnings += price * count
         }
-        return netProfit
+        return totalEarnings
     }
 
     private fun getPrice(rank: Int): Int {
