@@ -6,7 +6,7 @@ import lotto.view.InputView
 import lotto.view.OutputView
 
 class LottoController(
-    private val cashier: Cashier,
+    private val lottoCalculator: LottoCalculator,
     private val lottoMachine: LottoMachine,
     private val inputView: InputView,
     private val outputView: OutputView,
@@ -19,7 +19,7 @@ class LottoController(
         val winningBonusNumber = getBonusNumber()
         val winningLotto = createWinningLotto(winningLottoNumber, winningBonusNumber)
 
-        val lottoPrizes = calculateLottoStatistics(purchasedLottos, winningLotto)
+        val lottoPrizes = lottoCalculator.calculateStatistics(purchasedLottos, winningLotto)
         showLottoStatistics(lottoPrizes)
         showLottoYield(lottoPrizes, lottoAmount)
     }
@@ -35,7 +35,7 @@ class LottoController(
     }
 
     private fun issueLottos(lottoAmount: Int): List<Lotto> {
-        val lottosCount = cashier.calculateLottoCount(lottoAmount)
+        val lottosCount = lottoCalculator.calculateLottoCount(lottoAmount)
         outputView.printLottosCount(lottosCount)
 
         val lottos = lottoMachine.createLottos(lottosCount)
@@ -76,10 +76,6 @@ class LottoController(
         }
     }
 
-    private fun calculateLottoStatistics(purchasedLottos: List<Lotto>, winningLotto: WinningLotto): List<LottoPrize> {
-        return purchasedLottos.map { it.compareWinningLotto(winningLotto) }
-    }
-
     private fun showLottoStatistics(prizes: List<LottoPrize>) {
         outputView.printWinningStatisticsTitle()
 
@@ -95,8 +91,7 @@ class LottoController(
     }
 
     private fun showLottoYield(prizes: List<LottoPrize>, amount: Int) {
-        val totalPrizeMoney = prizes.sumOf { it.price }
-        val yield = (totalPrizeMoney.toDouble() / amount) * 100
+        val yield = lottoCalculator.calculateYield(prizes, amount)
         outputView.printLottoYield(yield)
     }
 }
