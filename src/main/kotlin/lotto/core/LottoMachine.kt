@@ -2,6 +2,7 @@ package lotto.core
 
 import camp.nextstep.edu.missionutils.Console
 import camp.nextstep.edu.missionutils.Randoms
+import lotto.calculator.LottoProfitCalculator
 import lotto.calculator.LottoStatsCalculator
 import lotto.data.BonusNumber
 import lotto.data.Lotto
@@ -26,6 +27,7 @@ class LottoMachine {
         requestBonusNumber()
 
         printLottoStats()
+        printLottoProfit()
     }
 
     private fun requestPurchaseAmount() {
@@ -100,4 +102,6 @@ class LottoMachine {
         }
     }
 
+    private fun printLottoProfit() =
+        println("총 수익률은 %.1f%%입니다.".format(LottoProfitCalculator(lottoStats, purchaseAmount).getLottoProfit()))
 }
