@@ -11,5 +11,6 @@ class MainController (
         repo.createLottos()
         inputController.inputWinningNumber()
         inputController.inputBonusNumber()
+        repo.winLottery()
     }
 }

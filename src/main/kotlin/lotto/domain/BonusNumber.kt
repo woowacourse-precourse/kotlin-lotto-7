@@ -7,4 +7,8 @@ class BonusNumber(private val number: Int, private val winningNumber: Lotto) {
         require(number in 1..45) { ErrorConstant.ERROR_BONUS_NUMBER_OUT_OF_RANGE }
         require(!winningNumber.getNumber().contains(number)) { ErrorConstant.ERROR_BONUS_NUMBER_DUPLICATED }
     }
+
+    fun getBonusNumber(): Int {
+        return number
+    }
 }
