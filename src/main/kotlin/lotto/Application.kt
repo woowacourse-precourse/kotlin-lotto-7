@@ -5,6 +5,28 @@ import camp.nextstep.edu.missionutils.Console
 const val LOTTO_TICKET_VALUE = 1000
 const val LOTTO_NUMBER_COUNT = 6
 
+val matchLabels = listOf(
+    "3개 일치",
+    "4개 일치",
+    "5개 일치",
+    "5개 일치, 보너스 볼 일치",
+    "6개 일치"
+)
+val lottoMoney = mutableMapOf(
+    "3개 일치" to 5000,
+    "4개 일치" to 50000,
+    "5개 일치" to 1500000,
+    "5개 일치, 보너스 볼 일치" to 30000000,
+    "6개 일치" to 2000000000
+)
+val matchCounts = mutableMapOf(
+    "3개 일치" to 0,
+    "4개 일치" to 0,
+    "5개 일치" to 0,
+    "5개 일치, 보너스 볼 일치" to 0,
+    "6개 일치" to 0
+)
+
 fun main() {
     val lottoBudget = getLottoBudget()
     val lottoTicketCount = getLottoTicketCount(lottoBudget)
@@ -18,20 +40,6 @@ fun main() {
         val lottoResult = compareLottoNumbers(lottoWinningNumbers, lottoBonusNumber, lotto)
         lottoResults.add(lottoResult)
     }
-    val lottoMoney = mutableMapOf(
-        "3개 일치" to 5000,
-        "4개 일치" to 50000,
-        "5개 일치" to 1500000,
-        "5개 일치, 보너스 볼 일치" to 30000000,
-        "6개 일치" to 2000000000
-    )
-    val matchCounts = mutableMapOf(
-        "3개 일치" to 0,
-        "4개 일치" to 0,
-        "5개 일치" to 0,
-        "5개 일치, 보너스 볼 일치" to 0,
-        "6개 일치" to 0
-    )
 
     for ((matchCount, bonusMatchCount) in lottoResults) {
         val allMatchCount = matchCount + bonusMatchCount
@@ -147,14 +155,6 @@ fun printResult(lottoMoney: Map<String, Int>, matchCounts: Map<String, Int>) {
     println()
     println("당첨 통계")
     println("---")
-
-    val matchLabels = listOf(
-        "3개 일치",
-        "4개 일치",
-        "5개 일치",
-        "5개 일치, 보너스 볼 일치",
-        "6개 일치"
-    )
 
     matchLabels.forEach { label ->
         val prize = String.format("%,d", lottoMoney[label] ?: 0)
