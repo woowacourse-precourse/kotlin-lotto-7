@@ -9,10 +9,10 @@ enum class LottoRank(val matchCount: Int, val reward: Int) {
     NONE(0, 0);
 
     companion object {
-        fun fromMatchCount(matchCount: Int, bonusMatch: Boolean): LottoRank {
+        fun fromMatchCount(matchCount: Int, isBonusMatch: Boolean): LottoRank {
             return when {
                 matchCount == 6 -> FIRST
-                matchCount == 5 && bonusMatch -> SECOND
+                matchCount == 5 && isBonusMatch -> SECOND
                 matchCount == 5 -> THIRD
                 matchCount == 4 -> FOURTH
                 matchCount == 3 -> FIFTH
