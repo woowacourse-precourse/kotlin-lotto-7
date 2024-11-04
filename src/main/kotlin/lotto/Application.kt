@@ -8,6 +8,16 @@ fun main() {
     val winningNumberManager = WinningNumberManager()
     winningNumberManager.requestWinningNumbers()
 
-    val bonusNumberManager = BonusNumberManager(winningNumberManager.winningNumbers)
+    val winningLotto = Lotto(winningNumberManager.winningNumbers)
+    val bonusNumberManager = BonusNumberManager(winningLotto)
     bonusNumberManager.requestBonusNumber()
+
+    val lottoResultManager = LottoResultManager(
+        lottoBuyManager.userLottos,
+        winningLotto,
+        bonusNumberManager.bonusNumber,
+        lottoBuyManager.money
+    )
+    lottoResultManager.calculateRankResults()
+    lottoResultManager.showResult()
 }
