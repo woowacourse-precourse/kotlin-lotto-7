@@ -1,6 +1,7 @@
 package lotto.controller
 
 import camp.nextstep.edu.missionutils.Randoms.pickUniqueNumbersInRange
+import lotto.constant.Message.TICKET_PRICE
 import lotto.model.Lotto
 import lotto.model.LottoTotalMatchResult
 import lotto.validation.InputValidation
@@ -12,7 +13,7 @@ class LottoController(val input: Input, val output: Output) {
     private val validator = InputValidation()
 
     private fun getLottoTicketCount(amount: Int): Int {
-        return amount / 1000
+        return amount / TICKET_PRICE
     }
 
     private fun createRandomLotto(): Lotto {

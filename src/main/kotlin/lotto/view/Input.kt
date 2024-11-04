@@ -1,16 +1,20 @@
 package lotto.view
 
 import camp.nextstep.edu.missionutils.Console
+import lotto.constant.Message.INFO_GET_LOTTO_BONUS_NUMBERS
+import lotto.constant.Message.INFO_GET_LOTTO_NUMBERS
+import lotto.constant.Message.INFO_GET_PURCHASE_AMOUNT
+import lotto.constant.Message.TICKET_PRICE
 import lotto.validation.InputValidation
 
 class Input {
     private val inputValidation = InputValidation()
 
     fun getPurchaseAmount(): Int {
-        println("구입금액을 입력해 주세요.")
+        println(INFO_GET_PURCHASE_AMOUNT)
         val value = readLine().let {
             inputValidation.typeInt(it).also { amount ->
-                inputValidation.unitOfNumber(amount, 1000)
+                inputValidation.unitOfNumber(amount, TICKET_PRICE)
             }
         }
         println()
@@ -18,7 +22,7 @@ class Input {
     }
 
     fun getLottoNumbers(): List<Int> {
-        println("당첨 번호를 입력해 주세요.")
+        println(INFO_GET_LOTTO_NUMBERS)
         val value = readLine().let {
             inputValidation.lottoNumbers(inputValidation.lottoNumbersDelimiter(it))
         }
@@ -27,7 +31,7 @@ class Input {
     }
 
     fun getLottoBonusNumber(): Int {
-        println("보너스 번호를 입력해주세요.")
+        println(INFO_GET_LOTTO_BONUS_NUMBERS)
         val value = readLine().let {
             inputValidation.typeInt(it).also { number ->
                 inputValidation.lottoNumberRange(number)
