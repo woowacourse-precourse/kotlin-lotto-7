@@ -1,13 +1,11 @@
 package lotto.model
 
+import lotto.constants.Constants.LOTTO_SIZE
+import lotto.constants.Exceptions
+
 class Lotto(private val numbers: List<Int>) {
     init {
-        require(numbers.size == NUMBERS_SIZE) { "[ERROR] 로또 번호는 6개여야 합니다." }
-        require(numbers.size == numbers.distinct().size) { "[ERROR] 중복 숫자를 제거해주세요." }
-    }
-
-
-    companion object {
-        private const val NUMBERS_SIZE = 6
+        require(numbers.size == LOTTO_SIZE) { Exceptions.INVALID_NUMBERS_SIZE }
+        require(numbers.size == numbers.distinct().size) { Exceptions.DUPLICATED_NUMBERS }
     }
 }

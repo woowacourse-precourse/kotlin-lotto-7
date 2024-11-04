@@ -1,4 +1,6 @@
 package lotto.util
 
+import lotto.constants.Exceptions.INVALID_NUMBER
+
 fun String.toIntOrException() =
-    this.toIntOrNull() ?: throw IllegalArgumentException("[ERROR] 정수 값을 입력해주세요.")
+    this.toIntOrNull() ?: throw IllegalArgumentException(INVALID_NUMBER)

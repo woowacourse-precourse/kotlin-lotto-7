@@ -1,14 +1,16 @@
 package lotto.util
 
+import lotto.constants.Exceptions
+
 class Validator {
     fun validatePriceRange(tempPrice: Int) =
-        require(tempPrice in MIN_PRICE..MAX_PRICE) { "[ERROR] 천원-십만원 사이 금액을 입력해주세요." }
+        require(tempPrice in MIN_PRICE..MAX_PRICE) { Exceptions.NOT_BETWEEN_PRICE_RANGE }
 
     fun validatePriceUnit(tempPrice: Int) =
-        require(tempPrice % MIN_PRICE == 0) { "[ERROR] 1000원 단위로 입력해주세요." }
+        require(tempPrice % MIN_PRICE == 0) { Exceptions.INVALID_PRICE_UNIT }
 
     fun validateLottoNumberRange(tempWinningNumber: Int) =
-        require(tempWinningNumber in MIN_NUMBER..MAX_NUMBER) { "[ERROR] 1-45 사이 숫자를 입력해주세요." }
+        require(tempWinningNumber in MIN_NUMBER..MAX_NUMBER) { Exceptions.NOT_BETWEEN_NUMBER_RANGE }
 
     companion object {
         private const val MIN_PRICE = 1000

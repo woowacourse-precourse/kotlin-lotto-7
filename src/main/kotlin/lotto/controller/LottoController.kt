@@ -1,5 +1,7 @@
 package lotto.controller
 
+import lotto.constants.Constants
+import lotto.constants.Exceptions
 import lotto.util.Validator
 import lotto.util.toIntOrException
 import lotto.view.InputView
@@ -15,12 +17,12 @@ class LottoController(
         validator.validatePriceRange(tempPrice)
         validator.validatePriceUnit(tempPrice)
 
-        return tempPrice % 1000
+        return tempPrice % Constants.PRICE_UNIT
     }
 
     private fun getWinningNumbers(): List<Int> {
         val winningNumbersInput = inputView.getWinningNumbersInput()
-        val winningNumberList = winningNumbersInput.split(",")
+        val winningNumberList = winningNumbersInput.split(Constants.DELIMITER)
 
         val tempWinningNumbers = winningNumberList.map {
             val value = it.toIntOrException()
