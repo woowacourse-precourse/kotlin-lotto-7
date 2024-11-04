@@ -1,5 +1,6 @@
 package lotto
 
+import lotto.model.Processor
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 
@@ -19,5 +20,17 @@ class LottoTest {
         }
     }
 
-    // TODO: 추가 기능 구현에 따른 테스트 코드 작성
+    @Test
+    fun `당첨 번호 중 45 초과인 숫자가 있을 때`() {
+        assertThrows<IllegalArgumentException> {
+            Processor.winningNumSplit("1,2,3,4,5,46")
+        }
+    }
+
+    @Test
+    fun `당첨 번호 중 1 미만인 숫자가 있을 때`() {
+        assertThrows<IllegalArgumentException> {
+            Processor.winningNumSplit("0,1,2,3,4,5")
+        }
+    }
 }

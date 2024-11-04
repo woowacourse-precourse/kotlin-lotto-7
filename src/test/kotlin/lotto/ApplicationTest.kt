@@ -49,6 +49,14 @@ class ApplicationTest : NsTest() {
         }
     }
 
+    @Test
+    fun `가격이 1000원으로 나누어 떨어지지 않을 때`() {
+        assertSimpleTest {
+            runException("8500")
+            assertThat(output()).contains(ERROR_MESSAGE)
+        }
+    }
+
     override fun runMain() {
         main()
     }
