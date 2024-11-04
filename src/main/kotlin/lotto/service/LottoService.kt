@@ -7,6 +7,8 @@ import lotto.constants.Constants.MAX_NUMBER
 import lotto.constants.Constants.MIN_NUMBER
 import lotto.model.Lotto
 import lotto.model.Rank
+import lotto.model.Statistics
+import kotlin.math.round
 
 class LottoService {
     fun generateLottoList(count: Int): List<Lotto> {
@@ -18,29 +20,62 @@ class LottoService {
         return lottoList
     }
 
-    fun getRankingTable(
+    fun getStatistics(
+        price: Int,
+        lottoList: List<Lotto>,
+        winningNumbers: List<Int>,
+        bonusNumbers: Int,
+    ): Statistics {
+        val winningHistory: Map<Rank, Int> = getWinningHistory(lottoList, winningNumbers, bonusNumbers)
+        val lottoROI = getLottoROI(price, winningHistory)
+
+        return Statistics(winningHistory, lottoROI)
+    }
+
+    private fun getWinningHistory(
         lottoList: List<Lotto>,
         winningNumbers: List<Int>,
         bonusNumbers: Int,
     ): Map<Rank, Int> {
-        val rankingTable = HashMap<Rank, Int>()
+        val rankingTable = LinkedHashMap<Rank, Int>().apply {
+            Rank.entries.reversed().forEach {
+                this[it] = 0
+            }
+        }
 
         lottoList.forEach { lotto ->
             val lottoNumbers = lotto.getNumbers()
             val matchCount = getMatchCount(lottoNumbers, winningNumbers)
-
-            when(matchCount) {
-                Constants.MATCH_COUNT_FIRST -> rankingTable.getOrDefault(Rank.FIRST, 0) + 1
-                Constants.MATCH_COUNT_SECOND -> {
-                    if(hasBonusNumber(lottoNumbers, bonusNumbers)) rankingTable.getOrDefault(Rank.SECOND, 0) + 1
-                    else rankingTable.getOrDefault(Rank.THIRD, 0) + 1
-                }
-                Constants.MATCH_COUNT_FOURTH -> rankingTable.getOrDefault(Rank.FOURTH, 0) + 1
-                Constants.MATCH_COUNT_FIFTH -> rankingTable.getOrDefault(Rank.FIFTH, 0) + 1
-            }
+            val rank = getRankByMatchCount(matchCount, lottoNumbers, bonusNumbers)
+            updateRankingTable(rankingTable, rank)
         }
 
         return rankingTable
+    }
+
+    private fun getRankByMatchCount(
+        matchCount: Int,
+        lottoNumbers: List<Int>,
+        bonusNumber: Int
+    ): Rank? {
+        return when (matchCount) {
+            Constants.MATCH_COUNT_FIRST -> Rank.FIRST
+            Constants.MATCH_COUNT_SECOND -> {
+                if (hasBonusNumber(lottoNumbers, bonusNumber)) Rank.SECOND else Rank.THIRD
+            }
+            Constants.MATCH_COUNT_FOURTH -> Rank.FOURTH
+            Constants.MATCH_COUNT_FIFTH -> Rank.FIFTH
+            else -> null
+        }
+    }
+
+    private fun updateRankingTable(
+        rankingTable: MutableMap<Rank, Int>,
+        rank: Rank?
+    ) {
+        rank?.let {
+            rankingTable[it] = rankingTable.getOrDefault(it, 0) + 1
+        }
     }
 
     private fun getMatchCount(lottoNumbers: List<Int>, winningNumbers: List<Int>): Int {
@@ -48,10 +83,10 @@ class LottoService {
         var idx1 = 0
         var idx2 = 0
 
-        while(idx1 < lottoNumbers.size && idx2 < winningNumbers.size) {
+        while (idx1 < lottoNumbers.size && idx2 < winningNumbers.size) {
             when {
                 lottoNumbers[idx1] < winningNumbers[idx2] -> idx1++
-                lottoNumbers[idx1] < winningNumbers[idx2] -> idx2++
+                lottoNumbers[idx1] > winningNumbers[idx2] -> idx2++
                 else -> {
                     cnt++
                     idx1++
@@ -64,5 +99,22 @@ class LottoService {
     }
 
     private fun hasBonusNumber(lottoNumbers: List<Int>, bonusNumbers: Int) = bonusNumbers in lottoNumbers
+
+        private fun getLottoROI(price: Int, winningHistory: Map<Rank, Int>): Double {
+            val allAmount = calculateAllAmount(winningHistory)
+            val roi = allAmount.toDouble() / price * 100
+
+            return round(roi * 10) / 10
+        }
+
+    private fun calculateAllAmount(winningHistory: Map<Rank, Int>): Long {
+        var sum = 0L
+
+        winningHistory.forEach { (rank, winningCount) ->
+            sum += rank.prize * winningCount
+        }
+
+        return sum
+    }
 
 }
