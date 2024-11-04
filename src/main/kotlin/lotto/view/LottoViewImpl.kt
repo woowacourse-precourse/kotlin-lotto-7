@@ -6,6 +6,7 @@ import lotto.model.LottoRank
 import lotto.util.ConstantsUtil.DELIMITER_COMMA
 import lotto.util.ConstantsUtil.MESSAGE_BONUS_NUMBER
 import lotto.util.ConstantsUtil.MESSAGE_CALCULATED_TICKETS
+import lotto.util.ConstantsUtil.MESSAGE_RETURN_RATE
 import lotto.util.ConstantsUtil.MESSAGE_SHOW_CALCULATED_TICKETS
 import lotto.util.ConstantsUtil.MESSAGE_TICKETS_COUNT
 import lotto.util.ConstantsUtil.MESSAGE_TICKETS_PRICE
@@ -51,6 +52,10 @@ class LottoViewImpl: LottoView {
         return input.toInt()
     }
 
+    override fun showReturnRate(returnRate: Double) {
+        println(formatShowReturnRate(returnRate))
+    }
+
     private fun formatShowTickets(ticketsSize: Int): String {
         return MESSAGE_TICKETS_COUNT.format(ticketsSize)
     }
@@ -58,5 +63,9 @@ class LottoViewImpl: LottoView {
     private fun formatCalculatedTickets(matchCount: Int, reward: Int, ticketCount: Int): String {
         val formatReward = NumberFormat.getNumberInstance().format(reward)
         return MESSAGE_CALCULATED_TICKETS.format(matchCount, formatReward, ticketCount)
+    }
+
+    private fun formatShowReturnRate(returnRate: Double): String {
+        return MESSAGE_RETURN_RATE.format("%.2f".format(returnRate))
     }
 }

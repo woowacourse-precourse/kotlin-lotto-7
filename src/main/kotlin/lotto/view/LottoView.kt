@@ -9,4 +9,5 @@ interface LottoView {
     fun getTicketsPrice(): Int
     fun getWinningNumbers(): List<Int>
     fun getBonusNumber(): Int
+    fun showReturnRate(returnRate: Double)
 }

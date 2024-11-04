@@ -15,5 +15,5 @@ fun main() {
 
     val winningNumbers = view.getWinningNumbers()
     val bonusNumbers = view.getBonusNumber()
-    presenter.processWinningNumbers(winningNumbers, bonusNumbers)
+    presenter.processWinningNumbers(winningNumbers, bonusNumbers, price)
 }
