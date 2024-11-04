@@ -22,24 +22,32 @@ class LottoController(
     private val printableRankList = mutableListOf<String>()
     private val winningRankCountList = mutableListOf<Int>()
 
-    fun purchaseLotto() {
+    fun start() {
+        continueAfterException(outputView) { purchaseLotto() }
+        continueAfterException(outputView) { showPurchasedLotto() }
+        continueAfterException(outputView) { inputWinningNumbers() }
+        continueAfterException(outputView) { inputBonusNumber() }
+        continueAfterException(outputView) { showLottoResult() }
+    }
+
+    private fun purchaseLotto() {
         outputView.outputPurchasePrice()
         purchasePrice = inputView.getPurchasePrice()
     }
 
-    fun showPurchasedLotto() {
+    private fun showPurchasedLotto() {
         val lottoGenerator = LottoGenerator(purchasePrice)
         lottoList = lottoGenerator.generate()
         val lottoListViewData = lottoList.toViewData()
         outputView.outputLottoList(lottoListViewData)
     }
 
-    fun inputWinningNumbers() {
+    private fun inputWinningNumbers() {
         outputView.outputWinningNumber()
         winningNumbers = inputView.getWinningNumbers()
     }
 
-    fun inputBonusNumber() {
+    private fun inputBonusNumber() {
         outputView.outputBonusNumber()
         bonusNumber = inputView.getBonusNumber()
         require(InputValidator.isBonusNumberUnique(winningNumbers, bonusNumber)) {
@@ -47,7 +55,7 @@ class LottoController(
         }
     }
 
-    fun showLottoResult() {
+    private fun showLottoResult() {
         val lottoResult = LottoResult(lottoList, winningNumbers, bonusNumber)
         val lottoResultDetail = lottoResult.getResult()
         val roundedRateOfReturn = lottoResultDetail.roundedRateOfReturnText
@@ -68,6 +76,21 @@ class LottoController(
                 winningRankCountList.add(rankCount)
                 printableRankList.add(rank.print())
             }
+        }
+    }
+}
+
+private fun continueAfterException(
+    outputView: LottoOutputView,
+    block: () -> Unit,
+) {
+    while (true) {
+        try {
+            block()
+            break
+        } catch (e: Exception) {
+            val errorMessage = e.localizedMessage
+            outputView.printErrorMessage(errorMessage)
         }
     }
 }

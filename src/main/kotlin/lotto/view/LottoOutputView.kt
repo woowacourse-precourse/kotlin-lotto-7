@@ -8,6 +8,7 @@ class LottoOutputView {
     }
 
     fun outputLottoList(lottoList: List<List<Int>>) {
+        println()
         println("${lottoList.size}${LottoOutputText.LOTTO_GENERATE_FINISH_TEXT}")
         lottoList.forEach { lotto ->
             println(lotto)
@@ -41,5 +42,11 @@ class LottoOutputView {
             "${LottoOutputText.LOTTO_WINNING_RESULT_TOTAL_RATE_OF_RETURN} " +
                     "$rateOfReturn${LottoOutputText.LOTTO_WINNING_RESULT_TOTAL_RATE_OF_RETURN_2}"
         )
+    }
+
+    fun printErrorMessage(message: String) {
+        println()
+        println(message)
+        println()
     }
 }
