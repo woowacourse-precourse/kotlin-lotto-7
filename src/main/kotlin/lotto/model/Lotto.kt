@@ -6,6 +6,8 @@ import lotto.util.ErrorMessage
 class Lotto(private val numbers: List<Int>) {
     init {
         require(numbers.size == Constant.LOTTO_NUMBERS_COUNT) { ErrorMessage.LOTTO_NUMBERS_COUNT_MISMATCH }
+        require(numbers.size == numbers.toSet().size) { ErrorMessage.LOTTO_NUMBERS_NOT_DISTINCT }
+        require(numbers.all { it in Constant.LOTTO_NUMBERS_MIN..Constant.LOTTO_NUMBERS_MAX }) { ErrorMessage.LOTTO_NUMBER_NOT_IN_RANGE }
     }
 
     fun countMatches(winningNumbers: List<Int>): Int {
