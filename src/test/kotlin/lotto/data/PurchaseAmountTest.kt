@@ -10,13 +10,17 @@ class PurchaseAmountTest {
     fun `구입금액이 음수면 예외가 발생한다`() {
         assertThrows<IllegalArgumentException> {
             PurchaseAmount("-1000", TICKET_PRICE)
+        }.also { exception ->
+            println(exception)
         }
     }
 
     @Test
     fun `구입금액이 숫자가 아니면 예외가 발생한다`() {
-        assertThrows<IllegalArgumentException> {
+        assertThrows<NumberFormatException> {
             PurchaseAmount("abc", TICKET_PRICE)
+        }.also { exception ->
+            println(exception)
         }
     }
 

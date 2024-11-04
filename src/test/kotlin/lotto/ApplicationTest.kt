@@ -42,9 +42,17 @@ class ApplicationTest : NsTest() {
     }
 
     @Test
-    fun `예외 테스트`() {
+    fun `예외 테스트 정수가 아닌 수 입력`() {
         assertSimpleTest {
             runException("1000j")
+            assertThat(output()).contains(ERROR_MESSAGE)
+        }
+    }
+
+    @Test
+    fun `예외 테스트 음수 입력`() {
+        assertSimpleTest {
+            runException("-1000")
             assertThat(output()).contains(ERROR_MESSAGE)
         }
     }

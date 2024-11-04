@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 
 class LottoTest {
+
     @Test
     fun `로또 번호의 개수가 6개가 넘어가면 예외가 발생한다`() {
         assertThrows<IllegalArgumentException> {
@@ -16,13 +17,17 @@ class LottoTest {
     fun `로또 번호에 중복된 숫자가 있으면 예외가 발생한다`() {
         assertThrows<IllegalArgumentException> {
             Lotto("1,2,3,4,5,5")
+        }.also { exception ->
+            println(exception)
         }
     }
 
     @Test
     fun `로또 번호에 숫자가 아닌 값이 있으면 예외가 발생한다`() {
-        assertThrows<IllegalArgumentException> {
+        assertThrows<NumberFormatException> {
             Lotto("1,2,3,4,5,a")
+        }.also { exception ->
+            println(exception)
         }
     }
 

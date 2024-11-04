@@ -8,10 +8,11 @@ class BonusNumberTest {
 
     @Test
     fun `보너스 번호가 정수가 아니면 예외가 발생한다`() {
-        assertThrows<IllegalArgumentException> {
+        assertThrows<NumberFormatException> {
             BonusNumber("a", listOf(1, 2, 3, 4, 5, 6))
         }.also { exception ->
             assertThat(exception.message).isEqualTo("[ERROR] 보너스번호는 정수여야 합니다.")
+            println(exception)
         }
     }
 
