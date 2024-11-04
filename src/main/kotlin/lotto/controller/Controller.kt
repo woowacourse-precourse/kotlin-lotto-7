@@ -24,7 +24,7 @@ object Controller {
                 lottoBuyNumber = purchaseAmount.toInt() / 1000
                 return printBuyLottoNumber()
             } catch (e: IllegalArgumentException) {
-                println(e)
+                println("[ERROR]" + e)
             }
         }
     }
@@ -52,7 +52,7 @@ object Controller {
                     WinningNumber(winningNumber.split(",").map { it.trim() }.map { it.toInt() })
                 return inputBonusNumber(notAddBonusBumber)
             } catch (e: IllegalArgumentException) {
-                println(e)
+                println("[ERROR]" + e)
             }
         }
     }
@@ -67,7 +67,7 @@ object Controller {
 
                 return WinningStatistics()
             } catch (e: IllegalArgumentException) {
-                println(e)
+                println("[ERROR]" + e)
             }
         }
     }
