@@ -58,7 +58,7 @@ fun main() {
     println()
     val lottoResult = ArrayList<PrizeWinner>()
     purchasedLottos.forEach {
-        lottoResult.add(checkWinner(checkLotto(it, winningLotto), checkBonus(it, winningLotto, bonusNumber)))
+        lottoResult.add(checkWinner(countMatchedLotto(it, winningLotto), checkBonus(it, winningLotto, bonusNumber)))
     }
     printResult(lottoResult)
     println("총 수익률은 ${String.format("%.1f", getReturnRate(purchasedLottosCount, lottoResult)*100)}%입니다.")
@@ -144,15 +144,23 @@ fun checkWinner(count: Int, isBonusEqual: Boolean): PrizeWinner {
     return result
 }
 
-fun checkLotto(purchasedLotto: Lotto, winningLotto: Lotto): Int {
+fun countMatchedLotto(purchasedLotto: Lotto, winningLotto: Lotto): Int {
     var count = 0
     for (i in 0 until 6) {
-        if (purchasedLotto.getNumbers()[i] == winningLotto.getNumbers()[i]) {
-            count++
-        }
+        count += checkLotto(purchasedLotto, winningLotto.getNumbers()[i])
     }
 
     return count
+}
+
+fun checkLotto(purchasedLotto: Lotto, winningLottoNumber: Int): Int {
+    for (i in 0 until 6) {
+        if (purchasedLotto.getNumbers()[i] == winningLottoNumber) {
+            return 1
+        }
+    }
+
+    return 0
 }
 
 fun checkBonus(purchasedLotto: Lotto, winningLotto: Lotto, bonusNumber: Int): Boolean {
