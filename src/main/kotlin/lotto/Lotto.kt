@@ -10,8 +10,11 @@ class Lotto(private val numbers: List<Int>) {
         return lottoNumbersOutput
     }
 
-    fun getLottoNumbers(): List<Int> {
-        return numbers
+    fun countMatchingNumbers(winningNumbers: List<Int>): Int {
+        return numbers.intersect(winningNumbers).size
     }
-    // TODO: 추가 기능 구현
+
+    fun isBonusMatched(bonusNumber: Int): Boolean {
+        return bonusNumber in numbers
+    }
 }
