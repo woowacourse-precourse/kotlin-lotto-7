@@ -41,6 +41,7 @@ class LottoMachine {
                 println("잘못된 입력입니다. 다시 입력해 주세요. ${e.message}")
             }
         }
+        println()
     }
 
     private fun printPurchasedLottoTickets() {
@@ -70,6 +71,7 @@ class LottoMachine {
                 println("숫자를 입력해 주세요.")
             }
         }
+        println()
     }
 
     private fun requestBonusNumber() {
@@ -85,6 +87,7 @@ class LottoMachine {
                 println("숫자를 입력해 주세요.")
             }
         }
+        println()
     }
 
     private fun printLottoStats() {
