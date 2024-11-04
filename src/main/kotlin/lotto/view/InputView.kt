@@ -18,4 +18,11 @@ class InputView(private val validator: Validator, private val parser: Parser) {
             return amount
         }
     }
+
+    fun inputWinningNumbers(): List<Int> {
+        while (true) {
+            println("당첨 번호를 입력해 주세요.")
+            val input = Console.readLine()
+        }
+    }
 }
