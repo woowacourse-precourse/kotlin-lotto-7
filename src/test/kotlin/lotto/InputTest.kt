@@ -1,5 +1,9 @@
 package lotto
 
+import camp.nextstep.edu.missionutils.test.Assertions.assertRandomUniqueNumbersInRangeTest
+import camp.nextstep.edu.missionutils.test.Assertions.assertSimpleTest
+import camp.nextstep.edu.missionutils.test.NsTest
+import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 import org.junit.jupiter.params.ParameterizedTest
@@ -15,7 +19,7 @@ import lotto.util.InputValidator.validateMoneyIsDivisible
 import lotto.util.InputValidator.validateWinningNumbersCount
 import lotto.util.InputValidator.validateWinningNumbersDistinctness
 
-class InputTest {
+class InputTest : NsTest() {
     @ParameterizedTest
     @ValueSource(strings = ["", "abc"])
     fun `숫자로 변환될 수 없는 문자열이 입력된 경우 예외가 발생한다`(input: String) {
@@ -69,5 +73,43 @@ class InputTest {
         val bonusNumber = parseNumericInput("6")
         val winningNumbers = parseWinningNumbers("1,2,3,4,5,6")
         assertThrows<IllegalArgumentException> { validateBonusNumberDistinctness(bonusNumber, winningNumbers) }
+    }
+
+    @Test
+    fun `입력값 테스트`() {
+        assertRandomUniqueNumbersInRangeTest(
+            {
+                run("8000", "1,2,3,4,5,6", "7")
+                assertThat(output()).contains(
+                    "8개를 구매했습니다.",
+                    "[1, 2, 3, 4, 5, 6]",
+                    "[1, 2, 3, 4, 5, 7]",
+                    "[1, 2, 3, 4, 5, 10]",
+                    "[1, 2, 3, 4, 10, 11]",
+                    "[1, 2, 3, 10, 11, 12]",
+                    "[1, 2, 10, 11, 12, 13]",
+                    "[1, 10, 11, 12, 13, 14]",
+                    "[10, 11, 12, 13, 14, 15]",
+                    "3개 일치 (5,000원) - 1개",
+                    "4개 일치 (50,000원) - 1개",
+                    "5개 일치 (1,500,000원) - 1개",
+                    "5개 일치, 보너스 볼 일치 (30,000,000원) - 1개",
+                    "6개 일치 (2,000,000,000원) - 1개",
+                    "총 수익률은 25394437.5%입니다."
+                )
+            },
+            listOf(1, 2, 3, 4, 5, 6),
+            listOf(1, 2, 3, 4, 5, 7),
+            listOf(1, 2, 3, 4, 5, 10),
+            listOf(1, 2, 3, 4, 10, 11),
+            listOf(1, 2, 3, 10, 11, 12),
+            listOf(1, 2, 10, 11, 12, 13),
+            listOf(1, 10, 11, 12, 13, 14),
+            listOf(10, 11, 12, 13, 14, 15)
+        )
+    }
+
+    override fun runMain() {
+        main()
     }
 }
