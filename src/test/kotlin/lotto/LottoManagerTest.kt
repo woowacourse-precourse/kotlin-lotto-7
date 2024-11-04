@@ -13,5 +13,12 @@ class LottoManagerTest {
         lottoManager = LottoManager(8)
     }
 
+    @Test
+    fun `로또 티켓 수량이 맞게 생성되는지 확인`() {
+        val lottoTicketsField = LottoManager::class.java.getDeclaredField("lottoTickets")
+        lottoTicketsField.isAccessible = true
+        val lottoTickets = lottoTicketsField.get(lottoManager) as List<Lotto>
 
+        assertThat(lottoTickets.size).isEqualTo(8)
+    }
 }
