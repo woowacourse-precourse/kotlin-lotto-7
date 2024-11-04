@@ -1,10 +1,7 @@
 package lotto.model
 
-import lotto.util.ConstantsUtil.TICKET_PRICE
-
 class LottoTicket {
-    fun generateTickets(ticketsPrice: Int): List<Lotto> {
-        val ticketCount = ticketsPrice / TICKET_PRICE
+    fun generateTickets(ticketCount: Int): List<Lotto> {
         return List(ticketCount) {Lotto.generate()}
     }
 
