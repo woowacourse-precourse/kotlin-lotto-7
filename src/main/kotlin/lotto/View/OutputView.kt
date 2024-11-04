@@ -14,6 +14,7 @@ class OutputView {
 
     fun printLottoResults(lottoRankResults: Map<LottoRank, Int>, totalRateOfReturn: Double) {
         println("당첨 통계")
+        println("---")
         val printOrder = listOf(LottoRank.Fifth, LottoRank.Fourth, LottoRank.Third, LottoRank.Second, LottoRank.First)
         printOrder.forEach { currentOrder ->
             printEachLottoRankResult(lottoRankResults, currentOrder)
