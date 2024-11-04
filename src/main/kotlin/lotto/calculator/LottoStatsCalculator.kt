@@ -17,19 +17,15 @@ class LottoStatsCalculator(
     private fun calculateRank() {
         lottoTickets.forEach { userLotto ->
             val matchCount: Int = userLotto.intersect(winningNumber).size
-
-            when (matchCount) {
-                Rank.FIRST.matchCount -> lottoStats.add(Rank.FIRST)
-                Rank.SECOND.matchCount, Rank.THIRD.matchCount -> lottoStats.add(
-                    checkBonusNumber(
-                        userLotto,
-                        bonusNumber
-                    )
-                )
-
-                Rank.FOURTH.matchCount -> lottoStats.add(Rank.FOURTH)
-                Rank.FIFTH.matchCount -> lottoStats.add(Rank.FIFTH)
+            val rank = when (matchCount) {
+                Rank.FIRST.matchCount -> Rank.FIRST
+                Rank.SECOND.matchCount, Rank.THIRD.matchCount -> checkBonusNumber(userLotto, bonusNumber)
+                Rank.FOURTH.matchCount -> Rank.FOURTH
+                Rank.FIFTH.matchCount -> Rank.FIFTH
+                else -> null // 해당하는 랭크가 없는 경우
             }
+
+            rank?.let { lottoStats.add(it) }
         }
     }
 
