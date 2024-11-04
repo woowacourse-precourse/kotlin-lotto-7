@@ -10,11 +10,13 @@ import lotto.data.PurchaseAmount
 import lotto.enums.Rank
 import lotto.constants.Format.DELIMITER_COMMA_WITH_SPACE
 import lotto.constants.Format.DIVIDER
+import lotto.constants.Format.FORMAT_PRINT_LOTTO
 import lotto.constants.Format.LOTTO_STATS_HEADER
 import lotto.constants.Message.MESSAGE_FORMATTED_PROFIT_RATE
 import lotto.constants.Message.MESSAGE_INVALID_INPUT
-import lotto.constants.Message.MESSAGE_LOTTO_TICKETS_PURCHASED
-import lotto.constants.Message.MESSAGE_LOTTO_TICKET_FORMAT
+import lotto.constants.Message.MESSAGE_MATCH_LOTTO_STATS
+import lotto.constants.Message.MESSAGE_MATCH_WITH_BONUS_LOTTO_STATS
+import lotto.constants.Message.MESSAGE_PURCHASED_LOTTO_COUNT
 import lotto.constants.Message.MESSAGE_PROMPT_BONUS_NUMBER
 import lotto.constants.Message.MESSAGE_PROMPT_PURCHASE_AMOUNT
 import lotto.constants.Message.MESSAGE_PROMPT_WINNING_NUMBER
@@ -58,13 +60,13 @@ class LottoMachine {
     private fun printPurchasedLottoTickets() {
         val purchasedLottoCount = purchaseAmount / TICKET_PRICE
 
-        println(MESSAGE_LOTTO_TICKETS_PURCHASED.format(purchasedLottoCount))
+        println(MESSAGE_PURCHASED_LOTTO_COUNT.format(purchasedLottoCount))
 
         repeat(purchasedLottoCount) {
             val userLottoTicket = Randoms.pickUniqueNumbersInRange(1, 45, 6).sorted()
             lottoTickets.add(userLottoTicket)
 
-            println(MESSAGE_LOTTO_TICKET_FORMAT.format(userLottoTicket.joinToString(DELIMITER_COMMA_WITH_SPACE)))
+            println(FORMAT_PRINT_LOTTO.format(userLottoTicket.joinToString(DELIMITER_COMMA_WITH_SPACE)))
         }
         println()
     }
@@ -108,11 +110,13 @@ class LottoMachine {
         println(DIVIDER)
 
         Rank.entries.reversed().forEach { rank ->   // 5등에서 1등 순서로 출력
+            val matchCount = lottoStats.count { it == rank }
             if (rank == Rank.SECOND) {
-                println("${rank.matchCount}개 일치, 보너스 볼 일치 (${rank.prize}원) - ${lottoStats.count { it == rank }}개")
+                println(MESSAGE_MATCH_WITH_BONUS_LOTTO_STATS.format(rank.matchCount, rank.prize, matchCount))
                 return@forEach
             }
-            println("${rank.matchCount}개 일치 (${rank.prize}원) - ${lottoStats.count { it == rank }}개")
+            println(MESSAGE_MATCH_LOTTO_STATS.format(rank.matchCount, rank.prize, matchCount))
+
         }
     }
 
