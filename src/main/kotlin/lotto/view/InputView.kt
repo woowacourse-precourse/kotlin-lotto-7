@@ -2,6 +2,7 @@ package lotto.view
 
 import camp.nextstep.edu.missionutils.Console
 import lotto.domain.Lotto
+import org.assertj.core.internal.ErrorMessages
 
 class InputView {
     fun readPurchaseAmount(): Int {
@@ -44,26 +45,28 @@ class InputView {
     }
 
     fun validatePurchaseAmount(input: String): Int {
-        val amount = input.toIntOrNull() ?: throw IllegalArgumentException("[ERROR] 구입금액은 숫자로 입력하세요.")
-        require(input.toInt() > 0) { "[ERROR] 구입 금액은 0보다 커야 합니다." }
-        require(input.toInt() % Lotto.PRICE == 0) { "[ERROR] 구입 금액은 1,000원 단위여야 합니다." }
+        val amount =
+            input.toIntOrNull() ?: throw IllegalArgumentException(ErrorMessage.INVALID_PURCHASE_AMOUNT.errorMessage)
+        require(input.toInt() > 0) { ErrorMessage.PURCHASE_AMOUNT_ZERO.errorMessage }
+        require(input.toInt() % Lotto.PRICE == 0) { ErrorMessage.INVALID_PURCHASE_MONEY.errorMessage }
 
         return input.toInt()
     }
 
     fun validateWinningNumbers(numbers: List<Int?>): List<Int?> {
-        require(numbers.size == Lotto.LOTTO_NUMBER_SIZE) { "[ERROR] 당첨 번호는 6개의 숫자를 입력해야 합니다." }
-        require(numbers.all { it != null && it in Lotto.MINIMUM_NUMBER ..Lotto.MAXIMUM_NUMBER }) { "[ERROR] 모든 번호는 1부터 45 사이의 숫자여야 합니다." }
-        require(numbers.size == numbers.toSet().size) { "[ERROR] 당첨 번호는 중복 없이 입력해야 합니다." }
+        require(numbers.size == Lotto.LOTTO_NUMBER_SIZE) { ErrorMessage.INVALID_NUMBERS_COUNT.errorMessage }
+        require(numbers.all { it != null && it in Lotto.MINIMUM_NUMBER..Lotto.MAXIMUM_NUMBER }) { ErrorMessage.INVALID_NUMBER_RANGE.errorMessage }
+        require(numbers.size == numbers.toSet().size) { ErrorMessage.DUPLICATE_NUMBERS.errorMessage }
 
         return numbers
     }
 
     fun validateBonusNumber(input: String, winningNumbers: List<Int?>): Int {
-        val bonusNumber = input.toIntOrNull() ?: throw IllegalArgumentException("[ERROR] 올바른 숫자를 입력하세요.")
+        val bonusNumber =
+            input.toIntOrNull() ?: throw IllegalArgumentException(ErrorMessage.INVALID_BONUS_NUMBER.errorMessage)
 
-        require(bonusNumber in Lotto.MINIMUM_NUMBER .. Lotto.MAXIMUM_NUMBER){"[ERROR] 보너스 번호는 1부터 45 사이여야 합니다."}
-        require(bonusNumber !in winningNumbers){"[ERROR] 보너스 번호는 당첨 번호와 중복될 수 없습니다."}
+        require(bonusNumber in Lotto.MINIMUM_NUMBER..Lotto.MAXIMUM_NUMBER) { ErrorMessage.INVALID_BONUS_NUMBER_RANGE.errorMessage }
+        require(bonusNumber !in winningNumbers) { ErrorMessage.DUPLICATE_BONUS_NUMBER.errorMessage }
 
         return bonusNumber
     }
