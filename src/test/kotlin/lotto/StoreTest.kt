@@ -11,7 +11,7 @@ class StoreTest {
     @Test
     fun `생성한 로또가 예외를 발생시키지는 않는지 검사한다`() {
         assertDoesNotThrow {
-            lotto
+            store.generateLotto()
         }
     }
 
