@@ -55,6 +55,7 @@ object InputView {
             if (price % Constants.LOTTO_PRICE != 0) {
                 throw IllegalArgumentException(ErrorMessage.INVALID_AMOUNT.getMessage())
             }
+
             return price
         } catch (e: NumberFormatException) {
             throw IllegalArgumentException(ErrorMessage.NOT_NUMBER.getMessage())
@@ -64,15 +65,16 @@ object InputView {
     private fun validateWinningNumbers(inputNumbers: String): List<Int> {
         try {
             val numbers = inputNumbers.split(",").map { it.trim().toInt() }
-            if (numbers.size != Constants.LOTTO_SIZE) {
-                throw IllegalArgumentException(ErrorMessage.INVALID_LOTTO_NUMBERS.getMessage())
+
+            when {
+                numbers.size != Constants.LOTTO_SIZE -> throw IllegalArgumentException(ErrorMessage.INVALID_LOTTO_NUMBERS.getMessage())
+                numbers.any { it !in Constants.RANDOM_MIN..Constants.RANDOM_MAX } -> throw IllegalArgumentException(
+                    ErrorMessage.INVALID_LOTTO_NUMBER.getMessage()
+                )
+
+                numbers.toSet().size != Constants.LOTTO_SIZE -> throw IllegalArgumentException(ErrorMessage.INVALID_DUPLICATE_NUMBER.getMessage())
             }
-            if (numbers.any { it !in Constants.RANDOM_MIN..Constants.RANDOM_MAX }) {
-                throw IllegalArgumentException(ErrorMessage.INVALID_LOTTO_NUMBER.getMessage())
-            }
-            if (numbers.toSet().size != Constants.LOTTO_SIZE) {
-                throw IllegalArgumentException(ErrorMessage.INVALID_DUPLICATE_NUMBER.getMessage())
-            }
+
             return numbers
         } catch (e: NumberFormatException) {
             throw IllegalArgumentException(ErrorMessage.NOT_NUMBER.getMessage())
