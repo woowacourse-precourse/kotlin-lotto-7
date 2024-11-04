@@ -28,14 +28,14 @@ class WinningLotto(winningLottoInput: String) {
 
     private fun validateWinningLotto(input: String): Set<Int> {
         val numbers = input.split(",").map { it.trim() }
-
+        validateWinningLottoLength(numbers)
         val validatedNumbers = validateWinningLottoNumber(numbers)
-        validateWinningLottoLength(validatedNumbers)
+        validateNoDuplicateWinningLotto(validatedNumbers)
 
         return validatedNumbers
     }
 
-    private fun validateWinningLottoLength(numbers: Set<Int>) {
+    private fun validateWinningLottoLength(numbers: List<String>) {
         require(numbers.size == LOTTO_SIZE) { getErrorMessage(INVALID_WINNING_NUMBERS_SIZE) }
     }
 
@@ -52,6 +52,12 @@ class WinningLotto(winningLottoInput: String) {
         }.toSet()
 
         return validatedNumbers
+    }
+
+    private fun validateNoDuplicateWinningLotto(numbers : Set<Int>) {
+        require(numbers.size == LOTTO_SIZE) {
+            getErrorMessage(INVALID_WINNING_LOTTO_DUPLICATE)
+        }
     }
 
     fun setBonusNumber(bonusNumberInput: String) {
@@ -84,8 +90,9 @@ class WinningLotto(winningLottoInput: String) {
             "당첨 번호는 ${MIN_LOTTO_NUMBER}과 ${MAX_LOTTO_NUMBER}사이 숫자만 가능합니다."
         private const val INVALID_BONUS_NUMBER =
             "보너스 번호는 ${MIN_LOTTO_NUMBER}과 ${MAX_LOTTO_NUMBER}사이 숫자만 가능합니다."
+        private const val INVALID_WINNING_LOTTO_DUPLICATE =
+            "당첨 번호는 중복될 수 없습니다."
         private const val INVALID_BONUS_NUMBER_DUPLICATE =
             "보너스 번호는 당첨 번호에 있는 숫자와 중복될 수 없습니다."
-
     }
 }
