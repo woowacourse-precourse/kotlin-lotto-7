@@ -23,8 +23,9 @@ fun String.validateIntList(): List<Int> {
     }
 }
 
-fun List<Int>.findDuplicates(count: Int): List<Int> {
-    require(this.toSet().size == count) { "[ERROR] 중복되지 않는 숫자로 입력해 주세요." }
+fun List<Int>.findDuplicates(): List<Int> {
+    val duplicates = this.groupingBy { it }.eachCount().filter { it.value > 1 }.keys
+    require(duplicates.isEmpty()) { "[ERROR] 중복되지 않는 숫자로 입력해 주세요." }
     return this
 }
 

@@ -7,6 +7,12 @@ class Lotto(private val numbers: List<Int>) {
         require(numbers.size == 6) { "[ERROR] 로또 번호는 6개여야 합니다." }
     }
 
+    init {
+        numbers
+            .findDuplicates()
+            .validateRange(LottoStore.LOTTO_MIN_NUMBER, LottoStore.LOTTO_MAX_NUMBER);
+    }
+
     // TODO: 추가 기능 구현
     override fun toString(): String {
         return numbers.joinToString(prefix = "[", postfix = "]", separator = ", ") { it.toString() }
@@ -26,11 +32,11 @@ class Lotto(private val numbers: List<Int>) {
         }
 
         fun fromList(numbers: List<Int>): Lotto {
-            return numbers
-                    .validateCount(LottoStore.LOTTO_NUMBER_COUNT)
-                    .findDuplicates(LottoStore.LOTTO_NUMBER_COUNT)
-                    .validateRange(LottoStore.LOTTO_MIN_NUMBER, LottoStore.LOTTO_MAX_NUMBER)
-                .run { Lotto(this) }
+            return Lotto(numbers
+                .validateCount(LottoStore.LOTTO_NUMBER_COUNT)
+                .findDuplicates()
+                .validateRange(LottoStore.LOTTO_MIN_NUMBER, LottoStore.LOTTO_MAX_NUMBER)
+            )
         }
     }
 }
