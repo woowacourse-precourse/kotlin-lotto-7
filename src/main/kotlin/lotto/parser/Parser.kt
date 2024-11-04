@@ -8,4 +8,8 @@ class Parser {
     fun parseWinningNumbers(input: String): List<Int> {
         return input.split(",").map { it.trim().toInt() }
     }
+
+    fun parseBonusNumber(input: String): Int {
+        return input.toInt()
+    }
 }
