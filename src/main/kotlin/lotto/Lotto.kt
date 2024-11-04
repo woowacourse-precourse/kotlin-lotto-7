@@ -36,7 +36,31 @@ class Lotto(private val numbers: List<Int>) {
         require(bonusNumber in 1..45) { "[ERROR] 보너스 번호는 1부터 45 사이여야 합니다." }
     }
 
+
+    // 당첨 내역 계산
+    fun calculateWinningResults(winningNumbers: List<Int>, bonusNumber: Int): WinningResults {
+        val matchCount = numbers.count { it in winningNumbers }
+        val isBonusMatched = numbers.contains(bonusNumber)
+
+        return WinningResults(matchCount, isBonusMatched)
+    }
+
+    // 수익률 계산
+    fun calculateYield(totalInvestment: Int, winningResults: WinningResults): Double {
+        val prize = when (winningResults.matchCount) {
+            6 -> 2000000000 // 1등
+            5 -> if (winningResults.isBonusMatched) 30000000 else 1500000 // 2등, 3등
+            4 -> 50000 // 4등
+            3 -> 5000 // 5등
+            else -> 0 // 꽝
+        }
+        return if (totalInvestment == 0) 0.0 else prize.toDouble() / totalInvestment
+    }
+
     override fun toString(): String {
         return numbers.toString()
     }
+
+    // 당첨 결과를 나타내는 데이터 클래스
+    data class WinningResults(val matchCount: Int, val isBonusMatched: Boolean)
 }
