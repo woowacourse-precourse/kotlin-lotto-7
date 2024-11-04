@@ -4,6 +4,7 @@ class Lotto(private val numbers: List<Int>) {
     init {
         require(numbers.size == LOTTO_SIZE) { ERROR_INVALID_SIZE_MESSAGE }
         require(numbers.toSet().size == LOTTO_SIZE) { ERROR_DUPLICATE_NUMBER_MESSAGE }
+        numbers.forEach { LottoNumberValidator.validate(it) }
     }
 
     fun getNumbers(): List<Int> = numbers
