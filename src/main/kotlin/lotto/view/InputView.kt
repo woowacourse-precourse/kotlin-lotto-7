@@ -32,11 +32,11 @@ object InputView {
         }
     }
 
-    fun inputBonusNumber(): Int {
+    fun inputBonusNumber(winningNumbers: List<Int>): Int {
         while (true) {
             try {
                 println(InputMessage.INPUT_BONUS_NUMBER.getMessage())
-                val bonusNumber = validateBonusNumber(readLine())
+                val bonusNumber = validateBonusNumber(readLine(), winningNumbers)
 
                 return bonusNumber
             } catch (e: IllegalArgumentException) {
@@ -78,11 +78,14 @@ object InputView {
         }
     }
 
-    private fun validateBonusNumber(inputBonusNumber: String): Int {
+    private fun validateBonusNumber(inputBonusNumber: String, winningNumbers: List<Int>): Int {
         try {
             val bonusNumber = inputBonusNumber.toInt()
             if (bonusNumber !in Constants.RANDOM_MIN..Constants.RANDOM_MAX) {
                 throw IllegalArgumentException(ErrorMessage.INVALID_BONUS_NUMBER.getMessage())
+            }
+            if (bonusNumber in winningNumbers) {
+                throw IllegalArgumentException(ErrorMessage.INVALID_BONUS_NUMBER_DUPLICATE.getMessage())
             }
             return bonusNumber
         } catch (e: NumberFormatException) {

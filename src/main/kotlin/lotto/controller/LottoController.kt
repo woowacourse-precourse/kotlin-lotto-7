@@ -13,7 +13,7 @@ class LottoController {
         lottos.buyLottos(lottoPrice) //구매한 로또들 생성
 
         val winningNumbers = InputView.inputWinningNumbers() // 당첨 번호를 입력
-        val bonusNumber = InputView.inputBonusNumber() // 보너스 번호를 입력
+        val bonusNumber = InputView.inputBonusNumber(winningNumbers) // 보너스 번호를 입력
 
         OutputView.printLottoNumbers(lottos.getLottos().map { it.get() })  // 구매한 로또들 출력
 

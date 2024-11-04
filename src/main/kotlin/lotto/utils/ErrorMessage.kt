@@ -10,6 +10,7 @@ enum class ErrorMessage(private val message: String) {
     INVALID_LOTTO_NUMBER("로또 번호는 ${Constants.RANDOM_MIN}부터 ${Constants.RANDOM_MAX} 사이의 숫자여야 합니다."),
     INVALID_DUPLICATE_NUMBER("로또 번호는 중복되어서는 안됩니다."),
     INVALID_BONUS_NUMBER("보너스 번호는 ${Constants.RANDOM_MIN}부터 ${Constants.RANDOM_MAX} 사이의 단 1개의 숫자여야 합니다."),
+    INVALID_BONUS_NUMBER_DUPLICATE("보너스 번호는 당첨 번호와 중복되어서는 안됩니다."),
 
     UNKNOWN_ERROR("알 수 없는 오류가 발생했습니다.");
 

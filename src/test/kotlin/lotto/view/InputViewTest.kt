@@ -55,7 +55,8 @@ class InputViewTest {
         @DisplayName("올바른 보너스 번호 입력 테스트")
         fun shouldReturnCorrectBonusNumber() {
             setInput("7\n")
-            val result: Int = InputView.inputBonusNumber()
+            val winningNumbers = listOf(1, 2, 3, 4, 5, 6)
+            val result: Int = InputView.inputBonusNumber(winningNumbers)
             assertEquals(7, result)
         }
     }
@@ -155,12 +156,39 @@ class InputViewTest {
         @Test
         @DisplayName("보너스 번호가 1~45 사이의 숫자가 아닌 경우 예외 메세지 출력")
         fun shouldDisplayErrorMessageForInvalidBonusNumber() {
-            setInput("46\n1\n")
-            val result = InputView.inputBonusNumber()
-            assertEquals(1, result)
+
+            setInput("46\n7\n")
+            val winningNumbers = listOf(1, 2, 3, 4, 5, 6)
+            val result = InputView.inputBonusNumber(winningNumbers)
+            assertEquals(7, result)
 
             val output = outputStreamCaptor.toString().trim()
             assertTrue(output.contains(ErrorMessage.INVALID_BONUS_NUMBER.getMessage()))
         }
+
+        @Test
+        @DisplayName("보너스 번호가 숫자가 아닌 경우 예외 메세지 출력")
+        fun shouldDisplayErrorMessageForNotNumberInBonusNumber() {
+            setInput("a\n7\n")
+            val winningNumbers = listOf(1, 2, 3, 4, 5, 6)
+            val result = InputView.inputBonusNumber(winningNumbers)
+            assertEquals(7, result)
+
+            val output = outputStreamCaptor.toString().trim()
+            assertTrue(output.contains(ErrorMessage.INVALID_BONUS_NUMBER.getMessage()))
+        }
+
+        @Test
+        @DisplayName("보너스 번호가 중복되는 경우 예외 처리")
+        fun shouldDisplayErrorMessageForDuplicatedBonusNumber() {
+            setInput("1\n7\n")
+            val winningNumbers = listOf(1, 2, 3, 4, 5, 6)
+            val result = InputView.inputBonusNumber(winningNumbers)
+            assertEquals(7, result)
+
+            val output = outputStreamCaptor.toString().trim()
+            assertTrue(output.contains(ErrorMessage.INVALID_BONUS_NUMBER_DUPLICATE.getMessage()))
+        }
+
     }
 }
