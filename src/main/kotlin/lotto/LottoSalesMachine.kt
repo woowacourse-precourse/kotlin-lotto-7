@@ -6,13 +6,13 @@ class LottoSalesMachine {
     val lottoPrice = 1000
 
     fun guideInputLottoPurchaseAmount(): String {
-        return "구입금액을 입력해 주세요."
+        return INPUT_PURCHASE_AMOUNT
     }
 
     fun purchase(won: Int): List<Lotto> {
         exceptNotDevideThousand(won)
-        val lottoCount = won / 1000
-        println("${lottoCount}개를 구매했습니다.")
+        val lottoCount = won / lottoPrice
+        println("${lottoCount}${PURCHASE_COUNT}")
         return List(lottoCount) { LottoMaker.make() }
     }
 
@@ -31,7 +31,7 @@ class LottoSalesMachine {
     }
 
     private fun validateUserInput(purchaseAmount: String): Int {
-        if (purchaseAmount.matches(Regex("-?\\d+"))) {
+        if (purchaseAmount.matches(Regex(REGEX_INT))) {
             return purchaseAmount.toInt()
         } else {
             throw IllegalArgumentException(ErrorMessage.INPUT_AMOUNT_FORMAT_ERROR.getMessage())
@@ -42,5 +42,11 @@ class LottoSalesMachine {
         if (won % lottoPrice != 0) {
             throw IllegalArgumentException(ErrorMessage.INPUT_AMOUNT_ERROR.getMessage())
         }
+    }
+
+    companion object {
+        private const val REGEX_INT: String = "-?\\d+"
+        private const val PURCHASE_COUNT: String = "개를 구매했습니다."
+        private const val INPUT_PURCHASE_AMOUNT: String = "구입금액을 입력해 주세요."
     }
 }
