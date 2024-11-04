@@ -11,16 +11,16 @@ class LottoService {
 
     fun randomLottoNumber(count: Int): MutableMap<Int, List<Int>> {
         val randomLottoList = mutableMapOf<Int, List<Int>>()
-        for (i in 0 until count) {
-            randomLottoList[i] = Randoms.pickUniqueNumbersInRange(Content.MIN_NUMBER_LOTTO, Content.MAX_NUMBER_LOTTO, Content.COUNT_FOR_LOTTO_NUMBER)
+        for (i in Content.MIN_COUNT until count) {
+            randomLottoList[i] = Randoms.pickUniqueNumbersInRange(Content.MIN_NUMBER_LOTTO, Content.MAX_NUMBER_LOTTO, Content.COUNT_FOR_LOTTO_NUMBER).sorted()
         }
         return randomLottoList
     }
 
-    fun countForWin(fiveNumberLottoList: List<Int>, randomLottoList: MutableMap<Int, List<Int>>, winNumberForLotto: List<Int>, bonusNumberForLotto: String, count: Int) {
-        for (i in 0 until count) {
+    fun countForWin(randomLottoList: MutableMap<Int, List<Int>>, winNumberForLotto: List<Int>, bonusNumberForLotto: String, count: Int) {
+        for (i in Content.MIN_COUNT until count) {
             val checkingLottoForWin = checkLottoForWin(randomLottoList, winNumberForLotto, count)
-            val checkingLottoForBonus = checkLottoForBonus(fiveNumberLottoList, bonusNumberForLotto)
+            val checkingLottoForBonus = checkLottoForBonus(randomLottoList, bonusNumberForLotto)
             calculateWinForLotto(checkingLottoForWin, checkingLottoForBonus)
         }
     }
@@ -40,29 +40,34 @@ class LottoService {
 
         return (totalMoney / moneyForLotto).toDouble() * Content.POINT_TO_PERCENT
     }
-    private fun checkLottoForWin(randomLottoList: MutableMap<Int, List<Int>>, winNumberForLotto: List<Int>, count: Int): Int {
-        return randomLottoList[count]?.filter { it in winNumberForLotto }?.count() ?: 0
+
+    fun stringToIntList(winForLotto: String): List<Int> {
+        return winForLotto.split(",").map {it.trim().toInt()}
     }
 
-    private fun checkLottoForBonus(randomLottoList: List<Int>, bonusNumberForLotto: String): Boolean {
-        return randomLottoList.any { it == bonusNumberForLotto.toInt() }
+    private fun checkLottoForWin(randomLottoList: MutableMap<Int, List<Int>>, winNumberForLotto: List<Int>, count: Int): Int {
+        return randomLottoList[count]?.count { it in winNumberForLotto } ?: 0
+    }
+
+    private fun checkLottoForBonus(randomLottoList: MutableMap<Int, List<Int>>, bonusNumberForLotto: String): Boolean {
+        return randomLottoList[Content.CORRECT_FIVE_NUMBER]?.any { it == bonusNumberForLotto.toInt() } ?: false
     }
 
     private fun calculateWinForLotto(checkLottoForWin: Int, checkLottoForBonus: Boolean) {
         if (checkLottoForWin == Content.CORRECT_THREE_NUMBER) {
-            WinCount.THREE_NUMBER.increse()
+            WinCount.THREE_NUMBER.increase()
         }
         if (checkLottoForWin == Content.CORRECT_FOUR_NUMBER) {
-            WinCount.FOUR_NUMBER.increse()
+            WinCount.FOUR_NUMBER.increase()
         }
         if (checkLottoForWin == Content.CORRECT_FIVE_NUMBER) {
             if (checkLottoForBonus) {
-                return WinCount.FIVE_NUMBER_AND_BONUS.increse()
+                WinCount.FIVE_NUMBER_AND_BONUS.increase()
             }
-            WinCount.FIVE_NUMBER.increse()
+            else WinCount.FIVE_NUMBER.increase()
         }
         if (checkLottoForWin == Content.CORRECT_SIX_NUMBER) {
-            WinCount.SIX_NUMBER.increse()
+            WinCount.SIX_NUMBER.increase()
         }
     }
 

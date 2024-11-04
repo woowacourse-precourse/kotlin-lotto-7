@@ -4,7 +4,7 @@ object Content {
     const val MONEY_FOR_LOTTO = "구입금액을 입력해 주세요."
     const val COUNT_FOR_LOTTO = "개를 구매했습니다."
     const val WIN_NUMBER_FOR_LOTTO = "당첨 번호를 입력해 주세요."
-    const val BONUS_NUMBER_FOR_LOTTO = "구입금액을 입력해 주세요."
+    const val BONUS_NUMBER_FOR_LOTTO = "보너스 번호를 입력해 주세요."
     const val STATISTICS_FOR_LOTTO = "당첨 통계\n" + "---"
     const val LOTTO_PRICE = 1000
     const val MAX_NUMBER_LOTTO = 45

@@ -7,7 +7,7 @@ enum class WinCount {
 
     private var count = Content.MIN_COUNT
 
-    fun increse() {
+    fun increase() {
         count++
     }
 
