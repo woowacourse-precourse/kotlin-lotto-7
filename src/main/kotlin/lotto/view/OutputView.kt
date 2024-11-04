@@ -15,7 +15,7 @@ object OutputView {
         println("당첨 통계")
         println("---")
         Prize.entries.forEach { prize ->
-            println("${prize.description} (${prize.moneyString} 원) - ${results[prize] ?: 0}개")
+            println("${prize.description} (${prize.moneyString}원) - ${results[prize] ?: 0}개")
         }
         val profitRate = (totalPrize.toDouble() / totalCost) * 100
         println("총 수익률은 %.1f%%입니다.".format(profitRate))
