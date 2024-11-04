@@ -86,10 +86,10 @@ class LottoJudgeTest {
     @Test
     fun `보너스 번호는 1 이상, 45 이하로 입력되어야 한다`() {
         val exceptionForBonusNumberLessThanOne = `보너스 번호가 1미만인 경우 예외가 발생해야 한다`()
-        assertThat(exceptionForBonusNumberLessThanOne.message).contains(INPUT_WINNING_NUMBER_OUT_OF_RANGE_ERROR.getMessage())
+        assertThat(exceptionForBonusNumberLessThanOne.message).contains(INPUT_BONUS_NUMBER_OUT_OF_RANGE_ERROR.getMessage())
 
         val exceptionForBonusNumberGreaterThanFortyFive = `보너스 번호가 45초과인 경우 예외가 발생해야 한다`()
-        assertThat(exceptionForBonusNumberGreaterThanFortyFive.message).contains(INPUT_WINNING_NUMBER_OUT_OF_RANGE_ERROR.getMessage())
+        assertThat(exceptionForBonusNumberGreaterThanFortyFive.message).contains(INPUT_BONUS_NUMBER_OUT_OF_RANGE_ERROR.getMessage())
     }
 
     private fun `보너스 번호가 1미만인 경우 예외가 발생해야 한다`(): Exception {
