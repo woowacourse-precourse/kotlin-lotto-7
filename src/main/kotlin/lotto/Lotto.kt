@@ -6,9 +6,12 @@ class Lotto(private val numbers: List<Int>) {
         require(numbers.size == numbers.distinct().size) { "[ERROR] 중복된 값이 도출되었습니다" }
     }
 
+    fun getNumbers(): List<Int> {
+        return numbers
+    }
+
     override fun toString(): String {
         return numbers.toString()
     }
-
-    fun lotto() {}
 }
+

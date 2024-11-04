@@ -11,6 +11,10 @@ class WinningNumber(private val numbers: List<Int>) {
         return WinningNumber(updatedNumbers)
     }
 
+    fun getNumbers(): List<Int> {
+        return numbers
+    }
+
     override fun toString(): String {
         return numbers.toString()
     }
