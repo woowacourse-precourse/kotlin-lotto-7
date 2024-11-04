@@ -7,6 +7,6 @@ import org.junit.jupiter.api.Assertions.*
 class LottoDrawTest {
 
     @Test
-    fun run() {
+    fun `run 함수가 `() {
     }
 }
