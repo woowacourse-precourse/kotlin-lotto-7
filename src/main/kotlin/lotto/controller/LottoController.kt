@@ -30,7 +30,7 @@ class LottoController(
             value
         }
 
-        return tempWinningNumbers
+        return tempWinningNumbers.sorted()
     }
 
     private fun getBonusNumber(): Int {
