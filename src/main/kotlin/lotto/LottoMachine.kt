@@ -8,6 +8,8 @@ class LottoMachine(
 ) {
 
     val lottoSet: List<Lotto> = createLottoSet(money)
+    var winningRankSet: List<WinningRank> = emptyList()
+        private set
 
     private fun createLottoSet(money: Int): List<Lotto> {
         val lottoCount = LottoGenerator.getLottoCount(money)
@@ -17,8 +19,14 @@ class LottoMachine(
         return lottoSet
     }
 
-    fun getEarningsRate(winningNumber: List<Int>, bonusNumber: Int): String {
-        val totalEarning = lottoSet.sumOf { it.getWinningRank(winningNumber, bonusNumber).price }
+    fun updateWinningNumber(winningNumber: List<Int>, bonusNumber: Int) {
+        winningRankSet = lottoSet.map { lotto ->
+            lotto.getWinningRank(winningNumber, bonusNumber)
+        }
+    }
+
+    fun getEarningsRate(): String {
+        val totalEarning = winningRankSet.sumOf { it.price }
         val earningsRate = CalculateUtils.calculateEarningsRate(totalEarning, money)
         return earningsRate
     }

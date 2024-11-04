@@ -8,5 +8,5 @@ fun main() {
     val lottoMachine = LottoMachine(money)
     val winningNumbers = InputManager.getWinningNumbers()
     val bonusNumbers = InputManager.getBonusNumber()
-
+    lottoMachine.updateWinningNumber(winningNumbers, bonusNumbers)
 }

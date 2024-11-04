@@ -1,12 +1,23 @@
 package lotto
 
-enum class WinningRank(val price: Long = 0){
-    PLACE_1st(2000000000),
-    PLACE_2nd(30000000),
-    PLACE_3rd(1500000),
-    PLACE_4th(50000),
-    PLACE_5th(5000),
-    PLACE_Fail(0);
+import java.text.NumberFormat
+
+enum class WinningRank(val price: Long = 0, val desc: String = ""){
+    PLACE_1st(2000000000L, "6개 일치" ),
+    PLACE_2nd(30000000L, "5개 일치, 보너스 볼 일치"),
+    PLACE_3rd(1500000L, "5개 일치"),
+    PLACE_4th(50000L, "4개 일치"),
+    PLACE_5th(5000L, "3개 일치"),
+    PLACE_Fail(0L, "");
+
+    fun str(): String {
+        return desc + price.toPriceStr()
+    }
+
+    private fun Long.toPriceStr(): String {
+        val formatter = NumberFormat.getNumberInstance()
+        return "(${formatter.format(this)}원)"
+    }
 
     companion object {
         const val MATCH_COUNT_1st = 6
