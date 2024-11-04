@@ -8,12 +8,12 @@ object InputView {
     private val input = InputValidation()
 
     fun getMoney(): Int {
-        OutputView.printMoneyMessage()
-        val money = Console.readLine().toIntOrNull()?: 0
+        while(true) {
+            OutputView.printMoneyMessage()
+            val money = Console.readLine().toIntOrNull() ?: 0
 
-        return if (input.isValidUnit(money) and input.isValidMoney(money))
-            money
-        else
-            -1
+            if (input.isValidUnit(money) and input.isValidMoney(money))
+                return money
+        }
     }
 }

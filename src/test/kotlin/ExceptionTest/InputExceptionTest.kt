@@ -1,6 +1,7 @@
 package ExceptionTest
 
 import Validation.InputValidation
+import View.InputView
 import camp.nextstep.edu.missionutils.test.Assertions.assertSimpleTest
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
