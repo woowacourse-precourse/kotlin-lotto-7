@@ -1,5 +1,6 @@
 package lotto
 
+import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test
@@ -30,7 +31,7 @@ class UtilsTest {
         val result = convertListInt(input.joinToString(","))
 
         assertEquals(input.size, result.size)
-        input.forEach { assertTrue(result.contains(it)) }
+        assertThat(result).containsAll(input)
     }
 
     @ParameterizedTest
