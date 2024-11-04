@@ -14,7 +14,7 @@ class Lotto(private val numbers: List<Int>) {
         require(numbers.size == numbers.distinct().size) {
             ErrorMessages.ERROR_SAME_NUMBER.message
         }
-        for (number in numbers) {
+        numbers.forEach { number ->
             require(number in LOWER_RANGE_LOTTO_NUMBER..UPPER_RANGE_LOTTO_NUMBER) {
                 ErrorMessages.ERROR_RANGE_NUMBER
             }
