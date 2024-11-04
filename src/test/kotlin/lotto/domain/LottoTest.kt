@@ -1,4 +1,4 @@
-package lotto
+package lotto.domain
 
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
@@ -16,6 +16,13 @@ class LottoTest {
     fun `로또 번호에 중복된 숫자가 있으면 예외가 발생한다`() {
         assertThrows<IllegalArgumentException> {
             Lotto(listOf(1, 2, 3, 4, 5, 5))
+        }
+    }
+
+    @Test
+    fun `로또 번호는 1에서 45 사이의 수로 구성되어야한다`() {
+        assertThrows<IllegalArgumentException> {
+            Lotto(listOf(1, 2, 3, 4, 5, 46))
         }
     }
 
