@@ -16,7 +16,15 @@ class LottoController {
     private var winLotteryNumber: Lotto? = null
     private var bonusLotteryNumber = NOT_INPUT_BONUS_LOTTERY_NUMBER_STATE
 
-    fun purchaseLotto() {
+
+    fun run() {
+        purchaseLotto()
+        setWinLotteryNumber()
+        setBonusLotteryNumber()
+        resultStatisticsOfLotto()
+    }
+
+    private fun purchaseLotto() {
         try {
             money = inputView.printInputMoney()
             generateLotto(money / LOTTO_PRICE)
@@ -30,7 +38,7 @@ class LottoController {
         }
     }
 
-    fun setWinLotteryNumber() {
+    private fun setWinLotteryNumber() {
         try {
             val winLotteryNumberList = inputView.printInputWinLotteryNumber()
             winLotteryNumber = Lotto(winLotteryNumberList)
@@ -42,9 +50,10 @@ class LottoController {
         }
     }
 
-    fun setBonusLotteryNumber() {
+    private fun setBonusLotteryNumber() {
         try {
-            bonusLotteryNumber = inputView.printInputBonusLotteryNumber(winLotteryNumber!!.getNumbers())
+            bonusLotteryNumber =
+                inputView.printInputBonusLotteryNumber(winLotteryNumber!!.getNumbers())
         } catch (e: IllegalArgumentException) {
             e.printStackTrace()
             println(e.message)
@@ -53,11 +62,12 @@ class LottoController {
         }
     }
 
-    fun resultLotto() {
+    private fun resultStatisticsOfLotto() {
         val matchCount = matchLotto()
         val profit = calculateProfit(matchCount)
         val amountOfProfit = calculateAmountOfProfit(profit)
-        outputView.printWinStatistics(matchCount, amountOfProfit)
+        outputView.printWinStatistics(matchCount)
+        outputView.printAmountOfProfit(amountOfProfit)
     }
 
     private fun generateLotto(count: Int) {
@@ -88,15 +98,23 @@ class LottoController {
         isMatchBonus: Boolean,
     ) {
         when (matchCount) {
-            3 -> matchLottoCount[MatchingLottoCount.THREE] = (matchLottoCount[MatchingLottoCount.THREE] ?: 0) + 1
-            4 -> matchLottoCount[MatchingLottoCount.FOUR] = (matchLottoCount[MatchingLottoCount.FOUR] ?: 0) + 1
-            5 -> matchLottoCount[MatchingLottoCount.FIVE] = (matchLottoCount[MatchingLottoCount.FIVE] ?: 0) + 1
+            3 -> matchLottoCount[MatchingLottoCount.THREE] =
+                (matchLottoCount[MatchingLottoCount.THREE] ?: 0) + 1
+
+            4 -> matchLottoCount[MatchingLottoCount.FOUR] =
+                (matchLottoCount[MatchingLottoCount.FOUR] ?: 0) + 1
+
+            5 -> matchLottoCount[MatchingLottoCount.FIVE] =
+                (matchLottoCount[MatchingLottoCount.FIVE] ?: 0) + 1
+
             6 -> {
                 if (isMatchBonus) {
-                    matchLottoCount[MatchingLottoCount.FIVE_BONUS] = (matchLottoCount[MatchingLottoCount.FIVE_BONUS] ?: 0) + 1
+                    matchLottoCount[MatchingLottoCount.FIVE_BONUS] =
+                        (matchLottoCount[MatchingLottoCount.FIVE_BONUS] ?: 0) + 1
                     return
                 }
-                matchLottoCount[MatchingLottoCount.SIX] = (matchLottoCount[MatchingLottoCount.SIX] ?: 0) + 1
+                matchLottoCount[MatchingLottoCount.SIX] =
+                    (matchLottoCount[MatchingLottoCount.SIX] ?: 0) + 1
             }
         }
     }

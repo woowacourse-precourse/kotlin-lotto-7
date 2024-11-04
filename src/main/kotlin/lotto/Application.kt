@@ -5,11 +5,5 @@ import lotto.view.InputView
 
 fun main() {
     // TODO: 프로그램 구현
-    val lottoController = LottoController()
-
-    lottoController.purchaseLotto()
-    lottoController.setWinLotteryNumber()
-    lottoController.setBonusLotteryNumber()
-    lottoController.resultLotto()
-
+    LottoController().run()
 }

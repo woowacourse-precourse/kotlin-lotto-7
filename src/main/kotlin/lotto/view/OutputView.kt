@@ -17,12 +17,15 @@ class OutputView {
         println()
     }
 
-    fun printWinStatistics(lottoMatch: Map<MatchingLottoCount, Int>, amountOfProfit: Float) {
+    fun printWinStatistics(lottoMatch: Map<MatchingLottoCount, Int>) {
         println(PRINT_WINNING_STATISTICS_MESSAGE)
         println("---")
         MatchingLottoCount.entries.forEach {
             println("${it.prefix} ${lottoMatch[it] ?: 0}$PRINT_COUNT_UNIT_MESSAGE")
         }
+    }
+
+    fun printAmountOfProfit(amountOfProfit: Float) {
         println("$PRINT_TOTAL_AMOUNT_OF_PROFIT_PREFIX_MESSAGE $amountOfProfit$PRINT_TOTAL_AMOUNT_OF_PROFIT_SUFFIX_MESSAGE")
     }
 
