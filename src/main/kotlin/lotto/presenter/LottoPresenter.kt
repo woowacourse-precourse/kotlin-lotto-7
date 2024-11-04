@@ -4,7 +4,7 @@ import lotto.model.LottoRank
 import lotto.model.LottoTicket
 import lotto.util.ConstantsUtil.TICKET_PRICE
 import lotto.util.ValidatorUtil.validateBonusNumberNotInWinningNumbers
-import lotto.util.ValidatorUtil.validateBonusNumbersRange
+import lotto.util.ValidatorUtil.validateBonusNumberRange
 import lotto.util.ValidatorUtil.validateTicketsPrice
 import lotto.util.ValidatorUtil.validateTicketsPriceRange
 import lotto.util.ValidatorUtil.validateUniqueWinningNumbers
@@ -59,7 +59,7 @@ class LottoPresenter(
     private fun getValidBonusNumber(winningNumbers: List<Int>): Int {
         return try {
             val bonusNumber = view.getBonusNumber()
-            validateBonusNumbersRange(bonusNumber)
+            validateBonusNumberRange(bonusNumber)
             validateBonusNumberNotInWinningNumbers(winningNumbers, bonusNumber)
             bonusNumber
         } catch (e: IllegalArgumentException) {

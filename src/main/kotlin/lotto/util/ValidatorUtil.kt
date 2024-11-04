@@ -69,7 +69,7 @@ object ValidatorUtil {
         }
     }
 
-    fun validateBonusNumbersRange(bonusNumbers: Int) {
+    fun validateBonusNumberRange(bonusNumbers: Int) {
         require(bonusNumbers in 1..45 ) {
             MESSAGE_BONUS_NUMBERS_RANGE_INVALID
         }
