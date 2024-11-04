@@ -18,4 +18,11 @@ object ValidatorUtil {
             MESSAGE_WINNING_NUMBERS_NOT_INT
         }
     }
+
+    fun validateBonusNumber(bonusNumber: String) {
+        require(bonusNumber.toIntOrNull() != null) {
+            MESSAGE_BONUS_NUMBERS_NOT_INT
+        }
+    }
+
 }
