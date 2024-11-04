@@ -10,6 +10,7 @@ object ConstantsUtil {
     const val MESSAGE_WINNING_NUMBERS_DUPLICATE =  "[ERROR] 당첨 번호는 중복되지 않아야 합니다."
     const val MESSAGE_WINNING_NUMBERS_SIZE_INVALID = "[ERROR] 당첨 번호는 6개여야 합니다."
     const val MESSAGE_WINNING_NUMBERS_RANGE_INVALID = "[ERROR] 당첨 번호는 1부터 45 사이의 숫자여야 합니다."
+    const val MESSAGE_BONUS_NUMBER_DUPLICATE = "[ERROR] 보너스 번호는 당첨 번호와 중복될 수 없습니다."
 
     const val MESSAGE_TICKETS_COUNT = "%d개를 구매했습니다."
     const val MESSAGE_SHOW_CALCULATED_TICKETS = "당첨 통계\n---"

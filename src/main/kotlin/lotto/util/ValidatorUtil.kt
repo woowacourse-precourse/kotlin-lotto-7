@@ -1,6 +1,7 @@
 package lotto.util
 
 import lotto.util.ConstantsUtil.MESSAGE_BONUS_NUMBERS_NOT_INT
+import lotto.util.ConstantsUtil.MESSAGE_BONUS_NUMBER_DUPLICATE
 import lotto.util.ConstantsUtil.MESSAGE_LOTTO_NUMBERS_DUPLICATE
 import lotto.util.ConstantsUtil.MESSAGE_LOTTO_NUMBERS_SIZE_INVALID
 import lotto.util.ConstantsUtil.MESSAGE_TICKETS_PRICE_INVALID
@@ -66,6 +67,10 @@ object ValidatorUtil {
         }
     }
 
-    // 보너스 번호랑 당첨 번호랑 같은지 구하기
+    fun validateBonusNumberNotInWinningNumbers(winningNumbers: List<Int>, bonusNumber: Int) {
+        require(bonusNumber !in winningNumbers) {
+            MESSAGE_BONUS_NUMBER_DUPLICATE
+        }
+    }
 
 }
