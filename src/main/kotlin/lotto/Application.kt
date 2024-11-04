@@ -268,6 +268,52 @@ class LottoGame {
             else -> Rank.NONE
         }
     }
+
+    private fun printResults(result: Map<Rank, Int>) {
+        println(Message.RESULT_HEADER)
+        printRankResults(result)
+        printProfitRate(result)
+    }
+
+    private fun printRankResults(result: Map<Rank, Int>) {
+        val ranks = listOf(Rank.FIFTH, Rank.FOURTH, Rank.THIRD, Rank.SECOND, Rank.FIRST)
+        for (rank in ranks) {
+            printRankResult(rank, result.getOrDefault(rank, 0))
+        }
+    }
+
+    private fun printRankResult(rank: Rank, count: Int) {
+        if (rank == Rank.NONE) return
+        println(String.format(Message.RESULT_FORMAT, rank.description, rank.prize, count))
+    }
+
+    private fun printProfitRate(result: Map<Rank, Int>) {
+        val profitRate = calculateProfitRate(result)
+        println(String.format(Message.PROFIT_RATE_FORMAT, profitRate))
+    }
+
+    internal fun calculateProfitRate(result: Map<Rank, Int>): Double {
+        val totalPrize = calculateTotalPrize(result)
+        val totalCost = calculateTotalCost(result)
+        if (totalCost == 0) return 0.0
+        return totalPrize.toDouble() / totalCost * 100
+    }
+
+    private fun calculateTotalPrize(result: Map<Rank, Int>): Int {
+        var total = 0
+        for (entry in result.entries) {
+            total += entry.key.prize * entry.value
+        }
+        return total
+    }
+
+    private fun calculateTotalCost(result: Map<Rank, Int>): Int {
+        var sum = 0
+        for (count in result.values) {
+            sum += count
+        }
+        return sum * LottoConfig.LOTTO_PRICE
+    }
 }
 
 fun main() {
