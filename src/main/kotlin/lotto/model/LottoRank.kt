@@ -1,4 +1,4 @@
-package lotto
+package lotto.model
 
 import lotto.util.LottoOutputText
 import java.text.DecimalFormat

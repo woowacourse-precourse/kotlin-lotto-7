@@ -1,6 +1,9 @@
 package lotto
 
 import camp.nextstep.edu.missionutils.Console
+import lotto.model.LottoGenerator
+import lotto.model.LottoRank
+import lotto.model.LottoResult
 import lotto.util.LottoConstants
 import lotto.util.LottoOutputText
 

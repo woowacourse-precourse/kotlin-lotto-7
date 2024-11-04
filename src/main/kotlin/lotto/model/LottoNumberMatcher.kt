@@ -1,4 +1,4 @@
-package lotto
+package lotto.model
 
 class LottoNumberMatcher {
     // TODO: 두 개의 리스트가 모두 Set 이라면 intersect 메서드가 더 효율적일 것으로 예상
