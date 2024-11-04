@@ -33,4 +33,11 @@ class LottoTest {
             Lotto(listOf(1, 2, 3, 4, 5, 46))
         }
     }
+
+    @Test
+    fun `로또 번호들이 오름차순이 아닐 경우 예외가 발생한다`() {
+        assertThrows<IllegalArgumentException> {
+            Lotto(listOf(1, 2, 3, 5, 4, 7))
+        }
+    }
 }
