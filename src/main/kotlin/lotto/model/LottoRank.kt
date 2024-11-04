@@ -1,11 +1,11 @@
 package lotto.model
 
-enum class LottoRank(val matchCount: Int, val prize: Int) {
-    THREE_MATCH(3, 5000),
-    FOUR_MATCH(4, 50000),
-    FIVE_MATCH(5, 1500000),
-    FIVE_MATCH_WITH_BONUS(5, 30000000),
-    SIX_MATCH(6, 2000000000);
+enum class LottoRank(val matchCount: Int, val prize: Int, val prizeString: String) {
+    THREE_MATCH(3, 5000, "5,000"),
+    FOUR_MATCH(4, 50000, "50,000"),
+    FIVE_MATCH(5, 1500000, "1,500,000"),
+    FIVE_MATCH_WITH_BONUS(5, 30000000, "30,000,000"),
+    SIX_MATCH(6, 2000000000, "2,000,000,000");
 
     var count = 0
         private set
