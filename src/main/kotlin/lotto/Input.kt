@@ -1,5 +1,7 @@
 package lotto
 
+import camp.nextstep.edu.missionutils.Console.readLine
+
 object Input {
 
     fun start() {
@@ -9,19 +11,19 @@ object Input {
     }
     private fun inputPurchaseAmount(){
         Instructions.purchaseAmountInstructions()
-        val purchaseAmount = readln().toInt()
+        val purchaseAmount = readLine().toInt()
         LottoSystem.savePurchaseAmount(purchaseAmount)
     }
 
     private fun inputWinningNumber(){
         Instructions.winningNumberInstructions()
-        val winningNumber = readln().split(",").map { it.trim().toInt() }
+        val winningNumber = readLine().split(",").map { it.trim().toInt() }
         LottoSystem.saveWinningNumber(winningNumber)
     }
 
     private fun inputBonusNumber(){
         Instructions.bonusNumberInstructions()
-        val bonusNumber = readln().toInt()
+        val bonusNumber = readLine().toInt()
         LottoSystem.saveBonusNumber(bonusNumber)
     }
 
