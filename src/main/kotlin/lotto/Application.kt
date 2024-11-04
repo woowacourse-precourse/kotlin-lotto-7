@@ -7,4 +7,7 @@ fun main() {
 
     val winningNumberManager = WinningNumberManager()
     winningNumberManager.requestWinningNumbers()
+
+    val bonusNumberManager = BonusNumberManager(winningNumberManager.winningNumbers)
+    bonusNumberManager.requestBonusNumber()
 }
