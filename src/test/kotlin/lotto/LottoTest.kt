@@ -1,7 +1,9 @@
 package lotto
 
-import org.junit.jupiter.api.Test
+import camp.nextstep.edu.missionutils.test.Assertions.assertRandomUniqueNumbersInRangeTest
+import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.assertThrows
+import org.junit.jupiter.api.Test
 
 class LottoTest {
     @Test
@@ -11,7 +13,6 @@ class LottoTest {
         }
     }
 
-    // TODO: 테스트가 통과하도록 프로덕션 코드 구현
     @Test
     fun `로또 번호에 중복된 숫자가 있으면 예외가 발생한다`() {
         assertThrows<IllegalArgumentException> {
@@ -19,5 +20,31 @@ class LottoTest {
         }
     }
 
-    // TODO: 추가 기능 구현에 따른 테스트 코드 작성
+    @Test
+    fun `로또 번호의 숫자 범위를 초과한 경우(1 ~ 45)`() {
+        assertThrows<IllegalArgumentException> {
+            Lotto(listOf(1, 2, 3, 4, 5, 46))
+            Lotto(listOf(0, 2, 3, 4, 5, 6))
+            Lotto(listOf(-1, 2, 3, 4, 5, 6))
+        }
+    }
+
+//    @Test
+//    fun `구입한 만큼의 로또 발행하기`() {
+//        val lotto = Lotto(listOf(1, 2, 3, 4, 5, 6))
+//        assertRandomUniqueNumbersInRangeTest(
+//            {
+//                assertThat(lotto.issueLotto(3)).isEqualTo(
+//                    listOf(
+//                        listOf(8, 21, 23, 41, 42, 43),
+//                        listOf(3, 5, 11, 16, 32, 38),
+//                        listOf(7, 11, 16, 35, 36, 44)
+//                    )
+//                )
+//            },
+//            listOf(8, 21, 23, 41, 42, 43),
+//            listOf(3, 5, 11, 16, 32, 38),
+//            listOf(7, 11, 16, 35, 36, 44)
+//        )
+//    }
 }
