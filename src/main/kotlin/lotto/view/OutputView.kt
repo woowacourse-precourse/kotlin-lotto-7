@@ -10,6 +10,7 @@ class OutputView {
 
     fun printLottos(lottos: Set<Lotto>) {
         lottos.forEach { println(it.toString()) }
+        println()
     }
 
     private fun formatWinCountsMessage(winCounts: Map<LottoRank, Int>, rank: LottoRank): String {
