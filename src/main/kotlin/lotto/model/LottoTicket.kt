@@ -1,11 +1,15 @@
 package lotto.model
 
 class LottoTicket {
+
+    private var lottoTickets: List<Lotto> = emptyList()
+
     fun generateTickets(ticketCount: Int): List<Lotto> {
-        return List(ticketCount) {Lotto.generate()}
+        lottoTickets = List(ticketCount) { Lotto.generate() }
+        return lottoTickets
     }
 
-    fun calculateTickets(tickets: List<Lotto>, winningNumbers: Set<Int>, bonusNumber: Int): Map<LottoRank, Int> {
-        return tickets.groupingBy { it.match(winningNumbers, bonusNumber) }.eachCount()
+    fun calculateTickets(winningNumbers: List<Int>, bonusNumber: Int): Map<LottoRank, Int> {
+        return lottoTickets.groupingBy { it.match(winningNumbers, bonusNumber) }.eachCount()
     }
 }
