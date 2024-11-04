@@ -40,8 +40,8 @@ class LottoResultCalculator(private val lotteries: List<Lotto>) {
         return formattedYield
     }
 
-    private fun calculateTotalEarnings(lottoResults: List<LottoResult>): Float {
-        var totalEarnings = LottoRules.ZERO_FLOAT
+    private fun calculateTotalEarnings(lottoResults: List<LottoResult>): Double {
+        var totalEarnings = LottoRules.ZERO_DOUBLE
         lottoResults.forEach { lottoResult ->
             val prizeMoney = getPrizeMoney(lottoResult.rank)
             val count = lottoResult.count

@@ -3,7 +3,7 @@ package lotto.util.constant
 object LottoRules {
     const val AMOUNT_UNIT = 1000
     const val ZERO = 0
-    const val ZERO_FLOAT = 0F
+    const val ZERO_DOUBLE = 0.0 // Float로 계산했을때 정밀 소수점 계산이 안됐음
     const val MAX_AMOUNT = 1000000000
 
     const val DELIMITER = ","
@@ -25,7 +25,7 @@ object LottoRules {
     const val RANK_FIFTH = 5
     const val OUT_OF_RANK = 0
 
-    const val PERCENTAGE = 100F
+    const val PERCENTAGE = 100.0
     const val YIELD_FORMAT = "%,.1f"
     const val COUNT_FORMAT = "%,d"
 
