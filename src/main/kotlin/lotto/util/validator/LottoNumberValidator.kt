@@ -34,7 +34,7 @@ object LottoNumberValidator {
     fun getValidatedWinningNumbers(winningNumbersInput: String): List<Int> {
         validateLottoNumberDelimiter(winningNumbersInput)
 
-        val splittingNumbersInput = winningNumbersInput.split(LottoRules.DELIMITER)
+        val splittingNumbersInput = winningNumbersInput.split(LottoRules.DELIMITER, LottoRules.DELIMITER_WITH_SPACE)
         validateIsNumeric(splittingNumbersInput)
 
         val validatedNumbers = splittingNumbersInput.map { it.toInt() }
