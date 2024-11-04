@@ -1,8 +1,8 @@
-package Validation
+package validation
 
-import Exception.Exception
-import Utils.ExceptionUtils
-import Utils.InputUtils
+import exception.Exception
+import utils.ExceptionUtils
+import utils.InputUtils
 
 class InputValidation {
     fun isValidUnit(money: Int): Boolean {

@@ -1,6 +1,6 @@
-package View
+package view
 
-import Utils.PrintUtils
+import utils.PrintUtils
 
 object OutputView {
     fun printMoneyMessage() {

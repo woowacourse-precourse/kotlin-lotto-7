@@ -1,6 +1,6 @@
-package Exception
+package exception
 
-import View.OutputView
+import view.OutputView
 
 object Exception {
     fun throwException(message: String): Nothing {

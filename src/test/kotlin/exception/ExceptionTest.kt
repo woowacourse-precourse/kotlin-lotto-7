@@ -1,6 +1,5 @@
-package ExceptionTest
+package exception
 
-import Exception.Exception
 import camp.nextstep.edu.missionutils.test.Assertions.assertSimpleTest
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows

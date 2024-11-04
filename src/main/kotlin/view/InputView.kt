@@ -1,7 +1,6 @@
-package View
+package view
 
-import Utils.InputUtils
-import Validation.InputValidation
+import validation.InputValidation
 import camp.nextstep.edu.missionutils.Console
 
 object InputView {
