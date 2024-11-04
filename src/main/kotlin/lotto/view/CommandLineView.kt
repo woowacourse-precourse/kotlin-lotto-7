@@ -63,6 +63,11 @@ class CommandLineView(private val viewModel: ViewModel = ViewModel()) : View {
     }
 
     override fun displayReturnRate() {
-        println("총 수익률은 ${viewModel.returnRate}%입니다.")
+        println(
+            "총 수익률은 ${
+                NumberFormat.getNumberInstance(Locale.KOREA)
+                    .format(String.format("%.1f", viewModel.returnRate).toDouble())
+            }%입니다."
+        )
     }
 }
