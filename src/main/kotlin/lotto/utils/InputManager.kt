@@ -12,7 +12,6 @@ object InputManager {
     fun getMoney(): Int {
         println(INPUT_PURCHASE_MONEY_TITLE)
         val input = Console.readLine()
-        Console.close()
         return input.toMoney()
     }
 
@@ -28,13 +27,12 @@ object InputManager {
     fun getWinningNumbers(): List<Int> {
         println(INPUT_WINNING_NUMBERS_TITLE)
         val input = Console.readLine()
-        Console.close()
         return input.toWinningNumbers()
     }
 
     private const val INPUT_WINNING_NUMBERS_SEPARATOR = ","
     private fun String.toWinningNumbers(): List<Int> {
-        return split(INPUT_WINNING_NUMBERS_SEPARATOR).map { toInt() }
+        return split(INPUT_WINNING_NUMBERS_SEPARATOR).map { it.toInt() }
     }
 
     private const val INPUT_BONUS_NUMBER_TITLE = "보너스 번호를 입력해 주세요."
