@@ -1,6 +1,7 @@
 package lotto
 
 import lotto.controller.LottoController
+import lotto.controller.MatchingLottoCount
 import lotto.model.Lotto
 import lotto.model.LottoMatchCount
 import org.junit.jupiter.api.Assertions.assertEquals
@@ -21,12 +22,23 @@ class LottoProfitCalcTest {
 
     @Test
     fun `로또 수익률 계산(당첨자 1명)`() {
-        val lottoController = LottoController()
-        val winLotto = Lotto(listOf(1, 2, 3, 7, 8, 9))
-        val purchaseLotto = listOf(Lotto(listOf(7, 8, 9, 10, 11, 12)), Lotto(listOf(13, 14, 15, 16, 17, 18)))
-        val bonusNumber = 13
-        val matchCount = LottoMatchCount.matchLotto(purchaseLotto, winLotto, bonusNumber)
-        val profit = lottoController
-        assertEquals(matchCount, 0)
+        val money = 5000
+        // 번호 6개가 일치 하는 로또가 1개
+        val matchCount = mapOf(MatchingLottoCount.THREE to 1)
+        LottoMatchCount.calculateProfit(matchCount)
+        val profit = LottoMatchCount.getProfit()
+        val amountOfProfit = LottoMatchCount.calculateAmountOfProfit(profit, money)
+        assertEquals(amountOfProfit, 100.0f)
+    }
+
+    @Test
+    fun `로또 수익률 계산(당첨자 5명- 전원)`() {
+        val money = 5000
+        // 번호 6개가 일치 하는 로또가 1개
+        val matchCount = mapOf(MatchingLottoCount.THREE to 5)
+        LottoMatchCount.calculateProfit(matchCount)
+        val profit = LottoMatchCount.getProfit()
+        val amountOfProfit = LottoMatchCount.calculateAmountOfProfit(profit, money)
+        assertEquals(amountOfProfit, 500.0f)
     }
 }
