@@ -49,4 +49,10 @@ class LottoTest {
             LottoPurchaseAmount.from("1500")
         }
     }
+    @Test
+    fun `로또 구입금액이 정수가 아니면 예외가 발생한다`() {
+        assertThrows<IllegalArgumentException> {
+            LottoPurchaseAmount.from("1000j")
+        }
+    }
 }

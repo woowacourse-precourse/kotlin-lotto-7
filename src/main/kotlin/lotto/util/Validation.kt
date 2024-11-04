@@ -40,17 +40,17 @@ fun List<Int>.findDuplicates(): List<Int> {
 }
 
 fun List<Int>.validateCount(count: Int = LottoConstants.LOTTO_NUMBER_COUNT): List<Int> {
-    require(this.size == count) { "갯수에 맞게 입력해 주세요." }
+    require(this.size == count) { "[ERROR] 갯수에 맞게 입력해 주세요." }
     return this
 }
 
 fun Int.validateRange(start: Int = LottoConstants.MIN_LOTTO_NUMBER, end: Int = LottoConstants.MAX_LOTTO_NUMBER): Int {
-    require(this in start..end) { "1~45 내의 숫자를 입력해 주세요. $start ~ $end" }
+    require(this in start..end) { "[ERROR] 1~45 내의 숫자를 입력해 주세요. $start ~ $end" }
     return this
 }
 
 fun List<Int>.validateRange(start: Int = LottoConstants.MIN_LOTTO_NUMBER, end: Int = LottoConstants.MAX_LOTTO_NUMBER): List<Int> {
-    require(this.all { it in start..end }) { "1~45 내의 숫자를 입력해 주세요. $start ~ $end" }
+    require(this.all { it in start..end }) { "[ERROR] 1~45 내의 숫자를 입력해 주세요. $start ~ $end" }
     return this
 }
 
