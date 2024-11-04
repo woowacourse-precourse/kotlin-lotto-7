@@ -24,4 +24,13 @@ class ResultCalculatorTest {
             }
         }
     }
+
+    @Test
+    fun `사용자의 수익률을 올바르게 계산`() {
+        val user = User(3)
+        user.addProfit(2000) // 임의의 당첨 금액
+
+        val profitRate = ResultCalculator().calculateProfitRate(user)
+        assertThat(profitRate).isEqualTo((2000.0 / (3 * 1000)) * 100)
+    }
 }
