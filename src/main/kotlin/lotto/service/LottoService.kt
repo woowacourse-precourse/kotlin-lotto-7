@@ -13,7 +13,7 @@ class LottoService {
         return List(lottoCount) { Lotto(Randoms.pickUniqueNumbersInRange(WinningNumbers.MIN_LOTTO_NUMBER.value, WinningNumbers.MAX_LOTTO_NUMBER.value, WinningNumbers.WINNING_NUMBER_COUNT.value)) }
     }
 
-    fun calculateStatistics(lottos: List<Lotto>, winningNumbers: Set<Int>, bonusNumber: Int): Map<String, Int> {
+    fun calculateStatistics(lottos: List<Lotto>, winningNumbers: List<Int>, bonusNumber: Int): Map<String, Int> {
         val statistics = initializeStatistics()
 
         lottos.forEach { lotto ->
@@ -33,7 +33,7 @@ class LottoService {
         )
     }
 
-    private fun calculateMatchCount(lotto: Lotto, winningNumbers: Set<Int>): Int {
+    private fun calculateMatchCount(lotto: Lotto, winningNumbers: List<Int>): Int {
         return lotto.getNumbers().count { winningNumbers.contains(it) }
     }
 

@@ -18,7 +18,7 @@ class InputView {
         }
     }
 
-    fun getWinningNumbers(): Set<Int> {
+    fun getWinningNumbers(): List<Int> {
         println("당첨 번호를 입력해 주세요.")
         val input = Console.readLine()
         return try {
@@ -26,7 +26,6 @@ class InputView {
                 .map { it.trim() }
                 .filter { it.isNotEmpty() }
                 .map { it.toInt() }
-                .toSet()
             validateWinningNumbers(numbers)
             numbers
         } catch (e: Exception) {
@@ -35,7 +34,7 @@ class InputView {
         }
     }
 
-    fun getBonusNumber(winningNumbers: Set<Int>): Int {
+    fun getBonusNumber(winningNumbers: List<Int>): Int {
         println("보너스 번호를 입력해 주세요.")
         val input = Console.readLine()
         return try {
@@ -48,20 +47,25 @@ class InputView {
         }
     }
 
-    private fun validatePurchaseAmount(amount: Int) {
-        if (amount % PurchaseAmount.LOTTO_PRICE.value != 0 || amount < PurchaseAmount.MIN_PURCHASE_AMOUNT.value || amount > PurchaseAmount.MAX_PURCHASE_AMOUNT.value) {
+    fun validatePurchaseAmount(amount: Int) {
+        if (amount % PurchaseAmount.LOTTO_PRICE.value != 0 ||
+            amount < PurchaseAmount.MIN_PURCHASE_AMOUNT.value ||
+            amount > PurchaseAmount.MAX_PURCHASE_AMOUNT.value) {
             throw IllegalArgumentException()
         }
     }
 
-    private fun validateWinningNumbers(numbers: Set<Int>) {
-        if (numbers.size != WinningNumbers.WINNING_NUMBER_COUNT.value || numbers.any { it !in WinningNumbers.MIN_LOTTO_NUMBER.value..WinningNumbers.MAX_LOTTO_NUMBER.value }) {
-            throw IllegalArgumentException()
+    fun validateWinningNumbers(numbers: List<Int>) {
+        if (numbers.size != WinningNumbers.WINNING_NUMBER_COUNT.value ||
+            numbers.any { it !in WinningNumbers.MIN_LOTTO_NUMBER.value..WinningNumbers.MAX_LOTTO_NUMBER.value } ||
+            numbers.distinct().size != numbers.size) {
+                throw IllegalArgumentException()
         }
     }
 
-    private fun validateBonusNumber(bonusNumber: Int, winningNumbers: Set<Int>) {
-        if (bonusNumber !in WinningNumbers.MIN_LOTTO_NUMBER.value..WinningNumbers.MAX_LOTTO_NUMBER.value || winningNumbers.contains(bonusNumber)) {
+    fun validateBonusNumber(bonusNumber: Int, winningNumbers: List<Int>) {
+        if (bonusNumber !in WinningNumbers.MIN_LOTTO_NUMBER.value..WinningNumbers.MAX_LOTTO_NUMBER.value ||
+            winningNumbers.contains(bonusNumber)) {
             throw IllegalArgumentException()
         }
     }
