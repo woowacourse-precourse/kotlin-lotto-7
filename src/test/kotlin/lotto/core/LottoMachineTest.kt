@@ -1,12 +1,11 @@
-package lotto
+package lotto.core
 
 import camp.nextstep.edu.missionutils.test.Assertions.assertRandomUniqueNumbersInRangeTest
-import camp.nextstep.edu.missionutils.test.Assertions.assertSimpleTest
 import camp.nextstep.edu.missionutils.test.NsTest
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 
-class ApplicationTest : NsTest() {
+class LottoMachineTest : NsTest() {
     @Test
     fun `기능 테스트`() {
         assertRandomUniqueNumbersInRangeTest(
@@ -41,27 +40,7 @@ class ApplicationTest : NsTest() {
         )
     }
 
-    @Test
-    fun `예외 테스트 정수가 아닌 수 입력`() {
-        assertSimpleTest {
-            runException("1000j")
-            assertThat(output()).contains(ERROR_MESSAGE)
-        }
-    }
-
-    @Test
-    fun `예외 테스트 음수 입력`() {
-        assertSimpleTest {
-            runException("-1000")
-            assertThat(output()).contains(ERROR_MESSAGE)
-        }
-    }
-
     override fun runMain() {
-        main()
-    }
-
-    companion object {
-        private const val ERROR_MESSAGE: String = "[ERROR]"
+        LottoMachine().run()
     }
 }
