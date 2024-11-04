@@ -9,10 +9,5 @@ class Lotto(private val numbers: List<Int>) {
         val lottoNumbersOutput = numbers.joinToString(prefix = "[", postfix = "]", separator = ", ")
         return lottoNumbersOutput
     }
-
-    fun toSpring() {
-        val numbersOutput = numbers.joinToString(prefix = "[", postfix = "]", separator = ", ")
-        println(numbersOutput)
-    }
     // TODO: 추가 기능 구현
 }
