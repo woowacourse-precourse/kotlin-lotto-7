@@ -7,7 +7,7 @@ class CreateWinningNumbersUseCase {
     fun execute(winningNumbersInput: () -> String): WinningNumbers {
         while (true) {
             try {
-                val numbers = parseNumbersInput(winningNumbersInput())
+                val numbers = parseNumbersInput(winningNumbersInput()).sorted()
                 return WinningNumbers(numbers)
             } catch (e: IllegalArgumentException) {
                 println(e.message)

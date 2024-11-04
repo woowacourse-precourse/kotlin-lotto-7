@@ -8,7 +8,9 @@ import lotto.domain.entity.Lotto
 
 class CreateLottoUseCase {
     fun execute(): Lotto {
-        val lottoNumbers = Randoms.pickUniqueNumbersInRange(MIN_LOTTO_NUMBER, MAX_LOTTO_NUMBER, LOTTO_NUMBERS_SIZE)
+        val lottoNumbers = Randoms
+            .pickUniqueNumbersInRange(MIN_LOTTO_NUMBER, MAX_LOTTO_NUMBER, LOTTO_NUMBERS_SIZE)
+            .sorted()
         return Lotto(lottoNumbers)
     }
 }
