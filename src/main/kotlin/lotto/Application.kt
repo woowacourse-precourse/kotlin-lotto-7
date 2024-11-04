@@ -21,8 +21,29 @@ fun main() {
     }
     val lottoWinningNumbers = getLottoWinningNumbers()
     val lottoBonusNumber = getLottoBonusNumber(lottoWinningNumbers)
+    val lottoResults: MutableList<Pair<Int, Int>> = mutableListOf()
     for (lotto in lottos) {
-        val (allMatchingNumber, bonusMatchingNumber) = compareLottoNumbers(lottoWinningNumbers, lottoBonusNumber, lotto)
+        val lottoResult = compareLottoNumbers(lottoWinningNumbers, lottoBonusNumber, lotto)
+        lottoResults.add(lottoResult)
+    }
+    val matchCounts = mutableMapOf(
+        "3개 일치" to 0,
+        "4개 일치" to 0,
+        "5개 일치" to 0,
+        "5개 일치, 보너스 볼 일치" to 0,
+        "6개 일치" to 0
+    )
+
+    for ((matchCount, bonusMatchCount) in lottoResults) {
+        val allMatchCount = matchCount + bonusMatchCount
+        println(allMatchCount)
+        when {
+            allMatchCount == 6 -> matchCounts["6개 일치"] = matchCounts["6개 일치"]!! + 1
+            allMatchCount == 5 && bonusMatchCount == 1 -> matchCounts["5개 일치, 보너스 볼 일치"] = matchCounts["5개 일치, 보너스 볼 일치"]!! + 1
+            allMatchCount == 5 -> matchCounts["5개 일치"] = matchCounts["5개 일치"]!! + 1
+            allMatchCount == 4 -> matchCounts["4개 일치"] = matchCounts["4개 일치"]!! + 1
+            allMatchCount == 3 -> matchCounts["3개 일치"] = matchCounts["3개 일치"]!! + 1
+        }
     }
 }
 
@@ -88,6 +109,5 @@ fun getLottoBonusNumber(lottoWinningNumbers: List<Int>): Int {
 fun compareLottoNumbers(lottoWinningNumbers: List<Int>, lottoBonusNumber: Int, lotto: Lotto): Pair<Int, Int> {
     val matchingCount = lotto.countMatchingNumbers(lottoWinningNumbers)
     val bonusMatchingCount = if (lotto.isBonusMatched(lottoBonusNumber)) 1 else 0
-    val allMatchingCount = matchingCount + bonusMatchingCount
-    return Pair(allMatchingCount, bonusMatchingCount)
+    return Pair(matchingCount, bonusMatchingCount)
 }
