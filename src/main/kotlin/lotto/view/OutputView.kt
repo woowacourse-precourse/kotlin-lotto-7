@@ -1,7 +1,6 @@
 package lotto.view
 
 import lotto.model.LottoRank
-import lotto.utils.Constants
 import lotto.utils.OutputMessage
 
 object OutputView {
