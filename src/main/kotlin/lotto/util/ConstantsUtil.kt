@@ -7,6 +7,7 @@ object ConstantsUtil {
     const val MESSAGE_WINNING_NUMBERS_NOT_INT= "[ERROR] 당첨 번호는 숫자여야 합니다."
     const val MESSAGE_BONUS_NUMBERS_NOT_INT= "[ERROR] 보너스 번호는 숫자여야 합니다."
     const val MESSAGE_TICKETS_PRICE_INVALID = "[ERROR] 티켓 가격은 1,000원 단위여야 합니다."
+    const val MESSAGE_TICKETS_PRICE_RANGE_INVALID = "[ERROR] 티켓 가격은 0원보다 커야 합니다."
     const val MESSAGE_WINNING_NUMBERS_DUPLICATE =  "[ERROR] 당첨 번호는 중복되지 않아야 합니다."
     const val MESSAGE_WINNING_NUMBERS_SIZE_INVALID = "[ERROR] 당첨 번호는 6개여야 합니다."
     const val MESSAGE_WINNING_NUMBERS_RANGE_INVALID = "[ERROR] 당첨 번호는 1부터 45 사이의 숫자여야 합니다."

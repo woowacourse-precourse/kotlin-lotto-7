@@ -6,6 +6,7 @@ import lotto.util.ConstantsUtil.TICKET_PRICE
 import lotto.util.ValidatorUtil.validateBonusNumberNotInWinningNumbers
 import lotto.util.ValidatorUtil.validateBonusNumbersRange
 import lotto.util.ValidatorUtil.validateTicketsPrice
+import lotto.util.ValidatorUtil.validateTicketsPriceRange
 import lotto.util.ValidatorUtil.validateUniqueWinningNumbers
 import lotto.util.ValidatorUtil.validateWinningNumbersRange
 import lotto.util.ValidatorUtil.validateWinningNumbersSize
@@ -16,10 +17,21 @@ class LottoPresenter(
     private val lottoTicket: LottoTicket
 ) {
     fun processLottoTickets(price: Int) {
-        validateTicketsPrice(price)
         val ticketCount = price / TICKET_PRICE
         val tickets = lottoTicket.generateTickets(ticketCount)
         view.showTickets(tickets)
+    }
+
+    fun getValidLottoPrice(): Int {
+        val price = view.getTicketsPrice()
+        return try {
+            validateTicketsPrice(price)
+            validateTicketsPriceRange(price)
+            price
+        } catch (e: IllegalArgumentException) {
+            println(e.message)
+            getValidLottoPrice()
+        }
     }
 
     fun processWinningNumbers(price: Int) {

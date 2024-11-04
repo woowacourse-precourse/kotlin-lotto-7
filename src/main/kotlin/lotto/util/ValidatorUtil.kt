@@ -7,6 +7,7 @@ import lotto.util.ConstantsUtil.MESSAGE_LOTTO_NUMBERS_DUPLICATE
 import lotto.util.ConstantsUtil.MESSAGE_LOTTO_NUMBERS_SIZE_INVALID
 import lotto.util.ConstantsUtil.MESSAGE_TICKETS_PRICE_INVALID
 import lotto.util.ConstantsUtil.MESSAGE_TICKETS_PRICE_NOT_INT
+import lotto.util.ConstantsUtil.MESSAGE_TICKETS_PRICE_RANGE_INVALID
 import lotto.util.ConstantsUtil.MESSAGE_WINNING_NUMBERS_DUPLICATE
 import lotto.util.ConstantsUtil.MESSAGE_WINNING_NUMBERS_NOT_INT
 import lotto.util.ConstantsUtil.MESSAGE_WINNING_NUMBERS_RANGE_INVALID
@@ -41,6 +42,12 @@ object ValidatorUtil {
     fun validateTicketsPrice(price: Int){
         require(price % TICKET_PRICE == 0) {
             MESSAGE_TICKETS_PRICE_INVALID
+        }
+    }
+
+    fun validateTicketsPriceRange(price: Int){
+        require(price > 0) {
+            MESSAGE_TICKETS_PRICE_RANGE_INVALID
         }
     }
 

@@ -10,8 +10,7 @@ fun main() {
     val lottoTicket = LottoTicket()
     val presenter = LottoPresenter(view, lottoTicket)
 
-    val price = view.getTicketsPrice()
+    val price = presenter.getValidLottoPrice()
     presenter.processLottoTickets(price)
-
     presenter.processWinningNumbers(price)
 }

@@ -203,6 +203,7 @@ class Lotto(private val numbers: List<Int>) {
 6. 로또 관련 검증 객체
     - 로또 사이즈가 6이 아니면 IllegalArgumentException을 발생
     - 로또 티켓 가격 입력이 숫자가 아니면 IllegalArgumentException을 발생
+    - 로또 티켓 가격 입력이 0원보다 작으면 IllegalArgumentException을 발생
     - 당첨 번호 입력이 숫자가 아니면 IllegalArgumentException을 발생
     - 보너스 번호 입력이 숫자가 아니면 IllegalArgumentException을 발셍
     - 로또 티켓 가격이 1000원으로 나누어 떨어지지 않으면 IllegalArgumentException을 발생
