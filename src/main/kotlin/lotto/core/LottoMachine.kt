@@ -14,6 +14,7 @@ import lotto.constants.Format.FORMAT_PRINT_LOTTO
 import lotto.constants.Format.LOTTO_STATS_HEADER
 import lotto.constants.Message.MESSAGE_FORMATTED_PROFIT_RATE
 import lotto.constants.Message.MESSAGE_INVALID_INPUT
+import lotto.constants.Message.MESSAGE_INVALID_TYPE
 import lotto.constants.Message.MESSAGE_MATCH_LOTTO_STATS
 import lotto.constants.Message.MESSAGE_MATCH_WITH_BONUS_LOTTO_STATS
 import lotto.constants.Message.MESSAGE_PURCHASED_LOTTO_COUNT
@@ -51,6 +52,8 @@ class LottoMachine {
 
                 purchaseAmount = PurchaseAmount(Console.readLine(), TICKET_PRICE).getAmount()
                 break
+            } catch (e: NumberFormatException) {
+                println(MESSAGE_INVALID_TYPE.format(e.message))
             } catch (e: IllegalArgumentException) {
                 println(MESSAGE_INVALID_INPUT.format(e.message))
             }
@@ -79,10 +82,10 @@ class LottoMachine {
 
                 winningNumber = Lotto(Console.readLine()).getWinningNumber()
                 break
+            } catch (e: NumberFormatException) {
+                println(MESSAGE_INVALID_TYPE.format(e.message))
             } catch (e: IllegalArgumentException) {
                 println(MESSAGE_INVALID_INPUT.format(e.message))
-            } catch (e: NumberFormatException) {
-                println("숫자를 입력해 주세요.")
             }
         }
         println()
@@ -95,10 +98,10 @@ class LottoMachine {
 
                 bonusNumber = BonusNumber(Console.readLine(), winningNumber).getNumber()
                 break
+            } catch (e: NumberFormatException) {
+                println(MESSAGE_INVALID_TYPE.format(e.message))
             } catch (e: IllegalArgumentException) {
                 println(MESSAGE_INVALID_INPUT.format(e.message))
-            } catch (e: NumberFormatException) {
-                println("숫자를 입력해 주세요.")
             }
         }
         println()
