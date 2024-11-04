@@ -15,7 +15,9 @@ object LottoMaker: RandomNumberGenerator {
     fun makeLotto(): MutableList<Int> {
         val ticket = mutableListOf<Int>()
         repeat(LottoUtils.LOTTO_NUMBER_COUNTS) {
-            val number = generateRandomNumber()
+            var number = generateRandomNumber()
+            while(number in ticket)
+                number = generateRandomNumber()
             ticket.add(number)
         }
         return ticket
