@@ -46,7 +46,7 @@ class LottoMachine(private val payment: String) {
 
     fun getWinningMessage(rank: Map<Rank?, Int>): List<String> {
         val winningMessage = mutableListOf<String>()
-        rank.forEach { (rank, count) ->
+        rank.forEach { (rank, _) ->
             rank?.let { prize.countPrize(it) }
         }
         winningMessage.add(FIFTH_PRIZE_RESULT.format(prize.fifth))
