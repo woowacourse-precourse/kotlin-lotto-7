@@ -27,7 +27,7 @@ class LottoController {
     private fun purchaseLotto() {
         try {
             money = inputView.printInputMoney()
-            generateLotto(money / LOTTO_PRICE)
+            generateLotto(lottos, money / LOTTO_PRICE)
             outputView.printPurchaseLottoCount(money / LOTTO_PRICE)
             outputView.printPurchaseLotto(lottos)
         } catch (e: IllegalArgumentException) {
@@ -70,9 +70,9 @@ class LottoController {
         outputView.printAmountOfProfit(amountOfProfit)
     }
 
-    private fun generateLotto(count: Int) {
+    private fun generateLotto(lotto: MutableList<Lotto>, count: Int) {
         repeat(count) {
-            lottos.add(Lotto(randomGenerator.generateUniqueRandomList()))
+            lotto.add(Lotto(randomGenerator.generateUniqueRandomList()))
         }
     }
 

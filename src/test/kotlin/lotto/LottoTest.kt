@@ -1,8 +1,12 @@
 package lotto
 
+import lotto.controller.MatchingLottoCount
 import lotto.model.Lotto
+import lotto.model.LottoMatchCount
+import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
+
 
 class LottoTest {
     @Test
@@ -35,8 +39,12 @@ class LottoTest {
     }
 
     @Test
-    fun `구입금액에 따른 구매한 로또 개수`() {
-
+    fun `로또 번호와 당첨 번호 카운트 일치하는지 확인 기능`() {
+        val lotto = listOf(Lotto(listOf(1, 2, 3, 4, 5, 6)))
+        val winLotto = Lotto(listOf(1, 2, 3, 4, 5, 6))
+        val bonusLotto = 7
+        val matchCount = LottoMatchCount.matchLotto(lotto, winLotto, bonusLotto)
+        assertEquals(matchCount.keys.toList()[0], MatchingLottoCount.SIX)
     }
 
 

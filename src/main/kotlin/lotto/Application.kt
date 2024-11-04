@@ -4,6 +4,6 @@ import lotto.controller.LottoController
 import lotto.view.InputView
 
 fun main() {
-    // TODO: 프로그램 구현
+
     LottoController().run()
 }
