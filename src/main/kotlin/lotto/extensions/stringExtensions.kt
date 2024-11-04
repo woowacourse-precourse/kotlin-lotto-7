@@ -10,7 +10,8 @@ fun String.isBelowMinimumAmount(): Boolean = this.toInt() < LOTTO_MINIMUM_AMOUNT
 
 fun String.isNotThousandUnit(): Boolean = this.toInt() % LOTTO_PRICE != 0
 
-fun String.isAboveMaximumAmount(): Boolean = this.length > 7 || (this.length == 7 && this > LOTTO_MAXIMUM_AMOUNT)
+fun String.isAboveMaximumAmount(): Boolean =
+    this.length > LOTTO_MAXIMUM_AMOUNT_LENGTH || (this.length == LOTTO_MAXIMUM_AMOUNT_LENGTH && this > LOTTO_MAXIMUM_AMOUNT)
 
 fun String.splitByComma(): List<String> = this.split(",")
 
