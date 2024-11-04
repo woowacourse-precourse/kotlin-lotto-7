@@ -63,7 +63,7 @@ class LottoController {
     }
 
     private fun resultStatisticsOfLotto() {
-        val matchCount = matchLotto()
+        val matchCount = LottoMatchCount.matchLotto(lottos, winLotteryNumber, bonusLotteryNumber)
         val profit = calculateProfit(matchCount)
         val amountOfProfit = calculateAmountOfProfit(profit)
         outputView.printWinStatistics(matchCount)
@@ -74,44 +74,6 @@ class LottoController {
         repeat(count) {
             lottos.add(Lotto(randomGenerator.generateUniqueRandomList()))
         }
-    }
-
-    private fun matchLotto(): Map<MatchingLottoCount, Int> {
-        val matchLottoNumber = MutableList(lottos.size) { 0 to false }
-        for ((ind, lotto) in lottos.withIndex()) {
-            matchLottoNumber[ind] = winLotteryNumber?.let {
-                lotto.getMatchCount(it) to lotto.isMatchBonusNumber(bonusLotteryNumber)
-            }!!
-        }
-
-        for (i in matchLottoNumber) {
-            increaseMatchCount(i.first + isMatchBonusNumber(i.second), i.second)
-        }
-
-        return LottoMatchCount.getMatchCount()
-    }
-
-    private fun increaseMatchCount(
-        matchCount: Int,
-        isMatchBonus: Boolean,
-    ) {
-        when (matchCount) {
-            3 -> LottoMatchCount.increaseCount(MatchingLottoCount.THREE)
-            4 -> LottoMatchCount.increaseCount(MatchingLottoCount.FOUR)
-            5 -> LottoMatchCount.increaseCount(MatchingLottoCount.FIVE)
-            6 -> {
-                if (isMatchBonus) {
-                    LottoMatchCount.increaseCount(MatchingLottoCount.FIVE_BONUS)
-                    return
-                }
-                LottoMatchCount.increaseCount(MatchingLottoCount.SIX)
-            }
-        }
-    }
-
-    private fun isMatchBonusNumber(isMatchBonusCount: Boolean): Int {
-        if (isMatchBonusCount) return 1
-        return 0
     }
 
     private fun calculateProfit(matchLottoCount: Map<MatchingLottoCount, Int>): Long {
