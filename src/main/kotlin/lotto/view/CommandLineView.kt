@@ -3,6 +3,8 @@ package lotto.view
 import camp.nextstep.edu.missionutils.Console.readLine
 import lotto.domain.Lotto
 import lotto.domain.LottoResult
+import java.text.NumberFormat
+import java.util.*
 
 class CommandLineView(private val viewModel: ViewModel = ViewModel()) : View {
     override fun buyLottos() {
@@ -35,11 +37,12 @@ class CommandLineView(private val viewModel: ViewModel = ViewModel()) : View {
     override fun readUserLottoNumbers() {
         println("당첨 번호를 입력해 주세요.")
         var input = readLine()
-        while (input.split(",").size != 6 || input.split(",").any { number -> number.toIntOrNull() == null }) {
+        while (input.split(",").size != 6 || input.split(",").map { it.trim() }
+                .any { number -> number.toIntOrNull() == null }) {
             println("[ERROR] 쉼표(,)를 기준으로 6개의 숫자를 입력해주세요.")
             input = readLine()
         }
-        viewModel.userLottoNumbers = input.split(",").map { it.toInt() }
+        viewModel.userLottoNumbers = input.split(",").map { it.trim().toInt() }
     }
 
     override fun readUserBonusNumbers() {
