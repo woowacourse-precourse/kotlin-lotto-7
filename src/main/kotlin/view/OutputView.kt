@@ -1,7 +1,7 @@
 package view
 
-import lotto.model.lotto.Lotto
-import lotto.model.lotto.Prize
+import lotto.model.Lotto
+import lotto.model.Prize
 
 class OutputView {
     fun printPurchaseLottoNumbers(lottoNumbers: List<Lotto>) {

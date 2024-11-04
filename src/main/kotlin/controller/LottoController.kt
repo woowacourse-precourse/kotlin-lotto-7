@@ -1,16 +1,25 @@
 package lotto.controller
 
 import camp.nextstep.edu.missionutils.Randoms
-import lotto.model.lotto.Lotto
-import lotto.model.lotto.Money
-import lotto.model.lotto.Prize
-import lotto.model.lotto.WinningNumbers
+import lotto.model.Lotto
+import lotto.model.Prize
+import lotto.model.WinningNumbers
 import view.InputView
 import view.OutputView
 
 class LottoController(private val inputView: InputView, private val outputView: OutputView) {
     fun run(){
+        val input = inputView.getPurchaseMoney()
+        val lottoAmount = createLottoNumbers(input / 1000)
+        outputView.printPurchaseLottoNumbers(lottoAmount)
 
+        val winningNumbers = inputView.getWinningNumbers()
+        val bonusNumber = inputView.getBonusNumber(winningNumbers)
+        val winningNumbersObj = WinningNumbers(winningNumbers, bonusNumber)
+
+        val results = checkLottoResults(lottoAmount, winningNumbersObj)
+        val profitRate = calculateProfitRate(results, input)
+        outputView.printProfitStatic(results, profitRate)
     }
 
     private fun createLottoNumbers(purchasedAmount : Int): List<Lotto>{

@@ -1,9 +1,9 @@
 package view
 
 import camp.nextstep.edu.missionutils.Console
-import lotto.model.lotto.Lotto
-import lotto.model.lotto.Money
-import lotto.model.lotto.WinningNumbers
+import lotto.model.Lotto
+import lotto.model.Money
+import lotto.model.WinningNumbers
 
 class InputView {
     fun getPurchaseMoney(): Int {

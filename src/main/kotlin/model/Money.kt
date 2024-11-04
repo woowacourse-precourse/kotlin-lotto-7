@@ -1,4 +1,4 @@
-package lotto.model.lotto
+package lotto.model
 
 class Money(private val money : Int){
     init {

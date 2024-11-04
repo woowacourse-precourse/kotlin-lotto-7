@@ -1,4 +1,4 @@
-package lotto.model.lotto
+package lotto.model
 
 class WinningNumbers(val winningNumbers: List<Int>,val bonusNumber: Int) {
     init {

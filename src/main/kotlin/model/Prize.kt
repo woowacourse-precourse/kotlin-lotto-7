@@ -1,4 +1,4 @@
-package lotto.model.lotto
+package lotto.model
 
 enum class Prize(val prizeMoney: Int, val description: String) {
     THREE_MATCH( 5000, "3개 일치 (5,000원)"),
