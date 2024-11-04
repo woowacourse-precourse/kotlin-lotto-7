@@ -65,7 +65,7 @@ class LottoController {
     private fun resultStatisticsOfLotto() {
         val matchCount = LottoMatchCount.matchLotto(lottos, winLotteryNumber, bonusLotteryNumber)
         val profit = calculateProfit(matchCount)
-        val amountOfProfit = calculateAmountOfProfit(profit)
+        val amountOfProfit = LottoMatchCount.calculateAmountOfProfit(profit, money)
         outputView.printWinStatistics(matchCount)
         outputView.printAmountOfProfit(amountOfProfit)
     }
@@ -77,23 +77,9 @@ class LottoController {
     }
 
     private fun calculateProfit(matchLottoCount: Map<MatchingLottoCount, Int>): Long {
-        var profit = 0L
-
-        for ((key, value) in matchLottoCount) {
-            profit += when (key) {
-                MatchingLottoCount.THREE -> value * MatchingLottoCount.THREE.price
-                MatchingLottoCount.FOUR -> value * MatchingLottoCount.FOUR.price
-                MatchingLottoCount.FIVE -> value * MatchingLottoCount.FIVE.price
-                MatchingLottoCount.FIVE_BONUS -> value * MatchingLottoCount.FIVE_BONUS.price
-                MatchingLottoCount.SIX -> value * MatchingLottoCount.SIX.price
-            }
-        }
-        return profit
+        LottoMatchCount.calculateProfit(matchLottoCount)
+        return LottoMatchCount.getProfit()
     }
-
-    private fun calculateAmountOfProfit(profit: Long): Float =
-        round((profit.toFloat() / money) * 1000) / 10
-
 
     companion object {
         const val NOT_INPUT_MONEY_STATE = 0
