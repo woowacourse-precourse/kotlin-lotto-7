@@ -91,7 +91,7 @@ fun printResults(results: Map<LottoResult, Int>, amountSpent: Int) {
 }
 
 fun printResultDetails(results: Map<LottoResult, Int>) {
-    LottoResult.entries
+    LottoResult.values()
         .filter { it != LottoResult.NONE }
         .forEach { result ->
             val count = results.getOrDefault(result, 0)
