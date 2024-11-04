@@ -29,11 +29,21 @@ class LottoGeneratorTest {
     @Test
     fun `기능 테스트-생성된 로또 번호에 중복이 없는지 확인`() {
         val lotto = LottoGenerator.createLotto()
-        val validLottoSet = lotto.toSet()
+        val validLotto = lotto.toSet()
         assertEquals(
             lotto.size,
-            validLottoSet.size,
+            validLotto.size,
             "중복없이 랜덤 번호가 생성되어야 함"
+        )
+    }
+
+    @Test
+    fun `기능 테스트-금액에 맞게 로또 수량이 계산되는지 확인`() {
+        val count = LottoGenerator.getLottoCount(10000)
+        assertEquals(
+            10,
+            count,
+            "로또 수량은 금액/1000개이어야 함"
         )
     }
 

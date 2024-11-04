@@ -4,6 +4,7 @@ import camp.nextstep.edu.missionutils.Randoms
 
 
 object LottoGenerator {
+
     const val LOTTO_START_INCLUSIVE_NUMBER = 1
     const val LOTTO_END_INCLUSIVE_NUMBER = 45
     const val LOTTO_ONE_SET_SIZE = 6
@@ -21,7 +22,18 @@ object LottoGenerator {
             /* startInclusive = */ LOTTO_START_INCLUSIVE_NUMBER,
             /* endInclusive = */ LOTTO_END_INCLUSIVE_NUMBER,
             /* count = */ LOTTO_ONE_SET_SIZE,
-        )
+        ).sorted()
         return lotto
     }
+
+    const val LOTTO_MONEY_UNIT = 1000
+    /**
+     * 금액당 로또 수량을 계산한다.
+     * @return 로또 수량
+     */
+    fun getLottoCount(money: Int): Int {
+        val lottoCount = money / LOTTO_MONEY_UNIT
+        return lottoCount
+    }
+
 }
