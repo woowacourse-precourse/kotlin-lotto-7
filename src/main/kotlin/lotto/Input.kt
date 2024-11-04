@@ -31,8 +31,6 @@ class Input {
         }
     }
 
-
-
     fun getLottoNumbers(): List<Int> {
         println(REQUEST_NUMBERS_MESSAGE)
 
@@ -41,20 +39,12 @@ class Input {
 
             try {
                 lottoNumbers.forEach {
-                    checkRangeLottoNumber(it)
+                    isRangeLottoNumber(it)
                 }
                 return lottoNumbers
             } catch (e: IllegalArgumentException) {
                 continue
             }
-        }
-    }
-
-
-    private fun checkRangeLottoNumber(number: Int) {
-        if (number < LOTTO_RANGE_FLOOR || number > LOTTO_RANGE_CEIL) {
-            println(NOT_RANGE_NUMBER)
-            throw IllegalArgumentException(NOT_RANGE_NUMBER)
         }
     }
 
@@ -66,7 +56,7 @@ class Input {
 
             try {
                 checkChangeInt(input)
-                checkRangeLottoNumber(input.toInt())
+                isRangeLottoNumber(input.toInt())
                 return input.toInt()
 
             } catch (e: IllegalArgumentException) {
