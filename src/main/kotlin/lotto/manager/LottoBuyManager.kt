@@ -22,7 +22,7 @@ class LottoBuyManager {
         }
     }
 
-    private fun validateMoneyInput(moneyInput: String) {
+    fun validateMoneyInput(moneyInput: String) {
         if (!moneyInput.matches(Regex(REGEX_NUMBER_PATTERN))) {
             throw IllegalArgumentException("$ERROR_TITLE $ERROR_NOT_NUMBER_MESSAGE")
         }
