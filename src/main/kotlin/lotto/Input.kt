@@ -1,6 +1,5 @@
 package lotto
 
-import camp.nextstep.edu.missionutils.Console
 import camp.nextstep.edu.missionutils.Console.readLine
 
 object Input {
@@ -15,7 +14,7 @@ object Input {
             try {
                 Instructions.purchaseAmountInstructions()
                 val purchaseAmount = readLine()
-                Validator.checkPurchaseAmount(purchaseAmount)
+                Validator.validatePurchaseAmount(purchaseAmount)
                 LottoSystem.savePurchaseAmount(purchaseAmount.toInt())
                 return
             }catch (e:IllegalArgumentException){
@@ -28,8 +27,9 @@ object Input {
         while (true){
             try {
                 Instructions.winningNumberInstructions()
-                val winningNumber = readLine().split(",").map { it.trim().toInt() }
-                LottoSystem.saveWinningNumber(winningNumber)
+                val winningNumber = readLine()
+                Validator.validateWinningNumber(winningNumber)
+                LottoSystem.saveWinningNumber(winningNumber.split(",").map { it.trim().toInt() })
                 return
             }catch (e:IllegalArgumentException){
                 println(e.message)
@@ -41,8 +41,9 @@ object Input {
         while (true){
             try {
                 Instructions.bonusNumberInstructions()
-                val bonusNumber = readLine().toInt()
-                LottoSystem.saveBonusNumber(bonusNumber)
+                val bonusNumber = readLine()
+                Validator.validateBonusNumber(bonusNumber)
+                LottoSystem.saveBonusNumber(bonusNumber.toInt())
                 return
             }catch (e:IllegalArgumentException){
                 println(e.message)

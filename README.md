@@ -332,7 +332,66 @@ object PrintResult {
 
 ### 예외 처리
 
+#### Validator
 
+```kotlin
+object Validator {
+    fun validatePurchaseAmount(purchaseAmount: String) {}
+    fun validateWinningNumber(winningNumber: String) {}
+    fun validateBonusNumber(bonusNumber: String) {}
+}
+```
+- `Input` 객체에서 입력을 받을 경우 각각의 입력 값에 대해서 `Validator` 객체를 통해 예외 확인후 처리
+
+#### 구매 금액 예외처리
+
+```kotlin
+    fun validatePurchaseAmount(purchaseAmount: String) {
+        require(purchaseAmount.isNotEmpty()){ "[ERROR] 입력 값이 없습니다." }
+        require(purchaseAmount.toIntOrNull() != null){"[ERROR] 입력 값이 정수가 아닙니다."}
+        require(purchaseAmount.toInt()>=1000){ "[ERROR] 구매 금액은 1000원이 최소입니다." }
+        require(purchaseAmount.toInt()%1000==0){"[ERROR] 구매 금액은 1000원 단위입니다."}
+    }
+```
+- 입력 값이 null 인 경우
+- 입력 값이 정수가 아닌 경우
+- 입력 값이 1000원 보다 싼 경우
+- 입력 값이 1000원 단위가 아닌 경우
+
+#### 당첨 번호 예외 처리
+
+```kotlin
+    fun validateWinningNumber(winningNumber: String) {
+        require(winningNumber.isNotEmpty()){ "[ERROR] 입력 값이 없습니다." }
+        require(winningNumber.split(",").size==6){ "[ERROR] 로또 번호는 6개여야 합니다." }
+        winningNumber.split(",").forEach {
+            require(it.trim().toIntOrNull()!=null){"[ERROR] 로또 번호는 숫자여야 합니다."}
+            require(it.trim().toInt() in 1..45){"[ERROR] 유효하지 않은 범위의 숫자가 포함되어 있습니다."}
+        }
+        require(winningNumber.split(",").toSet().size == 6) { "[ERROR] 중복된 숫자가 있습니다." }
+    }
+```
+- 입력 값이 null 인 경우
+- 입력한 로또 번호의 개수가 6개가 아닌 경우
+- 입력한 로또 번호가 숫자가 아닌 경우
+- 입력한 로또 번호가 1~45 사이의 값이 아닌 경우
+- 입력한 로또 번호 6개중 중복된 값이 있는 경우
+
+#### 보너스 번호 예외 처리
+
+```kotlin
+    fun validateBonusNumber(bonusNumber: String) {
+        require(bonusNumber.isNotEmpty()){ "[ERROR] 입력 값이 없습니다." }
+        require(bonusNumber.toIntOrNull() != null){"[ERROR] 입력 값이 숫자가 아닙니다."}
+        require(bonusNumber.toInt() in 1..45){"[ERROR] 유효하지 않은 범위의 숫자가 포함되어 있습니다."}
+        val winningNumber = LottoSystem.getWinningNumber()
+        require(bonusNumber.toInt() !in winningNumber) { "[ERROR] 보너스 숫자는 로또 번호와 중복될 수 없습니다." }
+    }
+```
+- 입력 값이 null 인 경우
+- 입력 값이 숫자가 아닌 경우
+- 입력 값이 1~45 사이의 값이 아닌 경우
+- 보너스 번호가 당첨번호중 중복된 값인 경우
 
 ## 실행 결과 
 <img width="333" alt="image" src="https://github.com/user-attachments/assets/efe89d74-590c-4d94-b112-8c957fb59830">
