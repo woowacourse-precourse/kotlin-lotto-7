@@ -65,6 +65,12 @@ class ApplicationTest : NsTest() {
         assertThrows<IllegalArgumentException> {
             validMoney("1300")
         }
+
+        listOf("1000!", "2000$", "@5000", "12a34").forEach { amount ->
+            assertThrows<IllegalArgumentException> {
+                validMoney(amount)
+            }
+        }
     }
 
     @Test
