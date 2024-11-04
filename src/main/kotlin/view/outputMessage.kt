@@ -9,6 +9,7 @@ class outputMessage {
         randomLottoList.forEach { (_, lottoNumbers) ->
             println(lottoNumbers)
         }
+        println()
     }
 
     fun statisticsForWinMessage() {

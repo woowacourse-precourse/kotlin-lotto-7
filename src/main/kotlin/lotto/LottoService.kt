@@ -19,7 +19,7 @@ class LottoService {
 
     fun countForWin(randomLottoList: MutableMap<Int, List<Int>>, winNumberForLotto: List<Int>, bonusNumberForLotto: String, count: Int) {
         for (i in Content.MIN_COUNT until count) {
-            val checkingLottoForWin = checkLottoForWin(randomLottoList, winNumberForLotto, count)
+            val checkingLottoForWin = checkLottoForWin(randomLottoList, winNumberForLotto, i)
             val checkingLottoForBonus = checkLottoForBonus(randomLottoList, bonusNumberForLotto)
             calculateWinForLotto(checkingLottoForWin, checkingLottoForBonus)
         }
@@ -38,7 +38,7 @@ class LottoService {
                 (fiveNumberAndBonus * Content.FIVE_NUMBER_AND_BONUS_PRIZE) +
                 (sixNumber * Content.SIX_NUMBER_PRIZE)
 
-        return (totalMoney / moneyForLotto).toDouble() * Content.POINT_TO_PERCENT
+        return (totalMoney.toDouble() / moneyForLotto.toDouble()) * Content.POINT_TO_PERCENT
     }
 
     fun stringToIntList(winForLotto: String): List<Int> {

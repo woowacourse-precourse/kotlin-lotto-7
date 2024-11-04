@@ -28,6 +28,9 @@ class LottoController {
         return try {
             val moneyForLotto = inputMessage.moneyForLotto()
             moneyForLotto.toInt()
+        } catch (e: NumberFormatException) {
+            println(Content.ERROR_OF_NUMBER)
+            getMoneyForLotto()
         } catch (error:IllegalArgumentException) {
             getMoneyForLotto()
         }
