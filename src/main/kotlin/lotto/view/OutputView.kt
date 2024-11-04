@@ -7,7 +7,7 @@ class OutputView {
         println("${num}개를 구매했습니다.")
     }
 
-    fun lottoList(lottos: List<Lotto>) {
+    fun purchasedLotto(lottos: List<Lotto>) {
         for (lotto in lottos) {
             println(lotto)
         }
