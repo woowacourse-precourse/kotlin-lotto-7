@@ -49,6 +49,14 @@ class ApplicationTest : NsTest() {
         }
     }
 
+    @Test
+    fun `구입 금액이 1,000원 단위가 아니면 예외가 발생한다`() {
+        assertSimpleTest {
+            runException("1500")
+            assertThat(output()).contains(ERROR_MESSAGE)
+        }
+    }
+
     override fun runMain() {
         main()
     }
