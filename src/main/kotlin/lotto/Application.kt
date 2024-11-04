@@ -4,15 +4,20 @@ import camp.nextstep.edu.missionutils.Console
 
 fun main() {
     // TODO: 프로그램 구현
+    println("구입 금액을 입력해 주세요.")
     val money = moneyInput()
     val repeat = money / 1000
     val lottoList: List<LottoPaper> = makeAll(repeat)
+    println("당첨 번호를 입력해 주세요.")
     val numberList: List<Int> = numberInput()
     val lotto = Lotto(numberList)
+    println("보너스 번호를 입력해 주세요")
     lotto.inputBonus()
     val resultList = lottoResult(lotto, lottoList)
     val earnMoney = printResult(resultList)
-    println(earnMoney)
+    println("당첨 통계")
+    println("---")
+    print("총 수익률은 ${String.format("%.1f", earnMoney / money.toDouble() * 100)}%입니다.")
 }
 
 fun moneyInput(): Int {
