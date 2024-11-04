@@ -36,11 +36,11 @@ class LottoManager (private val lottoCount : Int) {
 
         // 3개, 4개, 5개 일치 통계 출력
         val prizes = mapOf(
-            Rank.FIFTH to "(${Rank.FIFTH.prize}원)",
-            Rank.FOURTH to "(${Rank.FOURTH.prize}원)",
-            Rank.THIRD to "(${Rank.THIRD.prize}원)",
-            Rank.SECOND to "(${Rank.SECOND.prize}원)",
-            Rank.FIRST to "(${Rank.FIRST.prize}원)"
+            Rank.FIFTH to "(%,d원)".format(Rank.FIFTH.prize),
+            Rank.FOURTH to "(%,d원)".format(Rank.FOURTH.prize),
+            Rank.THIRD to "(%,d원)".format(Rank.THIRD.prize),
+            Rank.SECOND to "(%,d원)".format(Rank.SECOND.prize),
+            Rank.FIRST to "(%,d원)".format(Rank.FIRST.prize)
         )
 
         // 3개, 4개, 5개 일치 통계 출력
