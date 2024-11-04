@@ -7,7 +7,7 @@ class Amount(private val amount: String) {
         Validator.requireAmount(amount)
     }
 
-    fun generateToTry(amount: Int) {
-        val tryCount = amount % 1000
+    fun generateToTry(): Int {
+        return amount.toInt() / 1000
     }
 }
