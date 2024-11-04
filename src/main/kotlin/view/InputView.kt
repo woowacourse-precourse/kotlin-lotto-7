@@ -26,4 +26,13 @@ object InputView {
                 return winNumbers
         }
     }
+
+    fun getBounusNumber(): Int {
+        while(true) {
+            OutputView.printBonusNumberMessage()
+            val bonusNumber = Console.readLine().toInt()
+
+            return bonusNumber
+        }
+    }
 }
