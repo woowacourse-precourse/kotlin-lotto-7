@@ -1,7 +1,9 @@
 package Validation
 
+import Utils.InputUtils
+
 class InputValidation {
     fun isValidUnit(money: Int): Boolean {
-        return money % 1_000 == 0
+        return money % InputUtils.MONEY_UNIT == 0
     }
 }
