@@ -73,7 +73,7 @@ object InputView {
             }
             return numbers
         } catch (e: NumberFormatException) {
-            throw IllegalArgumentException(ErrorMessage.NOT_NUMBER.getMessage())
+            throw IllegalArgumentException(ErrorMessage.INVALID_LOTTO_NUMBERS.getMessage())
         }
     }
 
@@ -85,7 +85,7 @@ object InputView {
             }
             return bonusNumber
         } catch (e: NumberFormatException) {
-            throw IllegalArgumentException(ErrorMessage.NOT_NUMBER.getMessage())
+            throw IllegalArgumentException(ErrorMessage.INVALID_BONUS_NUMBER.getMessage())
         }
     }
 }

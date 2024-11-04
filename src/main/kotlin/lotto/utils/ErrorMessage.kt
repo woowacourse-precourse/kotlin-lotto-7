@@ -6,10 +6,10 @@ enum class ErrorMessage(private val message: String) {
 
     INVALID_AMOUNT("금액은 ${String.format("%,d", Constants.LOTTO_PRICE)}원 단위로 입력해야 합니다."),
     NOT_NUMBER("금액은 숫자여야 합니다."),
-    INVALID_LOTTO_NUMBERS("로또 번호는 ${Constants.LOTTO_SIZE}개여야 합니다."),
+    INVALID_LOTTO_NUMBERS("로또 번호는 ${Constants.LOTTO_SIZE}개의 정수여야 합니다."),
     INVALID_LOTTO_NUMBER("로또 번호는 ${Constants.RANDOM_MIN}부터 ${Constants.RANDOM_MAX} 사이의 숫자여야 합니다."),
     INVALID_DUPLICATE_NUMBER("로또 번호는 중복되어서는 안됩니다."),
-    INVALID_BONUS_NUMBER("보너스 번호는 ${Constants.RANDOM_MIN}부터 ${Constants.RANDOM_MAX} 사이의 숫자여야 합니다."),
+    INVALID_BONUS_NUMBER("보너스 번호는 ${Constants.RANDOM_MIN}부터 ${Constants.RANDOM_MAX} 사이의 단 1개의 숫자여야 합니다."),
 
     UNKNOWN_ERROR("알 수 없는 오류가 발생했습니다.");
 
