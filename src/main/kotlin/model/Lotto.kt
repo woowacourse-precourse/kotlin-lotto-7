@@ -1,4 +1,4 @@
-package lotto
+package model
 
 class Lotto(private val numbers: List<Int>) {
     init {
