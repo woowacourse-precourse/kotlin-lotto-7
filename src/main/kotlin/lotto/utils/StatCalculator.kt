@@ -6,7 +6,7 @@ import lotto.model.Stat
 
 object StatCalculator {
     fun getProfitRate(stats: List<Stat>, price: Int): String {
-        var profit = 0
+        var profit = 0L
         stats.forEach { stat ->
             val rank = stat.getRank()
             val count = stat.getCount()

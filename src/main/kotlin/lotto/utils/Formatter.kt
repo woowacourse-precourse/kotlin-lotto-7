@@ -3,7 +3,7 @@ package lotto.utils
 import java.text.DecimalFormat
 
 object Formatter {
-    fun addCommas(number: Int): String {
+    fun addCommas(number: Long): String {
         val decimalFormat = DecimalFormat("#,###")
         return decimalFormat.format(number)
     }
