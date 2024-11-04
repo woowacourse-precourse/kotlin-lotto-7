@@ -83,8 +83,12 @@ fun getLottoBudget(): Int {
         val userInput = Console.readLine()
         val lottoBudget = userInput.toInt()
         if (lottoBudget % LOTTO_TICKET_VALUE != 0) {
-            throw IllegalArgumentException("[ERROR] 로또 구입 금액은 1,000원 단위로 입력해 주세요.")
+            throw IllegalArgumentException("로또 구입 금액은 1,000원 단위로 입력해 주세요.")
         }
+        if (!userInput.matches(Regex("\\d+"))) {
+            throw IllegalArgumentException("입력 값은 숫자만 포함해야 합니다.")
+        }
+
         return lottoBudget
     } catch(e: java.lang.IllegalArgumentException) {
         println("[ERROR] ${e.message}")
