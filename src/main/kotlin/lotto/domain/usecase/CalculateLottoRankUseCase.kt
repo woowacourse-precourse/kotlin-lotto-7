@@ -20,7 +20,7 @@ class CalculateLottoRankUseCase {
             LottoRank.FOURTH.matchCount -> return LottoRank.FOURTH
             LottoRank.FIFTH.matchCount -> return LottoRank.FIFTH
         }
-        return LottoRank.SIXTH
+        return LottoRank.NON
     }
 
     private fun determineRankWithBonus(lotto: Lotto, bonusNumber: BonusNumber): LottoRank {

@@ -37,7 +37,7 @@ class CalculateLottoRankUseCaseTest {
         val winningNumbers = WinningNumbers(listOf(1, 2, 3, 4, 5, 6))
         val bonusNumber = BonusNumber(7, winningNumbers.getNumbers())
         val rank = calculateLottoRankUseCase.execute(lotto, winningNumbers, bonusNumber)
-        val expect = LottoRank.SIXTH
+        val expect = LottoRank.NON
         assertEquals(expect, rank)
     }
 }

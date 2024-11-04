@@ -6,13 +6,11 @@ enum class LottoRank(val price: Int, val matchCount: Int) {
     THIRD(1_500_000, 5),
     FOURTH(50_000, 4),
     FIFTH(5_000, 3),
-
-    // 6등은 matchCount가 의미가 없어서 0으로 할당
-    SIXTH(0, 0);
+    NON(0, 0);
 
     companion object {
         fun getWinningRanks(): List<LottoRank> {
-            return entries.filter { it != SIXTH }.reversed()
+            return entries.filter { it != NON }.reversed()
         }
     }
 }
