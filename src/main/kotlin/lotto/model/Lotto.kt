@@ -1,6 +1,7 @@
 package lotto.model
 
-import lotto.util.LottoNumberValidator
+import lotto.util.constant.LottoRules
+import lotto.util.validator.LottoNumberValidator
 
 // 로또 번호의 에러 체크
 // 로또 번호 제공
@@ -21,19 +22,19 @@ class Lotto(private val numbers: List<Int>) {
 
     private fun determineRank(matchedCount: Int, bonusNumber: Int): Int {
         val lottoRank = when (matchedCount) {
-            6 -> 1
-            5 -> determineSecondRank(bonusNumber)
-            4 -> 4
-            3 -> 5
-            else -> 0
+            LottoRules.MATCHED_SIX -> LottoRules.RANK_FIRST
+            LottoRules.MATCHED_FIVE -> determineSecondRank(bonusNumber)
+            LottoRules.MATCHED_FOUR -> LottoRules.RANK_FOURTH
+            LottoRules.MATCHED_THREE -> LottoRules.RANK_FIFTH
+            else -> LottoRules.OUT_OF_RANK
         }
         return lottoRank
     }
 
     private fun determineSecondRank(bonusNumber: Int): Int {
         if (bonusNumber in numbers) {
-            return 2
+            return LottoRules.RANK_SECOND
         }
-        return 3
+        return LottoRules.RANK_THIRD
     }
 }
