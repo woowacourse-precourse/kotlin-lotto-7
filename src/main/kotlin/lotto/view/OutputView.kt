@@ -1,6 +1,7 @@
 package lotto.view
 
 import lotto.model.LottoRank
+import lotto.utils.Constants
 import lotto.utils.OutputMessage
 
 object OutputView {
@@ -12,8 +13,8 @@ object OutputView {
     }
 
     fun printLottoResult(result: MutableMap<LottoRank, Int>) {
-        println("당첨 통계")
-        println("---------")
+        println(OutputMessage.RESULT_TITLE)
+        println(OutputMessage.DIVIDER)
 
         // rank가 낮은거 부터
         result.keys.sorted().reversed().forEach { rank ->
