@@ -11,8 +11,8 @@ class LottoController(val input: Input, val output: Output) {
     private val lottos: MutableList<Lotto> = mutableListOf()
     private val validator = InputValidation()
 
-    private fun getLottoTicketCount(): Int {
-        return input.getPurchaseAmount() / 1000
+    private fun getLottoTicketCount(amount: Int): Int {
+        return amount / 1000
     }
 
     private fun createRandomLotto(): Lotto {
@@ -37,17 +37,16 @@ class LottoController(val input: Input, val output: Output) {
         repeat(lottos.size) { idx ->
             val matchResult = lottos[idx].calculateMatchResult(result)
             when (matchResult.matchNumbersCount) {
-                5 -> totalMatchResult.prizeCount1 += 1
-                4 -> if (matchResult.isMatchBonus) totalMatchResult.prizeCount2 += 1
-                3 -> totalMatchResult.prizeCount3 += 1
-                2 -> totalMatchResult.prizeCount4 += 1
-                1 -> totalMatchResult.prizeCount5 += 1
+                6 -> totalMatchResult.prizeCount1 += 1
+                5 -> if (matchResult.isMatchBonus) totalMatchResult.prizeCount2 += 1 else totalMatchResult.prizeCount3 += 1
+                4 -> totalMatchResult.prizeCount4 += 1
+                3 -> totalMatchResult.prizeCount5 += 1
             }
         }
         return totalMatchResult
     }
 
-    private fun calculateRateOfReturn(totalMatchResult: LottoTotalMatchResult): Float {
-        return String.format("%.1f", totalMatchResult.getTotalPrize() / lottos.size).toFloat()
+    private fun calculateRateOfReturn(totalMatchResult: LottoTotalMatchResult, amount: Int): Float {
+        return String.format("%.1f", totalMatchResult.getTotalPrize() / amount).toFloat()
     }
 }
