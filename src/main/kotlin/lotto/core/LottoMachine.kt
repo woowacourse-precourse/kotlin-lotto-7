@@ -112,12 +112,12 @@ class LottoMachine {
 
         Rank.entries.reversed().forEach { rank ->   // 5등에서 1등 순서로 출력
             val formattedNumber = NumberFormat.getNumberInstance().format(rank.prize)   // 1000 단위씩 `,`로 구분
-            val matchCount = lottoStats.count { it == rank }
+            val winningCount = lottoStats.count { it == rank }
             if (rank == Rank.SECOND) {
-                println(MESSAGE_MATCH_WITH_BONUS_LOTTO_STATS.format(rank.matchCount, formattedNumber, matchCount))
+                println(MESSAGE_MATCH_WITH_BONUS_LOTTO_STATS.format(rank.matchCount, formattedNumber, winningCount))
                 return@forEach
             }
-            println(MESSAGE_MATCH_LOTTO_STATS.format(rank.matchCount, formattedNumber, matchCount))
+            println(MESSAGE_MATCH_LOTTO_STATS.format(rank.matchCount, formattedNumber, winningCount))
 
         }
     }
