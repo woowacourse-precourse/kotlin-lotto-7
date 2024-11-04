@@ -14,7 +14,6 @@ object InputView {
                 return price
             } catch (e: IllegalArgumentException) {
                 println(e.message ?: ErrorMessage.UNKNOWN_ERROR.getMessage())
-                println()
             }
         }
     }
@@ -27,7 +26,6 @@ object InputView {
                 return numbers
             } catch (e: IllegalArgumentException) {
                 println(e.message ?: ErrorMessage.UNKNOWN_ERROR.getMessage())
-                println()
             }
         }
     }
@@ -41,7 +39,6 @@ object InputView {
                 return bonusNumber
             } catch (e: IllegalArgumentException) {
                 println(e.message ?: ErrorMessage.UNKNOWN_ERROR.getMessage())
-                println()
             }
         }
     }
