@@ -54,6 +54,8 @@ object Controller {
     fun inputBonusNumber() {
         while (true) {
             try {
+                InputView.inputBonusNumber().trim()
+
             } catch (e: IllegalArgumentException) {
                 println(e)
             }

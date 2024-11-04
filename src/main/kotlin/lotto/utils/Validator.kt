@@ -14,7 +14,7 @@ class Validator {
 
         require(amount % 1000 == 0) { NOT_MULTIPLE_OF_1000.message }
     }
-    
+
 
     fun validateInputWiningNumber(input: String) {
         require(input.isNotEmpty()) { INPUT_EMPTY.message }
@@ -31,6 +31,12 @@ class Validator {
             }
         require(nums.size == 6) { MIN_SIX.message }
         require(nums.all { it in 1..45 }) { NOT_1_BETWEEN_45.message }
+    }
+
+    fun validateBonusNumber(input: String) {
+        require(input.isNotEmpty()) { INPUT_EMPTY.message }
+        require(input.length > 3) { ONLY_ONE_BONUS_NUMBER.message }
+        require(input.toInt() in 1..45) { NOT_1_BETWEEN_45 }
     }
 
 
