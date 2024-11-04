@@ -25,7 +25,7 @@ class LottoController {
         sum += LottoResult.FIVE.prize * lottoResult[2]
         sum += LottoResult.FIVE_SPECIAL.prize * lottoResult[3]
         sum += LottoResult.SIX.prize * lottoResult[4]
-        return sum / (buyLottoAmount * Constant.LOTTO_PRICE)
+        return sum / (buyLottoAmount * Constant.LOTTO_PRICE) * 100
     }
 
     private fun calculateLotto(winnerNumber: List<Int>, specialNumber: Int): List<Int> {
