@@ -15,7 +15,7 @@ class LottoController {
         lottos.forEach { OutputView.printLottoNumbers(it) }
 
         val winningNumbers = InputView.inputWinningNumbers()
-        val bonusNumber = InputView.inputBonusNumber()
+        val bonusNumber = InputView.inputBonusNumber(winningNumbers.getNumbers())
         val winningNumber = WinningNumber(winningNumbers.getNumbers(), bonusNumber)
 
         val gameResult = GameResult()
