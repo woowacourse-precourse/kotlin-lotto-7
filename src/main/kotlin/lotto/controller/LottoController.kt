@@ -17,7 +17,7 @@ class LottoController {
         OutputView.printLottoTickets(tickets)
 
         val winningLotto = getWinningNumbers()
-        val bonusLotto = getAllLottoNumbers(winningLotto)
+        val bonusLotto = getBonusNumbers(winningLotto)
 
         val ranks = tickets.map { calculateMatch(it, winningLotto, bonusLotto) }
         OutputView.printResults(ranks)
@@ -56,7 +56,7 @@ class LottoController {
         return Lotto(purchasePrice)
     }
 
-    private fun getAllLottoNumbers(lotto: Lotto): BonusLotto {
+    private fun getBonusNumbers(lotto: Lotto): BonusLotto {
         val bonusNumber = InputView.askForBonusNumber().toIntOrNull()
             ?: throw IllegalArgumentException(ErrorMessage.INVALID_NUMBER_FORMAT.message)
         return BonusLotto(lotto.getNumbers(), bonusNumber)
@@ -66,5 +66,4 @@ class LottoController {
         val totalPrize = ranks.sumOf { it.prize }
         return (totalPrize.toDouble() / purchaseAmount.toDouble()) * 100
     }
-
 }

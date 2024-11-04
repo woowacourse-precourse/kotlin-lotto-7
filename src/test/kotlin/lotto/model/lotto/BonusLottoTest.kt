@@ -1,7 +1,7 @@
 package lotto.model.lotto
 
 import lotto.model.message.ErrorMessage
-import org.junit.jupiter.api.Assertions.*
+import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 
@@ -34,7 +34,7 @@ class BonusLottoTest {
         }
 
         //then
-        assertEquals(ErrorMessage.INPUT_DUPLICATION_Bonus.message, exception.message)
+        assertEquals(ErrorMessage.INPUT_DUPLICATION_BONUS.message, exception.message)
     }
 
     @Test

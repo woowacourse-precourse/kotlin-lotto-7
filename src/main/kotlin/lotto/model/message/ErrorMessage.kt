@@ -9,7 +9,5 @@ enum class ErrorMessage(val message: String) {
     INPUT_WINNING_EMPTY("당첨번호에 빈문자열을 입력받았습니다."),
     INPUT_1_TO_45("번호는 1부터 45 사이의 숫자여야 합니다."),
     INPUT_DUPLICATION("로또 번호가 중복으로 입력되었습니다."),
-    INPUT_DUPLICATION_Bouns("보너스 번호는 로또 번호와 중복될 수 없습니다."),
-
-
+    INPUT_DUPLICATION_BONUS("보너스 번호는 로또 번호와 중복될 수 없습니다.")
 }
