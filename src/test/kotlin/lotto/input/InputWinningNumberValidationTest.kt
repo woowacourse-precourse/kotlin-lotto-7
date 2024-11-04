@@ -1,8 +1,9 @@
 package lotto.input
 
+import camp.nextstep.edu.missionutils.Console
 import camp.nextstep.edu.missionutils.test.Assertions.assertSimpleTest
 import camp.nextstep.edu.missionutils.test.NsTest
-import lotto.utils.InputManager
+import lotto.utils.ValidationUtils
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 
@@ -37,6 +38,8 @@ class InputWinningNumberValidationTest : NsTest() {
     }
 
     override fun runMain() {
-        InputManager.getWinningNumbers()
+        val number = Console.readLine()
+        ValidationUtils.checkValidWinningNumbers(number, ",")
+        Console.close()
     }
 }
