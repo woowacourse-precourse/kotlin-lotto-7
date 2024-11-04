@@ -3,6 +3,8 @@ package lotto
 import lotto.domain.entity.Lotto
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
+import org.junit.jupiter.params.ParameterizedTest
+import org.junit.jupiter.params.provider.ValueSource
 
 class LottoTest {
     @Test
@@ -20,17 +22,11 @@ class LottoTest {
         }
     }
 
-    @Test
-    fun `로또 번호가 1보다 작을 경우 예외가 발생한다`() {
+    @ParameterizedTest
+    @ValueSource(ints = [0, 46, -10, 100])
+    fun `로또 번호가 1~45가 아닐 경우 예외가 발생한다`(exceptionNumber: Int) {
         assertThrows<IllegalArgumentException> {
-            Lotto(listOf(0, 1, 2, 3, 4, 5))
-        }
-    }
-
-    @Test
-    fun `로또 번호가 45보다 클 경우 예외가 발생한다`() {
-        assertThrows<IllegalArgumentException> {
-            Lotto(listOf(1, 2, 3, 4, 5, 46))
+            Lotto(listOf(exceptionNumber, 1, 2, 3, 4, 5))
         }
     }
 
