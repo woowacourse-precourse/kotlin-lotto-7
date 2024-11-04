@@ -1,11 +1,13 @@
 package lotto.model
 
+import lotto.utils.LottoException
+
 class Lotto(private val numbers: List<Int>) {
     init {
-        require(numbers.size == 6) { "[ERROR] 로또 번호는 6개여야 합니다." }
-        require(numbers.size == numbers.toSet().size) { "[ERROR] 로또 번호는 중복이 없어야 합니다." }
+        require(numbers.size == 6) { LottoException.SHORTAGE }
+        require(numbers.size == numbers.toSet().size) { LottoException.DUPLICATION }
         numbers.forEach {
-            require(it > 0 && it < 46) { "[ERROR] 로또 번호는 1부터 45 사이의 숫자여야 합니다." }
+            require(it > 0 && it < 46) { LottoException.NOT_LOTTO }
         }
     }
 

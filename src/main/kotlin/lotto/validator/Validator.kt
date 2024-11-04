@@ -1,13 +1,13 @@
 package lotto.validator
 
-import lotto.utils.intException
+import lotto.utils.IntException
 
 object Validator {
     fun requireAmount(amount: String) {
-        require(amount.isNotBlank()) { intException.BLANK }
-        require(amount.toIntOrNull() != null) { intException.NOT_INT }
-        require(amount.toInt() >= 0) { intException.NEGATIVE_INT }
-        require((amount.toInt() % 1000 == 0)) { intException.NOT_THOUSAND_UNIT }
+        require(amount.isNotBlank()) { IntException.BLANK }
+        require(amount.toIntOrNull() != null) { IntException.NOT_INT }
+        require(amount.toInt() >= 0) { IntException.NEGATIVE_INT }
+        require((amount.toInt() % 1000 == 0)) { IntException.NOT_THOUSAND_UNIT }
 
     }
 

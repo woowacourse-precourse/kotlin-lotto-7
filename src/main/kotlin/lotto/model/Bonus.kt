@@ -1,10 +1,11 @@
 package lotto.model
 
+import lotto.utils.LottoException
+
 class Bonus(private val bonus: Int) {
     init {
-        require(bonus > 0 && bonus < 46)
-        require(bonus.toInt() != null)
-        //TODO: 당첨 번화와 중복검사
+        require(bonus > 0 && bonus < 46) { LottoException.NOT_LOTTO }
+        require(bonus.toInt() != null) { LottoException.NOT_LOTTO }
     }
 
     fun returnBonus(): Int {

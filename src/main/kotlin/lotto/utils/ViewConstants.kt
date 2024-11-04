@@ -15,10 +15,11 @@ enum class OuputString(private val transmission: String) {
     MATCHE_3("3개 일치 (5,000원) - "),
     MATCHE_4("4개 일치 (50,000원) - "),
     MATCHE_5("5개 일치 (1,500,000원) - "),
-    MATCHE_5_BONUS("5개 일치, 보너스 볼 일치 (30,000,000원) - " ),
+    MATCHE_5_BONUS("5개 일치, 보너스 볼 일치 (30,000,000원) - "),
     MATCHE_6("6개 일치 (2,000,000,000원) - "),
     MATCHE_END("개"),
     REVENUE("총 수익률은 "),
     REVENUE_END("%입니다.");
+
     override fun toString(): String = transmission
 }

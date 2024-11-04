@@ -20,8 +20,8 @@ class LottoController {
         val bonusNumber = Validator.retryOnFailure { Bonus(bonusInterface()) }
         val resultNumber = ResultNumber()
         val resultNumbers = resultNumber.check(numbers, winNumber.returnNumbers(), bonusNumber.returnBonus())
-        val revenue = resultNumber.revenue(resultNumbers,tryCount)
-        UserFeedback.result(resultNumbers,revenue)
+        val revenue = resultNumber.revenue(resultNumbers, tryCount)
+        UserFeedback.result(resultNumbers, revenue)
     }
 
     fun amountInterface(): String {
