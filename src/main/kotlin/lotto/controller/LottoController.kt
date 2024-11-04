@@ -10,7 +10,6 @@ import lotto.view.Output
 class LottoController(val input: Input, val output: Output) {
     private val lottos: MutableList<Lotto> = mutableListOf()
     private val validator = InputValidation()
-    private val totalMatchResult = LottoTotalMatchResult()
 
     private fun getLottoTicketCount(): Int {
         return input.getPurchaseAmount() / 1000
@@ -46,5 +45,9 @@ class LottoController(val input: Input, val output: Output) {
             }
         }
         return totalMatchResult
+    }
+
+    private fun calculateRateOfReturn(totalMatchResult: LottoTotalMatchResult): Float {
+        return String.format("%.1f", totalMatchResult.getTotalPrize() / lottos.size).toFloat()
     }
 }
