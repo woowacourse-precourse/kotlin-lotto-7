@@ -51,12 +51,10 @@ object InputView {
                 println("보너스 번호를 입력해 주세요.")
                 val bonusNum = Console.readLine().toInt()
 
-                // Check if the bonus number is within the valid range
                 if (bonusNum !in 1..45) {
                     throw IllegalArgumentException("[ERROR] 보너스 번호는 1과 45 사이의 숫자여야 합니다.")
                 }
 
-                // Check for duplicates with the winning numbers
                 if (winNumbers.contains(bonusNum)) {
                     throw IllegalArgumentException("[ERROR] 보너스 번호는 당첨 번호와 중복될 수 없습니다.")
                 }
