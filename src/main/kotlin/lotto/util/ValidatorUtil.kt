@@ -1,6 +1,7 @@
 package lotto.util
 
 import lotto.util.ConstantsUtil.MESSAGE_BONUS_NUMBERS_NOT_INT
+import lotto.util.ConstantsUtil.MESSAGE_BONUS_NUMBERS_RANGE_INVALID
 import lotto.util.ConstantsUtil.MESSAGE_BONUS_NUMBER_DUPLICATE
 import lotto.util.ConstantsUtil.MESSAGE_LOTTO_NUMBERS_DUPLICATE
 import lotto.util.ConstantsUtil.MESSAGE_LOTTO_NUMBERS_SIZE_INVALID
@@ -58,6 +59,12 @@ object ValidatorUtil {
     fun validateWinningNumbersRange(winningNumbers: List<Int>) {
         require(winningNumbers.all { it in 1..45 }) {
             MESSAGE_WINNING_NUMBERS_RANGE_INVALID
+        }
+    }
+
+    fun validateBonusNumbersRange(bonusNumbers: Int) {
+        require(bonusNumbers in 1..45 ) {
+            MESSAGE_BONUS_NUMBERS_RANGE_INVALID
         }
     }
 

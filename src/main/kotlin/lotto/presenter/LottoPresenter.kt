@@ -3,7 +3,9 @@ package lotto.presenter
 import lotto.model.LottoRank
 import lotto.model.LottoTicket
 import lotto.util.ConstantsUtil.TICKET_PRICE
+import lotto.util.ValidatorUtil.validateBonusNumber
 import lotto.util.ValidatorUtil.validateBonusNumberNotInWinningNumbers
+import lotto.util.ValidatorUtil.validateBonusNumbersRange
 import lotto.util.ValidatorUtil.validateTicketsPrice
 import lotto.util.ValidatorUtil.validateUniqueWinningNumbers
 import lotto.util.ValidatorUtil.validateWinningNumbersRange
@@ -25,6 +27,7 @@ class LottoPresenter(
         validateUniqueWinningNumbers(winningNumbers)
         validateWinningNumbersSize(winningNumbers.size)
         validateWinningNumbersRange(winningNumbers)
+        validateBonusNumbersRange(bonusNumber)
         validateBonusNumberNotInWinningNumbers(winningNumbers, bonusNumber)
 
         val results = lottoTicket.calculateTickets(winningNumbers, bonusNumber)
