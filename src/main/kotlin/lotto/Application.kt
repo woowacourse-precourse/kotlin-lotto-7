@@ -104,9 +104,6 @@ fun getWinningLotto(): Lotto {
 fun checkNumber(lottoNumbers: List<String>): List<Int> {
     try {
         val mappedLottoNumbers = lottoNumbers.map { it.toInt() }
-        mappedLottoNumbers.forEach {
-            require(it in 1..45) {"[ERROR] 로또 번호는 1부터 45 사이의 정수여야 합니다. 로또 번호를 다시 입력해주세요."}
-        }
         return mappedLottoNumbers
     } catch (e: NumberFormatException) {
         throw IllegalArgumentException("[ERROR] 쉼표(,) 이외의 구분자를 사용할 수 없습니다. 로또 번호를 다시 입력해주세요.")
