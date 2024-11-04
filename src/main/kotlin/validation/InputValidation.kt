@@ -32,4 +32,10 @@ class InputValidation {
         }
         return valid
     }
+
+    fun isUniqueBonusNumber(winNumbers: List<Int>, bonusNumber: Int): Boolean {
+        if (bonusNumber in winNumbers)
+            Exception.throwException(ExceptionUtils.DUPLICATE_BONUS_NUMBER)
+        return true
+    }
 }

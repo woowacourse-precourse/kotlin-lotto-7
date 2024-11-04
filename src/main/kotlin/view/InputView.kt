@@ -27,12 +27,13 @@ object InputView {
         }
     }
 
-    fun getBounusNumber(): Int {
+    fun getBounusNumber(winNumbers: List<Int>): Int {
         while(true) {
             OutputView.printBonusNumberMessage()
-            val bonusNumber = Console.readLine().toInt()
+            val bonusNumber = Console.readLine().toIntOrNull() ?: 0
 
-            return bonusNumber
+            if (input.isUniqueBonusNumber(winNumbers, bonusNumber))
+                return bonusNumber
         }
     }
 }
