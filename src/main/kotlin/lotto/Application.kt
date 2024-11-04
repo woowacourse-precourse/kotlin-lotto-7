@@ -32,6 +32,19 @@ fun main() {
         }
         break
     } while (true)
+
+    println()
+    println("보너스 번호를 입력해주세요.")
+    var bonusNumber: Int
+    do {
+        try {
+            bonusNumber = getBonusNumber()
+        } catch (e: IllegalArgumentException) {
+            println(e.message)
+            continue
+        }
+        break
+    } while (true)
 }
 
 fun getAmount(): Int {
@@ -63,10 +76,10 @@ fun printLottos(lottos: ArrayList<Lotto>) {
 
 fun getPrizeLotto(): Lotto {
     val prizeNumbers = Console.readLine().split(",")
-    return Lotto(checkLotto(prizeNumbers))
+    return Lotto(checkNumber(prizeNumbers))
 }
 
-fun checkLotto(lottoNumbers: List<String>): List<Int> {
+fun checkNumber(lottoNumbers: List<String>): List<Int> {
     try {
         val mappedLottoNumbers = lottoNumbers.map { it.toInt() }
         mappedLottoNumbers.forEach {
@@ -76,4 +89,14 @@ fun checkLotto(lottoNumbers: List<String>): List<Int> {
     } catch (e: NumberFormatException) {
         throw IllegalArgumentException("[ERROR] 쉼표(,) 이외의 구분자를 사용할 수 없습니다. 당첨 번호를 다시 입력해주세요.")
     }
+}
+
+fun getBonusNumber(): Int {
+    val bonusNumber = Console.readLine().toInt()
+    return checkNumber(bonusNumber)
+}
+
+fun checkNumber(lottoNumber: Int): Int {
+    require(lottoNumber in 1 .. 45) {"[ERROR] 로또 번호는 1부터 45 사이의 숫자여야 합니다. 보너스 번호를 다시 입력해주세요."}
+    return lottoNumber
 }
