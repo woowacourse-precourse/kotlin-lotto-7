@@ -20,7 +20,6 @@ class InputValidator {
         }
     }
 
-
     fun validateWinningNumbers(winningNumbers: String) {
         if (winningNumbers.isEmpty()) {
             throw IllegalStateException(ErrorType.LOTTO_NUMBER_EMPTY)
@@ -44,6 +43,22 @@ class InputValidator {
 
         require(splitNumbers.distinct().size == LOTTO_NUMBER_COUNT) {
             ErrorType.LOTTO_NUMBER_DUPLICATION
+        }
+    }
+
+    fun validateBonusNumberInput(winningNumbers: List<Int>, bonusNumber: String) {
+        if (bonusNumber.isEmpty()) {
+            throw IllegalStateException(ErrorType.BONUS_NUMBER_EMPTY)
+        }
+
+        NumberValidator.validateInteger(bonusNumber)
+
+        require(bonusNumber.toInt() in MIN_LOTTO_NUMBER..MAX_LOTTO_NUMBER) {
+            ErrorType.BONUS_NUMBER_RANGE_CONDITION
+        }
+
+        require(bonusNumber.toInt() !in winningNumbers) {
+            ErrorType.BONUS_NUMBER_NOT_CONTAINS_WINNING_NUMBER
         }
     }
 }
