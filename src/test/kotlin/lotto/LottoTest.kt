@@ -36,4 +36,18 @@ class LottoTest {
         val numbers = listOf(1, 2, 3, 4, 5, 6)
         duplicateValidate.validate(numbers)
     }
+
+    @Test
+    fun `1~45 사이의 숫자를 뽑은 경우`() {
+        val duplicateValidate = LottoGenerator()
+        val numbers = listOf(1, 2, 3, 45, 5, 6)
+        duplicateValidate.validate(numbers)
+    }
+
+    @Test
+    fun `1~45 사이의 숫자를 뽑지 않은 경우`() {
+        val duplicateValidate = LottoGenerator()
+        val numbers = listOf(0, 2, 3, 49, 5, 6)
+        duplicateValidate.validate(numbers)
+    }
 }
