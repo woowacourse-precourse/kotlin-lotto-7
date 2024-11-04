@@ -10,6 +10,8 @@ class Validator {
 
         val amount = input.toInt()
 
+        require(amount != 0) { NOT_MULTIPLE_OF_1000.message }
+
         require(amount % 1000 == 0) { NOT_MULTIPLE_OF_1000.message }
     }
 }
