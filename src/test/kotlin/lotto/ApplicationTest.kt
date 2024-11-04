@@ -50,7 +50,7 @@ class ApplicationTest : NsTest() {
     }
 
     override fun runMain() {
-        main()
+        main(isTestMode = true)
     }
 
     companion object {
