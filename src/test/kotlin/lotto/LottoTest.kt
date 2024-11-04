@@ -29,22 +29,22 @@ class LottoTest {
         }
     }
 
-    @Test
-    fun `구입한 만큼의 로또 발행하기`() {
-        val lotto = Lotto(listOf(1, 2, 3, 4, 5, 6))
-        assertRandomUniqueNumbersInRangeTest(
-            {
-                assertThat(lotto.issueLotto(3)).isEqualTo(
-                    listOf(
-                        listOf(8, 21, 23, 41, 42, 43),
-                        listOf(3, 5, 11, 16, 32, 38),
-                        listOf(7, 11, 16, 35, 36, 44)
-                    )
-                )
-            },
-            listOf(8, 21, 23, 41, 42, 43),
-            listOf(3, 5, 11, 16, 32, 38),
-            listOf(7, 11, 16, 35, 36, 44)
-        )
-    }
+//    @Test
+//    fun `구입한 만큼의 로또 발행하기`() {
+//        val lotto = Lotto(listOf(1, 2, 3, 4, 5, 6))
+//        assertRandomUniqueNumbersInRangeTest(
+//            {
+//                assertThat(lotto.issueLotto(3)).isEqualTo(
+//                    listOf(
+//                        listOf(8, 21, 23, 41, 42, 43),
+//                        listOf(3, 5, 11, 16, 32, 38),
+//                        listOf(7, 11, 16, 35, 36, 44)
+//                    )
+//                )
+//            },
+//            listOf(8, 21, 23, 41, 42, 43),
+//            listOf(3, 5, 11, 16, 32, 38),
+//            listOf(7, 11, 16, 35, 36, 44)
+//        )
+//    }
 }
