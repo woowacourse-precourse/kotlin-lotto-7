@@ -51,11 +51,11 @@ class LottoViewImpl: LottoView {
         return input.toInt()
     }
 
-    private fun formatShowTickets(ticketsSize: Int): String{
+    private fun formatShowTickets(ticketsSize: Int): String {
         return MESSAGE_TICKETS_COUNT.format(ticketsSize)
     }
 
-    private fun formatCalculatedTickets(matchCount: Int, reward: Int, ticketCount: Int): String{
+    private fun formatCalculatedTickets(matchCount: Int, reward: Int, ticketCount: Int): String {
         val formatReward = NumberFormat.getNumberInstance().format(reward)
         return MESSAGE_CALCULATED_TICKETS.format(matchCount, formatReward, ticketCount)
     }
