@@ -32,11 +32,16 @@ class InputView(private val validator: Validator, private val parser: Parser) {
         }
     }
 
-    fun inputBonusNumber(): Int {
+    fun inputBonusNumber(winningNumbers: List<Int>): Int {
         while (true) {
             println("보너스 번호를 입력해 주세요.")
             val input = Console.readLine()
+            val bonusNumber = parser.parseBonusNumber(input)
 
+            validator.validateBonusNumber(bonusNumber, winningNumbers)
+            println()
+
+            return bonusNumber
         }
     }
 }
