@@ -49,7 +49,7 @@ class LottoMachineTest {
 
     @Test
     fun `당첨 내역 출력 테스트`() {
-        val rank = mapOf(
+        val rank: Map<Rank?, Int> = mapOf(
             Rank.SECOND_RANK to 1,
             Rank.THIRD_RANK to 1,
             Rank.FOURTH_RANK to 1,
