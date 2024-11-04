@@ -28,7 +28,7 @@ class LottoValidatorTest {
 
     @ParameterizedTest
     @ValueSource(strings = ["a,b,c,d,e,f", "1,2,3,4,5,abc", "abcdef", "1.0,2.0,4,5,6,7", "1,,,2,,,3,,,4,,5,,6"])
-    @DisplayName("로또 번호로 입력된 문자열의 유효성 검사 예외 처리")
+    @DisplayName("로또 번호로 입력된 문자열의 정수 유효성 검사 예외 처리")
     fun `로또 번호 유효성 예외 처리`(input: String) {
         assertThrows<IllegalArgumentException> { validator.validateWinningLotto(input) }
     }
