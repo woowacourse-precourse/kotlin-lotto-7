@@ -51,7 +51,14 @@
   * [x] 구매 금액 1000 단위 x
   * [x] 구매 금액 숫자 아님
   * [x] 구매 금액 0
+  * [x] 보너스 번호 범위
+  * [x] 당첨 번호 범위
+  * [x] 당첨 번호 입력 형식
+  * [x] 보너스 번호 숫자 아님
 
 ## class diagram
+#### 코딩 전
 <a href="https://ibb.co/z5LqwxK"><img src="https://i.ibb.co/GJ1zjpg/lotto-drawio-1.png" alt="lotto-drawio-1" border="0"></a><br /><a target='_blank' href='https://dedupelist.com/'>find duplicate lines</a><br />
 
+#### 코딩 후
+<a href="https://ibb.co/DtDSt28"><img src="https://i.ibb.co/SPX9PCd/package.png" alt="package" border="0"></a>

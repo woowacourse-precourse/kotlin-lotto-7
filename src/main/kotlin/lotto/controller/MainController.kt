@@ -1,6 +1,7 @@
 package lotto.controller
 
 import lotto.model.LotteryGenerator
+import lotto.model.Lotto
 import lotto.model.WinningCalculator
 import lotto.util.Transformer
 import lotto.util.Validator
@@ -16,9 +17,9 @@ class MainController {
         lottoGenerator.makeLotto(money)
         Output.printLottoDetails(lottoGenerator.getLotteries())
         Output.printWinningNumberToInput()
-        val winningNumber = Transformer().stringToLotto(readAndValidateWinningNumber())
+        val winningNumber = readAndValidateWinningNumber()
         Output.printBonusNumberToInput()
-        val bonusNumber = readAndValidateBonusNumber().toInt()
+        val bonusNumber = readAndValidateBonusNumber(winningNumber).toInt()
         val calculator = WinningCalculator()
         val result = calculator.calculateDetails(winningNumber,bonusNumber,lottoGenerator.getLotteries())
         Output.printWinningDetails(result)
@@ -35,23 +36,24 @@ class MainController {
         }
     }
 
-    private fun readAndValidateWinningNumber() : String{
+    private fun readAndValidateWinningNumber() : Lotto{
         return try {
             val winningNumber = Input.read()
             Validator().validateWinningNumberInput(winningNumber)
-            winningNumber
+            Lotto(Transformer().stringToIntInt(winningNumber.split(',')))
         } catch (e: IllegalArgumentException) {
+            println("[ERROR] 입력이 올바르지 않습니다.")
             readAndValidateWinningNumber()
         }
     }
 
-    private fun readAndValidateBonusNumber() : String{
+    private fun readAndValidateBonusNumber(winningNumber: Lotto) : String{
         return try {
             val bonusNumber = Input.read()
-            Validator().validateBonusNumberInput(bonusNumber)
+            Validator().validateBonusNumberInput(bonusNumber,winningNumber)
             bonusNumber
         } catch (e: IllegalArgumentException) {
-            readAndValidateBonusNumber()
+            readAndValidateBonusNumber(winningNumber)
         }
     }
 }

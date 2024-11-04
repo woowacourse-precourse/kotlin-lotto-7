@@ -1,5 +1,6 @@
 package lotto.util
 
+import lotto.model.Lotto
 import java.lang.NumberFormatException
 
 class Validator {
@@ -14,8 +15,8 @@ class Validator {
         try {
             money.toInt()
         } catch (e: NumberFormatException) {
-            println("[ERROR] 입력이 숫자여야 합니다.")
-            throw IllegalArgumentException("[ERROR] 돈은 숫자여야 합니다.")
+            println("[ERROR] 입력은 숫자여야 합니다.")
+            throw IllegalArgumentException("[ERROR] 입력은 숫자여야 합니다.")
         }
     }
 
@@ -45,15 +46,23 @@ class Validator {
         }
     }
 
-    fun validateBonusNumberInput(bonusNumber: String) {
+    fun validateBonusNumberInput(bonusNumber: String, winningNumber: Lotto) {
         isNumber(bonusNumber)
         validateBonusNumberrange(bonusNumber)
+        validateBonusDuplication(bonusNumber, winningNumber)
     }
 
     private fun validateBonusNumberrange(bonusNumber: String) {
         if (bonusNumber.toInt() > 45 || bonusNumber.toInt() < 1) {
             println("[ERROR] 로또 번호의 범위는 1 ~ 45 입니다.")
             throw IllegalArgumentException("[ERROR] 로또 번호의 범위는 1 ~ 45 입니다.")
+        }
+    }
+
+    private fun validateBonusDuplication(bonusNumber: String, winningNumber: Lotto) {
+        if (winningNumber.getNumbers().contains(bonusNumber.toInt())) {
+            println("[ERROR] 로또 번호와 중복됩니다.")
+            throw IllegalArgumentException("[ERROR] 로또 번호와 중복됩니다.")
         }
     }
 }
