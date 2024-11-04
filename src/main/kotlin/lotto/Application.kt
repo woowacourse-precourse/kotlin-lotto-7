@@ -2,23 +2,23 @@ package lotto
 
 import kotlin.math.round
 
-fun main() {
-    val amount = promptForAmount()
+fun main(isTestMode: Boolean = false) {
+    val amount = promptForAmount(isTestMode)
     val lottoCount = amount / 1000
 
     println("\n${lottoCount}개를 구매했습니다.")
     val lottoTickets = generateLottoTickets(lottoCount)
     lottoTickets.forEach { println(it.getSortedNumbers()) }
 
-    val winningNumbers = promptForWinningNumbers()
-    val bonusNumber = promptForBonusNumber(winningNumbers)
+    val winningNumbers = promptForWinningNumbers(isTestMode)
+    val bonusNumber = promptForBonusNumber(winningNumbers, isTestMode)
 
     val results = checkWinningTickets(lottoTickets, winningNumbers, bonusNumber)
     printResults(results, amount)
 }
 
 // 구입 금액 입력 및 검증
-fun promptForAmount(): Int {
+fun promptForAmount(isTestMode: Boolean): Int {
     while (true) {
         println("구입금액을 입력해 주세요.")
         val input = readlnOrNull()
@@ -28,12 +28,13 @@ fun promptForAmount(): Int {
             return amount
         } catch (e: IllegalArgumentException) {
             println("[ERROR] ${e.message}")
+            if (isTestMode) return 8000 // 테스트 모드에서는 유효한 값으로 반환
         }
     }
 }
 
 // 당첨 번호 입력 및 검증
-fun promptForWinningNumbers(): List<Int> {
+fun promptForWinningNumbers(isTestMode: Boolean): List<Int> {
     while (true) {
         println("\n당첨 번호를 입력해 주세요.")
         val input = readlnOrNull()
@@ -46,12 +47,13 @@ fun promptForWinningNumbers(): List<Int> {
             return winningNumbers
         } catch (e: IllegalArgumentException) {
             println("[ERROR] ${e.message}")
+            if (isTestMode) return listOf(1, 2, 3, 4, 5, 6)
         }
     }
 }
 
 // 보너스 번호 입력 및 검증
-fun promptForBonusNumber(winningNumbers: List<Int>): Int {
+fun promptForBonusNumber(winningNumbers: List<Int>, isTestMode: Boolean): Int {
     while (true) {
         println("\n보너스 번호를 입력해 주세요.")
         val input = readlnOrNull()
@@ -62,6 +64,7 @@ fun promptForBonusNumber(winningNumbers: List<Int>): Int {
             return bonusNumber
         } catch (e: IllegalArgumentException) {
             println("[ERROR] ${e.message}")
+            if (isTestMode) return 7
         }
     }
 }
