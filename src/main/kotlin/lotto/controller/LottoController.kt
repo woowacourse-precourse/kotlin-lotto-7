@@ -33,16 +33,18 @@ class LottoController(val input: Input, val output: Output) {
         return validator.lottoNumbersNotDuplicate(resultNumbers.toList())
     }
 
-    private fun calculateTotalMatchResult(result: List<Int>) {
+    private fun calculateTotalMatchResult(result: List<Int>): LottoTotalMatchResult {
+        val totalMatchResult = LottoTotalMatchResult()
         repeat(lottos.size) { idx ->
             val matchResult = lottos[idx].calculateMatchResult(result)
             when (matchResult.matchNumbersCount) {
-                1 -> totalMatchResult.prize1 += 1
-                2 -> if (matchResult.isMatchBonus) totalMatchResult.prize2 += 1
-                3 -> totalMatchResult.prize3 += 1
-                4 -> totalMatchResult.prize4 += 1
-                5 -> totalMatchResult.prize5 += 1
+                5 -> totalMatchResult.prizeCount1 += 1
+                4 -> if (matchResult.isMatchBonus) totalMatchResult.prizeCount2 += 1
+                3 -> totalMatchResult.prizeCount3 += 1
+                2 -> totalMatchResult.prizeCount4 += 1
+                1 -> totalMatchResult.prizeCount5 += 1
             }
         }
+        return totalMatchResult
     }
 }
