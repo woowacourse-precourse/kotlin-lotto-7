@@ -37,6 +37,7 @@ object Input {
                 val input = Console.readLine()
                     ?.takeIf { it.isNotBlank() }
                     ?: throw IllegalArgumentException("[ERROR] 입력 값을 다시 확인해주세요.")
+                require(input.all { it.isDigit() }) { "[ERROR] 숫자만 입력 가능합니다." }
                 val price = input.toInt()
                 require(price % LOTTO_PRICE == 0 && price > 0) { "[ERROR] 구매 금액을 올바르게 입력해주세요." }
                 return price
@@ -70,6 +71,7 @@ object Input {
                 val input = Console.readLine()
                     ?.takeIf { it.isNotBlank() }
                     ?: throw IllegalArgumentException("[ERROR] 입력 값을 다시 확인해주세요.")
+                require(input.all { it.isDigit() }) { "[ERROR] 숫자만 입력 가능합니다." }
                 val bonusNumber = input.toInt()
                 require(bonusNumber in LOTTO_MIN..LOTTO_MAX) { "[ERROR] 보너스 번호 값을 다시 확인해주세요." }
                 return bonusNumber
