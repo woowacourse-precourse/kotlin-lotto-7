@@ -13,6 +13,11 @@ class Lotto(private val numbers: List<Int>) {
         fun generateNumbers(): List<Int> {
             return Randoms.pickUniqueNumbersInRange(1, 45, 6).sorted()
         }
+
+        // 로또 구입 금액 검증
+        fun validatePurchaseAmount(amount: Int) {
+            require(amount > 0 && amount % 1000 == 0) { "[ERROR] 로또 구입 금액은 1,000원 단위여야 합니다." }
+        }
     }
 
     // 당첨 번호와 보너스 번호 검증
