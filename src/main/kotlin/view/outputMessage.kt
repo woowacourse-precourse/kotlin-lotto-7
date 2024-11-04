@@ -3,7 +3,8 @@ package view
 import values.Content
 
 class outputMessage {
-    fun randomLottoList(randomNumberList: MutableMap<Int, List<Int>>) {
+    fun randomLottoList(count: Int, randomNumberList: MutableMap<Int, List<Int>>) {
+        println(count.toString() + Content.COUNT_FOR_LOTTO)
         println(randomNumberList)
     }
 
