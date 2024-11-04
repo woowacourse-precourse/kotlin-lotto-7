@@ -10,7 +10,7 @@ class User(val purchasedLottoCount: Int) {
         addLottos()
     }
 
-    // 구매 수량만큼 LotteryMachine에서 로또를 발행 후 User의 lottoList에 저장
+    // 구매 수량만큼 LotteryMachine에서 로또를 발행 후 User의 purchasedLottos에 저장
     fun addLottos(){
         val newLottos = LotteryMachine.generateLottos(purchasedLottoCount)
         purchasedLottos.addAll(newLottos)
