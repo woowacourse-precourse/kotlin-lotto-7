@@ -2,13 +2,58 @@ package lotto
 
 import camp.nextstep.edu.missionutils.Console
 
-lateinit var hitNumbers : List<Int>
+lateinit var hitNumbers: List<Int>
 
 fun main() {
     val money = inputHowMuch()
     val myLottos = makeMyLotto(money)
     hitNumbers = inputHitNumbers()
     val bonusNumber = inputBonusNumber()
+    result(money, myLottos, bonusNumber)
+}
+
+fun result(money: Int, myLottos: List<Lotto>, bonusNumber: Int) {
+    val myRewards = mutableListOf<Reward>()
+    repeat(myLottos.size) { it
+        myRewards += paperMatching(myLottos, bonusNumber, it)
+    }
+    resultOutput(money, myRewards)
+}
+
+fun resultOutput(money: Int, myRewards: List<Reward>) {
+    val incomeRate = (myRewards.sumOf { it.money }.toDouble()/money.toDouble())*100
+    val resultMessage = "당첨 통계\n" +
+            "---\n" +
+            "3개 일치 (5,000원) - ${myRewards.count { it == Reward.MATCH3 }}개\n" +
+            "4개 일치 (50,000원) - ${myRewards.count { it == Reward.MATCH4 }}개\n" +
+            "5개 일치 (1,500,000원) - ${myRewards.count { it == Reward.MATCH5 }}개\n" +
+            "5개 일치, 보너스 볼 일치 (30,000,000원) - ${myRewards.count { it == Reward.MATCH5BONUS }}개\n" +
+            "6개 일치 (2,000,000,000원) - ${myRewards.count { it == Reward.MATCH6 }}개\n" +
+            "총 수익률은 ${String.format("%.2f",incomeRate).toDouble()}%입니다."
+    println(resultMessage)
+}
+
+fun paperMatching(myLottos: List<Lotto>, bonusNumber: Int, turn: Int): Reward {
+    var hasBonus = false
+    val paper = myLottos[turn].getNumbers()
+    val matchedCount = paper.intersect(hitNumbers.toSet()).count()
+    if (matchedCount == 5 && checkBonus(paper, bonusNumber)) hasBonus = true
+    return getReward(matchedCount, hasBonus)
+}
+
+fun checkBonus(numbers: List<Int>, bonusNumber: Int): Boolean {
+    return numbers.contains(bonusNumber)
+}
+
+fun getReward(matchedCount: Int, hasBonus: Boolean): Reward {
+    return when {
+        matchedCount == 6 -> Reward.MATCH6
+        matchedCount == 5 && hasBonus -> Reward.MATCH5BONUS
+        matchedCount == 5 -> Reward.MATCH5
+        matchedCount == 4 -> Reward.MATCH4
+        matchedCount == 3 -> Reward.MATCH3
+        else -> Reward.NONE
+    }
 }
 
 fun inputBonusNumber(): Int {
@@ -29,7 +74,7 @@ fun validateBonusNumber(inputBonus: String) {
 
 fun validateDuplicateWithHit(input: Int) {
     val exceptionMessage = "[ERROR] 당첨 숫자와 중복 될 수 없습니다"
-    require(input !in hitNumbers){throw IllegalArgumentException(exceptionMessage)}
+    require(input !in hitNumbers) { throw IllegalArgumentException(exceptionMessage) }
 }
 
 fun inputHitNumbers(): List<Int> {
@@ -39,7 +84,7 @@ fun inputHitNumbers(): List<Int> {
     return validateHitNumbers(inputHit)
 }
 
-fun validateHitNumbers(input: String) : List<Int> {
+fun validateHitNumbers(input: String): List<Int> {
     validateEmpty(input)
     validateBlank(input)
     validatePattern(input)
@@ -51,17 +96,27 @@ fun validateHitNumbers(input: String) : List<Int> {
 
 fun validateDuplicate(parsedInput: List<Int>) {
     val exceptionMessage = "[ERROR] 중복된 숫자가 존재하면 안 됩니다."
-    require(parsedInput.groupingBy { it }.eachCount().all { 1 == it.value }){throw IllegalArgumentException(exceptionMessage)}
+    require(
+        parsedInput.groupingBy { it }.eachCount()
+            .all { 1 == it.value }) { throw IllegalArgumentException(exceptionMessage) }
 }
 
 fun validateBetween1And45(parsedInput: List<Int>) {
     val exceptionMessage = "[ERROR] 1이상 45이하의 숫자여야 합니다."
-    require(parsedInput.all { it in Lotto.MIN_LOTTO_NUMBER..Lotto.MAX_LOTTO_NUMBER }) { throw IllegalArgumentException(exceptionMessage) }
+    require(parsedInput.all { it in Lotto.MIN_LOTTO_NUMBER..Lotto.MAX_LOTTO_NUMBER }) {
+        throw IllegalArgumentException(
+            exceptionMessage
+        )
+    }
 }
 
 fun validateBetween1And45(input: Int) {
     val exceptionMessage = "[ERROR] 1이상 45이하의 숫자여야 합니다."
-    require(input in Lotto.MIN_LOTTO_NUMBER..Lotto.MAX_LOTTO_NUMBER ) { throw IllegalArgumentException(exceptionMessage) }
+    require(input in Lotto.MIN_LOTTO_NUMBER..Lotto.MAX_LOTTO_NUMBER) {
+        throw IllegalArgumentException(
+            exceptionMessage
+        )
+    }
 }
 
 fun parseByComma(input: String): List<Int> {
