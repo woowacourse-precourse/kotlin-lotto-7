@@ -22,7 +22,8 @@ object OutputView {
     private fun printRankResult(rank: Rank, rankCounts: Map<Rank, Int>) {
         val count = rankCounts[rank] ?: 0
         val bonusText = getBonusText(rank)
-        println(OutputMessage.RANK_RESULT.message.format(rank.matchCount, bonusText, rank.prize, count))
+        val formattedPrize = String.format("%,d", rank.prize)
+        println(OutputMessage.RANK_RESULT.message.format(rank.matchCount, bonusText, formattedPrize, count))
     }
 
     private fun getBonusText(rank: Rank): String {
