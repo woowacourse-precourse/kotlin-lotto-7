@@ -75,7 +75,7 @@ private fun printTicketCount(lottoTicketCount: Int) {
 
 private fun getLottoBudget(): Int {
     try {
-        println("구입금액을 입력해 주세요.")
+        promptLottoBudgetInput()
         val userInput = Console.readLine()
         val lottoBudget = userInput.toInt()
         handleBudgetInputError(lottoBudget, userInput)
@@ -85,6 +85,10 @@ private fun getLottoBudget(): Int {
     }
 
     return getLottoBudget()
+}
+
+private fun promptLottoBudgetInput() {
+    println("구입금액을 입력해 주세요.")
 }
 
 private fun handleBudgetInputError(lottoBudget: Int, userInput: String) {
@@ -107,7 +111,7 @@ private fun getLottoNumbers(): List<Int> {
 
 private fun getLottoWinningNumbers(): List<Int> {
     try {
-        println("당첨 번호를 입력해 주세요.")
+        promptWinningNumbersInput()
         val userInput = Console.readLine()
         val lottoWinningNumbers = userInput.split(",").map { it.toInt() ?: throw IllegalArgumentException("당첨 번호는 쉼표(,)로 구분된 1~45 사이의 정수 형태로 입력해 주세요.") }
         handleWinningNumberInputError(lottoWinningNumbers)
@@ -117,6 +121,10 @@ private fun getLottoWinningNumbers(): List<Int> {
     }
 
     return getLottoWinningNumbers()
+}
+
+private fun promptWinningNumbersInput() {
+    println("당첨 번호를 입력해 주세요.")
 }
 
 private fun handleWinningNumberInputError(lottoWinningNumbers: List<Int>) {
@@ -133,7 +141,7 @@ private fun handleWinningNumberInputError(lottoWinningNumbers: List<Int>) {
 
 private fun getLottoBonusNumber(lottoWinningNumbers: List<Int>): Int {
     try {
-        println("보너스 번호를 입력해 주세요.")
+        promptBonusNumberInput()
         val userInput = Console.readLine()
         val lottoBonusNumber = userInput.toInt()
         HandleBonusInputError(lottoBonusNumber, lottoWinningNumbers)
@@ -142,6 +150,10 @@ private fun getLottoBonusNumber(lottoWinningNumbers: List<Int>): Int {
         println("[ERROR] ${e.message}")
     }
     return getLottoBonusNumber(lottoWinningNumbers)
+}
+
+private fun promptBonusNumberInput() {
+    println("보너스 번호를 입력해 주세요.")
 }
 
 private fun HandleBonusInputError(lottoBonusNumber: Int, lottoWinningNumbers: List<Int>) {
