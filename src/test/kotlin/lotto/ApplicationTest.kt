@@ -4,6 +4,7 @@ import camp.nextstep.edu.missionutils.test.Assertions.assertRandomUniqueNumbersI
 import camp.nextstep.edu.missionutils.test.Assertions.assertSimpleTest
 import camp.nextstep.edu.missionutils.test.NsTest
 import org.assertj.core.api.Assertions.assertThat
+import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 
 class ApplicationTest : NsTest() {
@@ -42,9 +43,106 @@ class ApplicationTest : NsTest() {
     }
 
     @Test
-    fun `예외 테스트`() {
+    fun `예외 테스트 - 구입 금액이 Null인 경우`() {
+        assertSimpleTest {
+            runException(null)
+            assertThat(output()).contains(ERROR_MESSAGE)
+        }
+    }
+
+    @Test
+    fun `예외 테스트 - 구입 금액이 Int가 아닌 경우`() {
         assertSimpleTest {
             runException("1000j")
+            assertThat(output()).contains(ERROR_MESSAGE)
+        }
+    }
+
+    @Test
+    fun `예외 테스트 - 구입 금액이 1000원 단위가 아닌 경우`() {
+        assertSimpleTest {
+            runException("1500")
+            assertThat(output()).contains(ERROR_MESSAGE)
+        }
+    }
+
+    @Test
+    fun `예외 테스트 - 당첨 번호 입력이 빈 경우`() {
+        assertSimpleTest {
+            runException("1000", "","6")  // 빈 문자열을 입력으로 제공
+            assertThat(output()).contains(ERROR_MESSAGE)
+        }
+    }
+
+
+    @Test
+    fun `예외 테스트 - 당첨 번호가 1~45 사이가 아닌 경우`() {
+        assertSimpleTest {
+            runException("0,46,1,2,3,4")
+            assertThat(output()).contains(ERROR_MESSAGE)
+        }
+    }
+
+    @Test
+    fun `예외 테스트 - 당첨 번호 개수가 6개가 아닌 경우`() {
+        assertSimpleTest {
+            runException("1,2,3,4,5")
+            assertThat(output()).contains(ERROR_MESSAGE)
+        }
+    }
+
+    @Test
+    fun `예외 테스트 - 당첨 번호가 Int가 아닌 경우`() {
+        assertSimpleTest {
+            runException("1,2,3,4,5,a")
+            assertThat(output()).contains(ERROR_MESSAGE)
+        }
+    }
+
+    @Test
+    fun `예외 테스트 - 당첨 번호 중복된 경우`() {
+        assertSimpleTest {
+            runException("1,2,3,4,4,5")
+            assertThat(output()).contains(ERROR_MESSAGE)
+        }
+    }
+
+    @Test
+    fun `예외 테스트 - 보너스 번호 입력이 빈 경우`() {
+        assertSimpleTest {
+            runException("1,2,3,4,4,5","")
+            assertThat(output()).contains(ERROR_MESSAGE)
+        }
+    }
+
+    @Test
+    fun `예외 테스트 - 보너스 번호가 숫자가 아닌 경우`() {
+        assertSimpleTest {
+            runException("a")
+            assertThat(output()).contains(ERROR_MESSAGE)
+        }
+    }
+
+    @Test
+    fun `예외 테스트 - 보너스 번호가 1~45 사이가 아닌 경우`() {
+        assertSimpleTest {
+            runException("1,2,3,4,4,5","46") // 유효하지 않은 보너스 번호를 제공
+            assertThat(output()).contains(ERROR_MESSAGE)
+        }
+    }
+
+    @Test
+    fun `예외 테스트 - 보너스 번호 중복된 경우`() {
+        assertSimpleTest {
+            runException("1,1")
+            assertThat(output()).contains(ERROR_MESSAGE)
+        }
+    }
+
+    @Test
+    fun `예외 테스트 - 보너스 번호가 Int가 아닌 경우`() {
+        assertSimpleTest {
+            runException("1,a")
             assertThat(output()).contains(ERROR_MESSAGE)
         }
     }
