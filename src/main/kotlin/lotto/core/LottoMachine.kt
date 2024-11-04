@@ -20,6 +20,7 @@ import lotto.constants.Message.MESSAGE_PURCHASED_LOTTO_COUNT
 import lotto.constants.Message.MESSAGE_PROMPT_BONUS_NUMBER
 import lotto.constants.Message.MESSAGE_PROMPT_PURCHASE_AMOUNT
 import lotto.constants.Message.MESSAGE_PROMPT_WINNING_NUMBER
+import java.text.NumberFormat
 
 
 const val TICKET_PRICE = 1000
@@ -110,12 +111,13 @@ class LottoMachine {
         println(DIVIDER)
 
         Rank.entries.reversed().forEach { rank ->   // 5등에서 1등 순서로 출력
+            val formattedNumber = NumberFormat.getNumberInstance().format(rank.prize)   // 1000 단위씩 `,`로 구분
             val matchCount = lottoStats.count { it == rank }
             if (rank == Rank.SECOND) {
-                println(MESSAGE_MATCH_WITH_BONUS_LOTTO_STATS.format(rank.matchCount, rank.prize, matchCount))
+                println(MESSAGE_MATCH_WITH_BONUS_LOTTO_STATS.format(rank.matchCount, formattedNumber, matchCount))
                 return@forEach
             }
-            println(MESSAGE_MATCH_LOTTO_STATS.format(rank.matchCount, rank.prize, matchCount))
+            println(MESSAGE_MATCH_LOTTO_STATS.format(rank.matchCount, formattedNumber, matchCount))
 
         }
     }
