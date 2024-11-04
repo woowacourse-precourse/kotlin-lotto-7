@@ -2,44 +2,35 @@ package lotto.controller
 
 import lotto.constants.Constants.DELIMITER
 import lotto.constants.Constants.PRICE_UNIT
+import lotto.model.Lotto
+import lotto.model.Statistics
+import lotto.service.LottoService
 import lotto.util.Validator
 import lotto.util.safeInputCall
 import lotto.util.toIntOrException
 import lotto.view.InputView
+import lotto.view.OutputView
 
 class LottoController(
     private val inputView: InputView = InputView(),
-    private val validator: Validator = Validator()
+    private val lottoService: LottoService = LottoService(),
+    private val outputView: OutputView = OutputView()
 ) {
-    private fun getLottoCount(): Int = safeInputCall {
-        val priceInput = inputView.getPriceInput()
-        val tempPrice = priceInput.toIntOrException()
+    private lateinit var statistics: Statistics
+    fun run() {
+        setUp()
+        outputView.printStatistics(statistics)
 
-        validator.validatePriceRange(tempPrice)
-        validator.validatePriceUnit(tempPrice)
-
-        tempPrice % PRICE_UNIT
+        inputView.close()
     }
 
-    private fun getWinningNumbers(): List<Int> = safeInputCall {
-        val winningNumbersInput = inputView.getWinningNumbersInput()
-        val winningNumberList = winningNumbersInput.split(DELIMITER)
+    private fun setUp() {
+        val lottoPrice = inputView.getPriceInput()
+        val lottoList = lottoService.generateLottoList(count = lottoPrice / PRICE_UNIT)
+        outputView.printPurchaseHistory(lottoList)
 
-        val tempWinningNumbers = winningNumberList.map {
-            val value = it.toIntOrException()
-            validator.validateLottoNumberRange(value)
-            value
-        }
-
-        tempWinningNumbers.sorted()
-    }
-
-    private fun getBonusNumber(): Int = safeInputCall {
-        val bonusNumberInput = inputView.getBonusNumberInput()
-        val tempBonusNumber = bonusNumberInput.toIntOrException()
-
-        validator.validateLottoNumberRange(tempBonusNumber)
-
-        tempBonusNumber
+        val winningNumbers = inputView.getWinningNumbersInput()
+        val bonusNumber = inputView.getBonusNumberInput()
+        statistics = lottoService.getStatistics(lottoPrice, lottoList, winningNumbers, bonusNumber)
     }
 }
