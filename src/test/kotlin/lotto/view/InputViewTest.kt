@@ -127,7 +127,7 @@ class InputViewTest {
             assertEquals(listOf(1, 2, 3, 4, 5, 6), result)
 
             val output = outputStreamCaptor.toString().trim()
-            assertTrue(output.contains(ErrorMessage.NOT_NUMBER.getMessage()))
+            assertTrue(output.contains(ErrorMessage.INVALID_LOTTO_NUMBERS.getMessage()))
         }
 
         @Test
