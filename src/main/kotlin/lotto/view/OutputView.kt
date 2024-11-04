@@ -13,6 +13,12 @@ class OutputView {
         printMessageWithNumber(MSG_OUTPUT_LOTTO_PURCHASE_COUNT, purchaseCount)
     }
 
+    fun printLottoGenerateNumber(lottoNumbers: List<Lotto>) {
+        lottoNumbers.forEach { line ->
+            println(line.getNumbers())
+        }
+    }
+
     private fun printMessageWithNumber(message: String, number: Any) {
         println(String.format(message, number))
     }
