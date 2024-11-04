@@ -6,8 +6,8 @@ class WinningNumber(private val numbers: String) {
 
     init {
         require(checkLottoSize()) { "$ERROR $WINNING_SIZE_MESSAGE" }
-        require(isNumberInRange()) { "$ERROR $WINNING_NUMBER_DUPLICATE_MESSAGE" }
-        require(isDuplicate()) { "$ERROR $WINNING_NUMBER_NOT_IN_RANGE_MESSAGE" }
+        require(isNumberInRange()) { "$ERROR $WINNING_NUMBER_NOT_IN_RANGE_MESSAGE" }
+        require(isDuplicate()) { "$ERROR $WINNING_NUMBER_DUPLICATE_MESSAGE" }
         require(isNumberOrNull()) { "$ERROR $WINNING_NUMBER_NOT_NUMBER_MESSAGE" }
     }
 
