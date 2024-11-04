@@ -1,4 +1,4 @@
-package lotto
+package lotto.model
 
 import lotto.validation.InputValidation
 
@@ -9,5 +9,7 @@ class Lotto(private val numbers: List<Int>) {
         validator.lottoNumbers(numbers)
     }
 
-    // TODO: 추가 기능 구현
+    fun getLottoNumbers(): List<Int> {
+        return numbers
+    }
 }
