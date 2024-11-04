@@ -5,9 +5,9 @@ import camp.nextstep.edu.missionutils.Console
 class Input {
     private fun input(): String = Console.readLine()
 
-    fun getAmount(): String {
+    fun getAmount(): Int {
         println(REQUEST_AMOUNT_MESSAGE);
-        return input()
+        return input().toInt()
     }
 
     fun getLottoNumbers(): List<Int> {
