@@ -25,7 +25,7 @@ class LottoNumberValidatorTest {
         }
 
         @ParameterizedTest
-        @ValueSource(strings = ["a,b,c,d,e,f", "1 2,3 4,5 6,7 8,9 10,11 12", " , , , , , "])
+        @ValueSource(strings = ["a,b,c,d,e,f", "1 2,3 4,5 6,7 8,9 10,11 12", " , , , , , ", "1, 2, 3, 4, 5, 6"])
         fun `로또 번호가 자연수가 아닌 경우 예외가 발생한다`(input: String) {
             val exception = assertThrows<IllegalArgumentException> { LottoNumberValidator.getValidatedWinningNumbers(input) }
 
