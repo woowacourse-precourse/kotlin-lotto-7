@@ -38,7 +38,9 @@ class LottoController(
         lottoList = lottoGenerator.generate()
 
         val lottoListViewData = lottoList.toViewData()
+        outputView.newLine()
         outputView.outputLottoList(lottoListViewData)
+        outputView.newLine()
     }
 
     private fun inputWinningNumbers() {
@@ -47,6 +49,7 @@ class LottoController(
         require(LottoValidator.isNumbersLengthSix(winningNumbers)) {
             ErrorMessage.LOTTO_NUMBERS_MUST_SIX_LETTERS.getMessage()
         }
+        outputView.newLine()
     }
 
     private fun inputBonusNumber() {
@@ -55,6 +58,7 @@ class LottoController(
         require(InputValidator.isBonusNumberUnique(winningNumbers, bonusNumber)) {
             ErrorMessage.LOTTO_NUMBERS_CONTAIN_BONUS_NUMBER.getMessage()
         }
+        outputView.newLine()
     }
 
     private fun showLottoResult() {
@@ -69,6 +73,7 @@ class LottoController(
             winningRankCountList = winningRankCountList,
             rateOfReturn = roundedRateOfReturn
         )
+        outputView.newLine()
     }
 
     private fun calculateRankList(lottoResultDetail: LottoResultDetail) {
@@ -86,13 +91,15 @@ private fun continueAfterException(
     outputView: LottoOutputView,
     block: () -> Unit,
 ) {
-    while (true) {
+    var hasException = true
+    while (hasException) {
+        hasException = false
         try {
             block()
-            break
-        } catch (e: Exception) {
+        } catch (e: IllegalArgumentException) {
             val errorMessage = e.localizedMessage
             outputView.printErrorMessage(errorMessage)
+            hasException = true
         }
     }
 }
