@@ -14,7 +14,7 @@ object Validator {
     fun <T> retryOnFailure(inputFunction: () -> T): T {
         while (true) {
             try {
-                inputFunction()
+                return inputFunction()
             } catch (e: IllegalArgumentException) {
                 println(e.message)
                 retryOnFailure(inputFunction)

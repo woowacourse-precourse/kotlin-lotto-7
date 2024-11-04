@@ -9,7 +9,7 @@ import lotto.view.UserFeedback
 class LottoController {
     private val numbers: MutableList<MutableList<Int>> = mutableListOf()
     fun run() {
-        val amount = Validator.retryOnFailure { Amount(amountInterface()) } //TODO: 함수로 만들어 재사용하기
+        val amount = Validator.retryOnFailure { Amount(amountInterface()) }
         val tryCount = amount.generateToTry()
         repeat(tryCount) {
             numbers.add(CreateLotto().random())
