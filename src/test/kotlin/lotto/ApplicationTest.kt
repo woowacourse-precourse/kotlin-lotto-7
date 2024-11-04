@@ -5,6 +5,8 @@ import camp.nextstep.edu.missionutils.test.Assertions.assertSimpleTest
 import camp.nextstep.edu.missionutils.test.NsTest
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.assertDoesNotThrow
+import org.junit.jupiter.api.assertThrows
 
 class ApplicationTest : NsTest() {
     @Test
@@ -39,6 +41,36 @@ class ApplicationTest : NsTest() {
             listOf(2, 13, 22, 32, 38, 45),
             listOf(1, 3, 5, 14, 22, 45)
         )
+    }
+
+    @Test
+    fun `정상 금액 입력 테스트`() {
+        val money = 3000
+        assertDoesNotThrow {
+            validMoney(money.toString())
+        }
+    }
+
+    @Test
+    fun `비정상 금액 입력 예외 테스트`() {
+        assertThrows<IllegalArgumentException> {
+            validMoney("abc")
+        }
+        assertThrows<IllegalArgumentException> {
+            validMoney("-5000")
+        }
+        assertThrows<IllegalArgumentException> {
+            validMoney("")
+        }
+        assertThrows<IllegalArgumentException> {
+            validMoney("1300")
+        }
+
+        listOf("1000!", "2000$", "@5000", "12a34").forEach { amount ->
+            assertThrows<IllegalArgumentException> {
+                validMoney(amount)
+            }
+        }
     }
 
     @Test
