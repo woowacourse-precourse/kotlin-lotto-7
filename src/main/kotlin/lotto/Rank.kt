@@ -13,12 +13,17 @@ enum class Rank(
     NONE(0, 0);
 
     companion object {
+        private const val MATCH_COUNT_SIX = 6
+        private const val MATCH_COUNT_FIVE = 5
+        private const val MATCH_COUNT_FOUR = 4
+        private const val MATCH_COUNT_THREE = 3
+
         fun matchRank(matchCount: Int, isBonusMatch: Boolean): Rank {
             return when (matchCount) {
-                6 -> FIRST
-                5 -> if (isBonusMatch) SECOND else THIRD
-                4 -> FOURTH
-                3 -> FIFTH
+                MATCH_COUNT_SIX -> FIRST
+                MATCH_COUNT_FIVE -> if (isBonusMatch) SECOND else THIRD
+                MATCH_COUNT_FOUR -> FOURTH
+                MATCH_COUNT_THREE -> FIFTH
                 else -> NONE
             }
         }
