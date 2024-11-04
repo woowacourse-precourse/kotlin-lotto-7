@@ -8,7 +8,7 @@ class LottoBuyView {
 
     fun inputPurchaseAmount() = Console.readLine()
 
-    fun guidePurchaseLottoCount(lottoCount: Int) = println("${lottoCount}개를 구매했습니다.")
+    fun guidePurchaseLottoCount(lottoCount: Int) = println("$lottoCount" + LOTTO_PURCHASE_MESSAGE)
 
     fun guideLottoNumbers(lottoTickets: List<Lotto>) {
         lottoTickets.forEach { lotto ->
@@ -18,5 +18,6 @@ class LottoBuyView {
 
     companion object {
         private const val INPUT_PURCHASE_AMOUNT_MESSAGE = "구입금액을 입력해 주세요."
+        private const val LOTTO_PURCHASE_MESSAGE = "개를 구매했습니다."
     }
 }

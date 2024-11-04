@@ -17,13 +17,13 @@ class LottoResultView {
         val price = lottoRank.prize.toWonFormat()
         val lottoCount = lottoTicketsRank.count { lottoTicketRank -> lottoTicketRank == lottoRank }
         if (lottoRank == LottoRank.SECOND) {
-            return "${matchCount}개 일치, 보너스 볼 일치 (${price}) - ${lottoCount}개"
+            return String.format(BONUS_MATCH_MESSAGE, matchCount, price, lottoCount)
         }
-        return "${matchCount}개 일치 (${price}) - ${lottoCount}개"
+        return String.format(MATCH_MESSAGE, matchCount, price, lottoCount)
     }
 
     fun outputTotalProfitRate(lottoProfitRate: String) {
-        println("총 수익률은 ${lottoProfitRate}입니다.")
+        println("$TOTAL_PROFIT_RATE_MASSAGE$lottoProfitRate$TOTAL_PROFIT_ENDING_MESSAGE")
     }
 
     private fun Int.toWonFormat(): String {
@@ -35,5 +35,9 @@ class LottoResultView {
         private const val WINNING_STATISTIC_MESSAGE = "당첨 통계"
         private const val DIVIDER = "---"
         private const val WON_FORMAT_PATTERN = "#,###원"
+        private const val TOTAL_PROFIT_RATE_MASSAGE = "총 수익률은 "
+        private const val TOTAL_PROFIT_ENDING_MESSAGE = "입니다."
+        private const val BONUS_MATCH_MESSAGE = "%d개 일치, 보너스 볼 일치 (%d원) - %d개"
+        private const val MATCH_MESSAGE = "%d개 일치 (%d원) - %d개"
     }
 }
