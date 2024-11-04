@@ -1,7 +1,6 @@
 package lotto.domain
 
-import java.text.NumberFormat
-import java.util.*
+import lotto.util.prettyNumberString
 
 enum class LottoResult(val prize: Long, private val condition: String) {
     LOSE(0, "낙첨"),
@@ -12,7 +11,7 @@ enum class LottoResult(val prize: Long, private val condition: String) {
     FIRST(2_000_000_000, "6개 일치");
 
     override fun toString(): String {
-        return "$condition (${NumberFormat.getNumberInstance(Locale.KOREA).format(prize)}원)"
+        return "$condition (${prize.prettyNumberString}원)"
     }
 
     companion object {

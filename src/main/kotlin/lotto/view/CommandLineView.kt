@@ -3,8 +3,7 @@ package lotto.view
 import camp.nextstep.edu.missionutils.Console.readLine
 import lotto.domain.Lotto
 import lotto.domain.LottoResult
-import java.text.NumberFormat
-import java.util.*
+import lotto.util.prettyNumberString
 
 class CommandLineView(private val viewModel: ViewModel = ViewModel()) : View {
     override fun buyLottos() {
@@ -63,11 +62,6 @@ class CommandLineView(private val viewModel: ViewModel = ViewModel()) : View {
     }
 
     override fun displayReturnRate() {
-        println(
-            "총 수익률은 ${
-                NumberFormat.getNumberInstance(Locale.KOREA)
-                    .format(String.format("%.1f", viewModel.returnRate).toDouble())
-            }%입니다."
-        )
+        println("총 수익률은 ${String.format("%.1f", viewModel.returnRate).toDouble().prettyNumberString}%입니다.")
     }
 }
