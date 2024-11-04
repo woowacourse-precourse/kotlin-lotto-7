@@ -24,7 +24,7 @@ class InputService {
 
         fun readLineNumber(): Int {
             val userInput = inputView.readLine()
-            require(userInput.isNotEmpty()) { INPUT_EMPTY_STRING }
+            require(userInput.isNotBlank()) { INPUT_EMPTY_STRING }
             return userInput.toIntOrNull() ?: throw IllegalArgumentException(INVALID_NUMBER)
         }
     }

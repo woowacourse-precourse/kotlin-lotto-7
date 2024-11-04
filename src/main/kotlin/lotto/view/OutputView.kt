@@ -6,7 +6,7 @@ import java.text.DecimalFormat
 
 class OutputView {
     fun printPurchaseAmountRequest() {
-        println("구매금액을 입력해 주세요.")
+        println(INPUT_PURCHASE_AMOUNT)
     }
 
     fun printPurchaseQuantity(quantity: Int) {
@@ -14,7 +14,7 @@ class OutputView {
     }
 
     fun printPurchaseLotto(lottos: List<Lotto>, quantity: Int) {
-        println("")
+        println(EMPTY)
         printPurchaseQuantity(quantity)
         lottos.forEach {
             println(it.getLotto())
@@ -22,28 +22,40 @@ class OutputView {
     }
 
     fun printWinningLottoRequest() {
-        println("")
-        println("당첨 번호를 입력해 주세요.")
+        println(EMPTY)
+        println(INPUT_WINNING_NUMBERS)
     }
 
     fun printBonusNumberRequest() {
-        println("")
-        println("보너스 번호를 입력해 주세요.")
+        println(EMPTY)
+        println(INPUT_BONUS_NUMBER)
     }
 
     fun printMatchingResult(rankCount: Map<LottoRank, Int>) {
-        println("")
-        println("당첨 통계")
-        println("---")
+        println(EMPTY)
+        println(WINNING_LOTTO_STATISTICS)
+        println(DIVIDING_LINE)
         rankCount.forEach { rank, count ->
             if (rank.matchingNumbers != 0) {
-                val decimal = DecimalFormat("#,###")
-                println("${rank.message} (${decimal.format(rank.price)}원) - ${count}개")
+                println(formatRankMessage(rank.message, rank.price, count))
             }
         }
     }
 
+    private fun formatRankMessage(rankMessage: String, rankPrice: Int, count: Int) = "$rankMessage (${rankPrice}원) - ${count}개"
+
     fun printTotalRateOfReturn(rateOfReturn: Double) {
         println("총 수익률은 ${rateOfReturn}%입니다.")
+    }
+
+    companion object {
+        private const val EMPTY = ""
+        private const val INPUT_PURCHASE_AMOUNT = "구매금액을 입력해 주세요."
+        private const val INPUT_WINNING_NUMBERS = "당첨 번호를 입력해 주세요."
+        private const val INPUT_BONUS_NUMBER = "보너스 번호를 입력해 주세요."
+        private const val WINNING_LOTTO_STATISTICS = "당첨 통계"
+        private const val DIVIDING_LINE = "---"
+
+        private val decimal = DecimalFormat("#,###")
     }
 }
