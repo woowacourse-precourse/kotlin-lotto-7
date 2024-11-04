@@ -38,6 +38,10 @@ class LottoService(
         return ((totalEarning).toDouble() / (buyCount * LOTTO_PRICE_UNIT) * 100)
     }
 
+    fun clearLottoManager() {
+        _userLottoNumbers.clear()
+    }
+
     private fun generateRandomNumber(): List<Int> {
         return Randoms.pickUniqueNumbersInRange(START_INCLUSIVE, END_INCLUSIVE, RANDOM_COUNT).sortedBy { it }
     }

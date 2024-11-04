@@ -22,4 +22,7 @@ class LottoController(
     fun calculateEarningRate(buyCount: Int): Double {
         return lottoService.calculateEarningRate(buyCount)
     }
+    fun clearLottoNumbers() {
+        lottoService.clearLottoManager()
+    }
 }
