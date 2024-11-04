@@ -1,88 +1,73 @@
 package lotto.controller
 
 import lotto.model.LottoGame
+import lotto.model.Rank
 import lotto.view.InputView
 import lotto.view.OutputView
-
-enum class Ranking(
-    private val winningBall: Int,
-    private val bonusBall: Boolean,
-    private val prizeMoney: Int,
-    private val index: Int
-) {
-    FIRST(6, false, 2000000000, 0),
-    SECOND(5, true, 30000000, 1),
-    THIRD(5, false, 1500000, 2),
-    FOURTH(4, false, 50000, 3),
-    FIFTH(3, false, 5000, 4);
-
-    fun getWinningBall() = winningBall
-    fun getBonusBall() = bonusBall
-    fun getPrizeMoney() = prizeMoney
-    fun getIndex() = index
-}
 
 class Controller {
     private val inputView = InputView()
     private val outputView = OutputView()
     private val lottoGame = LottoGame()
 
-    private var count = 0
-    private var bonusNumber = ""
-    private var winningGames = List(5) { 0 }
-
     fun start() {
-        buyLotto()
+        buyLottoTicket()
         inputWinningNumbers()
         inputBonusBall()
+        lottoGame.setWinnings()
         getResult()
     }
 
-    private fun buyLotto() {
-        var priceInput: String
-        var price: Int?
+    private fun buyLottoTicket() {
+        var moneyInput: String
+        var message: String?
         do {
             outputView.showPrompt(REQUEST_PURCHASE_MESSAGE)
-            priceInput = inputView.readLine()
-            price = lottoGame.validatePrice(priceInput)
-            if (price !is Int) {
-                outputView.showPrompt(ERROR_INPUT_PRICE_MESSAGE)
+            moneyInput = inputView.readLine()
+            message = lottoGame.isValidMoney(moneyInput)
+            if (message is String) {
+                outputView.showPrompt(message)
             }
-        } while (price !is Int)
-        val count = lottoGame.buy(price)
-        outputView.showPrompt("$count" + CONFIRM_COUNT_MESSAGE)
-        lottoGame.generateLottoTickets(count)
+        } while (message is String)
+        lottoGame.buy(moneyInput.toInt())
+        outputView.showPrompt("\n" + "${lottoGame.lottoOrder.totalTicket}" + CONFIRM_COUNT_MESSAGE)
+        lottoGame.generateLottoTickets(lottoGame.lottoOrder.totalTicket)
     }
 
     private fun inputWinningNumbers() {
-        outputView.showPrompt(REQUEST_WINNING_NUMBER_MESSAGE)
-        val winningInput = inputView.readLine()
-        val winningNumber = winningInput.split(SEPARATOR)
-        val winningNumbers: MutableList<Int> = mutableListOf()
-        winningNumber.forEach { winningNumbers.add(it.toInt()) }
-        lottoGame.set(winningNumbers)
+        var winningInput: String
+        var message: String?
+        do {
+            outputView.showPrompt(REQUEST_WINNING_NUMBER_MESSAGE)
+            winningInput = inputView.readLine()
+            message = lottoGame.isValidNumbers(winningInput)
+            if (message is String) {
+                outputView.showPrompt(message)
+            }
+        } while (message is String)
+        lottoGame.lottoWinning.numbers = winningInput.split(",").map { it.toInt() }
     }
 
     private fun inputBonusBall() {
-        outputView.showPrompt(REQUEST_BONUS_NUMBER_MESSAGE)
-        bonusNumber = inputView.readLine()
-
-        winningGames = lottoGame.getWinnings(bonusNumber)
+        var bonusInput: String
+        var message: String?
+        do {
+            outputView.showPrompt(REQUEST_BONUS_NUMBER_MESSAGE)
+            bonusInput = inputView.readLine()
+            message = lottoGame.isValidBonus(bonusInput)
+            if (message is String) {
+                outputView.showPrompt(message)
+            }
+        } while (message is String)
+        lottoGame.lottoWinning.bonus = bonusInput.toInt()
     }
 
     fun getResult() {
         outputView.showPrompt(TOTAL_WINNING_MESSAGE)
-        outputView.showPrompt(LINE_SYMBOL)
-        showResult(Ranking.FIFTH)
-        showResult(Ranking.FOURTH)
-        showResult(Ranking.THIRD)
-        showResult(Ranking.SECOND)
-        showResult(Ranking.FIRST)
-        val totalPrize =
-            Ranking.FIFTH.getPrizeMoney() * winningGames[Ranking.FIFTH.getIndex()] + Ranking.FOURTH.getPrizeMoney() * winningGames[Ranking.FOURTH.getIndex()] + Ranking.THIRD.getPrizeMoney() * winningGames[Ranking.THIRD.getIndex()] + Ranking.SECOND.getPrizeMoney() * winningGames[Ranking.SECOND.getIndex()] + Ranking.FIRST.getPrizeMoney() * winningGames[Ranking.FIRST.getIndex()]
-        //TODO: 현재 정수로만 나옴. 소숫점 두 번째에서 반올림하여 소숫점 첫째자리까지 출력하거나, 정수면 정수로 출력하도록 변경 요망.
-        val ratePrize = totalPrize / (count * 10)
-        outputView.showPrompt(PREFIX_RETURN_MESSAGE + ratePrize + SUFFIX_RETURN_MESSAGE)
+        lottoGame.rankings.forEach {
+            showResult(it)
+        }
+        getRatePrize(getTotalPrize())
     }
 
     private fun formatMoney(money: Int): String {
@@ -98,33 +83,43 @@ class Controller {
         return formated
     }
 
-    fun showResult(ranking: Ranking) {
-        var result = "${ranking.getWinningBall()}" + FIRST_MESSAGE
-        if (ranking.getWinningBall() == 5 && ranking.getBonusBall()) {
+    fun showResult(ranking: Rank) {
+        var result = "${ranking.ranking.getWinningBall()}" + FIRST_MESSAGE
+        if (ranking.ranking.getWinningBall() == 5 && ranking.ranking.getBonusBall()) {
             result += BONUS_BALL_MESSAGE
         }
-        result += SECOND_MESSAGE + formatMoney(ranking.getPrizeMoney()) + THIRD_MESSAGE + winningGames[ranking.getIndex()] + LAST_MESSAGE
+        result += SECOND_MESSAGE + formatMoney(ranking.ranking.getPrizeMoney()) + THIRD_MESSAGE + ranking.wins + LAST_MESSAGE
         outputView.showPrompt(result)
     }
 
+    private fun getTotalPrize(): Long {
+        var totalPrize: Long = 0
+        lottoGame.rankings.forEach {
+            totalPrize += (it.ranking.getPrizeMoney() * it.wins)
+        }
+        println(totalPrize)
+        return totalPrize
+    }
+
+    fun getRatePrize(totalPrize: Long) {
+        val ratePrize = totalPrize.toDouble() / lottoGame.lottoOrder.totalPrice * 100.0
+        outputView.showPrompt(PREFIX_RETURN_MESSAGE + ratePrize.toString() + SUFFIX_RETURN_MESSAGE)
+    }
+
     companion object {
+        const val SEPARATOR = ","
+
         const val REQUEST_PURCHASE_MESSAGE = "구입금액을 입력해 주세요."
         const val CONFIRM_COUNT_MESSAGE = "개를 구매했습니다."
-        const val REQUEST_WINNING_NUMBER_MESSAGE = "당첨 번호를 입력해 주세요."
-        const val REQUEST_BONUS_NUMBER_MESSAGE = "보너스 번호를 입력해 주세요."
-        const val TOTAL_WINNING_MESSAGE = "\n당첨 통계"
-        const val LINE_SYMBOL = "---"
+        const val REQUEST_WINNING_NUMBER_MESSAGE = "\n당첨 번호를 입력해 주세요."
+        const val REQUEST_BONUS_NUMBER_MESSAGE = "\n보너스 번호를 입력해 주세요."
+        const val TOTAL_WINNING_MESSAGE = "\n당첨 통계\n---"
         const val FIRST_MESSAGE = "개 일치"
         const val SECOND_MESSAGE = " ("
         const val THIRD_MESSAGE = "원) - "
         const val LAST_MESSAGE = "개"
         const val BONUS_BALL_MESSAGE = ", 보너스 볼 일치"
-        const val PREFIX_RETURN_MESSAGE = "\n총 수익률은 "
+        const val PREFIX_RETURN_MESSAGE = "총 수익률은 "
         const val SUFFIX_RETURN_MESSAGE = "%입니다."
-
-        const val ERROR_INPUT_PRICE_MESSAGE = "[ERROR] 구매 가격은 정수여야 합니다."
-
-        const val SEPARATOR = ","
     }
-
 }

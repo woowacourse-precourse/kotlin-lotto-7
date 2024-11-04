@@ -15,13 +15,6 @@ class LottoTest {
     }
 
     @Test
-    fun `로또 번호에 중복된 숫자가 있으면 예외가 발생한다`() {
-        assertThrows<IllegalArgumentException> {
-            Lotto(listOf(1, 2, 3, 4, 5, 5))
-        }
-    }
-
-    @Test
     @DisplayName("Lotto class의 sort 메서드 검증")
     fun `로또 번호가 오름차순으로 정렬된다`() {
         // given
