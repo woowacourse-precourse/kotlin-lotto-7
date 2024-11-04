@@ -1,5 +1,6 @@
 package lotto.controller
 
+import lotto.model.LottoCalculator
 import lotto.model.Lottos
 import lotto.view.InputView
 import lotto.view.OutputView
@@ -19,6 +20,13 @@ class LottoController {
         //구매한 로또들 출력
         OutputView.printLottoNumbers(lottos.getLottos().map { it.get() })
 
+        //로또 시뮬레이션
+        val result = LottoCalculator.calculate(lottos, winningNumbers, bonusNumber)
+        // 수익률 계산
+        val profitRate = LottoCalculator.calculateProfitRate(result)
+        //당첨 통계 출력
+        OutputView.printLottoResult(result)
+        OutputView.printProfitRate(profitRate)
 
     }
 }

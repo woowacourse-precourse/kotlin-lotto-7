@@ -12,16 +12,13 @@ class Lotto(private val numbers: List<Int>) {
 
     fun get() = numbers
 
-    fun match(winningNumbers: List<Int>, bonusNumber: Int): Int {
+    fun match(winningNumbers: List<Int>): Int {
         val count = numbers.count { it in winningNumbers }
-        val bonusCount = numbers.count { it == bonusNumber }
-        return when (count) {
-            6 -> 1
-            5 -> if (bonusCount == 1) 2 else 3
-            4 -> 4
-            3 -> 5
-            else -> 0
-        }
+        return count
+    }
+
+    fun matchBonus(bonusNumber: Int): Boolean {
+        return numbers.contains(bonusNumber)
     }
 
 }
