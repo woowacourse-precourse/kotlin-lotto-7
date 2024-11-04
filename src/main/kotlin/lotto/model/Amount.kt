@@ -3,11 +3,11 @@ package lotto.model
 import lotto.validator.Validator
 
 class Amount(private val amount: String) {
-    init{
+    init {
         Validator.requireAmount(amount)
     }
 
     fun generateToTry(amount: Int) {
-       val tryCount = amount % 1000
+        val tryCount = amount % 1000
     }
 }
