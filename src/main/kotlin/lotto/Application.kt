@@ -1,5 +1,11 @@
 package lotto
 
+import lotto.manager.BonusNumberManager
+import lotto.manager.LottoBuyManager
+import lotto.manager.LottoResultManager
+import lotto.manager.WinningNumberManager
+import lotto.model.Lotto
+
 fun main() {
     val lottoBuyManager = LottoBuyManager()
     lottoBuyManager.requestMoney()

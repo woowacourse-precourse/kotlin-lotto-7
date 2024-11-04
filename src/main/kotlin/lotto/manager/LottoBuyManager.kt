@@ -1,7 +1,8 @@
-package lotto
+package lotto.manager
 
 import camp.nextstep.edu.missionutils.Console
 import camp.nextstep.edu.missionutils.Randoms
+import lotto.model.Lotto
 
 class LottoBuyManager {
 
@@ -39,7 +40,7 @@ class LottoBuyManager {
 
     fun buyLottos() {
         val lottoCount = buyMoney / LOTTO_PRICE
-        println("${lottoCount}${BUY_LOTTOS_MESSAGE}")
+        println("${lottoCount}$BUY_LOTTOS_MESSAGE")
         repeat(lottoCount) {
             val numbers = Randoms.pickUniqueNumbersInRange(LOTTO_RANGE_START, LOTTO_RANGE_END, LOTTO_COUNT).sorted()
             println(numbers)

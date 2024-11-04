@@ -1,4 +1,7 @@
-package lotto
+package lotto.manager
+
+import lotto.model.Lotto
+import lotto.model.Rank
 
 class LottoResultManager(
     private val userLottos: List<Lotto>,

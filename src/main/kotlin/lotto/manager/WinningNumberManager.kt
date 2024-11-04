@@ -1,6 +1,7 @@
-package lotto
+package lotto.manager
 
 import camp.nextstep.edu.missionutils.Console
+import lotto.model.Lotto
 
 class WinningNumberManager {
 
