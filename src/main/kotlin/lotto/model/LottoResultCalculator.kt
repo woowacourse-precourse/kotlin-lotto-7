@@ -3,6 +3,7 @@ package lotto.model
 import lotto.util.constant.LottoRules
 
 class LottoResultCalculator(private val lotteries: List<Lotto>) {
+
     fun getLottoResults(winningNumbers: List<Int>, bonusNumber: Int): List<LottoResult> {
         val lotteriesRank = calculateRanks(winningNumbers, bonusNumber)
         val rankWithCounts = countRank(lotteriesRank)

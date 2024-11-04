@@ -4,6 +4,7 @@ import lotto.util.constant.ErrorMessages
 import lotto.util.constant.LottoRules
 
 object BonusNumberValidator {
+
     fun getValidatedBonusNumber(bonusNumberInput: String, winningNumbers: List<Int>): Int {
         validateIsNumeric(bonusNumberInput)
 

@@ -4,6 +4,7 @@ import camp.nextstep.edu.missionutils.Console
 import lotto.util.constant.InputConst
 
 class InputView {
+
     private fun getInput(message: String): String {
         println(message)
         val input = Console.readLine()

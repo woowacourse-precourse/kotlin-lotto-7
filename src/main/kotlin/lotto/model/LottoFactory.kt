@@ -7,9 +7,20 @@ import lotto.util.constant.LottoRules
 // 구입금액을 통해 로또를 발행 -> 발행된 로또
 // 구입금액 제공
 class LottoFactory(private val purchaseAmount: Int) {
+
     val lottoQuantity: Int = purchaseAmount / LottoRules.AMOUNT_UNIT
 
     fun getPurchaseAmount(): Int = purchaseAmount
+
+    fun createLotto(): List<Lotto> {
+        val lottoList: MutableList<Lotto> = mutableListOf()
+        repeat(lottoQuantity) {
+            val numbers = createNumber()
+            val lotto = Lotto(numbers)
+            lottoList.add(lotto)
+        }
+        return lottoList
+    }
 
     private fun createNumber(): List<Int> {
         val randomNumbers = Randoms.pickUniqueNumbersInRange(
@@ -18,15 +29,5 @@ class LottoFactory(private val purchaseAmount: Int) {
             LottoRules.LOTTO_NUMBER_COUNT
         ).sorted()
         return randomNumbers
-    }
-
-    fun createLotto(): List<Lotto> {
-        val lottoList: MutableList<Lotto> = emptyList<Lotto>().toMutableList()
-        repeat(lottoQuantity) {
-            val numbers = createNumber()
-            val lotto = Lotto(numbers)
-            lottoList.add(lotto)
-        }
-        return lottoList
     }
 }

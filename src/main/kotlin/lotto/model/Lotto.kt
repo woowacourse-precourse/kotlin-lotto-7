@@ -3,6 +3,7 @@ package lotto.model
 import lotto.util.validator.LottoNumberValidator
 
 class Lotto(private val numbers: List<Int>) {
+
     init {
         LottoNumberValidator.validateLottoNumbers(numbers)
     }

@@ -7,6 +7,7 @@ import lotto.util.constant.LottoRules
 import lotto.util.constant.OutputConst
 
 class OutputView {
+
     fun showErrorMessage(errorMessages: String) {
         println(errorMessages)
     }
