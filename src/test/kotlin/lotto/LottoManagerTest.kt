@@ -21,4 +21,15 @@ class LottoManagerTest {
 
         assertThat(lottoTickets.size).isEqualTo(8)
     }
+
+    @Test
+    fun `발행된 각 로또 티켓 번호는 중복 없는 6자리여야 한다`() {
+        val lottoTicketsField = LottoManager::class.java.getDeclaredField("lottoTickets")
+        lottoTicketsField.isAccessible = true
+        val lottoTickets = lottoTicketsField.get(lottoManager) as List<Lotto>
+
+        lottoTickets.forEach { ticket ->
+            assertThat(ticket.getLottoNumbers().toSet().size).isEqualTo(6)
+        }
+    }
 }
