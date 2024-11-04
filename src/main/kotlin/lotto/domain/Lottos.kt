@@ -14,7 +14,7 @@ class Lottos(
     }
 
     private fun validatePurchaseCountPositive(purchaseCount: Int) =
-        require(purchaseCount > 0) { "로또 구매 수량은 1개 이상이여야 합니다." }
+        require(purchaseCount > MIN_COUNT) { PURCHASE_COUNT_ERROR_MESSAGE }
 
     private fun createLottos(lottoAmount: Int) =
         repeat(lottoAmount) {
@@ -29,5 +29,10 @@ class Lottos(
     }
 
     private fun storeLotto(lotto: Lotto) = _lottos.add(lotto)
+
+    companion object {
+        private const val PURCHASE_COUNT_ERROR_MESSAGE = "로또 구매 수량은 1개 이상이여야 합니다."
+        private const val MIN_COUNT = 0
+    }
 
 }
