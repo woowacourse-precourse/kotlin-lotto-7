@@ -128,3 +128,43 @@ enum class LottoResult(val prize: Int) {
     SIX(2000000000)
 }
 ```
+
+## 예외처리
+각 입력에 대해서는 유효하지 않을 경우 해당 입력을 다시 받아야하므로 각 입력에 대해서 
+```
+fun getSpecialNumber(winnerNumber: List<Int>): Int {
+        while (true) {
+            try {
+                println(Constant.INPUT_SPECIAL_NUMBER_MESSAGE)
+                val specialNumber = Console.readLine()
+                if (checkSpecialNumber(specialNumber, winnerNumber)) return specialNumber.toInt()
+            } catch (e: IllegalArgumentException) {
+                println(e.message)
+            }
+        }
+    }
+
+    private fun checkSpecialNumber(specialNumber: String, winnerNumber: List<Int>): Boolean {
+        try {
+            if (specialNumber.toInt() in 1..45) {
+                if (!winnerNumber.contains(specialNumber.toInt())) return true
+                else throw Exception()
+            } else throw Exception()
+        } catch (e: Exception) {
+            throw IllegalArgumentException(Constant.ERROR_SPECIAL_NUMBER_INVALID_MESSAGE)
+        }
+    }
+```
+
+와 같은 연산을 통해 유효성 검사를 수행한다.
+
+## 테스트 추가
+```
+@Test
+    fun `로또 번호가 1에서 45 사이의 숫자가 아니라면 예외가 발생한다`() {
+        assertThrows<IllegalArgumentException> {
+            Lotto(listOf(1, 2, 3, 4, 5, 46))
+        }
+    }
+```
+로또 번혹가 1~45 사이인지 확인하는 테스트를 추가해주었다.
