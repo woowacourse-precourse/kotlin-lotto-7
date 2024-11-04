@@ -33,6 +33,7 @@ object Controller {
             buyLottoNumber.add(Lotto(buyLottoNumbers))
         }
         OutputBuyLottoNumber(buyLottoNumber)
+//        validate.validateBuyLotto(buyLottoNumber)
         return inputWinningNumber()
     }
 

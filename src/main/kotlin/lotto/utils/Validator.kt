@@ -14,6 +14,7 @@ class Validator {
 
         require(amount % 1000 == 0) { NOT_MULTIPLE_OF_1000.message }
     }
+    
 
     fun validateInputWiningNumber(input: String) {
         require(input.isNotEmpty()) { INPUT_EMPTY.message }
