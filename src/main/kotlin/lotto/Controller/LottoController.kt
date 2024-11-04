@@ -9,12 +9,10 @@ import lotto.View.InputView
 import lotto.View.OutputView
 
 class LottoController {
+    private val inputView = InputView()
+    private val outputView = OutputView()
     private var releasedLottos = listOf<Lotto>()
     private lateinit var winningLottoResult: WinningLottoResult
-    private val inputView = InputView()
-    private val outputView by lazy {
-        OutputView(releasedLottos)
-    }
 
     fun execute() {
         getInputsAndReleaseLottos()
@@ -73,7 +71,7 @@ class LottoController {
 
     private fun releaseLottos(lottoAmount: Int) {
         releasedLottos = RandomLottoMaker.makeLottos(lottoAmount)
-        outputView.printLottos()
+        outputView.printLottos(releasedLottos)
     }
 
     companion object {

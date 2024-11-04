@@ -3,8 +3,8 @@ package lotto.View
 import lotto.Lotto
 import lotto.Model.LottoRank
 
-class OutputView(private val releasedLottos: List<Lotto>) {
-    fun printLottos() {
+class OutputView {
+    fun printLottos(releasedLottos: List<Lotto>) {
         println("${releasedLottos.size}개를 구매했습니다.")
         releasedLottos.forEach { lotto ->
             println(lotto.getNumbers())
