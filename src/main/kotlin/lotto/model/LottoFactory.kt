@@ -1,7 +1,6 @@
 package lotto.model
 
 import camp.nextstep.edu.missionutils.Randoms
-import lotto.util.PurchaseAmountValidator
 
 // 로또를 발행하는 역할(로또 생성)
 // 구입금액을 통해 로또를 발행 -> 발행된 로또
