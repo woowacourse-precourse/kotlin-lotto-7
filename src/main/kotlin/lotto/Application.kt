@@ -8,16 +8,9 @@ const val LOTTO_NUMBER_COUNT = 6
 fun main() {
     val lottoBudget = getLottoBudget()
     val lottoTicketCount = getLottoTicketCount(lottoBudget)
-    println("${lottoTicketCount}개를 구매했습니다.")
-    val lottos: MutableList<Lotto> = mutableListOf()
-    for (i in 1..lottoTicketCount) {
-        val lottoNumbers = getLottoNumbers()
-        val lotto = Lotto(lottoNumbers)
-        lottos.add(lotto)
-    }
-    for (lotto in lottos) {
-        println(lotto)
-    }
+    printTicketCount(lottoTicketCount)
+    val lottos: MutableList<Lotto> = getLottoNumbers(lottoTicketCount)
+    printLottoNumbers(lottos)
     val lottoWinningNumbers = getLottoWinningNumbers()
     val lottoBonusNumber = getLottoBonusNumber(lottoWinningNumbers)
     val lottoResults: MutableList<Pair<Int, Int>> = mutableListOf()
@@ -54,6 +47,26 @@ fun main() {
     val totalMoney = calculateTotalMoney(lottoMoney, matchCounts)
     val profitRate = calculateProfitRate(totalMoney, lottoBudget)
     printProfitRate(profitRate)
+}
+
+private fun printLottoNumbers(lottos: MutableList<Lotto>) {
+    for (lotto in lottos) {
+        println(lotto)
+    }
+}
+
+private fun getLottoNumbers(lottoTicketCount: Int): MutableList<Lotto> {
+    val lottos: MutableList<Lotto> = mutableListOf()
+    for (i in 1..lottoTicketCount) {
+        val lottoNumbers = getLottoNumbers()
+        val lotto = Lotto(lottoNumbers)
+        lottos.add(lotto)
+    }
+    return lottos
+}
+
+private fun printTicketCount(lottoTicketCount: Int) {
+    println("${lottoTicketCount}개를 구매했습니다.")
 }
 
 fun getLottoBudget(): Int {
