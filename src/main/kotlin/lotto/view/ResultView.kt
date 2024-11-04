@@ -17,6 +17,12 @@ class ResultView {
         println()
     }
 
+    fun displayResult(lottoResult: LottoResult) {
+        displayTitle()
+        displayPrizes(lottoResult)
+        displayProfitRate(lottoResult)
+    }
+
     private fun displayTitle() {
         println("당첨 통계")
         println("---")
