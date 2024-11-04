@@ -4,7 +4,9 @@ import lotto.model.Rank
 import lotto.model.lotto.BonusLotto
 import lotto.model.lotto.Lotto
 import lotto.model.lotto.LottoTicket
+import lotto.model.message.ErrorMessage
 import lotto.utils.ValidationUtils
+import lotto.view.ErrorView
 import lotto.view.InputView
 import lotto.view.OutputView
 
@@ -33,30 +35,48 @@ class LottoController {
     }
 
     private fun generateLottoTickets(purchaseAmount: Int): List<LottoTicket> {
-        ValidationUtils.validatePurchaseAmount(purchaseAmount)
         val ticketCount = purchaseAmount / 1000
         val tickets = List(ticketCount) { LottoTicket.generate() }
         return tickets
     }
 
     private fun getPurchaseAmount(): Int {
-        val purchaseAmountInput = InputView.askForPurchaseAmount()
-        val purchaseAmount = ValidationUtils.validateNumberInput(purchaseAmountInput)
-        return purchaseAmount
+        while (true) {
+            try {
+                val purchaseAmountInput = InputView.askForPurchaseAmount()
+                val purchaseAmount = ValidationUtils.validateNumberInput(purchaseAmountInput)
+                ValidationUtils.validatePurchaseAmount(purchaseAmount)
+                return purchaseAmount
+            } catch (e: IllegalArgumentException) {
+                ErrorView.errorMessage(e.message ?: ErrorMessage.DEFAULT_ERROR.message)
+            }
+        }
     }
 
     private fun getWinningNumbers(): Lotto {
-        val purchasePrice = InputView.askWinningNumbers().split(",").map {
-            val trimmed = it.trim()
-            ValidationUtils.validateWinningNumberInput(trimmed)
+        while (true) {
+            try {
+                val winningNumbers = InputView.askWinningNumbers().split(",").map {
+                    val trimmed = it.trim()
+                    ValidationUtils.validateWinningNumberInput(trimmed)
+                }
+                return Lotto(winningNumbers)
+            } catch (e: IllegalArgumentException) {
+                ErrorView.errorMessage(e.message ?: ErrorMessage.DEFAULT_ERROR.message)
+            }
         }
-        return Lotto(purchasePrice)
     }
 
     private fun getBonusNumber(lotto: Lotto): BonusLotto {
-        val bonusInput = InputView.askForBonusNumber()
-        val bonusNumber = ValidationUtils.validateNumberInput(bonusInput)
-        return BonusLotto(lotto.getNumbers(), bonusNumber)
+        while (true) {
+            try {
+                val bonusInput = InputView.askForBonusNumber()
+                val bonusNumber = ValidationUtils.validateNumberInput(bonusInput)
+                return BonusLotto(lotto.getNumbers(), bonusNumber)
+            } catch (e: IllegalArgumentException) {
+                ErrorView.errorMessage(e.message ?: ErrorMessage.DEFAULT_ERROR.message)
+            }
+        }
     }
 
     private fun calculateProfitRate(ranks: List<Rank>, purchaseAmount: Int): Double {
