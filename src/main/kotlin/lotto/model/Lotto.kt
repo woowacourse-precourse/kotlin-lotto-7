@@ -15,6 +15,12 @@ class Lotto(private val numbers: List<Int>) {
         }
     }
 
+    fun match(winningNumbers: Set<Int>, bonusNumber: Int): LottoRank {
+        val matchCount = numbers.count { it in winningNumbers }
+        val bonusMatch = bonusNumber in numbers
+        return LottoRank.fromMatchCount(matchCount, bonusMatch)
+    }
+
     fun getNumbers(): List<Int> = numbers
 
 }
