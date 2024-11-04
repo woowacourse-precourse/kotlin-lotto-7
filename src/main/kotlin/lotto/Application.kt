@@ -41,21 +41,26 @@ fun main() {
         val lottoResult = compareLottoNumbers(lottoWinningNumbers, lottoBonusNumber, lotto)
         lottoResults.add(lottoResult)
     }
+    countLottoNumber(lottoResults)
+    printResult(lottoMoney, matchCounts)
+    val totalMoney = calculateTotalMoney(lottoMoney, matchCounts)
+    val profitRate = calculateProfitRate(totalMoney, lottoBudget)
+    printProfitRate(profitRate)
+}
 
+private fun countLottoNumber(lottoResults: MutableList<Pair<Int, Int>>) {
     for ((matchCount, bonusMatchCount) in lottoResults) {
         val allMatchCount = matchCount + bonusMatchCount
         when {
             allMatchCount == 6 -> matchCounts["6개 일치"] = matchCounts["6개 일치"]!! + 1
-            allMatchCount == 5 && bonusMatchCount == 1 -> matchCounts["5개 일치, 보너스 볼 일치"] = matchCounts["5개 일치, 보너스 볼 일치"]!! + 1
+            allMatchCount == 5 && bonusMatchCount == 1 -> matchCounts["5개 일치, 보너스 볼 일치"] =
+                matchCounts["5개 일치, 보너스 볼 일치"]!! + 1
+
             allMatchCount == 5 -> matchCounts["5개 일치"] = matchCounts["5개 일치"]!! + 1
             allMatchCount == 4 -> matchCounts["4개 일치"] = matchCounts["4개 일치"]!! + 1
             allMatchCount == 3 -> matchCounts["3개 일치"] = matchCounts["3개 일치"]!! + 1
         }
     }
-    printResult(lottoMoney, matchCounts)
-    val totalMoney = calculateTotalMoney(lottoMoney, matchCounts)
-    val profitRate = calculateProfitRate(totalMoney, lottoBudget)
-    printProfitRate(profitRate)
 }
 
 private fun printLottoNumbers(lottos: MutableList<Lotto>) {
