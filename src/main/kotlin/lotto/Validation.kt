@@ -6,7 +6,7 @@ import kotlin.math.roundToInt
 
 class Validation() {
 
-    fun payLottoery():String {
+    fun payLottoery(): String {
         println("구입금액을 입력해주세요.")
         val payment = Console.readLine()
         return payment
