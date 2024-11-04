@@ -1,7 +1,6 @@
 package lotto
 
 import camp.nextstep.edu.missionutils.Console
-import kotlin.random.Random
 
 const val LOTTO_TICKET_VALUE = 1000
 const val LOTTO_NUMBER_COUNT = 6
@@ -36,7 +35,6 @@ fun main() {
 
     for ((matchCount, bonusMatchCount) in lottoResults) {
         val allMatchCount = matchCount + bonusMatchCount
-        println(allMatchCount)
         when {
             allMatchCount == 6 -> matchCounts["6개 일치"] = matchCounts["6개 일치"]!! + 1
             allMatchCount == 5 && bonusMatchCount == 1 -> matchCounts["5개 일치, 보너스 볼 일치"] = matchCounts["5개 일치, 보너스 볼 일치"]!! + 1
@@ -63,7 +61,7 @@ fun getLottoTicketCount(lottoBudget: Int): Int {
 }
 
 fun getLottoNumbers(): List<Int> {
-    val lottoNumbers = List(LOTTO_NUMBER_COUNT) { Random.nextInt(1, 46) }
+    val lottoNumbers = (1..45).shuffled().take(6)
     return lottoNumbers
 }
 
