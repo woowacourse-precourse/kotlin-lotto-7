@@ -43,7 +43,7 @@ class Repository {
             when {
                 count == 3 -> result.match3Count++
                 count == 4 -> result.match4Count++
-                count == 5 && bonus -> result.match5AndBonusCount
+                count == 5 && bonus -> result.match5AndBonusCount++
                 count == 5 -> result.match5Count++
                 count == 6 -> result.match6Count++
             }
@@ -61,7 +61,7 @@ class Repository {
     }
 
     private fun calculateTotalProfit() {
-        result.totalProfit = result.totalPrice.toDouble() / purchaseAmount!!.getPurchaseAmount()
+        result.totalProfit = result.totalPrice.toDouble() / purchaseAmount!!.getPurchaseAmount() * 100
     }
 
     private fun countCommonElements(winningNumber: List<Int>, lotto: List<Int>): Int {
