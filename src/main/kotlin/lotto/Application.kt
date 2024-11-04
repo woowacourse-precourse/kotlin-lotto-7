@@ -1,6 +1,7 @@
 package lotto
 
 import camp.nextstep.edu.missionutils.Console
+import camp.nextstep.edu.missionutils.Randoms
 
 const val LOTTO_TICKET_VALUE = 1000
 const val LOTTO_NUMBER_COUNT = 6
@@ -102,7 +103,7 @@ fun getLottoTicketCount(lottoBudget: Int): Int {
 }
 
 fun getLottoNumbers(): List<Int> {
-    val lottoNumbers = (1..45).shuffled().take(6)
+    val lottoNumbers = Randoms.pickUniqueNumbersInRange(1, 45, LOTTO_NUMBER_COUNT).toList()
     return lottoNumbers
 }
 
