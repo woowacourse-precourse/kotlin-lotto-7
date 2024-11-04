@@ -22,7 +22,7 @@ class LottoJudge {
     }
 
     private fun inputWinningNumbers() {
-        println("\n당첨 번호를 입력해 주세요.")
+        println(INPUT_WINNING_NUMBERS_GUIDE)
         val inputWinningNumbers = Console.readLine()
         val winningNumbers = validateWinningNumbers(inputWinningNumbers)
         setLottoWinningNumbers(winningNumbers)
@@ -46,7 +46,7 @@ class LottoJudge {
     }
 
     private fun inputBonusNumber() {
-        println("\n보너스 번호를 입력해 주세요.")
+        println(INPUT_BONUS_NUMBERS_GUIDE)
         val inputBonusNumber = Console.readLine()
         val bonusNumber = validateBonusNumber(inputBonusNumber)
         setLottoBonusNumber(bonusNumber)
@@ -100,7 +100,7 @@ class LottoJudge {
     }
 
     fun printWinningStatistics(lottos: List<Lotto>) {
-        println("\n당첨 통계\n---")
+        println(WINNING_STATISTICS_TITLE)
         val ranks = lottos.map { it.checkRank(winningNumbers, bonusNumber) }
         val ranksCount = getRanksCount(ranks)
         printRanks(ranksCount)
@@ -108,11 +108,11 @@ class LottoJudge {
     }
 
     private fun printRanks(ranksCount: List<Int>) {
-        println("3개 일치 (5,000원) - ${ranksCount[4]}개")
-        println("4개 일치 (50,000원) - ${ranksCount[3]}개")
-        println("5개 일치 (1,500,000원) - ${ranksCount[2]}개")
-        println("5개 일치, 보너스 볼 일치 (30,000,000원) - ${ranksCount[1]}개")
-        println("6개 일치 (2,000,000,000원) - ${ranksCount[0]}개")
+        println("$FIFTH_RANK_TITLE $HYPHEN ${ranksCount[4]}${PIECE}")
+        println("$FOURTH_RANK_TITLE $HYPHEN ${ranksCount[3]}${PIECE}")
+        println("$THIRD_RANK_TITLE $HYPHEN ${ranksCount[2]}${PIECE}")
+        println("$SECOND_RANK_TITLE $HYPHEN ${ranksCount[1]}${PIECE}")
+        println("$FIRST_RANK_TITLE $HYPHEN ${ranksCount[0]}${PIECE}")
     }
 
     private fun getRanksCount(ranks: List<LottoRank>): List<Int> {
@@ -128,6 +128,20 @@ class LottoJudge {
     private fun printProfitRatio(ranks: List<LottoRank>, lottoCount: Int) {
         val totalPrizeMoney = ranks.fold(0) { accumulatedValue, rank -> accumulatedValue + rank.prizeMoney }
         val profitRatio = totalPrizeMoney / (lottoCount * 1000.0) * 100
-        println("총 수익률은 %.1f%%입니다.".format(profitRatio))
+        println(PROFIT_RATIO_MESSAGE.format(profitRatio))
+    }
+
+    companion object {
+        private const val INPUT_WINNING_NUMBERS_GUIDE: String = "\n당첨 번호를 입력해 주세요."
+        private const val INPUT_BONUS_NUMBERS_GUIDE: String = "\n보너스 번호를 입력해 주세요."
+        private const val WINNING_STATISTICS_TITLE: String = "\n당첨 통계\n---"
+        private const val FIFTH_RANK_TITLE: String = "3개 일치 (5,000원)"
+        private const val FOURTH_RANK_TITLE: String = "4개 일치 (50,000원)"
+        private const val THIRD_RANK_TITLE: String = "5개 일치 (1,500,000원)"
+        private const val SECOND_RANK_TITLE: String = "5개 일치, 보너스 볼 일치 (30,000,000원)"
+        private const val FIRST_RANK_TITLE: String = "6개 일치 (2,000,000,000원)"
+        private const val HYPHEN: String = "-"
+        private const val PIECE: String = "개"
+        private const val PROFIT_RATIO_MESSAGE: String = "총 수익률은 %.1f%%입니다."
     }
 }
