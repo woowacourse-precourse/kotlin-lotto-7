@@ -60,15 +60,15 @@ fun printPurchasedLottos(lottos: MutableList<Lotto>) {
 
 fun printStatistics(lottoStatistics: LottoStatistics) {
     println(MESSAGE_STATISTICS_TITLE)
-    println(getDefaultMatchMessage(LottoRank.FIFTH, lottoStatistics))
-    println(getDefaultMatchMessage(LottoRank.FOURTH, lottoStatistics))
-    println(getDefaultMatchMessage(LottoRank.THIRD, lottoStatistics))
-    println(getDefaultMatchMessage(LottoRank.SECOND, lottoStatistics))
-    println(getDefaultMatchMessage(LottoRank.FIRST, lottoStatistics))
+    println(getMatchMessage(LottoRank.FIFTH, lottoStatistics))
+    println(getMatchMessage(LottoRank.FOURTH, lottoStatistics))
+    println(getMatchMessage(LottoRank.THIRD, lottoStatistics))
+    println(getMatchMessage(LottoRank.SECOND, lottoStatistics))
+    println(getMatchMessage(LottoRank.FIRST, lottoStatistics))
     println(RETURN_ON_INVESTMENT.format(lottoStatistics.roi))
 }
 
-private fun getDefaultMatchMessage(rank: LottoRank, statistics: LottoStatistics): String {
+private fun getMatchMessage(rank: LottoRank, statistics: LottoStatistics): String {
     val rankMatchCount = rank.matchCount
     val prizeMoney = rank.prize
     val count = statistics.rankCount.getOrDefault(rank, 0)
