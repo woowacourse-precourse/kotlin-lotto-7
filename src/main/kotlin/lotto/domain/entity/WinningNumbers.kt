@@ -1,10 +1,10 @@
 package lotto.domain.entity
 
-import lotto.domain.validator.LottoNumberValidator
+import lotto.domain.validator.LottoNumbersValidator
 
 class WinningNumbers(
     private val numbers: List<Int>,
-    validator: LottoNumberValidator = lottoNumberValidator
+    validator: LottoNumbersValidator = lottoNumbersValidator
 ) {
 
     init {
@@ -14,6 +14,6 @@ class WinningNumbers(
     fun getNumbers() = numbers.toList()
 
     companion object {
-        private val lottoNumberValidator by lazy { LottoNumberValidator() }
+        private val lottoNumbersValidator by lazy { LottoNumbersValidator() }
     }
 }

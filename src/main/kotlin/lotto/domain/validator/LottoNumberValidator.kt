@@ -1,29 +1,16 @@
 package lotto.domain.validator
 
-import lotto.common.LOTTO_NUMBERS_SIZE
+import lotto.common.MAX_LOTTO_NUMBER
+import lotto.common.MIN_LOTTO_NUMBER
 
-class LottoNumberValidator : NumberValidator() {
-
-    fun validateLottoNumbers(numbers: List<Int>) {
-        validateNumbersSize(numbers)
-        validateNumbersRange(numbers)
-        validateNumbersDuplicate(numbers)
-    }
-
-    private fun validateNumbersSize(numbers: List<Int>) {
-        require(numbers.size == LOTTO_NUMBERS_SIZE) { ERROR_LOTTO_SIZE }
-    }
-
-    private fun validateNumbersDuplicate(numbers: List<Int>) {
-        require(numbers.distinct().size == numbers.size) { ERROR_DUPLICATE_LOTTO }
-    }
-
-    private fun validateNumbersRange(numbers: List<Int>) {
-        numbers.forEach { validateNumberRange(it) }
+open class LottoNumberValidator {
+    protected fun validateNumberRange(number: Int) {
+        require(number <= MAX_LOTTO_NUMBER) { OVER_LOTTO_NUMBER_ERROR_MESSAGE }
+        require(number >= MIN_LOTTO_NUMBER) { UNDER_LOTTO_NUMBER_ERROR_MESSAGE }
     }
 
     companion object {
-        private const val ERROR_LOTTO_SIZE = "[ERROR] 로또 번호는 6개여야 합니다."
-        private const val ERROR_DUPLICATE_LOTTO = "[ERROR] 로또 번호는 중복되면 안됩니다."
+        private const val OVER_LOTTO_NUMBER_ERROR_MESSAGE = "[ERROR] 보너스 번호는 45보다 작거나 같아야 합니다."
+        private const val UNDER_LOTTO_NUMBER_ERROR_MESSAGE = "[ERROR] 보너스 번호는 1보다 크거나 같아야 합니다."
     }
 }

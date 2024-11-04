@@ -2,7 +2,7 @@ package lotto.domain.validator
 
 import lotto.common.LOTTO_PRICE
 
-class PurchasePriceValidator : NumberValidator() {
+class PurchasePriceValidator : LottoNumberValidator() {
     fun validateMoney(money: Int) {
         validateMultipleOfThousand(money)
         validateUnderMinMoney(money)

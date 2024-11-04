@@ -1,6 +1,6 @@
 package lotto.domain.validator
 
-class BonusNumberValidator : NumberValidator() {
+class BonusLottoNumberValidator : LottoNumberValidator() {
     fun validateBonusNumber(bonusNumber: Int, numbers: List<Int>) {
         validateNumberRange(bonusNumber)
         require(numbers.contains(bonusNumber).not()) { ERROR_DUPLICATE_WINNING_NUMBER }
