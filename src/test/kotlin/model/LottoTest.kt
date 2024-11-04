@@ -1,5 +1,7 @@
 package model
 
+import camp.nextstep.edu.missionutils.test.Assertions.assertSimpleTest
+import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 
@@ -11,7 +13,6 @@ class LottoTest {
         }
     }
 
-    // TODO: 테스트가 통과하도록 프로덕션 코드 구현
     @Test
     fun `로또 번호에 중복된 숫자가 있으면 예외가 발생한다`() {
         assertThrows<IllegalArgumentException> {
@@ -19,5 +20,18 @@ class LottoTest {
         }
     }
 
-    // TODO: 추가 기능 구현에 따른 테스트 코드 작성
+    @Test
+    fun `로또 번호는 오름차순으로 관리한다`() {
+        assertSimpleTest {
+            // given
+            val lotto = Lotto(listOf(6, 5, 4, 3, 2, 1))
+
+            // when
+            val sortedLotto = lotto.getLottoTicket().split(",")
+                .map { it.trim().toInt() }
+
+            // then
+            assertThat(sortedLotto).isEqualTo(listOf(1, 2, 3, 4, 5, 6))
+        }
+    }
 }

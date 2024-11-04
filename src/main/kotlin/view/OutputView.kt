@@ -22,7 +22,7 @@ object OutputView {
     }
 
     fun printTickets(ticket: String) {
-        println(ticket)
+        println("[$ticket]")
     }
 
     fun printWinNumberMessage() {

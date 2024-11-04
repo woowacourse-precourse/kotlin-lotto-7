@@ -12,7 +12,7 @@ class LottoMakerTest {
             // given
 
             // when
-            val lottoTicket = LottoMaker.makeLotto().getLottoTicket().toList().drop(1).dropLast(1)
+            val lottoTicket = LottoMaker.makeLotto().getLottoTicket().split(",")
 
             // then
             assertThat(lottoTicket).isEqualTo(LottoUtils.LOTTO_NUMBER_COUNTS)

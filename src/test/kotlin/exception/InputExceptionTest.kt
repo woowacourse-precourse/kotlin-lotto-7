@@ -49,7 +49,7 @@ class InputExceptionTest {
     fun `당첨 번호는 6개의 서로 중복되지 않는 숫자로 이뤄져야 한다`(winNumbersInput: String) {
         assertSimpleTest {
             // given
-            val winNumbers = winNumbersInput.split(", ")
+            val winNumbers = winNumbersInput.split(",")
                 .map { it.trim().toInt() }
 
             // when
