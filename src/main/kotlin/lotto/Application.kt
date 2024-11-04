@@ -90,3 +90,13 @@ enum class Rank(
         RankDescription.NONE
     )
 }
+
+class LottoGame {
+    fun start() {
+        // TODO
+    }
+}
+
+fun main() {
+    LottoGame().start()
+}
