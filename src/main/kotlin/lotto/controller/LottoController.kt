@@ -13,7 +13,7 @@ class LottoController(
 ) {
     fun runLottoGame() {
         val lottoAmount = getLottoAmount().money
-        val purchasedLottos = issueLottos(lottoAmount)
+        val purchasedLottos = generateLottos(lottoAmount)
 
         val winningLottoNumber = getWinningLottoNumber()
         val winningBonusNumber = getBonusNumber()
@@ -34,11 +34,11 @@ class LottoController(
         }
     }
 
-    private fun issueLottos(lottoAmount: Int): List<Lotto> {
+    private fun generateLottos(lottoAmount: Int): List<Lotto> {
         val lottosCount = lottoCalculator.calculateLottoCount(lottoAmount)
-        outputView.printLottosCount(lottosCount)
-
         val lottos = lottoMachine.createLottos(lottosCount)
+
+        outputView.printLottosCount(lottosCount)
         lottos.forEach { lotto ->
             println(lotto.getSortedNumbers())
         }
