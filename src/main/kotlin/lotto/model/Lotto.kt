@@ -8,7 +8,7 @@ import lotto.util.LottoNumberValidator
 // 로또 보너스 번호 체크
 class Lotto(private val numbers: List<Int>) {
     init {
-        validateLottoNumber(numbers)
+        LottoNumberValidator.validateLottoNumbers(numbers)
     }
 
     fun getLottoNumber(): List<Int> = numbers
@@ -35,11 +35,5 @@ class Lotto(private val numbers: List<Int>) {
             return 2
         }
         return 3
-    }
-
-    private fun validateLottoNumber(numbers: List<Int>) {
-        LottoNumberValidator.validateLottoNumberCount(numbers)
-        LottoNumberValidator.validateLottoNumberRange(numbers)
-        LottoNumberValidator.validateLottoNumberUniqueness(numbers)
     }
 }
