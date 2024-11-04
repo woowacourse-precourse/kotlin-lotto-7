@@ -4,6 +4,7 @@ import camp.nextstep.edu.missionutils.Randoms
 import lotto.domain.entity.Lotto
 import lotto.domain.entity.WinningLotto
 import lotto.domain.entity.increase
+import java.text.DecimalFormat
 
 class LottoService {
     fun matchAllLotto(winLotto: Lotto, comparingLottos: List<Lotto>, bonusNumber: Int) {
@@ -30,7 +31,8 @@ class LottoService {
 
     fun getProfitRate(originalMoney: Int, resultMoney: Int): String {
         val profit = resultMoney.toDouble() / originalMoney.toDouble() * 100
-        return String.format("%.1f", profit)
+        val decimalFormat = DecimalFormat("#,##0.0")
+        return decimalFormat.format(profit)
     }
 
     private fun createRandomLotto() = Lotto(Randoms.pickUniqueNumbersInRange(1, 45, 6).sorted())
