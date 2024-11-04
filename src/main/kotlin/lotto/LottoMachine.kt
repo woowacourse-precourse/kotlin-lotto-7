@@ -1,9 +1,10 @@
 package lotto
 
+import lotto.utils.CalculateUtils
 import lotto.utils.LottoGenerator
 
 class LottoMachine(
-    money: Int,
+    private val money: Int,
 ) {
 
     val lottoSet: List<Lotto> = createLottoSet(money)
@@ -14,6 +15,12 @@ class LottoMachine(
             Lotto(LottoGenerator.createLotto())
         }
         return lottoSet
+    }
+
+    fun getEarningsRate(winningNumber: List<Int>, bonusNumber: Int): String {
+        val totalEarning = lottoSet.sumOf { it.getWinningRank(winningNumber, bonusNumber).price }
+        val earningsRate = CalculateUtils.calculateEarningsRate(totalEarning, money)
+        return earningsRate
     }
 
 }

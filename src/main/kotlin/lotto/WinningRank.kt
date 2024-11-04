@@ -1,6 +1,6 @@
 package lotto
 
-enum class WinningRank(val price: Int = 0){
+enum class WinningRank(val price: Long = 0){
     PLACE_1st(2000000000),
     PLACE_2nd(30000000),
     PLACE_3rd(1500000),
