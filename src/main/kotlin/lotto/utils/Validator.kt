@@ -11,4 +11,10 @@ object Validator {
       LottoConstants.ERROR_INVALID_NUMBER_RANGE
     }
   }
+
+  fun validatePurchaseAmount(amount: Int?) {
+    require(amount != null && amount % LottoConstants.LOTTO_PRICE == 0) {
+      LottoConstants.ERROR_INVALID_PURCHASE_AMOUNT
+    }
+  }
 }

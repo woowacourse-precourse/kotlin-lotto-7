@@ -3,24 +3,22 @@ package lotto.view
 import camp.nextstep.edu.missionutils.Console
 import lotto.constants.LottoConstants
 import lotto.presenter.LottoPresenter
+import lotto.utils.Validator
 import lotto.view.interfaces.PurchaseViewInterface
 
 class PurchaseView(private val presenter: LottoPresenter) : PurchaseViewInterface {
 
   override fun requestPurchaseAmount() {
     println(LottoConstants.PURCHASE_AMOUNT_PROMPT)
-    val amount = Console.readLine().toIntOrNull()
+    val input = Console.readLine()
+    val amount = input.toIntOrNull()
 
-    if (amount != null && amount % LottoConstants.LOTTO_PRICE == 0) {
-      presenter.onPurchaseAmountReceived(amount)
-      return
+    try {
+      Validator.validatePurchaseAmount(amount)
+      presenter.onPurchaseAmountReceived(amount!!)
+    } catch (e: IllegalArgumentException) {
+      println("[ERROR] ${LottoConstants.ERROR_INVALID_PURCHASE_AMOUNT}")
+      requestPurchaseAmount()
     }
-
-    showErrorMessage(LottoConstants.ERROR_INVALID_PURCHASE_AMOUNT)
-    requestPurchaseAmount()
-  }
-
-  override fun showErrorMessage(message: String) {
-    ErrorMessageView.showErrorMessage(message)
   }
 }
