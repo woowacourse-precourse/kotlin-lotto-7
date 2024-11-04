@@ -1,5 +1,5 @@
 package lotto
 
 fun main() {
-    Lotto.getLottoInformation()
+    Lotto.runLotto()
 }
