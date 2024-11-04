@@ -1,6 +1,7 @@
 package lotto.view
 
 import lotto.model.Lotto
+import lotto.model.LottoRank
 import lotto.model.LottoResult
 import lotto.util.constant.OutputConst
 
@@ -24,12 +25,9 @@ class OutputView {
     fun showMatchingLottoAmount(lottoResults: List<LottoResult>) {
         println(OutputConst.RESULT)
         lottoResults.reversed().forEach { lottoResult ->
-            when (lottoResult.rank) {
-                5 -> println("${OutputConst.THREE_MATCHED} ${OutputConst.matchedLotteries(lottoResult.count)}")
-                4 -> println("${OutputConst.FOUR_MATCHED} ${OutputConst.matchedLotteries(lottoResult.count)}")
-                3 -> println("${OutputConst.FIVE_MATCHED} ${OutputConst.matchedLotteries(lottoResult.count)}")
-                2 -> println("${OutputConst.FIVE_MATCHED_WITH_BONUS} ${OutputConst.matchedLotteries(lottoResult.count)}")
-                1 -> println("${OutputConst.SIX_MATCHED} ${OutputConst.matchedLotteries(lottoResult.count)}")
+            val rank = LottoRank.entries.find { it.rankNumber == lottoResult.rank }
+            rank?.let {
+                println("${it.displayName} ${OutputConst.matchedLotteries(lottoResult.count)}")
             }
         }
     }

@@ -11,30 +11,32 @@ class LottoResultCalculator(private val lotteries: List<Lotto>) {
         return lottoResults
     }
 
+    private fun calculateRanks(winningNumbers: List<Int>, bonusNumber: Int): List<LottoRank> {
+        val lotteriesRank = lotteries.map { lotto -> lotto.getLottoRank(winningNumbers, bonusNumber) }
+        return lotteriesRank
+    }
+
+    private fun countRank(lotteriesRank: List<LottoRank>): Map<LottoRank, Int> {
+        val rankWithCounts = lotteriesRank.groupingBy { it }.eachCount()
+        return rankWithCounts
+    }
+
+    private fun mapToResult(rankWithCounts: Map<LottoRank, Int>): List<LottoResult> {
+        val lottoResult = LottoRank.entries
+            .filter { it != LottoRank.OUT_OF_RANK }
+            .map { rank ->
+                val count = rankWithCounts.getOrDefault(rank, LottoRules.ZERO)
+                LottoResult(rank.rankNumber, count)
+            }
+        return lottoResult
+    }
+
     fun getLottoYield(lottoResults: List<LottoResult>, purchaseAmount: Int): String {
         val totalEarnings = calculateTotalEarnings(lottoResults)
         val yield = (totalEarnings / purchaseAmount) * LottoRules.PERCENTAGE
         val formattedYield = String.format(LottoRules.YIELD_FORMAT, yield)
 
         return formattedYield
-    }
-
-    private fun calculateRanks(winningNumbers: List<Int>, bonusNumber: Int): List<Int> {
-        val lotteriesRank = lotteries.map { lotto -> lotto.getLottoRank(winningNumbers, bonusNumber) }
-        return lotteriesRank
-    }
-
-    private fun countRank(lotteriesRank: List<Int>): Map<Int, Int> {
-        val rankWithCounts = lotteriesRank.groupingBy { it }.eachCount()
-        return rankWithCounts
-    }
-
-    private fun mapToResult(rankWithCounts: Map<Int, Int>): List<LottoResult> {
-        val lottoResult = (LottoRules.RANK_FIRST..LottoRules.RANK_FIFTH).map { rank ->
-                val count = rankWithCounts.getOrDefault(rank, LottoRules.ZERO)
-                LottoResult(rank, count)
-            }
-        return lottoResult
     }
 
     private fun calculateTotalEarnings(lottoResults: List<LottoResult>): Float {
@@ -48,14 +50,8 @@ class LottoResultCalculator(private val lotteries: List<Lotto>) {
     }
 
     private fun getPrizeMoney(rank: Int): Int {
-        return when (rank) {
-            LottoRules.RANK_FIRST -> LottoRules.FIRST_PRIZE_MONEY
-            LottoRules.RANK_SECOND -> LottoRules.SECOND_PRIZE_MONEY
-            LottoRules.RANK_THIRD -> LottoRules.THIRD_PRIZE_MONEY
-            LottoRules.RANK_FOURTH -> LottoRules.FOURTH_PRIZE_MONEY
-            LottoRules.RANK_FIFTH -> LottoRules.FIFTH_PRIZE_MONEY
-            else -> LottoRules.OUT_OF_RANK
-        }
+        val prizeMoney = LottoRank.entries.find { it.rankNumber == rank }?.prizeMoney ?: LottoRules.OUT_OF_RANK
+        return prizeMoney
     }
 }
 
