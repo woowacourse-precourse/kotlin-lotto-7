@@ -50,6 +50,30 @@ class ApplicationTest : NsTest() {
         }
     }
 
+    @Test
+    fun `1000의 배수가 아닌 경우 예외 테스트`() {
+        assertSimpleTest {
+            runException("1500")
+            assertThat(output()).contains(ERROR_MESSAGE)
+        }
+    }
+
+    @Test
+    fun `음수인 경우 예외 테스트`() {
+        assertSimpleTest {
+            runException("-5000")
+            assertThat(output()).contains(ERROR_MESSAGE)
+        }
+    }
+
+    @Test
+    fun `공백인 경우 예외 테스트`() {
+        assertSimpleTest {
+            runException(" ")
+            assertThat(output()).contains(ERROR_MESSAGE)
+        }
+    }
+
     override fun runMain() {
         main()
     }
