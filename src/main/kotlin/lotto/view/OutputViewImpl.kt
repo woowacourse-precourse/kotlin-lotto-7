@@ -1,5 +1,6 @@
 package lotto.view
 
+import lotto.extensions.toFormattedString
 import lotto.model.Lotto
 import lotto.model.LottoWinning
 
@@ -10,7 +11,7 @@ class OutputViewImpl : OutputView {
     override fun printPurchaseSummary(lottoBundle: List<Lotto>) {
         println(PURCHASE_SUMMARY_MESSAGE.format(lottoBundle.size))
         for (lotto in lottoBundle) {
-            println(lotto.getNumbers().joinToString(", ", "[", "]"))
+            println(lotto.getNumbers().toFormattedString())
         }
         printNewLine()
     }
