@@ -20,7 +20,7 @@ class WinningNumberManager {
         }
     }
 
-    private fun validateWinningNumbersInput(winningNumbersInput: String) {
+    fun validateWinningNumbersInput(winningNumbersInput: String) {
         if (!winningNumbersInput.matches(Regex(REGEX_WINNING_NUMBERS_PATTERN))) {
             throw IllegalArgumentException(ERROR_WINNING_NUMBERS_INPUT_MESSAGE)
         }
