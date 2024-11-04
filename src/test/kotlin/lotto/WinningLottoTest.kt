@@ -43,7 +43,7 @@ class WinningLottoTest {
 
     @ParameterizedTest
     @ValueSource(strings = ["-1", "46", "오", "@", "seven"])
-    fun `보너스 번호는 1 ~ 45사이에 숫자여야 한다`(bonusNumberInput : String) {
+    fun `보너스 번호는 1 ~ 45사이에 숫자여야 한다`(bonusNumberInput: String) {
         assertThrows<IllegalArgumentException> {
             // given
             val winningLotto = WinningLotto("1,2,3,4,5,6")
@@ -55,29 +55,26 @@ class WinningLottoTest {
 
     @ParameterizedTest
     @ValueSource(strings = ["1", "2", "3", "4", "5", "6"])
-    fun `보너스 번호는 당첨 번호와 중복되어선 안된다`(bonusNumberInput : String) {
+    fun `보너스 번호는 당첨 번호와 중복되어선 안된다`(bonusNumberInput: String) {
         assertThrows<IllegalArgumentException> {
-            // given
             val winningLotto = WinningLotto("1,2,3,4,5,6")
-
-            // when
             winningLotto.setBonusNumber(bonusNumberInput)
         }
     }
 
     @ParameterizedTest
     @MethodSource("provideLottoNumbersAndRanks")
-    fun `당첨 번호와 보너스 번호에 따라 로또는 올바른 순위를 할당받는다`(pair: Pair<List<Int>, LottoRank> ) {
-            // given
-            val lotto = Lotto(pair.first)
-            val winningLotto = WinningLotto("1,2,3,4,5,6")
-            winningLotto.setBonusNumber("7")
+    fun `당첨 번호와 보너스 번호에 따라 로또는 올바른 순위를 할당받는다`(pair: Pair<List<Int>, LottoRank>) {
+        // given
+        val lotto = Lotto(pair.first)
+        val winningLotto = WinningLotto("1,2,3,4,5,6")
+        winningLotto.setBonusNumber("7")
 
-            // when
-            val lottoRank = winningLotto.getRank(lotto)
+        // when
+        val lottoRank = winningLotto.getRank(lotto)
 
-            // then
-            assertThat(lottoRank).isEqualTo(pair.second)
+        // then
+        assertThat(lottoRank).isEqualTo(pair.second)
     }
 
     companion object {
