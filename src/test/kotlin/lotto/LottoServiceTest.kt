@@ -5,6 +5,7 @@ import lotto.domain.entity.Lotto.Companion.toLottoNumbers
 import lotto.domain.entity.WinningLotto
 import lotto.service.LottoService
 import org.assertj.core.api.Assertions.assertThat
+import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.CsvSource
@@ -13,6 +14,11 @@ import kotlin.math.exp
 
 class LottoServiceTest {
     private val service = LottoService()
+
+    @BeforeEach
+    fun `로또 당첨 현황 초기화`() {
+        WinningLotto.entries.forEach { it.amount = 0 }
+    }
 
     @ParameterizedTest
     @ValueSource(ints = [1000])
