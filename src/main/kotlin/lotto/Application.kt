@@ -11,6 +11,5 @@ fun main() {
         lottoController.run()
     } catch (e: IllegalArgumentException) {
         ErrorView.errorMessage(e.message ?: ErrorMessage.DEFAULT_ERROR.message)
-        throw e
     }
 }
