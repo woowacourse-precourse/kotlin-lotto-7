@@ -1,5 +1,6 @@
 package lotto
 
+import lotto.constant.COMMA
 import lotto.model.Lotto
 import lotto.model.LottoGenerator
 import lotto.model.LottoResult
@@ -37,7 +38,7 @@ class Controller {
             try {
                 money = input.getMoney()
                 inputValidator.isValidMoney(money)
-                return money.replace(",", "").toInt()
+                return money.replace(COMMA, "").toInt()
             } catch (e: IllegalArgumentException) {
                 println(e.message)
             }
@@ -55,7 +56,7 @@ class Controller {
             try {
                 winningNum = input.getWinningNum()
                 inputValidator.isValidWinningNum(winningNum)
-                return winningNum.split(",").map { it.trim().toInt() }
+                return winningNum.split(COMMA).map { it.trim().toInt() }
             } catch (e: IllegalArgumentException) {
                 println(e.message)
             }
