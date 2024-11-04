@@ -25,7 +25,7 @@ class LottoApp(
         val bonusWinningNumber = keepCallingWithDefaultOnFailure { inputView.requestBonusWinningNumber(winningNumbers) }
 
         val lottoWinPlaces = lottoes.calculateAllLottoWinPlaces(winningNumbers, bonusWinningNumber)
-        outputView.displayLottoResults(lottoWinPlaces)
+        outputView.displayLottoResults(lottoWinPlaces, budget)
     }
 
     private fun List<Lotto>.calculateAllLottoWinPlaces(

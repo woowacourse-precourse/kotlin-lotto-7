@@ -7,5 +7,5 @@ interface OutputView {
     fun displayExceptionMessage(exception: Throwable)
     fun displayAmount(amount: Int)
     fun displayLottoes(lottoes: List<Lotto>)
-    fun displayLottoResults(lottoWinPlaces: Map<LottoWinPlace, Int>)
+    fun displayLottoResults(lottoWinPlaces: Map<LottoWinPlace, Int>, budget: Int)
 }

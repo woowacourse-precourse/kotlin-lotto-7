@@ -1,5 +1,6 @@
 package lotto.ui.console
 
+import lotto.domain.calculateProfitRate
 import lotto.domain.exception.ExceptionMessages
 import lotto.domain.model.Lotto
 import lotto.domain.model.LottoWinPlace
@@ -24,7 +25,7 @@ class ConsoleOutputView : OutputView {
         println(stringBuilder.toString())
     }
 
-    override fun displayLottoResults(lottoWinPlaces: Map<LottoWinPlace, Int>) {
+    override fun displayLottoResults(lottoWinPlaces: Map<LottoWinPlace, Int>, budget: Int) {
         val stringBuilder = StringBuilder()
         val availableWinPlaces = LottoWinPlace.entries.reversed()
 
@@ -37,6 +38,9 @@ class ConsoleOutputView : OutputView {
             stringBuilder.appendLine(availableWinPlace.convertToString(winPlaceCount))
         }
 
+        val profit = calculateProfitRate(budget, lottoWinPlaces)
+
+        stringBuilder.appendLine(PROFIT_FORMAT.format(profit))
         println(stringBuilder.toString())
     }
 
@@ -58,5 +62,6 @@ class ConsoleOutputView : OutputView {
         private const val SECTION_SEPARATOR = "---"
         private const val BONUS_WINNING_NUMBER_MATCH = ", 보너스 볼 일치"
         private const val EMPTY_STRING = ""
+        private const val PROFIT_FORMAT = "총 수익률은 %.1f%%입니다."
     }
 }
