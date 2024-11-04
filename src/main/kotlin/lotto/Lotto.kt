@@ -18,6 +18,13 @@ class Lotto(private val numbers: List<Int>) {
         fun validatePurchaseAmount(amount: Int) {
             require(amount > 0 && amount % 1000 == 0) { "[ERROR] 로또 구입 금액은 1,000원 단위여야 합니다." }
         }
+
+        // 로또 번호 유효성 검증
+        fun validateLottoNumbers(numbers: List<Int>) {
+            require(numbers.size == 6) { "[ERROR] 로또 번호는 6개여야 합니다." }
+            require(numbers.distinct().size == 6) { "[ERROR] 로또 번호는 중복되지 않아야 합니다." }
+            require(numbers.all { it in 1..45 }) { "[ERROR] 로또 번호는 1부터 45 사이여야 합니다." }
+        }
     }
 
     // 당첨 번호와 보너스 번호 검증
