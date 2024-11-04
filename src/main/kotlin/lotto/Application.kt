@@ -34,7 +34,7 @@ fun main() {
     var winningLotto: Lotto
     do {
         try {
-            winningLotto = getWinningLotto()
+            winningLotto = getWinningLotto(Console.readLine())
         } catch (e: IllegalArgumentException) {
             println(e.message)
             continue
@@ -96,8 +96,8 @@ fun printLottos(lottos: ArrayList<Lotto>) {
     println()
 }
 
-fun getWinningLotto(): Lotto {
-    val winningNumbers = Console.readLine().split(",")
+fun getWinningLotto(input: String): Lotto {
+    val winningNumbers = input.split(",")
     return Lotto(checkNumber(winningNumbers))
 }
 
