@@ -9,9 +9,9 @@
     - [X] 랜덤으로 6개의 숫자를 만들고 이를 Lotto에 저장하는 releaseLotto()
     - [ ] 값을 입력받고 정상적인 입력인지 확인후 저장
     - [X] 입력받은 가격에 따른 로또 구매
-    - [ ] 로또 결과를 확인
-    - [ ] 최종 결과값 반환
-- [ ] 입력과 결과를 다루는 LottoView
+    - [X] 로또 결과를 확인
+    - [X] 최종 결과값 반환
+- [X] 입력과 결과를 다루는 LottoView
 
 ## 구현 과정
 
@@ -66,3 +66,54 @@ LottoView를 통해 값을 입력받는다.
     }
 ```
 입력받은 값을 LOTTO_PRICE로 나누고 이를 통해 도출된 구매 갯수에 따라 releaseLotto()를 통해 Lotto를 발매한다.
+
+### 로또 결과 정산
+```
+private fun calculateLotto(winnerNumber: List<Int>, specialNumber: Int): List<Int> {
+        val lottoResult = MutableList(5) { 0 }
+        lottos.forEach {
+            when (it.getLottoValue().toSet().minus(winnerNumber.toSet()).size) {
+                3 -> lottoResult[0]++
+                2 -> lottoResult[1]++
+                1 -> {
+                    if (it.getLottoValue().contains(specialNumber)) lottoResult[3]++
+                    else lottoResult[2]++
+                }
+
+                0 -> lottoResult[4]++
+            }
+        }
+        return lottoResult
+    }
+```
+입력받은 로또 당첨 번호와 발매된 로또 번호의 공통 개수 비교 및 보너스 볼 넘버를 비교하고 그 갯수를 누적한다.
+
+```
+private fun getReturnRate(lottoResult: List<Int>, buyLottoAmount: Int) : Double{
+        var sum = 0.0
+        sum += Constant.THREE_REWARD * lottoResult[0]
+        sum += Constant.FOUR_REWARD * lottoResult[1]
+        sum += Constant.FIVE_REWARD * lottoResult[2]
+        sum += Constant.FIVE_SPECIAL_REWARD * lottoResult[3]
+        sum += Constant.SIX_REWARD * lottoResult[4]
+        return sum/(buyLottoAmount*Constant.LOTTO_PRICE)
+    }
+```
+calculateLotto로 얻어낸 lottoResult를 통해 총 수익률을 구하고 이 값들을 LottoView로 전달해주어
+```
+fun showLottoResult(lottoResult : List<Int>){
+        println(Constant.RESULT_MESSAGE)
+        println(Constant.RESULT_THREE_MATCH.format(lottoResult[0]))
+        println(Constant.RESULT_FOUR_MATCH.format(lottoResult[1]))
+        println(Constant.RESULT_FIVE_MATCH.format(lottoResult[2]))
+        println(Constant.RESULT_FIVE_SPECIAL_MATCH.format(lottoResult[3]))
+        println(Constant.RESULT_SIX_MATCH.format(lottoResult[4]))
+    }
+
+    fun showReturnRate(returnRate : Double){
+        println("총 수익률은 ${String.format("%.1f", returnRate)}%입니다.")
+    }
+
+```
+
+이것을 사용자에게 출력한다.
