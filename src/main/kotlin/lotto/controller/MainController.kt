@@ -3,6 +3,7 @@ package lotto.controller
 import lotto.model.LotteryGenerator
 import lotto.model.Lotto
 import lotto.model.WinningCalculator
+import lotto.util.Error
 import lotto.util.Transformer
 import lotto.util.Validator
 import lotto.view.Input
@@ -42,7 +43,6 @@ class MainController {
             Validator().validateWinningNumberInput(winningNumber)
             Lotto(Transformer().stringToIntInt(winningNumber.split(',')))
         } catch (e: IllegalArgumentException) {
-            println("[ERROR] 입력이 올바르지 않습니다.")
             readAndValidateWinningNumber()
         }
     }

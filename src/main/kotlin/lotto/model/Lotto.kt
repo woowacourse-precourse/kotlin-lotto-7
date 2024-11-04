@@ -1,10 +1,21 @@
 package lotto.model
 
+import lotto.util.Error
+
 class Lotto(private val numbers: List<Int>) {
     init {
-        require(numbers.size == 6) { "[ERROR] 로또 번호는 6개여야 합니다." }
-        require(numbers.toSet().size == 6) { "[ERROR] 로또 번호는 중복이 없여야 합니다." }
-        require(numbers.all { it in 1..45 }) { "[ERROR] 로또 번호는 1부터 45 사이의 숫자여야 합니다." }
+        require(numbers.size == 6) {
+            println(Error.SIX_NUMBER)
+            Error.SIX_NUMBER
+        }
+        require(numbers.toSet().size == 6) {
+            println(Error.WINNING_DUPLICATION)
+            Error.WINNING_DUPLICATION
+        }
+        require(numbers.all { it in 1..45 }) {
+            println(Error.LOTTERY_RANGE)
+            Error.LOTTERY_RANGE
+        }
     }
 
     fun getNumbers(): List<Int> {
