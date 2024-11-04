@@ -1,9 +1,28 @@
 package lotto
 
+import lotto.LottoConstants.LOTTO_NUMBER_RANGE
+import lotto.LottoConstants.LOTTO_NUMBER_SIZE
+import validator.LottoGenerator.Companion.GENERATOR_ERROR_FORMAT
+import validator.RangeValidator.Companion.LOTTO_COUNT_ERROR
+import validator.RangeValidator.Companion.RANGE_ERROR_FORMAT
+
 class Lotto(private val numbers: List<Int>) {
     init {
-        require(numbers.size == 6) { "[ERROR] 로또 번호는 6개여야 합니다." }
+        require(isSixLength(numbers)) { LOTTO_COUNT_ERROR }
+        require(isNotDuplicated(numbers)) { GENERATOR_ERROR_FORMAT }
+        require(isInRange(numbers)) { RANGE_ERROR_FORMAT }
     }
 
-    // TODO: 추가 기능 구현
+    private fun isSixLength(numbers: List<Int>): Boolean {
+        return numbers.size == LOTTO_NUMBER_SIZE
+    }
+
+    private fun isNotDuplicated(numbers: List<Int>): Boolean {
+        return numbers.distinct().size == numbers.size
+    }
+
+    private fun isInRange(numbers: List<Int>): Boolean {
+        return numbers.all { it in LOTTO_NUMBER_RANGE }
+    }
+
 }
