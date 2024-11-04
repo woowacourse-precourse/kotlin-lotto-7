@@ -11,13 +11,13 @@ import lotto.view.OutputView
 class LottoController {
 
     fun run() {
-        val purchaseAmount = getPrice()
+        val purchaseAmount = getPurchaseAmount()
         val tickets = generateLottoTickets(purchaseAmount)
 
         OutputView.printLottoTickets(tickets)
 
         val winningLotto = getWinningNumbers()
-        val bonusLotto = getBonusNumbers(winningLotto)
+        val bonusLotto = getBonusNumber(winningLotto)
 
         val ranks = tickets.map { calculateMatch(it, winningLotto, bonusLotto) }
         OutputView.printResults(ranks)
@@ -41,10 +41,10 @@ class LottoController {
         return tickets
     }
 
-    private fun getPrice(): Int {
-        val purchasePrice = InputView.askForPrice().toIntOrNull()
+    private fun getPurchaseAmount(): Int {
+        val purchaseAmount = InputView.askForPurchaseAmount().toIntOrNull()
             ?: throw IllegalArgumentException(ErrorMessage.INVALID_NUMBER_FORMAT.message)
-        return purchasePrice
+        return purchaseAmount
     }
 
     private fun getWinningNumbers(): Lotto {
@@ -56,7 +56,7 @@ class LottoController {
         return Lotto(purchasePrice)
     }
 
-    private fun getBonusNumbers(lotto: Lotto): BonusLotto {
+    private fun getBonusNumber(lotto: Lotto): BonusLotto {
         val bonusNumber = InputView.askForBonusNumber().toIntOrNull()
             ?: throw IllegalArgumentException(ErrorMessage.INVALID_NUMBER_FORMAT.message)
         return BonusLotto(lotto.getNumbers(), bonusNumber)
