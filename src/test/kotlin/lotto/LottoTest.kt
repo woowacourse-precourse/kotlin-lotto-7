@@ -2,6 +2,7 @@ package lotto
 
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
+import validator.LottoGenerator
 
 class LottoTest {
     @Test
@@ -20,4 +21,19 @@ class LottoTest {
     }
 
     // TODO: 추가 기능 구현에 따른 테스트 코드 작성
+    @Test
+    fun `리스트 내에 중복 숫자가 있는 경우`() {
+        val duplicateValidate = LottoGenerator()
+        val numbers = listOf(1, 2, 2, 4, 5, 6)
+        assertThrows<IllegalArgumentException>("로또 번호는 중복될 수 없습니다.") {
+            duplicateValidate.validate(numbers)
+        }
+    }
+
+    @Test
+    fun `리스트 내에 중복 숫자가 없는 경우`() {
+        val duplicateValidate = LottoGenerator()
+        val numbers = listOf(1, 2, 3, 4, 5, 6)
+        duplicateValidate.validate(numbers)
+    }
 }
