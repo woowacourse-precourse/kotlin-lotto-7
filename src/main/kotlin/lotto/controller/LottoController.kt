@@ -1,6 +1,7 @@
 package lotto.controller
 
 import lotto.model.Lotto
+import lotto.model.LottoMatchCount
 import lotto.model.Random
 import lotto.view.InputView
 import lotto.view.OutputView
@@ -15,7 +16,6 @@ class LottoController {
     private var lottos = mutableListOf<Lotto>()
     private var winLotteryNumber: Lotto? = null
     private var bonusLotteryNumber = NOT_INPUT_BONUS_LOTTERY_NUMBER_STATE
-
 
     fun run() {
         purchaseLotto()
@@ -84,41 +84,30 @@ class LottoController {
             }!!
         }
 
-        val matchLottoCount = mutableMapOf<MatchingLottoCount, Int>()
         for (i in matchLottoNumber) {
-            increaseMatchCount(matchLottoCount, i.first + isMatchBonusNumber(i.second), i.second)
+            increaseMatchCount(i.first + isMatchBonusNumber(i.second), i.second)
         }
 
-        return matchLottoCount
+        return LottoMatchCount.getMatchCount()
     }
 
     private fun increaseMatchCount(
-        matchLottoCount: MutableMap<MatchingLottoCount, Int>,
         matchCount: Int,
         isMatchBonus: Boolean,
     ) {
         when (matchCount) {
-            3 -> matchLottoCount[MatchingLottoCount.THREE] =
-                (matchLottoCount[MatchingLottoCount.THREE] ?: 0) + 1
-
-            4 -> matchLottoCount[MatchingLottoCount.FOUR] =
-                (matchLottoCount[MatchingLottoCount.FOUR] ?: 0) + 1
-
-            5 -> matchLottoCount[MatchingLottoCount.FIVE] =
-                (matchLottoCount[MatchingLottoCount.FIVE] ?: 0) + 1
-
+            3 -> LottoMatchCount.increaseCount(MatchingLottoCount.THREE)
+            4 -> LottoMatchCount.increaseCount(MatchingLottoCount.FOUR)
+            5 -> LottoMatchCount.increaseCount(MatchingLottoCount.FIVE)
             6 -> {
                 if (isMatchBonus) {
-                    matchLottoCount[MatchingLottoCount.FIVE_BONUS] =
-                        (matchLottoCount[MatchingLottoCount.FIVE_BONUS] ?: 0) + 1
+                    LottoMatchCount.increaseCount(MatchingLottoCount.FIVE_BONUS)
                     return
                 }
-                matchLottoCount[MatchingLottoCount.SIX] =
-                    (matchLottoCount[MatchingLottoCount.SIX] ?: 0) + 1
+                LottoMatchCount.increaseCount(MatchingLottoCount.SIX)
             }
         }
     }
-
 
     private fun isMatchBonusNumber(isMatchBonusCount: Boolean): Int {
         if (isMatchBonusCount) return 1
