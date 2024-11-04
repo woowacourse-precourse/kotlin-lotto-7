@@ -1,10 +1,11 @@
 package lotto.util
 
 object ConstantsUtil {
-    const val MESSAGE_NUMBER_SIZE_ERROR = "[ERROR] 로또 번호는 6개여야 합니다."
+    const val MESSAGE_NUMBER_SIZE_INVALID = "[ERROR] 로또 번호는 6개여야 합니다."
     const val MESSAGE_TICKETS_PRICE_NOT_INT= "[ERROR] 티켓 가격은 숫자여야 합니다."
     const val MESSAGE_WINNING_NUMBERS_NOT_INT= "[ERROR] 당첨 번호는 숫자여야 합니다."
     const val MESSAGE_BONUS_NUMBERS_NOT_INT= "[ERROR] 보너스 번호는 숫자여야 합니다."
+    const val MESSAGE_TICKETS_PRICE_INVALID = "[ERROR] 티켓 가격은 1,000원 단위여야 합니다"
 
     const val MESSAGE_TICKETS_COUNT = "%d개를 구매했습니다."
     const val MESSAGE_SHOW_CALCULATED_TICKETS = "당첨 통계\n ---"
