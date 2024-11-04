@@ -3,5 +3,9 @@ package lotto
 import lotto.controller.LottoController
 
 fun main() {
-    LottoController().run()
+    try {
+        LottoController().run()
+    } catch (e: IllegalArgumentException) {
+        println(e)
+    }
 }

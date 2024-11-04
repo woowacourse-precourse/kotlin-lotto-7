@@ -12,9 +12,13 @@ object Validator {
     }
 
     fun <T> retryOnFailure(inputFunction: () -> T): T {
-        return runCatching { inputFunction() }.getOrElse {
-            println(it.message)
-            retryOnFailure(inputFunction)
+        while (true) {
+            try {
+                inputFunction()
+            } catch (e: IllegalArgumentException) {
+                println(e.message)
+                retryOnFailure(inputFunction)
+            }
         }
     }
 }
