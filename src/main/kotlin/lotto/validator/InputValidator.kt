@@ -19,4 +19,31 @@ class InputValidator {
             ErrorType.PRICE_NOT_1000_UNIT
         }
     }
+
+
+    fun validateWinningNumbers(winningNumbers: String) {
+        if (winningNumbers.isEmpty()) {
+            throw IllegalStateException(ErrorType.LOTTO_NUMBER_EMPTY)
+        }
+
+        val splitNumbers = winningNumbers.split(",").map { it.trim() }
+
+        require(splitNumbers.size == LOTTO_NUMBER_COUNT) {
+            ErrorType.LOTTO_NUMBER_COUNT_CONDITION
+        }
+
+        splitNumbers.forEach {
+            NumberValidator.validateInteger(it)
+        }
+
+        require(splitNumbers.all { number ->
+            number.toInt() in MIN_LOTTO_NUMBER..MAX_LOTTO_NUMBER
+        }) {
+            ErrorType.LOTTO_NUMBER_RANGE_CONDITION
+        }
+
+        require(splitNumbers.distinct().size == LOTTO_NUMBER_COUNT) {
+            ErrorType.LOTTO_NUMBER_DUPLICATION
+        }
+    }
 }
