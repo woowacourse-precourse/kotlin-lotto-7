@@ -1,9 +1,11 @@
 package lotto.model
 
+import lotto.global.Error.*
+
 class Lotto(private val numbers: List<Int>) {
     init {
-        require(numbers.size == 6) { "[ERROR] 로또 번호는 6개여야 합니다." }
-        require(numbers.toSet().size == 6) { "[ERROR] 로또 번호에 중복된 숫자가 있습니다." }
+        require(numbers.size == 6) { NOT_SIX_NUMBERS.message }
+        require(numbers.toSet().size == 6) { HAS_DUPLICATE_NUMBERS.message }
     }
 
     fun contain(number: Int): Boolean {
