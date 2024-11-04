@@ -5,11 +5,12 @@ import camp.nextstep.edu.missionutils.Console
 class Input {
     private fun input(): String = Console.readLine()
 
-    private fun checkChangeInt(input  : String) : Boolean {
+    private fun checkChangeInt(input: String): Boolean {
         try {
             input.toInt()
             return true
-        }catch (e: NumberFormatException){
+        } catch (e: NumberFormatException) {
+            println(NOT_NUMBER)
             throw IllegalArgumentException(NOT_NUMBER)
         }
     }
@@ -24,42 +25,58 @@ class Input {
                 checkChangeInt(input)
                 return input.toInt()
 
-            }catch (e : IllegalArgumentException){
-                println(NOT_NUMBER)
+            } catch (e: IllegalArgumentException) {
+                continue
             }
         }
     }
 
-    private fun checkDuplicationLottoNumbers(lottoNumbers: List<Int>){
-        val duplicationNumbers = lottoNumbers.filterIndexed { idx, it -> lottoNumbers.indexOf(it) != idx }
-        if(duplicationNumbers.isNotEmpty()){
-           throw IllegalArgumentException(DUPLICATION_NUMBER)
-        }
-    }
+
 
     fun getLottoNumbers(): List<Int> {
         println(REQUEST_NUMBERS_MESSAGE)
 
-        while (true){
+        while (true) {
             val lottoNumbers = input().split(',').map { it.toInt() }
 
-            try{
-                checkDuplicationLottoNumbers(lottoNumbers)
+            try {
+                lottoNumbers.forEach {
+                    checkRangeLottoNumber(it)
+                }
                 return lottoNumbers
-            }catch (e : IllegalArgumentException){
-                println(DUPLICATION_NUMBER)
+            } catch (e: IllegalArgumentException) {
+                continue
             }
+        }
+    }
+
+
+    private fun checkRangeLottoNumber(number: Int) {
+        if (number < LOTTO_RANGE_FLOOR || number > LOTTO_RANGE_CEIL) {
+            println(NOT_RANGE_NUMBER)
+            throw IllegalArgumentException(NOT_RANGE_NUMBER)
         }
     }
 
     fun getLottoBonusNumbers(): Int {
         println(REQUEST_BONUS_NUMBERS_MESSAGE)
-        return input().toInt()
+
+        while (true) {
+            val input = input()
+
+            try {
+                checkChangeInt(input)
+                checkRangeLottoNumber(input.toInt())
+                return input.toInt()
+
+            } catch (e: IllegalArgumentException) {
+                continue
+            }
+        }
     }
 
     companion object {
         private const val REQUEST_AMOUNT_MESSAGE = "구입금액을 입력해 주세요."
-        private const val REQUEST_AMOUNT_MESSAGE_AGAIN = "구입금액을 형식에 맞춰 재입력해 주세요."
         private const val REQUEST_NUMBERS_MESSAGE = "당첨 번호를 입력해 주세요."
         private const val REQUEST_BONUS_NUMBERS_MESSAGE = "보너스 번호를 입력해 주세요."
     }

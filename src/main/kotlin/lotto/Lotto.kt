@@ -4,6 +4,16 @@ package lotto
 class Lotto(private val numbers: List<Int>) {
     init {
         require(numbers.size == 6) { "[ERROR] 로또 번호는 6개여야 합니다." }
+        require( checkDuplicationLottoNumbers(numbers)) { DUPLICATION_NUMBER }
+    }
+
+    private fun checkDuplicationLottoNumbers(lottoNumbers: List<Int>): Boolean {
+        val duplicationNumbers = lottoNumbers.filterIndexed { idx, it -> lottoNumbers.indexOf(it) != idx }
+        if (duplicationNumbers.isNotEmpty()) {
+            println(DUPLICATION_NUMBER)
+            return false
+        }
+        return true
     }
 
     private fun switchRank(matchNumberSize: Int, isBonusNumberMatch: Boolean): RANK {
