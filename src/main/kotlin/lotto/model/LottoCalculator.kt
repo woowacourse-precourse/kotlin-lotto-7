@@ -1,6 +1,6 @@
 package lotto.model
 
-import lotto.constants.LottoNumbers.LOTTO_PRICE
+import lotto.model.Lotto.Companion.LOTTO_PRICE
 
 class LottoCalculator {
 

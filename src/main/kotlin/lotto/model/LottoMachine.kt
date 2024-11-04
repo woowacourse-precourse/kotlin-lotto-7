@@ -1,9 +1,9 @@
 package lotto.model
 
 import camp.nextstep.edu.missionutils.Randoms
-import lotto.constants.LottoNumbers.LOTTO_MAXIMUM_NUMBER
-import lotto.constants.LottoNumbers.LOTTO_MINIMUM_NUMBER
-import lotto.constants.LottoNumbers.LOTTO_NUMBER_SIZE
+import lotto.model.Lotto.Companion.LOTTO_MAXIMUM_NUMBER
+import lotto.model.Lotto.Companion.LOTTO_MINIMUM_NUMBER
+import lotto.model.Lotto.Companion.LOTTO_NUMBER_SIZE
 
 class LottoMachine {
 

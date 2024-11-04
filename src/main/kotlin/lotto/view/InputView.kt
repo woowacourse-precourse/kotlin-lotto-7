@@ -1,12 +1,6 @@
 package lotto.view
 
 import camp.nextstep.edu.missionutils.Console.readLine
-import lotto.constants.ErrorMessages.ERROR_BLANK
-import lotto.constants.ErrorMessages.ERROR_INTEGER
-import lotto.constants.LottoMessages.BONUS_NUMBER
-import lotto.constants.LottoMessages.LOTTO_AMOUNT
-import lotto.constants.LottoMessages.MESSAGE_INPUT_VALUE
-import lotto.constants.LottoMessages.WINNING_LOTTO_NUMBER
 
 class InputView {
 
@@ -43,6 +37,13 @@ class InputView {
     }
 
     companion object {
+        private const val LOTTO_AMOUNT = "구입금액"
         private const val LOTTO_NUMBER_DELIMITER = ","
+        private const val WINNING_LOTTO_NUMBER = "당첨 번호"
+        private const val BONUS_NUMBER = "보너스 번호"
+        private const val MESSAGE_INPUT_VALUE = "%s을 입력해 주세요."
+
+        const val ERROR_BLANK = "[ERROR] %s은 공백이 될 수 없습니다."
+        const val ERROR_INTEGER = "[ERROR] %s는 정수만 입력할 수 있습니다."
     }
 }

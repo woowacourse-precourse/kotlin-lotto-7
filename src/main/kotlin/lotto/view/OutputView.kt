@@ -1,10 +1,5 @@
 package lotto.view
 
-import lotto.constants.LottoMessages.BONUS_INFO
-import lotto.constants.LottoMessages.MESSAGE_LOTTO_COUNT_PURCHASED
-import lotto.constants.LottoMessages.MESSAGE_LOTTO_YIELD
-import lotto.constants.LottoMessages.MESSAGE_WINNING_STATISTICS
-import lotto.constants.LottoMessages.MESSAGE_WINNING_STATISTICS_TITLE
 import lotto.model.LottoPrize
 import lotto.model.LottoPrize.SECOND_PRIZE
 import java.text.DecimalFormat
@@ -34,6 +29,11 @@ class OutputView {
     }
 
     companion object {
+        private const val MESSAGE_LOTTO_COUNT_PURCHASED = "%d개를 구매했습니다."
+        private const val MESSAGE_WINNING_STATISTICS_TITLE = "당첨 통계\n---"
+        private const val MESSAGE_WINNING_STATISTICS = "%d개 일치%s (%s원) - %d개"
+        private const val MESSAGE_LOTTO_YIELD = "총 수익률은 %s%%입니다."
+        private const val BONUS_INFO = ", 보너스 볼 일치"
         private val THOUSAND_COMMA = DecimalFormat("#,###")
     }
 }
