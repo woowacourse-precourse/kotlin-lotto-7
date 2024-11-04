@@ -4,6 +4,8 @@ import camp.nextstep.edu.missionutils.test.Assertions.assertRandomUniqueNumbersI
 import camp.nextstep.edu.missionutils.test.Assertions.assertSimpleTest
 import camp.nextstep.edu.missionutils.test.NsTest
 import org.assertj.core.api.Assertions.assertThat
+import org.junit.jupiter.api.DisplayName
+import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.Test
 
 class ApplicationTest : NsTest() {
@@ -41,13 +43,129 @@ class ApplicationTest : NsTest() {
         )
     }
 
-    @Test
-    fun `예외 테스트`() {
-        assertSimpleTest {
-            runException("1000j")
-            assertThat(output()).contains(ERROR_MESSAGE)
+    @Nested
+    @DisplayName("예외 테스트")
+    inner class InvalidInputTests {
+        @Test
+        fun `예외 테스트`() {
+            assertSimpleTest {
+                runException("1000j")
+                assertThat(output()).contains(ERROR_MESSAGE)
+            }
         }
+
+        @Test
+        fun `잘못된 금액 입력 시 예외 처리`() {
+            assertSimpleTest {
+                runException("1234")
+                assertThat(output()).contains(ERROR_MESSAGE)
+            }
+        }
+
+        @Test
+        fun `0원 입력 시 예외 처리`() {
+            assertSimpleTest {
+                runException("0")
+                assertThat(output()).contains(ERROR_MESSAGE)
+            }
+        }
+
+        @Test
+        fun `숫자가 아닌 문자 입력 시 예외 처리`() {
+            assertSimpleTest {
+                runException("abc")
+                assertThat(output()).contains(ERROR_MESSAGE)
+            }
+        }
+
+        @Test
+        fun `빈 칸 입력 시 예외 처리`() {
+            assertSimpleTest {
+                runException("\n")
+                assertThat(output()).contains(ERROR_MESSAGE)
+            }
+        }
+
+        @Test
+        fun `로또 숫자가 총 6개가 아닌 경우 예외 처리`() {
+            assertSimpleTest {
+                runException("5000", "1,2,3,4,5");
+                assertThat(output()).contains(ERROR_MESSAGE)
+            }
+        }
+
+        @Test
+        fun `로또 숫자가 중복되는 경우 예외 처리`() {
+            assertSimpleTest {
+                runException("5000", "1,2,3,4,5,5");
+                assertThat(output()).contains(ERROR_MESSAGE)
+            }
+        }
+
+
+        @Test
+        fun `로또 숫자가 1~45 범위를 벗어나는 경우 예외 처리`() {
+            assertSimpleTest {
+                runException("5000", "1,2,3,4,5,46");
+                assertThat(output()).contains(ERROR_MESSAGE)
+            }
+        }
+
+        @Test
+        fun `로또 숫자가 숫자가 아닌 경우 예외 처리`() {
+            assertSimpleTest {
+                runException("5000", "1,2,3,4,5,a");
+                assertThat(output()).contains(ERROR_MESSAGE)
+            }
+        }
+        @Test
+        fun `로또 숫자가 빈칸인 경우 예외 처리`() {
+            assertSimpleTest {
+                runException("5000", "1,2,3,4,5,");
+                assertThat(output()).contains(ERROR_MESSAGE)
+            }
+        }
+
+
+        @Test
+        fun `보너스 번호가 총 1개가 아닌 경우 예외 처리`() {
+            assertSimpleTest {
+                runException("5000", "1,2,3,4,5,6", "1,2");
+                assertThat(output()).contains(ERROR_MESSAGE)
+            }
+        }
+        @Test
+        fun `보너스 번호가 빈칸인 경우 예외 처리`() {
+            assertSimpleTest {
+                runException("5000", "1,2,3,4,5,6", "\n");
+                assertThat(output()).contains(ERROR_MESSAGE)
+            }
+        }
+
+        @Test
+        fun `보너스 번호가 숫자가 아닌 경우 예외 처리`() {
+            assertSimpleTest {
+                runException("5000", "1,2,3,4,5,6", "a");
+                assertThat(output()).contains(ERROR_MESSAGE)
+            }
+        }
+
+        @Test
+        fun `보너스 번호가 1~45 범위를 벗어나는 경우 예외 처리`() {
+            assertSimpleTest {
+                runException("5000", "1,2,3,4,5,6", "46");
+                assertThat(output()).contains(ERROR_MESSAGE)
+            }
+        }
+
+
+
+
+
+
+
     }
+
 
     override fun runMain() {
         main()
