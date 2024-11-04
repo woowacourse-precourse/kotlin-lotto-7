@@ -195,9 +195,11 @@ class Lotto(private val numbers: List<Int>) {
    - 로또 티켓 가격을 입력받는 함수
    - 당첨 번호를 입력받는 함수
    - 보너스 번호를 입력 받는 함수
+   - 수익률을 보여주는 함수
 5. 로또 비지니스 로직 처리 클래스
     - 로또 구입 티켓 생성하여 표시
     - 당첨 번호와 보너스 번호 당첨 결과 계산하여 표시
+    - 수익률 계산하여 표시
 6. 로또 관련 검증 객체
     - 로또 사이즈가 6이 아니면 IllegalArgumentException을 발생
     - 로또 티켓 가격 입력이 숫자가 아니면 IllegalArgumentException을 발생
