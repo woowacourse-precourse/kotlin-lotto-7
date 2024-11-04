@@ -94,7 +94,7 @@ class LottoGameTest {
         val winningLotto = Lotto(listOf(1, 2, 3, 4, 5, 6))
 
         val exception = assertThrows<IllegalArgumentException> {
-            game.parseBonusNumber("-3", winningLotto = winningLotto)
+            game.parseBonusNumber("6", winningLotto = winningLotto)
         }
         assertThat(exception.message).contains("[ERROR] 보너스 번호는 당첨 번호와 중복될 수 없습니다.")
     }
