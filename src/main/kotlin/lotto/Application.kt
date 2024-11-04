@@ -132,6 +132,15 @@ class LottoGame {
             Message.ERROR_INVALID_AMOUNT
         }
     }
+
+    private fun printPurchaseResult(lottos: List<Lotto>) {
+        println("\n${lottos.size}개를 구매했습니다.")
+        for (lotto in lottos) {
+            println(lotto.getNumbers())
+        }
+    }
+
+    
 }
 
 fun main() {
