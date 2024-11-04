@@ -34,4 +34,10 @@ class Lotto(private val numbers: List<Int>) {
     private fun countMatchingNumbers(list1: List<Int>, list2: List<Int>): Int {
         return list1.intersect(list2.toSet()).size
     }
+
+    fun calculateProfitRate(purchaseAmount: Int): Double {
+        val totalPrizeMoney =
+            5000 * fifthRank + 50000 * fourthRank + 1500000 * thirdRank + 30000000 * secondRank + 2000000000 * firstRank
+        return (totalPrizeMoney / purchaseAmount.toDouble()) * 100
+    }
 }
