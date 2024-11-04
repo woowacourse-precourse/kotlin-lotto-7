@@ -22,7 +22,10 @@ class LottoCalculatorTest {
     @Test
     fun `구매한 로또와 당첨 로또 번호를 가지고 당첨 로또를 반환한다`() {
         val purchasedLottos = listOf(Lotto(listOf(1, 2, 3, 4, 5, 6)), Lotto(listOf(1, 2, 3, 4, 5, 7)))
-        val winningLotto = WinningLotto(lotto = Lotto(listOf(1, 2, 3, 4, 5, 6)), bonusNumber = 7)
+        val winningLotto = WinningLotto(
+            lottoNumber = listOf(1, 2, 3, 4, 5, 6),
+            bonusNumber = 7,
+        )
 
         val prizes = lottoCalculator.calculateStatistics(purchasedLottos, winningLotto)
 

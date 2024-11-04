@@ -21,7 +21,7 @@ class Lotto(private val numbers: List<Int>) {
         var isMatchingBonusNumber = false
 
         numbers.forEach { lottoNumber ->
-            if (winningLotto.lotto.numbers.contains(lottoNumber)) {
+            if (winningLotto.lottoNumber.contains(lottoNumber)) {
                 matchingCount++
             }
 

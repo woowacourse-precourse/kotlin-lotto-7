@@ -1,6 +1,5 @@
 package lotto
 
-import lotto.model.Lotto
 import lotto.model.WinningLotto
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
@@ -12,7 +11,7 @@ class WinningLottoTest {
         val bonusNumber = 46
 
         assertThrows<IllegalArgumentException> {
-            WinningLotto(Lotto(listOf(1, 2, 3, 4, 5, 6)), bonusNumber)
+            WinningLotto(listOf(1, 2, 3, 4, 5, 6), bonusNumber)
         }
     }
 }
