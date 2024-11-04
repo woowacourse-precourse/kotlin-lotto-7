@@ -19,8 +19,8 @@ class LottoDraw {
         outputView.purchasedMessage(store.numberOfLottoPurchased)
         outputView.lottoList(lottos)
 
-        val (winningCounts, bonusWin) = LottoResultChecker.checkWinningStatus(lottos, myLotto, myBonus)
-        val profitRatio = LottoResultChecker.calculateProfitRate(price, winningCounts, bonusWin)
-        outputView.resultStatistics(winningCounts, bonusWin, profitRatio)
+        val ranking = LottoResultChecker.checkWinningStatus(lottos, myLotto, myBonus)
+        val profitRatio = LottoResultChecker.calculateProfitRate(price, ranking)
+        outputView.resultStatistics(ranking, profitRatio)
     }
 }

@@ -24,10 +24,11 @@ class InputView {
         println("당첨 번호를 입력해 주세요.")
         while (true) {
             try {
-                val input = Console.readLine().split(",")
-                val lottoNumber = input.map { it.trim().toIntOrNull() }
-                val notNullLottoNumber: List<Int> = lottoNumber.filterNotNull().sorted()
+                val input = Console.readLine()
+                require(input != "") { ErrorMessages.NULL_LOTTO_NUMBER }
 
+                val lottoNumber = input.split(",").map { it.trim().toIntOrNull() }
+                val notNullLottoNumber: List<Int> = lottoNumber.filterNotNull().sorted()
                 require(lottoNumber.all { it != null }) { ErrorMessages.NOT_INT }
 
                 return Lotto(notNullLottoNumber)

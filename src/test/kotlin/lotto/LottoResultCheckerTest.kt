@@ -27,10 +27,10 @@ class LottoResultCheckerTest {
 
     @Test
     fun `수익률 정상적으로 계산하는지 확인`() {
-        val winningCounts = listOf(0, 0, 0, 1, 1, 1, 1)
+        val ranking = listOf(0, 1, 1, 1, 1, 1)
         val bonusWin = 1
         val money = 5000
-        val profitRate = LottoResultChecker.calculateProfitRate(money, winningCounts, bonusWin)
-        assertEquals(profitRate, (2000000000 + 30000000 + 1500000 + 50000 + 5000)/money.toDouble())
+        val profitRate = LottoResultChecker.calculateProfitRate(money, ranking)
+        assertEquals(profitRate, (2000000000 + 30000000 + 1500000 + 50000 + 5000) / money.toDouble())
     }
 }
