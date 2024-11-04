@@ -19,6 +19,8 @@ object InputView {
     }
 
     fun inputBonusNumber(): Int {
-        return 1
+        println("보너스 번호를 입력해 주세요.")
+        val input = Console.readLine()
+        return input.toIntOrNull() ?: throw IllegalArgumentException("[ERROR] 보너스 숫자는 자연수로만 입력할 수 있습니다")
     }
 }

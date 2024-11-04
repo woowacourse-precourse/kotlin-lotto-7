@@ -13,6 +13,10 @@ class Lotto(private val numbers: List<Int>) {
         return numbers.contains(lottoNumber.getNumber())
     }
 
+    fun countMatchNumber(mainNumbers: Lotto): Int {
+        return numbers.intersect(mainNumbers.numbers).size
+    }
+
     override fun toString(): String = numbers.sorted().toString()
 
     companion object {

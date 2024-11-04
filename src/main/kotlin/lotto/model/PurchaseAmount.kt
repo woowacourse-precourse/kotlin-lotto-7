@@ -10,6 +10,10 @@ class PurchaseAmount(private val purchaseAmount: Int) {
         return purchaseAmount / TICKET_PRICE
     }
 
+    fun getProfit(totalAmount: Int): Double {
+        return 1.0 * totalAmount / purchaseAmount * 100
+    }
+
     companion object {
         private const val TICKET_PRICE = 1_000
     }

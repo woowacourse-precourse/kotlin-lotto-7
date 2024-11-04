@@ -10,6 +10,9 @@ class LottoController {
         val purchaseAmount = getPurchaseAmount()
         val lottos = getLottos(purchaseAmount)
         val winningNumbers = getWinningNumbers()
+        val lottoResults = winningNumbers.matchLotto(lottos)
+        OutputView.printLottoResult(lottoResults)
+        OutputView.printProfit(lottoResults.calculateProfit(purchaseAmount))
     }
 
     private fun getPurchaseAmount(): PurchaseAmount {
