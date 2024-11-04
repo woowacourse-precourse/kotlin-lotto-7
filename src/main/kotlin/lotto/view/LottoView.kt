@@ -31,5 +31,5 @@ class LottoView {
 
     fun printLottoRank(rank: LottoResult, count: Int) = println(rank.getMessage(count))
 
-    fun printRevenue(revenue: Double) = println("총 수익률은 ${revenue}%입니다.")
+    fun printRevenue(revenue: Double) = println("\n총 수익률은 ${revenue}%입니다.")
 }

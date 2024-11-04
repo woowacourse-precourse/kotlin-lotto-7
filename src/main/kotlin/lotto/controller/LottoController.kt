@@ -61,8 +61,8 @@ class LottoController(private val lottoView: LottoView) {
         val ranks = mutableListOf<LottoResult>()
         for (lotto in myLotto) {
             val count = lotto.toList().intersect(answer.toList().toSet()).size
-            val hasBonus = lotto.isContain(bonus)
-            ranks.add(LottoResult.of(count, hasBonus))
+            val isBonus = lotto.isContain(bonus)
+            ranks.add(LottoResult.of(count, isBonus))
         }
         return ranks
     }
