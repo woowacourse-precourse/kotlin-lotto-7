@@ -26,10 +26,18 @@ class LottoGenerator {
     }
 
     fun createLottos(money: Int): List<Lotto> {
-        require(money > 0) { "[ERROR] 구입 금액은 0보다 커야 합니다." }
-        require(money % Lotto.PRICE == 0) { "[ERROR] 구입 금액은 1,000원 단위여야 합니다." }
+        require(money > 0) { sendError(LOTTO_MONEY_ERROR) }
+        require(money % Lotto.PRICE == 0) { sendError(LOTTO_UNIT_ERROR) }
 
         val count = money / Lotto.PRICE
         return List(count) { generate() }
+    }
+
+    companion object {
+        private const val ERROR_PREFIX = "[ERROR] "
+        const val LOTTO_MONEY_ERROR = "구입 금액은 0보다 커야 합니다."
+        const val LOTTO_UNIT_ERROR = "구입 금액은 1,000원 단위여야 합니다."
+
+        fun sendError(message: String): String = ERROR_PREFIX + message
     }
 }

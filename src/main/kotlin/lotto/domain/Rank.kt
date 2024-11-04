@@ -14,6 +14,8 @@ enum class Rank(
     ;
 
     companion object {
+        private const val MAX_MATCH_COUNT = 5
+
         fun of(
             matchCount: Int,
             hasBonusMatch: Boolean = false,
@@ -22,7 +24,7 @@ enum class Rank(
                 .filter { it != NONE }
                 .findLast { rank ->
                     rank.matchCount == matchCount &&
-                        (matchCount != 5 || rank.bonusMatch == hasBonusMatch)
+                        (matchCount != MAX_MATCH_COUNT || rank.bonusMatch == hasBonusMatch)
                 } ?: NONE
     }
 }

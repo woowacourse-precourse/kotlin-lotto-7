@@ -30,8 +30,8 @@ class LottoGame(
         }
 
     private fun validatePurchaseAmount(amount: Int) {
-        require(amount >= Lotto.PRICE) { "[ERROR] 로또의 최소 구매 금액은 ${Lotto.PRICE}원입니다." }
-        require(amount % Lotto.PRICE == 0) { "[ERROR] 로또는 ${Lotto.PRICE}원 단위로 구매 가능합니다." }
+        require(amount >= Lotto.PRICE) { lottoMoneyError() }
+        require(amount % Lotto.PRICE == 0) { lottoUnitError() }
     }
 
     private fun buyLottos(amount: Int): List<Lotto> {
@@ -55,5 +55,15 @@ class LottoGame(
             result.getWinningStatistics(),
             result.calculateProfitRate(),
         )
+    }
+
+    companion object {
+        private const val ERROR_PREFIX = "[ERROR] "
+
+        private fun sendError(message: String): String = ERROR_PREFIX + message
+
+        fun lottoMoneyError(): String = sendError("로또의 최소 구매 금액은 ${Lotto.PRICE}원입니다.")
+
+        fun lottoUnitError(): String = sendError("로또는 ${Lotto.PRICE}원 단위로 구매 가능합니다.")
     }
 }
