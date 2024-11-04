@@ -51,6 +51,7 @@ fun main() {
         }
     }
     printResult(lottoMoney, matchCounts)
+    val totalMoney = calculateTotalMoney(lottoMoney, matchCounts)
 }
 
 fun getLottoBudget(): Int {
@@ -135,4 +136,14 @@ fun printResult(lottoMoney: Map<String, Int>, matchCounts: Map<String, Int>) {
         val count = matchCounts[label] ?: 0
         println("$label (${prize}원) - ${count}개")
     }
+}
+
+
+fun calculateTotalMoney(lottoMoney: MutableMap<String, Int>, matchCounts: MutableMap<String, Int>): Int {
+    var totalMoney = 0
+    for ((key, count) in matchCounts) {
+        val prize = lottoMoney[key] ?: 0
+        totalMoney += prize * count
+    }
+    return totalMoney
 }
