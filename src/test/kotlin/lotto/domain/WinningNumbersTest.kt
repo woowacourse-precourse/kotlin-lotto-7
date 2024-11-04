@@ -19,7 +19,7 @@ class WinningNumbersTest {
         }
 
         // Then
-        assertThat("당첨 번호는 비어있을 수 없습니다.").isEqualTo(exception.message)
+        assertThat(NUMBER_EMPTY_ERROR_MESSAGE).isEqualTo(exception.message)
     }
 
     @Test
@@ -33,7 +33,7 @@ class WinningNumbersTest {
         }
 
         // Then
-        assertThat("당첨 번호는 숫자를 입력해야 합니다.").isEqualTo(exception.message)
+        assertThat(NUMBER_ERROR_MESSAGE).isEqualTo(exception.message)
     }
 
     @ParameterizedTest
@@ -45,7 +45,7 @@ class WinningNumbersTest {
         }
 
         // Then
-        assertThat("당첨 번호는 6개여야 합니다.").isEqualTo(exception.message)
+        assertThat(NUMBER_SIZE_ERROR_MESSAGE).isEqualTo(exception.message)
     }
 
     @Test
@@ -59,7 +59,7 @@ class WinningNumbersTest {
         }
 
         // Then
-        assertThat("당첨 번호는 중복될 수 없습니다.").isEqualTo(exception.message)
+        assertThat(NUMBER_DISTINCT_ERROR_MESSAGE).isEqualTo(exception.message)
     }
 
     @ParameterizedTest
@@ -71,7 +71,7 @@ class WinningNumbersTest {
         }
 
         // Then
-        assertThat("당첨 번호는 1 ~ 45 중 하나여야 합니다.").isEqualTo(exception.message)
+        assertThat(NUMBER_RANGE_ERROR_MESSAGE).isEqualTo(exception.message)
     }
 
     @Test
@@ -85,6 +85,16 @@ class WinningNumbersTest {
 
         // Then
         assertThat(result).isEqualTo(winningNumbers)
+    }
+
+    companion object {
+        private const val START_RANGE = 1
+        private const val END_RANGE = 45
+        private const val NUMBER_EMPTY_ERROR_MESSAGE = "당첨 번호는 비어있을 수 없습니다."
+        private const val NUMBER_ERROR_MESSAGE = "당첨 번호는 숫자를 입력해야 합니다."
+        private const val NUMBER_SIZE_ERROR_MESSAGE = "당첨 번호는 6개여야 합니다."
+        private const val NUMBER_DISTINCT_ERROR_MESSAGE = "당첨 번호는 중복될 수 없습니다."
+        private const val NUMBER_RANGE_ERROR_MESSAGE = "당첨 번호는 $START_RANGE ~ $END_RANGE 중 하나여야 합니다."
     }
 
 }
