@@ -24,7 +24,7 @@ class LottoController {
     }
 
     private fun getLottos(purchaseAmount: PurchaseAmount): List<Lotto> {
-        val lottos = LottoMachine.issueLotto(purchaseAmount)
+        val lottos = LottoMachine.issueLottos(purchaseAmount)
         OutputView.printPurchaseLotto(lottos)
         return lottos
     }
