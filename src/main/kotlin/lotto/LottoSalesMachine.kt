@@ -1,5 +1,7 @@
 package lotto
 
+import camp.nextstep.edu.missionutils.Console
+
 class LottoSalesMachine {
     val lottoPrice = 1000
 
@@ -12,6 +14,12 @@ class LottoSalesMachine {
         val lottoCount = won / 1000
         println("${lottoCount}개를 구매했습니다.")
         return List(lottoCount) { LottoMaker.make() }
+    }
+
+    fun processPurchase(): List<Lotto> {
+        println(guideInputLottoPurchaseAmount())
+        val inputLottoPurchaseWon = Console.readLine()
+        return purchase(inputLottoPurchaseWon.toInt())
     }
 
     private fun exceptNotDevideThousand(won: Int) {
