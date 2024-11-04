@@ -2,7 +2,7 @@ package lotto
 
 import camp.nextstep.edu.missionutils.Console
 
-class BonusNumberManager(private val winningNumbers: List<Int>) {
+class BonusNumberManager(private val lotto: Lotto) {
 
     var bonusNumber: Int = 0
 
@@ -30,7 +30,7 @@ class BonusNumberManager(private val winningNumbers: List<Int>) {
             throw IllegalArgumentException(ERROR_BONUS_NUMBER_RANGE_MESSAGE)
         }
 
-        if (bonusNumber in winningNumbers) {
+        if (lotto.containsNumber(bonusNumber)) {
             throw IllegalArgumentException(ERROR_BONUS_NUMBER_DUPLICATE_MESSAGE)
         }
     }
