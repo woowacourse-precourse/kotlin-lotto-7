@@ -2,6 +2,7 @@ package lotto.model
 
 import org.junit.jupiter.api.assertThrows
 import org.junit.jupiter.api.Test
+import org.assertj.core.api.Assertions.assertThat
 
 class LottoSellerTest {
     @Test
@@ -21,12 +22,12 @@ class LottoSellerTest {
     @Test
     fun `로또 구매 개수를 반환한다`() {
         val lottoSeller = LottoSeller(5000)
-        assert(lottoSeller.lottoCount == 5)
+        assertThat(lottoSeller.lottoCount).isEqualTo(5)
     }
 
     @Test
     fun `로또를 판매한다`() {
         val lottoSeller = LottoSeller(5000)
-        assert(lottoSeller.sell().size == 5)
+        assertThat(lottoSeller.sell().size).isEqualTo(5)
     }
 }

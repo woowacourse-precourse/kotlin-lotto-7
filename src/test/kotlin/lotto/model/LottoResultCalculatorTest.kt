@@ -3,6 +3,7 @@ package lotto.model
 import lotto.dto.WinningTicket
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
+import org.assertj.core.api.Assertions.assertThat
 
 class LottoResultCalculatorTest {
 
@@ -19,12 +20,13 @@ class LottoResultCalculatorTest {
         val lottoResultCalculator = LottoResultCalculator(winningTicket)
         val result = lottoResultCalculator.countMatchingNumber(lottoBundle)
 
-        assertEquals(0, result[LottoWinning.FIRST])
-        assertEquals(0, result[LottoWinning.SECOND])
-        assertEquals(0, result[LottoWinning.THIRD])
-        assertEquals(0, result[LottoWinning.FOURTH])
-        assertEquals(1, result[LottoWinning.FIFTH])
-        assertEquals(1, result[LottoWinning.NONE])
+
+        assertThat(result[LottoWinning.FIRST]).isEqualTo(0)
+        assertThat(result[LottoWinning.SECOND]).isEqualTo(0)
+        assertThat(result[LottoWinning.THIRD]).isEqualTo(0)
+        assertThat(result[LottoWinning.FOURTH]).isEqualTo(0)
+        assertThat(result[LottoWinning.FIFTH]).isEqualTo(1)
+        assertThat(result[LottoWinning.NONE]).isEqualTo(1)
     }
 
     @Test
@@ -39,12 +41,12 @@ class LottoResultCalculatorTest {
         val lottoResultCalculator = LottoResultCalculator(winningTicket)
         val result = lottoResultCalculator.countMatchingNumber(lottoBundle)
 
-        assertEquals(0, result[LottoWinning.FIRST])
-        assertEquals(1, result[LottoWinning.SECOND])
-        assertEquals(1, result[LottoWinning.THIRD])
-        assertEquals(0, result[LottoWinning.FOURTH])
-        assertEquals(0, result[LottoWinning.FIFTH])
-        assertEquals(0, result[LottoWinning.NONE])
+        assertThat(result[LottoWinning.FIRST]).isEqualTo(0)
+        assertThat(result[LottoWinning.SECOND]).isEqualTo(1)
+        assertThat(result[LottoWinning.THIRD]).isEqualTo(1)
+        assertThat(result[LottoWinning.FOURTH]).isEqualTo(0)
+        assertThat(result[LottoWinning.FIFTH]).isEqualTo(0)
+        assertThat(result[LottoWinning.NONE]).isEqualTo(0)
     }
 
     @Test
@@ -59,7 +61,8 @@ class LottoResultCalculatorTest {
         val lottoResultCalculator = LottoResultCalculator(winningTicket)
         lottoResultCalculator.countMatchingNumber(lottoBundle)
         val totalReward = lottoResultCalculator.calculateTotalReward()
-        assertEquals(1_505_000, totalReward)
+
+        assertThat(totalReward).isEqualTo(1_505_000)
 
     }
 
@@ -77,6 +80,6 @@ class LottoResultCalculatorTest {
         val totalReward = lottoResultCalculator.calculateTotalReward()
         val profitRate = lottoResultCalculator.calculateProfitRate(lottoCount, totalReward)
 
-        assertEquals(62.5, profitRate)
+        assertThat(profitRate).isEqualTo(62.5)
     }
 }
