@@ -24,6 +24,10 @@ class LottoCalculator {
             // 전체 수익 / 구매 금액
             // total lotto 구매 가격
             val totalLotto = result.values.sum() * Constants.LOTTO_PRICE
+            if (totalLotto == 0) { //구매한 로또가 없다면 수익률 또한 0이다.
+                return 0.0
+            }
+
             // total lotto 당첨 금액
             val totalLottoPrize = result.map { it.key.prize * it.value }.sum()
             return totalLottoPrize.toDouble() / totalLotto * 100
