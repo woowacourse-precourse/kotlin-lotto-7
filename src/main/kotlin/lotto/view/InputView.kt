@@ -10,7 +10,12 @@ class InputView(private val validator: Validator, private val parser: Parser) {
         while (true) {
             println("구입금액을 입력해 주세요.")
             val input = Console.readLine()
-            validator.validatePurchaseAmount(input)
+            try {
+                validator.validatePurchaseAmount(input)
+            } catch (e: IllegalArgumentException) {
+                println(e.message)
+                throw e
+            }
 
             val amount = parser.parsePurchaseAmount(input)
             println()
@@ -25,7 +30,12 @@ class InputView(private val validator: Validator, private val parser: Parser) {
             val input = Console.readLine()
             val numbers = parser.parseWinningNumbers(input)
 
-            validator.validateWinningNumbers(numbers)
+            try {
+                validator.validateWinningNumbers(numbers)
+            } catch (e: IllegalArgumentException) {
+                println(e.message)
+                throw e
+            }
             println()
 
             return numbers
@@ -38,7 +48,12 @@ class InputView(private val validator: Validator, private val parser: Parser) {
             val input = Console.readLine()
             val bonusNumber = parser.parseBonusNumber(input)
 
-            validator.validateBonusNumber(bonusNumber, winningNumbers)
+            try {
+                validator.validateBonusNumber(bonusNumber, winningNumbers)
+            } catch (e: IllegalArgumentException) {
+                println(e.message)
+                throw e
+            }
             println()
 
             return bonusNumber
