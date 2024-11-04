@@ -3,17 +3,17 @@ package lotto.view
 import camp.nextstep.edu.missionutils.Console
 
 object Input {
-    fun amount(): Int{
-        val money = Console.readLine().toInt()
+    fun amount(): String {
+        val money = Console.readLine()
         return money
     }
 
-    fun winNumber(): String{
+    fun winNumber(): String {
         val numbers = Console.readLine()
         return numbers
     }
 
-    fun bonusNUmber(): Int{
+    fun bonusNUmber(): Int {
         val bonus = Console.readLine().toInt()
         return bonus
     }

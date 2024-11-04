@@ -14,5 +14,5 @@ object GuideOutput {
         println(InputUserGuide.BONUS)
     }
 
-    fun newline() = println()
+    private fun newline() = println()
 }
