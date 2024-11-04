@@ -34,7 +34,9 @@
 
 - 진행 순서에 맞게 정렬
 - 사용된 class 목록 ()안에 작성
-
+  IllegalArgumentException
+- NumberFormatException
+- ArithmeticException
 ---
 
 #### 로또 구매한 금액 입력 (Input)
