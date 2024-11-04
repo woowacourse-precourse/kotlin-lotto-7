@@ -12,14 +12,14 @@ class LottoController(
     private val outputView: OutputView,
 ) {
     fun runLottoGame() {
-        val lottoAmount = getLottoAmount()
-        val purchasedLottos = generateLottos(lottoAmount)
+        val lottoAmount: Int = getLottoAmount()
+        val purchasedLottos: List<Lotto> = generateLottos(lottoAmount)
 
-        val winningLottoNumber = getWinningLottoNumber()
-        val winningBonusNumber = getBonusNumber()
-        val winningLotto = createWinningLotto(winningLottoNumber, winningBonusNumber)
+        val winningLottoNumber: List<Int> = getWinningLottoNumber()
+        val winningBonusNumber: Int = getBonusNumber()
+        val winningLotto: WinningLotto = createWinningLotto(winningLottoNumber, winningBonusNumber)
 
-        val lottoPrizes = lottoCalculator.calculateStatistics(purchasedLottos, winningLotto)
+        val lottoPrizes: List<LottoPrize> = lottoCalculator.calculateStatistics(purchasedLottos, winningLotto)
         showLottoStatistics(lottoPrizes)
         showLottoYield(lottoPrizes, lottoAmount)
     }
@@ -46,10 +46,10 @@ class LottoController(
         return lottos
     }
 
-    private fun getWinningLottoNumber(): Lotto {
+    private fun getWinningLottoNumber(): List<Int> {
         while (true) {
             try {
-                return Lotto(inputView.inputWinningLottoNumber())
+                return Lotto(inputView.inputWinningLottoNumber()).getNumbers()
             } catch (e: Exception) {
                 println(e.message)
             }
@@ -66,7 +66,7 @@ class LottoController(
         }
     }
 
-    private fun createWinningLotto(lottoNumber: Lotto, bonusNumber: Int): WinningLotto {
+    private fun createWinningLotto(lottoNumber: List<Int>, bonusNumber: Int): WinningLotto {
         while (true) {
             try {
                 return WinningLotto(lottoNumber, bonusNumber)
