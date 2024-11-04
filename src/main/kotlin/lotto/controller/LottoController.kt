@@ -31,5 +31,8 @@ class LottoController {
         }
 
         outputView.printWinCounts(winCounts)
+        var revenue = 0
+        winCounts.forEach { revenue += it.value * it.key.prize }
+        outputView.printRevenueToCostRatio(revenue, lottoMoney)
     }
 }
