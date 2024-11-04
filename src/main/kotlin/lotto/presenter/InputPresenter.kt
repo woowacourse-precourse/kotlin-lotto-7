@@ -35,12 +35,12 @@ class InputPresenter(
         }
     }
 
-    fun onBonusNumberInput(): Int {
+    fun onBonusNumberInput(winningNumbers: List<Int>): Int {
         while (true) {
             try {
                 val bonusNumber = inputView.readBonusNumber()
                 outputView.printNewLine()
-                // TODO 검증예외처리
+                InputValidator.validateBonusNumber(bonusNumber, winningNumbers)
                 return bonusNumber.toInt()
             } catch (e: IllegalArgumentException) {
                 println(e.message)

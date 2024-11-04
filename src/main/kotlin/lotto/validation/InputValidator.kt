@@ -29,4 +29,16 @@ object InputValidator {
         }
         throw IllegalArgumentException(message)
     }
+
+    fun validateBonusNumber(input: String, winningNumbers: List<Int>) {
+        val message = when {
+            input.isEmpty() -> "[ERROR] 입력값이 없습니다. 다시 입력해 주세요."
+            input.containGap() -> "[ERROR] 공백이 포함되어 있습니다. 다시 입력해 주세요."
+            input.isNotNumeric() -> "[ERROR] 숫자만 입력해 주세요."
+            input.isNotNumberInRange() -> "[ERROR] 보너스 번호는 1부터 45사이의 숫자여야 합니다."
+            input.isDuplicateBonusNumber(winningNumbers) -> "[ERROR] 보너스 번호는 당첨 번호와 중복되지 않게 입력해 주세요."
+            else -> return
+        }
+        throw IllegalArgumentException(message)
+    }
 }

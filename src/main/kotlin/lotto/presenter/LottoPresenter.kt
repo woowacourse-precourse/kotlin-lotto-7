@@ -24,8 +24,8 @@ class LottoPresenter(
 
     fun getWinningTicket(): WinningTicket {
         val winningNumbers = inputPresenter.onWinningNumbersInput()
+        val bonusNumber = inputPresenter.onBonusNumberInput(winningNumbers)
         val winningLotto = Lotto(winningNumbers)
-        val bonusNumber = inputPresenter.onBonusNumberInput()
 
         return WinningTicket(winningLotto, bonusNumber)
     }
