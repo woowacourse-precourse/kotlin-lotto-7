@@ -49,4 +49,20 @@ class LottoController(val input: Input, val output: Output) {
     private fun calculateRateOfReturn(totalMatchResult: LottoTotalMatchResult, amount: Int): Float {
         return String.format("%.1f", totalMatchResult.getTotalPrize() / amount).toFloat()
     }
+
+    fun runMachine() {
+        val amount = input.getPurchaseAmount()
+        val count = getLottoTicketCount(amount)
+        repeat(count) {
+            val lotto: Lotto = createRandomLotto()
+            lottos.add(lotto)
+        }
+
+        output.printLottoNumbers(lottos)
+
+        val result = createResult()
+        val totalMatchResult = calculateTotalMatchResult(result)
+        val rateOfReturn = calculateRateOfReturn(totalMatchResult, amount)
+        output.printTotalLottoPrize(totalMatchResult, rateOfReturn)
+    }
 }
