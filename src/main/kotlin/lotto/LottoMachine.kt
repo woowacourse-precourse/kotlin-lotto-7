@@ -1,6 +1,9 @@
 package lotto
 
 import camp.nextstep.edu.missionutils.Console
+import kotlin.math.pow
+import kotlin.math.roundToInt
+
 class LottoMachine() {
 
     fun payLottoery():String {
@@ -39,6 +42,19 @@ class LottoMachine() {
         return this
     }
 
+    fun Int.validateRange(start: Int, end: Int): Int {
+        require(this in start..end) { "1~45 내의 숫자를 입력해 주세요. $start ~ $end" }
+        return this
+    }
 
+    fun List<Int>.validateRange(start: Int, end: Int): List<Int> {
+        require(this.all { it in start..end }) { "1~45 내의 숫자를 입력해 주세요. $start ~ $end" }
+        return this
+    }
 
+    fun Double.round(decimalPlaces: Int): Double {
+        val factor = 10.0.pow(decimalPlaces)
+        return (this * factor).roundToInt() / factor
+    }
+    
 }
