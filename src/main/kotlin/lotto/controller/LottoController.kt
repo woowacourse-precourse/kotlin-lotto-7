@@ -8,6 +8,7 @@ import lotto.model.LottoResultDetail
 import lotto.model.toViewData
 import lotto.util.ErrorMessage
 import lotto.util.validator.InputValidator
+import lotto.util.validator.LottoValidator
 import lotto.view.LottoInputView
 import lotto.view.LottoOutputView
 
@@ -24,7 +25,6 @@ class LottoController(
 
     fun start() {
         continueAfterException(outputView) { purchaseLotto() }
-        continueAfterException(outputView) { showPurchasedLotto() }
         continueAfterException(outputView) { inputWinningNumbers() }
         continueAfterException(outputView) { inputBonusNumber() }
         continueAfterException(outputView) { showLottoResult() }
@@ -33,11 +33,10 @@ class LottoController(
     private fun purchaseLotto() {
         outputView.outputPurchasePrice()
         purchasePrice = inputView.getPurchasePrice()
-    }
 
-    private fun showPurchasedLotto() {
         val lottoGenerator = LottoGenerator(purchasePrice)
         lottoList = lottoGenerator.generate()
+
         val lottoListViewData = lottoList.toViewData()
         outputView.outputLottoList(lottoListViewData)
     }
@@ -45,6 +44,9 @@ class LottoController(
     private fun inputWinningNumbers() {
         outputView.outputWinningNumber()
         winningNumbers = inputView.getWinningNumbers()
+        require(LottoValidator.isNumbersLengthSix(winningNumbers)) {
+            ErrorMessage.LOTTO_NUMBERS_MUST_SIX_LETTERS.getMessage()
+        }
     }
 
     private fun inputBonusNumber() {

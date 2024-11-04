@@ -9,11 +9,11 @@ class LottoInputView {
     fun getPurchasePrice(): Int {
         val trimPurchasePrice = Console.readLine().trim()
 
-        require(InputValidator.isNumber(trimPurchasePrice)) {
-            ErrorMessage.INPUT_VALUE_MUST_NUMBER.getMessage()
-        }
         require(InputValidator.isNotEmpty(trimPurchasePrice)) {
             ErrorMessage.NO_WHITESPACE_ALLOWED.getMessage()
+        }
+        require(InputValidator.isNumber(trimPurchasePrice)) {
+            ErrorMessage.INPUT_VALUE_MUST_NUMBER.getMessage()
         }
 
         val purchasePrice = trimPurchasePrice.toInt()
@@ -40,6 +40,9 @@ class LottoInputView {
     fun getBonusNumber(): Int {
         val trimBonusNumber = Console.readLine().trim()
 
+        require(InputValidator.isNotEmpty(trimBonusNumber)) {
+            ErrorMessage.INPUT_VALUE_MUST_NUMBER.getMessage()
+        }
         require(InputValidator.isNotEmpty(trimBonusNumber)) {
             ErrorMessage.NO_WHITESPACE_ALLOWED.getMessage()
         }
