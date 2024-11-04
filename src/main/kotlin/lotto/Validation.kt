@@ -1,5 +1,17 @@
 package lotto
 
+enum class LottoError(val message: String) {
+    INVALID_AMOUNT("[ERROR] 유효한 금액을 입력해주세요."),
+    INVALID_UNIT("[ERROR] 로또 금액은 1000원 단위로 입력해야 합니다."),
+    INVALID_NUM("[ERROR] 1~45 사이의 중복되지 않는 6개의 숫자를 입력해 주세요."),
+    INVALID_SPLIT("[ERROR] 유효한 구분자와 숫자를 사용해 주세요."),
+    INVALID_DUPLICATE("[ERROR] 보너스 번호는 당첨 번호와 중복될 수 없습니다.");
+
+    fun throwException(): IllegalArgumentException {
+        return IllegalArgumentException(this.message)
+    }
+}
+
 object Validation {
     fun parseAmount(amount: String?): Int {
         if (amount.isNullOrEmpty()) throw LottoError.INVALID_AMOUNT.throwException()
