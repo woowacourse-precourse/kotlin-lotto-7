@@ -89,7 +89,7 @@ class ApplicationTest : NsTest() {
         @Test
         fun `로또 숫자가 총 6개가 아닌 경우 예외 처리`() {
             assertSimpleTest {
-                runException("5000", "1,2,3,4,5");
+                runException("5000", "1,2,3,4,5")
                 assertThat(output()).contains(ERROR_MESSAGE)
             }
         }
@@ -97,7 +97,7 @@ class ApplicationTest : NsTest() {
         @Test
         fun `로또 숫자가 중복되는 경우 예외 처리`() {
             assertSimpleTest {
-                runException("5000", "1,2,3,4,5,5");
+                runException("5000", "1,2,3,4,5,5")
                 assertThat(output()).contains(ERROR_MESSAGE)
             }
         }
@@ -106,7 +106,7 @@ class ApplicationTest : NsTest() {
         @Test
         fun `로또 숫자가 1~45 범위를 벗어나는 경우 예외 처리`() {
             assertSimpleTest {
-                runException("5000", "1,2,3,4,5,46");
+                runException("5000", "1,2,3,4,5,46")
                 assertThat(output()).contains(ERROR_MESSAGE)
             }
         }
@@ -114,14 +114,15 @@ class ApplicationTest : NsTest() {
         @Test
         fun `로또 숫자가 숫자가 아닌 경우 예외 처리`() {
             assertSimpleTest {
-                runException("5000", "1,2,3,4,5,a");
+                runException("5000", "1,2,3,4,5,a")
                 assertThat(output()).contains(ERROR_MESSAGE)
             }
         }
+
         @Test
         fun `로또 숫자가 빈칸인 경우 예외 처리`() {
             assertSimpleTest {
-                runException("5000", "1,2,3,4,5,");
+                runException("5000", "1,2,3,4,5,")
                 assertThat(output()).contains(ERROR_MESSAGE)
             }
         }
@@ -130,14 +131,15 @@ class ApplicationTest : NsTest() {
         @Test
         fun `보너스 번호가 총 1개가 아닌 경우 예외 처리`() {
             assertSimpleTest {
-                runException("5000", "1,2,3,4,5,6", "1,2");
+                runException("5000", "1,2,3,4,5,6", "1,2")
                 assertThat(output()).contains(ERROR_MESSAGE)
             }
         }
+
         @Test
         fun `보너스 번호가 빈칸인 경우 예외 처리`() {
             assertSimpleTest {
-                runException("5000", "1,2,3,4,5,6", "\n");
+                runException("5000", "1,2,3,4,5,6", "\n")
                 assertThat(output()).contains(ERROR_MESSAGE)
             }
         }
@@ -145,7 +147,7 @@ class ApplicationTest : NsTest() {
         @Test
         fun `보너스 번호가 숫자가 아닌 경우 예외 처리`() {
             assertSimpleTest {
-                runException("5000", "1,2,3,4,5,6", "a");
+                runException("5000", "1,2,3,4,5,6", "a")
                 assertThat(output()).contains(ERROR_MESSAGE)
             }
         }
@@ -153,15 +155,10 @@ class ApplicationTest : NsTest() {
         @Test
         fun `보너스 번호가 1~45 범위를 벗어나는 경우 예외 처리`() {
             assertSimpleTest {
-                runException("5000", "1,2,3,4,5,6", "46");
+                runException("5000", "1,2,3,4,5,6", "46")
                 assertThat(output()).contains(ERROR_MESSAGE)
             }
         }
-
-
-
-
-
 
 
     }

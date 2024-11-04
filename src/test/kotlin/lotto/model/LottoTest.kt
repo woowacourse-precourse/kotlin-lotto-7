@@ -46,7 +46,7 @@ class LottoTest {
     @DisplayName("정상 입력 테스트")
     inner class ValidLottoTests {
         @Test
-        fun `정상적인 로또 번호가 입력되면 로또 객체가 생성된다`(){
+        fun `정상적인 로또 번호가 입력되면 로또 객체가 생성된다`() {
             val lotto = Lotto(listOf(1, 2, 3, 4, 5, 6))
             assertEquals(listOf(1, 2, 3, 4, 5, 6), lotto.get())
         }

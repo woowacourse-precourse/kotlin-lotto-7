@@ -9,5 +9,5 @@ enum class InputMessage(private val message: String) {
     fun getMessage(): String {
         return message
     }
-    
+
 }

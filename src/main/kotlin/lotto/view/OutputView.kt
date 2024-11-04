@@ -17,7 +17,14 @@ object OutputView {
         result.keys.sorted().reversed().forEach { rank ->   // rank가 낮은거 부터
             when (rank) {
                 LottoRank.FIRST -> println(OutputMessage.MATCH_COUNT.format(rank.matchCount, rank.prize, result[rank]))
-                LottoRank.SECOND -> println(OutputMessage.MATCH_COUNT_WITH_BONUS.format(rank.matchCount, rank.prize, result[rank]))
+                LottoRank.SECOND -> println(
+                    OutputMessage.MATCH_COUNT_WITH_BONUS.format(
+                        rank.matchCount,
+                        rank.prize,
+                        result[rank]
+                    )
+                )
+
                 LottoRank.THIRD -> println(OutputMessage.MATCH_COUNT.format(rank.matchCount, rank.prize, result[rank]))
                 LottoRank.FOURTH -> println(OutputMessage.MATCH_COUNT.format(rank.matchCount, rank.prize, result[rank]))
                 LottoRank.FIFTH -> println(OutputMessage.MATCH_COUNT.format(rank.matchCount, rank.prize, result[rank]))
