@@ -30,7 +30,7 @@ class Lotto(private val numbers: List<Int>) {
         }
     }
 
-    private var bonusNumber = 0
+    var bonusNumber = 0
     fun inputBonus() {
         try {
             bonusNumber = Console.readLine().toIntOrNull() ?: run {
