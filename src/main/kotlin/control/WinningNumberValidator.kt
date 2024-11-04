@@ -50,14 +50,6 @@ class WinningNumberValidater {
         ) { ErrorMessage.OUT_OF_LOTTO_NUMBER_RANGE }
     }
 
-//    private fun checkIntRange(number: String) {
-//        require(number.toLong() < Int.MAX_VALUE) { ErrorMessage.OUT_OF_LOTTO_NUMBER_RANGE }
-//    }
-//
-//    private fun checkRange(number: String) {
-//        require(number.toInt() in 0..45) { ErrorMessage.OUT_OF_LOTTO_NUMBER_RANGE }
-//    }
-
     private fun checkSize(winningNumber: List<String>) {
         require(winningNumber.size == 6) { ErrorMessage.NOT_INPUT_SIX_NUMBER }
     }
