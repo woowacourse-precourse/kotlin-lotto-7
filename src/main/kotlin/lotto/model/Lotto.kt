@@ -1,9 +1,37 @@
-package lotto
+package lotto.model
 
-class Lotto(private val numbers: List<Int>) {
+import lotto.util.ErrorMessage
+import java.util.random.RandomGenerator
+
+class Lotto(private val numbers: List<LottoNumber>) : List<LottoNumber> by numbers {
     init {
-        require(numbers.size == 6) { "[ERROR] 로또 번호는 6개여야 합니다." }
+        validateLotto(numbers)
     }
 
-    // TODO: 추가 기능 구현
+    private fun validateLotto(lottoNumbers: List<LottoNumber>) {
+        validateLottoSize(lottoNumbers)
+        validateDuplicateLottoNumber(lottoNumbers)
+    }
+
+    private fun validateLottoSize(lottoNumbers: List<LottoNumber>) {
+        require(lottoNumbers.size == LOTTO_SIZE) {
+            ErrorMessage.LOTTO_SIZE.getMessage()
+        }
+    }
+
+    private fun validateDuplicateLottoNumber(lottoNumbers: List<LottoNumber>) {
+        require(lottoNumbers.distinct().size == LOTTO_SIZE) {
+            ErrorMessage.LOTTO_DUPLICATE.getMessage()
+        }
+    }
+
+    companion object {
+        const val LOTTO_SIZE = 6
+
+        fun createRandomLotto(randomGenerator: NumberGenerator): Lotto {
+            val numbers = randomGenerator.generateNumber(LottoNumber.MIN_LOTTO_NUMBER, LottoNumber.MAX_LOTTO_NUMBER, LOTTO_SIZE)
+                .map { LottoNumber(it) }
+            return Lotto(numbers)
+        }
+    }
 }
