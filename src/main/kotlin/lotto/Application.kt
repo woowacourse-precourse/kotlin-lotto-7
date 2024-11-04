@@ -221,6 +221,53 @@ class LottoGame {
             Message.ERROR_DUPLICATE_BONUS_NUMBER
         }
     }
+
+    private fun calculateResults(
+        lottos: List<Lotto>,
+        winningNumbers: Set<Int>,
+        bonusNumber: Int
+    ): Map<Rank, Int> {
+        val resultMap = mutableMapOf<Rank, Int>()
+        for (lotto in lottos) {
+            val rank = calculateRank(lotto, winningNumbers, bonusNumber)
+            val count = resultMap.getOrDefault(rank, 0)
+            resultMap[rank] = count + 1
+        }
+        return resultMap.toMap()
+    }
+
+    private fun calculateRank(lotto: Lotto, winningNumbers: Set<Int>, bonusNumber: Int): Rank {
+        val matchCount = countMatchingNumbers(lotto.getNumbers(), winningNumbers)
+        val hasBonus = isContainsBonusNumber(lotto.getNumbers(), bonusNumber)
+        return determineRank(matchCount, hasBonus)
+    }
+
+    private fun countMatchingNumbers(numbers: List<Int>, winningNumbers: Set<Int>): Int {
+        var count = 0
+        for (number in numbers) {
+            if (winningNumbers.contains(number)) {
+                count++
+            }
+        }
+        return count
+    }
+
+    private fun isContainsBonusNumber(numbers: List<Int>, bonusNumber: Int): Boolean {
+        for (number in numbers) {
+            if (number == bonusNumber) return true
+        }
+        return false
+    }
+
+    private fun determineRank(matchCount: Int, hasBonus: Boolean): Rank {
+        return when (matchCount) {
+            6 -> Rank.FIRST
+            5 -> if (hasBonus) Rank.SECOND else Rank.THIRD
+            4 -> Rank.FOURTH
+            3 -> Rank.FIFTH
+            else -> Rank.NONE
+        }
+    }
 }
 
 fun main() {
