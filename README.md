@@ -1,8 +1,8 @@
 # kotlin-lotto-precourse
 
 ## 구현할 기능
-- [ ] Lotto Class
-    - [ ] 값을 반환하는 getLottoValue()
+- [X] Lotto Class
+    - [X] 값을 반환하는 getLottoValue()
 - [ ] 결과값을 갖는 enum class LottoResult
 - [ ] LottoController
     - [X] 랜덤으로 6개의 숫자를 만들고 이를 Lotto에 저장하는 releaseLotto()
@@ -10,7 +10,7 @@
     - [ ] 입력받은 가격에 따른 로또 구매
     - [ ] 로또 결과를 확인
     - [ ] 최종 결과값 반환
-- [ ] 입력 문자열과 결과를 보여주는 LottoView
+- [ ] 입력과 결과를 다루는 LottoView
 
 ## 구현 과정
 ### releaseLotto()

@@ -6,6 +6,8 @@ class LottoController {
 
     val lottos = ArrayList<Lotto>()
 
+
+
     private fun releaseLotto() {
         lottos.add(Lotto(getLottoNumber()))
     }
