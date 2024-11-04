@@ -1,6 +1,7 @@
 package lotto.controller
 
 import lotto.parser.Parser
+import lotto.util.Constants
 import lotto.validator.Validator
 import lotto.view.InputView
 
@@ -11,6 +12,6 @@ class LottoController {
 
     fun start() {
         val purchaseAmount = inputView.inputPurchaseAmount()
-
+        val lottoCount = purchaseAmount / Constants.LOTTO_UNIT_PRICE
     }
 }
