@@ -1,5 +1,8 @@
 package lotto
 
+import camp.nextstep.edu.missionutils.test.Assertions.assertRandomUniqueNumbersInRangeTest
+import lotto.model.CreateLotto
+import lotto.model.Lotto
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 
@@ -19,5 +22,16 @@ class LottoTest {
         }
     }
 
-    // TODO: 추가 기능 구현에 따른 테스트 코드 작성
+    @Test
+    fun `로또 번호 발행`() {
+        val expectedNumbers = listOf(21, 8, 23, 41, 42, 43)
+        assertRandomUniqueNumbersInRangeTest(
+            {
+                val lotto = CreateLotto()
+                val generatedNumbers = lotto.random()
+                assert(generatedNumbers == expectedNumbers)
+            },
+            expectedNumbers
+        )
+    }
 }
