@@ -16,8 +16,8 @@ class OutputView {
     private fun formatWinCountsMessage(winCounts: Map<LottoRank, Int>, rank: LottoRank): String {
         val message = MESSAGE_WIN_COUNTS.format(
             rank.matchCount,
-            "%,d".format(rank.prize),
             if (rank.hasBonus) MESSAGE_HAS_BONUS else "",
+            "%,d".format(rank.prize),
             winCounts.getOrDefault(rank, 0))
         return message
     }
@@ -36,7 +36,7 @@ class OutputView {
     companion object {
         const val MESSAGE_LOTTO_COUNT = "개를 구매했습니다."
         const val MESSAGE_RESULT_HEADER = "당첨 통계\n---"
-        const val MESSAGE_WIN_COUNTS = "%d개 일치 (%s원)%s - %d개"
+        const val MESSAGE_WIN_COUNTS = "%d개 일치%s (%s원) - %d개"
         const val MESSAGE_HAS_BONUS = ", 보너스 볼 일치"
         const val MESSAGE_PROFIT_TO_COST_RATIO = "총 수익률은 %.1f%%입니다."
     }
