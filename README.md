@@ -32,6 +32,10 @@
     - 당첨 로또 현황 업데이트 winStatusUpdate
     - 최종 수익 구하기 getResultMoney
     - 수익률 계산 getProfitRate
+- LottoValidator
+  - 구입 금액 유효성 검사 validatePurchasePrice
+  - 로또 유효성 검사 validateWinningLotto
+  - 보너브 번호 유효성 검사 validateBonusNumber
 
 ## 클래스
 - Lotto 클래스
