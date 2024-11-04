@@ -1,7 +1,12 @@
 package lotto
 
+import lotto.model.Lotto
+import lotto.util.InputParser.parseWinningNumbers
+import lotto.util.InputValidator.validateLottoNumberInRange
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
+import org.junit.jupiter.params.ParameterizedTest
+import org.junit.jupiter.params.provider.ValueSource
 
 class LottoTest {
     @Test
@@ -19,5 +24,10 @@ class LottoTest {
         }
     }
 
-    // TODO: 추가 기능 구현에 따른 테스트 코드 작성
+    @ParameterizedTest
+    @ValueSource(strings = ["0,1,2,3,4,5", "1,2,3,4,5,999"])
+    fun `당첨 번호 중 1 이상 45 이하가 아닌 것이 있을 경우 예외가 발생한다`(input: String) {
+        val numbers = parseWinningNumbers(input)
+        assertThrows<IllegalArgumentException> { numbers.forEach { validateLottoNumberInRange(it) } }
+    }
 }
