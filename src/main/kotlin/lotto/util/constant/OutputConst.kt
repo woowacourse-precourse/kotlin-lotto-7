@@ -12,7 +12,7 @@ object OutputConst {
     const val SIX_MATCHED = "6개 일치 (2,000,000,000원)"
 
     private const val LOTTO_COUNT = "- %s개"
-    fun matchedLotteries(count: Int): String = LOTTO_COUNT.format(count)
+    fun matchedLotteries(count: String): String = LOTTO_COUNT.format(count)
 
     private const val TOTAL_YIELD = "총 수익률은 %s%%입니다."
     fun getTotalYieldMessage(yield: String): String = TOTAL_YIELD.format(yield)

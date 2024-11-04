@@ -3,6 +3,7 @@ package lotto.view
 import lotto.model.Lotto
 import lotto.model.LottoRank
 import lotto.model.LottoResult
+import lotto.util.constant.LottoRules
 import lotto.util.constant.OutputConst
 
 class OutputView {
@@ -26,8 +27,9 @@ class OutputView {
         println(OutputConst.RESULT)
         lottoResults.reversed().forEach { lottoResult ->
             val rank = LottoRank.entries.find { it.rankNumber == lottoResult.rank }
+            val count = String.format(LottoRules.COUNT_FORMAT, lottoResult.count)
             rank?.let {
-                println("${it.displayName} ${OutputConst.matchedLotteries(lottoResult.count)}")
+                println("${it.displayName} ${OutputConst.matchedLotteries(count)}")
             }
         }
     }

@@ -27,6 +27,7 @@ object LottoRules {
 
     const val PERCENTAGE = 100F
     const val YIELD_FORMAT = "%,.1f"
+    const val COUNT_FORMAT = "%,d"
 
     const val FIRST_PRIZE_MONEY = 2000000000
     const val SECOND_PRIZE_MONEY = 30000000
