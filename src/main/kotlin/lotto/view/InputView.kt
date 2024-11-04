@@ -52,7 +52,7 @@ object InputView {
         try {
             val price = inputPrice.toInt()
 
-            if (price % Constants.LOTTO_PRICE != 0) {
+            if (price % Constants.LOTTO_PRICE != 0 || price == 0) {
                 throw IllegalArgumentException(ErrorMessage.INVALID_AMOUNT.getMessage())
             }
 
