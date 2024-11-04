@@ -2,6 +2,7 @@ package lotto.controller
 
 import camp.nextstep.edu.missionutils.Randoms
 import lotto.model.lotto.Lotto
+import lotto.model.lotto.Money
 import lotto.model.lotto.Prize
 import lotto.model.lotto.WinningNumbers
 import view.InputView

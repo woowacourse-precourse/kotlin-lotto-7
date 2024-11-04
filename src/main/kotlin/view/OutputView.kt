@@ -17,6 +17,6 @@ class OutputView {
         results.forEach { (prize, count) ->
             println("${prize.description} - ${count}개")
         }
-        println("총 수익률은 ${profitRate}%입니다.")
+        println("총 수익률은 ${profitRate}입니다.")
     }
 }

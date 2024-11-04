@@ -10,7 +10,7 @@ class InputView {
         var money = 0
         while (true) {
             try {
-                print("구매 금액을 입력하세요. ")
+                print("구입금액을 입력해 주세요.")
                 val input = Console.readLine().trim()
 
                 money = input.toIntOrNull() ?: throw IllegalArgumentException("[ERROR] 금액은 숫자여야 합니다.")
