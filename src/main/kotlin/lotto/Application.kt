@@ -12,5 +12,5 @@ fun main() {
     val inputView = InputView()
     val outputView = OutputView()
     val lottoController = LottoController(cashier, lottoMachine, inputView, outputView)
-    lottoController.start()
+    lottoController.runLottoGame()
 }

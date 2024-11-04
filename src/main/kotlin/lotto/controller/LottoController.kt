@@ -11,24 +11,31 @@ class LottoController(
     private val inputView: InputView,
     private val outputView: OutputView,
 ) {
-    private var purchasedLottos = emptyList<Lotto>()
-    private lateinit var amount: LottoAmount
+    fun runLottoGame() {
+        val lottoAmount = getLottoAmount()
+        val purchasedLottos = issueLottos(lottoAmount.lottoAmount)
 
-    fun start() {
+        val winningLottoNumber = getWinningLottoNumber()
+        val winningBonusNumber = getBonusNumber()
+        val winningLotto = createWinningLotto(winningLottoNumber, winningBonusNumber)
+
+        val lottoPrizes = calculateLottoStatistics(purchasedLottos, winningLotto)
+        showLottoStatistics(lottoPrizes)
+        showLottoYield(lottoPrizes, lottoAmount.lottoAmount)
+    }
+
+    private fun getLottoAmount(): LottoAmount {
         while (true) {
             try {
-                amount = LottoAmount(inputView.inputAmount())
-                break
+                return LottoAmount(inputView.inputAmount())
             } catch (e: IllegalArgumentException) {
                 println(e.message)
             }
         }
-
-        printLottos()
     }
 
-    private fun printLottos() {
-        val lottosCount = cashier.calculateLottoCount(amount)
+    private fun issueLottos(lottoAmount: Int): List<Lotto> {
+        val lottosCount = cashier.calculateLottoCount(lottoAmount)
         outputView.printLottosCount(lottosCount)
 
         val lottos = lottoMachine.createLottos(lottosCount)
@@ -36,47 +43,47 @@ class LottoController(
             println(lotto.lottoNumbers.sorted())
         }
 
-        purchasedLottos = lottos
-
-        inputWinningLottery()
+        return lottos
     }
 
-    private fun inputWinningLottery() {
-        lateinit var winningLottoNumber: Lotto
-        var winningBonusNumber: Int
-        var winningLotto: WinningLotto
-
-        println()
+    private fun getWinningLottoNumber(): Lotto {
         while (true) {
             try {
-                winningLottoNumber = Lotto(inputView.inputWinningLottoNumber())
-                break
+                return Lotto(inputView.inputWinningLottoNumber())
             } catch (e: Exception) {
                 println(e.message)
             }
         }
+    }
 
-        println()
+    private fun getBonusNumber(): Int {
         while (true) {
             try {
-                winningBonusNumber = inputView.inputBonusNumber()
-                winningLotto = WinningLotto(winningLottoNumber, winningBonusNumber)
-                break
+                return inputView.inputBonusNumber()
             } catch (e: Exception) {
                 println(e.message)
             }
         }
-
-        printWinningStatistics(winningLotto)
     }
 
-    private fun printWinningStatistics(winningLotto: WinningLotto) {
-        val prizes = mutableListOf<LottoPrize>()
+    private fun createWinningLotto(lottoNumber: Lotto, bonusNumber: Int): WinningLotto {
+        while (true) {
+            try {
+                return WinningLotto(lottoNumber, bonusNumber)
+            } catch (e: Exception) {
+                println(e.message)
+            }
+        }
+    }
 
-        purchasedLottos.forEach { prizes.add(it.compareWinningLotto(winningLotto)) }
+    private fun calculateLottoStatistics(purchasedLottos: List<Lotto>, winningLotto: WinningLotto): List<LottoPrize> {
+        return purchasedLottos.map { it.compareWinningLotto(winningLotto) }
+    }
+
+    private fun showLottoStatistics(prizes: List<LottoPrize>) {
+        outputView.printWinningStatisticsTitle()
 
         val prizeCounts = prizes.groupingBy { it }.eachCount()
-        outputView.printWinningStatisticsTitle()
 
         LottoPrize.entries
             .reversed()
@@ -85,13 +92,11 @@ class LottoController(
                 val count = prizeCounts[prize] ?: 0
                 outputView.printWinningStatistics(prize, count)
             }
-
-        printLottoYield(prizes)
     }
 
-    private fun printLottoYield(prizes: List<LottoPrize>) {
+    private fun showLottoYield(prizes: List<LottoPrize>, amount: Int) {
         val totalPrizeMoney = prizes.sumOf { it.price }
-        val yield = (totalPrizeMoney.toDouble() / amount.lottoAmount) * 100
+        val yield = (totalPrizeMoney.toDouble() / amount) * 100
         outputView.printLottoYield(yield)
     }
 }

@@ -2,7 +2,7 @@ package lotto.model
 
 class Cashier {
 
-    fun calculateLottoCount(amount: LottoAmount): Int {
-        return amount.lottoAmount / 1_000
+    fun calculateLottoCount(amount: Int): Int {
+        return amount / 1_000
     }
 }
