@@ -2,6 +2,8 @@ package lotto
 
 import camp.nextstep.edu.missionutils.Console
 class LottoView {
+    fun printError(message: String?) = println(message)
+
     fun printLottoPurchaseRequest() = println("구입금액을 입력해 주세요.")
 
     fun inputLottoPurchaseAmount(): String = Console.readLine()
@@ -23,5 +25,5 @@ class LottoView {
     fun inputBonusNumber(): String = Console.readLine()
 
     fun printLottoRankHeader() = println("\n당첨 통계\n---")
-    
+
 }
