@@ -38,19 +38,13 @@ class LottoController(
     }
 
     private fun receivePurchaseAmount(): PurchaseAmount {
-        while (true) {
-            try {
-                val rawPurchaseAmount = inputView.receivePurchaseAmount()
-                validateInputIsNotEmpty(rawPurchaseAmount)
-
-                val purchaseAmount = PurchaseAmount()
-                purchaseAmount.setPurchaseAmount(rawPurchaseAmount)
-
-                return purchaseAmount
-            } catch (e: IllegalArgumentException) {
-                outputView.printExceptionMessage(e.message ?: "")
-            }
-        }
+        return inputView.runWithValidation(
+            receiveInput = { inputView.receivePurchaseAmount() },
+            validateAndSet = { rawAmount ->
+                PurchaseAmount().apply { setPurchaseAmount(rawAmount) }
+            },
+            onError = { errorMessage -> outputView.printExceptionMessage(errorMessage) }
+        )
     }
 
     private fun purchaseLotto(purchaseAmount: PurchaseAmount): List<Lotto> {
@@ -64,35 +58,23 @@ class LottoController(
     }
 
     private fun receiveWinningNumber(): WinningNumber {
-        while (true) {
-            try {
-                val rawWinningNumber = inputView.receiveWinningNumbers()
-                validateInputIsNotEmpty(rawWinningNumber)
-
-                val winningNumber = WinningNumber()
-                winningNumber.setWinningNumbers(rawWinningNumber)
-
-                return winningNumber
-            } catch (e: IllegalArgumentException) {
-                outputView.printExceptionMessage(e.message ?: "")
-            }
-        }
+        return inputView.runWithValidation(
+            receiveInput = { inputView.receiveWinningNumbers() },
+            validateAndSet = { rawNumber ->
+                WinningNumber().apply { setWinningNumbers(rawNumber) }
+            },
+            onError = { errorMessage -> outputView.printExceptionMessage(errorMessage) }
+        )
     }
 
     private fun receiveBonusNumber(winningNumbers: List<Int>): BonusNumber {
-        while (true) {
-            try {
-                val rawBonusNumber = inputView.receiveBonusNumber()
-                validateInputIsNotEmpty(rawBonusNumber)
-
-                val bonusNumber = BonusNumber()
-                bonusNumber.setBonusNumber(rawBonusNumber, winningNumbers)
-
-                return bonusNumber
-            } catch (e: IllegalArgumentException) {
-                outputView.printExceptionMessage(e.message ?: "")
-            }
-        }
+        return inputView.runWithValidation(
+            receiveInput = { inputView.receiveBonusNumber() },
+            validateAndSet = { rawBonus ->
+                BonusNumber().apply { setBonusNumber(rawBonus, winningNumbers) }
+            },
+            onError = { errorMessage -> outputView.printExceptionMessage(errorMessage) }
+        )
     }
 
     private fun determineLottoRanks(
@@ -115,5 +97,21 @@ class LottoController(
         purchaseAmount: Int
     ): Double {
         return WinningRecord().calculatorProfitRate(lottoResults, purchaseAmount)
+    }
+
+    private fun <T> InputView.runWithValidation(
+        receiveInput: () -> String,
+        validateAndSet: (String) -> T,
+        onError: (String) -> Unit
+    ): T {
+        while (true) {
+            try {
+                val rawInput = receiveInput()
+                validateInputIsNotEmpty(rawInput)
+                return validateAndSet(rawInput)
+            } catch (e: IllegalArgumentException) {
+                onError(e.message ?: "")
+            }
+        }
     }
 }
