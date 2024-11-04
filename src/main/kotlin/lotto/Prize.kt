@@ -24,4 +24,9 @@ data class Prize(
                 + Rank.FOURTH_RANK.money * fourth
                 + Rank.FIFTH_RANK.money * fifth)
     }
+
+    fun getProfit(payment: String): String {
+        val totalPrize = this.getPrizeMoney()
+        return String.format("%.1f", (totalPrize / payment.toDouble()) * 100)
+    }
 }
