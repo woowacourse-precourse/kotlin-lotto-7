@@ -51,7 +51,6 @@ class LottoGame(
 
     fun inputBonusNumber(winningLotto: Lotto): Int {
         println("보너스 번호를 입력해 주세요.")
-        val input = readLine()
         return retryOnError { parseBonusNumber(readLine(), winningLotto) }
     }
 
