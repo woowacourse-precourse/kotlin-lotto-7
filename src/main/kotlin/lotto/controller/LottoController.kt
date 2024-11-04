@@ -11,7 +11,7 @@ class LottoController {
     private val lottoInput = LottoInput()
     private val lottoOutput = LottoOutput()
     private val lottoMachine = LottoMachine()
-    private val validator = InputValidator()
+    private val inputValidator = InputValidator()
     private val lottoResult = LottoResult()
     private val lottoCalculator = LottoCalculator()
 
@@ -37,21 +37,21 @@ class LottoController {
     private fun getValidatedPurchasePrice(): Int {
         return generateSequence {
             val input = lottoInput.getPurchasePrice()
-            validator.validatePurchasePrice(input)
+            inputValidator.validatePurchasePrice(input)
         }.firstNotNullOfOrNull { it } ?: getValidatedPurchasePrice()
     }
 
     private fun getValidatedWinningNumbers(): List<Int> {
         return generateSequence {
             val input = lottoInput.getWinningNumbers()
-            validator.validateWinningNumbers(input)
+            inputValidator.validateWinningNumbers(input)
         }.firstNotNullOfOrNull { it } ?: getValidatedWinningNumbers()
     }
 
     private fun getValidatedBonusNumber(winningNumbers: List<Int>): Int {
         return generateSequence {
             val input = lottoInput.getBonusNumber()
-            validator.validateBonusNumber(input, winningNumbers)
+            inputValidator.validateBonusNumber(input, winningNumbers)
         }.firstNotNullOfOrNull { it } ?: getValidatedBonusNumber(winningNumbers)
     }
 }
