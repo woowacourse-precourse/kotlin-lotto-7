@@ -4,11 +4,11 @@ import lotto.domain.validator.BonusLottoNumberValidator
 
 class BonusNumber(
     val number: Int,
-    winningNumbers: List<Int>,
+    winningNumbers: WinningNumbers,
     validator: BonusLottoNumberValidator = bonusNumberValidator
 ) {
     init {
-        validator.validateBonusNumber(number, winningNumbers)
+        validator.validateBonusNumber(number, winningNumbers.getNumbers())
     }
 
     companion object {

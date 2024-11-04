@@ -1,10 +1,11 @@
 package lotto.domain.usecase
 
 import lotto.domain.entity.BonusNumber
+import lotto.domain.entity.WinningNumbers
 import lotto.extention.parseToIntOrThrow
 
 class CreateBonusNumberUseCase {
-    fun execute(bonusNumberInput: () -> String, winningNumbers: List<Int>): BonusNumber {
+    fun execute(bonusNumberInput: () -> String, winningNumbers: WinningNumbers): BonusNumber {
         while (true) {
             try {
                 val bonusNumber = bonusNumberInput().parseToIntOrThrow()

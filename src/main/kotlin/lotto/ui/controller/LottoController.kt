@@ -29,7 +29,7 @@ class LottoController(
         buyLottoTickets(user)
         showLottoTicketsResult(user)
         val winningNumbers = getWinningNumbers()
-        val bonusNumber = getBonusNumber(winningNumbers.getNumbers())
+        val bonusNumber = getBonusNumber(winningNumbers)
         showLottoResult(user.getLottoTickets(), winningNumbers, bonusNumber)
     }
 
@@ -57,7 +57,7 @@ class LottoController(
         return createWinningNumbersUseCase.execute(winningNumbers)
     }
 
-    private fun getBonusNumber(winningNumbers: List<Int>): BonusNumber {
+    private fun getBonusNumber(winningNumbers: WinningNumbers): BonusNumber {
         val bonusNumber = {
             winningNumberInputView.guideBonusNumber()
             winningNumberInputView.inputBonusNumber()
