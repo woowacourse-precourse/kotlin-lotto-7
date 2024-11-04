@@ -45,22 +45,22 @@
 
 ### ✅ 체크리스트
 
-- [ ] 시작점이 application의 main 함수인가?
-- [ ] 프로그램 종료 시 System.exit() 또는 exitProcess()를 호출하지 않았는가?
-- [ ] 요구사항에 명시된 출력 형식을 따랐는가?
-- [ ] 기능 별로 커밋했는가?
-- [ ] [코틀린 코드 컨벤션](https://kotlinlang.org/docs/coding-conventions.html)을 지키며 프로그래밍했는가?
-- [ ] intent가 depth 3을 넘지 않는가? (2까지만 가능)
-- [ ] 함수 길이가 15라인을 넘지는 않는가?
-- [ ] else를 지양했는가? (얼리리턴 사용하기)
-- [ ] Enum class를 사용했는가?
+- [X] 시작점이 application의 main 함수인가?
+- [X] 프로그램 종료 시 System.exit() 또는 exitProcess()를 호출하지 않았는가?
+- [X] 요구사항에 명시된 출력 형식을 따랐는가?
+- [X] 기능 별로 커밋했는가?
+- [X] [코틀린 코드 컨벤션](https://kotlinlang.org/docs/coding-conventions.html)을 지키며 프로그래밍했는가?
+- [X] intent가 depth 3을 넘지 않는가? (2까지만 가능)
+- [X] 함수 길이가 15라인을 넘지는 않는가?
+- [X] else를 지양했는가? (얼리리턴 사용하기)
+- [X] Enum class를 사용했는가?
 - [ ] 함수가 한 가지 일만 하는가?
-- [ ] Random 값 추출은 `camp.nextstep.edu.missionutils.Randoms의 pickUniqueNumbersInRange()`를 활용하는가?
-- [ ] 사용자가 입력하는 값은 ```camp.nextstep.edu.missionutils.Console```의 ```readLine()```을 활용했는가?
-- [ ] `Unit 5`와 `AssertJ`를 이용하여 정리한 기능 목록이 정상적으로 작동하는지 테스트 코드로 확인했는가?
-- [ ] UI 로직은 제외하고 단위 테스트를 작성한다.
-- [ ] 연속된 숫자를 덧붙이거나(a1, a2, ..., aN), 불용어(Info, Data, a, an, the)를 사용하지 않았는가?
-- [ ] 축약하지 않았는가?
-- [ ] 의미없는 공백이 있지는 않은가?
-- [ ] Lotto 클래스 내 필드를 추가하진 않았는가?
-- [ ] Lotto 클래스 내 numbers의 접근 제어자를 변경하지는 않았는가?
+- [X] Random 값 추출은 `camp.nextstep.edu.missionutils.Randoms의 pickUniqueNumbersInRange()`를 활용하는가?
+- [X] 사용자가 입력하는 값은 ```camp.nextstep.edu.missionutils.Console```의 ```readLine()```을 활용했는가?
+- [X] `Unit 5`와 `AssertJ`를 이용하여 정리한 기능 목록이 정상적으로 작동하는지 테스트 코드로 확인했는가?
+- [X] UI 로직은 제외하고 단위 테스트를 작성한다.
+- [X] 연속된 숫자를 덧붙이거나(a1, a2, ..., aN), 불용어(Info, Data, a, an, the)를 사용하지 않았는가?
+- [X] 축약하지 않았는가?
+- [X] 의미없는 공백이 있지는 않은가?
+- [X] Lotto 클래스 내 필드를 추가하진 않았는가?
+- [X] Lotto 클래스 내 numbers의 접근 제어자를 변경하지는 않았는가?
