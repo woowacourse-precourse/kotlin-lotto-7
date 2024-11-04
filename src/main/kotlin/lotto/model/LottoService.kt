@@ -2,7 +2,6 @@ package lotto.model
 
 import camp.nextstep.edu.missionutils.Randoms
 import lotto.utils.Constants
-import kotlin.math.round
 
 class LottoService {
     private fun generateLottoNumbers(): List<Int> {

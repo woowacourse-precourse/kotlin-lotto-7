@@ -1,7 +1,7 @@
 package lotto.controller
 
-import lotto.utils.Constants
 import lotto.model.LottoService
+import lotto.utils.Constants
 import lotto.view.InputView
 import lotto.view.OutputView
 

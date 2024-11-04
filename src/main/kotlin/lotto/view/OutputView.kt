@@ -1,8 +1,8 @@
 package lotto.view
 
-import lotto.utils.Constants
 import lotto.model.Lotto
 import lotto.model.LottoRank
+import lotto.utils.Constants
 
 object OutputView {
     fun printLottoAmountMessage(amount: Int) = println("\n${amount}개를 구매했습니다.")
