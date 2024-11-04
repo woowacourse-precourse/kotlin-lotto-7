@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test
 class InputValidateTest: NsTest() {
 
     @Test
-    fun testPurchaseAmountNotDivide1000() {
+    fun testPurchaseAmountNotDivideLottoCost() {
         assertSimpleTest {
             runException("1500")
             assertThat(output()).contains(ERROR_MESSAGE)
@@ -19,6 +19,14 @@ class InputValidateTest: NsTest() {
     fun testPurchaseAmountNotDigit() {
         assertSimpleTest {
             runException("1500j")
+            assertThat(output()).contains(ERROR_MESSAGE)
+        }
+    }
+
+    @Test
+    fun testPurchaseAmountOverFlow() {
+        assertSimpleTest {
+            runException("150000000000000000")
             assertThat(output()).contains(ERROR_MESSAGE)
         }
     }

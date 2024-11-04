@@ -8,6 +8,9 @@ object InputValidater {
         if (!purchaseAmount.all { it.isDigit() }) {
             throw IllegalArgumentException(ERROR.INPUT_NOT_INT)
         }
+        if (purchaseAmount.length >= 19 || purchaseAmount.toLong() > Int.MAX_VALUE) {
+            throw IllegalArgumentException(ERROR.INPUT_INT_OVERFLOW)
+        }
         if (purchaseAmount.toInt() % Lotto.COST != 0) {
             throw IllegalArgumentException(ERROR.INPUT_NOT_DIVIDE_LOTTO_COST)
         }
@@ -37,6 +40,7 @@ object InputValidater {
 
     object ERROR {
         const val INPUT_NOT_INT = "[ERROR] 입력 값은 정수여야 합니다."
+        const val INPUT_INT_OVERFLOW = "[ERROR] 입력 값은 INT형 정수여야 합니다."
         const val INPUT_NOT_DIVIDE_LOTTO_COST = "[ERROR] 입력 값은 ${Lotto.COST}으로 나누어 떨어져야 합니다."
         const val INPUT_NOT_BETWEEN_LOTTO_NUM = "[ERROR] 로또 번호는 ${Lotto.MIN_VALUE}부터 ${Lotto.MAX_VALUE} 사이의 값이어야 합니다."
         const val INPUT_DUPLICATE_WITH_WINNING_LOTTO = "[ERROR] 보너스 번호가 로또 번호와 중복입니다."
