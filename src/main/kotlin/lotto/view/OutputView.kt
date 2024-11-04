@@ -14,7 +14,7 @@ class OutputView {
         val lottoGenerator = LottoGenerator()
         val tickets = lottoGenerator.generateLottoTickets(ticketCount)
 
-        tickets.forEach { ticket -> print(ticket.sorted()) }
+        tickets.forEach { ticket -> print("\n" + ticket.sorted()) }
     }
 
     fun displayWinningMessage() {

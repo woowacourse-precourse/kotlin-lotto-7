@@ -1,5 +1,6 @@
 package lotto.controller
 
+import camp.nextstep.edu.missionutils.Console
 import lotto.Constants.ERROR_INVALID_LOTTO_PURCHASE_MESSAGE
 import lotto.view.InputView
 import lotto.view.OutputView

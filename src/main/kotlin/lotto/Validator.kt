@@ -72,6 +72,6 @@ class Validator {
     }
 
     private fun isNumeric(number: String): Boolean {
-        return number.toIntOrNull() != null
+        return number.toIntOrNull() == null
     }
 }
