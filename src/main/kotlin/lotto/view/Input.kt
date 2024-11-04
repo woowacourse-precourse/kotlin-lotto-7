@@ -22,5 +22,14 @@ class Input {
         }
     }
 
+    fun getLotteryBonusNumber(): Int {
+        println("보너스 번호를 입력해주세요.")
+        return readLine().let {
+            inputValidation.typeInt(it).also { number ->
+                inputValidation.lotteryNumberRange(number)
+            }
+        }
+    }
+
     private fun readLine(): String = Console.readLine()
 }
