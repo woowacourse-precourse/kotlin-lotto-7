@@ -7,8 +7,7 @@ class Lotto(private val numbers: List<Int>) {
         numbers.forEach{
             require(it>0 && it<46){"[ERROR] 로또 번호는 1부터 45 사이의 숫자여야 합니다."}
         }
-
+        //require(numbers.isNotEmpty()){"[ERROR] 로또 번호는 공백이 아니여야 합니다."}
     }
 
-    // TODO: 추가 기능 구현
 }

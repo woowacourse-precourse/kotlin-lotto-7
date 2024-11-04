@@ -1,6 +1,7 @@
 package lotto.controller
 
 import lotto.model.Amount
+import lotto.model.Bonus
 import lotto.model.CreateLotto
 import lotto.model.Lotto
 import lotto.validator.Validator
@@ -16,9 +17,11 @@ class LottoController {
         repeat(tryCount) {
             numbers.add(CreateLotto().random())
         }
-        UserFeedback.randomLotoo(tryCount, numbers)
+        UserFeedback.randomLotto(tryCount, numbers)
 
         val winNumber = Validator.retryOnFailure { Lotto(numberInterface()) }
+        val bonusNumber = Validator.retryOnFailure { Bonus(bonusInterface()) }
+
 
     }
 
@@ -31,5 +34,10 @@ class LottoController {
         GuideOutput.winNumber()
         val numbers = Input.winNumber()
         return numbers.split(",").map { it.trim().toInt() }.sorted()
+    }
+
+    fun bonusInterface(): Int {
+        GuideOutput.bonusNumber()
+        return Input.bonusNUmber()
     }
 }
