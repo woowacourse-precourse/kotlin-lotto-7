@@ -1,6 +1,8 @@
-package lotto
+package lotto.view
 
 import camp.nextstep.edu.missionutils.Console
+import lotto.Lotto
+
 class LottoView {
     fun printError(message: String?) = println(message)
 

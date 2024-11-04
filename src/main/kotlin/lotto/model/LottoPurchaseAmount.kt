@@ -1,8 +1,8 @@
-package lotto
+package lotto.model
 
-import lotto.Validation.validateInt
-import lotto.Validation.validatePositive
-import lotto.Validation.validateDivisibleBy
+import lotto.util.validateInt
+import lotto.util.validatePositive
+import lotto.util.validateDivisibleBy
 
 class LottoPurchaseAmount private constructor(val money: Int) {
     companion object {
