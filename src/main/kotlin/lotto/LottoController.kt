@@ -1,7 +1,6 @@
 package lotto
 
 import camp.nextstep.edu.missionutils.Randoms
-import lotto.LottoView
 
 class LottoController {
 
@@ -13,20 +12,20 @@ class LottoController {
         releaseLotto(buyLottoAmount)
         lottoView.showBoughtLotto(buyLottoAmount, lottos)
         val winnerNumber = lottoView.getWinnerNumber()
-        val specialNumber = lottoView.getSpecialNumber()
+        val specialNumber = lottoView.getSpecialNumber(winnerNumber)
         val lottoResult = calculateLotto(winnerNumber, specialNumber)
         lottoView.showLottoResult(lottoResult)
-        lottoView.showReturnRate(getReturnRate(lottoResult,buyLottoAmount))
+        lottoView.showReturnRate(getReturnRate(lottoResult, buyLottoAmount))
     }
 
-    private fun getReturnRate(lottoResult: List<Int>, buyLottoAmount: Int) : Double{
+    private fun getReturnRate(lottoResult: List<Int>, buyLottoAmount: Int): Double {
         var sum = 0.0
         sum += Constant.THREE_REWARD * lottoResult[0]
         sum += Constant.FOUR_REWARD * lottoResult[1]
         sum += Constant.FIVE_REWARD * lottoResult[2]
         sum += Constant.FIVE_SPECIAL_REWARD * lottoResult[3]
         sum += Constant.SIX_REWARD * lottoResult[4]
-        return sum/(buyLottoAmount*Constant.LOTTO_PRICE)
+        return sum / (buyLottoAmount * Constant.LOTTO_PRICE)
     }
 
     private fun calculateLotto(winnerNumber: List<Int>, specialNumber: Int): List<Int> {
