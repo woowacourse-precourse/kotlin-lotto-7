@@ -1,9 +1,22 @@
 package lotto.model
 
-class Lotto(private val numbers: List<Int>) {
-    init {
-        require(numbers.size == 6) { "[ERROR] 로또 번호는 6개여야 합니다." }
-    }
+import lotto.constants.LottoConstants
+import lotto.utils.Validator
+import kotlin.random.Random
 
-    // TODO: 추가 기능 구현
+class Lotto(private val numbers: List<Int> = generateLottoNumbers()) {
+
+  init {
+    Validator.validateLottoNumbers(numbers)
+  }
+
+  fun getNumbers(): List<Int> = numbers
+
+  companion object {
+    private fun generateLottoNumbers() =
+      (LottoConstants.LOTTO_NUMBER_MIN..LottoConstants.LOTTO_NUMBER_MAX)
+        .shuffled(Random)
+        .take(6)
+        .sorted()
+  }
 }
