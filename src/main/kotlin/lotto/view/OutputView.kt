@@ -3,8 +3,12 @@ package lotto.view
 import lotto.model.Lotto
 import lotto.model.LottoResult
 import lotto.model.Rank
+import java.text.DecimalFormat
 
 object OutputView {
+    private val NUMBER_FORMAT = "#,###.0"
+    private val DECIMAL_FORMAT = DecimalFormat(NUMBER_FORMAT)
+
     fun printExceptionMessage(message: String?) {
         println(message)
     }
@@ -20,10 +24,10 @@ object OutputView {
         for (rank in Rank.entries) {
             when (rank) {
                 Rank.MISS -> continue
-                Rank.SECOND -> print("${rank.matchCount}개 일치, 보너스 볼 일치(${rank.winningAmount}원) - ")
-                else -> print("${rank.matchCount}개 일치 (${rank.winningAmount}원) - ")
+                Rank.SECOND -> print("${rank.matchCount}개 일치, 보너스 볼 일치(${DECIMAL_FORMAT.format(rank.winningAmount)}원) - ")
+                else -> print("${rank.matchCount}개 일치 (${DECIMAL_FORMAT.format(rank.winningAmount)}원) - ")
             }
-            println("${lottoResults.getCount(rank)}개")
+            println("${DECIMAL_FORMAT.format(lottoResults.getCount(rank))}개")
         }
     }
 
