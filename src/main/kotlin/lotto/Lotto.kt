@@ -5,5 +5,14 @@ class Lotto(private val numbers: List<Int>) {
         require(numbers.size == 6) { "[ERROR] 로또 번호는 6개여야 합니다." }
     }
 
+    override fun toString(): String {
+        val lottoNumbersOutput = numbers.joinToString(prefix = "[", postfix = "]", separator = ", ")
+        return lottoNumbersOutput
+    }
+
+    fun toSpring() {
+        val numbersOutput = numbers.joinToString(prefix = "[", postfix = "]", separator = ", ")
+        println(numbersOutput)
+    }
     // TODO: 추가 기능 구현
 }

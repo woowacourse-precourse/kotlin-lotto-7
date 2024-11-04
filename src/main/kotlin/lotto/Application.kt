@@ -16,6 +16,9 @@ fun main() {
         val lotto = Lotto(lottoNumbers)
         lottos.add(lotto)
     }
+    for (lotto in lottos) {
+        println(lotto)
+    }
 }
 
 fun getLottoBudget(): Int {
