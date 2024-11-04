@@ -21,7 +21,7 @@ class LottoService {
     }
 
     private fun generateNumbers(): Lotto {
-        return Randoms.pickUniqueNumbersInRange(1, 45, 6)
+        return Randoms.pickUniqueNumbersInRange(Lotto.MINIMUM_NUMBER, Lotto.MAXIMUM_NUMBER, Lotto.LOTTO_NUMBER_SIZE)
             .sorted()
             .let { Lotto(it) }
     }
