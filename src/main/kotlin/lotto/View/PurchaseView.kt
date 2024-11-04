@@ -21,7 +21,7 @@ class PurchaseView {
     }
 
     fun displayLottos(user: User) {
-        println("\n${user.lottoList.size}$PURCHASE_MESSAGE")
+        println("\n${user.lottoList.size}$PROMPT_PURCHASE_MESSAGE")
         user.lottoList.forEach { lotto ->
             println(lotto.getNumbers())
         }
@@ -29,6 +29,6 @@ class PurchaseView {
 
     companion object {
         const val PROMPT_MESSAGE = "구입금액을 입력해 주세요."
-        const val PURCHASE_MESSAGE = "개를 구매했습니다."
+        const val PROMPT_PURCHASE_MESSAGE = "개를 구매했습니다."
     }
 }
