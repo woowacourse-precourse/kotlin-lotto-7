@@ -10,16 +10,29 @@ class InputView {
         return Console.readLine()
     }
 
+    fun getPurchaseAmount(): Int {
+        return inputPurchaseAmount().toInt()
+    }
+
     fun inputLottoNumbers(): String {
         val guideMessage = GuideMessage.LottoNumbers
         guideMessage.printGuideMessage()
         return Console.readLine()
     }
 
+    fun getLottoNumbers(): List<Int> {
+        val lottoNumbers = inputLottoNumbers().split(",")
+        return lottoNumbers.map { it.trim().toInt() }.sorted()
+    }
+
     fun inputBonusNumber(): String {
         val guideMessage = GuideMessage.BonusNumber
         guideMessage.printGuideMessage()
         return Console.readLine()
+    }
+
+    fun getBonusNumber(): Int {
+        return inputBonusNumber().toInt()
     }
 
     enum class GuideMessage(private val message: String) {
