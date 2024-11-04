@@ -1,4 +1,4 @@
-package view
+package util
 
 class ErrorMessage {
     companion object {

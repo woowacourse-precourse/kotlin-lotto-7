@@ -2,7 +2,7 @@ package control
 
 import data.Lotto
 import util.SettingValue
-import view.ErrorMessage
+import util.ErrorMessage
 import view.Input
 
 class BonusNumberValidator {

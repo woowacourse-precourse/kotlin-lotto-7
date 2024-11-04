@@ -1,7 +1,7 @@
 package control
 
 import util.SettingValue
-import view.ErrorMessage
+import util.ErrorMessage
 import view.Input
 
 class WinningNumberValidator {

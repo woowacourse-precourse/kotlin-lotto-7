@@ -1,6 +1,6 @@
 package control
 
-import view.ErrorMessage
+import util.ErrorMessage
 import view.Input
 
 class PurchaseAmountValidator {
