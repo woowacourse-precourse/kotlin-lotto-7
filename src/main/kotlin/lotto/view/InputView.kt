@@ -14,33 +14,53 @@ import lotto.util.InputValidator.validateWinningNumbersDistinctness
 class InputView {
     private val winningNumbers = mutableListOf<Int>()
 
+    private fun <T> loopUntilValid(action: () -> T): T {
+        while (true) {
+            try { return action() }
+            catch (e: IllegalArgumentException) { println("\n${e.message}\n") }
+        }
+    }
+
     fun readLottoMoney(): Int {
-        println(PROMPT_LOTTO_MONEY)
-        val money = parseNumericInput(Console.readLine())
-        validateMoneyIsNotNegative(money)
-        validateMoneyIsEnough(money)
-        validateMoneyIsDivisible(money)
-        println()
-        return money
+        return loopUntilValid {
+            println(PROMPT_LOTTO_MONEY)
+
+            val money = parseNumericInput(Console.readLine())
+            validateMoneyIsNotNegative(money)
+            validateMoneyIsEnough(money)
+            validateMoneyIsDivisible(money)
+
+            println()
+            money
+        }
     }
 
     fun readWinningNumbers(): List<Int> {
-        println(PROMPT_WINNING_NUMBERS)
-        winningNumbers.addAll(parseWinningNumbers(Console.readLine()))
-        validateWinningNumbersCount(winningNumbers)
-        validateWinningNumbersDistinctness(winningNumbers)
-        winningNumbers.forEach { validateLottoNumberInRange(it) }
-        println()
-        return winningNumbers
+        return loopUntilValid {
+            println(PROMPT_WINNING_NUMBERS)
+
+            winningNumbers.clear()
+            winningNumbers.addAll(parseWinningNumbers(Console.readLine()))
+            validateWinningNumbersCount(winningNumbers)
+            validateWinningNumbersDistinctness(winningNumbers)
+            winningNumbers.forEach { validateLottoNumberInRange(it) }
+
+            println()
+            winningNumbers
+        }
     }
 
     fun readBonusNumber(): Int {
-        println(PROMPT_BONUS_NUMBER)
-        val bonusNumber = parseNumericInput(Console.readLine())
-        validateLottoNumberInRange(bonusNumber)
-        validateBonusNumberDistinctness(bonusNumber, winningNumbers)
-        println()
-        return bonusNumber
+        return loopUntilValid {
+            println(PROMPT_BONUS_NUMBER)
+
+            val bonusNumber = parseNumericInput(Console.readLine())
+            validateLottoNumberInRange(bonusNumber)
+            validateBonusNumberDistinctness(bonusNumber, winningNumbers)
+
+            println()
+            bonusNumber
+        }
     }
 
     companion object {
