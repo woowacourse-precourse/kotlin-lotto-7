@@ -12,7 +12,7 @@ class LottoController(
     private val outputView: OutputView,
 ) {
     fun runLottoGame() {
-        val lottoAmount = getLottoAmount().money
+        val lottoAmount = getLottoAmount()
         val purchasedLottos = generateLottos(lottoAmount)
 
         val winningLottoNumber = getWinningLottoNumber()
@@ -24,10 +24,10 @@ class LottoController(
         showLottoYield(lottoPrizes, lottoAmount)
     }
 
-    private fun getLottoAmount(): LottoAmount {
+    private fun getLottoAmount(): Int {
         while (true) {
             try {
-                return LottoAmount(inputView.inputAmount())
+                return LottoAmount(inputView.inputAmount()).money
             } catch (e: IllegalArgumentException) {
                 println(e.message)
             }
