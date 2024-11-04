@@ -8,7 +8,6 @@ object LottoRules {
     val AMOUNT_RANGE = AMOUNT_UNIT..MAX_AMOUNT
 
     const val DELIMITER = ","
-    const val DELIMITER_WITH_SPACE = "$DELIMITER "
 
     const val LOTTO_NUMBER_COUNT = 6
     const val LOTTO_NUMBER_MIN = 1
