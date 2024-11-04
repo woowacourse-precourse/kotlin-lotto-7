@@ -9,12 +9,6 @@ class Lotto(private val numbers: List<Int>) {
     var fourthRank = 0
     var fifthRank = 0
 
-    init {
-        require(numbers.size == 6) { "[ERROR] 로또 번호는 6개여야 합니다." }
-        require(numbers.toSet().size == 6) { "[ERROR] 로또 번호는 중복일 수 없습니다." }
-        require(numbers.all { it in 1..45 }) { "[ERROR] 로또 번호의 범위는 1 ~ 45입니다." }
-    }
-
     companion object {
         fun issueLotto(count: Int): List<List<Int>> {
             return (1..count).map {
