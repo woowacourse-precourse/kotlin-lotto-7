@@ -6,20 +6,24 @@ import lotto.domain.LottoResult
 import lotto.domain.ReturnRateCalculator
 
 class ViewModel {
-    var cost: Long? = null
-    val winningLottos: List<Lotto> = LottoOperator.buy(cost ?: throw IllegalStateException("cost is not initialized"))
-    private lateinit var purchasedLotto: Lotto
-    private var bonusNumber: Int? = null
-    private val lottoOperator: LottoOperator = LottoOperator(
-        winningLottos, purchasedLotto, bonusNumber ?: throw IllegalStateException("bonusNumber is not initialized")
-    )
-    private val lotteryResults: List<LottoResult> = lottoOperator.checkLotteryResult()
-    private val profit: Long = lotteryResults.sumOf { lotteryResult -> lotteryResult.prize }
-    val returnRate: Double =
-        ReturnRateCalculator.calculate(cost ?: throw IllegalStateException("winningLottos is not initialized"), profit)
+    private var cost: Long? = null
+    var winningLottos: List<Lotto>? = null
+    lateinit var userLottoNumbers: List<Int>
+    var bonusNumber: Int? = null
+    val lottoResults: List<LottoResult>
+        get() = LottoOperator(
+            winningLottos ?: throw IllegalStateException("winningLottos is not initialized"),
+            Lotto(userLottoNumbers),
+            bonusNumber ?: throw IllegalStateException("bonusNumber is not initialized")
+        ).checkLotteryResult()
+    private val profit: Long get() = lottoResults.sumOf { lotteryResult -> lotteryResult.prize }
+    val returnRate: Double
+        get() = ReturnRateCalculator.calculate(
+            cost ?: throw IllegalStateException("winningLottos is not initialized"), profit
+        )
 
-    fun setUserLotto(purchasedNumbers: List<Int>, bonusNumber: Int) {
-        purchasedLotto = Lotto(purchasedNumbers)
-        this.bonusNumber = bonusNumber
+    fun buyLottos(cost: Long) {
+        this.cost = cost
+        winningLottos = LottoOperator.buy(cost)
     }
 }
