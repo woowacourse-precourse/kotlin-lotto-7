@@ -2,10 +2,12 @@ package lotto.model
 
 import camp.nextstep.edu.missionutils.Randoms
 import lotto.util.ValidatorUtil.validateLottoSize
+import lotto.util.ValidatorUtil.validateUniqueLottoNumbers
 
 class Lotto(private val numbers: List<Int>) {
     init {
         validateLottoSize(numbers.size)
+        validateUniqueLottoNumbers(numbers)
     }
 
     companion object {

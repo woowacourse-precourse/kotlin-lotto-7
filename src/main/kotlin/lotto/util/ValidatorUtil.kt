@@ -1,6 +1,7 @@
 package lotto.util
 
 import lotto.util.ConstantsUtil.MESSAGE_BONUS_NUMBERS_NOT_INT
+import lotto.util.ConstantsUtil.MESSAGE_LOTTO_NUMBERS_DUPLICATE
 import lotto.util.ConstantsUtil.MESSAGE_LOTTO_NUMBERS_SIZE_INVALID
 import lotto.util.ConstantsUtil.MESSAGE_TICKETS_PRICE_INVALID
 import lotto.util.ConstantsUtil.MESSAGE_TICKETS_PRICE_NOT_INT
@@ -58,5 +59,13 @@ object ValidatorUtil {
             MESSAGE_WINNING_NUMBERS_RANGE_INVALID
         }
     }
+
+    fun validateUniqueLottoNumbers(lottoNumbers: List<Int>) {
+        require(lottoNumbers.size == lottoNumbers.distinct().size){
+            MESSAGE_LOTTO_NUMBERS_DUPLICATE
+        }
+    }
+
+    // 보너스 번호랑 당첨 번호랑 같은지 구하기
 
 }
