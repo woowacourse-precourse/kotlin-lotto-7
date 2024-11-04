@@ -21,6 +21,15 @@ class LottoService(
         }
     }
 
+    fun checkWinning(winningNumbers: List<Int>, bonusNumber: Int) {
+        _userLottoNumbers.forEach {
+            val result = lottoMatchService.checkMatchCount(it, winningNumbers, bonusNumber)
+            lottoCounterService.incrementResult(result)
+        }
+    }
+
+    fun getMatchResult(): Map<MatchType, Int> = lottoCounterService.getResultMap()
+
     private fun generateRandomNumber(): List<Int> {
         return Randoms.pickUniqueNumbersInRange(START_INCLUSIVE, END_INCLUSIVE, RANDOM_COUNT).sortedBy { it }
     }
