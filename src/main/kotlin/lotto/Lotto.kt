@@ -25,7 +25,7 @@ class Lotto(private val numbers: List<Int>) {
         }
     }
     companion object {
-        fun checkLottoAmount(amount: String): Int {
+        private fun checkLottoAmount(amount: String): Int {
             val lottoAmount = amount.toIntOrNull()
             when {
                 lottoAmount == null -> throw IllegalArgumentException("[ERROR] 구입 금액은 숫자여야 합니다.")
@@ -35,7 +35,7 @@ class Lotto(private val numbers: List<Int>) {
             }
         }
 
-        fun checkWinningNumber(numbers: String): List<Int> {
+        private fun checkWinningNumber(numbers: String): List<Int> {
             val winningNumbers = if ("," in numbers) {
                 numbers.split(",")
                 .map { it.trim() }
@@ -51,7 +51,7 @@ class Lotto(private val numbers: List<Int>) {
             return winningNumbers
         }
 
-        fun checkBonusNumber(number: String, winningNumber: List<Int>): Int? {
+        private fun checkBonusNumber(number: String, winningNumber: List<Int>): Int? {
             val bonusNumber = number.toIntOrNull()
 
             when {
@@ -62,7 +62,7 @@ class Lotto(private val numbers: List<Int>) {
             return bonusNumber
         }
 
-        fun generateLottoNumbers(amount: Int): List<Lotto> {
+        private fun generateLottoNumbers(amount: Int): List<Lotto> {
             return List(amount) {
                 val lottoNumbers = Randoms.pickUniqueNumbersInRange(1, 45, 6).sorted()
                 Lotto(lottoNumbers)
@@ -114,7 +114,6 @@ class Lotto(private val numbers: List<Int>) {
             lottos.forEach { println(it.numbers) }
 
             val results = lottoRanks(lottos, validWinningNumber, validBonusNumber)
-
             extractedRank(results, validLottoAmount)
         }
     }
