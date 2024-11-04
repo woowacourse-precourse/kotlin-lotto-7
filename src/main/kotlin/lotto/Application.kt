@@ -74,7 +74,10 @@ fun validateBonusNumber(inputBonus: String) {
 
 fun validateDuplicateWithHit(input: Int) {
     val exceptionMessage = "[ERROR] 당첨 숫자와 중복 될 수 없습니다"
-    require(input !in hitNumbers) { throw IllegalArgumentException(exceptionMessage) }
+    require(input !in hitNumbers) {
+        println(exceptionMessage)
+        throw IllegalArgumentException(exceptionMessage)
+    }
 }
 
 fun inputHitNumbers(): List<Int> {
@@ -98,24 +101,24 @@ fun validateDuplicate(parsedInput: List<Int>) {
     val exceptionMessage = "[ERROR] 중복된 숫자가 존재하면 안 됩니다."
     require(
         parsedInput.groupingBy { it }.eachCount()
-            .all { 1 == it.value }) { throw IllegalArgumentException(exceptionMessage) }
+            .all { 1 == it.value }) {
+        println(exceptionMessage)
+        throw IllegalArgumentException(exceptionMessage) }
 }
 
 fun validateBetween1And45(parsedInput: List<Int>) {
     val exceptionMessage = "[ERROR] 1이상 45이하의 숫자여야 합니다."
     require(parsedInput.all { it in Lotto.MIN_LOTTO_NUMBER..Lotto.MAX_LOTTO_NUMBER }) {
-        throw IllegalArgumentException(
-            exceptionMessage
-        )
+        println(exceptionMessage)
+        throw IllegalArgumentException(exceptionMessage)
     }
 }
 
 fun validateBetween1And45(input: Int) {
     val exceptionMessage = "[ERROR] 1이상 45이하의 숫자여야 합니다."
     require(input in Lotto.MIN_LOTTO_NUMBER..Lotto.MAX_LOTTO_NUMBER) {
-        throw IllegalArgumentException(
-            exceptionMessage
-        )
+        println(exceptionMessage)
+        throw IllegalArgumentException(exceptionMessage)
     }
 }
 
@@ -126,7 +129,10 @@ fun parseByComma(input: String): List<Int> {
 fun validatePattern(input: String) {
     val exceptionMessage = "[ERROR] 숫자,숫자,숫자,숫자,숫자,숫자 패턴이 아닙니다."
     val pattern = Regex("^(\\d+,){5}\\d+$") // 숫콤숫콤숫콤숫콤숫콤숫(숫 : 숫자, 콤 : 콤마)
-    require(pattern.matches(input)) { throw IllegalArgumentException(exceptionMessage) }
+    require(pattern.matches(input)) {
+        println(exceptionMessage)
+        throw IllegalArgumentException(exceptionMessage)
+    }
 }
 
 fun makeMyLotto(money: Int): List<Lotto> {
@@ -159,25 +165,40 @@ fun validateMoney(input: String) {
 
 fun validateEmpty(input: String) {
     val exceptionMessage = "[ERROR] 입력이 들어오지 않았습니다."
-    require(input.isNotEmpty()) { throw IllegalArgumentException(exceptionMessage) }
+    require(input.isNotEmpty()) {
+        println(exceptionMessage)
+        throw IllegalArgumentException(exceptionMessage)
+    }
 }
 
 fun validateBlank(input: String) {
     val exceptionMessage = "[ERROR] 입력에 공백만이 있습니다."
-    require(input.isNotBlank()) { throw IllegalArgumentException(exceptionMessage) }
+    require(input.isNotBlank()) {
+        println(exceptionMessage)
+        throw IllegalArgumentException(exceptionMessage)
+    }
 }
 
 fun validateBecomeNumber(input: String) {
-    val exceptionMessage = "[ERROR] 정수로 변환할수 없습니다."
-    require(input.toIntOrNull() is Int) { throw NumberFormatException(exceptionMessage) }
+    val exceptionMessage = "[ERROR] 정수로 변환할수 없습니다"
+    require(input.toIntOrNull() is Int) {
+        println(exceptionMessage)
+        throw NumberFormatException(exceptionMessage)
+    }
 }
 
 fun validateNaturalNumber(input: String) {
     val exceptionMessage = "[ERROR] 자연수가 아닙니다."
-    require(0 < input.toInt()) { throw IllegalArgumentException(exceptionMessage) }
+    require(0 < input.toInt()) {
+        println(exceptionMessage)
+        throw IllegalArgumentException(exceptionMessage)
+    }
 }
 
 fun validate1000won(input: String) {
     val exceptionMessage = "[ERROR] 1000원 단위가 아닙니다."
-    require(input.toInt() % 1000 == 0) { throw IllegalArgumentException(exceptionMessage) }
+    require(input.toInt() % 1000 == 0) {
+        println(exceptionMessage)
+        throw IllegalArgumentException(exceptionMessage)
+    }
 }

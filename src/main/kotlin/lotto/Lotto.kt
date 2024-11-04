@@ -4,8 +4,13 @@ import camp.nextstep.edu.missionutils.Randoms
 
 class Lotto(private val numbers: List<Int>) {
     init {
-        require(numbers.size == LOTTO_COUNT) {throw IllegalArgumentException ("[ERROR] 로또 번호는 ${LOTTO_COUNT}개여야 합니다.") }
-        require(numbers.groupingBy { it }.eachCount().all { 1==it.value }) {throw IllegalArgumentException (exceptionMessageDuplicate) }
+        require(numbers.size == LOTTO_COUNT) {
+            println("[ERROR] 로또 번호는 ${LOTTO_COUNT}개여야 합니다.")
+            throw IllegalArgumentException ("[ERROR] 로또 번호는 ${LOTTO_COUNT}개여야 합니다.") }
+        require(numbers.groupingBy { it }.eachCount().all { 1==it.value }) {
+            println(exceptionMessageDuplicate)
+            throw IllegalArgumentException (exceptionMessageDuplicate)
+        }
         showNumbers()
     }
 
