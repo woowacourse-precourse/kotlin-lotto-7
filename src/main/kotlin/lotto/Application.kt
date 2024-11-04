@@ -86,12 +86,16 @@ fun printResults(results: Map<LottoResult, Int>, amountSpent: Int) {
 
     val totalEarnings = results.entries.sumOf { (result, count) -> result.prize * count }
 
+    printResultDetails(results)
+    printReturnRate(totalEarnings, amountSpent)
+}
+
+fun printResultDetails(results: Map<LottoResult, Int>) {
     LottoResult.values()
-        .reversed() // 순서를 뒤집어서 출력
         .filter { it != LottoResult.NONE }
         .forEach { result ->
             val count = results.getOrDefault(result, 0)
-            val formattedPrize = "%,d".format(result.prize) // 숫자에 쉼표 추가
+            val formattedPrize = "%,d".format(result.prize)
             val resultLine = if (result == LottoResult.SECOND) {
                 "5개 일치, 보너스 볼 일치 (${formattedPrize}원) - ${count}개"
             } else {
@@ -99,8 +103,9 @@ fun printResults(results: Map<LottoResult, Int>, amountSpent: Int) {
             }
             println(resultLine)
         }
+}
 
+fun printReturnRate(totalEarnings: Long, amountSpent: Int) {
     val returnRate = (totalEarnings.toDouble() / amountSpent) * 100
     println("총 수익률은 ${"%.1f".format(returnRate)}%입니다.")
 }
-
