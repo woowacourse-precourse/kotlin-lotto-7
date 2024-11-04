@@ -3,12 +3,14 @@ package lotto
 import camp.nextstep.edu.missionutils.test.Assertions.assertRandomUniqueNumbersInRangeTest
 import camp.nextstep.edu.missionutils.test.Assertions.assertSimpleTest
 import camp.nextstep.edu.missionutils.test.NsTest
+import lotto.LottoTest.Companion.initializePrize
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 
 class ApplicationTest : NsTest() {
     @Test
     fun `기능 테스트`() {
+        initializePrize()
         assertRandomUniqueNumbersInRangeTest(
             {
                 run("8000", "1,2,3,4,5,6", "7")
