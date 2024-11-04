@@ -43,19 +43,22 @@ object Controller {
             try {
                 val winningNumber = InputView.inputWinningNumber().trim()
                 validate.validateInputWiningNumber(winningNumber)
-                WinningNumber(winningNumber.split(",").map { it.trim() }.map { it.toInt() })
-                return inputBonusNumber()
+                val notAddBonusBumber =
+                    WinningNumber(winningNumber.split(",").map { it.trim() }.map { it.toInt() })
+                return inputBonusNumber(notAddBonusBumber)
             } catch (e: IllegalArgumentException) {
                 println(e)
             }
         }
     }
 
-    fun inputBonusNumber() {
+    fun inputBonusNumber(notAddBonusNumber: WinningNumber) {
         while (true) {
             try {
-                InputView.inputBonusNumber().trim()
+                val bonusNumber = InputView.inputBonusNumber().trim()
+                validate.validateBonusNumber(bonusNumber)
 
+                notAddBonusNumber.addBonusNumber(bonusNumber.toInt())
             } catch (e: IllegalArgumentException) {
                 println(e)
             }

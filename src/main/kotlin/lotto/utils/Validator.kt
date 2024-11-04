@@ -35,8 +35,9 @@ class Validator {
 
     fun validateBonusNumber(input: String) {
         require(input.isNotEmpty()) { INPUT_EMPTY.message }
-        require(input.length > 3) { ONLY_ONE_BONUS_NUMBER.message }
-        require(input.toInt() in 1..45) { NOT_1_BETWEEN_45 }
+        require(input.length < 3) { ONLY_ONE_BONUS_NUMBER.message }
+        require(input.all { it.isDigit() }) { ONLY_NUMBER.message }
+        require(input.toInt() in 1..45) { NOT_1_BETWEEN_45.message }
     }
 
 
