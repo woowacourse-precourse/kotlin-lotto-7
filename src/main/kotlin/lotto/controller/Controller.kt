@@ -32,17 +32,18 @@ object Controller {
             buyLottoNumber.add(Lotto(buyLottoNumbers))
         }
         OutputBuyLottoNumber(buyLottoNumber)
+        return inputWinningNumber()
     }
 
 
-//    fun inputWinningNumber() {
-//        while (true) {
-//            try {
-//
-//            } catch (e: IllegalArgumentException) {
-//                println(e)
-//            }
-//        }
-//    }
+    fun inputWinningNumber() {
+        while (true) {
+            try {
+
+            } catch (e: IllegalArgumentException) {
+                println(e)
+            }
+        }
+    }
 
 }
