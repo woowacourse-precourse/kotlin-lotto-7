@@ -15,7 +15,7 @@ class RangeValidator(private val range: IntRange = LOTTO_NUMBER_RANGE) : Numbers
     }
 
     companion object {
-        private val RANGE_ERROR_FORMAT = "로또 번호는 1~45 사이의 값이여야 합니다."
-        private val LOTTO_COUNT_ERROR = "로또는 6개를 선택해야 됩니다."
+        val RANGE_ERROR_FORMAT = "로또 번호는 1~45 사이의 값이여야 합니다."
+        val LOTTO_COUNT_ERROR = "로또는 6개를 선택해야 됩니다."
     }
 }

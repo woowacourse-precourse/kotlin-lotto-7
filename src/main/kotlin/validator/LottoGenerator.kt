@@ -9,6 +9,6 @@ class LottoGenerator : NumbersValidator {
     }
 
     companion object {
-        private const val GENERATOR_ERROR_FORMAT = "로또 번호는 중복될 수 없습니다."
+         const val GENERATOR_ERROR_FORMAT = "로또 번호는 중복될 수 없습니다."
     }
 }
