@@ -1,5 +1,6 @@
 package lotto
 
+import camp.nextstep.edu.missionutils.Console
 import camp.nextstep.edu.missionutils.Console.readLine
 
 object Input {
@@ -10,21 +11,43 @@ object Input {
         inputBonusNumber()
     }
     private fun inputPurchaseAmount(){
-        Instructions.purchaseAmountInstructions()
-        val purchaseAmount = readLine().toInt()
-        LottoSystem.savePurchaseAmount(purchaseAmount)
+        while (true){
+            try {
+                Instructions.purchaseAmountInstructions()
+                val purchaseAmount = readLine()
+                Validator.checkPurchaseAmount(purchaseAmount)
+                LottoSystem.savePurchaseAmount(purchaseAmount.toInt())
+                return
+            }catch (e:IllegalArgumentException){
+                println(e.message)
+            }
+        }
     }
 
     private fun inputWinningNumber(){
-        Instructions.winningNumberInstructions()
-        val winningNumber = readLine().split(",").map { it.trim().toInt() }
-        LottoSystem.saveWinningNumber(winningNumber)
+        while (true){
+            try {
+                Instructions.winningNumberInstructions()
+                val winningNumber = readLine().split(",").map { it.trim().toInt() }
+                LottoSystem.saveWinningNumber(winningNumber)
+                return
+            }catch (e:IllegalArgumentException){
+                println(e.message)
+            }
+        }
     }
 
     private fun inputBonusNumber(){
-        Instructions.bonusNumberInstructions()
-        val bonusNumber = readLine().toInt()
-        LottoSystem.saveBonusNumber(bonusNumber)
+        while (true){
+            try {
+                Instructions.bonusNumberInstructions()
+                val bonusNumber = readLine().toInt()
+                LottoSystem.saveBonusNumber(bonusNumber)
+                return
+            }catch (e:IllegalArgumentException){
+                println(e.message)
+            }
+        }
     }
 
 }
