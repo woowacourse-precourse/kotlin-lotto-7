@@ -49,6 +49,14 @@ class ApplicationTest : NsTest() {
         }
     }
 
+    @Test
+    fun `보너스 번호 입력 숫자가 범위가 범어나면 예외가 발생한다`() {
+        assertSimpleTest {
+            runException("1000","1,2,3,4,5,6","46")
+            assertThat(output()).contains(ERROR_MESSAGE)
+        }
+    }
+
     override fun runMain() {
         main()
     }
