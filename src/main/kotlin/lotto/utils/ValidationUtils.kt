@@ -44,7 +44,7 @@ object ValidationUtils {
                 "[ERROR] 당첨 번호는 중복될 수 없습니다."
             }
         } catch (e: Exception) {
-            throw IllegalArgumentException("[ERROR] 당첨 번호는 공백없이 1~45 이내의 양의 정수만 공백 없이 $separator 구분으로 입력 가능합니다.")
+            throw IllegalArgumentException("[ERROR] 당첨 번호는 공백없이 1~45 이내의 양의 정수만 공백 없이 $separator 구분으로 6개 입력 가능합니다.")
         }
     }
 

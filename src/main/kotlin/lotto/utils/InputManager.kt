@@ -10,14 +10,9 @@ object InputManager {
      * @return 로또 구입 금액
      */
     fun getPurchaseMoney(): Int {
-        while (true) {
-            try {
-                println(INPUT_PURCHASE_MONEY_TITLE)
-                val input = Console.readLine()
-                return input.toPurchaseMoney()
-            } catch (e: IllegalArgumentException) {
-                println(e.message)
-            }
+        return callRetriableInput { println(INPUT_PURCHASE_MONEY_TITLE)
+            val input = Console.readLine()
+            return@callRetriableInput input.toPurchaseMoney()
         }
     }
 
@@ -32,14 +27,10 @@ object InputManager {
      * @return 로또 당첨 번호 세트
      */
     fun getWinningNumbers(): List<Int> {
-        while(true) {
-            try {
-                println(INPUT_WINNING_NUMBERS_TITLE)
-                val input = Console.readLine()
-                return input.toWinningNumbers()
-            } catch (e: IllegalArgumentException) {
-                println(e.message)
-            }
+        return callRetriableInput {
+            println(INPUT_WINNING_NUMBERS_TITLE)
+            val input = Console.readLine()
+            return@callRetriableInput input.toWinningNumbers()
         }
     }
 
@@ -57,21 +48,28 @@ object InputManager {
      * @return 보너스 번호
      */
     fun getBonusNumber(winningNumbers: List<Int>): Int {
-        while (true) {
-            try {
-                println(INPUT_BONUS_NUMBER_TITLE)
-                val input = Console.readLine()
-                Console.close()
-                return input.toBonusNumber(winningNumbers)
-            } catch (e: IllegalArgumentException) {
-                println(e.message)
-            }
+        return callRetriableInput {
+            println(INPUT_BONUS_NUMBER_TITLE)
+            val input = Console.readLine()
+            return@callRetriableInput input.toBonusNumber(winningNumbers)
+        }.also {
+            Console.close()
         }
     }
 
     private fun String.toBonusNumber(winningNumbers: List<Int>): Int {
         ValidationUtils.checkValidBonusNumber(this, winningNumbers)
         return toInt()
+    }
+
+    private fun <T> callRetriableInput(call: () -> T): T {
+        while (true) {
+            try {
+                return call.invoke()
+            } catch (e: IllegalArgumentException) {
+                println(e.message)  // 예외 메시지를 출력하고 반복
+            }
+        }
     }
 
 }
