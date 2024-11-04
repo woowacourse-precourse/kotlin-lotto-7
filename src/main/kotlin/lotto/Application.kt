@@ -32,6 +32,13 @@ fun main() {
 
     val lottoResult = LottoResult(lottoList, winningNumbers, bonusNumber)
     val lottoResultDetail = lottoResult.getResult()
-    println("lottoResultDetail.lottoRankList: ${lottoResultDetail.lottoRankList}")
-    println("lottoResultDetail.rateOfReturn: ${lottoResultDetail.roundedRateOfReturn}")
+    println("당첨 통계")
+    println("---")
+    LottoRank.entries.forEach { rank->
+        if (rank != LottoRank.NOTHING) {
+            val rankCount = lottoResultDetail.lottoRankList.count { it == rank }
+            println("${rank.print()} - ${rankCount}개")
+        }
+    }
+    println("총 수익률은 ${lottoResultDetail.roundedRateOfReturn}%입니다.")
 }
