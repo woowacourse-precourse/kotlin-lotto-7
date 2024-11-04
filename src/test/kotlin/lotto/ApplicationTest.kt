@@ -1,15 +1,9 @@
 package lotto
 
-import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
 import camp.nextstep.edu.missionutils.test.Assertions.assertRandomUniqueNumbersInRangeTest
 import camp.nextstep.edu.missionutils.test.Assertions.assertSimpleTest
 import camp.nextstep.edu.missionutils.test.NsTest
-import lotto.controller.LottoController
-import lotto.model.LottoGenerator
-import lotto.model.Profit
-import lotto.view.InputView
-import lotto.view.OutputView
 import org.assertj.core.api.Assertions.assertThat
 
 class ApplicationTest : NsTest() {
@@ -66,8 +60,8 @@ class ApplicationTest : NsTest() {
     @Test
     fun `당첨 통계 계산`() {
         assertRandomUniqueNumbersInRangeTest( {
-            run("2000", "1,2,3,4,5,6", "13")
-            assertThat(output()).contains("6개 일치 (2,000,000,000원) - 1개")
+            run("2000", "1,2,4,15,16,17", "13")
+            assertThat(output()).contains("3개 일치 (5,000원) - 1개")
         },
         listOf(1,2,3,4,5,6),
         listOf(7,8,9,10,11,12)
