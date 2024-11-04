@@ -1,5 +1,6 @@
 package lotto.presenter
 
+import lotto.dto.LottoBundle
 import lotto.dto.LottoResult
 import lotto.model.LottoResultCalculator
 import lotto.dto.WinningTicket
@@ -11,11 +12,12 @@ class LottoPresenter(
     private val outputView: OutputView
 ) {
 
-    fun purchaseLotto(): List<Lotto> {
+    fun purchaseLotto(): LottoBundle {
         val amount = inputPresenter.onPurchaseAmountInput()
         val lottoSeller = LottoSeller(amount)
-        val lottoBundle = lottoSeller.sell()
-        outputView.printPurchaseSummary(lottoBundle)
+        val items = lottoSeller.sell()
+        val lottoBundle = LottoBundle(items)
+        outputView.printPurchaseSummary(lottoBundle.items)
 
         return lottoBundle
     }
@@ -28,11 +30,11 @@ class LottoPresenter(
         return WinningTicket(winningLotto, bonusNumber)
     }
 
-    fun calculateLottoResult(lottoBundle: List<Lotto>, winningTicket: WinningTicket): LottoResult {
+    fun calculateLottoResult(lottoBundle: LottoBundle, winningTicket: WinningTicket): LottoResult {
         val lottoResultCalculator = LottoResultCalculator(winningTicket)
-        val result = lottoResultCalculator.countMatchingNumber(lottoBundle)
+        val result = lottoResultCalculator.countMatchingNumber(lottoBundle.items)
         val totalReward = lottoResultCalculator.calculateTotalReward()
-        val profitRate = lottoResultCalculator.calculateProfitRate(lottoBundle.size, totalReward)
+        val profitRate = lottoResultCalculator.calculateProfitRate(lottoBundle.items.size, totalReward)
 
         return LottoResult(result, profitRate)
     }
