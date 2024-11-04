@@ -1,5 +1,6 @@
 package lotto.presenter
 
+import lotto.validation.InputValidator
 import lotto.view.InputView
 import lotto.view.OutputView
 
@@ -13,7 +14,7 @@ class InputPresenter(
             try {
                 val amount = inputView.readPurchaseAmount()
                 outputView.printNewLine()
-                // TODO 검증예외처리
+                InputValidator.validatePurchaseAmount(amount)
                 return amount.toInt()
             } catch (e: IllegalArgumentException) {
                 println(e.message)
