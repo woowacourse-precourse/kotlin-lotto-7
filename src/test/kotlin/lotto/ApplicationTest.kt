@@ -49,6 +49,38 @@ class ApplicationTest : NsTest() {
         }
     }
 
+    @Test
+    fun `로또 번호 유효성 테스트 - 중복된 번호가 있을 때 예외 발생`() {
+        assertSimpleTest {
+            runException("8000", "1,2,3,4,5,5", "7")
+            assertThat(output()).contains(ERROR_MESSAGE)
+        }
+    }
+
+    @Test
+    fun `보너스 번호 유효성 테스트 - 보너스 번호가 당첨 번호와 중복될 때 예외 발생`() {
+        assertSimpleTest {
+            runException("8000", "1,2,3,4,5,6", "6")
+            assertThat(output()).contains(ERROR_MESSAGE)
+        }
+    }
+
+    @Test
+    fun `금액 유효성 테스트 - 0원 입력 시 예외 발생`() {
+        assertSimpleTest {
+            runException("0")
+            assertThat(output()).contains(ERROR_MESSAGE)
+        }
+    }
+
+    @Test
+    fun `금액 유효성 테스트 - 1000으로 나누어 떨어지지 않을 때 예외 발생`() {
+        assertSimpleTest {
+            runException("2500")
+            assertThat(output()).contains(ERROR_MESSAGE)
+        }
+    }
+
     override fun runMain() {
         main()
     }
