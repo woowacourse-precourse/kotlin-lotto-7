@@ -27,7 +27,7 @@ object OutputView {
     }
 
     private fun getBonusText(rank: Rank): String {
-        return if (rank.requiresBonus) OutputMessage.BONUS_TEXT.message else ""
+        return OutputMessage.BONUS_TEXT.message.takeIf { rank.requiresBonus } ?: ""
     }
 
     fun printProfitRate(profitRate: Double) {
