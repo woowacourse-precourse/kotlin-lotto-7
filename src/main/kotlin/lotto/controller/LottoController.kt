@@ -29,12 +29,11 @@ class LottoController {
         showProfitPercentage(purchaseAmount)
     }
 
-    private fun getLottoPurchaseAmount(): Int {
+    fun getLottoPurchaseAmount(): Int {
         return try {
             val lottoPurchase = inputView.purchaseLottoMessage()
             validator.checkLottoPurchaseAmount(lottoPurchase)
             lottoPurchase.toInt()
-
         } catch (e: NumberFormatException) {
             print(ERROR_INVALID_LOTTO_PURCHASE_MESSAGE)
             getLottoPurchaseAmount()
@@ -44,7 +43,7 @@ class LottoController {
         }
     }
 
-    private fun countLottoTicket(purchaseAmount: Int): Int {
+    fun countLottoTicket(purchaseAmount: Int): Int {
         return purchaseAmount / 1000
     }
 
