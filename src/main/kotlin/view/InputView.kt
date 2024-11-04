@@ -15,4 +15,13 @@ object InputView {
                 return money
         }
     }
+
+    fun getWinNumbers(): String? {
+        while(true) {
+            OutputView.printWinNumberMessage()
+            val winNumbers = Console.readLine()
+
+            return winNumbers
+        }
+    }
 }

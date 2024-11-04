@@ -8,8 +8,10 @@ object LottoMachine {
 
     fun runMachine() {
         getLotto()
+        getWinNumbers()
     }
-    fun getLotto() {
+
+    private fun getLotto() {
         val money = InputView.getMoney()
         OutputView.newLine()
 
@@ -18,5 +20,9 @@ object LottoMachine {
         OutputView.printTicketCounts(lottoTickets.ticketCounts)
         OutputView.printTickets(lottoTickets.lottoTickets)
         OutputView.newLine()
+    }
+
+    private fun getWinNumbers() {
+        val winNumbers = InputView.getWinNumbers()
     }
 }
