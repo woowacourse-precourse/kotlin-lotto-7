@@ -34,11 +34,9 @@ fun resultOutput(money: Int, myRewards: List<Reward>) {
 }
 
 fun paperMatching(myLottos: List<Lotto>, bonusNumber: Int, turn: Int): Reward {
-    var hasBonus = false
     val paper = myLottos[turn].getNumbers()
     val matchedCount = paper.intersect(hitNumbers.toSet()).count()
-    if (matchedCount == 5 && checkBonus(paper, bonusNumber)) hasBonus = true
-    return getReward(matchedCount, hasBonus)
+    return getReward(matchedCount, matchedCount == 5 && checkBonus(paper, bonusNumber))
 }
 
 fun checkBonus(numbers: List<Int>, bonusNumber: Int): Boolean {
@@ -106,21 +104,15 @@ fun validateDuplicate(parsedInput: List<Int>) {
         throw IllegalArgumentException(exceptionMessage) }
 }
 
-fun validateBetween1And45(parsedInput: List<Int>) {
-    val exceptionMessage = "[ERROR] 1이상 45이하의 숫자여야 합니다."
-    require(parsedInput.all { it in Lotto.MIN_LOTTO_NUMBER..Lotto.MAX_LOTTO_NUMBER }) {
-        println(exceptionMessage)
-        throw IllegalArgumentException(exceptionMessage)
+fun validateBetween1And45(input: Any, min: Int = 1, max: Int = 45) {
+    val exceptionMessage = "[ERROR] $min 이상 $max 이하의 숫자여야 합니다."
+    when (input) {
+        is Int -> require(input in min..max) { exceptionMessage }
+        is List<*> -> require((input as List<Int>).all { it in min..max }) { exceptionMessage }
+        else -> throw IllegalArgumentException("[ERROR] 잘못된 데이터 타입입니다.")
     }
 }
 
-fun validateBetween1And45(input: Int) {
-    val exceptionMessage = "[ERROR] 1이상 45이하의 숫자여야 합니다."
-    require(input in Lotto.MIN_LOTTO_NUMBER..Lotto.MAX_LOTTO_NUMBER) {
-        println(exceptionMessage)
-        throw IllegalArgumentException(exceptionMessage)
-    }
-}
 
 fun parseByComma(input: String): List<Int> {
     return input.split(",").map { it.toInt() }.toList()
@@ -128,7 +120,7 @@ fun parseByComma(input: String): List<Int> {
 
 fun validatePattern(input: String) {
     val exceptionMessage = "[ERROR] 숫자,숫자,숫자,숫자,숫자,숫자 패턴이 아닙니다."
-    val pattern = Regex("^(\\d+,){5}\\d+$") // 숫콤숫콤숫콤숫콤숫콤숫(숫 : 숫자, 콤 : 콤마)
+    val pattern = Regex("^(\\d+,){5}\\d+$") // 예: 1,2,3,4,5,6 형식
     require(pattern.matches(input)) {
         println(exceptionMessage)
         throw IllegalArgumentException(exceptionMessage)
