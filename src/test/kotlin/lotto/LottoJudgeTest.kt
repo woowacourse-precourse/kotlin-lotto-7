@@ -63,7 +63,7 @@ class LottoJudgeTest {
 
     private fun `로또 당첨 번호가 45초과인 경우 예외가 발생해야 한다`(): Exception {
         val exception = assertThrows<IllegalArgumentException> {
-            lottoJudge.setLottoWinningNumbers(listOf(1,2,3,4,46))
+            lottoJudge.setLottoWinningNumbers(listOf(1,2,3,4,5,46))
         }
 
         return exception
