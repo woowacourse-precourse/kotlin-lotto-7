@@ -32,19 +32,23 @@ object InputView {
         }
     }
 
-    fun inputBonusNumber(winningNumbers: List<Int>): Int {
+    fun inputBonusNumber(lottoNumbers: List<Int>): Int {
         println(INPUT_BONUS_NUMBER_MESSAGE)
         return try {
             val bonusNumber = Console.readLine().toIntOrNull() ?: throw IllegalArgumentException(
                 ERROR_INVALID_INPUT_MESSAGE
             )
-            require(!winningNumbers.contains(bonusNumber)) { ERROR_DUPLICATE_NUMBER_MESSAGE }
-            LottoNumberValidator.validate(bonusNumber)
+            validateBonusNumber(bonusNumber, lottoNumbers)
             bonusNumber
         } catch (e: IllegalArgumentException) {
             println(e.message)
-            inputBonusNumber(winningNumbers)
+            inputBonusNumber(lottoNumbers)
         }
+    }
+
+    private fun validateBonusNumber(bonusNumber: Int, lottoNumbers: List<Int>) {
+        require(!lottoNumbers.contains(bonusNumber)) { ERROR_DUPLICATE_NUMBER_MESSAGE }
+        LottoNumberValidator.validate(bonusNumber)
     }
 
     private const val INPUT_PURCHASE_MONEY_MESSAGE = "구입금액을 입력해 주세요."
