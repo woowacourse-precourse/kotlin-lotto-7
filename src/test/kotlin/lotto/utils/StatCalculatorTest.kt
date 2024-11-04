@@ -26,6 +26,14 @@ class StatCalculatorTest {
 
             assertThat(profit).isEqualTo("25000000.0")
         }
+
+        @Test
+        fun `int 범위 초과 금액 당첨 시 수익률 계산 테스트`() {
+            val price = 3000
+            val profit = StatCalculator.getProfitRate(listOf(Stat(Rank.FIRST, 3)), price)
+
+            assertThat(profit).isEqualTo("200000000.0")
+        }
     }
 
     @Nested

@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test
 class FormatterTest {
     @Test
     fun `숫자 출력 형식을 확인한다`() {
-        val number = 1_000_000
+        val number = 1_000_000L
         val formatted = Formatter.addCommas(number)
 
         assertThat(formatted).isEqualTo("1,000,000")
