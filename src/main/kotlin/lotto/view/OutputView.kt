@@ -1,5 +1,10 @@
 package lotto.view
 
+import lotto.constants.LottoMessages.BONUS_INFO
+import lotto.constants.LottoMessages.MESSAGE_LOTTO_COUNT_PURCHASED
+import lotto.constants.LottoMessages.MESSAGE_LOTTO_YIELD
+import lotto.constants.LottoMessages.MESSAGE_WINNING_STATISTICS
+import lotto.constants.LottoMessages.MESSAGE_WINNING_STATISTICS_TITLE
 import lotto.model.LottoPrize
 import lotto.model.LottoPrize.SECOND_PRIZE
 import java.text.DecimalFormat
@@ -8,24 +13,24 @@ class OutputView {
 
     fun printLottosCount(lottosCount: Int) {
         println()
-        println("${lottosCount}개를 구매했습니다.")
+        println(MESSAGE_LOTTO_COUNT_PURCHASED.format(lottosCount))
     }
 
     fun printWinningStatisticsTitle() {
         println()
-        println("당첨 통계\n---")
+        println(MESSAGE_WINNING_STATISTICS_TITLE)
     }
 
     fun printWinningStatistics(prize: LottoPrize, count: Int) {
-        var bonusInfo = ""
-        if (prize == SECOND_PRIZE) bonusInfo = ", 보너스 볼 일치"
+        val bonusInfo = BONUS_INFO.takeIf { prize == SECOND_PRIZE } ?: ""
+        val formattedPrice = THOUSAND_COMMA.format(prize.price)
 
-        println("${prize.matchingCount}개 일치$bonusInfo (${THOUSAND_COMMA.format(prize.price)}원) - ${count}개")
+        println(MESSAGE_WINNING_STATISTICS.format(prize.matchingCount, bonusInfo, formattedPrice, count))
     }
 
     fun printLottoYield(yield: Double) {
         val formattedYield = String.format("%.1f", yield)
-        println("총 수익률은 ${formattedYield}%입니다.")
+        println(MESSAGE_LOTTO_YIELD.format(formattedYield))
     }
 
     companion object {

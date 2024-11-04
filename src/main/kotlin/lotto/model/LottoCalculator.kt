@@ -1,9 +1,11 @@
 package lotto.model
 
+import lotto.constants.LottoNumbers.LOTTO_PRICE
+
 class LottoCalculator {
 
     fun calculateLottoCount(amount: Int): Int {
-        return amount / 1_000
+        return amount / LOTTO_PRICE
     }
 
     fun calculateStatistics(purchasedLottos: List<Lotto>, winningLotto: WinningLotto): List<LottoPrize> {
@@ -12,6 +14,10 @@ class LottoCalculator {
 
     fun calculateYield(prizes: List<LottoPrize>, amount: Int): Double {
         val totalPrizeMoney = prizes.sumOf { it.price }
-        return (totalPrizeMoney.toDouble() / amount) * 100
+        return (totalPrizeMoney.toDouble() / amount) * PERCENTAGE
+    }
+
+    companion object {
+        private const val PERCENTAGE = 100
     }
 }

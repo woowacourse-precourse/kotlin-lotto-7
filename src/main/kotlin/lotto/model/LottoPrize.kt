@@ -1,5 +1,7 @@
 package lotto.model
 
+import lotto.constants.ErrorMessages.ERROR_LOTTO_PRIZE_MATCHING_COUNT_RANGE
+
 enum class LottoPrize(
     val matchingCount: Int,
     val price: Int,
@@ -13,19 +15,20 @@ enum class LottoPrize(
     NONE_PRIZE(0, 0, false);
 
     companion object {
+        private val NONE_MATCHING_COUNT_RANGE = 0..2
 
         fun fromMatchingCount(matchingCount: Int, isMatchingBonusNumber: Boolean): LottoPrize {
-            if (matchingCount in 0..2) {
+            if (matchingCount in NONE_MATCHING_COUNT_RANGE) {
                 return NONE_PRIZE
             }
 
-            if (matchingCount == 5) {
-                return entries.find { it.matchingCount == matchingCount && it.isMatchingBonusNumber == isMatchingBonusNumber }
-                    ?: throw IllegalArgumentException("예상치 못한 값입니다.")
+            if (matchingCount == SECOND_PRIZE.matchingCount) {
+                return entries.find { it.isMatchingBonusNumber == isMatchingBonusNumber }
+                    ?: throw IllegalArgumentException(ERROR_LOTTO_PRIZE_MATCHING_COUNT_RANGE)
             }
 
             return entries.find { it.matchingCount == matchingCount }
-                ?: throw IllegalArgumentException("예상치 못한 값입니다.")
+                ?: throw IllegalArgumentException(ERROR_LOTTO_PRIZE_MATCHING_COUNT_RANGE)
         }
     }
 }
