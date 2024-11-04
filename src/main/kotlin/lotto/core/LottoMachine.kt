@@ -8,6 +8,17 @@ import lotto.data.BonusNumber
 import lotto.data.Lotto
 import lotto.data.PurchaseAmount
 import lotto.enums.Rank
+import lotto.constants.Format.DELIMITER_COMMA_WITH_SPACE
+import lotto.constants.Format.DIVIDER
+import lotto.constants.Format.LOTTO_STATS_HEADER
+import lotto.constants.Message.MESSAGE_FORMATTED_PROFIT_RATE
+import lotto.constants.Message.MESSAGE_INVALID_INPUT
+import lotto.constants.Message.MESSAGE_LOTTO_TICKETS_PURCHASED
+import lotto.constants.Message.MESSAGE_LOTTO_TICKET_FORMAT
+import lotto.constants.Message.MESSAGE_PROMPT_BONUS_NUMBER
+import lotto.constants.Message.MESSAGE_PROMPT_PURCHASE_AMOUNT
+import lotto.constants.Message.MESSAGE_PROMPT_WINNING_NUMBER
+
 
 const val TICKET_PRICE = 1000
 
@@ -33,12 +44,12 @@ class LottoMachine {
     private fun requestPurchaseAmount() {
         while (true) {
             try {
-                println("구입금액을 입력해 주세요.")
+                println(MESSAGE_PROMPT_PURCHASE_AMOUNT)
 
                 purchaseAmount = PurchaseAmount(Console.readLine(), TICKET_PRICE).getAmount()
                 break
             } catch (e: IllegalArgumentException) {
-                println("잘못된 입력입니다. 다시 입력해 주세요. ${e.message}")
+                println(MESSAGE_INVALID_INPUT.format(e.message))
             }
         }
         println()
@@ -47,13 +58,13 @@ class LottoMachine {
     private fun printPurchasedLottoTickets() {
         val purchasedLottoCount = purchaseAmount / TICKET_PRICE
 
-        println("${purchasedLottoCount}개를 구매했습니다.")
+        println(MESSAGE_LOTTO_TICKETS_PURCHASED.format(purchasedLottoCount))
 
         repeat(purchasedLottoCount) {
             val userLottoTicket = Randoms.pickUniqueNumbersInRange(1, 45, 6).sorted()
             lottoTickets.add(userLottoTicket)
 
-            println("[${userLottoTicket.joinToString(", ")}]")
+            println(MESSAGE_LOTTO_TICKET_FORMAT.format(userLottoTicket.joinToString(DELIMITER_COMMA_WITH_SPACE)))
         }
         println()
     }
@@ -61,12 +72,12 @@ class LottoMachine {
     private fun requestWinningNumber() {
         while (true) {
             try {
-                println("당첨 번호를 입력해 주세요.")
+                println(MESSAGE_PROMPT_WINNING_NUMBER)
 
                 winningNumber = Lotto(Console.readLine()).getWinningNumber()
                 break
             } catch (e: IllegalArgumentException) {
-                println("잘못된 입력입니다. 다시 입력해 주세요. ${e.message}")
+                println(MESSAGE_INVALID_INPUT.format(e.message))
             } catch (e: NumberFormatException) {
                 println("숫자를 입력해 주세요.")
             }
@@ -77,12 +88,12 @@ class LottoMachine {
     private fun requestBonusNumber() {
         while (true) {
             try {
-                println("보너스 번호를 입력해 주세요.")
+                println(MESSAGE_PROMPT_BONUS_NUMBER)
 
                 bonusNumber = BonusNumber(Console.readLine(), winningNumber).getNumber()
                 break
             } catch (e: IllegalArgumentException) {
-                println("잘못된 입력입니다. 다시 입력해 주세요. ${e.message}")
+                println(MESSAGE_INVALID_INPUT.format(e.message))
             } catch (e: NumberFormatException) {
                 println("숫자를 입력해 주세요.")
             }
@@ -93,8 +104,8 @@ class LottoMachine {
     private fun printLottoStats() {
         lottoStats = LottoStatsCalculator(lottoTickets, winningNumber, bonusNumber).getLottoStats()
 
-        println("당첨 통계")
-        println("---")
+        println(LOTTO_STATS_HEADER)
+        println(DIVIDER)
 
         Rank.entries.reversed().forEach { rank ->   // 5등에서 1등 순서로 출력
             if (rank == Rank.SECOND) {
@@ -106,5 +117,12 @@ class LottoMachine {
     }
 
     private fun printLottoProfit() =
-        println("총 수익률은 %.1f%%입니다.".format(LottoProfitCalculator(lottoStats, purchaseAmount).getLottoProfit()))
+        println(
+            MESSAGE_FORMATTED_PROFIT_RATE.format(
+                LottoProfitCalculator(
+                    lottoStats,
+                    purchaseAmount
+                ).getLottoProfit()
+            )
+        )
 }
