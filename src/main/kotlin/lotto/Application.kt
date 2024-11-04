@@ -45,6 +45,7 @@ fun main() {
             allMatchCount == 3 -> matchCounts["3개 일치"] = matchCounts["3개 일치"]!! + 1
         }
     }
+    printResult(matchCounts)
 }
 
 fun getLottoBudget(): Int {
@@ -110,4 +111,14 @@ fun compareLottoNumbers(lottoWinningNumbers: List<Int>, lottoBonusNumber: Int, l
     val matchingCount = lotto.countMatchingNumbers(lottoWinningNumbers)
     val bonusMatchingCount = if (lotto.isBonusMatched(lottoBonusNumber)) 1 else 0
     return Pair(matchingCount, bonusMatchingCount)
+}
+
+fun printResult(matchCounts: MutableMap<String, Int>) {
+    println("당첨 통계")
+    println("---")
+    println("3개 일치 (5,000원) - ${matchCounts["3개 일치"]}개")
+    println("4개 일치 (50,000원) - ${matchCounts["4개 일치"]}개")
+    println("5개 일치 (1,500,000원) - ${matchCounts["5개 일치"]}개")
+    println("5개 일치, 보너스 볼 일치 (30,000,000원) - ${matchCounts["5개 일치, 보너스 볼 일치"]}개")
+    println("6개 일치 (2,000,000,000원) - ${matchCounts["6개 일치"]}개")
 }
