@@ -18,7 +18,7 @@ class PurchaseTest {
         }
 
         //Then
-        assertEquals("[ERROR] 구매금액은 숫자를 입력해야 합니다.", exception.message)
+        assertEquals(PARSE_AMOUNT_ERROR_MESSAGE, exception.message)
     }
 
     @Test
@@ -32,7 +32,7 @@ class PurchaseTest {
         }
 
         //Then
-        assertEquals("[ERROR] 구매금액은 숫자를 입력해야 합니다.", exception.message)
+        assertEquals(PARSE_AMOUNT_ERROR_MESSAGE, exception.message)
     }
 
     @Test
@@ -46,7 +46,7 @@ class PurchaseTest {
         }
 
         //Then
-        assertEquals("[ERROR] 구매금액은 양수를 입력해야 합니다.", exception.message)
+        assertEquals(AMOUNT_POSITIVE_ERROR_MESSAGE, exception.message)
     }
 
     @Test
@@ -60,7 +60,7 @@ class PurchaseTest {
         }
 
         //Then
-        assertEquals("[ERROR] 구매금액은 1,000원 단위로 입력해야 합니다.", exception.message)
+        assertEquals(THOUSAND_UNIT_ERROR_MESSAGE, exception.message)
     }
 
     @Test
@@ -81,10 +81,16 @@ class PurchaseTest {
         val inputAmount = "11000"
 
         // When
-        val lottoCount = Purchase(inputAmount).lottoCount
+        val lottoPurchaseCount = Purchase(inputAmount).getLottoCount()
 
         // Then
-        assertThat(lottoCount).isEqualTo(11)
+        assertThat(lottoPurchaseCount).isEqualTo(11)
+    }
+
+    companion object {
+        private const val PARSE_AMOUNT_ERROR_MESSAGE = "구매금액은 숫자를 입력해야 합니다."
+        private const val AMOUNT_POSITIVE_ERROR_MESSAGE = "구매금액은 양수를 입력해야 합니다."
+        private const val THOUSAND_UNIT_ERROR_MESSAGE = "구매금액은 1,000원 단위로 입력해야 합니다."
     }
 
 }
