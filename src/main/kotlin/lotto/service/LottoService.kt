@@ -30,6 +30,14 @@ class LottoService(
 
     fun getMatchResult(): Map<MatchType, Int> = lottoCounterService.getResultMap()
 
+    fun calculateEarningRate(buyCount: Int): Double {
+        val totalEarning = MatchType.entries.sumOf { type ->
+            val count = lottoCounterService.getResultMap()[type] ?: 0
+            type.prize * count
+        }
+        return ((totalEarning).toDouble() / (buyCount * LOTTO_PRICE_UNIT) * 100)
+    }
+
     private fun generateRandomNumber(): List<Int> {
         return Randoms.pickUniqueNumbersInRange(START_INCLUSIVE, END_INCLUSIVE, RANDOM_COUNT).sortedBy { it }
     }
