@@ -1,10 +1,12 @@
 package lotto
 
+import lotto.utils.ValidationUtils
+
 class Lotto(
     val numbers: List<Int>,
 ) {
     init {
-        require(numbers.size == 6) { "[ERROR] 로또 번호는 6개여야 합니다." }
+        ValidationUtils.checkValidLottoNumbers(numbers)
     }
 
     fun getWinningRank(winningNumber: List<Int>, bonusNumber: Int): WinningRank {

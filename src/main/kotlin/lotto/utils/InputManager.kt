@@ -9,14 +9,15 @@ object InputManager {
      * 로또를 구입할 금액을 입력 받는다.
      * @return 로또 구입 금액
      */
-    fun getMoney(): Int {
+    fun getPurchaseMoney(): Int {
         println(INPUT_PURCHASE_MONEY_TITLE)
         val input = Console.readLine()
-        return input.toMoney()
+        return input.toPurchaseMoney()
     }
 
-    private fun String.toMoney(): Int {
-        return trim().toInt()
+    private fun String.toPurchaseMoney(): Int {
+        ValidationUtils.checkValidInputPurchaseMoney(this)
+        return this.toInt()
     }
 
     private const val INPUT_WINNING_NUMBERS_TITLE = "당첨 번호를 입력해 주세요."
@@ -32,7 +33,10 @@ object InputManager {
 
     private const val INPUT_WINNING_NUMBERS_SEPARATOR = ","
     private fun String.toWinningNumbers(): List<Int> {
-        return split(INPUT_WINNING_NUMBERS_SEPARATOR).map { it.toInt() }
+        ValidationUtils.checkValidWinningNumbers(this, INPUT_WINNING_NUMBERS_SEPARATOR)
+        return split(INPUT_WINNING_NUMBERS_SEPARATOR).map {
+            it.toInt()
+        }
     }
 
     private const val INPUT_BONUS_NUMBER_TITLE = "보너스 번호를 입력해 주세요."
@@ -40,15 +44,16 @@ object InputManager {
      * 로또 당첨 보너스 번호를 입력 받는다.
      * @return 보너스 번호
      */
-    fun getBonusNumber(): Int {
+    fun getBonusNumber(winningNumbers: List<Int>): Int {
         println(INPUT_BONUS_NUMBER_TITLE)
         val input = Console.readLine()
         Console.close()
-        return input.toBonusNumber()
+        return input.toBonusNumber(winningNumbers)
     }
 
-    private fun String.toBonusNumber(): Int {
-        return trim().toInt()
+    private fun String.toBonusNumber(winningNumbers: List<Int>): Int {
+        ValidationUtils.checkValidBonusNumber(this, winningNumbers)
+        return toInt()
     }
 
 }

@@ -1,21 +1,26 @@
 package lotto
 
-import lotto.utils.LottoGenerator
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 
 class LottoTest {
     @Test
-    fun `로또 번호의 개수가 6개가 넘어가면 예외가 발생한다`() {
+    fun `예외 테스트-로또 번호의 개수가 6개가 넘어가면 예외가 발생한다`() {
         assertThrows<IllegalArgumentException> {
             Lotto(listOf(1, 2, 3, 4, 5, 6, 7))
         }
     }
 
-    // TODO: 테스트가 통과하도록 프로덕션 코드 구현
     @Test
-    fun `로또 번호에 중복된 숫자가 있으면 예외가 발생한다`() {
+    fun `예외 테스트-로또 번호에 1~45 사이가 아닌 정수가 있으면 예외가 발생한다`() {
+        assertThrows<IllegalArgumentException> {
+            Lotto(listOf(-1, 0, 3, 4, 5, 50))
+        }
+    }
+
+    @Test
+    fun `예외 테스트-로또 번호에 중복된 숫자가 있으면 예외가 발생한다`() {
         assertThrows<IllegalArgumentException> {
             Lotto(listOf(1, 2, 3, 4, 5, 5))
         }
@@ -76,8 +81,5 @@ class LottoTest {
         val rank = lotto.getWinningRank(winningNumber, bonusNumber)
         assertEquals(WinningRank.PLACE_Fail, rank)
     }
-
-
-
 
 }
