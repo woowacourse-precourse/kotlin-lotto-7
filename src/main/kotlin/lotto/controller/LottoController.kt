@@ -36,11 +36,16 @@ class LottoController {
     }
 
     private fun getPurchaseMoney(): PurchaseMoney {
-        val moneyinput = getPurchaseMoneyInput()
-        return PurchaseMoney(moneyinput)
+        while(true) {
+            try {
+                val moneyinput = getPurchaseMoneyInput()
+                return PurchaseMoney(moneyinput)
+            } catch (e: IllegalArgumentException) {
+                println(e.message)
+            }
+        }
+
     }
-
-
 
     private fun getLottoCount(purchaseMoney: Int, unitPrice: Int): Int {
         return purchaseMoney / unitPrice
@@ -61,13 +66,27 @@ class LottoController {
     }
 
     private fun getWinningLotto(): WinningLotto {
-        val winningLottoInput = getWinningLottoInput()
-        return WinningLotto(winningLottoInput)
+        while(true) {
+            try {
+                val winningLottoInput = getWinningLottoInput()
+                return WinningLotto(winningLottoInput)
+            } catch (e: IllegalArgumentException) {
+                println(e.message)
+            }
+        }
+
     }
 
     private fun getBonusNumber(winningLotto: WinningLotto) {
-        val bonusNumberInput = getBonusNumberInput()
-        winningLotto.setBonusNumber(bonusNumberInput)
+        while(true) {
+            try {
+                val bonusNumberInput = getBonusNumberInput()
+                winningLotto.setBonusNumber(bonusNumberInput)
+                return
+            } catch (e: IllegalArgumentException) {
+                println(e.message)
+            }
+        }
     }
 
     private fun getWinningResult(lottos: List<Lotto>, winningLotto: WinningLotto): WinningResult {

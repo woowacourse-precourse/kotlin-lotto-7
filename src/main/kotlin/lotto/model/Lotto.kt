@@ -12,6 +12,7 @@ class Lotto(val numbers: List<Int>) {
     init {
         validateLottoSize()
         validateLottoNumber()
+        validateDuplicatedNumber()
     }
 
     private fun validateLottoSize() {
