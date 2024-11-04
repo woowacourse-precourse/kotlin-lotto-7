@@ -11,32 +11,40 @@ object OutputView {
     }
 
     fun printLottoNumbers(lotto: Lotto) {
-        val numbers = lotto.getNumbers()
-        println(numbers.sorted())
+        println(lotto.getNumbers().sorted())
     }
 
     fun printGameResult(gameResult: GameResult) {
         println(OUTPUT_WINNING_STATISTICS_MESSAGE)
         printWinningDetail(gameResult.winningDetail)
-        println(String.format(OUTPUT_EARNING_RATE_MESSAGE, gameResult.getEarningRate() * 100))
+        printEarningRate(gameResult.getEarningRate())
     }
 
     private fun printWinningDetail(winningDetail: Map<Rank, Int>) {
-        Rank.entries.reversed().forEach {
-            val result = when (it) {
-                Rank.SECOND -> OUTPUT_RANK_BONUS_MESSAGE.format(
-                    it.matchCount,
-                    DecimalFormat("#,###").format(it.prizeMoney),
-                    winningDetail[it]
-                )
-                Rank.FIRST, Rank.THIRD, Rank.FOURTH, Rank.FIFTH -> OUTPUT_RANK_MESSAGE.format(
-                    it.matchCount,
-                    DecimalFormat("#,###").format(it.prizeMoney),
-                    winningDetail[it]
-                )
-            }
-            println(result)
+        Rank.entries.reversed().forEach { rank ->
+            println(formatRankMessage(rank, winningDetail[rank] ?: 0))
         }
+    }
+
+    private fun formatRankMessage(rank: Rank, count: Int): String {
+        val prizeMoneyFormat = DecimalFormat("#,###").format(rank.prizeMoney)
+        return when (rank) {
+            Rank.FIRST, Rank.THIRD, Rank.FOURTH, Rank.FIFTH -> OUTPUT_RANK_MESSAGE.format(
+                rank.matchCount,
+                prizeMoneyFormat,
+                count
+            )
+
+            Rank.SECOND -> OUTPUT_RANK_BONUS_MESSAGE.format(
+                rank.matchCount,
+                prizeMoneyFormat,
+                count
+            )
+        }
+    }
+
+    private fun printEarningRate(earningRate: Double) {
+        println(OUTPUT_EARNING_RATE_MESSAGE.format(earningRate * 100))
     }
 
     private const val OUTPUT_PURCHASE_AMOUNT_MESSAGE = "개를 구매했습니다."
