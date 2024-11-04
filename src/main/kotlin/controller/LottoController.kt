@@ -44,4 +44,11 @@ class LottoController(private val inputView: InputView, private val outputView: 
 
         return results
     }
+
+    private fun calculateProfitRate(results: Map<Prize, Int>, purchaseAmount: Int): String {
+        val totalPrize = results.entries.sumOf { it.key.prizeMoney * it.value }
+        val profitRate = (totalPrize.toDouble() / purchaseAmount) * 100
+
+        return String.format("%.1f%%", profitRate)
+    }
 }
