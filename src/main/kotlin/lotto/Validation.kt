@@ -15,7 +15,13 @@ enum class LottoError(val message: String) {
 object Validation {
     fun parseAmount(amount: String?): Int {
         if (amount.isNullOrEmpty()) throw LottoError.INVALID_AMOUNT.throwException()
-        return amount.toIntOrNull() ?: throw LottoError.INVALID_AMOUNT.throwException()
+
+        val parsedAmount = amount.toIntOrNull()
+        if (parsedAmount == null || parsedAmount <= 0) {
+            throw LottoError.INVALID_AMOUNT.throwException()
+        }
+
+        return parsedAmount
     }
 
     fun validateAmount(amount: Int) {
@@ -24,8 +30,9 @@ object Validation {
     }
 
     fun validateLottoNumbers(numbers: List<Int>) {
-        if (numbers.size != 6 || numbers.any { it < 1 || it > 45 } || numbers.toSet().size != numbers.size)
-            throw LottoError.INVALID_NUM.throwException()
+        if (numbers.size != 6 || numbers.toSet().size != numbers.size)
+            throw LottoError.INVALID_AMOUNT.throwException()
+        if (numbers.any { it < 1 || it > 45 }) throw LottoError.INVALID_NUM.throwException()
     }
 
     fun parseLottoNumbers(input: String?): List<Int> {
