@@ -2,9 +2,11 @@ package lotto.core
 
 import camp.nextstep.edu.missionutils.Console
 import camp.nextstep.edu.missionutils.Randoms
+import lotto.calculator.LottoStatsCalculator
 import lotto.data.BonusNumber
 import lotto.data.Lotto
 import lotto.data.PurchaseAmount
+import lotto.enums.Rank
 
 const val TICKET_PRICE = 1000
 
@@ -13,6 +15,7 @@ class LottoMachine {
     private val lottoTickets = mutableListOf<List<Int>>()
     private var winningNumber = listOf<Int>()
     private var bonusNumber = 0
+    private var lottoStats = listOf<Rank>()
 
 
     fun run() {
@@ -21,6 +24,8 @@ class LottoMachine {
 
         requestWinningNumber()
         requestBonusNumber()
+
+        printLottoStats()
     }
 
     private fun requestPurchaseAmount() {
@@ -80,5 +85,19 @@ class LottoMachine {
         }
     }
 
+    private fun printLottoStats() {
+        lottoStats = LottoStatsCalculator(lottoTickets, winningNumber, bonusNumber).getLottoStats()
+
+        println("당첨 통계")
+        println("---")
+
+        Rank.entries.reversed().forEach { rank ->   // 5등에서 1등 순서로 출력
+            if (rank == Rank.SECOND) {
+                println("${rank.matchCount}개 일치, 보너스 볼 일치 (${rank.prize}원) - ${lottoStats.count { it == rank }}개")
+                return@forEach
+            }
+            println("${rank.matchCount}개 일치 (${rank.prize}원) - ${lottoStats.count { it == rank }}개")
+        }
+    }
 
 }
