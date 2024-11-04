@@ -8,7 +8,7 @@ class User {
     fun inputBonusNum(): Int = Console.readLine().toInt()
 
     fun inputMoney(): String = Console.readLine()
-    
+
     private fun isValidLottoNumbers(): List<Int> {
         val lottoNumbers = getUserInput()
         CheckInputValidation.validateNull(lottoNumbers)
