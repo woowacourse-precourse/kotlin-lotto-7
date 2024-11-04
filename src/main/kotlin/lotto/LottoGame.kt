@@ -64,7 +64,11 @@ class LottoGame(
     }
 
     internal fun parseBonusNumber(input: String): Int {
-        return input.toIntOrNull() ?: throw IllegalArgumentException("[ERROR] 보너스 번호는 숫자로 입력해야 합니다.")
+        val bonusNumber = input.toIntOrNull() ?: throw IllegalArgumentException("[ERROR] 보너스 번호는 숫자로 입력해야 합니다.")
+        if (bonusNumber !in 1..45) {
+            throw IllegalArgumentException("[ERROR] 보너스 번호는 1부터 45 사이여야 합니다.")
+        }
+        return bonusNumber
     }
 
     fun buyLottos(cost: Int): List<Lotto> {
