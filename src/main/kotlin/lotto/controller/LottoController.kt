@@ -57,6 +57,7 @@ class LottoController(private val lottoView: LottoView) {
             return processLottoBonusNumber(lotto)
         }
     }
+
     private fun checkResults(myLotto: List<Lotto>, answer: Lotto, bonus: Int): List<LottoResult> {
         val ranks = mutableListOf<LottoResult>()
         for (lotto in myLotto) {

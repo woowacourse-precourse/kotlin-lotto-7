@@ -1,9 +1,10 @@
 package lotto.model
 
 import camp.nextstep.edu.missionutils.Randoms
-class LottoStore: Store {
+
+class LottoStore : Store {
     override fun sell(): List<Int> {
-        return Randoms.pickUniqueNumbersInRange(LOTTO_MIN_NUMBER ,LOTTO_MAX_NUMBER,LOTTO_NUMBER_COUNT)
+        return Randoms.pickUniqueNumbersInRange(LOTTO_MIN_NUMBER, LOTTO_MAX_NUMBER, LOTTO_NUMBER_COUNT)
     }
 
     companion object {

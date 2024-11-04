@@ -52,12 +52,18 @@ fun List<Int>.validateCount(count: Int = LottoConstants.LOTTO_NUMBER_COUNT.value
     return this
 }
 
-fun Int.validateRange(start: Int = LottoConstants.MIN_LOTTO_NUMBER.value, end: Int = LottoConstants.MAX_LOTTO_NUMBER.value): Int {
+fun Int.validateRange(
+    start: Int = LottoConstants.MIN_LOTTO_NUMBER.value,
+    end: Int = LottoConstants.MAX_LOTTO_NUMBER.value
+): Int {
     require(this in start..end) { ErrorMessages.OUT_OF_RANGE.format(start, end) }
     return this
 }
 
-fun List<Int>.validateRange(start: Int = LottoConstants.MIN_LOTTO_NUMBER.value, end: Int = LottoConstants.MAX_LOTTO_NUMBER.value): List<Int> {
+fun List<Int>.validateRange(
+    start: Int = LottoConstants.MIN_LOTTO_NUMBER.value,
+    end: Int = LottoConstants.MAX_LOTTO_NUMBER.value
+): List<Int> {
     require(this.all { it in start..end }) { ErrorMessages.OUT_OF_RANGE.format(start, end) }
     return this
 }

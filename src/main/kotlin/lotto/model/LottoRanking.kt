@@ -6,9 +6,9 @@ import lotto.util.round
 class LottoRanking(var countByRanking: MutableMap<LottoResult, Int>, var totalRevenue: Double) {
     companion object {
         fun of(lottoResults: List<LottoResult>): LottoRanking {
-            val lottoResultBundle = initializeResultBundle()  // 1. 초기화
-            val prize = calculateTotalPrize(lottoResults, lottoResultBundle)  // 2. 등수에 해당하는 count 증가 및 상금 계산
-            val totalRevenue = calculateROI(lottoResults.size, prize)  // 3. 수익률 계산 및 반올림
+            val lottoResultBundle = initializeResultBundle()
+            val prize = calculateTotalPrize(lottoResults, lottoResultBundle)
+            val totalRevenue = calculateROI(lottoResults.size, prize)
             return LottoRanking(lottoResultBundle, totalRevenue)
         }
 
@@ -19,8 +19,7 @@ class LottoRanking(var countByRanking: MutableMap<LottoResult, Int>, var totalRe
         }
 
         private fun calculateTotalPrize(
-            lottoResults: List<LottoResult>,
-            lottoResultBundle: MutableMap<LottoResult, Int>
+            lottoResults: List<LottoResult>, lottoResultBundle: MutableMap<LottoResult, Int>
         ): Double {
             var prize = 0.0
             for (result in lottoResults) {
