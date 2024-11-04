@@ -1,4 +1,11 @@
 import lotto.model.Lotto
+import lotto.model.LottoRank
+import lotto.util.ConstantsUtil.MESSAGE_CALCULATED_TICKETS
+import lotto.util.ConstantsUtil.MESSAGE_SHOW_CALCULATED_TICKETS
+import lotto.util.ConstantsUtil.MESSAGE_TICKETS_COUNT
+import lotto.util.ConstantsUtil.MESSAGE_TICKETS_PRICE
+import lotto.util.ValidatorUtil.validateTicketsPrice
+import java.text.NumberFormat
 class LottoViewImpl: LottoView {
     override fun showTickets(tickets: List<Lotto>) {
         println(formatShowTickets(tickets.size))
@@ -12,6 +19,13 @@ class LottoViewImpl: LottoView {
                 println(formatCalculatedTickets(rank.matchCount, rank.reward, calculatedTickets[rank] ?: 0))
             }
         }
+    }
+
+    override fun getTicketsPrice(): Int {
+        println(MESSAGE_TICKETS_PRICE)
+        val input = Console.readLine()
+        validateTicketsPrice(input)
+        return input.toInt()
     }
     private fun formatShowTickets(ticketsSize: Int): String{
         return MESSAGE_TICKETS_COUNT.format(ticketsSize)
