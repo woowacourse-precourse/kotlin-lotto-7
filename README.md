@@ -207,4 +207,3 @@ class Lotto(private val numbers: List<Int>) {
     - 당첨 번호가 1~45 사이의 숫자가 아니면 IllegalArgumentException을 발생
     - 당첨 번호 사이즈가 6이 아니면 IllegalArgumentException을 발생
     - 보너스 번호가 1~45 사이의 숫자가 아니면 IllegalArgumentException을 발생
-    - 보너스 번호 사이즈가 1이 아니면 IllegalArgumentException을 발생

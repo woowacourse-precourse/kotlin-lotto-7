@@ -11,7 +11,7 @@ import lotto.util.ConstantsUtil.MESSAGE_TICKETS_COUNT
 import lotto.util.ConstantsUtil.MESSAGE_TICKETS_PRICE
 import lotto.util.ConstantsUtil.MESSAGE_WINNING_NUMBERS
 import lotto.util.ValidatorUtil.validateBonusNumber
-import lotto.util.ValidatorUtil.validateTicketsPrice
+import lotto.util.ValidatorUtil.validateTicketsPriceNumber
 import lotto.util.ValidatorUtil.validateWinningNumbers
 import java.text.NumberFormat
 
@@ -33,7 +33,7 @@ class LottoViewImpl: LottoView {
     override fun getTicketsPrice(): Int {
         println(MESSAGE_TICKETS_PRICE)
         val input = Console.readLine()
-        validateTicketsPrice(input)
+        validateTicketsPriceNumber(input)
         return input.toInt()
     }
 
