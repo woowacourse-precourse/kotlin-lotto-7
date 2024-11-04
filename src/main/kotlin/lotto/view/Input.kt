@@ -17,9 +17,11 @@ class Input {
 
     fun getLottoNumbers(): List<Int> {
         println("당첨 번호를 입력해 주세요.")
-        return readLine().let {
-            inputValidation.lottoNumbersDelimiter(it)
+        val value = readLine().let {
+            inputValidation.lottoNumbers(inputValidation.lottoNumbersDelimiter(it))
         }
+        println()
+        return value
     }
 
     fun getLottoBonusNumber(): Int {
