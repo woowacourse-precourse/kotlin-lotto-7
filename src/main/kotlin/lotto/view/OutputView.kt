@@ -19,8 +19,38 @@ class OutputView {
         }
     }
 
+    fun printLottoWinningStat() {
+        println(MSG_OUTPUT_WINNING_STAT)
+    }
+
+    fun printLottoWinningCount(matchType: MatchType, count: Int) {
+        printMessageWinningCount(matchType, count)
+    }
+
     private fun printMessageWithNumber(message: String, number: Any) {
         println(String.format(message, number))
+    }
+
+    private fun printMessageWinningCount(matchType: MatchType, userCount: Int) {
+        println(
+            String.format(
+                if (matchType.isBonusMatch) MSG_OUTPUT_WINNING_BONUS_MATCH_COUNT
+                else MSG_OUTPUT_WINNING_MATCH_COUNT,
+                matchType.matchingCount,
+                matchType.prize.formatKoreaNumber(false), userCount
+            )
+        )
+    }
+
+    fun Number.formatKoreaNumber(isDecimal: Boolean): String {
+        val numberFormat = NumberFormat.getInstance(Locale.KOREA).apply {
+            if (isDecimal) {
+                minimumIntegerDigits = 1
+                maximumFractionDigits = 1 // 소수점 첫째 자리까지 표시
+                minimumFractionDigits = 1 // 소수점 첫째 자리까지 표시
+            }
+        }
+        return numberFormat.format(this)
     }
 
     companion object {
