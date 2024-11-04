@@ -52,7 +52,12 @@ fun validLottoNum (input : String) : List<Int> {
         throw IllegalArgumentException(ErrorMessage.LOTTO_NUMBER_FORMAT_ERROR.message)
     }
 
-    return numbers.map { it.toInt() }
+    val intNumbers = numbers.map { it.toInt() }
+    if (intNumbers.size != 6) {
+        throw IllegalArgumentException(ErrorMessage.LOTTO_SIZE_ERROR.message)
+    }
+
+    return intNumbers
 }
 
 fun inputBonusNumber(lottoNumbers: List<Int>) : Int {

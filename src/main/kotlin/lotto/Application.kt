@@ -4,7 +4,7 @@ package lotto
 fun main() {
     val money = inputMoney()
     val ticketCount = calculateTicket(money)
-    println("$ticketCount 개를 구매했습니다.")
+    println("${ticketCount}개를 구매했습니다.")
 
     val lottoNum = inputLottoNumbers()
     val bonusNum = inputBonusNumber(lottoNum)
@@ -53,7 +53,7 @@ fun printStatistics(statistics: Map<String,Int>, spendMoney : Int) {
     println("6개 일치 (2,000,000,000원) - ${statistics["1등"]}개")
 
     val profitRate = calculateProfitRate(statistics, spendMoney)
-    println("총 수익률은 ${String.format("%.2f", profitRate)}% 입니다.")
+    println("총 수익률은 ${String.format("%.1f", profitRate)}%입니다.")
 }
 
 fun calculateProfitRate(statistics: Map<String, Int>, ticketCost : Int) : Double {
@@ -64,5 +64,7 @@ fun calculateProfitRate(statistics: Map<String, Int>, ticketCost : Int) : Double
         prizeMoney.getOrDefault(rank,0) * count
     }
 
-    return (totalPrize.toDouble() / ticketCost) * 100
+    val profitRate = (totalPrize.toDouble() / ticketCost) * 100
+
+    return Math.round(profitRate * 100) / 100.0
 }
