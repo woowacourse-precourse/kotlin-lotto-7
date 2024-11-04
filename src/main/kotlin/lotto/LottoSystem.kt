@@ -1,6 +1,8 @@
 package lotto
 
 import camp.nextstep.edu.missionutils.Randoms
+import java.math.BigDecimal
+import java.math.RoundingMode
 
 object LottoSystem {
     private lateinit var winningNumber: List<Int>
@@ -10,7 +12,7 @@ object LottoSystem {
     private var randomNumbers = mutableListOf<MutableList<Int>?>()
     private var matchCounts = mutableListOf<MutableList<Int>>()
     private var ranks = mutableMapOf<LottoRank,Int>()
-    private var rateOfReturn = 0.0
+    private var rateOfReturn = BigDecimal.ZERO
 
     fun start() {
         Input.start()
@@ -32,11 +34,19 @@ object LottoSystem {
     }
 
     private fun saveRateOfReturn(){
-        ranks.entries.forEach { if(it.value > 0) rateOfReturn += it.key.price.toLong()*it.value }
-        rateOfReturn = (rateOfReturn/purchaseAmount.toDouble())*100.0
+        ranks.entries.forEach { entry ->
+            if (entry.value > 0) {
+                val prizeAmount = entry.key.price.toBigDecimal()
+                rateOfReturn += prizeAmount * BigDecimal(entry.value)
+            }
+        }
+        rateOfReturn = rateOfReturn
+            .divide(BigDecimal(purchaseAmount), 10, RoundingMode.HALF_UP) // 충분한 정밀도로 나눗셈 수행
+            .multiply(BigDecimal(100))
+            .setScale(1, RoundingMode.HALF_UP)
     }
 
-    fun getRateOfReturn(): Double = rateOfReturn
+    fun getRateOfReturn(): BigDecimal = rateOfReturn
 
     fun getRandomNumbers(): MutableList<MutableList<Int>?> = randomNumbers
 

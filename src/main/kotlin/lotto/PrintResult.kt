@@ -21,7 +21,7 @@ object PrintResult {
                 println("${it.key.matchCount}개 일치, 보너스 볼 일치 (${it.key.priceONE}) - ${it.value}개")
             else println("${it.key.matchCount}개 일치 (${it.key.priceONE}) - ${it.value}개")
         }
-        val rateOfReturn = round((LottoSystem.getRateOfReturn() * 100)) /100
+        val rateOfReturn = LottoSystem.getRateOfReturn()
         println("총 수익률은 ${rateOfReturn}%입니다.")
     }
 

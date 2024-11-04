@@ -49,6 +49,22 @@ class ApplicationTest : NsTest() {
         }
     }
 
+    @Test
+    fun `1등 당첨 테스트`(){
+        assertRandomUniqueNumbersInRangeTest(
+            {
+                run("1000", "1,2,3,4,5,6", "7")
+                assertThat(output()).contains(
+                    "1개를 구매했습니다.",
+                    "[1, 2, 3, 4, 5, 6]",
+                    "6개 일치 (2,000,000,000원) - 1개",
+                    "총 수익률은 2000000000.0%입니다."
+                )
+            },
+            listOf(1, 2, 3, 4, 5, 6)
+        )
+    }
+
     override fun runMain() {
         main()
     }
