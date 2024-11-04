@@ -16,16 +16,19 @@ class LottoGame(
 
         return result
     }
+    // 공통된 예외 처리 로직을 추출한 메서드
+    private fun <T> retryOnError(action: () -> T): T {
+        return try {
+            action()
+        } catch (e: IllegalArgumentException) {
+            println(e.message)
+            retryOnError(action)
+        }
+    }
 
     fun inputCost(): Int {
         println("구입금액을 입력해 주세요.")
-        return try {
-            val input = readLine()
-            parseCost(input)
-        } catch (e: IllegalArgumentException) {
-            println(e.message)
-            inputCost()
-        }
+        return retryOnError { parseCost(readLine()) }
     }
     // 테스트 코드에 접근할 수 있도록 하기 위해 internal 로 설정
     internal fun parseCost(input: String): Int {
@@ -37,13 +40,7 @@ class LottoGame(
 
     fun inputWinningLotto(): Lotto {
         println("당첨 번호를 입력해 주세요.")
-        val input = readLine()
-        return try {
-            parseWinningLotto(input)
-        } catch (e: IllegalArgumentException) {
-            println(e.message)
-            inputWinningLotto()
-        }
+        return retryOnError { parseWinningLotto(readLine()) }
     }
 
     internal fun parseWinningLotto(input: String): Lotto {
@@ -55,12 +52,7 @@ class LottoGame(
     fun inputBonusNumber(winningLotto: Lotto): Int {
         println("보너스 번호를 입력해 주세요.")
         val input = readLine()
-        return try {
-            parseBonusNumber(input, winningLotto)
-        } catch (e: IllegalArgumentException) {
-            println(e.message)
-            inputBonusNumber(winningLotto)
-        }
+        return retryOnError { parseBonusNumber(readLine(), winningLotto) }
     }
 
     internal fun parseBonusNumber(input: String, winningLotto: Lotto): Int {

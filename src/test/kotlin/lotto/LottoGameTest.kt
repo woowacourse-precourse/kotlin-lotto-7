@@ -14,7 +14,7 @@ class LottoGameTest {
         val cost = game.inputCost()
         assertThat(cost).isEqualTo(3000)
     }
-    
+
     // 예외 처리 테스트
     @Test
     fun `금액이 1000원 미만이면 예외가 발생후 재입력 받아 정상 종료된다`() {
