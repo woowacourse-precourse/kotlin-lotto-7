@@ -27,8 +27,8 @@ class InputValidation {
         return numbers
     }
 
-    private fun lottoNumbersNotDuplicate(numbers: List<Int>): List<Int> {
-        require(numbers.toSet().size == 6) { "당첨 번호는 중복되면 안됩니다." }
+    fun lottoNumbersNotDuplicate(numbers: List<Int>): List<Int> {
+        require(numbers.toSet().size == numbers.size) { "번호는 중복되면 안됩니다." }
         return numbers
     }
 
