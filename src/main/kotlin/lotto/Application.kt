@@ -1,5 +1,10 @@
 package lotto
 
+import lotto.controller.LottoController
+import lotto.domain.numberGenerator.RandomNumberGenerator
+
 fun main() {
-    // TODO: 프로그램 구현
+    val lottoGame = LottoController(RandomNumberGenerator())
+
+    lottoGame.draw()
 }
