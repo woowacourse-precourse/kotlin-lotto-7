@@ -1,5 +1,6 @@
 package lotto.presenter
 
+import lotto.extensions.splitByComma
 import lotto.validation.InputValidator
 import lotto.view.InputView
 import lotto.view.OutputView
@@ -28,7 +29,7 @@ class InputPresenter(
                 val numbers = inputView.readWinningNumbers()
                 outputView.printNewLine()
                 InputValidator.validateWinningNumbers(numbers)
-                return numbers.split(",").map { it.toInt() }
+                return numbers.splitByComma().map { it.toInt() }
             } catch (e: IllegalArgumentException) {
                 println(e.message)
             }
