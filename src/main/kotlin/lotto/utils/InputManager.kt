@@ -10,9 +10,15 @@ object InputManager {
      * @return 로또 구입 금액
      */
     fun getPurchaseMoney(): Int {
-        println(INPUT_PURCHASE_MONEY_TITLE)
-        val input = Console.readLine()
-        return input.toPurchaseMoney()
+        while (true) {
+            try {
+                println(INPUT_PURCHASE_MONEY_TITLE)
+                val input = Console.readLine()
+                return input.toPurchaseMoney()
+            } catch (e: IllegalArgumentException) {
+                println(e.message)
+            }
+        }
     }
 
     private fun String.toPurchaseMoney(): Int {
@@ -26,9 +32,15 @@ object InputManager {
      * @return 로또 당첨 번호 세트
      */
     fun getWinningNumbers(): List<Int> {
-        println(INPUT_WINNING_NUMBERS_TITLE)
-        val input = Console.readLine()
-        return input.toWinningNumbers()
+        while(true) {
+            try {
+                println(INPUT_WINNING_NUMBERS_TITLE)
+                val input = Console.readLine()
+                return input.toWinningNumbers()
+            } catch (e: IllegalArgumentException) {
+                println(e.message)
+            }
+        }
     }
 
     private const val INPUT_WINNING_NUMBERS_SEPARATOR = ","
@@ -45,10 +57,16 @@ object InputManager {
      * @return 보너스 번호
      */
     fun getBonusNumber(winningNumbers: List<Int>): Int {
-        println(INPUT_BONUS_NUMBER_TITLE)
-        val input = Console.readLine()
-        Console.close()
-        return input.toBonusNumber(winningNumbers)
+        while (true) {
+            try {
+                println(INPUT_BONUS_NUMBER_TITLE)
+                val input = Console.readLine()
+                Console.close()
+                return input.toBonusNumber(winningNumbers)
+            } catch (e: IllegalArgumentException) {
+                println(e.message)
+            }
+        }
     }
 
     private fun String.toBonusNumber(winningNumbers: List<Int>): Int {
