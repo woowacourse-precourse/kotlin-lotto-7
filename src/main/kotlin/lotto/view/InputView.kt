@@ -7,7 +7,7 @@ import lotto.util.InputValidate
 
 class InputView {
     fun getPrice(): Int {
-        println("구입금액을 입력해 주세요.")
+        println(GET_PRICE)
         while (true) {
             val input = Console.readLine()
             try {
@@ -21,7 +21,7 @@ class InputView {
     }
 
     fun getMyLotto(): Lotto {
-        println("당첨 번호를 입력해 주세요.")
+        println(GET_MY_LOTTO)
         while (true) {
             try {
                 val input = Console.readLine()
@@ -39,7 +39,7 @@ class InputView {
     }
 
     fun getBonusNumber(myLotto: Lotto): Int {
-        println("보너스 번호를 입력해 주세요.")
+        println(GET_BONUS_NUMBER)
         while (true) {
             try {
                 val input = Console.readLine()
@@ -52,5 +52,11 @@ class InputView {
                 println(e.message)
             }
         }
+    }
+
+    companion object{
+        const val GET_PRICE = "구입금액을 입력해 주세요."
+        const val GET_MY_LOTTO = "당첨 번호를 입력해 주세요."
+        const val GET_BONUS_NUMBER = "보너스 번호를 입력해 주세요."
     }
 }
