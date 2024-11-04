@@ -14,7 +14,7 @@ class LottoResultView {
 
     private fun formatLottoRankResult(lottoRank: LottoRank, lottoTicketsRank: List<LottoRank>): String {
         val matchCount = lottoRank.matchCount
-        val price = lottoRank.price.priceFormat()
+        val price = lottoRank.prize.priceFormat()
         val lottoCount = lottoTicketsRank.count { lottoTicketRank -> lottoTicketRank == lottoRank }
         if (lottoRank == LottoRank.SECOND) {
             return "${matchCount}개 일치, 보너스 볼 일치 (${price}) - ${lottoCount}개"

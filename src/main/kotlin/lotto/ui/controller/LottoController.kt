@@ -70,7 +70,7 @@ class LottoController(
             calculateLottoRankUseCase.execute(lotto, winningNumbers, bonusNumber)
         }
         lottoResultView.outputWinningStatistics(lottoTicketsRank)
-        val winningPrizes = lottoTicketsRank.map { it.price }
+        val winningPrizes = lottoTicketsRank.map { it.prize }
         val lottoTotalProfitRate =
             calculateLottoReturnUseCase.execute(winningPrizes, lottoTickets.size.times(LOTTO_PRICE))
         lottoResultView.outputTotalProfitRate(lottoTotalProfitRate)

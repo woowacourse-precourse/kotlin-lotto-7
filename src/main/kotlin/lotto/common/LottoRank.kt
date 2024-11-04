@@ -1,6 +1,6 @@
 package lotto.common
 
-enum class LottoRank(val price: Int, val matchCount: Int) {
+enum class LottoRank(val prize: Int, val matchCount: Int) {
     FIRST(2_000_000_000, 6),
     SECOND(30_000_000, 5),
     THIRD(1_500_000, 5),
