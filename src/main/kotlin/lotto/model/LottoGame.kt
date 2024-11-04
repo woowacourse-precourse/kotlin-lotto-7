@@ -30,6 +30,20 @@ class LottoGame {
 
     }
 
+    private fun updatePrizeCounts(
+        lotto: Lotto,
+        winningNumbers: List<Int>,
+        bonusNumber: Int,
+        prizeCounts: MutableMap<Prize, Int>
+    ): Int {
+        val (matchCount, isBonusMatch) = calculateMatch(lotto, winningNumbers, bonusNumber)
+        val prize = Prize.getPrize(matchCount, isBonusMatch)
+        prizeCounts[prize] = prizeCounts.getValue(prize) + 1
+        val prizeMoney = prize.prizeMoney
+
+        return prizeMoney
+    }
+
     private fun calculateMatch(
         lotto: Lotto,
         winningNumbers: List<Int>,
