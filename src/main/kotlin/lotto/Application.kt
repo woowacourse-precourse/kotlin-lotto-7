@@ -1,8 +1,8 @@
 package lotto
 
 import lotto.data.random.pickLottoNumbers
-import lotto.domain.model.factory.LottoFactory
 import lotto.domain.model.Lotto
+import lotto.domain.model.factory.LottoFactory
 import lotto.ui.Ui
 import lotto.util.keepCallingForSuccessResult
 
@@ -17,4 +17,7 @@ fun main() {
     val lottoFactory = LottoFactory(lottoNumberGenerator = ::pickLottoNumbers)
     val lottoes = lottoFactory.createLottoes(amount)
     ui.displayLottoes(lottoes)
+
+    val winningNumbers =
+        keepCallingForSuccessResult(onFailure = ui::displayExceptionMessage, actionToCall = ui::requestWinningNumbers)
 }
