@@ -5,8 +5,8 @@ import lotto.Model.Lotto
 
 // 로또 발행, 당첨번호 관리
 object LotteryMachine {
-    val winningNumbers = mutableListOf<Int>()
-    var bonusNumber: Int = 0
+    val winningNumbers = mutableListOf<Int>() // 6개의 당첨 번호
+    var bonusNumber: Int = 0 // 보너스 번호
 
     fun generateLotto(): Lotto {
         val numbers = Randoms.pickUniqueNumbersInRange(1, 45, 6)
