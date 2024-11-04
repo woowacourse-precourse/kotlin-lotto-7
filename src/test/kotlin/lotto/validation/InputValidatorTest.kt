@@ -46,4 +46,46 @@ class InputValidatorTest {
             InputValidator.validatePurchaseAmount("1000a")
         }
     }
+
+    @Test
+    fun `당첨 번호에 공백이 있으면 예외가 발생한다`() {
+        assertThrows<IllegalArgumentException> {
+            InputValidator.validateWinningNumbers("1, 2, 3, 4, 5, 6")
+        }
+    }
+
+    @Test
+    fun `당첨 번호에 빈 값이 있으면 예외가 발생한다`() {
+        assertThrows<IllegalArgumentException> {
+            InputValidator.validateWinningNumbers("1, 2, 3, 4, 5, ")
+        }
+    }
+
+    @Test
+    fun `당첨 번호 중복이 있으면 예외가 발생한다`() {
+        assertThrows<IllegalArgumentException> {
+            InputValidator.validateWinningNumbers("1, 2, 3, 4, 5, 5")
+        }
+    }
+
+    @Test
+    fun `각 당첨 번호가 지정된 숫자 범위에 포함되어 있지 않으면 예외가 발생한다`() {
+        assertThrows<IllegalArgumentException> {
+            InputValidator.validateWinningNumbers("1, 2, 3, 4, 5, 46")
+        }
+    }
+
+    @Test
+    fun `당첨 번호 개수가 6개보다 작으면 예외가 발생한다`() {
+        assertThrows<IllegalArgumentException> {
+            InputValidator.validateWinningNumbers("1, 2, 3, 4, 5")
+        }
+    }
+
+    @Test
+    fun `당첨 번호 개수가 6개보다 크면 예외가 발생한다`() {
+        assertThrows<IllegalArgumentException> {
+            InputValidator.validateWinningNumbers("1, 2, 3, 4, 5, 6, 7")
+        }
+    }
 }
