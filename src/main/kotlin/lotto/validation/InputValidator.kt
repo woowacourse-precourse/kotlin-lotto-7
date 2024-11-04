@@ -16,4 +16,17 @@ object InputValidator {
         }
         throw IllegalArgumentException(message)
     }
+
+    fun validateWinningNumbers(input: String) {
+        val message = when {
+            input.isEmpty() -> "[ERROR] 입력값이 없습니다. 다시 입력해 주세요."
+            input.containGap() -> "[ERROR] 공백이 포함되어 있습니다. 다시 입력해 주세요."
+            input.isNotNumbers() -> "[ERROR] 숫자만 입력해 주세요."
+            input.hasNotSixNumbers() -> "[ERROR] 당첨 번호는 6개를 입력해 주세요."
+            input.hasDuplicateNumbers() -> "[ERROR] 당첨 번호는 중복되지 않게 입력해 주세요."
+            input.areNotNumbersInRange() -> "[ERROR] 당첨 번호는 1부터 45사이의 숫자여야 합니다."
+            else -> return
+        }
+        throw IllegalArgumentException(message)
+    }
 }

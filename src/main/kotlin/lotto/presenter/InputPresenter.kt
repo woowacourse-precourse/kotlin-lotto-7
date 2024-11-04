@@ -27,7 +27,7 @@ class InputPresenter(
             try {
                 val numbers = inputView.readWinningNumbers()
                 outputView.printNewLine()
-                // TODO 검증예외처리
+                InputValidator.validateWinningNumbers(numbers)
                 return numbers.split(",").map { it.toInt() }
             } catch (e: IllegalArgumentException) {
                 println(e.message)
