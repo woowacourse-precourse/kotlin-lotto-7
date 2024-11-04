@@ -391,7 +391,25 @@ object Validator {
 - 입력 값이 null 인 경우
 - 입력 값이 숫자가 아닌 경우
 - 입력 값이 1~45 사이의 값이 아닌 경우
-- 보너스 번호가 당첨번호중 중복된 값인 경우
+- 보너스 번호가 당첨번호중 중복된 값인 경
+
+#### Lotto 클래스 예외 처리
+
+```kotlin
+class Lotto(private val numbers: List<Int>) {
+    init {
+        require(numbers.size == 6) { "[ERROR] 로또 번호는 6개여야 합니다." }
+        numbers.forEach {
+            require(it in 1..45){"[ERROR] 유효하지 않은 범위의 숫자가 포함되어 있습니다."}
+        }
+        require(numbers.toSet().size == 6) { "[ERROR] 중복된 숫자가 있습니다." }
+    }
+    ...
+}
+```
+- 입력한 로또 번호의 개수가 6개가 아닌 경우
+- 입력한 로또 번호가 1~45 사이의 값이 아닌 경우
+- 입력한 로또 번호 6개중 중복된 값이 있는 경우
 
 ## 실행 결과 
 <img width="333" alt="image" src="https://github.com/user-attachments/assets/efe89d74-590c-4d94-b112-8c957fb59830">
