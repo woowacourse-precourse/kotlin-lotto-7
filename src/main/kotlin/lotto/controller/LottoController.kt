@@ -27,7 +27,6 @@ class LottoController {
         val bonusNumber = repeatLogic { Validator.getBonusNumber(inputView.readBonusNumber(), winningNumber) }
 
         val stats = getStats(lotto, winningNumber, bonusNumber)
-
         outputView.printStats(stats)
         outputView.printProfitRate(StatCalculator.getProfitRate(stats, price))
     }
