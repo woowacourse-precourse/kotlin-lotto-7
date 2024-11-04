@@ -15,12 +15,17 @@ class Lotto(private val numbers: List<Int>) {
         require(numbers.all { it in 1..45 }) { "[ERROR] 로또 번호의 범위는 1 ~ 45입니다." }
     }
 
-    fun issueLotto(number: Int): List<List<Int>> {
-        return (1..number).map {
-            Randoms.pickUniqueNumbersInRange(1, 45, 6)
+    companion object {
+        fun issueLotto(count: Int): List<List<Int>> {
+            return (1..count).map {
+                Randoms.pickUniqueNumbersInRange(1, 45, 6).sorted()
+            }
+        }
+    }
+
     fun getLottoRank(myLotto: List<List<Int>>, bonusNumber: Int) {
         myLotto.forEach { lottoNumbers ->
-            val matchCount = countMatchingNumbers(lottoNumbers, numbers)
+            val matchCount = countMatchingNumbers(lottoNumbers, numbers.sorted())
             when {
                 matchCount == 6 -> firstRank++
                 matchCount == 5 && lottoNumbers.contains(bonusNumber) -> secondRank++
