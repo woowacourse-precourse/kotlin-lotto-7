@@ -11,6 +11,14 @@ class Lotto(private val numbers: List<Int>) {
         return numbers
     }
 
+    fun getMatchCount(userLotto: Lotto): Int {
+        return numbers.count { it in userLotto.numbers }
+    }
+
+    fun containsNumber(number: Int): Boolean {
+        return numbers.contains(number)
+    }
+
     companion object {
         private const val LOTTO_NUMBER_SIZE = 6
         private const val LOTTO_NUMBER_MIN = 1
