@@ -6,6 +6,8 @@ import lotto.model.LottoRank
 import lotto.model.LottoResult
 import lotto.model.LottoResultDetail
 import lotto.model.toViewData
+import lotto.util.ErrorMessage
+import lotto.util.validator.InputValidator
 import lotto.view.LottoInputView
 import lotto.view.LottoOutputView
 
@@ -40,6 +42,9 @@ class LottoController(
     fun inputBonusNumber() {
         outputView.outputBonusNumber()
         bonusNumber = inputView.getBonusNumber()
+        require(InputValidator.isBonusNumberUnique(winningNumbers, bonusNumber)) {
+            ErrorMessage.LOTTO_NUMBERS_CONTAIN_BONUS_NUMBER.getMessage()
+        }
     }
 
     fun showLottoResult() {

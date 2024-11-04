@@ -3,11 +3,16 @@ package lotto.model
 import camp.nextstep.edu.missionutils.Randoms.pickUniqueNumbersInRange
 import lotto.util.ErrorMessage
 import lotto.util.LottoConstants
+import lotto.util.validator.LottoGeneratorValidator
 
 class LottoGenerator(private val purchasePrice: Int) {
     init {
-        require(purchasePrice >= 1000) { ErrorMessage.PURCHASE_PRICE_MORE_THAN_THOUSAND.getMessage() }
-        require(purchasePrice % 1000 == 0) { ErrorMessage.INVALID_PURCHASE_PRICE.getMessage() }
+        require(LottoGeneratorValidator.isMoreThanOneThousand(purchasePrice)) {
+            ErrorMessage.PURCHASE_PRICE_MORE_THAN_THOUSAND.getMessage()
+        }
+        require(LottoGeneratorValidator.isThousandUnit(purchasePrice)) {
+            ErrorMessage.INVALID_PURCHASE_PRICE.getMessage()
+        }
     }
 
     fun generate(): List<Lotto> {
