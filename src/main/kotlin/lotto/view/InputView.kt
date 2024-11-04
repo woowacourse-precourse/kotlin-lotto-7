@@ -4,8 +4,8 @@ import camp.nextstep.edu.missionutils.Console.readLine
 import lotto.constants.ErrorMessages.ERROR_BLANK
 import lotto.constants.ErrorMessages.ERROR_INTEGER
 import lotto.constants.LottoMessages.BONUS_NUMBER
-import lotto.constants.LottoMessages.MESSAGE_INPUT_VALUE
 import lotto.constants.LottoMessages.LOTTO_AMOUNT
+import lotto.constants.LottoMessages.MESSAGE_INPUT_VALUE
 import lotto.constants.LottoMessages.WINNING_LOTTO_NUMBER
 
 class InputView {
@@ -23,7 +23,7 @@ class InputView {
     fun inputWinningLottoNumber(): List<Int> {
         println()
         println(MESSAGE_INPUT_VALUE.format(WINNING_LOTTO_NUMBER))
-        val winningLottoNumber = readLine().split(",").map { it.trim() }
+        val winningLottoNumber = readLine().split(LOTTO_NUMBER_DELIMITER).map { it.trim() }
 
         require(winningLottoNumber.all { it.isNotBlank() }) { ERROR_BLANK.format(WINNING_LOTTO_NUMBER) }
 
@@ -40,5 +40,9 @@ class InputView {
         require(bonusNumber.isNotBlank()) { ERROR_BLANK.format(BONUS_NUMBER) }
 
         return bonusNumber.toIntOrNull() ?: throw IllegalArgumentException(ERROR_INTEGER.format(BONUS_NUMBER))
+    }
+
+    companion object {
+        private const val LOTTO_NUMBER_DELIMITER = ","
     }
 }
