@@ -2,10 +2,12 @@ package exception
 
 import validation.InputValidation
 import camp.nextstep.edu.missionutils.test.Assertions.assertSimpleTest
+import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.CsvSource
+import utils.LottoUtils
 
 class InputExceptionTest {
     private val input = InputValidation()
@@ -38,6 +40,23 @@ class InputExceptionTest {
             // then
             assertThrows<IllegalArgumentException> {
                 input.isValidMoney(money)
+            }
+        }
+    }
+
+    @ParameterizedTest
+    @CsvSource("1, 3, 3", "1, 4, 5, 8, 24, 24")
+    fun `당첨 번호는 6개의 서로 중복되지 않는 숫자로 이뤄져야 한다`(winNumbersInput: String) {
+        assertSimpleTest {
+            // given
+            val winNumbers = winNumbersInput.split(", ")
+                .map { it.trim().toInt() }
+
+            // when
+
+            // then
+            assertThrows<IllegalArgumentException> {
+                input.isValidWinNumbers(winNumbers)
             }
         }
     }

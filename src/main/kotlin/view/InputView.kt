@@ -16,10 +16,11 @@ object InputView {
         }
     }
 
-    fun getWinNumbers(): String? {
+    fun getWinNumbers(): List<Int> {
         while(true) {
             OutputView.printWinNumberMessage()
-            val winNumbers = Console.readLine()
+            val winNumbers = Console.readLine().split(",")
+                .map { it.trim().toInt() }
 
             return winNumbers
         }

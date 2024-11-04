@@ -3,6 +3,7 @@ package validation
 import exception.Exception
 import utils.ExceptionUtils
 import utils.InputUtils
+import utils.LottoUtils
 
 class InputValidation {
     fun isValidUnit(money: Int): Boolean {
@@ -15,5 +16,11 @@ class InputValidation {
         if (money > 0)
             return true
         Exception.throwException(ExceptionUtils.WRONG_MONEY_INPUT_MESSAGE)
+    }
+
+    fun isValidWinNumbers(winNumbers: List<Int>): Boolean {
+        if (winNumbers.toSet().size == LottoUtils.LOTTO_NUMBER_COUNTS)
+            return true
+        Exception.throwException(ExceptionUtils.WRONG_WIN_NUMBERS)
     }
 }
