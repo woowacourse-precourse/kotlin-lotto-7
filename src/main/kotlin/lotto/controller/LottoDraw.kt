@@ -13,7 +13,7 @@ class LottoDraw {
         val store = Store()
         val lottos = store.buyLotto(price)
 
-        val myLotto = Lotto(inputView.getLottoNumber())
+        val myLotto = inputView.getMyLotto()
         val myBonus = inputView.getBonusNumber(myLotto)
 
         outputView.purchasedMessage(store.numberOfLottoPurchased)
