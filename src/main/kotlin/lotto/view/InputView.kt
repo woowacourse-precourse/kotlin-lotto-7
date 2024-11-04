@@ -7,7 +7,7 @@ object InputView {
         while (true) {
             try {
                 println("구입금액을 입력해 주세요.")
-                val cost = readCost()
+                val cost = readValidCost()
                 validateCost(cost)
                 return cost
             } catch (e: IllegalArgumentException) {
@@ -18,8 +18,20 @@ object InputView {
         }
     }
 
-    private fun readCost(): Int {
-        return Console.readLine().toInt()
+    private fun readValidCost(): Int {
+        while (true) {
+            try {
+                val input = Console.readLine().toInt()
+                if (input % 1000 != 0) {
+                    throw IllegalArgumentException("[ERROR] 로또 구매 금액은 1,000원 단위이어야 합니다.")
+                }
+                return input
+            } catch (e: NumberFormatException) {
+                println("[ERROR] 잘못된 입력입니다. 숫자를 입력해주세요.")
+            } catch (e: IllegalArgumentException) {
+                println(e.message)
+            }
+        }
     }
 
     private fun validateCost(cost: Int) {
@@ -33,8 +45,22 @@ object InputView {
         return Console.readLine().split(",").map { it.toInt()}
     }
 
-    fun getBonusNum(): Int {
-        println("보너스 번호를 입력해 주세요.")
-        return Console.readLine().toInt()
+    fun getBonusNum(previousLottoNumbers: List<List<Int>>): Int {
+        while (true) {
+            try {
+                println("보너스 번호를 입력해 주세요.")
+                val bonusNum = Console.readLine().toInt()
+                // Check for duplicates with previously generated lotto numbers
+                val allLottoNumbers = previousLottoNumbers.flatten().toSet()
+                if (bonusNum in allLottoNumbers) {
+                    throw IllegalArgumentException("[ERROR] 보너스 번호는 이미 구입한 번호와 중복될 수 없습니다.")
+                }
+                return bonusNum
+            } catch (e: NumberFormatException) {
+                println("[ERROR] 잘못된 입력입니다. 숫자를 입력해주세요.")
+            } catch (e: IllegalArgumentException) {
+                println(e.message)
+            }
+        }
     }
 }

@@ -12,15 +12,12 @@ import lotto.view.OutputView.printResults
 fun playLotto() {
     val lottoCost = getCost()
     val count = lottoCost/1000
-    if(lottoCost%1000 != 0){
-        throw IllegalArgumentException("[ERROR] 로또 구매 금액은 1,000원 단위이어야 합니다.")
-    }
     printNumbers(count)
     val lottoTickets = generateLottoTickets(count)
     printLottoNumbers(lottoTickets.map { it.getNumbers() })
 
     val winNumber = getWinNum().toSet()
-    val bonus = getBonusNum()
+    val bonus = getBonusNum(lottoTickets.map { it.getNumbers() })
 
     val results = calculateResults(lottoTickets, winNumber, bonus)
     val totalPrize = calculateTotalPrize(results)
