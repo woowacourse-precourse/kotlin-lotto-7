@@ -7,9 +7,9 @@ import org.junit.jupiter.api.Test
 class LotteryMachineTest {
     @Test
     fun `구매하는 로또 수량만큼 로또를 발행한다`() {
-        val lottoList = LotteryMachine.generateLottos(3)
-        assertThat(lottoList).hasSize(3)
-        lottoList.forEach { lotto ->
+        val purchasedLottos = LotteryMachine.generateLottos(3)
+        assertThat(purchasedLottos).hasSize(3)
+        purchasedLottos.forEach { lotto ->
             assertThat(lotto.getNumbers()).hasSize(6)
             assertThat(lotto.getNumbers().distinct().size).isEqualTo(6)
         }

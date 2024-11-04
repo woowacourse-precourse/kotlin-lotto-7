@@ -21,8 +21,8 @@ class PurchaseView {
     }
 
     fun displayLottos(user: User) {
-        println("\n${user.lottoList.size}$PROMPT_PURCHASE_MESSAGE")
-        user.lottoList.forEach { lotto ->
+        println("\n${user.purchasedLottos.size}$PROMPT_PURCHASE_MESSAGE")
+        user.purchasedLottos.forEach { lotto ->
             println(lotto.getNumbers())
         }
     }

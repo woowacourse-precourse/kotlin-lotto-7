@@ -8,7 +8,7 @@ class ResultCalculator {
     // User가 보유한 로또 티켓을 바탕으로 당첨 결과를 계산
     fun calculateResults(user: User): Map<Prize, Int> {
         val results = mutableMapOf<Prize, Int>()
-        user.lottoList.forEach { lotto ->
+        user.purchasedLottos.forEach { lotto ->
             val matchCount = lotto.getNumbers().intersect(LotteryMachine.winningNumbers.toSet()).size
             val isBonusMatched = LotteryMachine.bonusNumber in lotto.getNumbers()
 
