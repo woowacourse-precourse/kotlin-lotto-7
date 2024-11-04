@@ -1,8 +1,5 @@
-package lotto
+package lotto.model
 
-import lotto.model.Lotto
-import lotto.model.LottoRank
-import lotto.model.LottoResult
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
