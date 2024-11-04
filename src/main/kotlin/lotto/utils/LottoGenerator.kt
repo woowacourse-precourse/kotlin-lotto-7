@@ -1,12 +1,12 @@
-package lotto
+package lotto.utils
 
 import camp.nextstep.edu.missionutils.Randoms
 
 
 object LottoGenerator {
-    private const val LOTTO_START_INCLUSIVE_NUMBER = 1
-    private const val LOTTO_END_INCLUSIVE_NUMBER = 45
-    private const val LOTTO_ONE_SET_SIZE = 6
+    const val LOTTO_START_INCLUSIVE_NUMBER = 1
+    const val LOTTO_END_INCLUSIVE_NUMBER = 45
+    const val LOTTO_ONE_SET_SIZE = 6
     /**
      * Lotto 번호 한 세트를 생성한다.
      * [LOTTO_START_INCLUSIVE_NUMBER]~[LOTTO_END_INCLUSIVE_NUMBER] 범위의 정수를
