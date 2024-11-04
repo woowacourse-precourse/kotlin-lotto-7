@@ -1,6 +1,5 @@
-package lotto
+package lotto.model
 
-import lotto.model.LottoPrize
 import lotto.model.LottoPrize.SECOND_PRIZE
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
