@@ -9,10 +9,10 @@ object LottoSystem {
     private var bonusNumber : Int = 0
     private var purchaseAmount : Int = 0
     private var numberOfPurchases : Int = 0
-    private var randomNumbers = mutableListOf<MutableList<Int>?>()
-    private var matchCounts = mutableListOf<MutableList<Int>>()
+    private lateinit var randomNumbers : MutableList<MutableList<Int>?>
+    private lateinit var matchCounts : MutableList<MutableList<Int>>
     private var ranks = mutableMapOf<LottoRank,Int>()
-    private var rateOfReturn = BigDecimal.ZERO
+    private lateinit var rateOfReturn : BigDecimal
 
     fun start() {
         Input.start()
@@ -34,6 +34,7 @@ object LottoSystem {
     }
 
     private fun saveRateOfReturn(){
+        rateOfReturn = BigDecimal.ZERO
         ranks.entries.forEach { entry ->
             if (entry.value > 0) {
                 val prizeAmount = entry.key.price.toBigDecimal()
@@ -65,6 +66,7 @@ object LottoSystem {
     }
 
     private fun checkWinning(){
+        matchCounts = mutableListOf()
         randomNumbers.forEach {
             val lotto = Lotto(it!!.toList())
             val matchCount = lotto.getMatchCount()
@@ -98,6 +100,7 @@ object LottoSystem {
     }
 
     private fun saveRandomNumbers(numberOfPurchases: Int) {
+        randomNumbers = mutableListOf()
         repeat(numberOfPurchases){
             val randomNumber = pickRandomNumbers()
             randomNumbers.add(randomNumber!!.sorted().toMutableList())
