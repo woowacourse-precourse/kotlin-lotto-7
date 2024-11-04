@@ -12,4 +12,10 @@ object ValidatorUtil {
             MESSAGE_TICKETS_PRICE_NOT_INT
         }
     }
+
+    fun validateWinningNumbers(winningNumbers: List<Int?>) {
+        require(winningNumbers.all { it != null }) {
+            MESSAGE_WINNING_NUMBERS_NOT_INT
+        }
+    }
 }
