@@ -4,7 +4,7 @@ import camp.nextstep.edu.missionutils.Console
 import kotlin.math.pow
 import kotlin.math.roundToInt
 
-class LottoMachine() {
+class Validation() {
 
     fun payLottoery():String {
         println("구입금액을 입력해주세요.")
@@ -56,5 +56,5 @@ class LottoMachine() {
         val factor = 10.0.pow(decimalPlaces)
         return (this * factor).roundToInt() / factor
     }
-    
+
 }
