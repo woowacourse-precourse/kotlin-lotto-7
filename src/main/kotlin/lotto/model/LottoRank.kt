@@ -11,7 +11,7 @@ enum class LottoRank(val price: Int) {
     FIVE_AND_BONUS_MATCHES(30000000),
     SIX_MATCHES(2000000000);
 
-    fun print(): String = "${this.toDisplayName()} (${this.price.formatCurrency()})"
+    fun print(): String = "${this.toDisplayName()} (${this.price.formatCurrency()}원)"
 
     private fun toDisplayName(): String =
         when (this) {
