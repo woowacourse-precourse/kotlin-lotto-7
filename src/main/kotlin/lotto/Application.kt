@@ -43,10 +43,25 @@ fun getLottoNumbers(): List<Int> {
 }
 
 fun getLottoWinningNumbers(): List<Int> {
-    println("당첨 번호를 입력해 주세요.")
-    val userInput = Console.readLine()
-    val lottoWinningNumbers = userInput.split(",").map { it.toInt() }
-    return lottoWinningNumbers
+    try {
+        println("당첨 번호를 입력해 주세요.")
+        val userInput = Console.readLine()
+        val lottoWinningNumbers = userInput.split(",").map { it.toInt() ?: throw IllegalArgumentException("당첨 번호는 쉼표(,)로 구분된 1~45 사이의 정수 형태로 입력해 주세요.") }
+        if (lottoWinningNumbers.size != LOTTO_NUMBER_COUNT) {
+            throw IllegalArgumentException("당첨 번호는 6개로 입력해 주세요.")
+        }
+        if (!lottoWinningNumbers.all { it in 1..45}) {
+            throw IllegalArgumentException("당첨 번호는 1~45 사이의 숫자로 입력해 주세요.")
+        }
+        if (lottoWinningNumbers.size != lottoWinningNumbers.distinct().size) {
+            throw IllegalArgumentException("당첨 번호는 중복되지 않은 숫자로 입력해 주세요.")
+        }
+        return lottoWinningNumbers
+    } catch(e: java.lang.IllegalArgumentException) {
+        println("[ERROR] ${e.message}")
+    }
+
+    return getLottoWinningNumbers()
 }
 
 fun getLottoBonusNumber(): Int {
