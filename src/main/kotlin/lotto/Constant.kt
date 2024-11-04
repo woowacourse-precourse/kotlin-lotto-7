@@ -13,13 +13,6 @@ object Constant {
     const val RESULT_FIVE_SPECIAL_MATCH = "5개 일치, 보너스 볼 일치 (30,000,000원) - %d개"
     const val RESULT_SIX_MATCH = "6개 일치 (2,000,000,000원) - %d개"
 
-    const val THREE_REWARD = 5000
-    const val FOUR_REWARD = 50000
-    const val FIVE_REWARD = 1500000
-    const val FIVE_SPECIAL_REWARD = 30000000
-    const val SIX_REWARD = 2000000000
-
-
     const val ERROR_SPECIAL_NUMBER_INVALID_MESSAGE = "[ERROR] 보너스 번호는 당첨 번호에 속하지 않은 1부터 45 사이의 정수여야 합니다."
     const val ERROR_BUY_AMOUNT_INVALID_MESSAGE = "[ERROR] 구매금액은 1000의 배수인 정수여야 합니다."
     const val ERROR_WINNER_NUMBER_INVALID_MESSAGE = "[ERROR] 당첨 번호는 서로 다른 6개의 1부터 45사이의 정수여야 합니다."

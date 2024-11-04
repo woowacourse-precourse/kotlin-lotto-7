@@ -20,11 +20,11 @@ class LottoController {
 
     private fun getReturnRate(lottoResult: List<Int>, buyLottoAmount: Int): Double {
         var sum = 0.0
-        sum += Constant.THREE_REWARD * lottoResult[0]
-        sum += Constant.FOUR_REWARD * lottoResult[1]
-        sum += Constant.FIVE_REWARD * lottoResult[2]
-        sum += Constant.FIVE_SPECIAL_REWARD * lottoResult[3]
-        sum += Constant.SIX_REWARD * lottoResult[4]
+        sum += LottoResult.THREE.prize * lottoResult[0]
+        sum += LottoResult.FOUR.prize * lottoResult[1]
+        sum += LottoResult.FIVE.prize * lottoResult[2]
+        sum += LottoResult.FIVE_SPECIAL.prize * lottoResult[3]
+        sum += LottoResult.SIX.prize * lottoResult[4]
         return sum / (buyLottoAmount * Constant.LOTTO_PRICE)
     }
 

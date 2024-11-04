@@ -4,7 +4,7 @@
 
 - [X] Lotto Class
     - [X] 값을 반환하는 getLottoValue()
-- [ ] 결과값을 갖는 enum class LottoResult
+- [X] 결과값을 갖는 enum class LottoResult
 - [X] LottoController
     - [X] 랜덤으로 6개의 숫자를 만들고 이를 Lotto에 저장하는 releaseLotto()
     - [X] 값을 입력받고 정상적인 입력인지 확인후 저장
@@ -117,3 +117,14 @@ fun showLottoResult(lottoResult : List<Int>){
 ```
 
 이것을 사용자에게 출력한다.
+
+## enum Class 추가
+```
+enum class LottoResult(val prize: Int) {
+    THREE(5000),
+    FOUR(50000),
+    FIVE(1500000),
+    FIVE_SPECIAL(30000000),
+    SIX(2000000000)
+}
+```
