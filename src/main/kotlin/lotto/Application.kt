@@ -140,7 +140,55 @@ class LottoGame {
         }
     }
 
-    
+    private fun getWinningNumbers(): Set<Int> {
+        println(Message.INPUT_WINNING_NUMBERS)
+        return readValidWinningNumbers()
+    }
+
+    private fun readValidWinningNumbers(): Set<Int> {
+        while (true) {
+            try {
+                val input = Console.readLine()
+                validateInputNumbers(input)
+                val numbers = parseWinningNumbers(input)
+                validateWinningNumbers(numbers)
+                return numbers
+            } catch (e: IllegalArgumentException) {
+                println("[ERROR] ${e.message}")
+            }
+        }
+    }
+
+    private fun validateInputNumbers(input: String) {
+        val numbers = input.split(",")
+        for (number in numbers) {
+            validateInputNumber(number.trim())
+        }
+    }
+
+    private fun parseWinningNumbers(input: String): Set<Int> {
+        val numbers = mutableSetOf<Int>()
+        val splitNumbers = input.split(",")
+        for (number in splitNumbers) {
+            numbers.add(number.trim().toInt())
+        }
+        return numbers
+    }
+
+    private fun validateWinningNumbers(numbers: Set<Int>) {
+        require(numbers.size == LottoConfig.LOTTO_NUMBER_COUNT) {
+            Message.ERROR_INVALID_WINNING_NUMBERS
+        }
+        validateWinningNumbersRange(numbers)
+    }
+
+    private fun validateWinningNumbersRange(numbers: Set<Int>) {
+        for (number in numbers) {
+            require(number in LottoConfig.MIN_NUMBER..LottoConfig.MAX_NUMBER) {
+                Message.ERROR_INVALID_NUMBER_RANGE
+            }
+        }
+    }
 }
 
 fun main() {
