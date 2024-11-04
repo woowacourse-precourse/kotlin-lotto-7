@@ -18,5 +18,12 @@ class LottoTest {
         }
     }
 
-    // TODO: 추가 기능 구현에 따른 테스트 코드 작성
+    @Test
+    fun `로또 번호의 숫자 범위를 초과한 경우(1 ~ 45)`() {
+        assertThrows<IllegalArgumentException> {
+            Lotto(listOf(1, 2, 3, 4, 5, 46))
+            Lotto(listOf(0, 2, 3, 4, 5, 6))
+            Lotto(listOf(-1, 2, 3, 4, 5, 6))
+        }
+    }
 }
