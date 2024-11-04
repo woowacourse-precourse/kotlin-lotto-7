@@ -25,12 +25,13 @@ class Lotto(private val numbers: List<Int>) {
         }
     }
     companion object {
+        private const val ERROR_MESSAGE_PREFIX = "[ERROR]"
         private fun checkLottoAmount(amount: String): Int {
             val lottoAmount = amount.toIntOrNull()
             when {
-                lottoAmount == null -> throw IllegalArgumentException("[ERROR] 구입 금액은 숫자여야 합니다.")
-                lottoAmount < 0 -> throw IllegalArgumentException("[ERROR] 구입 금액은 양의 정수여야 합니다.")
-                lottoAmount % 1000 != 0 -> throw IllegalArgumentException("[ERROR] 구입 금액은 1000원 단위여야 합니다.")
+                lottoAmount == null -> throw IllegalArgumentException("$ERROR_MESSAGE_PREFIX 구입 금액은 숫자여야 합니다.")
+                lottoAmount < 0 -> throw IllegalArgumentException("$ERROR_MESSAGE_PREFIX 구입 금액은 양의 정수여야 합니다.")
+                lottoAmount % 1000 != 0 -> throw IllegalArgumentException("$ERROR_MESSAGE_PREFIX 구입 금액은 1000원 단위여야 합니다.")
                 else -> return lottoAmount / 1000
             }
         }
@@ -40,13 +41,13 @@ class Lotto(private val numbers: List<Int>) {
                 numbers.split(",")
                 .map { it.trim() }
                 .filter { it.isNotEmpty() }
-                .map { it.toIntOrNull() ?: throw IllegalArgumentException("[ERROR] 당첨 번호는 숫자여야 합니다.")}
-            } else { throw IllegalArgumentException("[ERROR] 당첨 번호는 ','를 이용하여 구분하여야 합니다.\n[예시] 1,2,3,4,5,6")}
+                .map { it.toIntOrNull() ?: throw IllegalArgumentException("$ERROR_MESSAGE_PREFIX 당첨 번호는 숫자여야 합니다.")}
+            } else { throw IllegalArgumentException("$ERROR_MESSAGE_PREFIX 당첨 번호는 ','를 이용하여 구분하여야 합니다.\n[예시] 1,2,3,4,5,6")}
 
             when {
-                winningNumbers.size != 6 -> throw IllegalArgumentException("[ERROR] 당첨 번호는 6자리의 숫자여야 합니다.")
-                winningNumbers.any { it !in 1..45} -> throw IllegalArgumentException("[ERROR] 당첨 번호는 1~45 사이의 숫자여야 합니다.")
-                winningNumbers.size != winningNumbers.toSet().size -> throw IllegalArgumentException("[ERROR] 당첨 번호는 중복을 허용하지 않습니다.")
+                winningNumbers.size != 6 -> throw IllegalArgumentException("$ERROR_MESSAGE_PREFIX 당첨 번호는 6자리의 숫자여야 합니다.")
+                winningNumbers.any { it !in 1..45} -> throw IllegalArgumentException("$ERROR_MESSAGE_PREFIX 당첨 번호는 1~45 사이의 숫자여야 합니다.")
+                winningNumbers.size != winningNumbers.toSet().size -> throw IllegalArgumentException("$ERROR_MESSAGE_PREFIX 당첨 번호는 중복을 허용하지 않습니다.")
             }
             return winningNumbers
         }
@@ -55,9 +56,9 @@ class Lotto(private val numbers: List<Int>) {
             val bonusNumber = number.toIntOrNull()
 
             when {
-                bonusNumber == null -> throw IllegalArgumentException("[ERROR] 보너스 번호는 숫자여야 합니다.")
-                bonusNumber !in 1..45 -> throw IllegalArgumentException("[ERROR] 보너스 번호는 1~45 사이의 숫자여야 합니다.")
-                bonusNumber in winningNumber -> throw IllegalArgumentException("[ERROR] 보너스 번호는 당첨 번호와 중복될 수 없습니다.")
+                bonusNumber == null -> throw IllegalArgumentException("$ERROR_MESSAGE_PREFIX 보너스 번호는 숫자여야 합니다.")
+                bonusNumber !in 1..45 -> throw IllegalArgumentException("$ERROR_MESSAGE_PREFIX 보너스 번호는 1~45 사이의 숫자여야 합니다.")
+                bonusNumber in winningNumber -> throw IllegalArgumentException("$ERROR_MESSAGE_PREFIX 보너스 번호는 당첨 번호와 중복될 수 없습니다.")
             }
             return bonusNumber
         }
