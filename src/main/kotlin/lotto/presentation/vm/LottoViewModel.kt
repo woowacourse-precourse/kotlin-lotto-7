@@ -29,7 +29,8 @@ class LottoViewModel(
     }
 
     fun checkBonusNumberValidation(bonusNumber: String) {
-        val validBonusNumber = validator.bonusNumberValidation(bonusNumber)
+        val winningNumber = _state.winningNumber
+        val validBonusNumber = validator.bonusNumberValidation(bonusNumber, winningNumber)
         _state = _state.copy(bonusNumber = validBonusNumber)
         getLottoResult()
     }

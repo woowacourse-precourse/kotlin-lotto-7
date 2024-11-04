@@ -9,7 +9,8 @@ enum class Exception(private val msg: String) {
     EXCEED_INPUT("로또 번호는 1부터 45 사이의 숫자여야 합니다."),
     INVALID_SIZE("당첨 번호는 6개를 입력해주세요."),
     INVALID_LOTTO_SIZE("로또 번호는 6개여야 합니다."),
-    INVALID_DUPLICATED("당첨 번호는 중복될 수 없어요.");
+    INVALID_DUPLICATED("당첨 번호는 중복될 수 없어요."),
+    BONUS_NUMBER_DUPLICATED("보너스 번호와 당첨 번호는 중복될 수 없어요.");
 
     override fun toString(): String = "$ERROR $msg"
 

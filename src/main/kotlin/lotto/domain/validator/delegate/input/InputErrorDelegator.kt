@@ -32,6 +32,13 @@ class InputErrorDelegator : InputErrorDelegate {
         require(input.count { it.value > 1 } == 0) { Exception.INVALID_DUPLICATED }
     }
 
+    override fun isDuplicatedBonusNumber(winningNumber: List<Int>, bonusNumber: Int) {
+        require(winningNumber.all { it != bonusNumber }) {
+            Exception.BONUS_NUMBER_DUPLICATED
+        }
+    }
+
+
     companion object {
         const val REGEX = "^[0-9,]+$"
     }

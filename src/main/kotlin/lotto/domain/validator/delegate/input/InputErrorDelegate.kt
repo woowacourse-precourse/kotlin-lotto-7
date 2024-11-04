@@ -8,4 +8,5 @@ interface InputErrorDelegate {
     fun isInvalidInputFormat(input: String)
     fun isInvalidLottoSize(input: List<String>)
     fun isDuplicated(input: Map<String, Int>)
+    fun isDuplicatedBonusNumber(winningNumber: List<Int>, bonusNumber: Int)
 }

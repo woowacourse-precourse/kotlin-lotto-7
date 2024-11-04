@@ -29,10 +29,11 @@ class InputValidator(
         return winningNumber.mapToInt()
     }
 
-    override fun bonusNumberValidation(value: String): Int {
+    override fun bonusNumberValidation(value: String, winningNumber: List<Int>): Int {
         val process = Process.BONUS_NUMBER
         commonValidation(value, process)
         inputErrorDelegate.isExceededRange(listOf(value), process)
+        inputErrorDelegate.isDuplicatedBonusNumber(winningNumber, value.toInt())
         return value.toInt()
     }
 
