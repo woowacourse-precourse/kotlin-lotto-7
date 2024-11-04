@@ -2,6 +2,7 @@ package lotto.controller
 
 import camp.nextstep.edu.missionutils.Randoms
 import lotto.Lotto
+import lotto.model.WinningNumber
 import lotto.utils.Validator
 import lotto.view.OutputView.OutputBuyLottoNumber
 import lotto.viewm.InputView
@@ -28,7 +29,7 @@ object Controller {
         println("${lottoBuyNumber}개를 구매했습니다")
 
         repeat(lottoBuyNumber) {
-            val buyLottoNumbers = Randoms.pickUniqueNumbersInRange(1, 45, 6)
+            val buyLottoNumbers = Randoms.pickUniqueNumbersInRange(1, 45, 6).sorted()
             buyLottoNumber.add(Lotto(buyLottoNumbers))
         }
         OutputBuyLottoNumber(buyLottoNumber)
@@ -41,6 +42,17 @@ object Controller {
             try {
                 val winningNumber = InputView.inputWinningNumber().trim()
                 validate.validateInputWiningNumber(winningNumber)
+                WinningNumber(winningNumber.split(",").map { it.trim() }.map { it.toInt() })
+                return inputBonusNumber()
+            } catch (e: IllegalArgumentException) {
+                println(e)
+            }
+        }
+    }
+
+    fun inputBonusNumber() {
+        while (true) {
+            try {
             } catch (e: IllegalArgumentException) {
                 println(e)
             }
