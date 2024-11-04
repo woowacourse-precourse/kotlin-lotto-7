@@ -14,7 +14,7 @@ data class Statistics(private val winningHistory: Map<Rank, Int>, private val lo
             val prize = decimalFormat.format(rank.prize)
             val eachWinning = String.format(format = formatType, rank.matchCount, prize, matchCount)
 
-            sb.append(eachWinning).append("\n")
+            sb.appendLine(eachWinning)
         }
 
         return sb.toString().trim()
