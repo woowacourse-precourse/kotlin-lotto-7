@@ -1,10 +1,19 @@
 package View
 
+import Utils.InputUtils
+import Validation.InputValidation
 import camp.nextstep.edu.missionutils.Console
 
 object InputView {
-    fun getMoney(): String? {
+    private val input = InputValidation()
+
+    fun getMoney(): Int {
         OutputView.printMoneyMessage()
-        return Console.readLine()
+        val money = Console.readLine().toIntOrNull()?: 0
+
+        return if (input.isValidUnit(money) and input.isValidMoney(0))
+            money
+        else
+            -1
     }
 }
