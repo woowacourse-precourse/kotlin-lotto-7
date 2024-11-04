@@ -4,8 +4,8 @@ import camp.nextstep.edu.missionutils.Console
 import lotto.ErrorMessage.*
 
 class LottoJudge {
-    var winnerNumbers: List<Int> = emptyList()
-    var bonusNumber: Int = 0
+    private var winningNumbers: List<Int> = emptyList()
+    private var bonusNumber: Int = 0
 
     fun saveUserInput() {
         inputWinningNumbers()
@@ -14,8 +14,8 @@ class LottoJudge {
 
     private fun inputWinningNumbers() {
         println("\n당첨 번호를 입력해 주세요.")
-        val inputWinnerNumbers = Console.readLine().split(",").map { it.toInt() }
-        setLottoWinnerNumbers(inputWinnerNumbers)
+        val inputWinningNumbers = Console.readLine().split(",").map { it.toInt() }
+        setLottoWinningNumbers(inputWinningNumbers)
     }
 
     private fun inputBonusNumber() {
@@ -24,46 +24,46 @@ class LottoJudge {
         setLottoBonusNumber(inputBonusNumber)
     }
 
-    fun setLottoWinnerNumbers(numbers: List<Int>) {
-        exceptWinnerNumberCount(numbers)
-        exceptWinnerNumberRange(numbers)
+    fun setLottoWinningNumbers(numbers: List<Int>) {
+        exceptWinningNumberCount(numbers)
+        exceptWinningNumberRange(numbers)
         exceptDuplicates(numbers)
-        winnerNumbers = numbers
+        winningNumbers = numbers
     }
 
     fun setLottoBonusNumber(number: Int) {
         exceptBonusNumberRange(number)
-        require(!winnerNumbers.contains(number)) { ErrorMessage.INPUT_WINNER_NUMBER_NO_DUPLICATE.getMessage() }
+        require(!winningNumbers.contains(number)) { ErrorMessage.INPUT_WINNING_NUMBER_NO_DUPLICATE.getMessage() }
         bonusNumber = number
     }
 
-    private fun exceptWinnerNumberCount(numbers: List<Int>) {
+    private fun exceptWinningNumberCount(numbers: List<Int>) {
         if (numbers.size != LottoMaker.NUMBERS_COUNT) {
-            throw IllegalArgumentException(INPUT_WINNER_NUMBER_COUNT_ERROR.getMessage())
+            throw IllegalArgumentException(INPUT_WINNING_NUMBER_COUNT_ERROR.getMessage())
         }
     }
 
-    private fun exceptWinnerNumberRange(numbers: List<Int>) {
+    private fun exceptWinningNumberRange(numbers: List<Int>) {
         if (numbers.any { it < LottoMaker.FIRST_NUMBER || it > LottoMaker.LAST_NUMBER }) {
-            throw IllegalArgumentException(INPUT_WINNER_NUMBER_OUT_OF_RANGE_ERROR.getMessage())
+            throw IllegalArgumentException(INPUT_WINNING_NUMBER_OUT_OF_RANGE_ERROR.getMessage())
         }
     }
 
     private fun exceptBonusNumberRange(number: Int) {
         if (number < LottoMaker.FIRST_NUMBER || number > LottoMaker.LAST_NUMBER ) {
-            throw IllegalArgumentException(INPUT_WINNER_NUMBER_OUT_OF_RANGE_ERROR.getMessage())
+            throw IllegalArgumentException(INPUT_WINNING_NUMBER_OUT_OF_RANGE_ERROR.getMessage())
         }
     }
 
     private fun exceptDuplicates(numbers: List<Int>) {
         if (numbers.toSet().size != numbers.size) {
-            throw IllegalArgumentException(INPUT_WINNER_NUMBER_NO_DUPLICATE.getMessage())
+            throw IllegalArgumentException(INPUT_WINNING_NUMBER_NO_DUPLICATE.getMessage())
         }
     }
 
     fun printWinningStatistics(lottos: List<Lotto>) {
         println("\n당첨 통계\n---")
-        val ranks = lottos.map { it.checkRank(winnerNumbers, bonusNumber) }
+        val ranks = lottos.map { it.checkRank(winningNumbers, bonusNumber) }
         val ranksCount = getRanksCount(ranks)
         printRanks(ranksCount)
         printProfitRatio(ranks, lottos.size)

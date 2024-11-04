@@ -7,9 +7,9 @@ class Lotto(private val numbers: List<Int>) {
         println(numbers.sorted())
     }
 
-    fun checkRank(winnerNumbers: List<Int>, bonusNumber: Int): LottoRank {
-        val winNumbersCount = countCommonNumbers(winnerNumbers, numbers)
-        return LottoRank.getRank(winNumbersCount, numbers.contains(bonusNumber))
+    fun checkRank(winningNumbers: List<Int>, bonusNumber: Int): LottoRank {
+        val winningNumbersCount = countCommonNumbers(winningNumbers, numbers)
+        return LottoRank.getRank(winningNumbersCount, numbers.contains(bonusNumber))
     }
 
     private fun countCommonNumbers(list1: List<Int>, list2: List<Int>): Int {
