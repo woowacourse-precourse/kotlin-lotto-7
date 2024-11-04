@@ -6,8 +6,10 @@ import lotto.model.Rank
 import java.text.DecimalFormat
 
 object OutputView {
-    private val NUMBER_FORMAT = "#,###.0"
-    private val DECIMAL_FORMAT = DecimalFormat(NUMBER_FORMAT)
+    private val NUMBER_FORMAT = "#,###"
+    private val PROFIT_FORMAT = "#,###.0"
+    private val DECIMAL_NUMBER_FORMAT = DecimalFormat(NUMBER_FORMAT)
+    private val DECIMAL_PROFIT_FORMAT = DecimalFormat(PROFIT_FORMAT)
 
     fun printExceptionMessage(message: String?) {
         println(message)
@@ -24,14 +26,14 @@ object OutputView {
         for (rank in Rank.entries) {
             when (rank) {
                 Rank.MISS -> continue
-                Rank.SECOND -> print("${rank.matchCount}개 일치, 보너스 볼 일치(${DECIMAL_FORMAT.format(rank.winningAmount)}원) - ")
-                else -> print("${rank.matchCount}개 일치 (${DECIMAL_FORMAT.format(rank.winningAmount)}원) - ")
+                Rank.SECOND -> print("${rank.matchCount}개 일치, 보너스 볼 일치 (${DECIMAL_NUMBER_FORMAT.format(rank.winningAmount)}원) - ")
+                else -> print("${rank.matchCount}개 일치 (${DECIMAL_NUMBER_FORMAT.format(rank.winningAmount)}원) - ")
             }
-            println("${DECIMAL_FORMAT.format(lottoResults.getCount(rank))}개")
+            println("${lottoResults.getCount(rank)}개")
         }
     }
 
     fun printProfit(profit: Double) {
-        println("총 수익률은 ${profit}%입니다.")
+        println("총 수익률은 ${DECIMAL_PROFIT_FORMAT.format(profit)}%입니다.")
     }
 }
