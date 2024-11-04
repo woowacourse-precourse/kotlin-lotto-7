@@ -1,12 +1,12 @@
 package lotto.controller
 
 import lotto.model.*
+import lotto.service.InputService
 import lotto.service.RankService
-import lotto.view.InputView
 import lotto.view.OutputView
 
 class LottoController {
-    private val inputView = InputView()
+
     private val outputView = OutputView()
     private val lottoGenerator = LottoGenerator()
 
@@ -28,7 +28,7 @@ class LottoController {
     private fun getPurchaseAmount(): PurchaseAmount {
         return try {
             outputView.printPurchaseAmountRequest()
-            val userInput = inputView.readLine().toInt()
+            val userInput = InputService.readLineNumber()
             PurchaseAmount(userInput)
         } catch(e:IllegalArgumentException) {
             println(e.message)
@@ -47,7 +47,7 @@ class LottoController {
     private fun getWinningNumbers(): Lotto {
         return try{
             outputView.printWinningLottoRequest()
-            val userInput = inputView.readLine().split(",").map { it.trim().toInt() }
+            val userInput = InputService.readLineNumberList()
             Lotto(userInput)
         } catch (e:IllegalArgumentException) {
             println(e.message)
@@ -58,14 +58,11 @@ class LottoController {
     private fun getWinningLotto(winningNumbers: Lotto): WinningLotto {
         return try {
             outputView.printBonusNumberRequest()
-            val bonusNumber = inputView.readLine().trim().toInt()
+            val bonusNumber = InputService.readLineNumber()
             WinningLotto(winningNumbers, bonusNumber)
         } catch(e:IllegalArgumentException) {
             println(e.message)
             getWinningLotto(winningNumbers)
         }
     }
-
-
-
 }
