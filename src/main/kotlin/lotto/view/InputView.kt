@@ -8,7 +8,6 @@ class InputView {
         while (true) {
             try {
                 val payment = inputPayment()
-                require(payment % LOTTO_PRICE == REMAINDER) { ErrorMessages.ERROR_PAYMENT_UNIT.message }
                 return payment / LOTTO_PRICE
             } catch (error: IllegalArgumentException) {
                 println(error.message)
@@ -77,7 +76,6 @@ class InputView {
 
     companion object {
         private const val LOTTO_PRICE = 1000
-        private const val REMAINDER = 0
         private const val NUMBER_DELIMITER = ","
     }
 }

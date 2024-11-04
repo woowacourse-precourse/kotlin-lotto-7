@@ -25,4 +25,11 @@ class PaymentTest {
             Payment(0)
         }
     }
+
+    @Test
+    fun `1000원 단위가 아니면 예외가 발생한다`() {
+        assertThrows<IllegalArgumentException> {
+            Payment(32070)
+        }
+    }
 }
