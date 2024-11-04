@@ -20,8 +20,13 @@ class LottoStatsCalculator(
 
             when (matchCount) {
                 Rank.FIRST.matchCount -> lottoStats.add(Rank.FIRST)
-                Rank.SECOND.matchCount -> lottoStats.add(checkBonusNumber(userLotto, bonusNumber))
-                Rank.THIRD.matchCount -> lottoStats.add(checkBonusNumber(userLotto, bonusNumber))
+                Rank.SECOND.matchCount, Rank.THIRD.matchCount -> lottoStats.add(
+                    checkBonusNumber(
+                        userLotto,
+                        bonusNumber
+                    )
+                )
+
                 Rank.FOURTH.matchCount -> lottoStats.add(Rank.FOURTH)
                 Rank.FIFTH.matchCount -> lottoStats.add(Rank.FIFTH)
             }
