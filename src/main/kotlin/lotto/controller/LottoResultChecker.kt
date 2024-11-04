@@ -19,7 +19,7 @@ object LottoResultChecker {
         return ranking
     }
 
-    private fun compareLotto(purchasedLotto: Lotto, myLotto: Lotto, myBonus: Int): Pair<Int, Boolean> {
+    fun compareLotto(purchasedLotto: Lotto, myLotto: Lotto, myBonus: Int): Pair<Int, Boolean> {
         val sameValueOfLotto = purchasedLotto.getNumbers().intersect(myLotto.getNumbers().toSet())
         val duplicateCount = sameValueOfLotto.size
         val isBonus = myBonus in purchasedLotto.getNumbers()
