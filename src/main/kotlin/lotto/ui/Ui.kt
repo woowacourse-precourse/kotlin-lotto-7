@@ -3,6 +3,7 @@ package lotto.ui
 import camp.nextstep.edu.missionutils.Console
 import lotto.domain.exception.ExceptionMessages
 import lotto.domain.model.Lotto
+import lotto.domain.validation.validateBonusWinningNumber
 import lotto.domain.validation.validateBudget
 import lotto.domain.validation.validateWinningNumbers
 
@@ -37,6 +38,12 @@ class Ui {
         return@runCatching userInput
     }
 
+    fun requestBonusWinningNumber(winningNumbers: List<Int>): Result<Int> = runCatching {
+        displayEnterBonusWinningNumber()
+        val userInput = readInt().also { validateBonusWinningNumber(it, winningNumbers) }
+        return@runCatching userInput
+    }
+
     private fun displayEnterBudgetMessage(): Unit = println(ENTER_BUDGET_MESSAGE)
 
     private fun readInt(): Int = runCatching {
@@ -55,6 +62,8 @@ class Ui {
         throw it
     }
 
+    private fun displayEnterBonusWinningNumber(): Unit = println("$NEW_LINE_FEED$ENTER_BONUS_WINNING_NUMBER")
+
     companion object {
         private const val ENTER_BUDGET_MESSAGE = "구입금액을 입력해 주세요."
         private const val EXCEPTION_MESSAGE_HEADER = "[ERROR]"
@@ -62,5 +71,6 @@ class Ui {
         private const val NEW_LINE_FEED = '\n'
         private const val ENTER_WINNING_NUMBERS = "당첨 번호를 입력해 주세요."
         private const val WINNING_NUMBER_DELIMITER = ','
+        private const val ENTER_BONUS_WINNING_NUMBER = "보너스 번호를 입력해 주세요."
     }
 }

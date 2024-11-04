@@ -14,4 +14,5 @@ object ExceptionMessages {
     val NUMBER_OUT_OF_VALID_LOTTO_RANGE_EXISTS =
         "로또 번호는 ${VALID_LOTTO_NUMBER_RANGE.first}와 ${VALID_LOTTO_NUMBER_RANGE.last} 사이의 값이어야 합니다."
     const val DUPLICATE_NUMBER_EXISTS = "로또 번호에 중복이 없어야 합니다."
+    const val DUPLICATE_BONUS_WINNING_NUMBER = "보너스 당첨 번호는 당첨 번호와 중복이 될 수 없습니다."
 }

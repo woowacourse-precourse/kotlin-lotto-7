@@ -20,4 +20,9 @@ fun main() {
 
     val winningNumbers =
         keepCallingForSuccessResult(onFailure = ui::displayExceptionMessage, actionToCall = ui::requestWinningNumbers)
+
+    val bonusWinningNumber = keepCallingForSuccessResult(
+        onFailure = ui::displayExceptionMessage,
+        actionToCall = { ui.requestBonusWinningNumber(winningNumbers) }
+    )
 }
