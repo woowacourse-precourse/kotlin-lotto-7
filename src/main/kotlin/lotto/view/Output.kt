@@ -1,6 +1,7 @@
 package lotto.view
 
 import lotto.model.Lotto
+import lotto.model.LottoTotalMatchResult
 
 class Output {
     fun printLottoNumbers(lottos: List<Lotto>) {
@@ -9,5 +10,16 @@ class Output {
             println(lottos[idx].getLottoNumbers())
         }
         println()
+    }
+
+    fun printTotalLottoPrize(totalMatchResult: LottoTotalMatchResult, rateOfReturn: Float) {
+        println("당첨 통계")
+        println("---")
+        println("3개 일치 (5,000원) - ${totalMatchResult.prizeCount5}개")
+        println("4개 일치 (50,000원) - ${totalMatchResult.prizeCount4}개")
+        println("5개 일치 (1,500,000원) - ${totalMatchResult.prizeCount3}개")
+        println("5개 일치, 보너스 볼 일치 (30,000,000원) - ${totalMatchResult.prizeCount2}개")
+        println("6개 일치 (2,000,000,000원) - ${totalMatchResult.prizeCount1}개")
+        println("총 수익률은 ${rateOfReturn}%입니다.")
     }
 }
