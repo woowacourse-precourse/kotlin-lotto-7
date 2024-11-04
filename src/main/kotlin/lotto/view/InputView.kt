@@ -8,9 +8,5 @@ object InputView {
         println(INPUT_PURCHASE_AMOUNT)
         return Console.readLine()
     }
-
-    fun inputWinNum(): String {
-        println(INPUT_WINNING_NUMBER)
-        return Console.readLine()
-    }
+    
 }
