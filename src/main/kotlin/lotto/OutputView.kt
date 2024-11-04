@@ -1,6 +1,7 @@
 package lotto
 
 import camp.nextstep.edu.missionutils.Randoms
+import kotlin.math.round
 
 fun lottoNumberPrint(purchase_money: Int): MutableList<List<Int>> {
     var lotto_num = MutableList<List<Int>>(purchase_money) { emptyList() }
@@ -21,11 +22,15 @@ fun resultoutput(purchase_money: Int, lottoNumber: MutableList<List<Int>>, winne
 }
 
 fun resultprint(purchase_money: Int, scoreBoard: MutableList<Int>, fiveBonusCount: Int) {
+    var total_prize = 0
     for (winning in Winning.values()) {
         val count = if (winning.bonus == 1) fiveBonusCount else scoreBoard[winning.count]
         val bonusMessage = if (winning.bonus == 1) ", 보너스 볼 일치" else ""
         println("${winning.count}개 일치 (${winning.prizestring}원)$bonusMessage - ${count}개")
+        total_prize = total_prize + winning.prize * count
     }
+    val rateofreturn = round((total_prize.toFloat()/(purchase_money*1000))*1000)/10
+    println("총 수익률은 $rateofreturn%입니다.")
 }
 
 enum class Winning(val count: Int, val prizestring: String, val bonus: Int, val prize: Int) {
