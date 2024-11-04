@@ -9,5 +9,9 @@ class Lotto(private val numbers: List<Int>) {
         val lottoNumbersOutput = numbers.joinToString(prefix = "[", postfix = "]", separator = ", ")
         return lottoNumbersOutput
     }
+
+    fun getLottoNumbers(): List<Int> {
+        return numbers
+    }
     // TODO: 추가 기능 구현
 }

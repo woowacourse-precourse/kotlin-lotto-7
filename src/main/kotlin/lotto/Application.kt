@@ -21,6 +21,10 @@ fun main() {
     }
     val lottoWinningNumbers = getLottoWinningNumbers()
     val lottoBonusNumber = getLottoBonusNumber(lottoWinningNumbers)
+    for (lotto in lottos) {
+        val (allMatchingNumber, isBonusMatched) = compareLottoNumbers(lottoWinningNumbers, lottoBonusNumber, lotto)
+    }
+
 }
 
 fun getLottoBudget(): Int {
@@ -80,4 +84,19 @@ fun getLottoBonusNumber(lottoWinningNumbers: List<Int>): Int {
         println("[ERROR] ${e.message}")
     }
     return getLottoBonusNumber(lottoWinningNumbers)
+}
+
+fun compareLottoNumbers(lottoWinningNumbers: List<Int>, lottoBonusNumber: Int, lotto: Lotto): Pair<Int, Int> {
+    val lottoNumbers: List<Int> = lotto.getLottoNumbers()
+    val matchingNumbers = lottoWinningNumbers.intersect(lottoNumbers)
+    val matchingCount = matchingNumbers.size
+    val isBonusMatched: Int
+    if (lottoBonusNumber in lottoNumbers) {
+        isBonusMatched = 1
+    }
+    else {
+        isBonusMatched = 0
+    }
+    val allMatchingNumber = matchingCount + isBonusMatched
+    return Pair(allMatchingNumber, isBonusMatched)
 }
