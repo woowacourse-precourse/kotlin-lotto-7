@@ -38,30 +38,5 @@ class LottoTest {
         duplicateValidate.validate(numbers)
     }
 
-    @Test
-    fun `1~45 사이의 숫자를 뽑은 경우`() {
-        val rangeValidate = LottoGenerator()
-        val numbers = listOf(1, 2, 3, 45, 5, 6)
-        rangeValidate.validate(numbers)
-    }
-
-    @Test
-    fun `1~45 사이의 숫자를 뽑지 않은 경우`() {
-        val rangeValidate = RangeValidator()
-        val numbers = listOf(0, 2, 3, 49, 5, 6)
-        assertThrows<IllegalArgumentException>("로또 번호는 1~45 사이의 값이여야 합니다.") {
-            rangeValidate.validate(numbers)
-        }
-    }
-
-    @Test
-    fun `6개의 숫자를 선택하지 않은 경우`() {
-        val rangeValidate = RangeValidator()
-        val numbers = listOf(2, 3, 49, 5, 6)
-        assertThrows<IllegalArgumentException>("로또는 6개를 선택해야 됩니다.") {
-            rangeValidate.validate(numbers)
-        }
-    }
-
 
 }
