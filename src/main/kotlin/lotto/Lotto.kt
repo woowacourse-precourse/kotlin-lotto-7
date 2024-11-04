@@ -1,8 +1,12 @@
 package lotto
 
+import lotto.validation.InputValidation
+
 class Lotto(private val numbers: List<Int>) {
+    private val validator = InputValidation()
+
     init {
-        require(numbers.size == 6) { "[ERROR] 로또 번호는 6개여야 합니다." }
+        validator.lottoNumbers(numbers)
     }
 
     // TODO: 추가 기능 구현

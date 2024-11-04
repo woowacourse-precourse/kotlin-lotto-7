@@ -15,18 +15,18 @@ class Input {
         }
     }
 
-    fun getLotteryNumbers(): List<Int> {
+    fun getLottoNumbers(): List<Int> {
         println("당첨 번호를 입력해 주세요.")
         return readLine().let {
-            inputValidation.lotteryNumbersDelimiter(it)
+            inputValidation.lottoNumbersDelimiter(it)
         }
     }
 
-    fun getLotteryBonusNumber(): Int {
+    fun getLottoBonusNumber(): Int {
         println("보너스 번호를 입력해주세요.")
         return readLine().let {
             inputValidation.typeInt(it).also { number ->
-                inputValidation.lotteryNumberRange(number)
+                inputValidation.lottoNumberRange(number)
             }
         }
     }
