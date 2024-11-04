@@ -51,3 +51,42 @@ object RankDescription {
     const val FIFTH = "3개 일치"
     const val NONE = ""
 }
+
+enum class Rank(
+    val matchCount: Int,
+    val prize: Int,
+    val description: String,
+    val needBonusMatch: Boolean = false
+) {
+    FIRST(
+        MatchConfig.FIRST_MATCH,
+        PrizeConfig.FIRST_PRIZE,
+        RankDescription.FIRST
+    ),
+    SECOND(
+        MatchConfig.SECOND_MATCH,
+        PrizeConfig.SECOND_PRIZE,
+        RankDescription.SECOND,
+        true
+    ),
+    THIRD(
+        MatchConfig.THIRD_MATCH,
+        PrizeConfig.THIRD_PRIZE,
+        RankDescription.THIRD
+    ),
+    FOURTH(
+        MatchConfig.FOURTH_MATCH,
+        PrizeConfig.FOURTH_PRIZE,
+        RankDescription.FOURTH
+    ),
+    FIFTH(
+        MatchConfig.FIFTH_MATCH,
+        PrizeConfig.FIFTH_PRIZE,
+        RankDescription.FIFTH
+    ),
+    NONE(
+        MatchConfig.NO_MATCH,
+        0,
+        RankDescription.NONE
+    )
+}
