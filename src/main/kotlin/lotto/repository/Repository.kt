@@ -5,6 +5,7 @@ import lotto.domain.Lotto
 import lotto.domain.PurchaseAmount
 import camp.nextstep.edu.missionutils.Randoms
 import lotto.domain.Result
+import lotto.domain.WinningRank
 
 class Repository {
     private var purchaseAmount: PurchaseAmount? = null
@@ -40,12 +41,15 @@ class Repository {
         lottos.forEach { lotto ->
             val count = countCommonElements(lotto.getNumber(), winningNumber!!.getNumber())
             val bonus = checkBonusNumberMatch(lotto.getNumber())
-            when {
-                count == 3 -> result.match3Count++
-                count == 4 -> result.match4Count++
-                count == 5 && bonus -> result.match5AndBonusCount++
-                count == 5 -> result.match5Count++
-                count == 6 -> result.match6Count++
+            val rank = WinningRank.findByMatch(count, bonus)
+
+            when (rank) {
+                WinningRank.THREE_MATCH -> result.match3Count++
+                WinningRank.FOUR_MATCH -> result.match4Count++
+                WinningRank.FIVE_MATCH -> result.match5Count++
+                WinningRank.FIVE_MATCH_WITH_BONUS -> result.match5AndBonusCount++
+                WinningRank.SIX_MATCH -> result.match6Count++
+                WinningRank.NO_MATCH -> {} // 아무것도 하지 않음
             }
         }
         calculateTotalPrice()
@@ -53,11 +57,11 @@ class Repository {
     }
 
     private fun calculateTotalPrice() {
-        result.totalPrice = (result.match3Count * PRIZE_3_MATCH) +
-                (result.match4Count * PRIZE_4_MATCH) +
-                (result.match5Count * PRIZE_5_MATCH) +
-                (result.match5AndBonusCount * PRIZE_5_AND_BONUS_MATCH) +
-                (result.match6Count * PRIZE_6_MATCH)
+        result.totalPrice = result.match3Count * WinningRank.THREE_MATCH.prize +
+                result.match4Count * WinningRank.FOUR_MATCH.prize +
+                result.match5Count * WinningRank.FIVE_MATCH.prize +
+                result.match5AndBonusCount * WinningRank.FIVE_MATCH_WITH_BONUS.prize +
+                result.match6Count * WinningRank.SIX_MATCH.prize
     }
 
     private fun calculateTotalProfit() {
@@ -70,13 +74,5 @@ class Repository {
 
     private fun checkBonusNumberMatch(lotto: List<Int>): Boolean {
         return lotto.contains(bonusNumber!!.getBonusNumber())
-    }
-
-    companion object {
-        const val PRIZE_3_MATCH = 5_000
-        const val PRIZE_4_MATCH = 50_000
-        const val PRIZE_5_MATCH = 1_500_000
-        const val PRIZE_5_AND_BONUS_MATCH = 30_000_000
-        const val PRIZE_6_MATCH = 2_000_000_000
     }
 }
