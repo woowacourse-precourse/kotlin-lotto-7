@@ -1,6 +1,7 @@
 package lotto.model
 
 import lotto.dto.WinningTicket
+import lotto.global.LOTTO_PRICE
 import lotto.model.LottoWinning.*
 
 class LottoResultCalculator(
@@ -47,6 +48,6 @@ class LottoResultCalculator(
     }
 
     fun calculateProfitRate(lottoCount: Int, totalReward: Int): Double {
-        return totalReward.toDouble() / (lottoCount * 1000) * 100
+        return totalReward.toDouble() / (lottoCount * LOTTO_PRICE) * 100
     }
 }

@@ -9,10 +9,10 @@ object InputValidator {
         val error = when {
             input.isEmpty() -> EMPTY_INPUT
             input.containGap() -> CONTAINS_GAP
+            input.isAboveMaximumAmount() -> ABOVE_MAXIMUM_AMOUNT
             input.isNotNumeric() -> NOT_NUMERIC
             input.isBelowMinimumAmount() -> BELOW_MINIMUM_AMOUNT
             input.isNotThousandUnit() -> NOT_THOUSAND_UNIT
-            input.isAboveMaximumAmount() -> ABOVE_MAXIMUM_AMOUNT
             else -> return
         }
         throw IllegalArgumentException(error.message)

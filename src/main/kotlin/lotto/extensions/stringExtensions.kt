@@ -1,14 +1,18 @@
 package lotto.extensions
 
+import lotto.global.LOTTO_MAXIMUM_AMOUNT
+import lotto.global.LOTTO_MINIMUM_AMOUNT
+import lotto.global.LOTTO_PRICE
+
 fun String.containGap(): Boolean = this.contains(" ")
 
 fun String.isNotNumeric(): Boolean = !this.all { it.isDigit() }
 
-fun String.isBelowMinimumAmount(): Boolean = this.toInt() < 1000
+fun String.isBelowMinimumAmount(): Boolean = this.toInt() < LOTTO_MINIMUM_AMOUNT
 
-fun String.isNotThousandUnit(): Boolean = this.toInt() % 1000 != 0
+fun String.isNotThousandUnit(): Boolean = this.toInt() % LOTTO_PRICE != 0
 
-fun String.isAboveMaximumAmount(): Boolean = this.length > 7 || (this.length == 7 && this > "1000000")
+fun String.isAboveMaximumAmount(): Boolean = this.length > 7 || (this.length == 7 && this > LOTTO_MAXIMUM_AMOUNT)
 
 fun String.splitByComma(): List<String> = this.split(",")
 

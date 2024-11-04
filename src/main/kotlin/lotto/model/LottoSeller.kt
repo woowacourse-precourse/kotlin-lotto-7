@@ -1,15 +1,17 @@
 package lotto.model
 
+import lotto.global.Error
+import lotto.global.LOTTO_PRICE
 import lotto.utils.LottoMachine
 
 class LottoSeller(private val money: Int) {
     init {
-        require(money >= 1000) { "[ERROR] 로또 구매 금액은 최소 1000원 이상이어야 합니다." }
-        require(money % 1000 == 0) { "[ERROR] 로또 구매 금액은 1000원 단위여야 합니다." }
+        require(money >= LOTTO_PRICE) { Error.BELOW_MINIMUM_AMOUNT.message }
+        require(money % LOTTO_PRICE == 0) { Error.NOT_THOUSAND_UNIT.message }
     }
 
     val lottoCount: Int
-        get() = money / 1000
+        get() = money / LOTTO_PRICE
 
     fun sell(): List<Lotto> {
         return (1..lottoCount).map { LottoMachine.generate() }
