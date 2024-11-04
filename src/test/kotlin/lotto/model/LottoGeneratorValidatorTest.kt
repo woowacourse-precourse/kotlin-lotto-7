@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 
-class LottoGeneratorTest {
+class LottoGeneratorValidatorTest {
     @Test
     fun `구입 금액이 1,000원 미만이면 예외가 발생한다`() {
         assertThrows<IllegalArgumentException> {
