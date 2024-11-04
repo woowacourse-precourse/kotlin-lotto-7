@@ -3,6 +3,7 @@ package lotto.view
 import camp.nextstep.edu.missionutils.Console
 import lotto.model.Lotto
 import lotto.util.ErrorMessages
+import lotto.util.InputValidate
 
 class InputView {
     fun getPrice(): Int {
@@ -11,11 +12,8 @@ class InputView {
             val input = Console.readLine()
             try {
                 val price = input.toIntOrNull()
-
-                require(input != "") { ErrorMessages.NULL_PRICE }
-                require(price != null) { ErrorMessages.NOT_INT }
-                require(price >= 1000) { ErrorMessages.MINIMUM_PRICE }
-                return price
+                InputValidate.checkPrice(input, price)
+                return price ?: 0
             } catch (e: IllegalArgumentException) {
                 println(e.message)
             }
@@ -28,16 +26,10 @@ class InputView {
             try {
                 val input = Console.readLine()
                 val lottoNumber = input.split(",").map { it.trim().toIntOrNull() }
+                InputValidate.checkMyLotto(input, lottoNumber)
 
-                require(input != "") { ErrorMessages.NULL_LOTTO_NUMBER }
-                require(lottoNumber.all { it != null }) { ErrorMessages.NOT_INT }
-                require(lottoNumber.all { it in 1..45 }) { ErrorMessages.OUT_OF_RANGE }
-                require(lottoNumber.size == 6) { ErrorMessages.INVALID_NUMBER_SIZE }
-                require(lottoNumber.distinct().size == lottoNumber.size) { ErrorMessages.DUPLICATE_NUMBERS }
                 val notNullLottoNumber: List<Int> = lottoNumber.filterNotNull().sorted()
-
                 return notNullLottoNumber
-
             } catch (e: Exception) {
                 println(e.message)
             }
@@ -51,12 +43,9 @@ class InputView {
                 val input = Console.readLine()
                 val bonusNumber = input.toIntOrNull()
 
-                require(input != "") { ErrorMessages.NULL_BONUS_NUMBER }
-                require(bonusNumber != null) { ErrorMessages.NOT_INT }
-                require(bonusNumber in 1..45) { ErrorMessages.OUT_OF_RANGE }
-                require(bonusNumber !in myLotto.getNumbers()) { ErrorMessages.DUPLICATED_BONUS }
+                InputValidate.checkMyBonus(input, bonusNumber, myLotto)
 
-                return bonusNumber
+                return bonusNumber ?: 0
             } catch (e: IllegalArgumentException) {
                 println(e.message)
             }
