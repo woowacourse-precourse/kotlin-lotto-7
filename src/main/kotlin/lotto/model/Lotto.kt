@@ -1,9 +1,11 @@
 package lotto.model
 
+import lotto.util.ExceptionConstants
+
 class Lotto(private val numbers: List<Int>) {
     init {
-        require(numbers.size == 6) { "[ERROR] 로또 번호는 6개여야 합니다." }
+        require(numbers.size == 6) { ExceptionConstants.ERROR_INVALID_WINNING_NUMBERS_COUNT }
+        require(numbers.all { it in 1..45 }) { ExceptionConstants.ERROR_INVALID_WINNING_NUMBERS_RANGE }
+        require(numbers.distinct().size == 6) { ExceptionConstants.ERROR_DUPLICATE_WINNING_NUMBERS }
     }
-
-    // TODO: 추가 기능 구현
 }
