@@ -21,7 +21,7 @@ class OutputView {
     }
 
     fun printRevenueToCostRatio(revenue: Int, cost: Int) {
-        println(MESSAGE_PROFIT_TO_COST_RATIO.format(revenue.toFloat() / cost * 100))
+        println(MESSAGE_PROFIT_TO_COST_RATIO.format(revenue / cost.toDouble() * 100))
     }
 
     private fun formatWinCountsMessage(winCounts: Map<LottoRank, Int>, rank: LottoRank): String {
