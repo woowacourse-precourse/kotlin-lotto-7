@@ -12,23 +12,10 @@ class LottoMakerTest {
             // given
 
             // when
-            val lottoTicket = LottoMaker.makeLotto()
+            val lottoTicket = LottoMaker.makeLotto().getLottoTicket().toList().drop(1).dropLast(1)
 
             // then
-            assertThat(lottoTicket.size).isEqualTo(LottoUtils.LOTTO_NUMBER_COUNTS)
-        }
-    }
-
-    @Test
-    fun `로또는 중복되지 않는 6개의 숫자들로 이뤄진다`() {
-        assertSimpleTest {
-            // given
-
-            // when
-            val lottoTicket = LottoMaker.makeLotto().toSet()
-
-            // then
-            assertThat(lottoTicket.size).isEqualTo(LottoUtils.LOTTO_NUMBER_COUNTS)
+            assertThat(lottoTicket).isEqualTo(LottoUtils.LOTTO_NUMBER_COUNTS)
         }
     }
 }

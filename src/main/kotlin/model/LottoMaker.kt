@@ -12,7 +12,7 @@ object LottoMaker: RandomNumberGenerator {
         return Randoms.pickNumberInRange(LottoUtils.MIN_VALUE, LottoUtils.MAX_VALUE)
     }
 
-    fun makeLotto(): MutableList<Int> {
+    fun makeLotto(): Lotto {
         val ticket = mutableListOf<Int>()
         repeat(LottoUtils.LOTTO_NUMBER_COUNTS) {
             var number = generateRandomNumber()
@@ -20,6 +20,6 @@ object LottoMaker: RandomNumberGenerator {
                 number = generateRandomNumber()
             ticket.add(number)
         }
-        return ticket
+        return Lotto(ticket)
     }
 }

@@ -1,5 +1,6 @@
 package view
 
+import model.Lotto
 import model.LottoTickets
 import utils.PrintUtils
 
@@ -20,10 +21,8 @@ object OutputView {
         println("$ticketCounts"+PrintUtils.LOTTO_TICKET_COUNTS)
     }
 
-    fun printTickets(tickets: List<List<Int>>) {
-        for (ticket in tickets) {
-            println("["+ticket.joinToString()+"]")
-        }
+    fun printTickets(ticket: String) {
+        println(ticket)
     }
 
     fun printWinNumberMessage() {
