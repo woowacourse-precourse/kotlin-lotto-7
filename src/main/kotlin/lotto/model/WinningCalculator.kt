@@ -19,13 +19,13 @@ class WinningCalculator {
         winningDetails: MutableList<Int>
     ): MutableList<Int> {
         val union = purchasedLotto.getNumbers() + winningLotto.getNumbers()
-        val lotteryCount = union.groupBy { it }.filter { it.value.size > 1 }.flatMap { it.value }.distinct().size
+        val matchCount = union.groupBy { it }.filter { it.value.size > 1 }.flatMap { it.value }.distinct().size
         when {
-            lotteryCount == 3 -> winningDetails[4]++
-            lotteryCount == 4 -> winningDetails[3]++
-            lotteryCount == 5 && winningLotto.getNumbers().contains(bonus) -> winningDetails[2]++
-            lotteryCount == 5 -> winningDetails[1]++
-            lotteryCount == 6 -> winningDetails[0]++
+            matchCount == 6 -> winningDetails[0]++
+            matchCount == 5 && purchasedLotto.getNumbers().contains(bonus) -> winningDetails[1]++
+            matchCount == 5 -> winningDetails[2]++
+            matchCount == 4 -> winningDetails[3]++
+            matchCount == 3 -> winningDetails[4]++
         }
         return winningDetails
     }
