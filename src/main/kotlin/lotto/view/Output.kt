@@ -23,9 +23,12 @@ object GuideOutput {
 
 object UserFeedback {
     fun randomLotoo(tryCount: Int, number: MutableList<MutableList<Int>>) {
+        newline()
         println("$tryCount${OuputString.TRY_COUNT}")
         number.forEach {
             println(it)
         }
     }
+
+    private fun newline() = println()
 }
