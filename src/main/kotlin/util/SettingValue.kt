@@ -11,5 +11,6 @@ class SettingValue {
         const val THIRD = "5개 일치 (1,500,000원) - "
         const val FOURTH = "4개 일치 (50,000원) - "
         const val FIFTH = "3개 일치 (5,000원) - "
+        const val OUT_OF_INT_LENGTH = 10
     }
 }

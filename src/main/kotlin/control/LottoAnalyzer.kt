@@ -6,7 +6,11 @@ import view.Output
 
 class LottoAnalyzer {
 
-    fun analyze(randomLotto: List<List<Int>>, winningNumber: List<Int>, bonusNumber: Int) {
+    fun analyze(
+        randomLotto: List<List<Int>>,
+        winningNumber: List<Int>,
+        bonusNumber: Int
+    ) {
         randomLotto.forEach { game ->
             winningCountUpdate(winningNumber, game, bonusNumber)
         }
@@ -18,10 +22,16 @@ class LottoAnalyzer {
         return (LottoWinningCount.entries.sumOf { it.count * it.prize } / amount) * 100
     }
 
-    private fun winningCountUpdate(randomLotto: List<Int>, winningNumber: List<Int>, bonusNumber: Int): Any {
+    private fun winningCountUpdate(
+        randomLotto: List<Int>,
+        winningNumber: List<Int>,
+        bonusNumber: Int
+    ): Any {
         val matchCount = checkWinning(randomLotto, winningNumber)
         if (matchCount == 6) return LottoWinningCount.FIRST.count++
-        if (matchCount == 5 && checkBonus(randomLotto, bonusNumber)) return LottoWinningCount.SECOND.count++
+        if (matchCount == 5 && checkBonus(randomLotto, bonusNumber)) {
+            return LottoWinningCount.SECOND.count++
+        }
         if (matchCount == 5) return LottoWinningCount.THIRD.count++
         if (matchCount == 4) return LottoWinningCount.FOURTH.count++
         if (matchCount == 3) return LottoWinningCount.FIFTH.count++
@@ -36,4 +46,9 @@ class LottoAnalyzer {
         return bonusNumber in randomLotto
     }
 
+
+//    fun confirmRateOfReturn(amount: Int) {
+//
+//        )
+//    }
 }

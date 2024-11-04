@@ -1,8 +1,8 @@
 package control
 
 import data.Lotto
-import util.SettingValue
 import util.ErrorMessage
+import util.SettingValue
 import view.Input
 
 class BonusNumberValidator {
@@ -31,16 +31,20 @@ class BonusNumberValidator {
     }
 
     private fun checkBlank(amount: String) {
-        if (amount.isBlank()) throw IllegalArgumentException(ErrorMessage.EMPTY_BONUS_NUMBER)
+        if (amount.isBlank()) {
+            throw IllegalArgumentException(ErrorMessage.EMPTY_BONUS_NUMBER)
+        }
     }
 
     private fun checkNumber(amount: String) {
-        if (!amount.contains(Regex("^[0-9]*$"))) throw NumberFormatException(ErrorMessage.NOT_NUMBERS)
+        if (!amount.contains(Regex("^[0-9]*$"))) {
+            throw NumberFormatException(ErrorMessage.NOT_NUMBERS)
+        }
     }
 
     private fun checkLottoRange(number: String) {
         if (
-            number.length > 11 ||
+            number.length > SettingValue.OUT_OF_INT_LENGTH ||
             number.toLong() > Int.MAX_VALUE ||
             number.toInt() < SettingValue.LOTTO_NUMBER_MINIMUM ||
             number.toInt() > SettingValue.LOTTO_NUMBER_MAXIMUM
@@ -48,8 +52,9 @@ class BonusNumberValidator {
     }
 
     private fun checkDuplicate(bonusNumber: String, winningNumber: Lotto) {
-        if (winningNumber.contains(bonusNumber.toInt())
-        ) throw IllegalArgumentException(ErrorMessage.DUPLICATED_NUMBERS)
+        if (winningNumber.contains(bonusNumber.toInt())) {
+            throw IllegalArgumentException(ErrorMessage.DUPLICATED_NUMBERS)
+        }
     }
 
     internal fun checkDuplicateTest(bonusNumber: String, winningNumber: Lotto) {

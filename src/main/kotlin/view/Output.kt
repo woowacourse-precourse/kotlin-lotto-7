@@ -10,18 +10,23 @@ class Output {
     }
 
     fun randomLottoList(randomLottoNumber: List<List<Int>>) {
-        "\n" + randomLottoNumber.forEach { list -> println(list.sorted()) }
+        "\n" + randomLottoNumber.forEach { list ->
+            println(list.sorted())
+        }
     }
 
     fun winningStatistics(amount: Int) {
         println("\n" + WINNING_STATISTICS)
         println(DIVIDER)
-        LottoWinningCount.entries.take(5)
-            .forEach { result -> println(result.message + result.count.toString() + UNIT) }
+        val messages = LottoWinningCount.entries.take(5)
+            .joinToString("\n") { result ->
+                result.message + result.count.toString() + UNIT
+            }
+        println(messages)
         println(
-            TOTAL_RETURN_INTRO
-                    + "%,.1f".format(LottoAnalyzer().calculateRateOfReturn(amount))
-                    + TOTAL_RETURN_OUTRO
+            TOTAL_RETURN_INTRO +
+            "%,.1f".format(LottoAnalyzer().calculateRateOfReturn(amount)) +
+            TOTAL_RETURN_OUTRO
         )
     }
 

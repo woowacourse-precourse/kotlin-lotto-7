@@ -1,7 +1,7 @@
 package control
 
-import util.SettingValue
 import util.ErrorMessage
+import util.SettingValue
 import view.Input
 
 class WinningNumberValidator {
@@ -59,7 +59,9 @@ class WinningNumberValidator {
     }
 
     private fun checkSize(winningNumber: List<String>) {
-        if (winningNumber.size != 6) throw IllegalArgumentException(ErrorMessage.NOT_INPUT_SIX_NUMBER)
+        if (winningNumber.size != 6) {
+            throw IllegalArgumentException(ErrorMessage.NOT_INPUT_SIX_NUMBER)
+        }
     }
 
     private fun checkDuplicates(winningNumber: List<String>) {
