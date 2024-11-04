@@ -58,6 +58,10 @@ class LottoMachine(private val payment: String) {
         return winningMessage
     }
 
+    fun getPrize(): Prize {
+        return prize
+    }
+
     companion object {
         const val LOTTO_PRICE = 1000
         const val LOTTO_MIN_NUM = 1
