@@ -14,13 +14,6 @@ import lotto.util.InputValidator.validateWinningNumbersDistinctness
 class InputView {
     private val winningNumbers = mutableListOf<Int>()
 
-    private fun <T> loopUntilValid(action: () -> T): T {
-        while (true) {
-            try { return action() }
-            catch (e: IllegalArgumentException) { println("\n${e.message}\n") }
-        }
-    }
-
     fun readLottoMoney(): Int {
         return loopUntilValid {
             println(PROMPT_LOTTO_MONEY)
@@ -60,6 +53,13 @@ class InputView {
 
             println()
             bonusNumber
+        }
+    }
+
+    private fun <T> loopUntilValid(action: () -> T): T {
+        while (true) {
+            try { return action() }
+            catch (e: IllegalArgumentException) { println("\n${e.message}\n") }
         }
     }
 

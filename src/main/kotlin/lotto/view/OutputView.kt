@@ -13,15 +13,6 @@ class OutputView {
         println()
     }
 
-    private fun formatWinCountsMessage(winCounts: Map<LottoRank, Int>, rank: LottoRank): String {
-        val message = MESSAGE_WIN_COUNTS.format(
-            rank.matchCount,
-            if (rank.hasBonus) MESSAGE_HAS_BONUS else "",
-            "%,d".format(rank.prize),
-            winCounts.getOrDefault(rank, 0))
-        return message
-    }
-
     fun printWinCounts(winCounts: Map<LottoRank, Int>) {
         println(MESSAGE_RESULT_HEADER)
         LottoRank.entries.dropLast(1).reversed().forEach {
@@ -31,6 +22,15 @@ class OutputView {
 
     fun printRevenueToCostRatio(revenue: Int, cost: Int) {
         println(MESSAGE_PROFIT_TO_COST_RATIO.format(revenue.toFloat() / cost * 100))
+    }
+
+    private fun formatWinCountsMessage(winCounts: Map<LottoRank, Int>, rank: LottoRank): String {
+        val message = MESSAGE_WIN_COUNTS.format(
+            rank.matchCount,
+            if (rank.hasBonus) MESSAGE_HAS_BONUS else "",
+            "%,d".format(rank.prize),
+            winCounts.getOrDefault(rank, 0))
+        return message
     }
 
     companion object {
