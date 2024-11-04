@@ -10,8 +10,9 @@ fun main() {
     val numberList: List<Int> = numberInput()
     val lotto = Lotto(numberList)
     lotto.inputBonus()
-    //result(lotto,lottoList)
-
+    val resultList = lottoResult(lotto, lottoList)
+    val earnMoney = printResult(resultList)
+    println(earnMoney)
 }
 
 fun moneyInput(): Int {
@@ -41,4 +42,29 @@ fun makeAll(repeat: Int): List<LottoPaper> {
         lottoList.add(paper)
     }
     return lottoList
+}
+
+fun printResult(rankList: List<Int>): Int {
+    var money = 0
+    for (i in 3..6) {
+        println("${i}개 일치 (${LottoPrice.findPrintByKey(i)}) - ${rankList[i]}개")
+        money += (LottoPrice.findPriceByKey(i)!!.times(rankList[i].toInt()))
+        if (i == 5) {
+            println("5개 일치,보너스 볼 일치 (${LottoPrice.findPrintByKey(i + 2)}) - ${rankList[i + 2]}개")
+        }
+    }
+    return money
+}
+
+fun lottoResult(lotto: Lotto, lottoList: List<LottoPaper>): List<Int> {
+    var resultList: MutableList<Int> = mutableListOf(0, 0, 0, 0, 0, 0, 0, 0)
+    for (lottoPaper in lottoList) {
+        var number = lotto.findNumbers(lottoPaper.paperNumber)
+        resultList[number] += 1
+        if (number == 5 && lotto.findBonus(lottoPaper.paperNumber)) {
+            resultList[7] += 1
+            resultList[number] -= 1
+        }
+    }
+    return resultList
 }

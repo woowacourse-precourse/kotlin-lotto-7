@@ -2,12 +2,22 @@ package lotto
 
 import camp.nextstep.edu.missionutils.Console
 
-enum class LottoPrice(price: Int) {
-    FIRST(2000000000),
-    SECOND(30000000),
-    THIRD(1500000),
-    FORTH(50000),
-    FIFTH(5000)
+enum class LottoPrice(val price: Int, val key: Int, val print: String) {
+    FIRST(2000000000, 6, "2,000,000,000원"),
+    SECOND(30000000, 5, "30,000,000원"),
+    THIRD(1500000, 7, "1,500,000원"),
+    FORTH(50000, 4, "50000원"),
+    FIFTH(5000, 3, "5000원");
+
+    companion object {
+        fun findPriceByKey(key: Int): Int? {
+            return LottoPrice.entries.find { it.key == key }?.price
+        }
+
+        fun findPrintByKey(key: Int): String {
+            return LottoPrice.entries.find { it.key == key }?.print.toString()
+        }
+    }
 }
 
 
