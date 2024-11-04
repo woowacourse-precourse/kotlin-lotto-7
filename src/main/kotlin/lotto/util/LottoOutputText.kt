@@ -11,4 +11,8 @@ object LottoOutputText {
     const val FIVE_AND_BONUS_MATCHES = "5개 일치, 보너스 볼 일치"
     const val SIX_MATCHES = "6개 일치"
     const val EMPTY = ""
+    const val LOTTO_WINNING_RESULT_TITLE = "당첨 통계"
+    const val LOTTO_WINNING_RESULT_SEPARATE_LINE = "---"
+    const val LOTTO_WINNING_RESULT_TOTAL_RATE_OF_RETURN = "총 수익률은"
+    const val LOTTO_WINNING_RESULT_TOTAL_RATE_OF_RETURN_2 = "%입니다."
 }

@@ -2,7 +2,9 @@ package lotto.controller
 
 import lotto.model.Lotto
 import lotto.model.LottoGenerator
+import lotto.model.LottoRank
 import lotto.model.LottoResult
+import lotto.model.LottoResultDetail
 import lotto.model.toViewData
 import lotto.view.LottoInputView
 import lotto.view.LottoOutputView
@@ -15,6 +17,8 @@ class LottoController(
     private var lottoList = listOf<Lotto>()
     private var winningNumbers = listOf<Int>()
     private var bonusNumber = 0
+    private val printableRankList = mutableListOf<String>()
+    private val winningRankCountList = mutableListOf<Int>()
 
     fun purchaseLotto() {
         outputView.outputPurchasePrice()
@@ -41,6 +45,24 @@ class LottoController(
     fun showLottoResult() {
         val lottoResult = LottoResult(lottoList, winningNumbers, bonusNumber)
         val lottoResultDetail = lottoResult.getResult()
-        outputView.outputLottoResult(lottoResultDetail)
+        val roundedRateOfReturn = lottoResultDetail.roundedRateOfReturnText
+
+        calculateRankList(lottoResultDetail)
+
+        outputView.outputLottoResult(
+            printableRankList = printableRankList,
+            winningRankCountList = winningRankCountList,
+            rateOfReturn = roundedRateOfReturn
+        )
+    }
+
+    private fun calculateRankList(lottoResultDetail: LottoResultDetail) {
+        LottoRank.entries.forEach { rank ->
+            if (rank != LottoRank.NOTHING) {
+                val rankCount = lottoResultDetail.winningRankList.count { it == rank }
+                winningRankCountList.add(rankCount)
+                printableRankList.add(rank.print())
+            }
+        }
     }
 }

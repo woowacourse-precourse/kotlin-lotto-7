@@ -1,9 +1,9 @@
 package lotto.model
 
 data class LottoResultDetail(
-    val lottoRankList: List<LottoRank>,
+    val winningRankList: List<LottoRank>,
     val rateOfReturn: Double
 ) {
-    val roundedRateOfReturn: String
+    val roundedRateOfReturnText: String
         get() = String.format("%.1f", rateOfReturn)
 }

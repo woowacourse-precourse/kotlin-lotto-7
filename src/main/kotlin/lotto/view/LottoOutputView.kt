@@ -1,7 +1,5 @@
 package lotto.view
 
-import lotto.model.LottoRank
-import lotto.model.LottoResultDetail
 import lotto.util.LottoOutputText
 
 class LottoOutputView {
@@ -26,16 +24,22 @@ class LottoOutputView {
         println(LottoOutputText.INPUT_BONUS_NUMBER)
     }
 
-    fun outputLottoResult(lottoResultDetail: LottoResultDetail)  {
+    fun outputLottoResult(
+        printableRankList: List<String>,
+        winningRankCountList: List<Int>,
+        rateOfReturn: String,
+    ) {
         println()
-        println("당첨 통계")
-        println("---")
-        LottoRank.entries.forEach { rank->
-            if (rank != LottoRank.NOTHING) {
-                val rankCount = lottoResultDetail.lottoRankList.count { it == rank }
-                println("${rank.print()} - ${rankCount}개")
-            }
+        println(LottoOutputText.LOTTO_WINNING_RESULT_TITLE)
+        println(LottoOutputText.LOTTO_WINNING_RESULT_SEPARATE_LINE)
+
+        printableRankList.forEachIndexed { index, printableRank ->
+            println("$printableRank - ${winningRankCountList[index]}개")
         }
-        println("총 수익률은 ${lottoResultDetail.roundedRateOfReturn}%입니다.")
+
+        println(
+            "${LottoOutputText.LOTTO_WINNING_RESULT_TOTAL_RATE_OF_RETURN} " +
+                    "$rateOfReturn${LottoOutputText.LOTTO_WINNING_RESULT_TOTAL_RATE_OF_RETURN_2}"
+        )
     }
 }

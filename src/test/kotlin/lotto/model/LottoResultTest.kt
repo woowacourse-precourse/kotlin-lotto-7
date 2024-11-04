@@ -29,7 +29,7 @@ class LottoResultTest {
         val actual = lottoResult.getResult()
 
         assertEquals(expectedRateOfReturn, actual.rateOfReturn)
-        assertEquals(expectedLottoRankList, actual.lottoRankList)
+        assertEquals(expectedLottoRankList, actual.winningRankList)
     }
 
     @Test
@@ -42,7 +42,7 @@ class LottoResultTest {
         val actual = lottoResult.getResult()
 
         assertEquals(expectedRateOfReturn, actual.rateOfReturn)
-        assertEquals(expectedLottoRankList, actual.lottoRankList)
+        assertEquals(expectedLottoRankList, actual.winningRankList)
     }
 
     companion object {
