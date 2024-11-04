@@ -1,8 +1,8 @@
 package lotto
 
-class WinningNumber(private val numbers: String) {
+class WinningNumber(numbers: String) {
 
-    private val winningNumbers = numbers.split(",")
+    private val winningNumbers = numbers.split(COMMA)
 
     init {
         require(checkLottoSize()) { "$ERROR $WINNING_SIZE_MESSAGE" }
@@ -27,6 +27,7 @@ class WinningNumber(private val numbers: String) {
         const val LOTTO_SIZE = 6
         const val MIN_NUM = 1
         const val MAX_NUM = 45
+        const val COMMA = ","
 
         const val ERROR = "[ERROR]"
         const val WINNING_SIZE_MESSAGE = "당첨 번호는 6개여야 합니다."
