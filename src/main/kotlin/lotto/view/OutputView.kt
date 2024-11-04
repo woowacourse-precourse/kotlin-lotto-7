@@ -2,7 +2,6 @@ package lotto.view
 
 import lotto.Constants.OUTPUT_LOTTO_TICKET_COUNT_MESSAGE
 import lotto.Constants.OUTPUT_LOTTO_WINNING_MESSAGE
-import lotto.model.LottoGenerator
 import lotto.model.LottoRank
 
 class OutputView {

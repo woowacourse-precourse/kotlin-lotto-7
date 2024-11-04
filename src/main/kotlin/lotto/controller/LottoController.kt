@@ -1,12 +1,11 @@
 package lotto.controller
 
-import camp.nextstep.edu.missionutils.Console
 import lotto.Constants.ERROR_INVALID_LOTTO_PURCHASE_MESSAGE
 import lotto.view.InputView
 import lotto.view.OutputView
 import lotto.Validator
 import lotto.model.BonusNumber
-import lotto.model.Lotto
+import lotto.Lotto
 import lotto.model.LottoGenerator
 import lotto.model.LottoRank
 import lotto.model.Profit
@@ -35,7 +34,12 @@ class LottoController {
             val lottoPurchase = inputView.purchaseLottoMessage()
             validator.checkLottoPurchaseAmount(lottoPurchase)
             lottoPurchase.toInt()
+
+        } catch (e: NumberFormatException) {
+            print(ERROR_INVALID_LOTTO_PURCHASE_MESSAGE)
+            getLottoPurchaseAmount()
         } catch (e: IllegalArgumentException) {
+            println(e.message)
             getLottoPurchaseAmount()
         }
     }
@@ -64,6 +68,9 @@ class LottoController {
         return try {
             val bonusNumber = inputView.getBonusNumber()
             BonusNumber(bonusNumber, lotto).getBonusNumber()
+        } catch (error: NumberFormatException) {
+            print(ERROR_INVALID_LOTTO_PURCHASE_MESSAGE)
+            getBonusNumber(lotto)
         } catch (error: IllegalArgumentException) {
             getBonusNumber(lotto)
         }

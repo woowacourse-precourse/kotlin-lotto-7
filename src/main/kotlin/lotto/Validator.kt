@@ -56,11 +56,11 @@ class Validator {
     }
 
     private fun checkLottoPurchaseNumeric(purchaseAmount: String) {
-        require(!isNumeric(purchaseAmount)) { ERROR_INVALID_LOTTO_PURCHASE_MESSAGE }
+        require(isNumeric(purchaseAmount)) { ERROR_INVALID_LOTTO_PURCHASE_MESSAGE }
     }
 
     private fun checkBonusNumberNumeric(bonusNumber: String) {
-        require(!isNumeric(bonusNumber)) { ERROR_INVALID_LOTTO_PURCHASE_MESSAGE }
+        require(isNumeric(bonusNumber)) { ERROR_INVALID_LOTTO_PURCHASE_MESSAGE }
     }
 
     private fun checkBonusNumberRange(bonusNumber: String) {
@@ -72,6 +72,6 @@ class Validator {
     }
 
     private fun isNumeric(number: String): Boolean {
-        return number.toIntOrNull() == null
+        return number.toIntOrNull() != null // 수정된 부분
     }
 }
