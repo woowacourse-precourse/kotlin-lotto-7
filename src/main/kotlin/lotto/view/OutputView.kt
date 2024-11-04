@@ -11,22 +11,21 @@ class OutputView {
     }
 
     fun printLottoStatus(lottos: List<Lotto>) {
-        lottos.forEach {lotto ->
+        lottos.forEach { lotto ->
             println(lotto.getNumbers().joinToString(", ", "[", "]"))
-                }
-            }
+        }
+    }
 
-        fun printStatistics(result: WinningStatus) {
-            val decimal = DecimalFormat("#,###")
+    fun printStatistics(result: WinningStatus) {
+        val decimal = DecimalFormat("#,###")
 
-            println("\n당첨 통계")
-            println("---")
-            Rank.entries.filterNot { it == Rank.NONE }
-                .sortedBy { it.prize }
-                .forEach { rank ->
-                    println("${rank.description} (${decimal.format(rank.prize)}원) - ${result.rankCount[rank] ?: 0}개")
+        println("\n당첨 통계")
+        println("---")
+        Rank.entries.filterNot { it == Rank.NONE }
+            .sortedBy { it.prize }
+            .forEach { rank ->
+                println("${rank.description} (${decimal.format(rank.prize)}원) - ${result.rankCount[rank] ?: 0}개")
             }
         println("총 수익률은 ${"%.1f".format(result.profitRate)}%입니다.")
-
-        }
+    }
 }
