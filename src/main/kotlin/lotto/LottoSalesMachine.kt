@@ -17,20 +17,25 @@ class LottoSalesMachine {
     }
 
     fun processPurchase(): List<Lotto> {
-        println(guideInputLottoPurchaseAmount())
-        var inputLottoPurchaseWon = Console.readLine()
-        while (true) {
-            try {
-                inputLottoPurchaseWon.toInt()
-                break
-            } catch (e: NumberFormatException) {
-                println(ErrorMessage.INPUT_AMOUNT_FORMAT_ERROR.getMessage())
-                println(guideInputLottoPurchaseAmount())
-                inputLottoPurchaseWon = Console.readLine()
-            }
+        while (true) try {
+            return purchase(inputLottoPurchase())
+        } catch (e: IllegalArgumentException) {
+            println(e.message)
         }
+    }
 
-        return purchase(inputLottoPurchaseWon.toInt())
+    private fun inputLottoPurchase(): Int {
+        println(guideInputLottoPurchaseAmount())
+        val purchaseAmount = Console.readLine()
+        return validateUserInput(purchaseAmount)
+    }
+
+    private fun validateUserInput(purchaseAmount: String): Int {
+        if (purchaseAmount.matches(Regex("-?\\d+"))) {
+            return purchaseAmount.toInt()
+        } else {
+            throw IllegalArgumentException(ErrorMessage.INPUT_AMOUNT_FORMAT_ERROR.getMessage())
+        }
     }
 
     private fun exceptNotDevideThousand(won: Int) {
