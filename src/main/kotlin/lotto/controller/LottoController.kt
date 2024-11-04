@@ -24,5 +24,7 @@ class LottoController {
         val winningNumbers = inputView.inputWinningNumbers()
         val bonusNumber = inputView.inputBonusNumber(winningNumbers)
         val lottoResult = lottoGame.calculateResult(lottos, winningNumbers, bonusNumber)
+
+        resultView.displayResult(lottoResult)
     }
 }
