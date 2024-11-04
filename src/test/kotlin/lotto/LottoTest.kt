@@ -38,9 +38,15 @@ class LottoTest {
     }
 
     @Test
-    fun `로또 머니가 양수가 아니면 예외가 발생한다`() {
+    fun `로또 구입금액이 양수가 아니면 예외가 발생한다`() {
         assertThrows<IllegalArgumentException> {
             LottoPurchaseAmount.from("-1000")
+        }
+    }
+    @Test
+    fun `로또 구입금액이 1000원 단위로 나누어지지 않으면 예외가 발생한다`() {
+        assertThrows<IllegalArgumentException> {
+            LottoPurchaseAmount.from("1500")
         }
     }
 }
