@@ -12,10 +12,24 @@ class LottoTicketsTest {
             val money = 2_000
 
             // when
-            val lottoTickets = LottoTickets(money).ticketCounts
+            val lottoTicketCounts = LottoTickets(money).ticketCounts
 
             // then
-            assertThat(lottoTickets).isEqualTo(2)
+            assertThat(lottoTicketCounts).isEqualTo(2)
+        }
+    }
+
+    @Test
+    fun `구매 갯수만큼의 로또 티켓들을 가진다`() {
+        assertSimpleTest {
+            // given
+            val money = 2_000
+
+            // when
+            val lottoTickets = LottoTickets(money).lottoTickets
+
+            // then
+            assertThat(lottoTickets.size).isEqualTo(2)
         }
     }
 }
