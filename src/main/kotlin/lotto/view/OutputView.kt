@@ -36,7 +36,7 @@ class OutputView {
         println(WINNING_LOTTO_STATISTICS)
         println(DIVIDING_LINE)
         rankCount.forEach { rank, count ->
-            if (rank.matchingNumbers != 0) {
+            if (rank.price != 0) {
                 println(formatRankMessage(rank.message, rank.price, count))
             }
         }

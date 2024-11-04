@@ -3,14 +3,13 @@ package lotto.model
 enum class LottoRank(
     val message: String,
     val price: Int,
-    val matchingNumbers: Int,
 ) {
-    NONE_RANK("꽝",0,0),
-    FIFTH_RANK("3개 일치",5_000,3),
-    FOURTH_RANK("4개 일치",50_000,4),
-    THIRD_RANK("5개 일치",1_500_000,5),
-    SECOND_RANK("5개 일치, 보너스 볼 일치", 30_000_000,5),
-    FIRST_RANK("6개 일치", 2_000_000_000,6);
+    NONE_RANK("꽝",0),
+    FIFTH_RANK("3개 일치",5_000),
+    FOURTH_RANK("4개 일치",50_000),
+    THIRD_RANK("5개 일치",1_500_000),
+    SECOND_RANK("5개 일치, 보너스 볼 일치", 30_000_000),
+    FIRST_RANK("6개 일치", 2_000_000_000);
 
     companion object {
         fun matchingLottoNumber(winningNumbers: Lotto, bonusNumber: Int, purchaseLotto: Lotto): Pair<Int, Boolean> {
