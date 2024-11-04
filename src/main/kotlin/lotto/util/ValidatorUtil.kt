@@ -6,4 +6,10 @@ object ValidatorUtil {
             MESSAGE_NUMBER_SIZE_ERROR
         }
     }
+
+    fun validateTicketsPrice(ticketsPrice: String) {
+        require(ticketsPrice.toIntOrNull() != null) {
+            MESSAGE_TICKETS_PRICE_NOT_INT
+        }
+    }
 }
