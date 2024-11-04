@@ -1,5 +1,7 @@
 package lotto
 
+import camp.nextstep.edu.missionutils.Randoms
+
 class Lotto(private val numbers: List<Int>) {
     init {
         require(numbers.size == 6) { "[ERROR] 로또 번호는 6개여야 합니다." }
@@ -7,5 +9,10 @@ class Lotto(private val numbers: List<Int>) {
         require(numbers.all { it in 1..45 }) { "[ERROR] 로또 번호의 범위는 1 ~ 45입니다." }
     }
 
-    // TODO: 추가 기능 구현
+    fun issueLotto(number: Int): List<List<Int>> {
+        return (1..number).map {
+            Randoms.pickUniqueNumbersInRange(1, 45, 6)
+        }
+    }
+
 }
