@@ -59,8 +59,8 @@ class WinningLotto(winningLottoInput: String) {
     }
 
     private fun validateBonusNumber(bonusNumberInput: String): Int {
-        val bonusNumber = requireNotNull(bonusNumberInput.toInt()) {
-            getErrorMessage(getErrorMessage(INVALID_BONUS_NUMBER))
+        val bonusNumber = requireNotNull(bonusNumberInput.toIntOrNull()) {
+            getErrorMessage(INVALID_BONUS_NUMBER)
         }
 
         require(bonusNumber >= MIN_LOTTO_NUMBER && bonusNumber <= MAX_LOTTO_NUMBER) {
