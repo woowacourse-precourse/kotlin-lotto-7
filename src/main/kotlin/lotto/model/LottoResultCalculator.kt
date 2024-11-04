@@ -41,13 +41,8 @@ class LottoResultCalculator(private val lotteries: List<Lotto>) {
     }
 
     private fun calculateTotalEarnings(lottoResults: List<LottoResult>): Double {
-        var totalEarnings = LottoRules.ZERO_DOUBLE
-        lottoResults.forEach { lottoResult ->
-            val prizeMoney = getPrizeMoney(lottoResult.rank)
-            val count = lottoResult.count
-            totalEarnings += prizeMoney * count
-        }
-        return totalEarnings
+        val totalEarnings = lottoResults.sumOf { lottoResult -> getPrizeMoney(lottoResult.rank) * lottoResult.count }
+        return totalEarnings.toDouble()
     }
 
     private fun getPrizeMoney(rank: Int): Int {
