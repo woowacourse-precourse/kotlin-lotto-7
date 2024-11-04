@@ -19,6 +19,7 @@ fun main() {
     for (lotto in lottos) {
         println(lotto)
     }
+    val lottoWinningNumbers = getLottoWinningNumbers()
 }
 
 fun getLottoBudget(): Int {
@@ -38,4 +39,11 @@ fun getLottoTicketCount(lottoBudget: Int): Int {
 fun getLottoNumbers(): List<Int> {
     val lottoNumbers = List(LOTTO_NUMBER_COUNT) { Random.nextInt(1, 46) }
     return lottoNumbers
+}
+
+fun getLottoWinningNumbers(): List<Int> {
+    println("당첨 번호를 입력해 주세요.")
+    val userInput = Console.readLine()
+    val lottoWinningNumbers = userInput.split(",").map { it.toInt() }
+    return lottoWinningNumbers
 }
