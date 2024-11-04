@@ -21,11 +21,11 @@ class WinningNumbersTest {
         val winningNumbers = listOf(1, 2, 3, 4, 5, 6)
 
         assertThrows<IllegalArgumentException> {
-            WinningNumbers(winningNumbers, 0)  // 0은 범위 밖
+            WinningNumbers(winningNumbers, 0)
         }
 
         assertThrows<IllegalArgumentException> {
-            WinningNumbers(winningNumbers, 46)  // 46은 범위 밖
+            WinningNumbers(winningNumbers, 46)
         }
     }
 
@@ -34,6 +34,6 @@ class WinningNumbersTest {
         val winningNumbers = listOf(1, 2, 3, 4, 5, 6)
         val bonusNumber = 7
 
-        WinningNumbers(winningNumbers, bonusNumber)  // 예외가 발생하지 않아야 함
+        WinningNumbers(winningNumbers, bonusNumber)
     }
 }
