@@ -1,6 +1,7 @@
 package view
 
 import lotto.model.lotto.Lotto
+import lotto.model.lotto.Prize
 
 class OutputView {
     fun displayPurchaseLottoNumbers(lottoNumbers: List<Lotto>) {
@@ -9,4 +10,13 @@ class OutputView {
         lottoNumbers.forEach { println(it.getNumbers()) }
     }
 
+    fun printProfitStatic(results: Map<Prize, Int>, profitRate: String) {
+        println()
+        println("당첨 통계")
+        println("---")
+        results.forEach { (prize, count) ->
+            println("${prize.description} - ${count}개")
+        }
+        println("총 수익률은 ${profitRate}%입니다.")
+    }
 }
