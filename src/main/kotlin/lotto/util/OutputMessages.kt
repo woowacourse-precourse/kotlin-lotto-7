@@ -14,7 +14,7 @@ enum class OutputMessages(val message: String) {
     RESULT("총 수익률은 "),
     UNIT_CORRECT("개\n"),
     RESULT_SECOND("%입니다."),
-    RATE_FORMAT("#,###.#"),
+    RATE_FORMAT("#,##0.0"),
     NUMBER_FORMAT("#,###"),
     NEW_LINE("\n")
 }

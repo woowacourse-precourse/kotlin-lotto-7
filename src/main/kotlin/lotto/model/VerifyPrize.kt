@@ -1,7 +1,6 @@
 package lotto.model
 
 import lotto.util.PrizeRank
-import kotlin.math.roundToInt
 
 class VerifyPrize {
     val countPrize: MutableMap<PrizeRank, Int> = mutableMapOf()
@@ -16,8 +15,7 @@ class VerifyPrize {
             checkPrize(ticket, prizeNumber, bonusNumber)
         }
         val rate = earn / (tickets.size * LOTTO_PRICE) * PERCENTAGE
-        val formattedRate = (rate * SHIFT_DECIMAL_POINT).roundToInt().toDouble() / RESTORE_DECIMAL_POINT
-        return String.format(DECIMAL_PLACES, formattedRate).toDouble()
+        return String.format(DECIMAL_PLACES, rate).toDouble()
     }
 
     private fun checkPrize(ticket: List<Int>, prizeNumber: List<Int>, bonusNumber: Int) {
@@ -39,8 +37,6 @@ class VerifyPrize {
 
     companion object {
         private const val DECIMAL_PLACES = "%.1f"
-        private const val SHIFT_DECIMAL_POINT = 10
-        private const val RESTORE_DECIMAL_POINT = 10
         private const val INIT_EARN = 0.0
         private const val INIT_RANK_COUNT = 0
         private const val LOTTO_PRICE = 1000
