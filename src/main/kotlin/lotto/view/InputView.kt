@@ -37,9 +37,7 @@ object InputView {
             try {
                 println(InputMessage.INPUT_BONUS_NUMBER.getMessage())
                 val bonusNumber = validateBonusNumber(readLine())
-                if (bonusNumber !in Constants.RANDOM_MIN..Constants.RANDOM_MAX) {
-                    throw IllegalArgumentException(ErrorMessage.INVALID_BONUS_NUMBER.getMessage())
-                }
+
                 return bonusNumber
             } catch (e: IllegalArgumentException) {
                 println(e.message ?: ErrorMessage.UNKNOWN_ERROR.getMessage())
