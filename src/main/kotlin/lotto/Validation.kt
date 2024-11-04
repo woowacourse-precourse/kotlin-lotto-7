@@ -46,8 +46,9 @@ object Validation {
     fun validateBonusNumber(input: String?, winningNumbers: List<Int>): Int {
         if (input.isNullOrBlank()) throw LottoError.INVALID_NUM.throwException()
 
-        val bonusNum = input.trim().toIntOrNull()
-        if (bonusNum == null || bonusNum < 1 || bonusNum > 45)
+        val bonusNum = input.trim().toIntOrNull() ?: throw LottoError.INVALID_AMOUNT.throwException()
+
+        if (bonusNum < 1 || bonusNum > 45)
             throw LottoError.INVALID_NUM.throwException()
 
         if (winningNumbers.contains(bonusNum)) throw LottoError.INVALID_DUPLICATE.throwException()
