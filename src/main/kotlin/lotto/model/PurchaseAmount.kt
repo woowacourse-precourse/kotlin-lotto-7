@@ -8,6 +8,8 @@ class PurchaseAmount(private val amount: Int) {
 
     fun calculatePurchaseQuantity() = amount / PURCHASE_UNIT
 
+    fun getPurchaseAmount() = amount
+
     companion object {
         private const val PURCHASE_UNIT = 1000
     }

@@ -1,6 +1,8 @@
 package lotto.view
 
 import lotto.model.Lotto
+import lotto.model.LottoRank
+import java.text.DecimalFormat
 
 class OutputView {
     fun printPurchaseAmountRequest() {
@@ -27,6 +29,18 @@ class OutputView {
     fun printBonusNumberRequest() {
         println("")
         println("보너스 번호를 입력해 주세요.")
+    }
+
+    fun printMatchingResult(rankCount: Map<LottoRank, Int>) {
+        println("")
+        println("당첨 통계")
+        println("---")
+        rankCount.forEach { rank, count ->
+            if (rank.matchingNumbers != 0) {
+                val decimal = DecimalFormat("#,###")
+                println("${rank.message} (${decimal.format(rank.price)}원) - ${count}개")
+            }
+        }
     }
 
     fun printTotalRateOfReturn(rateOfReturn: Double) {
