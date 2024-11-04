@@ -2,7 +2,7 @@ package data
 
 import util.SettingValue
 
-enum class LottoMatchingCount(var count: Int, val prize: Double, val message: String) {
+enum class LottoWinningCount(var count: Int, val prize: Double, val message: String) {
     FIFTH(0, 5_000.0, SettingValue.FIFTH),
     FOURTH(0, 50_000.0, SettingValue.FOURTH),
     THIRD(0, 1_500_000.0, SettingValue.THIRD),

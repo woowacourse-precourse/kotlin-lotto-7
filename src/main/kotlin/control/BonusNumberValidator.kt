@@ -5,24 +5,23 @@ import util.SettingValue
 import view.ErrorMessage
 import view.Input
 
-class BonusNumberValidater {
+class BonusNumberValidator {
     private var validatorTest = false
     private lateinit var bonusNumber: String
 
+    // Stack Overflow 방지 위해 while 구현
     fun validate(winningNumber: Lotto): Int {
         while (!validatorTest) {
             bonusNumber = Input().bonusNumberInput()
-            bonusNumberException(winningNumber)
+            checkException(winningNumber)
         }
         return bonusNumber.toInt()
     }
 
-    private fun bonusNumberException(winningNumber: Lotto) {
+    private fun checkException(winningNumber: Lotto) {
         try {
             checkBlank(bonusNumber)
             checkNumber(bonusNumber)
-            checkBigNumber(bonusNumber)
-            checkIntRange(bonusNumber)
             checkLottoRange(bonusNumber)
             checkDuplicate(bonusNumber, winningNumber)
             validatorTest = true
@@ -39,21 +38,21 @@ class BonusNumberValidater {
         if (!amount.contains(Regex("^[0-9]*$"))) throw NumberFormatException(ErrorMessage.NOT_NUMBERS)
     }
 
-    private fun checkBigNumber(amount: String) {
-        if (amount.length > 11) throw IllegalArgumentException(ErrorMessage.OUT_OF_LOTTO_NUMBER_RANGE)
-    }
-
-    private fun checkIntRange(amount: String) {
-        if (amount.toLong() > Int.MAX_VALUE) throw ArithmeticException(ErrorMessage.OUT_OF_LOTTO_NUMBER_RANGE)
-    }
-
-    private fun checkLottoRange(bonusNumber: String) {
-        if (bonusNumber.toInt() < SettingValue.LOTTO_NUMBER_MINIMUM
-            || bonusNumber.toInt() > SettingValue.LOTTO_NUMBER_MAXIMUM
+    private fun checkLottoRange(number: String) {
+        if (
+            number.length > 11 ||
+            number.toLong() > Int.MAX_VALUE ||
+            number.toInt() < SettingValue.LOTTO_NUMBER_MINIMUM ||
+            number.toInt() > SettingValue.LOTTO_NUMBER_MAXIMUM
         ) throw IllegalArgumentException(ErrorMessage.OUT_OF_LOTTO_NUMBER_RANGE)
     }
 
     private fun checkDuplicate(bonusNumber: String, winningNumber: Lotto) {
-        if (winningNumber.contains(bonusNumber.toInt())) throw IllegalArgumentException(ErrorMessage.DUPLICATED_NUMBERS)
+        if (winningNumber.contains(bonusNumber.toInt())
+        ) throw IllegalArgumentException(ErrorMessage.DUPLICATED_NUMBERS)
+    }
+
+    internal fun checkDuplicateTest(bonusNumber: String, winningNumber: Lotto) {
+        return checkDuplicate(bonusNumber, winningNumber)
     }
 }

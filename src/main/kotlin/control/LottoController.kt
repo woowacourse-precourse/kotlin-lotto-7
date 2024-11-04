@@ -5,10 +5,11 @@ import data.Lotto
 import data.RandomLotto
 
 class LottoController {
+
     fun play() {
-        val randomLotto = RandomLotto(PurchaseAmountValidater().validate())
-        val winningNumber = Lotto(WinningNumberValidater().validate())
-        val bonusNumber = Bonus(BonusNumberValidater().validate(winningNumber))
+        val randomLotto = RandomLotto(PurchaseAmountValidator().validate())
+        val winningNumber = Lotto(WinningNumberValidator().validate())
+        val bonusNumber = Bonus(BonusNumberValidator().validate(winningNumber))
 
         LottoAnalyzer().analyze(
             randomLotto.read,

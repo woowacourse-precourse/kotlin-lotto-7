@@ -1,7 +1,7 @@
 package view
 
 import control.LottoAnalyzer
-import data.LottoMatchingCount
+import data.LottoWinningCount
 
 class Output {
 
@@ -16,9 +16,8 @@ class Output {
     fun winningStatistics(amount: Int) {
         println("\n" + WINNING_STATISTICS)
         println(DIVIDER)
-        LottoMatchingCount.entries.take(5).forEach { result ->
-            println(result.message + result.count.toString() + UNIT)
-        }
+        LottoWinningCount.entries.take(5)
+            .forEach { result -> println(result.message + result.count.toString() + UNIT) }
         println(
             TOTAL_RETURN_INTRO
                     + "%,.1f".format(LottoAnalyzer().calculateRateOfReturn(amount))

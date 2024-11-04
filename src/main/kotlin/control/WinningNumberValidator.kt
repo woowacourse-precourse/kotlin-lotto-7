@@ -1,60 +1,69 @@
 package control
 
+import util.SettingValue
 import view.ErrorMessage
 import view.Input
 
-class WinningNumberValidater {
+class WinningNumberValidator {
 
     private var validatorTest = false
     private lateinit var winningNumber: List<String>
 
+    // Stack Overflow 방지 위해 while 구현
     fun validate(): List<Int> {
         while (!validatorTest) {
-            winningNumberException()
+            winningNumber = Input().winningNumberInput()
+            checkException()
         }
         return winningNumber.map { it.toInt() }
     }
 
-    private fun winningNumberException(): Any {
+    private fun checkException() {
         try {
-            winningNumber = validateWinningNumber(Input().winningNumberInput())
+            check(winningNumber)
             validatorTest = true
-            return winningNumber
         } catch (ex: Exception) {
-            return print(ex.message)
+            print(ex.message)
         }
     }
 
-    private fun validateWinningNumber(winningNumber: List<String>): List<String> {
+    private fun check(winningNumber: List<String>): List<String> {
         winningNumber.forEach { number ->
+            checkBlank(number)
             checkNumber(number)
             checkBigNumber(number)
-//            checkIntRange(number)
-//            checkRange(number)
         }
-
         checkSize(winningNumber)
         checkDuplicates(winningNumber)
         return winningNumber
     }
 
-    private fun checkNumber(number: String) {
-        require(number.contains(Regex("^[0-9]*$"))) { ErrorMessage.NOT_NUMBERS }
+
+    private fun checkBlank(amount: String) {
+        if (amount.isBlank())
+            throw IllegalArgumentException(ErrorMessage.EMPTY_PURCHASED_NUMBER)
+    }
+
+    private fun checkNumber(amount: String) {
+        if (!amount.contains(Regex("^[0-9]*$")))
+            throw NumberFormatException(ErrorMessage.NOT_NUMBERS)
     }
 
     private fun checkBigNumber(number: String) {
-        require(
-            number.length < 11
-                    && number.toLong() < Int.MAX_VALUE
-                    && number.toInt() in 0..45
-        ) { ErrorMessage.OUT_OF_LOTTO_NUMBER_RANGE }
+        if (
+            number.length > 11
+            || number.toLong() > Int.MAX_VALUE
+            || number.toInt() < SettingValue.LOTTO_NUMBER_MINIMUM
+            || number.toInt() > SettingValue.LOTTO_NUMBER_MAXIMUM
+        ) throw IllegalArgumentException(ErrorMessage.OUT_OF_LOTTO_NUMBER_RANGE)
     }
 
     private fun checkSize(winningNumber: List<String>) {
-        require(winningNumber.size == 6) { ErrorMessage.NOT_INPUT_SIX_NUMBER }
+        if (winningNumber.size != 6) throw IllegalArgumentException(ErrorMessage.NOT_INPUT_SIX_NUMBER)
     }
 
     private fun checkDuplicates(winningNumber: List<String>) {
-        require(winningNumber.size == winningNumber.toSet().size) { ErrorMessage.DUPLICATED_NUMBERS }
+        if (winningNumber.size != winningNumber.toSet().size)
+            throw IllegalArgumentException(ErrorMessage.NOT_INPUT_SIX_NUMBER)
     }
 }

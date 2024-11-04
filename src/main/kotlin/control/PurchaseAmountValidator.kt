@@ -1,21 +1,22 @@
-import control.RandomLottoGenerator
+package control
+
 import view.ErrorMessage
 import view.Input
 
-class PurchaseAmountValidater {
-
+class PurchaseAmountValidator {
     private var validatorTest = false
     private lateinit var amount: String
 
+    // Stack Overflow 방지 위해 while 구현
     fun validate(): MutableList<List<Int>> {
         while (!validatorTest) {
             amount = Input().purchaseAmountInput()
-            purchaseAmountException()
+            checkException()
         }
-        return RandomLottoGenerator().purchase(amount.toInt())
+        return RandomLottoGenerator().generate(amount.toInt())
     }
 
-    private fun purchaseAmountException() {
+    private fun checkException() {
         try {
             checkBlank(amount)
             checkNumber(amount)
@@ -45,8 +46,15 @@ class PurchaseAmountValidater {
     }
 
     private fun checkDivide(amount: String) {
-        if (
-            amount.toInt() % 1000 != 0 || amount.toInt() == 0
-        ) throw IllegalArgumentException(ErrorMessage.NOT_DIVIDE_THOUSAND)
+        if (amount.toInt() % 1000 != 0 || amount.toInt() == 0)
+            throw IllegalArgumentException(ErrorMessage.NOT_DIVIDE_THOUSAND)
+    }
+
+    internal fun checkDivideTest(amount: String) {
+        return checkDivide(amount)
+    }
+
+    internal fun checkIntRangeTest(amount: String) {
+        return checkIntRange(amount)
     }
 }

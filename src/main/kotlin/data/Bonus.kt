@@ -1,16 +1,15 @@
 package data
 
-import view.ErrorMessage
+import util.SettingValue
 
 class Bonus(private val numbers: Int) {
+
     init {
-        require(numbers in 1..45) { ErrorMessage.OUT_OF_LOTTO_NUMBER_RANGE }
+        require(numbers in SettingValue.LOTTO_NUMBER_MINIMUM..SettingValue.LOTTO_NUMBER_MAXIMUM) {
+            "[ERROR] 보너스 번호는 1~45 사이여야 합니다."
+        }
     }
 
     val read: Int
         get() = numbers
-
-    override fun toString(): String {
-        return numbers.toString()
-    }
 }

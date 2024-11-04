@@ -5,25 +5,25 @@ import util.SettingValue
 import view.Output
 
 
-class RandomLottoGenerator() {
+class RandomLottoGenerator {
 
-    fun purchase(amount: Int): MutableList<List<Int>> {
-        val lottoCount = (amount.toString().toInt() / SettingValue.LOTTO_PRICE)
-        Output().lottoPurchase(lottoCount)
-        return repeat(lottoCount)
+    fun generate(amount: Int): MutableList<List<Int>> {
+        val lottoTickets = (amount.toString().toInt() / SettingValue.LOTTO_PRICE)
+        Output().lottoPurchase(lottoTickets)
+        return repeat(lottoTickets)
     }
 
-    private fun repeat(lottoCount: Int): MutableList<List<Int>> {
+    private fun repeat(lottoTickets: Int): MutableList<List<Int>> {
         val randomLottoList = mutableListOf<List<Int>>()
-        repeat(lottoCount) {
-            val randomLottoNumber = randomLottoGenerate()
+        repeat(lottoTickets) {
+            val randomLottoNumber = randomRange()
             randomLottoList.add(randomLottoNumber)
         }
         Output().randomLottoList(randomLottoList)
         return randomLottoList
     }
 
-    private fun randomLottoGenerate(): List<Int> {
+    private fun randomRange(): List<Int> {
         return Randoms.pickUniqueNumbersInRange(
             SettingValue.LOTTO_NUMBER_MINIMUM,
             SettingValue.LOTTO_NUMBER_MAXIMUM,
