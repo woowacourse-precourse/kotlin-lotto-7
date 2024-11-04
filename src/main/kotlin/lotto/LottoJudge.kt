@@ -8,14 +8,32 @@ class LottoJudge {
     private var bonusNumber: Int = 0
 
     fun saveUserInput() {
-        inputWinningNumbers()
-        inputBonusNumber()
+        saveWinningNumbers()
+        saveBonusNumber()
+    }
+
+    private fun saveWinningNumbers() {
+        while (true) try {
+            inputWinningNumbers()
+            return
+        } catch (error: IllegalArgumentException) {
+            println(error.message)
+        }
     }
 
     private fun inputWinningNumbers() {
         println("\n당첨 번호를 입력해 주세요.")
         val inputWinningNumbers = Console.readLine().split(",").map { it.toInt() }
         setLottoWinningNumbers(inputWinningNumbers)
+    }
+
+    private fun saveBonusNumber() {
+        while (true) try {
+            inputBonusNumber()
+            return
+        } catch (error: IllegalArgumentException) {
+            println(error.message)
+        }
     }
 
     private fun inputBonusNumber() {
