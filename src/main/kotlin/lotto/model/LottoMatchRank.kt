@@ -1,9 +1,11 @@
 package lotto.model
 
+import lotto.util.*
+
 enum class LottoMatchRank(val matchCount: Int, val prize: Int) {
-    FIFTH(3, 5_000),
-    FOURTH(4, 50_000),
-    THIRD(5, 1_500_000),
-    SECOND(5, 30_000_000),
-    FIRST(6, 2_000_000_000)
+    FIFTH(FIFTH_MATCH_COUNT, FIFTH_PRIZE),
+    FOURTH(FOURTH_MATCH_COUNT, FOURTH_PRIZE),
+    THIRD(THIRD_MATCH_COUNT, THIRD_PRIZE),
+    SECOND(SECOND_MATCH_COUNT, SECOND_PRIZE),
+    FIRST(FIRST_MATCH_COUNT, FIRST_PRIZE)
 }
