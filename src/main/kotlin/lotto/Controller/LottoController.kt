@@ -2,6 +2,7 @@ package lotto.Controller
 
 import lotto.Lotto
 import lotto.Model.InputValidater
+import lotto.Model.LottoRankResultsAnnouncer
 import lotto.Model.RandomLottoMaker
 import lotto.Model.WinningLottoResult
 import lotto.View.InputView
@@ -17,7 +18,10 @@ class LottoController {
 
     fun execute() {
         getInputsAndReleaseLottos()
-        outputView.printLottoResults(winningLottoResult)
+        val lottoRankResultsAnnouncer = LottoRankResultsAnnouncer(releasedLottos, winningLottoResult)
+        val lottoRankResults = lottoRankResultsAnnouncer.getLottoRankResults()
+        val totalRateOfReturn = lottoRankResultsAnnouncer.calculateTotalRateOfReturn(lottoRankResults)
+        outputView.printLottoResults(lottoRankResults, totalRateOfReturn)
     }
 
     private fun getInputsAndReleaseLottos() {
