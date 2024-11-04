@@ -28,6 +28,15 @@ class LottoGame {
         val prizeCounts = Prize.values().associateWith { 0 }.toMutableMap()
         var totalPrize = 0
 
+        lottos.forEach { lotto ->
+            updatePrizeCounts(lotto, winningNumbers, bonusNumber, prizeCounts).also {
+                totalPrize += it
+            }
+        }
+
+        val purchaseAmount = lottos.size * Constants.LOTTO_UNIT_PRICE
+
+        return LottoResult(prizeCounts, totalPrize, purchaseAmount)
     }
 
     private fun updatePrizeCounts(
