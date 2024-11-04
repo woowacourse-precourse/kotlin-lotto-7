@@ -21,9 +21,10 @@
     - 구입 금액 입력 getPurchasePrice
     - 당첨 번호 입력 getWinningNumbers
     - 보너스 번호 입력 getBonusNumbers
-- 출력
-    - 8개의 로또 당첨 번호 리스트
-    - 당첨 통계 (일치 개수, 수익률)
+- 출력 OutputView
+    - 랜덤 생성한 로또 번호 출력 showRandomLottos
+    - 로또 일치 개수 출력 showStatus
+    - 수익률 출력 showProfitRate
 - LottoService
     - ~~당첨 번호 저장~~
     - 로또 당첨 확인 matchAllLotto
