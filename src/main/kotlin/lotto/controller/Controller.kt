@@ -1,7 +1,6 @@
 package lotto.controller
 
 import lotto.model.LottoGame
-import lotto.model.Rank
 import lotto.view.InputView
 import lotto.view.OutputView
 
@@ -14,8 +13,8 @@ class Controller {
         buyLottoTicket()
         inputWinningNumbers()
         inputBonusBall()
-        lottoGame.setWinnings()
-        getResult()
+        showResult()
+        showRatePrize()
     }
 
     private fun buyLottoTicket() {
@@ -24,14 +23,14 @@ class Controller {
         do {
             outputView.showPrompt(REQUEST_PURCHASE_MESSAGE)
             moneyInput = inputView.readLine()
-            message = lottoGame.isValidMoney(moneyInput)
+            message = lottoGame.validateMoney(moneyInput)
             if (message is String) {
                 outputView.showPrompt(message)
             }
         } while (message is String)
         lottoGame.buy(moneyInput.toInt())
-        outputView.showPrompt("\n" + "${lottoGame.lottoOrder.totalTicket}" + CONFIRM_COUNT_MESSAGE)
-        lottoGame.generateLottoTickets(lottoGame.lottoOrder.totalTicket)
+        outputView.showPrompt("\n" + "${lottoGame.lottoOrder.ticketAmount}" + CONFIRM_COUNT_MESSAGE)
+        lottoGame.generateLottoTickets(lottoGame.lottoOrder.ticketAmount)
     }
 
     private fun inputWinningNumbers() {
@@ -40,12 +39,12 @@ class Controller {
         do {
             outputView.showPrompt(REQUEST_WINNING_NUMBER_MESSAGE)
             winningInput = inputView.readLine()
-            message = lottoGame.isValidNumbers(winningInput)
+            message = lottoGame.validateNumbers(winningInput)
             if (message is String) {
                 outputView.showPrompt(message)
             }
         } while (message is String)
-        lottoGame.lottoWinning.numbers = winningInput.split(",").map { it.toInt() }
+        lottoGame.lottoWinning.numbers = winningInput.split(SEPARATOR).map { it.toInt() }
     }
 
     private fun inputBonusBall() {
@@ -54,55 +53,28 @@ class Controller {
         do {
             outputView.showPrompt(REQUEST_BONUS_NUMBER_MESSAGE)
             bonusInput = inputView.readLine()
-            message = lottoGame.isValidBonus(bonusInput)
+            message = lottoGame.validateBonus(bonusInput)
             if (message is String) {
                 outputView.showPrompt(message)
             }
         } while (message is String)
         lottoGame.lottoWinning.bonus = bonusInput.toInt()
+        lottoGame.setWinnings()
     }
 
-    fun getResult() {
+    private fun showResult() {
         outputView.showPrompt(TOTAL_WINNING_MESSAGE)
         lottoGame.rankings.forEach {
-            showResult(it)
+            outputView.showPrompt(lottoGame.getResult(it))
         }
-        getRatePrize(getTotalPrize())
     }
 
-    private fun formatMoney(money: Int): String {
-        var formated = ""
-        val moneyString = money.toString()
-        val num = moneyString.length % 3 - 1
-        for (index in moneyString.indices) {
-            formated += moneyString[index]
-            if (index % 3 == num && index != moneyString.length - 1) {
-                formated += SEPARATOR
-            }
-        }
-        return formated
-    }
-
-    fun showResult(ranking: Rank) {
-        var result = "${ranking.ranking.getWinningBall()}" + FIRST_MESSAGE
-        if (ranking.ranking.getWinningBall() == 5 && ranking.ranking.getBonusBall()) {
-            result += BONUS_BALL_MESSAGE
-        }
-        result += SECOND_MESSAGE + formatMoney(ranking.ranking.getPrizeMoney()) + THIRD_MESSAGE + ranking.wins + LAST_MESSAGE
-        outputView.showPrompt(result)
-    }
-
-    private fun getTotalPrize(): Long {
+    private fun showRatePrize() {
         var totalPrize: Long = 0
         lottoGame.rankings.forEach {
             totalPrize += (it.ranking.getPrizeMoney() * it.wins)
         }
-        println(totalPrize)
-        return totalPrize
-    }
-
-    fun getRatePrize(totalPrize: Long) {
-        val ratePrize = totalPrize.toDouble() / lottoGame.lottoOrder.totalPrice * 100.0
+        val ratePrize = totalPrize.toDouble() / lottoGame.lottoOrder.money * 100.0
         outputView.showPrompt(PREFIX_RETURN_MESSAGE + ratePrize.toString() + SUFFIX_RETURN_MESSAGE)
     }
 
