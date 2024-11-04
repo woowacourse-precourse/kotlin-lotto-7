@@ -24,4 +24,8 @@ class OutputView {
             println("${rank.matchCount}개 일치 (${rank.prize}원) - ${rank.count}개")
         }
     }
+
+    fun displayProfitPercentage(percentage: Double) {
+        println("수익률: ${percentage}%")
+    }
 }

@@ -8,12 +8,14 @@ import lotto.model.BonusNumber
 import lotto.model.Lotto
 import lotto.model.LottoGenerator
 import lotto.model.LottoRank
+import lotto.model.Profit
 
 class LottoController {
     private val inputView = InputView()
     private val outputView = OutputView()
     private val validator = Validator()
     private val generator = LottoGenerator()
+    private val profit = Profit()
 
     fun lottoGame() {
         val purchaseAmount = getLottoPurchaseAmount()
@@ -24,6 +26,7 @@ class LottoController {
         val winLottoNumbers = getWinningNumbers()
         val bonusNumber = getBonusNumber(winLottoNumbers)
         calculateWinningStatistics(lottoTickets, winLottoNumbers, bonusNumber.toInt())
+        showProfitPercentage(purchaseAmount)
     }
 
     private fun getLottoPurchaseAmount(): Int {
@@ -75,4 +78,10 @@ class LottoController {
         }
         outputView.displayWinningMessage()
     }
+
+    private fun showProfitPercentage(purchaseAmount: Int) {
+        val profitPercentage = profit.calculateProfitPercentage(purchaseAmount)
+        outputView.displayProfitPercentage(profitPercentage)
+    }
+
 }
