@@ -43,13 +43,13 @@ class CalculationWinningStatistics(
         for (count in matchingNumbersCountList) {
             if (count.contains("3")) profit += 5000
             if (count.contains("4")) profit += 50000
-            if (count.contains("보너스")) profit += 30000000
             if (count.contains("5")) profit += 1500000
+            if (count.contains("보너스")) profit += 30000000
             if (count.contains("6")) profit += 2000000000
 
         }
         addStats()
-        val yield = String.format("%.2f", yieldCalculation()).toDouble()
+        val yield = String.format("%.1f", yieldCalculation())
         return OutputWinningStatistics(matchingNumbersList, yield)
     }
 
@@ -57,8 +57,8 @@ class CalculationWinningStatistics(
         for (count in matchingNumbersCountList) {
             if (count.contains("3")) ++matchingNumbersList[0]
             if (count.contains("4")) ++matchingNumbersList[1]
-            if (count.contains("보너스")) ++matchingNumbersList[2]
-            if (count.contains("5")) ++matchingNumbersList[3]
+            if (count.contains("5")) ++matchingNumbersList[2]
+            if (count.contains("보너스")) ++matchingNumbersList[3]
             if (count.contains("6")) ++matchingNumbersList[4]
         }
     }

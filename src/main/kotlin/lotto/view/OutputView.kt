@@ -12,7 +12,7 @@ object OutputView {
 
     fun OutputWinningStatistics(
         matchingNumbersList: MutableList<Int>,
-        yield: Double
+        yield: String
     ) {
         println(OUTPUT_RESULT_OF_WINNING)
         println("3개 일치 (5,000원) - ${matchingNumbersList[0]}개")
