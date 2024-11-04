@@ -4,11 +4,6 @@ import camp.nextstep.edu.missionutils.Console
 import camp.nextstep.edu.missionutils.Randoms
 
 class Lotto(private val numbers: List<Int>) {
-    init {
-        require(numbers.size == 6) { "[ERROR] 로또 당첨 번호는 6개여야 합니다." }
-        require(numbers.all { it in 1..45 }) { "[ERROR] 로또 당첨 번호는 1~45 사이의 숫자여야 합니다." }
-        require(numbers.size == numbers.toSet().size) { "[ERROR] 로또 당첨 번호는 중복될 수 없습니다." }
-    }
 
     enum class LottoRank(val matchCount: Int, val matchBonus: Boolean, val prize: Long, val displayText: String) {
         FIRST(6, false, 2_000_000_000, "6개 일치 (2,000,000,000원)"),
@@ -20,53 +15,90 @@ class Lotto(private val numbers: List<Int>) {
 
         companion object {
             fun valueOf(matchCount: Int, matchBonus: Boolean): LottoRank {
-                return values().find { it.matchCount == matchCount && it.matchBonus == matchBonus } ?: NONE
+                return entries.find { it.matchCount == matchCount && it.matchBonus == matchBonus } ?: NONE
             }
         }
     }
+
     companion object {
         private const val ERROR_MESSAGE_PREFIX = "[ERROR]"
+
+        fun runLotto() {
+            val validLottoAmount = runWithRetry { readLottoAmount() }
+            val lottos = generateLottoNumbers(validLottoAmount)
+
+            println("당첨 번호를 입력해 주세요.")
+            val validWinningNumber = runWithRetry { readWinningNumbers() }
+
+            println("보너스 번호를 입력해 주세요.")
+            val validBonusNumber = runWithRetry { readBonusNumber(validWinningNumber) }
+
+            println("${validLottoAmount}개를 구매했습니다.")
+            lottos.forEach { println(it.numbers) }
+
+            val results = lottoRanks(lottos, validWinningNumber, validBonusNumber)
+            extractedRank(results, validLottoAmount)
+        }
+
+        private fun <T> runWithRetry(action: () -> T): T {
+            while (true) {
+                try {
+                    return action()
+                } catch (e: IllegalArgumentException) {
+                    println(e.message)
+                }
+            }
+        }
+
+        private fun readLottoAmount(): Int {
+            println("구입 금액을 입력해 주세요.")
+            val amount = Console.readLine()
+            return checkLottoAmount(amount)
+        }
+
         private fun checkLottoAmount(amount: String): Int {
             val lottoAmount = amount.toIntOrNull()
-            when {
+            return when {
                 lottoAmount == null -> throw IllegalArgumentException("$ERROR_MESSAGE_PREFIX 구입 금액은 숫자여야 합니다.")
                 lottoAmount < 0 -> throw IllegalArgumentException("$ERROR_MESSAGE_PREFIX 구입 금액은 양의 정수여야 합니다.")
                 lottoAmount % 1000 != 0 -> throw IllegalArgumentException("$ERROR_MESSAGE_PREFIX 구입 금액은 1000원 단위여야 합니다.")
-                else -> return lottoAmount / 1000
+                else -> lottoAmount / 1000
             }
+        }
+
+        private fun readWinningNumbers(): List<Int> {
+            val winningNumbers = Console.readLine()
+            return checkWinningNumber(winningNumbers)
         }
 
         private fun checkWinningNumber(numbers: String): List<Int> {
-            val winningNumbers = if ("," in numbers) {
-                numbers.split(",")
+            val winningNumbers = numbers.split(",")
                 .map { it.trim() }
                 .filter { it.isNotEmpty() }
-                .map { it.toIntOrNull() ?: throw IllegalArgumentException("$ERROR_MESSAGE_PREFIX 당첨 번호는 숫자여야 합니다.")}
-            } else { throw IllegalArgumentException("$ERROR_MESSAGE_PREFIX 당첨 번호는 ','를 이용하여 구분하여야 합니다.\n[예시] 1,2,3,4,5,6")}
+                .map { it.toIntOrNull() ?: throw IllegalArgumentException("$ERROR_MESSAGE_PREFIX 당첨 번호는 숫자여야 합니다.") }
 
-            when {
-                winningNumbers.size != 6 -> throw IllegalArgumentException("$ERROR_MESSAGE_PREFIX 당첨 번호는 6자리의 숫자여야 합니다.")
-                winningNumbers.any { it !in 1..45} -> throw IllegalArgumentException("$ERROR_MESSAGE_PREFIX 당첨 번호는 1~45 사이의 숫자여야 합니다.")
-                winningNumbers.size != winningNumbers.toSet().size -> throw IllegalArgumentException("$ERROR_MESSAGE_PREFIX 당첨 번호는 중복을 허용하지 않습니다.")
-            }
+            require(winningNumbers.size == 6) { "$ERROR_MESSAGE_PREFIX 당첨 번호는 6자리의 숫자여야 합니다." }
+            require(winningNumbers.all { it in 1..45 }) { "$ERROR_MESSAGE_PREFIX 당첨 번호는 1~45 사이의 숫자여야 합니다." }
+            require(winningNumbers.toSet().size == 6) { "$ERROR_MESSAGE_PREFIX 당첨 번호는 중복될 수 없습니다." }
             return winningNumbers
         }
 
-        private fun checkBonusNumber(number: String, winningNumber: List<Int>): Int? {
-            val bonusNumber = number.toIntOrNull()
+        private fun readBonusNumber(winningNumbers: List<Int>): Int {
+            val bonusNumber = Console.readLine()
+            return checkBonusNumber(bonusNumber, winningNumbers)
+        }
 
-            when {
-                bonusNumber == null -> throw IllegalArgumentException("$ERROR_MESSAGE_PREFIX 보너스 번호는 숫자여야 합니다.")
-                bonusNumber !in 1..45 -> throw IllegalArgumentException("$ERROR_MESSAGE_PREFIX 보너스 번호는 1~45 사이의 숫자여야 합니다.")
-                bonusNumber in winningNumber -> throw IllegalArgumentException("$ERROR_MESSAGE_PREFIX 보너스 번호는 당첨 번호와 중복될 수 없습니다.")
-            }
+        private fun checkBonusNumber(number: String, winningNumbers: List<Int>): Int {
+            val bonusNumber = number.toIntOrNull()
+                ?: throw IllegalArgumentException("$ERROR_MESSAGE_PREFIX 보너스 번호는 숫자여야 합니다.")
+            require(bonusNumber in 1..45) { "$ERROR_MESSAGE_PREFIX 보너스 번호는 1~45 사이의 숫자여야 합니다." }
+            require(bonusNumber !in winningNumbers) { "$ERROR_MESSAGE_PREFIX 보너스 번호는 당첨 번호와 중복될 수 없습니다." }
             return bonusNumber
         }
 
         private fun generateLottoNumbers(amount: Int): List<Lotto> {
             return List(amount) {
-                val lottoNumbers = Randoms.pickUniqueNumbersInRange(1, 45, 6).sorted()
-                Lotto(lottoNumbers)
+                Lotto(Randoms.pickUniqueNumbersInRange(1, 45, 6).sorted())
             }
         }
 
@@ -75,16 +107,15 @@ class Lotto(private val numbers: List<Int>) {
             validWinningNumber: List<Int>,
             validBonusNumber: Int?,
         ): List<LottoRank> {
-            val results = lottos.map { lotto ->
+            return lottos.map { lotto ->
                 val matchCount = lotto.numbers.count { it in validWinningNumber }
                 val matchBonus = validBonusNumber != null && validBonusNumber in lotto.numbers
                 LottoRank.valueOf(matchCount, matchBonus)
             }
-            return results
         }
 
         private fun extractedRank(results: List<LottoRank>, validLottoAmount: Int) {
-            val rankCounts = LottoRank.values().associateWith { rank -> results.count { it == rank } }
+            val rankCounts = LottoRank.entries.associateWith { rank -> results.count { it == rank } }
             val totalPrize = rankCounts.entries.sumOf { (rank, count) -> rank.prize * count }
             val profitRate = (totalPrize.toDouble() / (validLottoAmount * 1000)) * 100
 
@@ -96,27 +127,6 @@ class Lotto(private val numbers: List<Int>) {
             println("${LottoRank.SECOND.displayText} - ${rankCounts[LottoRank.SECOND] ?: 0}개")
             println("${LottoRank.FIRST.displayText} - ${rankCounts[LottoRank.FIRST] ?: 0}개")
             println("총 수익률은 ${"%.1f".format(profitRate)}%입니다.")
-        }
-
-        fun runLotto() {
-            println("구입 금액을 입력해 주세요.")
-            val lottoAmount = Console.readLine()
-            val validLottoAmount = checkLottoAmount(lottoAmount)
-
-            println("당첨 번호를 입력해 주세요.")
-            val winningNumbers = Console.readLine()
-            val validWinningNumber = checkWinningNumber(winningNumbers)
-
-            println("보너스 번호를 입력해 주세요.")
-            val bonusNumber = Console.readLine()
-            val validBonusNumber = checkBonusNumber(bonusNumber, validWinningNumber)
-
-            println("${validLottoAmount}개를 구매했습니다.")
-            val lottos = generateLottoNumbers(validLottoAmount)
-            lottos.forEach { println(it.numbers) }
-
-            val results = lottoRanks(lottos, validWinningNumber, validBonusNumber)
-            extractedRank(results, validLottoAmount)
         }
     }
 }
