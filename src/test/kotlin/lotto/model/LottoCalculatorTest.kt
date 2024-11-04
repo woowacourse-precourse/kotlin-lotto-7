@@ -1,6 +1,7 @@
 package lotto.model
 
 import camp.nextstep.edu.missionutils.test.Assertions.assertRandomUniqueNumbersInRangeTest
+import lotto.utils.Constants
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 
@@ -36,4 +37,66 @@ class LottoCalculatorTest {
             *expectedNumbers.subList(1, expectedNumbers.size).toTypedArray()
         )
     }
+
+    @Test
+    fun `calculateProfitRate 메서드는 올바른 수익률을 계산해야 한다`() {
+        // given: 각 랭크의 결과 맵을 설정
+        val result = mutableMapOf(
+            LottoRank.FIRST to 1, // 1등 1개
+            LottoRank.SECOND to 0,
+            LottoRank.THIRD to 0,
+            LottoRank.FOURTH to 0,
+            LottoRank.FIFTH to 0,
+            LottoRank.NONE to 0
+        )
+
+        // when: calculateProfitRate 메서드 호출
+        val profitRate = LottoCalculator.calculateProfitRate(result)
+
+        // then: 수익률이 예상과 일치하는지 검증
+        val totalLottoPrize = LottoRank.FIRST.prize.toDouble()
+        val totalSpent = result.values.sum() * Constants.LOTTO_PRICE
+        val expectedProfitRate = (totalLottoPrize / totalSpent) * 100
+
+        assertEquals(expectedProfitRate, profitRate, 0.1) // 소수점 첫째 자리까지 비교
+    }
+
+    @Test
+    fun `calculateProfitRate는 구매 금액이 0일 때 0%의 수익률을 반환해야 한다`() {
+        // given: 빈 결과 맵
+        val result = mutableMapOf(
+            LottoRank.FIRST to 0,
+            LottoRank.SECOND to 0,
+            LottoRank.THIRD to 0,
+            LottoRank.FOURTH to 0,
+            LottoRank.FIFTH to 0,
+            LottoRank.NONE to 0
+        )
+
+        // when: calculateProfitRate 메서드 호출
+        val profitRate = LottoCalculator.calculateProfitRate(result)
+
+        // then: 구매 금액이 0일 때 수익률은 0%이어야 함
+        assertEquals(0.0, profitRate, 0.1)
+    }
+
+    @Test
+    fun `calculateProfitRate는 구매 금액이 0보다 클 때 당첨된 로또가 없으면 0%의 수익률을 반환해야 한다`() {
+        // given: 빈 결과 맵
+        val result = mutableMapOf(
+            LottoRank.FIRST to 0,
+            LottoRank.SECOND to 0,
+            LottoRank.THIRD to 0,
+            LottoRank.FOURTH to 0,
+            LottoRank.FIFTH to 0,
+            LottoRank.NONE to 10
+        )
+
+        // when: calculateProfitRate 메서드 호출
+        val profitRate = LottoCalculator.calculateProfitRate(result)
+
+        // then: 구매 금액이 0일 때 수익률은 0%이어야 함
+        assertEquals(0.0, profitRate, 0.1)
+    }
+
 }
