@@ -14,7 +14,7 @@ class Input {
         println(INFO_GET_PURCHASE_AMOUNT)
         val value = readLine().let {
             inputValidation.typeInt(it).also { amount ->
-                inputValidation.unitOfNumber(amount, TICKET_PRICE)
+                inputValidation.unitOfPrice(amount, TICKET_PRICE)
             }
         }
         println()
