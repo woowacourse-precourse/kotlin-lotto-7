@@ -139,8 +139,7 @@ class LottoTest {
 
         val winningLotto = WinningLotto(Lotto(listOf(1, 2, 3, 4, 5, 6)), 7)
         LottoController().calculatePrize(lottoes, winningLotto)
-        val earningMoney = LottoController().calculateEarningMoney()
-        val earningRate = LottoController().getEarningRate(earningMoney, 3000)
+        val earningRate = LottoController().getEarningRate(3000)
 
         assertEquals(2000.0, earningRate)
     }

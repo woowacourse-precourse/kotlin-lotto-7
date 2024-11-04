@@ -20,8 +20,7 @@ class LottoController {
         calculatePrize(lottoes, winningLotto)
         OutputView.printWinningStatistics()
 
-        val earningMoney = calculateEarningMoney()
-        val earningRate = getEarningRate(earningMoney, money)
+        val earningRate = getEarningRate(money)
         OutputView.printEarningRate(earningRate)
     }
 
@@ -61,11 +60,12 @@ class LottoController {
         }
     }
 
-    fun calculateEarningMoney(): Int {
+    private fun calculateEarningMoney(): Int {
         return Prize.entries.sumOf { it.prize * it.winningCount }
     }
 
-    fun getEarningRate(earningMoney: Int, money: Int): Double {
+    fun getEarningRate(money: Int): Double {
+        val earningMoney = calculateEarningMoney()
         return earningMoney.toDouble() / money * 100
     }
 
