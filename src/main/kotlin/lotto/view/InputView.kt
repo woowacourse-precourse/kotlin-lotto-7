@@ -7,25 +7,47 @@ import lotto.domain.PurchaseAmount
 object InputView {
     fun inputPurchaseMoney(): PurchaseAmount {
         println(INPUT_PURCHASE_MONEY_MESSAGE)
-        val money = Console.readLine().toInt()
-        return PurchaseAmount(money)
+        return try {
+            val money = Console.readLine().toIntOrNull() ?: throw IllegalArgumentException(
+                ERROR_INVALID_INPUT_MESSAGE
+            )
+            PurchaseAmount(money)
+        } catch (e: IllegalArgumentException) {
+            println(e.message)
+            inputPurchaseMoney()
+        }
     }
 
     fun inputWinningNumbers(): Lotto {
         println(INPUT_WINNING_NUMBER_MESSAGE)
-        val winningNumbers = Console.readLine().split(NUMBER_DELIMITER).map { it.toInt() }
-        return Lotto(winningNumbers)
+        return try {
+            val winningNumbers = Console.readLine().split(NUMBER_DELIMITER).map {
+                it.toIntOrNull() ?: throw IllegalArgumentException(ERROR_INVALID_INPUT_MESSAGE)
+            }
+            Lotto(winningNumbers)
+        } catch (e: IllegalArgumentException) {
+            println(e.message)
+            inputWinningNumbers()
+        }
     }
 
     fun inputBonusNumber(): Int {
         println(INPUT_BONUS_NUMBER_MESSAGE)
-        val bonusNumber = Console.readLine().toInt()
-        return bonusNumber
+        return try {
+            val bonusNumber = Console.readLine().toIntOrNull() ?: throw IllegalArgumentException(
+                ERROR_INVALID_INPUT_MESSAGE
+            )
+            bonusNumber
+        } catch (e: IllegalArgumentException) {
+            println(e.message)
+            inputBonusNumber()
+        }
     }
 
     private const val INPUT_PURCHASE_MONEY_MESSAGE = "구입금액을 입력해 주세요."
     private const val INPUT_WINNING_NUMBER_MESSAGE = "당첨 번호를 입력해 주세요."
     private const val INPUT_BONUS_NUMBER_MESSAGE = "보너스 번호를 입력해 주세요."
+    private const val ERROR_INVALID_INPUT_MESSAGE = "[ERROR] 올바른 숫자를 입력해야 합니다."
 
     private const val NUMBER_DELIMITER = ','
 }
