@@ -85,10 +85,10 @@ class LottoServiceTest {
     @ParameterizedTest
     @CsvSource(
         value = [
-            "1000,10000,1000.0",
-            "10000,0,0.0",
-            "5000,5000,100.0"
-        ]
+            "1000:10000:1,000.0",
+            "10000:0:0.0",
+            "5000:5000:100.0"
+        ], delimiter = ':'
     )
     @DisplayName("수익률 계산 확인")
     fun `당첨 로또 수령 금액 확인 테스트`(input: Int, output: Int, expected: String) {
