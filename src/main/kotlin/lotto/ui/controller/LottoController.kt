@@ -8,12 +8,12 @@ import lotto.domain.entity.User
 import lotto.domain.entity.WinningNumbers
 import lotto.ui.view.LottoBuyView
 import lotto.ui.view.LottoResultView
-import lotto.ui.view.WinningNumberInputView
+import lotto.ui.view.WinningNumbersInputView
 
 class LottoController(
     appContainer: AppContainer,
     private val lottoBuyView: LottoBuyView,
-    private val winningNumberInputView: WinningNumberInputView,
+    private val winningNumberInputView: WinningNumbersInputView,
     private val lottoResultView: LottoResultView
 ) {
 

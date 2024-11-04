@@ -4,10 +4,10 @@ import lotto.domain.entity.WinningNumbers
 import lotto.extention.parseToIntOrThrow
 
 class CreateWinningNumbersUseCase {
-    fun execute(numbersInput: () -> String): WinningNumbers {
+    fun execute(winningNumbersInput: () -> String): WinningNumbers {
         while (true) {
             try {
-                val numbers = parseNumbersInput(numbersInput())
+                val numbers = parseNumbersInput(winningNumbersInput())
                 return WinningNumbers(numbers)
             } catch (e: IllegalArgumentException) {
                 println(e.message)

@@ -4,10 +4,10 @@ import lotto.domain.entity.User
 import lotto.extention.parseToIntOrThrow
 
 class CreateUserUseCase {
-    fun execute(priceInput: () -> String): User {
+    fun execute(purchaseAmountInput: () -> String): User {
         while (true) {
             try {
-                val lottoCost = priceInput().parseToIntOrThrow()
+                val lottoCost = purchaseAmountInput().parseToIntOrThrow()
                 return User(lottoCost)
             } catch (e: IllegalArgumentException) {
                 println(e.message)

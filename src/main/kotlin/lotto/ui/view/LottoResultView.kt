@@ -14,7 +14,7 @@ class LottoResultView {
 
     private fun formatLottoRankResult(lottoRank: LottoRank, lottoTicketsRank: List<LottoRank>): String {
         val matchCount = lottoRank.matchCount
-        val price = lottoRank.prize.priceFormat()
+        val price = lottoRank.prize.toWonFormat()
         val lottoCount = lottoTicketsRank.count { lottoTicketRank -> lottoTicketRank == lottoRank }
         if (lottoRank == LottoRank.SECOND) {
             return "${matchCount}개 일치, 보너스 볼 일치 (${price}) - ${lottoCount}개"
@@ -26,7 +26,7 @@ class LottoResultView {
         println("총 수익률은 ${lottoProfitRate}입니다.")
     }
 
-    private fun Int.priceFormat(): String {
+    private fun Int.toWonFormat(): String {
         val formatter = DecimalFormat(WON_FORMAT_PATTERN)
         return formatter.format(this)
     }

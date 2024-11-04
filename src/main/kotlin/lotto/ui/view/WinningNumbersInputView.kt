@@ -2,7 +2,7 @@ package lotto.ui.view
 
 import camp.nextstep.edu.missionutils.Console
 
-class WinningNumberInputView {
+class WinningNumbersInputView {
 
     fun guideWinningNumbers() = println(INPUT_WINNING_NUMBERS_MESSAGE)
 
