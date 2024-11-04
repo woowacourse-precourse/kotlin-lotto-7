@@ -29,5 +29,12 @@ class Lotto(private val numbers: List<Int>) {
         return inputLottoNum.sorted() == randomLottoNum.sorted()
     }
 
+    fun countMatch(otherLotto: Lotto): Int {
+        return numbers.fold(0) { total, number ->
+            total + if (otherLotto.numbers.contains(number)) 1 else 0
+        }
+    }
+
+    fun contains(number: Int) = numbers.contains(number)
 
 }
