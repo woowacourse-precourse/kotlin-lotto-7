@@ -73,7 +73,7 @@ private fun printTicketCount(lottoTicketCount: Int) {
     println("${lottoTicketCount}개를 구매했습니다.")
 }
 
-fun getLottoBudget(): Int {
+private fun getLottoBudget(): Int {
     try {
         println("구입금액을 입력해 주세요.")
         val userInput = Console.readLine()
@@ -96,16 +96,16 @@ private fun handleBudgetInputError(lottoBudget: Int, userInput: String) {
     }
 }
 
-fun getLottoTicketCount(lottoBudget: Int): Int {
+private fun getLottoTicketCount(lottoBudget: Int): Int {
     return lottoBudget / LOTTO_TICKET_VALUE
 }
 
-fun getLottoNumbers(): List<Int> {
+private fun getLottoNumbers(): List<Int> {
     val lottoNumbers = Randoms.pickUniqueNumbersInRange(1, 45, LOTTO_NUMBER_COUNT).toList()
     return lottoNumbers
 }
 
-fun getLottoWinningNumbers(): List<Int> {
+private fun getLottoWinningNumbers(): List<Int> {
     try {
         println("당첨 번호를 입력해 주세요.")
         val userInput = Console.readLine()
@@ -131,7 +131,7 @@ private fun handleWinningNumberInputError(lottoWinningNumbers: List<Int>) {
     }
 }
 
-fun getLottoBonusNumber(lottoWinningNumbers: List<Int>): Int {
+private fun getLottoBonusNumber(lottoWinningNumbers: List<Int>): Int {
     try {
         println("보너스 번호를 입력해 주세요.")
         val userInput = Console.readLine()
@@ -153,13 +153,13 @@ private fun HandleBonusInputError(lottoBonusNumber: Int, lottoWinningNumbers: Li
     }
 }
 
-fun compareLottoNumbers(lottoWinningNumbers: List<Int>, lottoBonusNumber: Int, lotto: Lotto): Pair<Int, Int> {
+private fun compareLottoNumbers(lottoWinningNumbers: List<Int>, lottoBonusNumber: Int, lotto: Lotto): Pair<Int, Int> {
     val matchingCount = lotto.countMatchingNumbers(lottoWinningNumbers)
     val bonusMatchingCount = if (lotto.isBonusMatched(lottoBonusNumber)) 1 else 0
     return Pair(matchingCount, bonusMatchingCount)
 }
 
-fun printResult(matchCounts: Map<LottoMatch, Int>) {
+private fun printResult(matchCounts: Map<LottoMatch, Int>) {
     println("당첨 통계")
     println("---")
 
@@ -170,7 +170,7 @@ fun printResult(matchCounts: Map<LottoMatch, Int>) {
     }
 }
 
-fun calculateTotalMoney(matchCounts: MutableMap<LottoMatch, Int>): Int {
+private fun calculateTotalMoney(matchCounts: MutableMap<LottoMatch, Int>): Int {
     var totalMoney = 0
     for ((match, count) in matchCounts) {
         totalMoney += match.prize * count
@@ -178,11 +178,11 @@ fun calculateTotalMoney(matchCounts: MutableMap<LottoMatch, Int>): Int {
     return totalMoney
 }
 
-fun calculateProfitRate(totalMoney: Int, lottoBudget: Int): Double {
+private fun calculateProfitRate(totalMoney: Int, lottoBudget: Int): Double {
     if (lottoBudget == 0) return 0.0
     return (totalMoney.toDouble() / lottoBudget) * 100
 }
 
-fun printProfitRate(profitRate: Double) {
+private fun printProfitRate(profitRate: Double) {
     println("총 수익률은 ${String.format("%.1f", profitRate)}%입니다.")
 }
