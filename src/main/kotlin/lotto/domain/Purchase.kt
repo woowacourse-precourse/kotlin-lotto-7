@@ -7,31 +7,39 @@ class Purchase(
     val amount: Int
         get() = _amount
 
-    private val _lottoCount: Int
-    val lottoCount: Int
-        get() = _lottoCount
-
     init {
         val rawAmount = parseAmount()
-        validAmount(rawAmount)
+        validateAmount(rawAmount)
         _amount = rawAmount
-        _lottoCount = calculateLottoCount(rawAmount)
     }
 
-    private fun parseAmount() =
-        inputAmount.toIntOrNull() ?: throw IllegalArgumentException("[ERROR] 구매금액은 숫자를 입력해야 합니다.")
+    fun getLottoCount(): Int {
+        val lottoCount = calculateLottoCount(amount)
+        return lottoCount
+    }
 
-    private fun validAmount(rawAmount: Int) {
-        validatePositive(rawAmount)
+    private fun calculateLottoCount(amount: Int): Int = amount / CURRENCY_UNIT
+
+    private fun parseAmount() =
+        inputAmount.toIntOrNull() ?: throw IllegalArgumentException(PARSE_AMOUNT_ERROR_MESSAGE)
+
+    private fun validateAmount(rawAmount: Int) {
+        validateAmountPositive(rawAmount)
         validateThousandUnit(rawAmount)
     }
 
-    private fun validatePositive(amount: Int) =
-        require(amount > 0) { "[ERROR] 구매금액은 양수를 입력해야 합니다." }
+    private fun validateAmountPositive(amount: Int) =
+        require(amount > ZERO) { AMOUNT_POSITIVE_ERROR_MESSAGE }
 
     private fun validateThousandUnit(amount: Int) =
-        require(amount % 1000 == 0) { "[ERROR] 구매금액은 1,000원 단위로 입력해야 합니다." }
+        require(amount % CURRENCY_UNIT == ZERO) { THOUSAND_UNIT_ERROR_MESSAGE }
 
-    private fun calculateLottoCount(amount: Int): Int = amount / 1000
+    companion object {
+        private const val PARSE_AMOUNT_ERROR_MESSAGE = "구매금액은 숫자를 입력해야 합니다."
+        private const val AMOUNT_POSITIVE_ERROR_MESSAGE = "구매금액은 양수를 입력해야 합니다."
+        private const val THOUSAND_UNIT_ERROR_MESSAGE = "구매금액은 1,000원 단위로 입력해야 합니다."
+        private const val CURRENCY_UNIT = 1000
+        private const val ZERO = 0
+    }
 
 }
