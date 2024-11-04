@@ -11,9 +11,12 @@ object LottoMachine {
     }
     fun getLotto() {
         val money = InputView.getMoney()
+        OutputView.newLine()
 
         val lottoTickets = LottoTickets(money)
-        OutputView.printTicketCounts(lottoTickets.ticketCounts)
 
+        OutputView.printTicketCounts(lottoTickets.ticketCounts)
+        OutputView.printTickets(lottoTickets.lottoTickets)
+        OutputView.newLine()
     }
 }
