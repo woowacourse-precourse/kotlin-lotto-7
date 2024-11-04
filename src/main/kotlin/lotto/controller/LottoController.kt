@@ -4,7 +4,7 @@ import lotto.model.Rank
 import lotto.model.lotto.BonusLotto
 import lotto.model.lotto.Lotto
 import lotto.model.lotto.LottoTicket
-import lotto.model.message.ErrorMessage
+import lotto.utils.ValidationUtils
 import lotto.view.InputView
 import lotto.view.OutputView
 
@@ -33,32 +33,29 @@ class LottoController {
     }
 
     private fun generateLottoTickets(purchaseAmount: Int): List<LottoTicket> {
-        require(purchaseAmount % 1000 == 0) { ErrorMessage.PURCHASE_PRICE_1000.message }
+        ValidationUtils.validatePurchaseAmount(purchaseAmount)
         val ticketCount = purchaseAmount / 1000
-
         val tickets = List(ticketCount) { LottoTicket.generate() }
-
         return tickets
     }
 
     private fun getPurchaseAmount(): Int {
-        val purchaseAmount = InputView.askForPurchaseAmount().toIntOrNull()
-            ?: throw IllegalArgumentException(ErrorMessage.INVALID_NUMBER_FORMAT.message)
+        val purchaseAmountInput = InputView.askForPurchaseAmount()
+        val purchaseAmount = ValidationUtils.validateNumberInput(purchaseAmountInput)
         return purchaseAmount
     }
 
     private fun getWinningNumbers(): Lotto {
         val purchasePrice = InputView.askWinningNumbers().split(",").map {
             val trimmed = it.trim()
-            require(trimmed.isNotEmpty()) { ErrorMessage.INPUT_WINNING_EMPTY.message }
-            trimmed.toIntOrNull() ?: throw IllegalArgumentException(ErrorMessage.INPUT_WINNING_ONLY_NUMBERS.message)
+            ValidationUtils.validateWinningNumberInput(trimmed)
         }
         return Lotto(purchasePrice)
     }
 
     private fun getBonusNumber(lotto: Lotto): BonusLotto {
-        val bonusNumber = InputView.askForBonusNumber().toIntOrNull()
-            ?: throw IllegalArgumentException(ErrorMessage.INVALID_NUMBER_FORMAT.message)
+        val bonusInput = InputView.askForBonusNumber()
+        val bonusNumber = ValidationUtils.validateNumberInput(bonusInput)
         return BonusLotto(lotto.getNumbers(), bonusNumber)
     }
 
