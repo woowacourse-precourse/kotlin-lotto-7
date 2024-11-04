@@ -14,3 +14,5 @@ class Lotto(private val numbers: List<Int>) {
 
     fun getSortedNumbers(): List<Int> = numbers.sorted()
 }
+
+fun List<Lotto>.toViewData(): List<List<Int>> = this.map { it.getNumbers() }
