@@ -1,12 +1,12 @@
 package lotto.controller
 
-import lotto.model.Lotto
-import lotto.model.randomNums
+import lotto.model.*
 import lotto.view.InputView.getBonusNum
 import lotto.view.InputView.getCost
 import lotto.view.InputView.getWinNum
 import lotto.view.OutputView.printLottoNumbers
 import lotto.view.OutputView.printNumbers
+import lotto.view.OutputView.printResults
 
 
 fun playLotto() {
@@ -17,12 +17,14 @@ fun playLotto() {
     }
     printNumbers(count)
     val lottoTickets = generateLottoTickets(count)
-    printLottoNumbers(lottoTickets.map { it.numbers })
+    printLottoNumbers(lottoTickets.map { it.getNumbers() })
 
-    val winNumber = getWinNum()
+    val winNumber = getWinNum().toSet()
     val bonus = getBonusNum()
+
+    val results = calculateResults(lottoTickets, winNumber, bonus)
+    val totalPrize = calculateTotalPrize(results)
+
+    printResults(results, totalPrize, lottoCost)
 }
 
-fun generateLottoTickets(count: Int): List<Lotto> {
-    return List(count) { Lotto(randomNums()) }
-}
