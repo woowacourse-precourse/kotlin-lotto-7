@@ -1,14 +1,21 @@
 package lotto
 
 import camp.nextstep.edu.missionutils.Console
+import kotlin.random.Random
 
 const val LOTTO_TICKET_VALUE = 1000
+const val LOTTO_NUMBER_COUNT = 6
 
 fun main() {
     val lottoBudget = getLottoBudget()
     val lottoTicketCount = getLottoTicketCount(lottoBudget)
     println("${lottoTicketCount}개를 구매했습니다.")
-
+    val lottos: MutableList<Lotto> = mutableListOf()
+    for (i in 1..lottoTicketCount) {
+        val lottoNumbers = getLottoNumbers()
+        val lotto = Lotto(lottoNumbers)
+        lottos.add(lotto)
+    }
 }
 
 fun getLottoBudget(): Int {
@@ -23,4 +30,9 @@ fun getLottoBudget(): Int {
 
 fun getLottoTicketCount(lottoBudget: Int): Int {
     return lottoBudget / LOTTO_TICKET_VALUE
+}
+
+fun getLottoNumbers(): List<Int> {
+    val lottoNumbers = List(LOTTO_NUMBER_COUNT) { Random.nextInt(1, 46) }
+    return lottoNumbers
 }
