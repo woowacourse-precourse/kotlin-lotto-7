@@ -2,6 +2,7 @@ package lotto.core
 
 import camp.nextstep.edu.missionutils.Console
 import camp.nextstep.edu.missionutils.Randoms
+import lotto.data.BonusNumber
 import lotto.data.Lotto
 import lotto.data.PurchaseAmount
 
@@ -11,6 +12,7 @@ class LottoMachine {
     private var purchaseAmount: Int = 0
     private val lottoTickets = mutableListOf<List<Int>>()
     private var winningNumber = listOf<Int>()
+    private var bonusNumber = 0
 
 
     fun run() {
@@ -18,6 +20,7 @@ class LottoMachine {
         printPurchasedLottoTickets()
 
         requestWinningNumber()
+        requestBonusNumber()
     }
 
     private fun requestPurchaseAmount() {
@@ -61,5 +64,21 @@ class LottoMachine {
             }
         }
     }
+
+    private fun requestBonusNumber() {
+        while (true) {
+            try {
+                println("보너스 번호를 입력해 주세요.")
+
+                bonusNumber = BonusNumber(Console.readLine(), winningNumber).getNumber()
+                break
+            } catch (e: IllegalArgumentException) {
+                println("잘못된 입력입니다. 다시 입력해 주세요. ${e.message}")
+            } catch (e: NumberFormatException) {
+                println("숫자를 입력해 주세요.")
+            }
+        }
+    }
+
 
 }
