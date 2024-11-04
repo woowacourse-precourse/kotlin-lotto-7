@@ -30,7 +30,7 @@ class OutputView {
         private const val PURCHASE_HISTORY_FORMAT = "%d개를 구매했습니다."
         private const val STATISTICS_MSG = "\n당첨 통계\n---"
 
-        private const val SEPARATOR = ","
+        private const val SEPARATOR = ", "
         private const val PREFIX = "["
         private const val POSTFIX = "]"
 
