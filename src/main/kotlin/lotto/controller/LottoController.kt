@@ -1,5 +1,6 @@
 package lotto.controller
 
+import lotto.Lotto
 import lotto.view.LottoView
 import lotto.model.LottoPurchaseAmount
 import lotto.model.LottoStore

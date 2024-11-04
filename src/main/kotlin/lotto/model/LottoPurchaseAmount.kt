@@ -11,7 +11,7 @@ class LottoPurchaseAmount private constructor(val money: Int) {
                 inputLottoPurchaseAmount
                     .validateInt()
                     .validatePositive()
-                    .validateDivisibleBy()
+                    .validateDivisibleBy(LottoStore.LOTTO_TICKET_PRICE)
             )
         }
     }
