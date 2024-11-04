@@ -29,4 +29,16 @@ class LottoGame {
         var totalPrize = 0
 
     }
+
+    private fun calculateMatch(
+        lotto: Lotto,
+        winningNumbers: List<Int>,
+        bonusNumber: Int
+    ): Pair<Int, Boolean> {
+        val matchCount = lotto.getNumbers().count { it in winningNumbers }
+        val isBonusMatch = bonusNumber in lotto.getNumbers() && matchCount == 5
+        val matchResult = Pair(matchCount, isBonusMatch)
+
+        return matchResult
+    }
 }
