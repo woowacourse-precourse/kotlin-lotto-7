@@ -17,7 +17,7 @@ class LottosTest {
         }
 
         // Then
-        assertThat("로또 구매 수량은 1개 이상이여야 합니다.").isEqualTo(exception.message)
+        assertThat(PURCHASE_COUNT_ERROR_MESSAGE).isEqualTo(exception.message)
     }
 
     @Test
@@ -30,6 +30,10 @@ class LottosTest {
 
         // Then
         assertThat(5).isEqualTo(lottos.size)
+    }
+
+    companion object {
+        private const val PURCHASE_COUNT_ERROR_MESSAGE = "로또 구매 수량은 1개 이상이여야 합니다."
     }
 
 }
