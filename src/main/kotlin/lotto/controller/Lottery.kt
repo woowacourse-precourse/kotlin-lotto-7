@@ -5,6 +5,7 @@ import lotto.model.randomNums
 import lotto.view.InputView.getBonusNum
 import lotto.view.InputView.getCost
 import lotto.view.InputView.getWinNum
+import lotto.view.OutputView.printLottoNumbers
 import lotto.view.OutputView.printNumbers
 
 
@@ -15,11 +16,13 @@ fun playLotto() {
         throw IllegalArgumentException("[ERROR] 로또 구매 금액은 1,000원 단위이어야 합니다.")
     }
     printNumbers(count)
-    for(i in 0..<count){
-        val l0 = Lotto(randomNums())
-        l0.printNumbers()
-    }
+    val lottoTickets = generateLottoTickets(count)
+    printLottoNumbers(lottoTickets.map { it.numbers })
 
     val winNumber = getWinNum()
     val bonus = getBonusNum()
+}
+
+fun generateLottoTickets(count: Int): List<Lotto> {
+    return List(count) { Lotto(randomNums()) }
 }
