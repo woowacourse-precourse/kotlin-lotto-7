@@ -22,5 +22,6 @@ class LottoController {
         resultView.displayPurchasedLotto(lottoCount, lottos)
 
         val winningNumbers = inputView.inputWinningNumbers()
+        val bonusNumber = inputView.inputBonusNumber(winningNumbers)
     }
 }
