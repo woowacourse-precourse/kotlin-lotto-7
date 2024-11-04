@@ -8,7 +8,7 @@ class LottoGame(
     fun start(): LottoResult {
         val cost = inputCost()
         val winningLotto = inputWinningLotto()
-        val bonusNumber = inputBonusNumber()
+        val bonusNumber = inputBonusNumber(winningLotto)
         val lottoList = buyLottos(cost)
         val result = calculateResult(lottoList, winningLotto, bonusNumber)
         printResults(result)
@@ -52,21 +52,24 @@ class LottoGame(
         return Lotto(winningLotto)
     }
 
-    fun inputBonusNumber(): Int {
+    fun inputBonusNumber(winningLotto: Lotto): Int {
         println("보너스 번호를 입력해 주세요.")
         val input = readLine()
         return try {
-            parseBonusNumber(input)
+            parseBonusNumber(input, winningLotto)
         } catch (e: IllegalArgumentException) {
             println(e.message)
-            inputBonusNumber()
+            inputBonusNumber(winningLotto)
         }
     }
 
-    internal fun parseBonusNumber(input: String): Int {
+    internal fun parseBonusNumber(input: String, winningLotto: Lotto): Int {
         val bonusNumber = input.toIntOrNull() ?: throw IllegalArgumentException("[ERROR] 보너스 번호는 숫자로 입력해야 합니다.")
         if (bonusNumber !in 1..45) {
             throw IllegalArgumentException("[ERROR] 보너스 번호는 1부터 45 사이여야 합니다.")
+        }
+        if (bonusNumber in winningLotto.getNumbers()) {
+            throw IllegalArgumentException("[ERROR] 보너스 번호는 당첨 번호와 중복될 수 없습니다.")
         }
         return bonusNumber
     }
