@@ -11,6 +11,6 @@ object CalculateUtils {
         } else {
             (earningMoney.toDouble() / investMoney) * RATE_PERCENT
         }
-        return String.format("%.2f", earningsRate)
+        return String.format("%.1f", earningsRate)
     }
 }
