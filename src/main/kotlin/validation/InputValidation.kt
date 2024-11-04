@@ -23,4 +23,13 @@ class InputValidation {
             return true
         Exception.throwException(ExceptionUtils.WRONG_WIN_NUMBERS)
     }
+
+    fun isinValidRange(winNumbers: List<Int>): Boolean {
+        var valid = true
+        for (number in winNumbers) {
+            if (number < LottoUtils.MIN_VALUE || number > LottoUtils.MAX_VALUE)
+                valid = false
+        }
+        return valid
+    }
 }

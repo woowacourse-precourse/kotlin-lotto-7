@@ -60,4 +60,19 @@ class InputExceptionTest {
             }
         }
     }
+
+    @Test
+    fun `당첨 번호는 1~45까지의 숫자이어야 한다`() {
+        assertSimpleTest {
+            // given
+            val winNumbers = listOf(1, 3, 14, 524, 2323, 5)
+
+            // when
+
+            // then
+            assertThrows<IllegalArgumentException> {
+                input.isinValidRange(winNumbers)
+            }
+        }
+    }
 }

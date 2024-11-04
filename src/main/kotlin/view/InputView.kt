@@ -22,7 +22,8 @@ object InputView {
             val winNumbers = Console.readLine().split(",")
                 .map { it.trim().toInt() }
 
-            return winNumbers
+            if (input.isValidWinNumbers(winNumbers) and input.isinValidRange(winNumbers))
+                return winNumbers
         }
     }
 }
