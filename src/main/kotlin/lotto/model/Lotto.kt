@@ -1,9 +1,24 @@
 package lotto.model
 
+import lotto.model.LottoNumber.Companion
+
 class Lotto(private val numbers: List<Int>) {
     init {
-        require(numbers.size == 6) { "[ERROR] 로또 번호는 6개여야 합니다." }
+        require(numbers.size == LOTTO_SIZE) { "[ERROR] 로또 번호는 ${LOTTO_SIZE}개여야 합니다" }
+        require(numbers.distinct().size == LOTTO_SIZE) { "[ERROR] 로또 번호는 중복되지 않아야 합니다" }
+        require(numbers.all { it in NUMBER_RANGE }) { "[ERROR] 로또 번호는 ${MIN_NUMBER}부터 ${MAX_NUMBER}사이의 숫자여야 합니다" }
     }
 
-    // TODO: 추가 기능 구현
+    fun containNumber(lottoNumber: LottoNumber): Boolean {
+        return numbers.contains(lottoNumber.getNumber())
+    }
+
+    override fun toString(): String = numbers.sorted().toString()
+
+    companion object {
+        private const val LOTTO_SIZE = 6
+        private const val MIN_NUMBER = 1
+        private const val MAX_NUMBER = 45
+        val NUMBER_RANGE = MIN_NUMBER..MAX_NUMBER
+    }
 }
