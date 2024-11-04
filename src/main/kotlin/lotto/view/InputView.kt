@@ -2,6 +2,7 @@ package lotto.view
 
 import camp.nextstep.edu.missionutils.Console
 import lotto.domain.Lotto
+import lotto.domain.LottoNumberValidator
 import lotto.domain.PurchaseAmount
 
 object InputView {
@@ -37,6 +38,7 @@ object InputView {
             val bonusNumber = Console.readLine().toIntOrNull() ?: throw IllegalArgumentException(
                 ERROR_INVALID_INPUT_MESSAGE
             )
+            LottoNumberValidator.validate(bonusNumber)
             bonusNumber
         } catch (e: IllegalArgumentException) {
             println(e.message)
