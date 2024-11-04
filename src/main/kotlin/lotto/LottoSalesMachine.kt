@@ -18,7 +18,18 @@ class LottoSalesMachine {
 
     fun processPurchase(): List<Lotto> {
         println(guideInputLottoPurchaseAmount())
-        val inputLottoPurchaseWon = Console.readLine()
+        var inputLottoPurchaseWon = Console.readLine()
+        while (true) {
+            try {
+                inputLottoPurchaseWon.toInt()
+                break
+            } catch (e: NumberFormatException) {
+                println(ErrorMessage.INPUT_AMOUNT_FORMAT_ERROR.getMessage())
+                println(guideInputLottoPurchaseAmount())
+                inputLottoPurchaseWon = Console.readLine()
+            }
+        }
+
         return purchase(inputLottoPurchaseWon.toInt())
     }
 
