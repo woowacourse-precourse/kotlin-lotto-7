@@ -25,4 +25,8 @@ object OutputView {
             println("["+ticket.joinToString()+"]")
         }
     }
+
+    fun printWinNumberMessage() {
+        println(PrintUtils.ENTER_WIN_NUMBERS)
+    }
 }
