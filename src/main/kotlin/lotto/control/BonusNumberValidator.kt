@@ -1,9 +1,9 @@
-package control
+package lotto.control
 
-import data.Lotto
-import util.ErrorMessage
-import util.SettingValue
-import view.Input
+import lotto.data.Lotto
+import lotto.util.ErrorMessage
+import lotto.util.SettingValue
+import lotto.view.Input
 
 class BonusNumberValidator {
     private var validatorTest = false

@@ -1,7 +1,7 @@
-package view
+package lotto.view
 
-import control.LottoAnalyzer
-import data.LottoWinningCount
+import lotto.control.LottoAnalyzer
+import lotto.data.LottoWinningCount
 
 class Output {
 

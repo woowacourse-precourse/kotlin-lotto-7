@@ -1,4 +1,4 @@
-package util
+package lotto.util
 
 class ErrorMessage {
     companion object {

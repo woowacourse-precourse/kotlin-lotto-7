@@ -1,8 +1,8 @@
-package control
+package lotto.control
 
-import util.ErrorMessage
-import util.SettingValue
-import view.Input
+import lotto.util.ErrorMessage
+import lotto.util.SettingValue
+import lotto.view.Input
 
 class PurchaseAmountValidator {
     private var validatorTest = false

@@ -1,6 +1,6 @@
-package data
+package lotto.data
 
-import util.SettingValue
+import lotto.util.SettingValue
 
 enum class LottoWinningCount(
     var count: Int,

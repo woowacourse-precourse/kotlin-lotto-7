@@ -1,4 +1,4 @@
-package data
+package lotto.data
 
 class RandomLotto(private val numbers: List<List<Int>>) {
 

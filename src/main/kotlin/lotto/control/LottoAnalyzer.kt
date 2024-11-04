@@ -1,8 +1,8 @@
-package control
+package lotto.control
 
-import data.LottoWinningCount
-import util.SettingValue
-import view.Output
+import lotto.data.LottoWinningCount
+import lotto.util.SettingValue
+import lotto.view.Output
 
 class LottoAnalyzer {
 

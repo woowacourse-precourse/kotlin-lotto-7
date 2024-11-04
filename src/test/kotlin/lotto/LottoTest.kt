@@ -1,9 +1,9 @@
 package lotto
 
-import control.BonusNumberValidator
-import control.PurchaseAmountValidator
-import data.Bonus
-import data.Lotto
+import lotto.control.BonusNumberValidator
+import lotto.control.PurchaseAmountValidator
+import lotto.data.Bonus
+import lotto.data.Lotto
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 

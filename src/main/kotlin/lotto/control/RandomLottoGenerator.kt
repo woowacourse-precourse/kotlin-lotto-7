@@ -1,8 +1,8 @@
-package control
+package lotto.control
 
 import camp.nextstep.edu.missionutils.Randoms
-import util.SettingValue
-import view.Output
+import lotto.util.SettingValue
+import lotto.view.Output
 
 
 class RandomLottoGenerator {

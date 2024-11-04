@@ -1,8 +1,8 @@
-package control
+package lotto.control
 
-import data.Bonus
-import data.Lotto
-import data.RandomLotto
+import lotto.data.Bonus
+import lotto.data.Lotto
+import lotto.data.RandomLotto
 
 class LottoController {
 
