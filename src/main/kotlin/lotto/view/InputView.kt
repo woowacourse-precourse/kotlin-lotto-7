@@ -68,18 +68,13 @@ object InputView {
 
             when {
                 numbers.size != Constants.LOTTO_SIZE -> throw IllegalArgumentException(ErrorMessage.INVALID_LOTTO_NUMBERS.getMessage())
-                numbers.any { it !in Constants.RANDOM_MIN..Constants.RANDOM_MAX } -> throw IllegalArgumentException(
-                    ErrorMessage.INVALID_LOTTO_NUMBER.getMessage()
-                )
-
+                numbers.any { it !in Constants.RANDOM_MIN..Constants.RANDOM_MAX } -> throw IllegalArgumentException(ErrorMessage.INVALID_LOTTO_NUMBER.getMessage())
                 numbers.toSet().size != Constants.LOTTO_SIZE -> throw IllegalArgumentException(ErrorMessage.INVALID_DUPLICATE_NUMBER.getMessage())
             }
-
             return numbers
         } catch (e: NumberFormatException) {
             throw IllegalArgumentException(ErrorMessage.NOT_NUMBER.getMessage())
         }
-
     }
 
     private fun validateBonusNumber(inputBonusNumber: String): Int {
@@ -92,6 +87,5 @@ object InputView {
         } catch (e: NumberFormatException) {
             throw IllegalArgumentException(ErrorMessage.NOT_NUMBER.getMessage())
         }
-
     }
 }

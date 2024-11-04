@@ -9,7 +9,7 @@ import org.junit.jupiter.api.assertThrows
 
 class LottosTest {
 
-    @Nested
+    @Nested 
     @DisplayName("정상 테스트")
     inner class ValidLottosTests {
         @Test
