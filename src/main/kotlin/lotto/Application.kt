@@ -4,4 +4,7 @@ fun main() {
     val lottoBuyManager = LottoBuyManager()
     lottoBuyManager.requestMoney()
     lottoBuyManager.buyLottos()
+
+    val winningNumberManager = WinningNumberManager()
+    winningNumberManager.requestWinningNumbers()
 }
