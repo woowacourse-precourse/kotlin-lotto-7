@@ -429,3 +429,6 @@ class Lotto(private val numbers: List<Int>) {
 
 ## 실행 결과 
 <img width="333" alt="image" src="https://github.com/user-attachments/assets/efe89d74-590c-4d94-b112-8c957fb59830">
+
+## 다이어 그램
+![image](https://github.com/user-attachments/assets/aecdf2ee-4e30-4570-89fd-8c62a58dfe2b)
