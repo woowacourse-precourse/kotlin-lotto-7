@@ -85,16 +85,16 @@ class Lotto(private val numbers: List<Int>) {
         private fun extractedRank(results: List<LottoRank>, validLottoAmount: Int) {
             val rankCounts = LottoRank.values().associateWith { rank -> results.count { it == rank } }
             val totalPrize = rankCounts.entries.sumOf { (rank, count) -> rank.prize * count }
-            val profitRate = (totalPrize.toDouble() / (validLottoAmount * 1000))
+            val profitRate = (totalPrize.toDouble() / (validLottoAmount * 1000)) * 100
 
             println("당첨 통계")
             println("---")
-            println("${LottoRank.FIFTH.displayText} - ${rankCounts[LottoRank.FIFTH]}개")
-            println("${LottoRank.FOURTH.displayText} - ${rankCounts[LottoRank.FOURTH]}개")
-            println("${LottoRank.THIRD.displayText} - ${rankCounts[LottoRank.THIRD]}개")
-            println("${LottoRank.SECOND.displayText} - ${rankCounts[LottoRank.SECOND]}개")
-            println("${LottoRank.FIRST.displayText} - ${rankCounts[LottoRank.FIRST]}개")
-            println("총 수익률은 ${"%.2f".format(profitRate)}%입니다.")
+            println("${LottoRank.FIFTH.displayText} - ${rankCounts[LottoRank.FIFTH] ?: 0}개")
+            println("${LottoRank.FOURTH.displayText} - ${rankCounts[LottoRank.FOURTH] ?: 0}개")
+            println("${LottoRank.THIRD.displayText} - ${rankCounts[LottoRank.THIRD] ?: 0}개")
+            println("${LottoRank.SECOND.displayText} - ${rankCounts[LottoRank.SECOND] ?: 0}개")
+            println("${LottoRank.FIRST.displayText} - ${rankCounts[LottoRank.FIRST] ?: 0}개")
+            println("총 수익률은 ${"%.1f".format(profitRate)}%입니다.")
         }
 
         fun runLotto() {
