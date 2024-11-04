@@ -1,6 +1,7 @@
 package lotto
 
 import camp.nextstep.edu.missionutils.Randoms
+import kotlin.math.round
 
 fun main() {
     println("구입금액을 입력해 주세요.")
@@ -23,7 +24,7 @@ fun main() {
 
     // 당첨 결과 확인
     val results = checkWinningTickets(lottoTickets, winningNumbers, bonusNumber)
-    printResults(results)
+    printResults(results, amount)
 }
 
 // 개수만큼 로또 발행
@@ -65,8 +66,8 @@ fun checkWinningTickets(
     return results
 }
 
-// 당첨 결과 출력
-fun printResults(results: Map<String, Int>) {
+// 당첨 결과 및 수익률 출력
+fun printResults(results: Map<String, Int>, amountSpent: Int) {
     println("\n당첨 통계")
     println("---")
     println("3개 일치 (5,000원) - ${results["5등"]}개")
@@ -74,4 +75,30 @@ fun printResults(results: Map<String, Int>) {
     println("5개 일치 (1,500,000원) - ${results["3등"]}개")
     println("5개 일치, 보너스 볼 일치 (30,000,000원) - ${results["2등"]}개")
     println("6개 일치 (2,000,000,000원) - ${results["1등"]}개")
+
+    // 수익률 계산
+    val totalPrize = calculateTotalPrize(results)
+    val profitRate = calculateProfitRate(amountSpent, totalPrize)
+    println("총 수익률은 ${profitRate}%입니다.")
+}
+
+// 당첨 금액 계산
+fun calculateTotalPrize(results: Map<String, Int>): Int {
+    val prizeAmounts = mapOf(
+        "1등" to 2_000_000_000,
+        "2등" to 30_000_000,
+        "3등" to 1_500_000,
+        "4등" to 50_000,
+        "5등" to 5_000
+    )
+
+    return results.entries.sumOf { (rank, count) ->
+        (prizeAmounts[rank] ?: 0) * count
+    }
+}
+
+// 수익률 계산
+fun calculateProfitRate(amountSpent: Int, totalPrize: Int): Double {
+    val profitRate = (totalPrize.toDouble() / amountSpent) * 100
+    return round(profitRate * 10) / 10 // 소수점 둘째 자리에서 반올림
 }
