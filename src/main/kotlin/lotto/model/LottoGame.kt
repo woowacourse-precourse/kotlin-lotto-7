@@ -19,4 +19,14 @@ class LottoGame {
         )
         return randomNumbers
     }
+
+    fun calculateResult(
+        lottos: List<Lotto>,
+        winningNumbers: List<Int>,
+        bonusNumber: Int
+    ): LottoResult {
+        val prizeCounts = Prize.values().associateWith { 0 }.toMutableMap()
+        var totalPrize = 0
+
+    }
 }
