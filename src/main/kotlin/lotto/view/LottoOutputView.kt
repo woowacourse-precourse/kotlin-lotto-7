@@ -1,7 +1,5 @@
 package lotto.view
 
-import lotto.util.LottoOutputText
-
 class LottoOutputView {
     fun outputPurchasePrice() {
         println(LottoOutputText.INPUT_PURCHASE_PRICE_TEXT)

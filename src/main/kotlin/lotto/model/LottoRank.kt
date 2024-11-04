@@ -1,6 +1,6 @@
 package lotto.model
 
-import lotto.util.LottoOutputText
+import lotto.view.LottoOutputText
 import java.text.DecimalFormat
 
 enum class LottoRank(val price: Int) {
