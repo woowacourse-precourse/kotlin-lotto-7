@@ -50,6 +50,4 @@ class LottoService {
 
         return result
     }
-
-
 }
