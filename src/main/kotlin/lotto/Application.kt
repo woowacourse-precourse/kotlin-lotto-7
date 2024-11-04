@@ -4,6 +4,9 @@ import camp.nextstep.edu.missionutils.Console
 
 fun main() {
     val lottoBudget = getLottoBudget()
+    val lottoTicketCount = getLottoTicketCount(lottoBudget)
+    println("${lottoTicketCount}개를 구매했습니다.")
+
 }
 
 fun getLottoBudget(): Int {
@@ -14,4 +17,8 @@ fun getLottoBudget(): Int {
         throw IllegalArgumentException("[ERROR] 로또 구입 금액은 1,000원 단위로 입력해 주세요.")
     }
     return lottoBudget
+}
+
+fun getLottoTicketCount(lottoBudget: Int): Int {
+    return lottoBudget/1000
 }
