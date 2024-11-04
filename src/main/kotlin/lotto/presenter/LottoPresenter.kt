@@ -23,18 +23,40 @@ class LottoPresenter(
         view.showTickets(tickets)
     }
 
-    fun processWinningNumbers(winningNumbers: List<Int>, bonusNumber: Int, price: Int) {
-        validateUniqueWinningNumbers(winningNumbers)
-        validateWinningNumbersSize(winningNumbers.size)
-        validateWinningNumbersRange(winningNumbers)
-        validateBonusNumbersRange(bonusNumber)
-        validateBonusNumberNotInWinningNumbers(winningNumbers, bonusNumber)
+    fun processWinningNumbers(price: Int) {
+        val winningNumbers = getValidWinningNumbers()
+        val bonusNumber = getValidBonusNumber(winningNumbers)
 
         val results = lottoTicket.calculateTickets(winningNumbers, bonusNumber)
         view.showCalculatedTickets(results)
-
         showYieldCalculation(price, results)
     }
+
+    private fun getValidWinningNumbers(): List<Int> {
+        return try {
+            val winningNumbers = view.getWinningNumbers()
+            validateUniqueWinningNumbers(winningNumbers)
+            validateWinningNumbersSize(winningNumbers.size)
+            validateWinningNumbersRange(winningNumbers)
+            winningNumbers
+        } catch (e: IllegalArgumentException) {
+            println(e.message)
+            getValidWinningNumbers()
+        }
+    }
+
+    private fun getValidBonusNumber(winningNumbers: List<Int>): Int {
+        return try {
+            val bonusNumber = view.getBonusNumber()
+            validateBonusNumbersRange(bonusNumber)
+            validateBonusNumberNotInWinningNumbers(winningNumbers, bonusNumber)
+            bonusNumber
+        } catch (e: IllegalArgumentException) {
+            println(e.message)
+            getValidBonusNumber(winningNumbers)
+        }
+    }
+
 
     private fun showYieldCalculation(purchasePrice: Int, results: Map<LottoRank, Int>) {
         val totalWinningAmount = calculateTotalWinningPrice(results)

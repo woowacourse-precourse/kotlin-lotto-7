@@ -37,23 +37,39 @@ class LottoViewImpl: LottoView {
 
     override fun getTicketsPrice(): Int {
         println(MESSAGE_TICKETS_PRICE)
-        val input = Console.readLine()
-        validateTicketsPriceNumber(input)
-        return input.toInt()
+        val input = Console.readLine() ?: return getTicketsPrice()
+        return try {
+            validateTicketsPriceNumber(input)
+            input.toInt()
+        } catch (e: IllegalArgumentException) {
+            println(e.message)
+            getTicketsPrice()
+        }
     }
 
     override fun getWinningNumbers(): List<Int> {
         println(MESSAGE_WINNING_NUMBERS)
-        val inputWinningNumbers = Console.readLine().split(DELIMITER_COMMA).map { it.toIntOrNull() }
-        validateWinningNumbers(inputWinningNumbers)
-        return inputWinningNumbers.filterNotNull()
+        val input = Console.readLine() ?: return getWinningNumbers()
+        return try {
+            val inputWinningNumbers = input.split(DELIMITER_COMMA).map { it.toIntOrNull() }
+            validateWinningNumbers(inputWinningNumbers)
+            inputWinningNumbers.filterNotNull()
+        } catch (e: IllegalArgumentException) {
+            println(e.message)
+            getWinningNumbers()
+        }
     }
 
     override fun getBonusNumber(): Int {
         println(MESSAGE_BONUS_NUMBER)
-        val input = Console.readLine()
-        validateBonusNumber(input)
-        return input.toInt()
+        val input = Console.readLine() ?: return getBonusNumber()
+        return try {
+            validateBonusNumber(input)
+            input.toInt()
+        } catch (e: IllegalArgumentException) {
+            println(e.message)
+            getBonusNumber()
+        }
     }
 
     override fun showReturnRate(returnRate: Double) {
