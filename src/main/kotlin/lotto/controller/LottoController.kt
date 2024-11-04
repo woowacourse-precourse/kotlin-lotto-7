@@ -112,11 +112,11 @@ class LottoController {
 
         for ((key, value) in matchLottoCount) {
             profit += when (key) {
-                MatchingLottoCount.THREE -> value * PRIZE_MONEY_3MATCH
-                MatchingLottoCount.FOUR -> value * PRIZE_MONEY_4MATCH
-                MatchingLottoCount.FIVE -> value * PRIZE_MONEY_5MATCH
-                MatchingLottoCount.FIVE_BONUS -> value * PRIZE_MONEY_5MATCH_BONUS
-                MatchingLottoCount.SIX -> value * PRIZE_MONEY_6MATCH
+                MatchingLottoCount.THREE -> value * MatchingLottoCount.THREE.price
+                MatchingLottoCount.FOUR -> value * MatchingLottoCount.FOUR.price
+                MatchingLottoCount.FIVE -> value * MatchingLottoCount.FIVE.price
+                MatchingLottoCount.FIVE_BONUS -> value * MatchingLottoCount.FIVE_BONUS.price
+                MatchingLottoCount.SIX -> value * MatchingLottoCount.SIX.price
             }
         }
         return profit
@@ -130,19 +130,13 @@ class LottoController {
         const val NOT_INPUT_MONEY_STATE = 0
         const val NOT_INPUT_BONUS_LOTTERY_NUMBER_STATE = 0
         const val LOTTO_PRICE = 1_000
-        const val PRIZE_MONEY_6MATCH = 2_000_000_000
-        const val PRIZE_MONEY_5MATCH_BONUS = 30_000_000
-        const val PRIZE_MONEY_5MATCH = 1_500_000
-        const val PRIZE_MONEY_4MATCH = 50_000
-        const val PRIZE_MONEY_3MATCH = 5_000
-
     }
 }
 
-enum class MatchingLottoCount {
-    THREE,
-    FOUR,
-    FIVE,
-    FIVE_BONUS,
-    SIX,
+enum class MatchingLottoCount(val price: Int) {
+    THREE(5_000),
+    FOUR(50_000),
+    FIVE(1_500_000),
+    FIVE_BONUS(30_000_000),
+    SIX(2_000_000_000),
 }
