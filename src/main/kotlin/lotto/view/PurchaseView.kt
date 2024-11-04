@@ -1,23 +1,21 @@
 package lotto.view
 
-import camp.nextstep.edu.missionutils.Console
+import lotto.presenter.PurchasePresenter
 import lotto.constants.LottoConstants
-import lotto.presenter.LottoPresenter
-import lotto.utils.Validator
 import lotto.view.interfaces.PurchaseViewInterface
+import camp.nextstep.edu.missionutils.Console
 
-class PurchaseView(private val presenter: LottoPresenter) : PurchaseViewInterface {
+class PurchaseView : PurchaseViewInterface {
+  private lateinit var presenter: PurchasePresenter
 
   override fun requestPurchaseAmount() {
     println(LottoConstants.PURCHASE_AMOUNT_PROMPT)
     val input = Console.readLine()
     val amount = input.toIntOrNull()
+    presenter.onPurchaseAmountReceived(amount)
+  }
 
-    try {
-      Validator.validatePurchaseAmount(amount)
-      presenter.onPurchaseAmountReceived(amount!!)
-    } catch (e: IllegalArgumentException) {
-      requestPurchaseAmount()
-    }
+  override fun setPresenter(presenter: PurchasePresenter) {
+    this.presenter = presenter
   }
 }

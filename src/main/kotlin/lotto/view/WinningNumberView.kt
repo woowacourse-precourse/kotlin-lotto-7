@@ -2,40 +2,27 @@ package lotto.view
 
 import camp.nextstep.edu.missionutils.Console
 import lotto.constants.LottoConstants
-import lotto.presenter.LottoPresenter
-import lotto.utils.Validator
+import lotto.presenter.WinningNumberPresenter
 import lotto.view.interfaces.WinningNumberViewInterface
 
-class WinningNumberView(private val presenter: LottoPresenter) : WinningNumberViewInterface {
-
-  private lateinit var winningNumbers: List<Int>
+class WinningNumberView : WinningNumberViewInterface {
+  private lateinit var presenter: WinningNumberPresenter
 
   override fun requestWinningNumbers() {
     println(LottoConstants.WINNING_NUMBERS_PROMPT)
     val input = Console.readLine()
-    val numbers = input.split(",")
-      .mapNotNull { it.trim().toIntOrNull() }
-
-    try {
-      Validator.validateLottoNumbers(numbers)
-      winningNumbers = numbers
-      presenter.onWinningNumbersReceived(numbers)
-    } catch (e: IllegalArgumentException) {
-      requestWinningNumbers()
-    }
+    val numbers = input.split(",").mapNotNull { it.trim().toIntOrNull() }
+    presenter.onWinningNumbersReceived(numbers)
   }
 
   override fun requestBonusNumber() {
     println(LottoConstants.BONUS_NUMBER_PROMPT)
     val input = Console.readLine()
     val bonusNumber = input.toIntOrNull()
-
-    try {
-      Validator.validateBonusNumber(winningNumbers, bonusNumber)
-      presenter.onBonusNumberReceived(bonusNumber!!)
-    } catch (e: IllegalArgumentException) {
-      requestBonusNumber()
-    }
+    presenter.onBonusNumberReceived(bonusNumber)
   }
 
+  override fun setPresenter(presenter: WinningNumberPresenter) {
+    this.presenter = presenter
+  }
 }
