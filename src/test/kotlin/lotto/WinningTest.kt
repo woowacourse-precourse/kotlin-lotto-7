@@ -57,12 +57,4 @@ class WinningTest {
         val result = assertThrows<IllegalArgumentException> { Winning(input) }
         assertEquals(result.message, "[ERROR] 1 ~ 45 범위 내 6개의 번호를 입력해주세요.")
     }
-
-    @DisplayName("당첨 번호가 오름차순으로 정렬되어 있지 않은 경우")
-    @ParameterizedTest
-    @ValueSource(strings = ["1,2,3,6,5,4"])
-    fun numberIsNotOfSort(input: String) {
-        val result = assertThrows<IllegalArgumentException> { Winning(input) }
-        assertEquals(result.message, "[ERROR] 당첨 번호는 오름차순으로 입력해주세요.")
-    }
 }

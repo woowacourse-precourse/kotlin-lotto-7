@@ -13,7 +13,6 @@ class Winning(private val input: String) {
             .all { it != null }) { NUMBER_IS_OUT_OF_RANGE_ERROR_MESSAGE }
         numbers = input.split(DELIMITER).map { it.toInt() }
         require(numbers.all { it in WINNING_MIN_NUMBER..WINNING_MAX_NUMBER }) { NUMBER_IS_OUT_OF_RANGE_ERROR_MESSAGE }
-        require(numbers == numbers.sorted()) { NUMBER_IS_NOT_OF_SORT_ERROR_MESSAGE }
     }
 
     companion object {
@@ -29,6 +28,5 @@ class Winning(private val input: String) {
         private const val NUMBER_START_ZERO_ERROR_MESSAGE = "[ERROR] 0으로 시작하지 않는 6개의 번호를 쉼표(,)를 기준으로 입력해주세요."
         private const val NUMBER_IS_DUPLICATION_ERROR_MESSAGE = "[ERROR] 중복되지 않는 6개의 번호를 입력해주세요."
         private const val NUMBER_IS_OUT_OF_RANGE_ERROR_MESSAGE = "[ERROR] 1 ~ 45 범위 내 6개의 번호를 입력해주세요."
-        private const val NUMBER_IS_NOT_OF_SORT_ERROR_MESSAGE = "[ERROR] 당첨 번호는 오름차순으로 입력해주세요."
     }
 }
