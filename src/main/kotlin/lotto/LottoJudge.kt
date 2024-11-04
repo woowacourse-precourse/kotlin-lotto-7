@@ -1,10 +1,28 @@
 package lotto
 
+import camp.nextstep.edu.missionutils.Console
 import lotto.ErrorMessage.*
 
 class LottoJudge {
     var winnerNumbers: List<Int> = emptyList()
     var bonusNumber: Int = 0
+
+    fun saveUserInput() {
+        inputWinningNumbers()
+        inputBonusNumber()
+    }
+
+    private fun inputWinningNumbers() {
+        println("\n당첨 번호를 입력해 주세요.")
+        val inputWinnerNumbers = Console.readLine().split(",").map { it.toInt() }
+        setLottoWinnerNumbers(inputWinnerNumbers)
+    }
+
+    private fun inputBonusNumber() {
+        println("\n보너스 번호를 입력해 주세요.")
+        val inputBonusNumber = Console.readLine().toInt()
+        setLottoBonusNumber(inputBonusNumber)
+    }
 
     fun setLottoWinnerNumbers(numbers: List<Int>) {
         exceptWinnerNumberCount(numbers)
