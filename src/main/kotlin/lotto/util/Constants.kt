@@ -6,6 +6,7 @@ class Constants {
         const val MIN_NUMBER = 1
         const val MAX_NUMBER = 45
         const val WINNING_NUMBERS_COUNT = 6
+        const val PERCENTAGE_MULTIPLIER = 100
 
         const val FIRST_PRIZE_MONEY = 2_000_000_000
         const val SECOND_PRIZE_MONEY = 30_000_000
