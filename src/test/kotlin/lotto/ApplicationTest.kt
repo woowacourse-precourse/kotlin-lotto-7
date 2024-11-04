@@ -7,6 +7,7 @@ import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 
 class ApplicationTest : NsTest() {
+
     @Test
     fun `기능 테스트`() {
         assertRandomUniqueNumbersInRangeTest(
@@ -38,6 +39,35 @@ class ApplicationTest : NsTest() {
             listOf(7, 11, 30, 40, 42, 43),
             listOf(2, 13, 22, 32, 38, 45),
             listOf(1, 3, 5, 14, 22, 45)
+        )
+    }
+
+    @Test
+    fun testPrintStatics() {
+        assertRandomUniqueNumbersInRangeTest(
+            {
+                run("9000", "1,2,3,4,5,6", "7")
+                assertThat(output()).contains("총 수익률은 55.6%입니다.")
+            },
+            listOf(1, 2, 3, 41, 42, 43),
+            listOf(40, 41, 42, 43, 44, 45),
+            listOf(40, 41, 42, 43, 44, 45),
+            listOf(40, 41, 42, 43, 44, 45),
+            listOf(40, 41, 42, 43, 44, 45),
+            listOf(40, 41, 42, 43, 44, 45),
+            listOf(40, 41, 42, 43, 44, 45),
+            listOf(40, 41, 42, 43, 44, 45),
+            listOf(40, 41, 42, 43, 44, 45)
+        )
+    }
+
+    @Test
+    fun testPrintStaticsComma() {
+        assertRandomUniqueNumbersInRangeTest(
+            {
+                run("1000", "1,2,3,4,5,6", "7")
+                assertThat(output()).contains("총 수익률은 200,000,000.0%입니다.")
+            }, listOf(1, 2, 3, 4, 5, 6)
         )
     }
 
