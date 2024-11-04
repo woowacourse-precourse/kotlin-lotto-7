@@ -21,6 +21,9 @@ class LottoController {
 
         val ranks = tickets.map { calculateMatch(it, winningLotto, bonusLotto) }
         OutputView.printResults(ranks)
+
+        val profitRate = calculateProfitRate(ranks, purchaseAmount)
+        OutputView.printProfitRate(profitRate)
     }
 
     private fun calculateMatch(ticket: LottoTicket, lotto: Lotto, bonusLotto: BonusLotto): Rank {
@@ -58,4 +61,10 @@ class LottoController {
             ?: throw IllegalArgumentException(ErrorMessage.INVALID_NUMBER_FORMAT.message)
         return BonusLotto(lotto.getNumbers(), bonusNumber)
     }
+
+    private fun calculateProfitRate(ranks: List<Rank>, purchaseAmount: Int): Double {
+        val totalPrize = ranks.sumOf { it.prize }
+        return (totalPrize.toDouble() / purchaseAmount.toDouble()) * 100
+    }
+
 }

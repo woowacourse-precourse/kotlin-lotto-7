@@ -28,4 +28,8 @@ object OutputView {
     private fun getBonusText(rank: Rank): String {
         return if (rank.requiresBonus) OutputMessage.BONUS_TEXT.message else ""
     }
+
+    fun printProfitRate(profitRate: Double) {
+        println(OutputMessage.PROFIT_RATE.message.format(profitRate))
+    }
 }
