@@ -50,7 +50,7 @@ class LottoMachine(private val payment: String) {
             prize.countPrize(rank)
         }
         winningMessage.add(FIFTH_PRIZE_RESULT.format(prize.fifth))
-        winningMessage.add(FORTH_PRIZE_RESULT.format(prize.forth))
+        winningMessage.add(FORTH_PRIZE_RESULT.format(prize.fourth))
         winningMessage.add(THIRD_PRIZE_RESULT.format(prize.third))
         winningMessage.add(SECOND_PRIZE_RESULT.format(prize.second))
         winningMessage.add(FIRST_PRIZE_RESULT.format(prize.first))
