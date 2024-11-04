@@ -23,8 +23,17 @@ class LottoJudge {
 
     private fun inputWinningNumbers() {
         println("\n당첨 번호를 입력해 주세요.")
-        val inputWinningNumbers = Console.readLine().split(",").map { it.toInt() }
-        setLottoWinningNumbers(inputWinningNumbers)
+        val inputWinningNumbers = Console.readLine()
+        val winningNumbers = validateWinningNumbers(inputWinningNumbers)
+        setLottoWinningNumbers(winningNumbers)
+    }
+
+    private fun validateWinningNumbers(input: String): List<Int> {
+        try {
+            return input.split(",").map { it.toInt() }
+        } catch (error: NumberFormatException) {
+            throw IllegalArgumentException(ErrorMessage.INPUT_WINNING_NUMBER_INVALID_INPUT_ERROR.getMessage())
+        }
     }
 
     private fun saveBonusNumber() {
@@ -38,8 +47,17 @@ class LottoJudge {
 
     private fun inputBonusNumber() {
         println("\n보너스 번호를 입력해 주세요.")
-        val inputBonusNumber = Console.readLine().toInt()
-        setLottoBonusNumber(inputBonusNumber)
+        val inputBonusNumber = Console.readLine()
+        val bonusNumber = validateBonusNumber(inputBonusNumber)
+        setLottoBonusNumber(bonusNumber)
+    }
+
+    private fun validateBonusNumber(input: String): Int {
+        try {
+            return input.toInt()
+        } catch (error: NumberFormatException) {
+            throw IllegalArgumentException(lotto.ErrorMessage.INPUT_BONUS_NUMBER_INVALID_INPUT_ERROR.getMessage())
+        }
     }
 
     fun setLottoWinningNumbers(numbers: List<Int>) {
