@@ -7,6 +7,8 @@ class LottoGame {
     private val broadcast = Broadcast()
 
     private lateinit var inputPayment: Payment
+    private lateinit var winningNumber: WinningNumber
+    private lateinit var bonusNumber: BonusNumber
 
     fun start() {
         inputPayment = tryInputPayment()
@@ -15,8 +17,8 @@ class LottoGame {
         val lottoList = lottoMachine.lottoList
         broadcast.printLottoNumbers(lottoList)
 
-        val winningNumber = tryInputWinningNumber()
-        val bonusNumber = tryInputBonusNumber(winningNumber)
+        winningNumber = tryInputWinningNumber()
+        bonusNumber = tryInputBonusNumber(winningNumber)
 
         val winningResult = lottoMachine.winningLotteryResult(lottoList, bonusNumber)
         val prizeCount = lottoMachine.countPrize(winningResult)
