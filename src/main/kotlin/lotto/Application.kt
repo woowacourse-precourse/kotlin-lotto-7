@@ -93,7 +93,44 @@ enum class Rank(
 
 class LottoGame {
     fun start() {
-        // TODO
+        val purchaseAmount = getPurchaseAmount()
+
+    }
+
+    private fun getPurchaseAmount(): Int {
+        println(Message.INPUT_PURCHASE_AMOUNT)
+        return readValidAmount()
+    }
+
+    private fun readValidAmount(): Int {
+        while (true) {
+            try {
+                val input = Console.readLine()
+                validateInputNumber(input)
+                val amount = input.toInt()
+                validateAmount(amount)
+                return amount
+            } catch (e: IllegalArgumentException) {
+                println("[ERROR] ${e.message}")
+            }
+        }
+    }
+
+    private fun validateInputNumber(input: String) {
+        try {
+            input.toInt()
+        } catch (e: NumberFormatException) {
+            throw IllegalArgumentException(Message.ERROR_INVALID_NUMBER_FORMAT)
+        }
+    }
+
+    fun validateAmount(amount: Int) {
+        require(amount >= LottoConfig.LOTTO_PRICE) {
+            Message.ERROR_INVALID_MINIMUM_AMOUNT
+        }
+        require(amount % LottoConfig.LOTTO_PRICE == 0) {
+            Message.ERROR_INVALID_AMOUNT
+        }
     }
 }
 
