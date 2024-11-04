@@ -4,6 +4,7 @@ import camp.nextstep.edu.missionutils.test.Assertions.assertRandomUniqueNumbersI
 import camp.nextstep.edu.missionutils.test.Assertions.assertSimpleTest
 import camp.nextstep.edu.missionutils.test.NsTest
 import org.assertj.core.api.Assertions.assertThat
+import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
 
 class ApplicationTest : NsTest() {
@@ -42,6 +43,7 @@ class ApplicationTest : NsTest() {
     }
 
     @Test
+    @DisplayName("예외 발생시 [ERROR]로 시작하는 메세지를 출력한다")
     fun `예외 테스트`() {
         assertSimpleTest {
             runException("1000j")
