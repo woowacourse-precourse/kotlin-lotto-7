@@ -14,4 +14,13 @@ class LotteryMachineTest {
             assertThat(lotto.getNumbers().distinct().size).isEqualTo(6)
         }
     }
+
+    @Test
+    fun `당첨 번호와 보너스 번호가 올바르게 설정된다`() {
+        val winningNumbers = listOf(1, 2, 3, 4, 5, 6)
+        val bonusNumber = 7
+        LotteryMachine.setWinningLotto(winningNumbers, bonusNumber)
+        assertThat(LotteryMachine.winningNumbers).containsExactlyElementsOf(winningNumbers)
+        assertThat(LotteryMachine.bonusNumber).isEqualTo(bonusNumber)
+    }
 }
