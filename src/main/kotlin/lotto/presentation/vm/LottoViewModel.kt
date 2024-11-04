@@ -1,11 +1,10 @@
 package lotto.presentation.vm
 
-import lotto.domain.enums.Output.Companion.purchaseFormat
-import lotto.domain.enums.Output.Companion.totalRateOfReturnFormat
-import lotto.data.LottoDataSource
 import lotto.domain.calculator.Calculate
+import lotto.domain.enums.Output.Companion.totalRateOfReturnFormat
 import lotto.domain.enums.Rank
 import lotto.domain.lotto.Lotto
+import lotto.domain.repository.LottoRepository
 import lotto.domain.validator.InputValidate
 import lotto.presentation.vm.model.PurchaseState
 import java.util.TreeSet
@@ -13,7 +12,7 @@ import java.util.TreeSet
 class LottoViewModel(
     private val validator: InputValidate,
     private val calculator: Calculate,
-    private val lottoDataSource: LottoDataSource
+    private val lottoRepository: LottoRepository
 ) {
 
     private var _state = PurchaseState()
@@ -39,7 +38,8 @@ class LottoViewModel(
         val purchaseLottoAmount = _state.purchaseInfo.purchaseLottoCount
         val pickedLotto = mutableListOf<TreeSet<Int>>()
         repeat(purchaseLottoAmount) {
-            pickedLotto.add(lottoDataSource())
+            val lottoNumber = lottoRepository.generateLottoNumbers()
+            pickedLotto.add(lottoNumber)
         }
         setPickedLotto(pickedLotto)
     }

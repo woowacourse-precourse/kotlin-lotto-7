@@ -1,4 +1,4 @@
-package lotto.data
+package lotto.data.datasource
 
 import java.util.TreeSet
 
