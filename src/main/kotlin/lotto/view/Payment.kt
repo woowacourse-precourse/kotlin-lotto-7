@@ -8,7 +8,7 @@ class Payment(private val payment: Int) {
     }
 
     private fun validatePayment() {
-        require(payment >= LOWER_RANGE_PAYMENT) {
+        require(payment > LOWER_RANGE_PAYMENT) {
             ErrorMessages.ERROR_POSITIVE_DIGIT.message
         }
         require(payment <= UPPER_RANGE_PAYMENT) {
