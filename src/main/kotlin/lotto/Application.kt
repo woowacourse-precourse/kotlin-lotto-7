@@ -189,6 +189,38 @@ class LottoGame {
             }
         }
     }
+
+    private fun getBonusNumber(winningNumbers: Set<Int>): Int {
+        println(Message.INPUT_BONUS_NUMBER)
+        return readValidBonusNumber(winningNumbers)
+    }
+
+    private fun readValidBonusNumber(winningNumbers: Set<Int>): Int {
+        while (true) {
+            try {
+                val input = Console.readLine()
+                validateInputNumber(input)
+                val number = input.toInt()
+                validateBonusNumber(number)
+                validateBonusNumberDuplicate(number, winningNumbers)
+                return number
+            } catch (e: IllegalArgumentException) {
+                println("[ERROR] ${e.message}")
+            }
+        }
+    }
+
+    private fun validateBonusNumber(number: Int) {
+        require(number in LottoConfig.MIN_NUMBER..LottoConfig.MAX_NUMBER) {
+            Message.ERROR_INVALID_BONUS_NUMBER
+        }
+    }
+
+    fun validateBonusNumberDuplicate(bonusNumber: Int, winningNumbers: Set<Int>) {
+        require(!winningNumbers.contains(bonusNumber)) {
+            Message.ERROR_DUPLICATE_BONUS_NUMBER
+        }
+    }
 }
 
 fun main() {
