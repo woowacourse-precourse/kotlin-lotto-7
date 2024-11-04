@@ -8,4 +8,6 @@ class Lotto(private val numbers: List<Int>) {
         require(numbers.size == LOTTO_SIZE) { Exceptions.INVALID_NUMBERS_SIZE }
         require(numbers.size == numbers.distinct().size) { Exceptions.DUPLICATED_NUMBERS }
     }
+
+    fun getNumbers() = numbers.sorted()
 }
