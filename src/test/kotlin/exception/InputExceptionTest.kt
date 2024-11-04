@@ -75,4 +75,35 @@ class InputExceptionTest {
             }
         }
     }
+
+    @Test
+    fun `당첨 번호와 보너스 번호는 중복되지 않아야 한다`() {
+        assertSimpleTest {
+            // given
+            val winNumbers = listOf(1, 2, 3, 4, 5, 6)
+
+            // when
+
+            // then
+            assertThrows<IllegalArgumentException> {
+                input.isUniqueBonusNumber(winNumbers, 2)
+            }
+        }
+    }
+
+    @Test
+    fun `보너스 번호는 1개를 입력받아야 한다`() {
+        assertSimpleTest {
+            // given
+            val bonusNumberInput = "1, 3"
+
+            // when
+            val bonusNumber = bonusNumberInput.toIntOrNull()?: 0
+
+            // then
+            assertThrows<IllegalArgumentException> {
+                input.isOneBonusNumber(bonusNumber)
+            }
+        }
+    }
 }

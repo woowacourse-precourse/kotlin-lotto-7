@@ -38,4 +38,10 @@ class InputValidation {
             Exception.throwException(ExceptionUtils.DUPLICATE_BONUS_NUMBER)
         return true
     }
+
+    fun isOneBonusNumber(bonusNumber: Int): Boolean {
+        if (bonusNumber == 0)
+            Exception.throwException(ExceptionUtils.NOT_ONE_BONUS_NUMBER)
+        return true
+    }
 }
