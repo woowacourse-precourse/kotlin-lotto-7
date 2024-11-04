@@ -88,4 +88,18 @@ class InputValidatorTest {
             InputValidator.validateWinningNumbers("1, 2, 3, 4, 5, 6, 7")
         }
     }
+
+    @Test
+    fun `보너스 번호와 당첨 번호가 중복되면 예외가 발생한다`() {
+        assertThrows<IllegalArgumentException> {
+            InputValidator.validateBonusNumber("1", listOf(1, 2, 3, 4, 5, 6))
+        }
+    }
+
+    @Test
+    fun `보너스 번호가 지정된 숫자 범위에 포함되어 있지 않으면 예외가 발생한다`() {
+        assertThrows<IllegalArgumentException> {
+            InputValidator.validateBonusNumber("46", listOf(1, 2, 3, 4, 5, 6))
+        }
+    }
 }
