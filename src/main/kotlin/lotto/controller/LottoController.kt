@@ -40,7 +40,7 @@ class LottoController(
 
         val lottos = lottoMachine.createLottos(lottosCount)
         lottos.forEach { lotto ->
-            println(lotto.lottoNumbers.sorted())
+            println(lotto.getSortedNumbers())
         }
 
         return lottos
