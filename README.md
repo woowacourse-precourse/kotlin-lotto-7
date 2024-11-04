@@ -17,10 +17,10 @@
 - [x] 사용자가 잘못된 값을 입력할 경우 IllegalArgumentException을 발생시키고, "[ERROR]"로 시작하는 에러 메시지를 출력 후 그 부분부터 입력을 다시 받는다.
 
 ## 기능
-- 입력
-    - 구입 금액 (1,000원으로 나누어 떨어질 것)
-    - 당첨 번호 (쉼표를 기준으로 구분할 것)
-    - 보너스 번호
+- 입력 InputView
+    - 구입 금액 입력 getPurchasePrice
+    - 당첨 번호 입력 getWinningNumbers
+    - 보너스 번호 입력 getBonusNumbers
 - 출력
     - 8개의 로또 당첨 번호 리스트
     - 당첨 통계 (일치 개수, 수익률)
