@@ -12,7 +12,7 @@ class Lotto(private val numbers: List<Int>) {
     constructor() : this(Randoms.pickUniqueNumbersInRange(MIN_LOTTO_NUMBER,MAX_LOTTO_NUMBER,LOTTO_COUNT))
 
     private fun showNumbers(){
-        println(numbers.sorted().joinToString(separator = ",", prefix = "[", postfix = "]"))
+        println(numbers.sorted().joinToString(separator = ", ", prefix = "[", postfix = "]"))
     }
 
     fun getNumbers() : List<Int>{
