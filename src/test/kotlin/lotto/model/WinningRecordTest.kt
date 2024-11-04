@@ -1,6 +1,5 @@
 package lotto.model
 
-import lotto.model.LottoRank.Rank
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
@@ -13,11 +12,11 @@ class WinningRecordTest {
     @Test
     fun `당첨 결과에 따라 기록을 생성한다`() {
         val lottoResults = listOf(
-            LottoRank(Rank.FIRST, 0),
-            LottoRank(Rank.SECOND, 0),
-            LottoRank(Rank.FIRST, 0),
-            LottoRank(Rank.THIRD, 0),
-            LottoRank(Rank.SECOND, 0),
+            LottoRank.FIRST,
+            LottoRank.SECOND,
+            LottoRank.FIRST,
+            LottoRank.THIRD,
+            LottoRank.SECOND,
         )
 
         val expected = listOf(2, 2, 1, 0, 0, 0)
@@ -37,11 +36,11 @@ class WinningRecordTest {
     companion object {
         @JvmStatic
         fun profitRateParameters() = listOf(
-            arrayOf(listOf(LottoRank(Rank.FIRST, 2_000_000_000)), 10_000, 20000000.0),
-            arrayOf(listOf(LottoRank(Rank.SECOND, 30_000_000)), 20_000, 150000.0),
-            arrayOf(listOf(LottoRank(Rank.THIRD, 1_500_000)), 5_000, 30000.0),
-            arrayOf(listOf(LottoRank(Rank.FOURTH, 50_000)), 1_000, 5000.0),
-            arrayOf(listOf(LottoRank(Rank.FIFTH, 5_000)), 2_000, 250.0)
+            arrayOf(listOf(LottoRank.FIRST), 10_000, 20000000.0),
+            arrayOf(listOf(LottoRank.SECOND), 20_000, 150000.0),
+            arrayOf(listOf(LottoRank.THIRD), 5_000, 30000.0),
+            arrayOf(listOf(LottoRank.FOURTH), 1_000, 5000.0),
+            arrayOf(listOf(LottoRank.FIFTH), 2_000, 250.0)
         )
     }
 }

@@ -3,7 +3,7 @@ package lotto.model
 import lotto.util.Constants.LOTTO_PRICE
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
-import lotto.model.LottoRank.Rank
+import lotto.model.LottoRank
 
 class LottoMachineTest {
 
@@ -32,7 +32,7 @@ class LottoMachineTest {
         val lotto = Lotto(listOf(1, 2, 3, 4, 5, 6))
         val ranks = lottoMachine.determineLottoRanks(listOf(lotto), winningNumbers, bonusNumber)
 
-        assertEquals(Rank.FIRST, ranks[0].rank)
+        assertEquals(LottoRank.FIRST, ranks[0])
     }
 
     @Test
@@ -40,7 +40,7 @@ class LottoMachineTest {
         val lotto = Lotto(listOf(1, 2, 3, 4, 5, 7))
         val ranks = lottoMachine.determineLottoRanks(listOf(lotto), winningNumbers, bonusNumber)
 
-        assertEquals(Rank.SECOND, ranks[0].rank)
+        assertEquals(LottoRank.SECOND, ranks[0])
     }
 
     @Test
@@ -48,7 +48,7 @@ class LottoMachineTest {
         val lotto = Lotto(listOf(1, 2, 3, 4, 5, 8))
         val ranks = lottoMachine.determineLottoRanks(listOf(lotto), winningNumbers, bonusNumber)
 
-        assertEquals(Rank.THIRD, ranks[0].rank)
+        assertEquals(LottoRank.THIRD, ranks[0])
     }
 
     @Test
@@ -56,7 +56,7 @@ class LottoMachineTest {
         val lotto = Lotto(listOf(1, 2, 3, 4, 7, 8))
         val ranks = lottoMachine.determineLottoRanks(listOf(lotto), winningNumbers, bonusNumber)
 
-        assertEquals(Rank.FOURTH, ranks[0].rank)
+        assertEquals(LottoRank.FOURTH, ranks[0])
     }
 
     @Test
@@ -64,7 +64,7 @@ class LottoMachineTest {
         val lotto = Lotto(listOf(1, 2, 3, 4, 8, 9))
         val ranks = lottoMachine.determineLottoRanks(listOf(lotto), winningNumbers, bonusNumber)
 
-        assertEquals(Rank.FOURTH, ranks[0].rank)
+        assertEquals(LottoRank.FOURTH, ranks[0])
     }
 
     @Test
@@ -72,7 +72,7 @@ class LottoMachineTest {
         val lotto = Lotto(listOf(1, 2, 3, 7, 8, 9))
         val ranks = lottoMachine.determineLottoRanks(listOf(lotto), winningNumbers, bonusNumber)
 
-        assertEquals(Rank.FIFTH, ranks[0].rank)
+        assertEquals(LottoRank.FIFTH, ranks[0])
     }
 
     @Test
@@ -80,7 +80,7 @@ class LottoMachineTest {
         val lotto = Lotto(listOf(1, 2, 3, 8, 9, 10))
         val ranks = lottoMachine.determineLottoRanks(listOf(lotto), winningNumbers, bonusNumber)
 
-        assertEquals(Rank.FIFTH, ranks[0].rank)
+        assertEquals(LottoRank.FIFTH, ranks[0])
     }
 
     @Test
@@ -88,6 +88,6 @@ class LottoMachineTest {
         val lotto = Lotto(listOf(1, 2, 8, 9, 10, 11))
         val ranks = lottoMachine.determineLottoRanks(listOf(lotto), winningNumbers, bonusNumber)
 
-        assertEquals(Rank.NO_WIN, ranks[0].rank)
+        assertEquals(LottoRank.NO_WIN, ranks[0])
     }
 }
