@@ -66,6 +66,7 @@ private fun getLottoNumbers(lottoTicketCount: Int): MutableList<Lotto> {
 }
 
 private fun printTicketCount(lottoTicketCount: Int) {
+    println()
     println("${lottoTicketCount}개를 구매했습니다.")
 }
 
@@ -96,6 +97,7 @@ fun getLottoNumbers(): List<Int> {
 
 fun getLottoWinningNumbers(): List<Int> {
     try {
+        println()
         println("당첨 번호를 입력해 주세요.")
         val userInput = Console.readLine()
         val lottoWinningNumbers = userInput.split(",").map { it.toInt() ?: throw IllegalArgumentException("당첨 번호는 쉼표(,)로 구분된 1~45 사이의 정수 형태로 입력해 주세요.") }
@@ -118,6 +120,7 @@ fun getLottoWinningNumbers(): List<Int> {
 
 fun getLottoBonusNumber(lottoWinningNumbers: List<Int>): Int {
     try {
+        println()
         println("보너스 번호를 입력해 주세요.")
         val userInput = Console.readLine()
         val lottoBonusNumber = userInput.toInt()
@@ -141,6 +144,7 @@ fun compareLottoNumbers(lottoWinningNumbers: List<Int>, lottoBonusNumber: Int, l
 }
 
 fun printResult(lottoMoney: Map<String, Int>, matchCounts: Map<String, Int>) {
+    println()
     println("당첨 통계")
     println("---")
 
@@ -175,5 +179,5 @@ fun calculateProfitRate(totalMoney: Int, lottoBudget: Int): Double {
 }
 
 fun printProfitRate(profitRate: Double) {
-    println("총 수익률은 ${profitRate}%입니다.")
+    println("총 수익률은 ${String.format("%.1f", profitRate)}%입니다.")
 }
