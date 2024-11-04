@@ -17,7 +17,6 @@ class PurchaseView(private val presenter: LottoPresenter) : PurchaseViewInterfac
       Validator.validatePurchaseAmount(amount)
       presenter.onPurchaseAmountReceived(amount!!)
     } catch (e: IllegalArgumentException) {
-      println("[ERROR] ${LottoConstants.ERROR_INVALID_PURCHASE_AMOUNT}")
       requestPurchaseAmount()
     }
   }
