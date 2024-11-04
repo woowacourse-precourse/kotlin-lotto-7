@@ -10,5 +10,7 @@ class ExceptionConstants {
         const val ERROR_EMPTY_PURCHASE_AMOUNT = "[ERROR] 구매 금액이 비어 있습니다."
         const val ERROR_NOT_A_NUMBER = "[ERROR] 구매 금액은 숫자여야 합니다."
         const val ERROR_OUT_OF_RANGE = "[ERROR] 구매 금액이 정수의 범위를 벗어납니다."
+
+        const val ERROR_EMPTY_WINNING_NUMBERS = "[ERROR] 당첨 번호가 비어 있습니다."
     }
 }

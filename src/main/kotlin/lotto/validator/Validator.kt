@@ -15,4 +15,11 @@ class Validator {
         require(amount > 0) { ExceptionConstants.ERROR_INVALID_PURCHASE_AMOUNT }
         require(amount % Constants.LOTTO_UNIT_PRICE == 0) { ExceptionConstants.ERROR_INVALID_PURCHASE_AMOUNT }
     }
+
+    fun validateWinningNumbers(numbers: List<Int>) {
+        require(numbers.isNotEmpty()) { ExceptionConstants.ERROR_EMPTY_WINNING_NUMBERS }
+        require(numbers.size == Constants.WINNING_NUMBERS_COUNT) { ExceptionConstants.ERROR_INVALID_WINNING_NUMBERS_COUNT }
+        require(numbers.all { it in Constants.MIN_NUMBER..Constants.MAX_NUMBER }) { ExceptionConstants.ERROR_INVALID_WINNING_NUMBERS_RANGE }
+        require(numbers.distinct().size == Constants.WINNING_NUMBERS_COUNT) { ExceptionConstants.ERROR_DUPLICATE_WINNING_NUMBERS }
+    }
 }
