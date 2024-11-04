@@ -57,7 +57,7 @@ class LottoBuyManager {
         private const val LOTTO_COUNT = 6
         private const val REGEX_NUMBER_PATTERN = "^[0-9]+\$"
         private const val ERROR_TITLE = "[ERROR]"
-        private const val ERROR_NOT_NUMBER_MESSAGE = "금액은 숫자여야 합니다."
+        private const val ERROR_NOT_NUMBER_MESSAGE = "금액은 부호가 없는 숫자만 입력 가능합니다."
         private const val ERROR_MINIMUM_AMOUNT_MESSAGE = "로또 구입금액은 1000원 이상이어야 합니다."
         private const val ERROR_UNIT_AMOUNT_MESSAGE = "로또 구입금액은 1000원 단위여야 합니다."
     }
