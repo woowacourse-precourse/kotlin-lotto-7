@@ -12,7 +12,7 @@ class LottoTicketsTest {
             val money = 2_000
 
             // when
-            val lottoTickets = LottoTickets(money).tickets
+            val lottoTickets = LottoTickets(money).ticketCounts
 
             // then
             assertThat(lottoTickets).isEqualTo(2)
