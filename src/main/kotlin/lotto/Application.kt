@@ -6,27 +6,19 @@ import camp.nextstep.edu.missionutils.Randoms
 const val LOTTO_TICKET_VALUE = 1000
 const val LOTTO_NUMBER_COUNT = 6
 
-val matchLabels = listOf(
-    "3개 일치",
-    "4개 일치",
-    "5개 일치",
-    "5개 일치, 보너스 볼 일치",
-    "6개 일치"
-)
-val lottoMoney = mutableMapOf(
-    "3개 일치" to 5000,
-    "4개 일치" to 50000,
-    "5개 일치" to 1500000,
-    "5개 일치, 보너스 볼 일치" to 30000000,
-    "6개 일치" to 2000000000
-)
-val matchCounts = mutableMapOf(
-    "3개 일치" to 0,
-    "4개 일치" to 0,
-    "5개 일치" to 0,
-    "5개 일치, 보너스 볼 일치" to 0,
-    "6개 일치" to 0
-)
+enum class LottoMatch(val label: String, val prize: Int) {
+    MATCH_3("3개 일치", 5000),
+    MATCH_4("4개 일치", 50000),
+    MATCH_5("5개 일치", 1500000),
+    MATCH_5_BONUS("5개 일치, 보너스 볼 일치", 30000000),
+    MATCH_6("6개 일치", 2000000000);
+
+    companion object {
+        fun initMatchCounts(): MutableMap<LottoMatch, Int> {
+            return values().associateWith { 0 }.toMutableMap()
+        }
+    }
+}
 
 fun main() {
     val lottoBudget = getLottoBudget()
@@ -41,24 +33,22 @@ fun main() {
         val lottoResult = compareLottoNumbers(lottoWinningNumbers, lottoBonusNumber, lotto)
         lottoResults.add(lottoResult)
     }
-    countLottoNumber(lottoResults)
-    printResult(lottoMoney, matchCounts)
-    val totalMoney = calculateTotalMoney(lottoMoney, matchCounts)
+    val matchCounts = LottoMatch.initMatchCounts()
+    countLottoNumber(lottoResults, matchCounts)
+    printResult(matchCounts)
+    val totalMoney = calculateTotalMoney(matchCounts)
     val profitRate = calculateProfitRate(totalMoney, lottoBudget)
     printProfitRate(profitRate)
 }
 
-private fun countLottoNumber(lottoResults: MutableList<Pair<Int, Int>>) {
+private fun countLottoNumber(lottoResults: MutableList<Pair<Int, Int>>, matchCounts: MutableMap<LottoMatch, Int>) {
     for ((matchCount, bonusMatchCount) in lottoResults) {
-        val allMatchCount = matchCount + bonusMatchCount
         when {
-            allMatchCount == 6 -> matchCounts["6개 일치"] = matchCounts["6개 일치"]!! + 1
-            allMatchCount == 5 && bonusMatchCount == 1 -> matchCounts["5개 일치, 보너스 볼 일치"] =
-                matchCounts["5개 일치, 보너스 볼 일치"]!! + 1
-
-            allMatchCount == 5 -> matchCounts["5개 일치"] = matchCounts["5개 일치"]!! + 1
-            allMatchCount == 4 -> matchCounts["4개 일치"] = matchCounts["4개 일치"]!! + 1
-            allMatchCount == 3 -> matchCounts["3개 일치"] = matchCounts["3개 일치"]!! + 1
+            matchCount == 6 -> matchCounts[LottoMatch.MATCH_6] = matchCounts[LottoMatch.MATCH_6]!! + 1
+            matchCount == 5 && bonusMatchCount == 1 -> matchCounts[LottoMatch.MATCH_5_BONUS] = matchCounts[LottoMatch.MATCH_5_BONUS]!! + 1
+            matchCount == 5 -> matchCounts[LottoMatch.MATCH_5] = matchCounts[LottoMatch.MATCH_5]!! + 1
+            matchCount == 4 -> matchCounts[LottoMatch.MATCH_4] = matchCounts[LottoMatch.MATCH_4]!! + 1
+            matchCount == 3 -> matchCounts[LottoMatch.MATCH_3] = matchCounts[LottoMatch.MATCH_3]!! + 1
         }
     }
 }
@@ -94,7 +84,6 @@ fun getLottoBudget(): Int {
         if (!userInput.matches(Regex("\\d+"))) {
             throw IllegalArgumentException("입력 값은 숫자만 포함해야 합니다.")
         }
-
         return lottoBudget
     } catch(e: java.lang.IllegalArgumentException) {
         println("[ERROR] ${e.message}")
@@ -158,23 +147,21 @@ fun compareLottoNumbers(lottoWinningNumbers: List<Int>, lottoBonusNumber: Int, l
     return Pair(matchingCount, bonusMatchingCount)
 }
 
-fun printResult(lottoMoney: Map<String, Int>, matchCounts: Map<String, Int>) {
+fun printResult(matchCounts: Map<LottoMatch, Int>) {
     println("당첨 통계")
     println("---")
 
-    matchLabels.forEach { label ->
-        val prize = String.format("%,d", lottoMoney[label] ?: 0)
-        val count = matchCounts[label] ?: 0
-        println("$label (${prize}원) - ${count}개")
+    LottoMatch.values().forEach { match ->
+        val prize = String.format("%,d", match.prize)
+        val count = matchCounts[match] ?: 0
+        println("${match.label} (${prize}원) - ${count}개")
     }
 }
 
-
-fun calculateTotalMoney(lottoMoney: MutableMap<String, Int>, matchCounts: MutableMap<String, Int>): Int {
+fun calculateTotalMoney(matchCounts: MutableMap<LottoMatch, Int>): Int {
     var totalMoney = 0
-    for ((key, count) in matchCounts) {
-        val prize = lottoMoney[key] ?: 0
-        totalMoney += prize * count
+    for ((match, count) in matchCounts) {
+        totalMoney += match.prize * count
     }
     return totalMoney
 }
