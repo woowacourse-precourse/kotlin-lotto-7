@@ -20,7 +20,7 @@ fun main() {
         println(lotto)
     }
     val lottoWinningNumbers = getLottoWinningNumbers()
-    val lottoBonusNumber = getLottoBonusNumber()
+    val lottoBonusNumber = getLottoBonusNumber(lottoWinningNumbers)
 }
 
 fun getLottoBudget(): Int {
@@ -64,9 +64,20 @@ fun getLottoWinningNumbers(): List<Int> {
     return getLottoWinningNumbers()
 }
 
-fun getLottoBonusNumber(): Int {
-    println("보너스 번호를 입력해 주세요.")
-    val userInput = Console.readLine()
-    val lottoBonusNumber = userInput.toInt()
-    return lottoBonusNumber
+fun getLottoBonusNumber(lottoWinningNumbers: List<Int>): Int {
+    try {
+        println("보너스 번호를 입력해 주세요.")
+        val userInput = Console.readLine()
+        val lottoBonusNumber = userInput.toInt()
+        if (!(lottoBonusNumber in 1..45)) {
+            throw IllegalArgumentException("당첨 번호는 1~45 사이의 숫자로 입력해 주세요.")
+        }
+        if (lottoBonusNumber in lottoWinningNumbers) {
+            throw IllegalArgumentException("보너스 번호는 당첨 번호와 중복되지 않은 숫자로 입력해 주세요.")
+        }
+        return lottoBonusNumber
+    } catch (e: java.lang.IllegalArgumentException) {
+        println("[ERROR] ${e.message}")
+    }
+    return getLottoBonusNumber(lottoWinningNumbers)
 }
