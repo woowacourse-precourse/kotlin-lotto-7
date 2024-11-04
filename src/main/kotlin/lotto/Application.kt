@@ -2,17 +2,40 @@ package lotto
 
 import camp.nextstep.edu.missionutils.Console
 
+lateinit var hitNumbers : List<Int>
+
 fun main() {
     val money = inputHowMuch()
     val myLottos = makeMyLotto(money)
-    val hitNumbers = inputHitNumbers()
+    hitNumbers = inputHitNumbers()
+    val bonusNumber = inputBonusNumber()
+}
+
+fun inputBonusNumber(): Int {
+    val inputMessage = "보너스 번호를 입력해 주세요."
+    println(inputMessage)
+    val inputBonus = Console.readLine()
+    validateBonusNumber(inputBonus)
+    return inputBonus.toInt()
+}
+
+fun validateBonusNumber(inputBonus: String) {
+    validateEmpty(inputBonus)
+    validateBlank(inputBonus)
+    validateBecomeNumber(inputBonus)
+    validateBetween1And45(inputBonus.toInt())
+    validateDuplicateWithHit(inputBonus.toInt())
+}
+
+fun validateDuplicateWithHit(input: Int) {
+    val exceptionMessage = "[ERROR] 당첨 숫자와 중복 될 수 없습니다"
+    require(input !in hitNumbers){throw IllegalArgumentException(exceptionMessage)}
 }
 
 fun inputHitNumbers(): List<Int> {
     val inputMessage = "당첨 번호를 입력해 주세요."
     println(inputMessage)
     val inputHit = Console.readLine()
-    Console.close()
     return validateHitNumbers(inputHit)
 }
 
@@ -27,17 +50,18 @@ fun validateHitNumbers(input: String) : List<Int> {
 }
 
 fun validateDuplicate(parsedInput: List<Int>) {
-    val exceptionMessage = "중복된 숫자가 존재하면 안 됩니다."
+    val exceptionMessage = "[ERROR] 중복된 숫자가 존재하면 안 됩니다."
     require(parsedInput.groupingBy { it }.eachCount().all { 1 == it.value }){throw IllegalArgumentException(exceptionMessage)}
 }
 
 fun validateBetween1And45(parsedInput: List<Int>) {
-    val exceptionMessage = "1이상 45이하의 숫자여야 합니다."
-    require(parsedInput.all { it in Lotto.MIN_LOTTO_NUMBER..Lotto.MAX_LOTTO_NUMBER }) {
-        throw IllegalArgumentException(
-            exceptionMessage
-        )
-    }
+    val exceptionMessage = "[ERROR] 1이상 45이하의 숫자여야 합니다."
+    require(parsedInput.all { it in Lotto.MIN_LOTTO_NUMBER..Lotto.MAX_LOTTO_NUMBER }) { throw IllegalArgumentException(exceptionMessage) }
+}
+
+fun validateBetween1And45(input: Int) {
+    val exceptionMessage = "[ERROR] 1이상 45이하의 숫자여야 합니다."
+    require(input in Lotto.MIN_LOTTO_NUMBER..Lotto.MAX_LOTTO_NUMBER ) { throw IllegalArgumentException(exceptionMessage) }
 }
 
 fun parseByComma(input: String): List<Int> {
@@ -45,7 +69,7 @@ fun parseByComma(input: String): List<Int> {
 }
 
 fun validatePattern(input: String) {
-    val exceptionMessage = "숫자,숫자,숫자,숫자,숫자,숫자 패턴이 아닙니다."
+    val exceptionMessage = "[ERROR] 숫자,숫자,숫자,숫자,숫자,숫자 패턴이 아닙니다."
     val pattern = Regex("^(\\d+,){5}\\d+$") // 숫콤숫콤숫콤숫콤숫콤숫(숫 : 숫자, 콤 : 콤마)
     require(pattern.matches(input)) { throw IllegalArgumentException(exceptionMessage) }
 }
@@ -66,7 +90,6 @@ fun inputHowMuch(): Int {
     val inputMessage = "구입금액을 입력해 주세요."
     println(inputMessage)
     val money = Console.readLine()
-    Console.close()
     validateMoney(money)
     return money.toInt()
 }
