@@ -12,8 +12,8 @@ object OutputView {
     }
 
     fun printLottoResult(result: MutableMap<LottoRank, Int>) {
-        println(OutputMessage.RESULT_TITLE)
-        println(OutputMessage.DIVIDER)
+        println(OutputMessage.RESULT_TITLE.getMessage())
+        println(OutputMessage.DIVIDER.getMessage())
         result.keys.sorted().reversed().forEach { rank ->   // rank가 낮은거 부터
             when (rank) {
                 LottoRank.FIRST -> println(OutputMessage.MATCH_COUNT.format(rank.matchCount, rank.prize, result[rank]))
