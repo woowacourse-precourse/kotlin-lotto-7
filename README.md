@@ -14,8 +14,8 @@
 <br>
 
 2. 로또 번호 생성
-    - [ ] 로또 번호를 생성
-    - [ ] `Randoms.pickUniqueNumbersInRange(1, 45, 6)` 이용
+    - [x] 로또 번호를 생성
+    - [x] `Randoms.pickUniqueNumbersInRange(1, 45, 6)` 이용
     - 제공된 `Lotto` 클래스를 사용하여 구현
 
 <br>
