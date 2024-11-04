@@ -8,11 +8,11 @@ class LottoResultManager(
 ) {
 
     private val rankResults = mutableMapOf(
-        Rank.FIFTH to RANK_DEFAULT_COUNT,
-        Rank.FOURTH to RANK_DEFAULT_COUNT,
-        Rank.THIRD to RANK_DEFAULT_COUNT,
-        Rank.SECOND to RANK_DEFAULT_COUNT,
-        Rank.FIRST to RANK_DEFAULT_COUNT
+        Rank.FIFTH to DEFAULT_MATCH_COUNT,
+        Rank.FOURTH to DEFAULT_MATCH_COUNT,
+        Rank.THIRD to DEFAULT_MATCH_COUNT,
+        Rank.SECOND to DEFAULT_MATCH_COUNT,
+        Rank.FIRST to DEFAULT_MATCH_COUNT
     )
 
     fun calculateRankResults() {
@@ -26,7 +26,7 @@ class LottoResultManager(
     private fun matchRank(matchCount: Int, isBonusMatch: Boolean) {
         when (val rank = Rank.matchRank(matchCount, isBonusMatch)) {
             Rank.NONE -> return
-            else -> rankResults[rank] = rankResults.getOrDefault(rank, 0) + 1
+            else -> rankResults[rank] = rankResults.getOrDefault(rank, DEFAULT_MATCH_COUNT) + MATCH_COUNT_PLUS_ONE
         }
     }
 
@@ -60,12 +60,13 @@ class LottoResultManager(
     }
 
     companion object {
-        private const val RANK_DEFAULT_COUNT = 0
+        private const val DEFAULT_MATCH_COUNT = 0
+        private const val MATCH_COUNT_PLUS_ONE = 1
+        private const val PROFIT_PERCENT_MULTIPLIER = 100
         private const val RANK_RESULT_MESSAGE = "당첨 통계\n---"
         private const val RANK_RESULT_FORMAT = "%d개 일치%s (%,d원) - %d개"
         private const val HAS_BONUS_MESSAGE = ", 보너스 볼 일치"
         private const val NO_BONUS_MESSAGE = ""
         private const val PROFIT_RESULT_MESSAGE = "총 수익률은 %,.1f%%입니다."
-        private const val PROFIT_PERCENT_MULTIPLIER = 100
     }
 }

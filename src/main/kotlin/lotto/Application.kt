@@ -16,7 +16,7 @@ fun main() {
         lottoBuyManager.userLottos,
         winningLotto,
         bonusNumberManager.bonusNumber,
-        lottoBuyManager.money
+        lottoBuyManager.buyMoney
     )
     lottoResultManager.calculateRankResults()
     lottoResultManager.showResult()

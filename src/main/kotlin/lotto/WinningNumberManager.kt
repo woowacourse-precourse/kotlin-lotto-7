@@ -24,7 +24,7 @@ class WinningNumberManager {
             throw IllegalArgumentException(ERROR_WINNING_NUMBERS_INPUT_MESSAGE)
         }
 
-        val rawWinningNumbers = winningNumbersInput.split(',')
+        val rawWinningNumbers = winningNumbersInput.split(WINNING_NUMBER_SPLITTER)
         if (rawWinningNumbers.any { it.isBlank() }) {
             throw IllegalArgumentException(ERROR_WINNING_NUMBERS_BLANK_MESSAGE)
         }
@@ -34,6 +34,7 @@ class WinningNumberManager {
     }
 
     companion object {
+        private const val WINNING_NUMBER_SPLITTER = ','
         private const val REQUEST_WINNING_NUMBERS_MESSAGE = "당첨 번호를 입력해 주세요."
         private const val REGEX_WINNING_NUMBERS_PATTERN = "^[0-9,]+\$"
         private const val ERROR_WINNING_NUMBERS_INPUT_MESSAGE = "[ERROR] 당첨 번호 입력은 부호가 없는 숫자와 쉼표(,)만 입력 가능합니다."
