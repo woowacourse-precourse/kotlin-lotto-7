@@ -61,6 +61,7 @@ fun main() {
         lottoResult.add(checkWinner(checkLotto(it, prizeLotto), checkBonus(it, prizeLotto, bonusNumber)))
     }
     printResult(lottoResult)
+    println("총 수익률은 ${String.format("%.1f", getReturnRate(lottoCount, lottoResult)*100)}%입니다.")
 }
 
 fun getAmount(): Int {
@@ -165,4 +166,13 @@ fun printResult(result: ArrayList<PrizeWinner>) {
     println("5개 일치 (1,500,000원) - ${result.count { it == PrizeWinner.THIRD }}개")
     println("5개 일치, 보너스 볼 일치 (30,000,000원) - ${result.count { it == PrizeWinner.SECOND }}개")
     println("6개 일치 (2,000,000,000원) - ${result.count { it == PrizeWinner.FIRST }}개")
+}
+
+fun getReturnRate(lottoCount: Int, result: ArrayList<PrizeWinner>): Double {
+    val purchaseAmount = (lottoCount*1000).toDouble()
+    val returnAmount = (result.count { it == PrizeWinner.FIFTH }*5000 + result.count { it == PrizeWinner.FOURTH }*50000 +
+            result.count { it == PrizeWinner.THIRD }*1500000 + result.count { it == PrizeWinner.SECOND }*30000000 +
+            result.count { it == PrizeWinner.FIRST }*2000000000).toDouble()
+
+    return returnAmount / purchaseAmount
 }
