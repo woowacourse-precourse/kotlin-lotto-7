@@ -28,4 +28,8 @@ object OutputView {
     fun printWinNumberMessage() {
         println(PrintUtils.ENTER_WIN_NUMBERS)
     }
+
+    fun printBonusNumberMessage() {
+        println(PrintUtils.ENTER_BONUS_NUMBER)
+    }
 }
