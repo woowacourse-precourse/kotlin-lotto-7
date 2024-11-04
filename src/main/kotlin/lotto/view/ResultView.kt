@@ -35,4 +35,8 @@ class ResultView {
                 println("${prize.matchCount}개 일치${bonusText} (${formattedPrizeMoney}원) - ${count}개")
             }
     }
+
+    private fun displayProfitRate(lottoResult: LottoResult) {
+        println("총 수익률은 ${lottoResult.profitRate}%입니다.")
+    }
 }
