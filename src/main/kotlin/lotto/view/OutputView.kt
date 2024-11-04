@@ -42,7 +42,7 @@ class OutputView {
         }
     }
 
-    private fun formatRankMessage(rankMessage: String, rankPrice: Int, count: Int) = "$rankMessage (${rankPrice}원) - ${count}개"
+    private fun formatRankMessage(rankMessage: String, rankPrice: Int, count: Int) = "$rankMessage (${decimal.format(rankPrice)}원) - ${count}개"
 
     fun printTotalRateOfReturn(rateOfReturn: Double) {
         println("총 수익률은 ${rateOfReturn}%입니다.")
