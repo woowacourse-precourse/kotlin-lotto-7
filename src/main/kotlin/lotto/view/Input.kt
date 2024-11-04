@@ -6,7 +6,7 @@ import lotto.util.Constants
 import lotto.util.Transformer
 
 object Input {
-    fun read():String{
+    fun read(): String {
         return Console.readLine()
     }
 }

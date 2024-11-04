@@ -9,7 +9,7 @@ import lotto.view.Input
 import lotto.view.Output
 
 class MainController {
-    fun execute(){
+    fun execute() {
         Output.printMoneyToInput()
         val money = readAndValidateMoney().toInt()
         Output.printPurchaseDetails(money)
@@ -21,12 +21,12 @@ class MainController {
         Output.printBonusNumberToInput()
         val bonusNumber = readAndValidateBonusNumber(winningNumber).toInt()
         val calculator = WinningCalculator()
-        val result = calculator.calculateDetails(winningNumber,bonusNumber,lottoGenerator.getLotteries())
+        val result = calculator.calculateDetails(winningNumber, bonusNumber, lottoGenerator.getLotteries())
         Output.printWinningDetails(result)
-        Output.printReturnRate(calculator.calculateReturnRate(money,result))
+        Output.printReturnRate(calculator.calculateReturnRate(money, result))
     }
 
-    private fun readAndValidateMoney() : String{
+    private fun readAndValidateMoney(): String {
         return try {
             val money = Input.read()
             Validator().validateMoneyInput(money)
@@ -36,7 +36,7 @@ class MainController {
         }
     }
 
-    private fun readAndValidateWinningNumber() : Lotto{
+    private fun readAndValidateWinningNumber(): Lotto {
         return try {
             val winningNumber = Input.read()
             Validator().validateWinningNumberInput(winningNumber)
@@ -47,10 +47,10 @@ class MainController {
         }
     }
 
-    private fun readAndValidateBonusNumber(winningNumber: Lotto) : String{
+    private fun readAndValidateBonusNumber(winningNumber: Lotto): String {
         return try {
             val bonusNumber = Input.read()
-            Validator().validateBonusNumberInput(bonusNumber,winningNumber)
+            Validator().validateBonusNumberInput(bonusNumber, winningNumber)
             bonusNumber
         } catch (e: IllegalArgumentException) {
             readAndValidateBonusNumber(winningNumber)
