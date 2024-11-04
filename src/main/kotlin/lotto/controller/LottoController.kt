@@ -23,7 +23,7 @@ class LottoController {
         val ticket = countLottoTicket(purchaseAmount)
         val lottoTickets = generateLottoTickets(ticket)
         outputView.countTicketsMessage(ticket)
-        outputView.generateTicketsMessage(ticket)
+        outputView.generateTicketsMessage(lottoTickets)
         val winLottoNumbers = getWinningNumbers()
         val bonusNumber = getBonusNumber(winLottoNumbers)
         calculateWinningStatistics(lottoTickets, winLottoNumbers, bonusNumber.toInt())

@@ -10,11 +10,10 @@ class OutputView {
         print("\n" + String.format(OUTPUT_LOTTO_TICKET_COUNT_MESSAGE, ticket))
     }
 
-    fun generateTicketsMessage(ticketCount: Int) {
-        val lottoGenerator = LottoGenerator()
-        val tickets = lottoGenerator.generateLottoTickets(ticketCount)
-
-        tickets.forEach { ticket -> print("\n" + ticket.sorted()) }
+    fun generateTicketsMessage(tickets: List<List<Int>>) {
+        tickets.forEach { ticket ->
+            print("\n" + ticket.sorted())
+        }
     }
 
     fun displayWinningMessage() {
