@@ -12,8 +12,8 @@ class LottoController(
     private val outputView: OutputView,
 ) {
     fun runLottoGame() {
-        val lottoAmount = getLottoAmount()
-        val purchasedLottos = issueLottos(lottoAmount.lottoAmount)
+        val lottoAmount = getLottoAmount().money
+        val purchasedLottos = issueLottos(lottoAmount)
 
         val winningLottoNumber = getWinningLottoNumber()
         val winningBonusNumber = getBonusNumber()
@@ -21,7 +21,7 @@ class LottoController(
 
         val lottoPrizes = calculateLottoStatistics(purchasedLottos, winningLotto)
         showLottoStatistics(lottoPrizes)
-        showLottoYield(lottoPrizes, lottoAmount.lottoAmount)
+        showLottoYield(lottoPrizes, lottoAmount)
     }
 
     private fun getLottoAmount(): LottoAmount {
