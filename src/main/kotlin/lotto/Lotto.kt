@@ -1,40 +1,33 @@
 package lotto
 
-import lotto.LottoConstants.LOTTO_NUMBER_RANGE
-import lotto.LottoConstants.LOTTO_NUMBER_SIZE
-import validator.LottoGenerator.Companion.GENERATOR_ERROR_FORMAT
-import validator.RangeValidator.Companion.LOTTO_COUNT_ERROR
-import validator.RangeValidator.Companion.RANGE_ERROR_FORMAT
-
 class Lotto(private val numbers: List<Int>) {
     init {
-        require(isSixLength(numbers)) { LOTTO_COUNT_ERROR }
-        require(isNotDuplicated(numbers)) { GENERATOR_ERROR_FORMAT }
-        require(isInRange(numbers)) { RANGE_ERROR_FORMAT }
+        require(numbers.size == DEFAULT_LOTTO_SIZE)
+        checkLottoNumberException()
     }
 
-    private fun isSixLength(numbers: List<Int>): Boolean {
-        return numbers.size == LOTTO_NUMBER_SIZE
+    private fun checkLottoNumberException(): List<Int> {
+
+        if (numbers.size != 6) throw IllegalArgumentException(ERROR_INPUT_NUMBER_LENGTH)
+        if (numbers.distinct().size != 6) throw IllegalArgumentException(ERROR_INPUT_NUMBER_DISTINCT)
+        isAllNumbersInRange(numbers)
+        return numbers.sorted()
     }
 
-    private fun isNotDuplicated(numbers: List<Int>): Boolean {
-        return numbers.distinct().size == numbers.size
-    }
-
-    private fun isInRange(numbers: List<Int>): Boolean {
-        return numbers.all { it in LOTTO_NUMBER_RANGE }
-    }
-
-    fun isSameList(inputLottoNum: List<Int>, randomLottoNum: List<Int>): Boolean {
-        return inputLottoNum.sorted() == randomLottoNum.sorted()
-    }
-
-    fun countMatch(otherLotto: Lotto): Int {
-        return numbers.fold(0) { total, number ->
-            total + if (otherLotto.numbers.contains(number)) 1 else 0
+    private fun isAllNumbersInRange(list: List<Int>): Boolean {
+        for (number in list) {
+            if (number < 1 || number > 45) {
+                throw IllegalArgumentException(ERROR_INPUT_NUMBER_RANGE)
+            }
         }
+        return true
     }
 
-    fun contains(number: Int) = numbers.contains(number)
 
+    companion object {
+        private const val DEFAULT_LOTTO_SIZE = 6
+        private const val ERROR_INPUT_NUMBER_LENGTH = "[ERROR] 6개의 숫자만 입력 가능합니다"
+        private const val ERROR_INPUT_NUMBER_DISTINCT = "1[ERROR]수 중에 중복이 있습니다."
+        private const val ERROR_INPUT_NUMBER_RANGE = "[ERROR]1~45사이의 수가 아닙니다"
+    }
 }
