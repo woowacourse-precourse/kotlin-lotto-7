@@ -15,7 +15,7 @@ class Lotto(private val numbers: List<Int>) {
 
     // TODO: 추가 기능 구현
     override fun toString(): String {
-        return numbers.joinToString(prefix = "[", postfix = "]", separator = ", ") { it.toString() }
+        return numbers.joinToString(prefix = PREFIX, postfix = POSTFIX, separator = SEPARATOR) { it.toString() }
     }
 
     fun toList(): List<Int> {
@@ -27,6 +27,10 @@ class Lotto(private val numbers: List<Int>) {
     }
 
     companion object {
+        private const val PREFIX = "["
+        private const val POSTFIX = "]"
+        private const val SEPARATOR = ", "
+
         fun fromInput(inputNumbers: String): Lotto {
             return fromList(inputNumbers.validateIntList())
         }
