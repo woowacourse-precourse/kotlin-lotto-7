@@ -25,9 +25,13 @@
     - 8개의 로또 당첨 번호 리스트
     - 당첨 통계 (일치 개수, 수익률)
 - LottoService
-    - 당첨 번호 저장
-    - 로또 생성
-    - 당첨 로또 현황 업데이트
+    - ~~당첨 번호 저장~~
+    - 로또 당첨 확인 matchAllLotto
+    - 로또 생성 createRandomLotto
+    - 구입 금액만큼 로또 구매 purchaseLottos
+    - 당첨 로또 현황 업데이트 winStatusUpdate
+    - 최종 수익 구하기 getResultMoney
+    - 수익률 계산 getProfitRate
 
 ## 클래스
 - Lotto 클래스
