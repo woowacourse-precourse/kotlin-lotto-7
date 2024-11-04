@@ -6,7 +6,7 @@ import camp.nextstep.edu.missionutils.Randoms
 class LottoBuyManager {
 
     var money: Int = 0
-    var userLottos = mutableListOf<List<Int>>()
+    val userLottos = mutableListOf<Lotto>()
 
     fun requestMoney() {
         println(REQUEST_MONEY_MESSAGE)
@@ -43,7 +43,7 @@ class LottoBuyManager {
         repeat(lottoCount) {
             val numbers = Randoms.pickUniqueNumbersInRange(LOTTO_RANGE_START, LOTTO_RANGE_END, LOTTO_COUNT).sorted()
             println(numbers)
-            userLottos += numbers
+            userLottos.add(Lotto(numbers))
         }
         println()
     }
