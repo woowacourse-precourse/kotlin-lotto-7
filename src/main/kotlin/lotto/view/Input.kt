@@ -8,11 +8,13 @@ class Input {
 
     fun getPurchaseAmount(): Int {
         println("구입금액을 입력해 주세요.")
-        return readLine().let {
+        val value = readLine().let {
             inputValidation.typeInt(it).also { amount ->
                 inputValidation.unitOfNumber(amount, 1000)
             }
         }
+        println()
+        return value
     }
 
     fun getLottoNumbers(): List<Int> {
@@ -26,11 +28,13 @@ class Input {
 
     fun getLottoBonusNumber(): Int {
         println("보너스 번호를 입력해주세요.")
-        return readLine().let {
+        val value = readLine().let {
             inputValidation.typeInt(it).also { number ->
                 inputValidation.lottoNumberRange(number)
             }
         }
+        println()
+        return value
     }
 
     private fun readLine(): String = Console.readLine()
