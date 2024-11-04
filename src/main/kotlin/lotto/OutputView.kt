@@ -29,7 +29,7 @@ fun resultprint(purchase_money: Int, scoreBoard: MutableList<Int>, fiveBonusCoun
         println("${winning.count}개 일치$bonusMessage (${winning.prizestring}원) - ${count}개")
         total_prize = total_prize + winning.prize * count
     }
-    val rateofreturn = round((total_prize.toFloat()/(purchase_money*1000))*1000)/10
+    val rateofreturn = round((total_prize.toFloat() / (purchase_money * 1000)) * 1000) / 10
     println("총 수익률은 $rateofreturn%입니다.")
 }
 
