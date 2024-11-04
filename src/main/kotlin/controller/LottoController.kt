@@ -13,4 +13,5 @@ class LottoController(private val inputView: InputView, private val outputView: 
     private fun createLottoNumbers(purchasedAmount : Int): List<Lotto>{
         return List(purchasedAmount) { Lotto(Randoms.pickUniqueNumbersInRange(1,45,6)) }
     }
+
 }

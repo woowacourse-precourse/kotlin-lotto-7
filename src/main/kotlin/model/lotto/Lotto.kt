@@ -9,4 +9,12 @@ class Lotto(private val numbers: List<Int>) {
 
     // TODO: 추가 기능 구현
     fun getNumbers(): List<Int> = numbers
+
+    fun countMatchingNumbers(winningNumbers: List<Int>): Int {
+        return numbers.count { it in winningNumbers }
+    }
+
+    fun matchBonusNumber(bonusNumber: Int): Boolean {
+        return bonusNumber in numbers
+    }
 }

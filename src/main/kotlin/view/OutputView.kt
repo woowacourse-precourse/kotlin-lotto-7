@@ -9,5 +9,4 @@ class OutputView {
         lottoNumbers.forEach { println(it.getNumbers()) }
     }
 
-
 }
