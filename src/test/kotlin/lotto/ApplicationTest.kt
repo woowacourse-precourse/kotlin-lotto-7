@@ -1,10 +1,10 @@
 package lotto
 
+import org.junit.jupiter.api.Test
 import camp.nextstep.edu.missionutils.test.Assertions.assertRandomUniqueNumbersInRangeTest
 import camp.nextstep.edu.missionutils.test.Assertions.assertSimpleTest
 import camp.nextstep.edu.missionutils.test.NsTest
 import org.assertj.core.api.Assertions.assertThat
-import org.junit.jupiter.api.Test
 
 class ApplicationTest : NsTest() {
     @Test
@@ -47,6 +47,25 @@ class ApplicationTest : NsTest() {
             runException("1000j")
             assertThat(output()).contains(ERROR_MESSAGE)
         }
+    }
+
+    @Test
+    fun `구매 금액 입력 후 티켓 수 계산`() {
+        assertSimpleTest {
+            runException("2000")
+            assertThat(output()).contains("2")
+        }
+    }
+
+    @Test
+    fun `당첨 통계 계산`() {
+        assertRandomUniqueNumbersInRangeTest( {
+            run("2000", "1,2,4,15,16,17", "13")
+            assertThat(output()).contains("3개 일치 (5,000원) - 1개")
+        },
+        listOf(1,2,3,4,5,6),
+        listOf(7,8,9,10,11,12)
+        )
     }
 
     override fun runMain() {
