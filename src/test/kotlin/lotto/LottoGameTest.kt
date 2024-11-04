@@ -6,11 +6,7 @@ import org.assertj.core.api.Assertions.assertThat
 
 
 class LottoGameTest {
-
-    companion object {
-        private const val ERROR_MESSAGE: String = "[ERROR]"
-    }
-
+    
     @Test
     fun `유효한 구입 금액을 입력하면 해당 금액을 반환한다`() {
         val game = LottoGame(readLine = { "3000" })
@@ -53,20 +49,21 @@ class LottoGameTest {
         assertThat(exception.message).contains("[ERROR] 로또 번호는 6개여야 합니다.")
     }
 
-
     @Test
     fun `유효한 보너스 번호를 입력하면 해당 번호를 반환한다`() {
+        val winningLotto = Lotto(listOf(1, 2, 3, 4, 5, 6))
         val game = LottoGame(readLine = { "8" })
-        val bonusNumber = game.inputBonusNumber()
+        val bonusNumber = game.inputBonusNumber(winningLotto = winningLotto)
         assertThat(bonusNumber).isEqualTo(8)
     }
 
     @Test
     fun `보너스 번호가 숫자 형식이 아니면 예외가 발생한다`() {
         val game = LottoGame(readLine = { "" })
+        val winningLotto = Lotto(listOf(1, 2, 3, 4, 5, 6))
 
         val exception = assertThrows<IllegalArgumentException> {
-            game.parseBonusNumber("abc")
+            game.parseBonusNumber("abc", winningLotto = winningLotto)
         }
         assertThat(exception.message).contains("[ERROR] 보너스 번호는 숫자로 입력해야 합니다.")
     }
@@ -74,13 +71,24 @@ class LottoGameTest {
     @Test
     fun `보너스 번호가 1~45 사이의 숫자가 아니면 예외가 발생한다`() {
         val game = LottoGame(readLine = { "" })
+        val winningLotto = Lotto(listOf(1, 2, 3, 4, 5, 6))
 
         val exception = assertThrows<IllegalArgumentException> {
-            game.parseBonusNumber("-3")
+            game.parseBonusNumber("-3", winningLotto = winningLotto)
         }
         assertThat(exception.message).contains("[ERROR] 보너스 번호는 1부터 45 사이여야 합니다.")
     }
 
+    @Test
+    fun `보너스 번호가 당첨 번호와 중복되면 예외가 발생한다`() {
+        val game = LottoGame(readLine = { "" })
+        val winningLotto = Lotto(listOf(1, 2, 3, 4, 5, 6))
+
+        val exception = assertThrows<IllegalArgumentException> {
+            game.parseBonusNumber("-3", winningLotto = winningLotto)
+        }
+        assertThat(exception.message).contains("[ERROR] 보너스 번호는 당첨 번호와 중복될 수 없습니다.")
+    }
 
     @Test
     fun `구입 금액에 따른 로또 목록이 생성된다`() {
