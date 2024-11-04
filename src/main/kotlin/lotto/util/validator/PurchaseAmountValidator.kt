@@ -24,10 +24,10 @@ object PurchaseAmountValidator {
     }
 
     private fun validateMaxAmount(amount: Int) {
-        require(amount <= LottoRules.MAX_AMOUNT) { ErrorMessages.MAX_AMOUNT }
+        require(amount in LottoRules.AMOUNT_RANGE) { ErrorMessages.OUT_OF_AMOUNT_RANGE }
     }
 
-    private fun validatePurchaseAmount(purchaseAmountInput: String) {
+    fun validatePurchaseAmount(purchaseAmountInput: String) {
         validateNotEmpty(purchaseAmountInput)
 
         val amount = purchaseAmountInput.trim().toIntOrNull()

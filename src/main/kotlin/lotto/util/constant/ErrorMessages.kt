@@ -6,7 +6,7 @@ object ErrorMessages {
     const val AMOUNT_IS_NOT_EMPTY = "$ERROR_HEADER 구입 금액은 빈 값이 될 수 없습니다."
     const val AMOUNT_IS_NUMERIC = "$ERROR_HEADER 구입 금액은 숫자여야 합니다."
     const val AMOUNT_IS_MULTIPLE_OF_THOUSAND = "$ERROR_HEADER 구입 금액은 1,000원 단위여야 합니다."
-    const val MAX_AMOUNT = "$ERROR_HEADER 구입 금액은 10억원 이하여야 합니다."
+    const val OUT_OF_AMOUNT_RANGE = "$ERROR_HEADER 구입 금액은 1,000원 이상 10억원 이하여야 합니다."
 
     const val LOTTO_NUMBER_NUMERIC = "$ERROR_HEADER 로또 번호는 자연수여야 합니다."
     const val LOTTO_NUMBER_DELIMITER = "$ERROR_HEADER 로또 번호는 쉼표로 구분해야 합니다."

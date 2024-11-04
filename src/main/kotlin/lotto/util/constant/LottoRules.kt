@@ -5,6 +5,7 @@ object LottoRules {
     const val ZERO = 0
     const val ZERO_DOUBLE = 0.0 // Float로 계산했을때 정밀 소수점 계산이 안됐음
     const val MAX_AMOUNT = 1000000000
+    val AMOUNT_RANGE = AMOUNT_UNIT..MAX_AMOUNT
 
     const val DELIMITER = ","
 
