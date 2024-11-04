@@ -2,8 +2,7 @@ package lotto
 
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
-import validator.LottoGenerator
-import validator.RangeValidator
+import validator.*
 
 class LottoTest {
     @Test
@@ -36,6 +35,21 @@ class LottoTest {
         val duplicateValidate = LottoGenerator()
         val numbers = listOf(1, 2, 3, 4, 5, 6)
         duplicateValidate.validate(numbers)
+    }
+
+    @Test
+    fun `보너스 번호와 뽑은 로또 번호가 중복인 경우`() {
+
+        val randomLottoNum: List<Int> = listOf(1, 2, 3, 4, 5, 6)
+        val stringValidator: StringGenerator = StringValidator()
+        val rangeValidator: NumbersValidator = RangeValidator()
+
+        val checkLottoNum = BonusNumberValidator(randomLottoNum, stringValidator, rangeValidator)
+        val bonusNumbers = "6"
+
+        assertThrows<IllegalArgumentException>("보너스는 뽑은 값과 중복될 수 없습니다.") {
+            checkLottoNum.validate(bonusNumbers)
+        }
     }
 
 
