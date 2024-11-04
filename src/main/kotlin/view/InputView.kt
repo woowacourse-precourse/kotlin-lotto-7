@@ -32,7 +32,7 @@ object InputView {
             OutputView.printBonusNumberMessage()
             val bonusNumber = Console.readLine().toIntOrNull() ?: 0
 
-            if (input.isUniqueBonusNumber(winNumbers, bonusNumber))
+            if (input.isUniqueBonusNumber(winNumbers, bonusNumber) and input.isinValidRange(listOf(bonusNumber)))
                 return bonusNumber
         }
     }

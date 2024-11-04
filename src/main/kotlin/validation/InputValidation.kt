@@ -25,12 +25,11 @@ class InputValidation {
     }
 
     fun isinValidRange(winNumbers: List<Int>): Boolean {
-        var valid = true
         for (number in winNumbers) {
             if (number < LottoUtils.MIN_VALUE || number > LottoUtils.MAX_VALUE)
-                valid = false
+                Exception.throwException(ExceptionUtils.WRONG_RANGE_NUMBERS)
         }
-        return valid
+        return true
     }
 
     fun isUniqueBonusNumber(winNumbers: List<Int>, bonusNumber: Int): Boolean {

@@ -106,4 +106,19 @@ class InputExceptionTest {
             }
         }
     }
+
+    @Test
+    fun `보너스 번호는 1~45까지의 숫자이어야 한다`() {
+        assertSimpleTest {
+            // given
+            val bonusNumbers = listOf(882)
+
+            // when
+
+            // then
+            assertThrows<IllegalArgumentException> {
+                input.isinValidRange(bonusNumbers)
+            }
+        }
+    }
 }
