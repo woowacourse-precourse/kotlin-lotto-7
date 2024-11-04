@@ -23,7 +23,7 @@ class InputView {
             Payment(convertPayment)
             return convertPayment
         } catch (error: NumberFormatException) {
-            throw IllegalArgumentException(ErrorMessages.ERROR_ONLY_LONG_DIGIT.message)
+            throw IllegalArgumentException(ErrorMessages.ERROR_MAX_PAYMENT.message)
         }
     }
 

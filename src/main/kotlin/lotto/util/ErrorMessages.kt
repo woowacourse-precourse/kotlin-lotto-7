@@ -7,6 +7,5 @@ enum class ErrorMessages(val message: String) {
     ERROR_PAYMENT_UNIT("[ERROR] 구매 금액은 1,000원 단위여야 합니다."),
     ERROR_POSITIVE_DIGIT("[ERROR] 구매 금액은 양수여야 합니다."),
     ERROR_MAX_PAYMENT("[ERROR] 구매 금액은 2,000,000,000 이하여야 합니다."),
-    ERROR_ONLY_LONG_DIGIT("[ERROR] 구매 금액은 int 범위 내의 숫자여야 합니다."),
     ERROR_ONLY_DIGIT("[ERROR] 숫자만 입력 가능합니다.")
 }
