@@ -1,6 +1,7 @@
 package lotto
 
 import lotto.model.Lotto
+import lotto.model.LottoPurchaseAmount
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
@@ -29,10 +30,17 @@ class LottoTest {
         }
     }
     @Test
-    fun `isContain() 번호 확인 리턴 검증`() {
+    fun `isContain() 포함된 번호가 맞는지 확인한다`() {
         val lotto = Lotto.fromList(listOf(1, 2, 3, 4, 5, 6))
         assertThat(lotto.isContain(1)).isEqualTo(true)
         assertThat(lotto.isContain(2)).isEqualTo(true)
         assertThat(lotto.isContain(10)).isEqualTo(false)
+    }
+
+    @Test
+    fun `로또 머니가 양수가 아니면 예외가 발생한다`() {
+        assertThrows<IllegalArgumentException> {
+            LottoPurchaseAmount.from("-1000")
+        }
     }
 }
