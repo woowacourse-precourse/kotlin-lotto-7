@@ -1,6 +1,5 @@
-package lotto.view
+package lotto.view.interfaces
 
 interface LottoViewInterface {
-  fun requestPurchaseAmount()
   fun showErrorMessage(message: String)
 }
