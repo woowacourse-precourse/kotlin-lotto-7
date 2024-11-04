@@ -1,6 +1,6 @@
 package lotto.domain.validation
 
-import lotto.Lotto.Companion.LOTTO_PRICE
+import lotto.domain.model.Lotto.Companion.LOTTO_PRICE
 import lotto.domain.exception.ExceptionMessages
 
 fun validateBudget(budget: Int) {

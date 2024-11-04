@@ -1,6 +1,6 @@
-package lotto.domain.factory
+package lotto.domain.model.factory
 
-import lotto.Lotto
+import lotto.domain.model.Lotto
 import lotto.domain.random.LottoNumberGenerator
 
 class LottoFactory(

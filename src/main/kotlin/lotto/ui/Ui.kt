@@ -1,8 +1,8 @@
 package lotto.ui
 
 import camp.nextstep.edu.missionutils.Console
-import lotto.Lotto
 import lotto.domain.exception.ExceptionMessages
+import lotto.domain.model.Lotto
 import lotto.domain.validation.validateBudget
 
 class Ui {

@@ -1,7 +1,8 @@
 package lotto
 
 import lotto.data.random.pickLottoNumbers
-import lotto.domain.factory.LottoFactory
+import lotto.domain.model.factory.LottoFactory
+import lotto.domain.model.Lotto
 import lotto.ui.Ui
 import lotto.util.keepCallingForSuccessResult
 

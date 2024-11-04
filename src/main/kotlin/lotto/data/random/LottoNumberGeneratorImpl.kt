@@ -1,7 +1,7 @@
 package lotto.data.random
 
 import camp.nextstep.edu.missionutils.Randoms
-import lotto.Lotto
+import lotto.domain.model.Lotto
 
 fun pickLottoNumbers(): List<Int> = Randoms.pickUniqueNumbersInRange(
     Lotto.VALID_LOTTO_NUMBER_RANGE.first,

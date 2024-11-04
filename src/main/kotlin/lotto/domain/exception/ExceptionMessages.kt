@@ -1,8 +1,8 @@
 package lotto.domain.exception
 
-import lotto.Lotto
-import lotto.Lotto.Companion.VALID_LOTTO_NUMBER_LENGTH
-import lotto.Lotto.Companion.VALID_LOTTO_NUMBER_RANGE
+import lotto.domain.model.Lotto
+import lotto.domain.model.Lotto.Companion.VALID_LOTTO_NUMBER_LENGTH
+import lotto.domain.model.Lotto.Companion.VALID_LOTTO_NUMBER_RANGE
 
 object ExceptionMessages {
     const val DEFAULT_EXCEPTION_MESSAGE = "오류가 발생 했습니다. 다시 입력해 주세요."

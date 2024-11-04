@@ -1,6 +1,7 @@
 package lotto.domain.factory
 
 import lotto.data.random.FakeLottoNumberGenerator
+import lotto.domain.model.factory.LottoFactory
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 
