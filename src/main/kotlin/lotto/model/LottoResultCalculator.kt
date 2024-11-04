@@ -16,8 +16,8 @@ class LottoResultCalculator(
         NONE to 0
     )
 
-    fun countMatchingNumber(lottoBundle: List<Lotto>): MutableMap<LottoWinning, Int> {
-        for (lotto in lottoBundle) {
+    fun countMatchingNumber(lottos: List<Lotto>): MutableMap<LottoWinning, Int> {
+        for (lotto in lottos) {
             val matchingCount = lotto.countMatching(winningTicket.lotto)
             matchResult(matchingCount, lotto)
         }
