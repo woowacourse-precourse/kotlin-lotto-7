@@ -6,13 +6,13 @@ class LottoSalesMachine {
     val lottoPrice = 1000
 
     fun guideInputLottoPurchaseAmount(): String {
-        return INPUT_PURCHASE_AMOUNT
+        return INPUT_PURCHASE_AMOUNT_GUIDE
     }
 
     fun purchase(won: Int): List<Lotto> {
         exceptNotDevideThousand(won)
         val lottoCount = won / lottoPrice
-        println("${lottoCount}${PURCHASE_COUNT}")
+        println("${lottoCount}${PURCHASE_COUNT_GUIDE}")
         return List(lottoCount) { LottoMaker.make() }
     }
 
@@ -46,7 +46,7 @@ class LottoSalesMachine {
 
     companion object {
         private const val REGEX_INT: String = "-?\\d+"
-        private const val PURCHASE_COUNT: String = "개를 구매했습니다."
-        private const val INPUT_PURCHASE_AMOUNT: String = "구입금액을 입력해 주세요."
+        private const val PURCHASE_COUNT_GUIDE: String = "개를 구매했습니다."
+        private const val INPUT_PURCHASE_AMOUNT_GUIDE: String = "구입금액을 입력해 주세요."
     }
 }
