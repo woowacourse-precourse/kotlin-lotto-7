@@ -76,6 +76,17 @@ class InputViewTest {
         }
 
         @Test
+        @DisplayName("구입 금액이 0원인 경우 예외 메세지 출력")
+        fun shouldDisplayErrorMessageForZeroAmount() {
+            setInput("0\n2000\n")
+            val result = InputView.inputLottoPrice()
+            assertEquals(2000, result)
+
+            val output = outputStreamCaptor.toString().trim()
+            assertTrue(output.contains(ErrorMessage.INVALID_AMOUNT.getMessage()))
+        }
+
+        @Test
         @DisplayName("구입 금액에 숫자가 아닌 문자 입력 시 예외 메세지 출력")
         fun shouldDisplayErrorMessageForNotNumber() {
             setInput("abc\n2000\n")
