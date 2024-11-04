@@ -11,6 +11,14 @@ class Lotto(private val numbers: List<Int>) {
         }
     }
 
+    fun calculateWinPlace(winningNumbers: List<Int>, bonusWinningNumber: Int): LottoWinPlace? {
+        val matchedNumbers = getMatchedNumbers(winningNumbers)
+        val isBonusWinningNumberMatched = bonusWinningNumber in numbers
+        return LottoWinPlace.findLottoWinPlace(matchedNumbers.size, isBonusWinningNumberMatched)
+    }
+
+    private fun getMatchedNumbers(winningNumbers: List<Int>) = numbers.toSet().intersect(winningNumbers.toSet())
+
     override fun toString(): String = numbers.sorted().toString()
 
     companion object {
