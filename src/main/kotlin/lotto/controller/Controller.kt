@@ -39,7 +39,8 @@ object Controller {
     fun inputWinningNumber() {
         while (true) {
             try {
-
+                val winningNumber = InputView.inputWinningNumber().trim()
+                validate.validateInputWiningNumber(winningNumber)
             } catch (e: IllegalArgumentException) {
                 println(e)
             }
