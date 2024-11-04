@@ -1,5 +1,7 @@
 package lotto.util
 
+import lotto.constants.Constants.MAX_NUMBER
+import lotto.constants.Constants.MIN_NUMBER
 import lotto.constants.Exceptions
 
 class Validator {
@@ -15,8 +17,5 @@ class Validator {
     companion object {
         private const val MIN_PRICE = 1000
         private const val MAX_PRICE = 100000
-
-        private const val MIN_NUMBER = 1
-        private const val MAX_NUMBER = 45
     }
 }
