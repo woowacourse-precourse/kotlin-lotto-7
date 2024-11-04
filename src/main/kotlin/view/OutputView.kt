@@ -1,5 +1,6 @@
 package view
 
+import model.LottoTickets
 import utils.PrintUtils
 
 object OutputView {
@@ -9,5 +10,9 @@ object OutputView {
 
     fun printExceptionMessage(message: String) {
         println(message)
+    }
+
+    fun printTicketCounts(ticketCounts: Int) {
+        println("$ticketCounts"+PrintUtils.LOTTO_TICKET_COUNTS)
     }
 }
