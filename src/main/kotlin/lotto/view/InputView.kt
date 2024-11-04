@@ -15,6 +15,7 @@ class InputView {
     }
 
     fun inputWinningLottoNumber(): List<Int> {
+        println()
         println("당첨 번호를 입력해 주세요.")
         val winningLottoNumber = readLine().split(",").map { it.trim() }
 
@@ -25,6 +26,7 @@ class InputView {
     }
 
     fun inputBonusNumber(): Int {
+        println()
         println("보너스 번호를 입력해 주세요.")
         val bonusNumber = readLine()
 
