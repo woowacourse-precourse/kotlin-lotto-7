@@ -24,8 +24,11 @@ class Broadcast {
         println("\n$INPUT_BONUS_NUMBER_MESSAGE")
     }
 
-    fun printWinningStatistics() {
+    fun printWinningStatistics(winningMessage: List<String>) {
         println(WINNING_STATISTICS)
+        winningMessage.forEach {
+            println(it)
+        }
     }
 
     companion object {
