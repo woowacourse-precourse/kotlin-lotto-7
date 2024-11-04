@@ -60,6 +60,6 @@ class ClientTest {
         "85000, 85"
     )
     fun createLottoOnPurchaseAmount(amount: String, quantity: Int) {
-        assertEquals(Client(amount).lotto.size, quantity)
+        assertEquals(Client(amount).lottoNumbers.size, quantity)
     }
 }

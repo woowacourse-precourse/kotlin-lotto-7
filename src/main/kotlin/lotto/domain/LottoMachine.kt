@@ -10,7 +10,7 @@ class LottoMachine(
 ) {
     fun start() {
         val client = buildClient()
-        printLottoQuantity(client.lotto)
+        printLottoQuantity(client.lottoNumbers)
         printLottoNumbers(client.lottoNumbers)
         val winning = buildWinning()
         val bonus = buildBonus(winning)
@@ -29,9 +29,9 @@ class LottoMachine(
         }
     }
 
-    private fun printLottoQuantity(lotto: List<Lotto>) {
+    private fun printLottoQuantity(numbers: List<List<Int>>) {
         outputView.printNewLine()
-        outputView.printLottoQuantity(lotto.size)
+        outputView.printLottoQuantity(numbers.size)
     }
 
     private fun printLottoNumbers(lottoNumbers: List<List<Int>>) {

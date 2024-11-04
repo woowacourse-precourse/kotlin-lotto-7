@@ -5,7 +5,7 @@ import lotto.utils.Random
 class Client(private val amount: String) {
 
     val lottoNumbers: List<List<Int>>
-    val lotto: List<Lotto>
+    private val lotto: List<Lotto>
 
     init {
         require(amount.isNotEmpty()) { AMOUNT_EMPTY_ERROR_MESSAGE }
