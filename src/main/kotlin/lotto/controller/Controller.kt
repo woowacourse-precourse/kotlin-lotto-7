@@ -65,4 +65,8 @@ object Controller {
         }
     }
 
+    fun WinningStatistics() {
+
+    }
+
 }
