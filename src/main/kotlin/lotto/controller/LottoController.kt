@@ -2,6 +2,7 @@ package lotto.controller
 
 import lotto.view.LottoView
 import lotto.model.LottoPurchaseAmount
+import lotto.model.LottoStore
 
 class LottoController(private val lottoView: LottoView) {
     fun run() {
