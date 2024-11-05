@@ -27,7 +27,7 @@ class LottoMachine(
 
     fun getEarningsRate(): String {
         val totalEarning = winningRankSet.sumOf { it.price }
-        val earningsRate = CalculateUtils.calculateEarningsRate(totalEarning, money)
+        val earningsRate = CalculateUtils.getEarningsRate(totalEarning, money)
         return earningsRate
     }
 
