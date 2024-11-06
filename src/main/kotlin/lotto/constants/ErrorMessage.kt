@@ -1,5 +1,6 @@
 package lotto.constants
 
+import lotto.utils.InputManager
 import lotto.utils.LottoGenerator
 
 object ErrorMessage {
@@ -16,5 +17,16 @@ object ErrorMessage {
             "${LottoGenerator.LOTTO_START_INCLUSIVE_NUMBER}~${LottoGenerator.LOTTO_END_INCLUSIVE_NUMBER}" +
             " 사이의 정수만 가능합니다."
     const val LOTTO_NUMBER_OVERLAP = "[ERROR] 로또 번호는 중복될 수 없습니다."
+
+    // WinningNumbers
+    const val WINNING_NUMBER_NOT_ONE_SET_SIZE = "[ERROR] 당첨 번호는 ${LottoGenerator.LOTTO_ONE_SET_SIZE}개여야 합니다."
+    const val WINNING_NUMBER_NOT_IN_RANGE = "[ERROR] 당첨 번호는 " +
+            "${LottoGenerator.LOTTO_START_INCLUSIVE_NUMBER}~${LottoGenerator.LOTTO_END_INCLUSIVE_NUMBER}" +
+            " 사이의 정수만 가능합니다."
+    const val WINNING_NUMBER_OVERLAP = "[ERROR] 당첨 번호는 중복될 수 없습니다."
+    const val WINNING_NUMBER_INVALID_FORMAT = "[ERROR] 당첨 번호는 공백 없이" +
+            "${LottoGenerator.LOTTO_START_INCLUSIVE_NUMBER}~${LottoGenerator.LOTTO_END_INCLUSIVE_NUMBER}" +
+            " 사이의 정수만 ${InputManager.INPUT_WINNING_NUMBERS_SEPARATOR} 구분으로" +
+            " ${LottoGenerator.LOTTO_ONE_SET_SIZE}개 입력 가능합니다."
 
 }

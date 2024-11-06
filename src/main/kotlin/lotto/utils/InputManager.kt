@@ -34,9 +34,9 @@ object InputManager {
         }
     }
 
-    private const val INPUT_WINNING_NUMBERS_SEPARATOR = ","
+    const val INPUT_WINNING_NUMBERS_SEPARATOR = ","
     private fun String.toWinningNumbers(): List<Int> {
-        ValidationUtils.checkValidWinningNumbers(this, INPUT_WINNING_NUMBERS_SEPARATOR)
+        ValidationUtils.checkValidWinningNumbers(this)
         return split(INPUT_WINNING_NUMBERS_SEPARATOR).map {
             it.toInt()
         }

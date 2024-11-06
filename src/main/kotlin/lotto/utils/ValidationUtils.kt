@@ -29,20 +29,18 @@ object ValidationUtils {
         }
     }
 
-    fun checkValidWinningNumbers(numbers: String, separator: String) {
-        try {
-            val validNumbers = numbers.split(separator).map { it.toInt() }
-            require(validNumbers.size == 6 ) {
-                "[ERROR] 당첨 번호는 6개여야 합니다."
-            }
-            require(validNumbers.all { it in 1..45 }) {
-                "[ERROR] 당첨 번호는 1~45 사이의 정수만 입력 가능합니다."
-            }
-            require(validNumbers.size == validNumbers.toSet().size) {
-                "[ERROR] 당첨 번호는 중복될 수 없습니다."
-            }
-        } catch (e: Exception) {
-            throw IllegalArgumentException("[ERROR] 당첨 번호는 공백없이 1~45 이내의 양의 정수만 공백 없이 $separator 구분으로 6개 입력 가능합니다.")
+    fun checkValidWinningNumbers(numbers: String) {
+        val validNumbers = numbers.split(InputManager.INPUT_WINNING_NUMBERS_SEPARATOR).map {
+            it.toIntOrNull() ?: throw IllegalArgumentException(ErrorMessage.WINNING_NUMBER_INVALID_FORMAT)
+        }
+        require(validNumbers.size == LottoGenerator.LOTTO_ONE_SET_SIZE ) {
+            ErrorMessage.WINNING_NUMBER_NOT_ONE_SET_SIZE
+        }
+        require(validNumbers.all { it in LottoGenerator.LOTTO_START_INCLUSIVE_NUMBER..LottoGenerator.LOTTO_END_INCLUSIVE_NUMBER }) {
+            ErrorMessage.WINNING_NUMBER_NOT_IN_RANGE
+        }
+        require(validNumbers.size == validNumbers.toSet().size) {
+            ErrorMessage.WINNING_NUMBER_OVERLAP
         }
     }
 
