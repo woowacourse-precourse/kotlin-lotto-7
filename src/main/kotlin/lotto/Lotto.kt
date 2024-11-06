@@ -1,9 +1,24 @@
 package lotto
 
-class Lotto(private val numbers: List<Int>) {
+import lotto.utils.ValidationUtils
+
+class Lotto(
+    private val numbers: List<Int>,
+) {
     init {
-        require(numbers.size == 6) { "[ERROR] 로또 번호는 6개여야 합니다." }
+        ValidationUtils.checkValidLottoNumbers(numbers)
     }
 
-    // TODO: 추가 기능 구현
+    fun getNumbers(): List<Int> {
+        return numbers
+    }
+
+    fun getWinningRank(winningNumber: List<Int>, bonusNumber: Int): WinningRank {
+        return WinningRank.getWinningRank(
+            lottoNumber = numbers,
+            winningNumbers = winningNumber,
+            bonusNumber = bonusNumber,
+        )
+    }
+
 }
