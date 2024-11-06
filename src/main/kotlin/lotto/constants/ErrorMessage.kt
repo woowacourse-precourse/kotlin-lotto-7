@@ -29,4 +29,12 @@ object ErrorMessage {
             " 사이의 정수만 ${InputManager.INPUT_WINNING_NUMBERS_SEPARATOR} 구분으로" +
             " ${LottoGenerator.LOTTO_ONE_SET_SIZE}개 입력 가능합니다."
 
+    // BonusNumber
+    const val BONUS_NUMBER_NOT_IN_RANGE = "[ERROR] 보너스 번호는 " +
+            "${LottoGenerator.LOTTO_START_INCLUSIVE_NUMBER}~${LottoGenerator.LOTTO_END_INCLUSIVE_NUMBER}" +
+            " 사이의 정수만 가능합니다."
+    const val BONUS_NUMBER_OVERLAP = "[ERROR] 보너스 번호와 당첨 번호는 중복될 수 없습니다."
+    const val BONUS_NUMBER_INVALID_FORMAT = "[ERROR] 보너스 번호는 공백 없이" +
+            "${LottoGenerator.LOTTO_START_INCLUSIVE_NUMBER}~${LottoGenerator.LOTTO_END_INCLUSIVE_NUMBER}" +
+            " 사이의 정수만 입력 가능합니다."
 }

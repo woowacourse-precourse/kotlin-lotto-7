@@ -45,16 +45,12 @@ object ValidationUtils {
     }
 
     fun checkValidBonusNumber(number: String, winningNumbers: List<Int>) {
-        try {
-            val validBonusNumber = number.toInt()
-            require(validBonusNumber in 1..45 ) {
-                "[ERROR] 보너스 번호는 1~45 사이의 정수만 가능합니다."
-            }
-            require(validBonusNumber !in winningNumbers) {
-                "[ERROR] 보너스 번호와 당첨 번호는 중복될 수 없습니다."
-            }
-        } catch (e: Exception) {
-            throw IllegalArgumentException("보너스 번호는 공백 없이 1~45 사이의 정수만 입력 가능합니다.")
+        val validBonusNumber = number.toIntOrNull() ?: throw IllegalArgumentException(ErrorMessage.BONUS_NUMBER_INVALID_FORMAT)
+        require(validBonusNumber in LottoGenerator.LOTTO_START_INCLUSIVE_NUMBER..LottoGenerator.LOTTO_END_INCLUSIVE_NUMBER ) {
+            ErrorMessage.BONUS_NUMBER_NOT_IN_RANGE
+        }
+        require(validBonusNumber !in winningNumbers) {
+            ErrorMessage.BONUS_NUMBER_OVERLAP
         }
     }
 
