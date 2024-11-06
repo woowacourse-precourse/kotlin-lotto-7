@@ -15,7 +15,7 @@ object PrintManager {
 
     private fun printLottoSet(lottoSet: List<Lotto>) {
         lottoSet.forEach {
-            println(it.numbers)
+            println(it.getNumbers())
         }
     }
 

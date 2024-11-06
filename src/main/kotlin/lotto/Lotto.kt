@@ -3,10 +3,14 @@ package lotto
 import lotto.utils.ValidationUtils
 
 class Lotto(
-    val numbers: List<Int>,
+    private val numbers: List<Int>,
 ) {
     init {
         ValidationUtils.checkValidLottoNumbers(numbers)
+    }
+
+    fun getNumbers(): List<Int> {
+        return numbers
     }
 
     fun getWinningRank(winningNumber: List<Int>, bonusNumber: Int): WinningRank {

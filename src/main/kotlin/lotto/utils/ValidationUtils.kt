@@ -1,21 +1,19 @@
 package lotto.utils
 
+import lotto.constants.ErrorMessage
+
 object ValidationUtils {
 
     fun checkValidInputPurchaseMoney(money: String) {
-        try {
-            val validMoney = money.toInt()
-            require(validMoney % 1000 == 0) {
-                "[ERROR] 구입 금액은 1000단위의 양수만 입력 가능합니다."
-            }
-            require(validMoney > 0) {
-                "[ERROR] 구입 금액은 1000단위의 양수만 입력 가능합니다."
-            }
-            require(validMoney <= 1000000) {
-                "[ERROR] 한번에 구입 가능한 최대 금액은 1,000,000원을 넘길 수 없습니다."
-            }
-        } catch (e: Exception) {
-            throw IllegalArgumentException("[ERROR] 구입 금액은 1000단위의 양수만 입력 가능합니다.")
+        val validMoney = money.toIntOrNull() ?: throw IllegalArgumentException(ErrorMessage.PURCHASE_MONEY_INVALID_FORMAT)
+        require(validMoney >= LottoGenerator.LOTTO_MONEY_MINIMUM) {
+            ErrorMessage.PURCHASE_MONEY_LESS_THAN_MINIMUM
+        }
+        require(validMoney % LottoGenerator.LOTTO_MONEY_UNIT == 0) {
+            ErrorMessage.PURCHASE_MONEY_NOT_IN_1000_UNITS
+        }
+        require(validMoney <= LottoGenerator.LOTTO_MONEY_MAXIMUM) {
+            ErrorMessage.PURCHASE_MONEY_EXCEEDS_MAXIMUM
         }
     }
 

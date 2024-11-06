@@ -27,6 +27,8 @@ object LottoGenerator {
     }
 
     const val LOTTO_MONEY_UNIT = 1000
+    const val LOTTO_MONEY_MINIMUM = 1000
+    const val LOTTO_MONEY_MAXIMUM = 1000000
     /**
      * 금액당 로또 수량을 계산한다.
      * @return 로또 수량
