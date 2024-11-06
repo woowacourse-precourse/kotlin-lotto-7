@@ -1,5 +1,6 @@
 package lotto
 
+import lotto.constants.ErrorMessage
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
@@ -7,23 +8,26 @@ import org.junit.jupiter.api.assertThrows
 class LottoTest {
     @Test
     fun `예외 테스트-로또 번호의 개수가 6개가 넘어가면 예외가 발생한다`() {
-        assertThrows<IllegalArgumentException> {
+        val exception = assertThrows<IllegalArgumentException> {
             Lotto(listOf(1, 2, 3, 4, 5, 6, 7))
         }
+        assertEquals(ErrorMessage.LOTTO_NUMBER_NOT_ONE_SET_SIZE, exception.message)
     }
 
     @Test
     fun `예외 테스트-로또 번호에 1~45 사이가 아닌 정수가 있으면 예외가 발생한다`() {
-        assertThrows<IllegalArgumentException> {
+        val exception = assertThrows<IllegalArgumentException> {
             Lotto(listOf(-1, 0, 3, 4, 5, 50))
         }
+        assertEquals(ErrorMessage.LOTTO_NUMBER_NOT_IN_RANGE, exception.message)
     }
 
     @Test
     fun `예외 테스트-로또 번호에 중복된 숫자가 있으면 예외가 발생한다`() {
-        assertThrows<IllegalArgumentException> {
+        val exception = assertThrows<IllegalArgumentException> {
             Lotto(listOf(1, 2, 3, 4, 5, 5))
         }
+        assertEquals(ErrorMessage.LOTTO_NUMBER_OVERLAP, exception.message)
     }
 
     @Test

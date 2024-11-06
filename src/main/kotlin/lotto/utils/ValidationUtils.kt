@@ -18,14 +18,14 @@ object ValidationUtils {
     }
 
     fun checkValidLottoNumbers(numbers: List<Int>) {
-        require(numbers.size == 6 ) {
-            "[ERROR] 로또 번호는 6개여야 합니다."
+        require(numbers.size == LottoGenerator.LOTTO_ONE_SET_SIZE ) {
+            ErrorMessage.LOTTO_NUMBER_NOT_ONE_SET_SIZE
         }
-        require(numbers.all { it in 1..45 }) {
-            "[ERROR] 로또 번호는 1~45 사이의 정수만 가능합니다."
+        require(numbers.all { it in LottoGenerator.LOTTO_START_INCLUSIVE_NUMBER..LottoGenerator.LOTTO_END_INCLUSIVE_NUMBER }) {
+            ErrorMessage.LOTTO_NUMBER_NOT_IN_RANGE
         }
         require(numbers.size == numbers.toSet().size) {
-            "[ERROR] 로또 번호는 중복될 수 없습니다."
+            ErrorMessage.LOTTO_NUMBER_OVERLAP
         }
     }
 
